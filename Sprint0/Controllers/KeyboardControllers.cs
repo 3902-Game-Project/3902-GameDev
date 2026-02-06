@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Sprint0;
-using Sprint0.Commands;
-using Sprint0.Interfaces;
+using GameProject.Commands;
+using GameProject.Interfaces;
+
+namespace GameProject.Controllers;
+
 public class KeyboardController : IController
 {
     private Game1 myGame;
