@@ -7,10 +7,10 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Sprint0.Interfaces;
-using Sprint0.Sprites;
+using GameProject.Interfaces;
+using GameProject.Sprites;
 
-namespace Sprint0;
+namespace GameProject;
 public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
