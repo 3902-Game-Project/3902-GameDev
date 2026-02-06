@@ -1,4 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿/**
+ * Authors:
+ * Q
+ * Santosh Schaefer
+ */
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint0.Interfaces;
