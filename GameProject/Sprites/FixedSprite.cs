@@ -8,7 +8,6 @@ public class FixedSprite : ISprite
 {
     private Texture2D texture;
     private Vector2 position;
-    private int timer = 0;
 
     public FixedSprite(Texture2D texture, Vector2 position)
     {

@@ -8,7 +8,6 @@ namespace GameProject.Controllers;
 
 public class KeyboardController : IController
 {
-    private Game1 myGame;
     private Dictionary<Keys, ICommand> keyMappings;
     
     public KeyboardController(Game1 game)
