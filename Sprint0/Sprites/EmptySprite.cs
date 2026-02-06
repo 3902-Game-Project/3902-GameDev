@@ -1,17 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint0.Interfaces;
+using GameProject.Interfaces;
 
-namespace Sprint0.Sprites
+namespace GameProject.Sprites;
+
+public class EmptySprite : ISprite
 {
-    public class EmptySprite : ISprite
+    public void Update(GameTime gameTime)
     {
-        public void Update(GameTime gameTime)
-        {
-        }
+    }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-        }
+    public void Draw(SpriteBatch spriteBatch)
+    {
     }
 }
