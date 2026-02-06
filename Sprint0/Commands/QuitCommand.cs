@@ -1,5 +1,7 @@
 using Microsoft.Xna.Framework;
-using Sprint0;
+using GameProject.Interfaces;
+
+namespace GameProject.Commands;
 
 public class QuitCommand : ICommand
 {

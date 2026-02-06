@@ -1,24 +1,23 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint0.Interfaces;
-using Sprint0.Sprites;
+using GameProject.Interfaces;
+using GameProject.Sprites;
 
-namespace Sprint0.Commands
+namespace GameProject.Commands;
+
+public class AnimatedSpriteCommand : ICommand
 {
-    public class AnimatedSpriteCommand : ICommand
+    private Game1 myGame;
+    public AnimatedSpriteCommand(Game1 game)
     {
-        private Game1 myGame;
-        public AnimatedSpriteCommand(Game1 game)
-        {
-            myGame = game;
-        }
-        public void Execute()
-        {
-            Texture2D texture = myGame.Texture;
+        myGame = game;
+    }
+    public void Execute()
+    {
+        Texture2D texture = myGame.Texture;
 
-            ISprite newSprite = new AnimatedSprite(texture, new Vector2(400, 200));
+        ISprite newSprite = new AnimatedSprite(texture, new Vector2(400, 200));
 
-            myGame.CurrentSprite = newSprite;
-        }
+        myGame.CurrentSprite = newSprite;
     }
 }
