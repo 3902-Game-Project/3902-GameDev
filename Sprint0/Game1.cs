@@ -11,6 +11,7 @@ using GameProject.Interfaces;
 using GameProject.Sprites;
 
 namespace GameProject;
+
 public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
