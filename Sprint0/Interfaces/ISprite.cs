@@ -1,11 +1,10 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint0.Interfaces
+namespace GameProject.Interfaces;
+
+public interface ISprite
 {
-    public interface ISprite
-    {
-        public void Update(GameTime gameTime);
-        public void Draw(SpriteBatch spriteBatch);
-    }
+    public void Update(GameTime gameTime);
+    public void Draw(SpriteBatch spriteBatch);
 }

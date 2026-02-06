@@ -1,7 +1,6 @@
-namespace Sprint0
+namespace GameProject.Interfaces;
+
+public interface ICommand
 {
-    public interface ICommand
-    {
-        void Execute();
-    }
+    void Execute();
 }

@@ -1,9 +1,8 @@
 using Microsoft.Xna.Framework;
 
-namespace Sprint0
+namespace GameProject.Interfaces;
+
+public interface IController
 {
-    public interface IController
-    {
-        void Update(GameTime gameTime);
-    }
+    void Update(GameTime gameTime);
 }
