@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 
-namespace sprint0;
+namespace GameProject.Interfaces;
 
 public interface IEnemy {
   void Update();

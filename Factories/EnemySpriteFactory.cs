@@ -1,7 +1,7 @@
-﻿using GameProject.Sprites;
+﻿using GameProject.Interfaces;
+using GameProject.Sprites;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using sprint0;
 
 namespace GameProject.Factories;
 

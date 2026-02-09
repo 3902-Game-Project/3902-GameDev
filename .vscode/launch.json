@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": "C#: Sprint0 Debug",
+        "name": "C#: GameProject Debug",
         "type": "dotnet",
         "request": "launch",
-        "projectPath": "${workspaceFolder}/Sprint0.csproj"
+        "projectPath": "${workspaceFolder}/GameProject.csproj"
       }
     ],
   }

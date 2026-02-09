@@ -1,6 +1,6 @@
 ﻿using System;
+using GameProject.Interfaces;
 using Microsoft.Xna.Framework.Graphics;
-using sprint0;
 
 namespace GameProject.Sprites;
 
