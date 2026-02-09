@@ -1,28 +1,26 @@
 ﻿using GameProject.Interfaces;
 using GameProject.Sprites;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Factories;
+namespace GameProject.Factories {
+  internal class EnemySpriteFactory {
+    private Texture2D snakeTexture;
 
-internal class EnemySpriteFactory {
-  private Texture2D snakeSpritesheet;
-  //...
+    private static EnemySpriteFactory instance = new EnemySpriteFactory();
+    public static EnemySpriteFactory Instance {
+      get { return instance; }
+    }
 
-  private static EnemySpriteFactory instance = new EnemySpriteFactory();
+    private EnemySpriteFactory() { }
 
-  public static EnemySpriteFactory Instance {
-    get { return instance; }
-  }
+    public void LoadAllTextures(ContentManager content) {
+      snakeTexture = content.Load<Texture2D>("snakeSpritesheet");
+    }
 
-  private EnemySpriteFactory() { }
-
-  public void LoadAllTextures(ContentManager content) {
-    snakeSpritesheet = content.Load<Texture2D>("snakeSpritesheet.png");
-    //...
-  }
-
-  public IEnemy CreateSnakeSprite() {
-    return new SnakeSprite(snakeSpritesheet, 32, 32);
+    public IEnemy CreateSnakeSprite() {
+      return new SnakeSprite(snakeTexture, new Vector2(400, 200));
+    }
   }
 }

@@ -39,7 +39,7 @@ public class Game1 : Game {
 
     myTexture = Content.Load<Texture2D>("Metro");
     currentSprite = new FixedSprite(myTexture, new Vector2(400, 200));
-
+    GameProject.Factories.EnemySpriteFactory.Instance.LoadAllTextures(Content);
     myFont = Content.Load<SpriteFont>("CreditsFont");
   }
 
