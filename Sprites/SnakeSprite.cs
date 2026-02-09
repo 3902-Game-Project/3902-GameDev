@@ -12,7 +12,7 @@ namespace GameProject.Sprites {
     private List<Rectangle> sourceRectangles;
 
     private int direction = -1;
-    private int speed = 2;
+    private int speed = 0;
     private int patrolDistance = 100;
 
     private int currentFrame;
@@ -27,8 +27,17 @@ namespace GameProject.Sprites {
       this.currentFrame = 0;
 
       sourceRectangles = new List<Rectangle>();
-      sourceRectangles.Add(new Rectangle(0, 0, 16, 16));
-      sourceRectangles.Add(new Rectangle(16, 0, 16, 16)); 
+      // Rectangle(x, y, width, height)
+      sourceRectangles.Add(new Rectangle(11, 20, 10, 12));
+      sourceRectangles.Add(new Rectangle(43, 21, 10, 11));
+      sourceRectangles.Add(new Rectangle(75, 22, 10, 10));
+      sourceRectangles.Add(new Rectangle(106, 22, 11, 10));
+      sourceRectangles.Add(new Rectangle(138, 22, 11, 10));
+      sourceRectangles.Add(new Rectangle(170, 22, 11, 10));
+      sourceRectangles.Add(new Rectangle(203, 22, 10, 10));
+      sourceRectangles.Add(new Rectangle(235, 21, 10, 11));
+      sourceRectangles.Add(new Rectangle(267, 20, 10, 12));
+      sourceRectangles.Add(new Rectangle(299, 20, 10, 12));
     }
 
     public void Update(GameTime gameTime) {
@@ -53,7 +62,19 @@ namespace GameProject.Sprites {
       Rectangle sourceRectangle = sourceRectangles[currentFrame];
       SpriteEffects effects = (direction == -1) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
-      spriteBatch.Draw(texture, position, sourceRectangle, Color.White, 0f, Vector2.Zero, 2.0f, effects, 0f);
+      Vector2 origin = new Vector2(0, sourceRectangle.Height);
+
+      spriteBatch.Draw(
+          texture: texture,
+          position: position,
+          sourceRectangle: sourceRectangle,
+          color: Color.White,
+          rotation: 0f,
+          origin: origin, // <--- Use the new origin here
+          scale: 2f,      // If you scale by 2, the gap doubles, so Origin fixes this automatically!
+          effects: effects,
+          layerDepth: 0f
+          );
     }
 
     public void ChangeDirection() { /* TODO */ }
