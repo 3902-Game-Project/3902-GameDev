@@ -67,19 +67,21 @@ namespace GameProject.Sprites {
     }
 
     public void ChangeDirection() {
-      int dir = random.Next(0, 4);
+      float randomX = (float)(random.NextDouble() * 2 - 1);
+      float randomY = (float)(random.NextDouble() * 2 - 1);
 
-      switch (dir) {
-        case 0: velocity = new Vector2(speed, 0); break;  // Right
-        case 1: velocity = new Vector2(-speed, 0); break; // Left
-        case 2: velocity = new Vector2(0, speed); break;  // Down
-        case 3: velocity = new Vector2(0, -speed); break; // Up
+      Vector2 direction = new Vector2(randomX, randomY);
+
+      if (direction != Vector2.Zero) {
+        direction.Normalize();
       }
+
+      velocity = direction * speed;
     }
 
     public void Draw(SpriteBatch spriteBatch) {
       Rectangle sourceRectangle = sourceRectangles[currentFrame];
-      SpriteEffects effect = (velocity.X < 0) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+      SpriteEffects effect = (velocity.X > 0) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
       Vector2 origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height);
 
