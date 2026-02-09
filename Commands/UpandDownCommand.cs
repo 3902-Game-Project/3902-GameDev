@@ -7,9 +7,11 @@ namespace GameProject.Commands;
 
 public class UpandDownCommand : ICommand {
   private Game1 myGame;
+
   public UpandDownCommand(Game1 game) {
     myGame = game;
   }
+
   public void Execute() {
     Texture2D texture = myGame.Texture;
 

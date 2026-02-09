@@ -7,9 +7,11 @@ namespace GameProject.Commands;
 
 public class LeftandRightAnimatedCommand : ICommand {
   private Game1 myGame;
+
   public LeftandRightAnimatedCommand(Game1 game) {
     myGame = game;
   }
+
   public void Execute() {
     Texture2D texture = myGame.Texture;
 

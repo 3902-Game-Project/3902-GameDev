@@ -50,7 +50,6 @@ public class LeftandRightAnimatedSprite : ISprite {
       }
       timer = 0;
     }
-
   }
 
   public void Draw(SpriteBatch spriteBatch) {
@@ -58,15 +57,15 @@ public class LeftandRightAnimatedSprite : ISprite {
     SpriteEffects effects = (direction == -1) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
     spriteBatch.Draw(
-        texture,
-        position,
-        sourceRectangle,
-        Color.White,
-        0f,
-        Vector2.Zero,
-        1f,
-        effects,
-        0f
+      texture: texture,
+      position: position,
+      sourceRectangle: sourceRectangle,
+      color: Color.White,
+      rotation: 0f,
+      origin: Vector2.Zero,
+      scale: 1f,
+      effects: effects,
+      layerDepth: 0f
     );
   }
 }

@@ -29,15 +29,13 @@ public class Game1 : Game {
   }
 
   public Game1() {
-
     _graphics = new GraphicsDeviceManager(this);
     Content.RootDirectory = "Content";
     IsMouseVisible = true;
-
   }
+
   protected override void Initialize() {
     keyboardController = new KeyboardController(this);
-
 
     base.Initialize();
   }
@@ -50,7 +48,6 @@ public class Game1 : Game {
 
     myFont = Content.Load<SpriteFont>("CreditsFont");
   }
-
 
   protected override void Update(GameTime gameTime) {
     if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) {
@@ -72,5 +69,4 @@ public class Game1 : Game {
 
     base.Draw(gameTime);
   }
-
 }

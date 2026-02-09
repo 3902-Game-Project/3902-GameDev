@@ -31,7 +31,6 @@ public class UpandDownSprite : ISprite {
       position.Y = startPosition.Y;
       direction = -1;
     }
-
   }
 
   public void Draw(SpriteBatch spriteBatch) {
