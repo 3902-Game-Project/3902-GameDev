@@ -16,7 +16,6 @@ namespace GameProject.Factories {
     private EnemySpriteFactory() { }
 
     public void LoadAllTextures(ContentManager content) {
-      // Load the texture (Do NOT include .png extension here)
       snakeTexture = content.Load<Texture2D>("snakeSpritesheet");
     }
 

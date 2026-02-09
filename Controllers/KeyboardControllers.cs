@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using GameProject.Commands;
 using GameProject.Interfaces;
+using GameProject.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -15,7 +16,8 @@ public class KeyboardController : IController {
       {Keys.D1, new FixedSpriteCommand(game)},
       {Keys.D2, new AnimatedSpriteCommand(game)},
       {Keys.D3, new UpandDownCommand(game)},
-      {Keys.D4, new LeftandRightAnimatedCommand(game)}
+      {Keys.D4, new LeftandRightAnimatedCommand(game)},
+      {Keys.O, new EnemySnakeCommand(game)}
     };
   }
 
