@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime;
+using System.Runtime.ExceptionServices;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,23 +10,23 @@ namespace GameProject.Sprites {
   public class SnakeSprite : IEnemy {
     private Texture2D texture;
     private Vector2 position;
-    private Vector2 startPosition;
     private List<Rectangle> sourceRectangles;
 
-    private int direction = -1;
-    private int speed = 0;
-    private int patrolDistance = 100;
+    private Vector2 velocity;
+    private float speed = 100f;
+    private Random random;
+    private double directionTimer;
 
     private int currentFrame;
-    private double timer;
-    private double frameInterval = 0.2;
+    private double animationTimer;
 
     public SnakeSprite(Texture2D texture, Vector2 startPosition) {
+
       this.texture = texture;
       this.position = startPosition;
-      this.startPosition = startPosition;
-      this.timer = 0;
-      this.currentFrame = 0;
+      this.random = new Random();
+
+      ChangeDirection();
 
       sourceRectangles = new List<Rectangle>();
       // Rectangle(x, y, width, height)
@@ -41,28 +43,45 @@ namespace GameProject.Sprites {
     }
 
     public void Update(GameTime gameTime) {
-      timer += gameTime.ElapsedGameTime.TotalSeconds;
-      if (timer >= frameInterval) {
+      float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+      animationTimer += dt;
+      if (animationTimer >= 0.2)
+      {
         currentFrame++;
-        if (currentFrame >= sourceRectangles.Count)
-          currentFrame = 0;
-        timer = 0;
+        if (currentFrame >= sourceRectangles.Count) currentFrame = 0;
+        animationTimer = 0;
       }
 
-      position.X += speed * direction;
+      position += velocity * dt;
 
-      if (direction == -1 && position.X <= startPosition.X - patrolDistance) {
-        direction = 1; 
-      } else if (direction == 1 && position.X >= startPosition.X + patrolDistance) {
-        direction = -1; 
+      directionTimer -= dt;
+      if(directionTimer <= 0) 
+      {
+        ChangeDirection();
+        directionTimer = 2.0;
+      }
+
+      if (position.X < 0 || position.X > 800) velocity.X *= -1;
+      if (position.Y < 0 || position.Y > 480) velocity.Y *= -1;
+    }
+
+    public void ChangeDirection() {
+      int dir = random.Next(0, 4);
+
+      switch (dir) {
+        case 0: velocity = new Vector2(speed, 0); break;  // Right
+        case 1: velocity = new Vector2(-speed, 0); break; // Left
+        case 2: velocity = new Vector2(0, speed); break;  // Down
+        case 3: velocity = new Vector2(0, -speed); break; // Up
       }
     }
 
     public void Draw(SpriteBatch spriteBatch) {
       Rectangle sourceRectangle = sourceRectangles[currentFrame];
-      SpriteEffects effects = (direction == -1) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+      SpriteEffects effect = (velocity.X < 0) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
-      Vector2 origin = new Vector2(0, sourceRectangle.Height);
+      Vector2 origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height);
 
       spriteBatch.Draw(
           texture: texture,
@@ -70,14 +89,12 @@ namespace GameProject.Sprites {
           sourceRectangle: sourceRectangle,
           color: Color.White,
           rotation: 0f,
-          origin: origin, // <--- Use the new origin here
-          scale: 2f,      // If you scale by 2, the gap doubles, so Origin fixes this automatically!
-          effects: effects,
+          origin: origin,
+          scale: 2f,
+          effects: effect,
           layerDepth: 0f
           );
     }
-
-    public void ChangeDirection() { /* TODO */ }
     public void TakeDamage() { /* TODO */ }
   }
 }
