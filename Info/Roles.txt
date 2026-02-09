@@ -1,0 +1,6 @@
+Aaron: level design, blocks and arenas
+Emmett: ?
+Eric: player
+Q: enemies, little bit of player
+Santosh: starting UI, refactoring
+JJ: items
