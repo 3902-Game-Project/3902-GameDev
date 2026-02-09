@@ -1,4 +1,5 @@
-﻿using GameProject.Interfaces;
+﻿using GameProject.Factories;
+using GameProject.Interfaces;
 using GameProject.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,10 +14,7 @@ public class EnemySnakeCommand : ICommand {
   }
 
   public void Execute() {
-    Texture2D texture = myGame.Texture;
-
-    ISprite newSprite = new AnimatedSprite(texture, new Vector2(400, 200));
-
-    myGame.CurrentSprite = newSprite;
+    IEnemy snake = EnemySpriteFactory.Instance.CreateSnakeSprite();
+    myGame.CurrentSprite = (ISprite)snake;
   }
 }

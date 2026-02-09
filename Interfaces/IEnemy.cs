@@ -3,9 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Interfaces
 {
-  public interface IEnemy {
-    void Update(GameTime gameTime); 
-    void Draw(SpriteBatch spriteBatch);
+  public interface IEnemy : ISprite {
     void ChangeDirection();
     void TakeDamage();
   }
