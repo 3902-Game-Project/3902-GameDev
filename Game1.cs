@@ -1,10 +1,4 @@
-﻿/**
- * Authors:
- * Q
- * Santosh Schaefer
- */
-
-using GameProject.Controllers;
+﻿using GameProject.Controllers;
 using GameProject.Interfaces;
 using GameProject.Sprites;
 using Microsoft.Xna.Framework;
