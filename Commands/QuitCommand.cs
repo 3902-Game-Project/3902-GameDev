@@ -1,19 +1,15 @@
-using Microsoft.Xna.Framework;
 using GameProject.Interfaces;
 
 namespace GameProject.Commands;
 
-public class QuitCommand : ICommand
-{
-    private Game1 myGame;
+public class QuitCommand : ICommand {
+  private Game1 myGame;
 
-    public QuitCommand(Game1 game)
-    {
-        myGame = game;
-    }
+  public QuitCommand(Game1 game) {
+    myGame = game;
+  }
 
-    public void Execute()
-    {
-        myGame.Exit();
-    }
+  public void Execute() {
+    myGame.Exit();
+  }
 }

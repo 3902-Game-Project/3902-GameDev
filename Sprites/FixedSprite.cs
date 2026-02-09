@@ -1,28 +1,24 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameProject.Interfaces;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using GameProject.Interfaces;
 
 namespace GameProject.Sprites;
 
-public class FixedSprite : ISprite
-{
-    private Texture2D texture;
-    private Vector2 position;
+public class FixedSprite : ISprite {
+  private Texture2D texture;
+  private Vector2 position;
 
-    public FixedSprite(Texture2D texture, Vector2 position)
-    {
-        this.texture = texture;
-        this.position = position;
-    }
+  public FixedSprite(Texture2D texture, Vector2 position) {
+    this.texture = texture;
+    this.position = position;
+  }
 
-    public void Update(GameTime gameTime)
-    {
-        // Static sprites don't change, so this can be empty!
-    }
+  public void Update(GameTime gameTime) {
+    // Static sprites don't change, so this can be empty!
+  }
 
-    public void Draw(SpriteBatch spriteBatch)
-    {
-        Rectangle sourceRect = new Rectangle(0, 0, 22, 30);
-        spriteBatch.Draw(texture, position, sourceRect, Color.White);
-    }
+  public void Draw(SpriteBatch spriteBatch) {
+    Rectangle sourceRect = new Rectangle(0, 0, 22, 30);
+    spriteBatch.Draw(texture, position, sourceRect, Color.White);
+  }
 }

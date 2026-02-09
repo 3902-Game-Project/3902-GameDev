@@ -1,50 +1,45 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using System.Collections.Generic;
 using GameProject.Interfaces;
-using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Sprites;
 
-internal class AnimatedSprite : ISprite
-{
-    private Texture2D texture;
-    private Vector2 position;
+internal class AnimatedSprite : ISprite {
+  private Texture2D texture;
+  private Vector2 position;
 
-    private List<Rectangle> sourceRectangles;
+  private List<Rectangle> sourceRectangles;
 
-    private int currentFrame;
-    private double timer;
-    private double FrameInterval = 0.2; // How long we want to wait to change the frame of a sprite
-    public AnimatedSprite(Texture2D texture, Vector2 position) {
+  private int currentFrame;
+  private double timer;
+  private double FrameInterval = 0.2; // How long we want to wait to change the frame of a sprite
+  public AnimatedSprite(Texture2D texture, Vector2 position) {
 
-        this.texture = texture;
-        this.position = position;
-        this.currentFrame = 0;
-        this.timer = 0;
+    this.texture = texture;
+    this.position = position;
+    this.currentFrame = 0;
+    this.timer = 0;
 
-        sourceRectangles = new List<Rectangle>();
-        sourceRectangles.Add(new Rectangle(0, 0, 23, 25));
-        sourceRectangles.Add(new Rectangle(22, 0, 23, 25));
-        sourceRectangles.Add(new Rectangle(44, 0, 21, 25));
+    sourceRectangles = new List<Rectangle>();
+    sourceRectangles.Add(new Rectangle(0, 0, 23, 25));
+    sourceRectangles.Add(new Rectangle(22, 0, 23, 25));
+    sourceRectangles.Add(new Rectangle(44, 0, 21, 25));
+  }
+  public void Update(GameTime gameTime) {
+    timer += gameTime.ElapsedGameTime.TotalSeconds;
+
+    if (timer > FrameInterval) {
+      currentFrame++;
+      if (currentFrame >= sourceRectangles.Count) {
+        currentFrame = 0;
+      }
+      timer = 0;
     }
-    public void Update(GameTime gameTime)
-    {
-        timer += gameTime.ElapsedGameTime.TotalSeconds;
+  }
+  public void Draw(SpriteBatch spriteBatch) {
+    Rectangle sourceRectangle = sourceRectangles[currentFrame];
+    spriteBatch.Draw(texture, position, sourceRectangle, Color.White);
 
-        if (timer > FrameInterval)
-        {
-            currentFrame++;
-            if (currentFrame >= sourceRectangles.Count)
-            {
-                currentFrame = 0;
-            }
-            timer = 0;
-        }
-    }
-    public void Draw(SpriteBatch spriteBatch)
-    {
-        Rectangle sourceRectangle = sourceRectangles[currentFrame];
-        spriteBatch.Draw(texture, position, sourceRectangle, Color.White);
-
-    }
+  }
 }
