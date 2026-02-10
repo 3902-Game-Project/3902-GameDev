@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GameProject.Interfaces;
+using GameProject.Animations;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -7,20 +8,19 @@ public class Bomb : IItem {
   private Texture2D texture;
   private Vector2 position;
   private List<Rectangle> sourceRectangles;
-  private int currentFrame;
-  private double animationTimer;
-  private int fps;
+  private Rectangle currentSourceRect;
+  private Animation bombAnimation;
   private Vector2 origin;
 
   private float fuseTime;
 
   public void Draw(SpriteBatch spriteBatch) {
-    origin = new Vector2(sourceRectangles[currentFrame].Width / 2, sourceRectangles[currentFrame].Height / 2);
+    origin = new Vector2(currentSourceRect.Width / 2, currentSourceRect.Height / 2);
 
     spriteBatch.Draw(
       texture,
       position,
-      sourceRectangles[currentFrame],
+      currentSourceRect,
       Color.White,
       0f,
       origin,
@@ -31,15 +31,10 @@ public class Bomb : IItem {
   }
 
   public void Update(GameTime gameTime) {
+    bombAnimation.Update(gameTime);
+    currentSourceRect = bombAnimation.CurrentFrame;
+
     float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-    animationTimer += dt;
-    if (animationTimer >= 1.0 / fps)
-    {
-      currentFrame = (currentFrame + 1) % sourceRectangles.Count;
-      animationTimer = 0;
-    }
-
     fuseTime -= dt;
     if (fuseTime <= 0) {
       Explode();
@@ -57,9 +52,7 @@ public class Bomb : IItem {
   public Bomb(Texture2D texture, Vector2 startPosition) {
     this.texture = texture;
     this.position = startPosition;
-    animationTimer = 0;
-    currentFrame = 0;
-    sourceRectangles = new List<Rectangle>();
-    fps = 5;
+    bombAnimation = new Animation(sourceRectangles, 5);
+    currentSourceRect = bombAnimation.CurrentFrame;
   }
 }

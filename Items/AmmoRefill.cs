@@ -4,13 +4,14 @@ using GameProject.Animations;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class Revolver : IItem {
+public class AmmoRefill : IItem {
     private Texture2D texture;
     private Vector2 position;
     private List<Rectangle> sourceRectangles;
-    private Animation revolverAnimation;
     private Rectangle currentSourceRect;
     private Vector2 origin;
+    
+    private Animation shootAnimation;
 
     public void Draw(SpriteBatch spriteBatch) {
         origin = new Vector2(currentSourceRect.Width / 2, currentSourceRect.Height / 2);
@@ -29,18 +30,18 @@ public class Revolver : IItem {
     }
 
     public void Update(GameTime gameTime) {
-        revolverAnimation.Update(gameTime);
-        currentSourceRect = revolverAnimation.CurrentFrame;
+        shootAnimation.Update(gameTime);
+        currentSourceRect = shootAnimation.CurrentFrame;
     }
 
     public void OnPickup() {
-        
+    // Logic for using the ammo refill item
     }
 
-    public Revolver(Texture2D texture, Vector2 startPosition) {
+    public AmmoRefill(Texture2D texture, Vector2 startPosition) {
         this.texture = texture;
         this.position = startPosition;
-        revolverAnimation = new Animation(sourceRectangles, 10);
-        currentSourceRect = revolverAnimation.CurrentFrame;
+        shootAnimation = new Animation(sourceRectangles, 10);
+        currentSourceRect = shootAnimation.CurrentFrame;
     }
 }
