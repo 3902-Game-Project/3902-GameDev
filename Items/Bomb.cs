@@ -39,7 +39,7 @@ public class Bomb : IItem {
     }
   }
 
-  public void Use() {
+  public void OnPickup() {
     // Logic for using the bomb item
   }
 
