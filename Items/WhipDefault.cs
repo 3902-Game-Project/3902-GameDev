@@ -1,16 +1,16 @@
-using System.Collections.Generic;
 using GameProject.Interfaces;
 using GameProject.Animations;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace GameProject.Items {
-    public class Revolver : IItem {
+    public class WhipDefault : IItem {
         private Texture2D texture;
         private Vector2 position;
         private List<Rectangle> sourceRectangles;
-        private Animation revolverAnimation;
         private Rectangle currentSourceRect;
+        private Animation whipAnimation;
         private Vector2 origin;
 
         public void Draw(SpriteBatch spriteBatch) {
@@ -30,19 +30,19 @@ namespace GameProject.Items {
         }
 
         public void Update(GameTime gameTime) {
-            revolverAnimation.Update(gameTime);
-            currentSourceRect = revolverAnimation.CurrentFrame;
+            whipAnimation.Update(gameTime);
+            currentSourceRect = whipAnimation.CurrentFrame;
         }
 
         public void OnPickup() {
-            
+            // Logic for using the whip item
         }
 
-        public Revolver(Texture2D texture, Vector2 startPosition) {
+        public WhipDefault(Texture2D texture, Vector2 startPosition) {
             this.texture = texture;
             this.position = startPosition;
-            revolverAnimation = new Animation(sourceRectangles, 10);
-            currentSourceRect = revolverAnimation.CurrentFrame;
+            whipAnimation = new Animation(sourceRectangles, 10);
+            currentSourceRect = whipAnimation.CurrentFrame;
         }
     }
 }
