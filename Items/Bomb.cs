@@ -4,13 +4,15 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 public class Bomb : IItem {
-    private Texture2D texture;
-    private Vector2 position;
-    private List<Rectangle> sourceRectangles;
-    private int currentFrame;
-    private double animationTimer;
-    private int fps;
-    private Vector2 origin;
+  private Texture2D texture;
+  private Vector2 position;
+  private List<Rectangle> sourceRectangles;
+  private int currentFrame;
+  private double animationTimer;
+  private int fps;
+  private Vector2 origin;
+
+  private float fuseTime;
 
   public void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(sourceRectangles[currentFrame].Width / 2, sourceRectangles[currentFrame].Height / 2);
@@ -37,10 +39,19 @@ public class Bomb : IItem {
       currentFrame = (currentFrame + 1) % sourceRectangles.Count;
       animationTimer = 0;
     }
+
+    fuseTime -= dt;
+    if (fuseTime <= 0) {
+      Explode();
+    }
   }
 
   public void OnPickup() {
     // Logic for using the bomb item
+  }
+
+  private void Explode() {
+    
   }
 
   public Bomb(Texture2D texture, Vector2 startPosition) {
