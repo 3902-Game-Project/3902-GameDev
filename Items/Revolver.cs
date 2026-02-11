@@ -1,0 +1,48 @@
+using System.Collections.Generic;
+using GameProject.Interfaces;
+using GameProject.Animations;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace GameProject.Items {
+    public class Revolver : IItem {
+        private Texture2D texture;
+        private Vector2 position;
+        private List<Rectangle> sourceRectangles;
+        private Animation revolverAnimation;
+        private Rectangle currentSourceRect;
+        private Vector2 origin;
+
+        public void Draw(SpriteBatch spriteBatch) {
+            origin = new Vector2(currentSourceRect.Width / 2, currentSourceRect.Height / 2);
+
+            spriteBatch.Draw(
+                texture,
+                position,
+                currentSourceRect,
+                Color.White,
+                0f,
+                origin,
+                1f,
+                SpriteEffects.None,
+                0f
+            );
+        }
+
+        public void Update(GameTime gameTime) {
+            revolverAnimation.Update(gameTime);
+            currentSourceRect = revolverAnimation.CurrentFrame;
+        }
+
+        public void OnPickup() {
+            
+        }
+
+        public Revolver(Texture2D texture, Vector2 startPosition) {
+            this.texture = texture;
+            this.position = startPosition;
+            revolverAnimation = new Animation(sourceRectangles, 10);
+            currentSourceRect = revolverAnimation.CurrentFrame;
+        }
+    }
+}
