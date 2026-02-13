@@ -16,9 +16,6 @@
     <None Remove="Blocks\**" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Commands\LeftAndRightAnimatedCommand.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>
