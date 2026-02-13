@@ -15,7 +15,7 @@ public class Game1 : Game {
   public Texture2D Texture { get; private set; }
   public SpriteFont MainFont { get; private set; }
   private IController keyboardController;
-  public ISprite CurrentSprite { get; private set; }
+  public ISprite CurrentSprite { get; set; }
 
   public IGameState StateMenu { get; private set; }
   public IGameState StateGame { get; private set; }
