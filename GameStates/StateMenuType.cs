@@ -30,12 +30,11 @@ public class StateMenuType(Game1 game) : IGameState {
         new Vector2(
           game.Window.ClientBounds.Width,
           game.Window.ClientBounds.Height
-        ) * 0.5f +
-        new Vector2(0.0f, 150.0f),
+        ) * 0.5f,
       color: Color.White,
       origin: game.GlobalVars.Assets.MainFont.MeasureString(START_TEXT) * 0.5f,
       rotation: 0.0f,
-      scale: 0.3f,
+      scale: 1.0f,
       effects: SpriteEffects.None,
       layerDepth: 0.0f
     );
