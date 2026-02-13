@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using GameProject.Commands;
 using GameProject.Interfaces;
-using GameProject.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 

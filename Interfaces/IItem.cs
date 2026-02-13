@@ -1,7 +1,5 @@
-namespace GameProject.Interfaces
+namespace GameProject.Interfaces;
 
-{
-  public interface IItem : ISprite {
-    void OnPickup();
-  }
+public interface IItem : ISprite {
+  void OnPickup();
 }

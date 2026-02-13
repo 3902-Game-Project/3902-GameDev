@@ -1,102 +1,99 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime;
-using System.Runtime.ExceptionServices;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Sprites {
-  public class SnakeSprite : IEnemy {
-    private Texture2D texture;
-    private Vector2 position;
-    private List<Rectangle> sourceRectangles;
+namespace GameProject.Sprites;
 
-    private Vector2 velocity;
-    private float speed = 100f;
-    private Random random;
-    private double directionTimer;
+public class SnakeSprite : IEnemy {
+  private Texture2D texture;
+  private Vector2 position;
+  private List<Rectangle> sourceRectangles;
 
-    private int currentFrame;
-    private double animationTimer;
+  private Vector2 velocity;
+  private float speed = 100f;
+  private Random random;
+  private double directionTimer;
 
-    public SnakeSprite(Texture2D texture, Vector2 startPosition) {
+  private int currentFrame;
+  private double animationTimer;
 
-      this.texture = texture;
-      this.position = startPosition;
-      this.random = new Random();
+  public SnakeSprite(Texture2D texture, Vector2 startPosition) {
 
-      ChangeDirection();
+    this.texture = texture;
+    this.position = startPosition;
+    this.random = new Random();
 
-      sourceRectangles = new List<Rectangle>();
-      // Rectangle(x, y, width, height)
-      sourceRectangles.Add(new Rectangle(11, 20, 10, 12));
-      sourceRectangles.Add(new Rectangle(43, 21, 10, 11));
-      sourceRectangles.Add(new Rectangle(75, 22, 10, 10));
-      sourceRectangles.Add(new Rectangle(106, 22, 11, 10));
-      sourceRectangles.Add(new Rectangle(138, 22, 11, 10));
-      sourceRectangles.Add(new Rectangle(170, 22, 11, 10));
-      sourceRectangles.Add(new Rectangle(203, 22, 10, 10));
-      sourceRectangles.Add(new Rectangle(235, 21, 10, 11));
-      sourceRectangles.Add(new Rectangle(267, 20, 10, 12));
-      sourceRectangles.Add(new Rectangle(299, 20, 10, 12));
-    }
+    ChangeDirection();
 
-    public void Update(GameTime gameTime) {
-      float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-      animationTimer += dt;
-      if (animationTimer >= 0.2)
-      {
-        currentFrame++;
-        if (currentFrame >= sourceRectangles.Count) currentFrame = 0;
-        animationTimer = 0;
-      }
-
-      position += velocity * dt;
-
-      directionTimer -= dt;
-      if(directionTimer <= 0) 
-      {
-        ChangeDirection();
-        directionTimer = 2.0;
-      }
-
-      if (position.X < 0 || position.X > 800) velocity.X *= -1;
-      if (position.Y < 0 || position.Y > 480) velocity.Y *= -1;
-    }
-
-    public void ChangeDirection() {
-      float randomX = (float)(random.NextDouble() * 2 - 1);
-      float randomY = (float)(random.NextDouble() * 2 - 1);
-
-      Vector2 direction = new Vector2(randomX, randomY);
-
-      if (direction != Vector2.Zero) {
-        direction.Normalize();
-      }
-
-      velocity = direction * speed;
-    }
-
-    public void Draw(SpriteBatch spriteBatch) {
-      Rectangle sourceRectangle = sourceRectangles[currentFrame];
-      SpriteEffects effect = (velocity.X > 0) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-
-      Vector2 origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height);
-
-      spriteBatch.Draw(
-          texture: texture,
-          position: position,
-          sourceRectangle: sourceRectangle,
-          color: Color.White,
-          rotation: 0f,
-          origin: origin,
-          scale: 2f,
-          effects: effect,
-          layerDepth: 0f
-          );
-    }
-    public void TakeDamage() { /* TODO */ }
+    sourceRectangles = new List<Rectangle>();
+    // Rectangle(x, y, width, height)
+    sourceRectangles.Add(new Rectangle(11, 20, 10, 12));
+    sourceRectangles.Add(new Rectangle(43, 21, 10, 11));
+    sourceRectangles.Add(new Rectangle(75, 22, 10, 10));
+    sourceRectangles.Add(new Rectangle(106, 22, 11, 10));
+    sourceRectangles.Add(new Rectangle(138, 22, 11, 10));
+    sourceRectangles.Add(new Rectangle(170, 22, 11, 10));
+    sourceRectangles.Add(new Rectangle(203, 22, 10, 10));
+    sourceRectangles.Add(new Rectangle(235, 21, 10, 11));
+    sourceRectangles.Add(new Rectangle(267, 20, 10, 12));
+    sourceRectangles.Add(new Rectangle(299, 20, 10, 12));
   }
+
+  public void Update(GameTime gameTime) {
+    float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+    animationTimer += dt;
+    if (animationTimer >= 0.2) {
+      currentFrame++;
+      if (currentFrame >= sourceRectangles.Count) currentFrame = 0;
+      animationTimer = 0;
+    }
+
+    position += velocity * dt;
+
+    directionTimer -= dt;
+    if (directionTimer <= 0) {
+      ChangeDirection();
+      directionTimer = 2.0;
+    }
+
+    if (position.X < 0 || position.X > 800) velocity.X *= -1;
+    if (position.Y < 0 || position.Y > 480) velocity.Y *= -1;
+  }
+
+  public void ChangeDirection() {
+    float randomX = (float)(random.NextDouble() * 2 - 1);
+    float randomY = (float)(random.NextDouble() * 2 - 1);
+
+    Vector2 direction = new Vector2(randomX, randomY);
+
+    if (direction != Vector2.Zero) {
+      direction.Normalize();
+    }
+
+    velocity = direction * speed;
+  }
+
+  public void Draw(SpriteBatch spriteBatch) {
+    Rectangle sourceRectangle = sourceRectangles[currentFrame];
+    SpriteEffects effect = (velocity.X > 0) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+
+    Vector2 origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height);
+
+    spriteBatch.Draw(
+      texture: texture,
+      position: position,
+      sourceRectangle: sourceRectangle,
+      color: Color.White,
+      rotation: 0f,
+      origin: origin,
+      scale: 2f,
+      effects: effect,
+      layerDepth: 0f
+    );
+  }
+
+  public void TakeDamage() { /* TODO */ }
 }

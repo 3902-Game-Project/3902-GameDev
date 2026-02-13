@@ -1,31 +1,30 @@
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
-namespace GameProject.Animations {
-    public class Animation {
-        private readonly List<Rectangle> frames;
-        private readonly float frameDuration;
-        private int currentFrame;
-        private float timer;
+namespace GameProject.Animations;
 
-        public Animation(List<Rectangle> frames, int fps) {
-            this.frames = frames;
-            this.frameDuration = 1f / fps;
-            currentFrame = 0;
-            timer = 0f;
-        }
+public class Animation {
+  private readonly List<Rectangle> frames;
+  private readonly float frameDuration;
+  private int currentFrame;
+  private float timer;
 
-        public void Update(GameTime gameTime) {
-            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+  public Animation(List<Rectangle> frames, int fps) {
+    this.frames = frames;
+    this.frameDuration = 1f / fps;
+    currentFrame = 0;
+    timer = 0f;
+  }
 
-            timer += dt;
-            if (timer >= frameDuration) {
-                currentFrame = (currentFrame + 1) % frames.Count;
-                timer -= frameDuration;
-            }
-        }
+  public void Update(GameTime gameTime) {
+    float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-        public Rectangle CurrentFrame => frames[currentFrame];
+    timer += dt;
+    if (timer >= frameDuration) {
+      currentFrame = (currentFrame + 1) % frames.Count;
+      timer -= frameDuration;
     }
+  }
+
+  public Rectangle CurrentFrame => frames[currentFrame];
 }
