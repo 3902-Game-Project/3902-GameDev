@@ -47,7 +47,7 @@ public class Game1 : Game {
     GlobalVars.LoadContent();
     StateMenu.LoadContent();
     StateGame.LoadContent();
-
+    
     EnemySpriteFactory.Instance.LoadAllTextures(Content);
   }
 
