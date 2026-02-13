@@ -40,6 +40,10 @@ public class AmmoRefill : IItem {
     // Logic for using the ammo refill item
   }
 
+  public void Use() {
+    // Logic for using the ammo refill item
+  }
+
   public AmmoRefill(Texture2D texture, Vector2 startPosition) {
     this.texture = texture;
     this.position = startPosition;

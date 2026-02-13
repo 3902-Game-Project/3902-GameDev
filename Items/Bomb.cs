@@ -14,8 +14,6 @@ public class Bomb : IItem {
   private Animation bombAnimation;
   private Vector2 origin;
 
-  private float fuseTime;
-
   public void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(currentSourceRect.Width / 2, currentSourceRect.Height / 2);
 
@@ -35,20 +33,14 @@ public class Bomb : IItem {
   public void Update(GameTime gameTime) {
     bombAnimation.Update(gameTime);
     currentSourceRect = bombAnimation.CurrentFrame;
-
-    float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-    fuseTime -= dt;
-    if (fuseTime <= 0) {
-      Explode();
-    }
   }
 
   public void OnPickup() {
     // Logic for using the bomb item
   }
 
-  private void Explode() {
-
+  public void Use() {
+    // Logic for using the bomb item
   }
 
   public Bomb(Texture2D texture, Vector2 startPosition) {

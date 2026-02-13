@@ -39,6 +39,10 @@ public class WhipDefault : IItem {
     // Logic for using the whip item
   }
 
+  public void Use() {
+    // Logic for using the whip item
+  }
+
   public WhipDefault(Texture2D texture, Vector2 startPosition) {
     this.texture = texture;
     this.position = startPosition;

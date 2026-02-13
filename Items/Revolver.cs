@@ -39,6 +39,10 @@ public class Revolver : IItem {
 
   }
 
+  public void Use() {
+    // Logic for using the revolver item
+  }
+
   public Revolver(Texture2D texture, Vector2 startPosition) {
     this.texture = texture;
     this.position = startPosition;
