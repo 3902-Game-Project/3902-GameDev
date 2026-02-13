@@ -13,9 +13,7 @@ public class StateMenuType(Game1 game) : IGameState {
     keyboardController = new MenuKeyboardController(game);
   }
 
-  public void LoadContent() {
-    throw new System.NotImplementedException();
-  }
+  public void LoadContent() { }
 
   public void Update(GameTime gameTime) {
     keyboardController.Update(gameTime);
