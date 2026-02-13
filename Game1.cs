@@ -1,65 +1,64 @@
-﻿using GameProject.Controllers;
+﻿using GameProject.Factories;
+using GameProject.Globals;
 using GameProject.Interfaces;
-using GameProject.Sprites;
+using GameProject.GameStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace GameProject;
 
 public class Game1 : Game {
-  private GraphicsDeviceManager _graphics;
-  private SpriteBatch _spriteBatch;
+  private readonly GraphicsDeviceManager graphics;
 
-  private Texture2D myTexture;
-  public Texture2D Texture {
-    get { return myTexture; }
-  }
-  private SpriteFont myFont;
-  private IController keyboardController;
-  private ISprite currentSprite;
-  public ISprite CurrentSprite {
-    set { currentSprite = value; }
-  }
+  public SpriteBatch SpriteBatch { get; private set; }
+  public GlobalVarStore GlobalVars { get; private set; }
+
+  public StateMenuType StateMenu { get; private set; }
+  public StateGameType StateGame { get; private set; }
+  private IGameState currentState;
 
   public Game1() {
-    _graphics = new GraphicsDeviceManager(this);
+    graphics = new GraphicsDeviceManager(this);
     Content.RootDirectory = "Content";
     IsMouseVisible = true;
+
+    GlobalVars = new GlobalVarStore(this);
+
+    StateMenu = new StateMenuType(this);
+    StateGame = new StateGameType(this);
+    currentState = StateMenu;
+  }
+
+  public void ChangeState(IGameState state) {
+    currentState = state;
   }
 
   protected override void Initialize() {
-    keyboardController = new KeyboardController(this);
+    GlobalVars.Initialize();
+    StateMenu.Initialize();
+    StateGame.Initialize();
 
     base.Initialize();
   }
 
   protected override void LoadContent() {
-    _spriteBatch = new SpriteBatch(GraphicsDevice);
+    SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-    myTexture = Content.Load<Texture2D>("Metro");
-    currentSprite = new FixedSprite(myTexture, new Vector2(400, 200));
-    GameProject.Factories.EnemySpriteFactory.Instance.LoadAllTextures(Content);
-    myFont = Content.Load<SpriteFont>("CreditsFont");
+    GlobalVars.LoadContent();
+    StateMenu.LoadContent();
+    StateGame.LoadContent();
+
+    EnemySpriteFactory.Instance.LoadAllTextures(Content);
   }
 
   protected override void Update(GameTime gameTime) {
-    if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) {
-      Exit();
-    }
-
-    keyboardController.Update(gameTime);
-    currentSprite.Update(gameTime);
+    currentState.Update(gameTime);
 
     base.Update(gameTime);
   }
 
   protected override void Draw(GameTime gameTime) {
-    GraphicsDevice.Clear(Color.CornflowerBlue);
-
-    _spriteBatch.Begin();
-    currentSprite.Draw(_spriteBatch);
-    _spriteBatch.End();
+    currentState.Draw(gameTime);
 
     base.Draw(gameTime);
   }
