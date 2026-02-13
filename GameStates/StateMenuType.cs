@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.GameStates;
 
-internal class StateMenu(Game1 game) : IGameState {
+public class StateMenuType(Game1 game) : IGameState {
   private static readonly string START_TEXT = "Press Enter to start!";
   private IController keyboardController;
 

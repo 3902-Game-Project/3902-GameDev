@@ -1,6 +1,7 @@
 ﻿using GameProject.Factories;
 using GameProject.Globals;
 using GameProject.Interfaces;
+using GameProject.GameStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,8 +13,8 @@ public class Game1 : Game {
   public SpriteBatch SpriteBatch { get; private set; }
   public GlobalVarStore GlobalVars { get; private set; }
 
-  public IGameState StateMenu { get; private set; }
-  public IGameState StateGame { get; private set; }
+  public StateMenuType StateMenu { get; private set; }
+  public StateGameType StateGame { get; private set; }
   private IGameState currentState;
 
   public Game1() {
@@ -23,8 +24,8 @@ public class Game1 : Game {
 
     GlobalVars = new GlobalVarStore(this);
 
-    StateMenu = GameStateFactory.Instance.CreateMenuState(this);
-    StateGame = GameStateFactory.Instance.CreateGameState(this);
+    StateMenu = new StateMenuType(this);
+    StateGame = new StateGameType(this);
     currentState = StateMenu;
   }
 

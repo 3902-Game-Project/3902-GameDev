@@ -3,15 +3,8 @@ using GameProject.Interfaces;
 
 namespace GameProject.Commands;
 
-public class EnemySnakeCommand : ICommand {
-  private Game1 myGame;
-
-  public EnemySnakeCommand(Game1 game) {
-    myGame = game;
-  }
-
+public class EnemySnakeCommand(Game1 game) : ICommand {
   public void Execute() {
-    IEnemy snake = EnemySpriteFactory.Instance.CreateSnakeSprite();
-    myGame.CurrentSprite = (ISprite)snake;
+    game.StateGame.CurrentSprite = EnemySpriteFactory.Instance.CreateSnakeSprite();
   }
 }

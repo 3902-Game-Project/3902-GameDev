@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.GameStates;
 
-internal class StateGame(Game1 game) : IGameState {
+public class StateGameType(Game1 game) : IGameState {
   private IController keyboardController;
 
   public ISprite CurrentSprite { get; set; }
