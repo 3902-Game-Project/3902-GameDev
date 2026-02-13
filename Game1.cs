@@ -1,16 +1,15 @@
 ﻿using GameProject.Factories;
-using GameProject.Interfaces;
 using GameProject.Globals;
+using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace GameProject;
 
 public class Game1 : Game {
   private readonly GraphicsDeviceManager graphics;
-  private SpriteBatch spriteBatch;
 
+  public SpriteBatch SpriteBatch { get; private set; }
   public GlobalVarStore GlobalVars { get; private set; }
 
   public IGameState StateMenu { get; private set; }
@@ -42,7 +41,7 @@ public class Game1 : Game {
   }
 
   protected override void LoadContent() {
-    spriteBatch = new SpriteBatch(GraphicsDevice);
+    SpriteBatch = new SpriteBatch(GraphicsDevice);
 
     GlobalVars.LoadContent();
     StateMenu.LoadContent();
@@ -58,11 +57,7 @@ public class Game1 : Game {
   }
 
   protected override void Draw(GameTime gameTime) {
-    GraphicsDevice.Clear(Color.CornflowerBlue);
-
-    spriteBatch.Begin();
-    currentState.Draw(spriteBatch, gameTime);
-    spriteBatch.End();
+    currentState.Draw(gameTime);
 
     base.Draw(gameTime);
   }

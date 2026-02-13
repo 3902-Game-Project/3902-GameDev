@@ -2,21 +2,20 @@
 using GameProject.Interfaces;
 using GameProject.Sprites;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.GameStates;
 
-internal class StateGame : IGameState {
+internal class StateGame(Game1 game) : IGameState {
   private IController keyboardController;
 
   public ISprite CurrentSprite { get; set; }
 
   public void Initialize() {
-    keyboardController = new GameKeyboardController(this);
+    keyboardController = new GameKeyboardController(game);
   }
 
   public void LoadContent() {
-    CurrentSprite = new FixedSprite(Texture, new Vector2(400, 200));
+    CurrentSprite = new FixedSprite(game.GlobalVars.Assets.Textures.MetroTexture, new Vector2(400, 200));
   }
 
   public void Update(GameTime gameTime) {
@@ -24,7 +23,11 @@ internal class StateGame : IGameState {
     CurrentSprite.Update(gameTime);
   }
 
-  public void Draw(SpriteBatch spriteBatch, GameTime gameTime) {
-    CurrentSprite.Draw(_spriteBatch);
+  public void Draw(GameTime gameTime) {
+    game.GraphicsDevice.Clear(Color.CornflowerBlue);
+
+    game.SpriteBatch.Begin();
+    CurrentSprite.Draw(game.SpriteBatch);
+    game.SpriteBatch.End();
   }
 }

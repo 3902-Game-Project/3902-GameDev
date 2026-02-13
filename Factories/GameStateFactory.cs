@@ -1,6 +1,5 @@
 ﻿using GameProject.GameStates;
 using GameProject.Interfaces;
-using GameProject.Sprites;
 
 namespace GameProject.Factories;
 
@@ -9,11 +8,11 @@ internal class GameStateFactory {
 
   private GameStateFactory() { }
 
-  public IGameState CreateMenuState(Game1 gameObject) {
-    return new StateMenu(gameObject);
+  public IGameState CreateMenuState(Game1 game) {
+    return new StateMenu(game);
   }
 
-  public IGameState CreateGameState(Game1 gameObject) {
-    return new StateGame(gameObject);
+  public IGameState CreateGameState(Game1 game) {
+    return new StateGame(game);
   }
 }
