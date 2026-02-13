@@ -2,13 +2,7 @@
 
 namespace GameProject.Commands;
 
-public class StartGameCommand : ICommand {
-  private Game1 game;
-
-  public StartGameCommand(Game1 game) {
-    this.game = game;
-  }
-
+public class StartGameCommand(Game1 game) : ICommand {
   public void Execute() {
     game.ChangeState(game.StateGame);
   }

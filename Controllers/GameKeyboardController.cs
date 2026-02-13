@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using GameProject.Commands;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
@@ -6,10 +6,15 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Controllers;
 
-public class MenuKeyboardController(Game1 game) : IController {
+public class GameKeyboardController(Game1 game) : IController {
   private Dictionary<Keys, ICommand> keyMappings = new Dictionary<Keys, ICommand> {
     {Keys.Q, new QuitCommand(game)},
-    {Keys.Enter, new StartGameCommand(game)}
+    {Keys.R, new ReturnToMenuAndResetCommand(game)},
+    {Keys.D1, new FixedSpriteCommand(game)},
+    {Keys.D2, new AnimatedSpriteCommand(game)},
+    {Keys.D3, new UpAndDownCommand(game)},
+    {Keys.D4, new LeftAndRightAnimatedCommand(game)},
+    {Keys.O, new EnemySnakeCommand(game)}
   };
 
   public void Update(GameTime gameTime) {
