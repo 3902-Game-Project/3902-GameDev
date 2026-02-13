@@ -2,6 +2,7 @@ Code Written By:
 Q
 Santosh
 Emmett
+JJ Weixel
 
 Sprite Sheets:
 https://opengameart.org/content/animated-snake
