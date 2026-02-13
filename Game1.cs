@@ -1,4 +1,5 @@
 ﻿using GameProject.Controllers;
+using GameProject.Factories;
 using GameProject.Interfaces;
 using GameProject.Sprites;
 using Microsoft.Xna.Framework;
@@ -22,10 +23,21 @@ public class Game1 : Game {
     set { currentSprite = value; }
   }
 
+  public IGameState stateMenu { get; private set; }
+  public IGameState stateGame { get; private set; }
+  private IGameState currentState;
+
   public Game1() {
     _graphics = new GraphicsDeviceManager(this);
     Content.RootDirectory = "Content";
     IsMouseVisible = true;
+    stateMenu = GameStateFactory.Instance.CreateMenuState(this);
+    stateGame = GameStateFactory.Instance.CreateGameState(this);
+    currentState = stateMenu;
+  }
+
+  public void ChangeState(IGameState state) {
+    currentState = state;
   }
 
   protected override void Initialize() {
@@ -39,7 +51,7 @@ public class Game1 : Game {
 
     myTexture = Content.Load<Texture2D>("Metro");
     currentSprite = new FixedSprite(myTexture, new Vector2(400, 200));
-    GameProject.Factories.EnemySpriteFactory.Instance.LoadAllTextures(Content);
+    EnemySpriteFactory.Instance.LoadAllTextures(Content);
     myFont = Content.Load<SpriteFont>("CreditsFont");
   }
 
@@ -50,6 +62,7 @@ public class Game1 : Game {
 
     keyboardController.Update(gameTime);
     currentSprite.Update(gameTime);
+    currentState.Update(gameTime);
 
     base.Update(gameTime);
   }
@@ -59,6 +72,7 @@ public class Game1 : Game {
 
     _spriteBatch.Begin();
     currentSprite.Draw(_spriteBatch);
+    currentState.Draw(_spriteBatch, gameTime);
     _spriteBatch.End();
 
     base.Draw(gameTime);
