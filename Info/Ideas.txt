@@ -1,0 +1,11 @@
+﻿Weapons:
+
+	Call the revolver the Peacemaker
+	Lever action rifle
+
+Non-weapon items:
+	Whisky that acts as healing potion or damage doubler. Hurts you temporarily but makes you awesome for a period of time.
+	Milk can heal, but you have to actually milk a cow to get it.
+
+Player:
+	
