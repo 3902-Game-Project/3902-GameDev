@@ -17,17 +17,17 @@ public class Game1 : Game {
   private IController keyboardController;
   public ISprite CurrentSprite { get; private set; }
 
-  public IGameState stateMenu { get; private set; }
-  public IGameState stateGame { get; private set; }
+  public IGameState StateMenu { get; private set; }
+  public IGameState StateGame { get; private set; }
   private IGameState currentState;
 
   public Game1() {
     _graphics = new GraphicsDeviceManager(this);
     Content.RootDirectory = "Content";
     IsMouseVisible = true;
-    stateMenu = GameStateFactory.Instance.CreateMenuState(this);
-    stateGame = GameStateFactory.Instance.CreateGameState(this);
-    currentState = stateMenu;
+    StateMenu = GameStateFactory.Instance.CreateMenuState(this);
+    StateGame = GameStateFactory.Instance.CreateGameState(this);
+    currentState = StateMenu;
   }
 
   public void ChangeState(IGameState state) {
@@ -35,6 +35,8 @@ public class Game1 : Game {
   }
 
   protected override void Initialize() {
+    StateMenu.Initialize();
+    StateGame.Initialize();
     keyboardController = new KeyboardController(this);
 
     base.Initialize();
@@ -42,6 +44,9 @@ public class Game1 : Game {
 
   protected override void LoadContent() {
     _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+    StateMenu.LoadContent();
+    StateGame.LoadContent();
 
     Texture = Content.Load<Texture2D>("Metro");
     CurrentSprite = new FixedSprite(Texture, new Vector2(400, 200));

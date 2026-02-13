@@ -6,10 +6,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Controllers;
 
-public class KeyboardController : IController {
+public class GameKeyboardController : IController {
   private Dictionary<Keys, ICommand> keyMappings;
 
-  public KeyboardController(Game1 game) {
+  public GameKeyboardController(Game1 game) {
     keyMappings = new Dictionary<Keys, ICommand> {
       {Keys.D0, new QuitCommand(game)},
       {Keys.D1, new FixedSpriteCommand(game)},
