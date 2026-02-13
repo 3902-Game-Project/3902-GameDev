@@ -11,6 +11,11 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Blocks\**" />
+    <EmbeddedResource Remove="Blocks\**" />
+    <None Remove="Blocks\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>
@@ -28,7 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Info\" />
-    <Folder Include="Blocks\" />
   </ItemGroup>
   <ItemGroup>
     <EditorConfigFiles Remove=".editorconfig" />
