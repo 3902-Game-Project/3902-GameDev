@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Sprites;
 
-public class UpandDownSprite : ISprite {
+public class UpAndDownSprite : ISprite {
   private Texture2D texture;
   private Vector2 position;
   private Vector2 startPosition;
@@ -14,7 +14,7 @@ public class UpandDownSprite : ISprite {
   private int speed = 2;
   private int jumpHeight = 50;
 
-  public UpandDownSprite(Texture2D texture, Vector2 position) {
+  public UpAndDownSprite(Texture2D texture, Vector2 position) {
     this.texture = texture;
     this.position = position;
     this.startPosition = position;

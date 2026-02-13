@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Sprites;
 
-public class LeftandRightAnimatedSprite : ISprite {
+public class LeftAndRightAnimatedSprite : ISprite {
   private Texture2D texture;
   private Vector2 position;
   private Vector2 startPosition;
@@ -20,7 +20,7 @@ public class LeftandRightAnimatedSprite : ISprite {
   private double timer;
   private double FrameInterval = 0.2;
 
-  public LeftandRightAnimatedSprite(Texture2D texture, Vector2 position) {
+  public LeftAndRightAnimatedSprite(Texture2D texture, Vector2 position) {
     this.texture = texture;
     this.position = position;
     this.startPosition = position;

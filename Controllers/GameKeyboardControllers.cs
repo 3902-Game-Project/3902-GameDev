@@ -14,8 +14,8 @@ public class GameKeyboardController : IController {
       {Keys.D0, new QuitCommand(game)},
       {Keys.D1, new FixedSpriteCommand(game)},
       {Keys.D2, new AnimatedSpriteCommand(game)},
-      {Keys.D3, new UpandDownCommand(game)},
-      {Keys.D4, new LeftandRightAnimatedCommand(game)},
+      {Keys.D3, new UpAndDownCommand(game)},
+      {Keys.D4, new LeftAndRightAnimatedCommand(game)},
       {Keys.O, new EnemySnakeCommand(game)}
     };
   }
