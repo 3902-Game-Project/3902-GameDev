@@ -12,16 +12,10 @@ public class Game1 : Game {
   private GraphicsDeviceManager _graphics;
   private SpriteBatch _spriteBatch;
 
-  private Texture2D myTexture;
-  public Texture2D Texture {
-    get { return myTexture; }
-  }
-  private SpriteFont myFont;
+  public Texture2D Texture { get; private set; }
+  public SpriteFont MainFont { get; private set; }
   private IController keyboardController;
-  private ISprite currentSprite;
-  public ISprite CurrentSprite {
-    set { currentSprite = value; }
-  }
+  public ISprite CurrentSprite { get; private set; }
 
   public IGameState stateMenu { get; private set; }
   public IGameState stateGame { get; private set; }
@@ -49,10 +43,10 @@ public class Game1 : Game {
   protected override void LoadContent() {
     _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-    myTexture = Content.Load<Texture2D>("Metro");
-    currentSprite = new FixedSprite(myTexture, new Vector2(400, 200));
+    Texture = Content.Load<Texture2D>("Metro");
+    CurrentSprite = new FixedSprite(Texture, new Vector2(400, 200));
     EnemySpriteFactory.Instance.LoadAllTextures(Content);
-    myFont = Content.Load<SpriteFont>("CreditsFont");
+    MainFont = Content.Load<SpriteFont>("CreditsFont");
   }
 
   protected override void Update(GameTime gameTime) {
@@ -61,7 +55,7 @@ public class Game1 : Game {
     }
 
     keyboardController.Update(gameTime);
-    currentSprite.Update(gameTime);
+    CurrentSprite.Update(gameTime);
     currentState.Update(gameTime);
 
     base.Update(gameTime);
@@ -71,7 +65,7 @@ public class Game1 : Game {
     GraphicsDevice.Clear(Color.CornflowerBlue);
 
     _spriteBatch.Begin();
-    currentSprite.Draw(_spriteBatch);
+    CurrentSprite.Draw(_spriteBatch);
     currentState.Draw(_spriteBatch, gameTime);
     _spriteBatch.End();
 
