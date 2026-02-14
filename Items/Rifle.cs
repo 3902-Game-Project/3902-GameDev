@@ -17,6 +17,7 @@ public class Rifle : IItem {
 
   private IProjectile bulletProjectile;
   private float bulletVelocity = 25f;
+  private float bulletLifetime = 2f;
 
   public void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(currentSourceRect.Width / 2, currentSourceRect.Height / 2);
@@ -45,7 +46,7 @@ public class Rifle : IItem {
 
   public void Use() {
     Vector2 bulletDirection = new Vector2(1, 0);
-    bulletProjectile.Instantiate(position, bulletDirection, bulletVelocity);
+    bulletProjectile.Instantiate(position, bulletDirection, bulletVelocity, bulletLifetime);
   }
 
   public Rifle(Texture2D texture, Vector2 startPosition) {

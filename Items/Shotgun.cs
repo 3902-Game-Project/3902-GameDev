@@ -18,6 +18,7 @@ public class Shotgun : IItem {
 
   private IProjectile bulletProjectile;
   private float bulletVelocity = 10f;
+  private float bulletLifetime = 0.5f;
   private int pelletCount = 5;
   private float spreadAngle = 30f;
 
@@ -51,7 +52,7 @@ public class Shotgun : IItem {
     for (int i = 0; i < pelletCount; i++) {
       float angle = -spreadAngle / 2 + (spreadAngle / (pelletCount - 1)) * i;
       Vector2 rotatedDirection = RotateVector(bulletDirection, angle);
-      bulletProjectile.Instantiate(position, rotatedDirection, bulletVelocity);
+      bulletProjectile.Instantiate(position, rotatedDirection, bulletVelocity, bulletLifetime);
     }
   }
 
