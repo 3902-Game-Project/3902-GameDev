@@ -11,6 +11,6 @@ public class TextureStore(Game1 game) : IGlobalData {
 
   public void LoadContent() {
     MetroTexture = game.Content.Load<Texture2D>("Metro"); // is this needed? -Aaron
-    BlockTextures = game.Content.Load<Texture2D>("deset-atlas-v1");
+    BlockTextures = game.Content.Load<Texture2D>("desert-atlas-v1");
   }
 }

@@ -4,6 +4,7 @@ using GameProject.Interfaces;
 using GameProject.GameStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace GameProject;
 
@@ -16,6 +17,8 @@ public class Game1 : Game {
   public StateMenuType StateMenu { get; private set; }
   public StateGameType StateGame { get; private set; }
   private IGameState currentState;
+  public List<IBlock> Blocks; // temporary for sprint2
+  public int BlockNumber { get; set; } // temporary for sprint2
 
   public Game1() {
     graphics = new GraphicsDeviceManager(this);
@@ -27,6 +30,8 @@ public class Game1 : Game {
     StateMenu = new StateMenuType(this);
     StateGame = new StateGameType(this);
     currentState = StateMenu;
+
+    Blocks = new List<IBlock>(); // temporary for sprint2
   }
 
   public void ChangeState(IGameState state) {
