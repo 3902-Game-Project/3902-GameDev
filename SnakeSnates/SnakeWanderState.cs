@@ -29,7 +29,7 @@ namespace GameProject.States {
             new Rectangle(198, 85, 16, 12),
             new Rectangle(232, 85, 15, 12),
             new Rectangle(266, 85, 12, 12),
-            new Rectangle(298, 85, 12, 1)
+            new Rectangle(298, 85, 12, 12)
       };
       this.snake.CurrentFrame = 0;
 
@@ -52,7 +52,11 @@ namespace GameProject.States {
       }
       snake.Position += snake.Velocity * dt;
 
-      if (snake.Position.X < 0 || snake.Position.X > 800) snake.Velocity.X *= -1;
+      if (snake.Position.X < 0 || snake.Position.X > 800) {
+        snake.Velocity.X *= -1;
+        if (snake.Velocity.X > 0) snake.FacingDirection = 1;
+        else snake.FacingDirection = -1;
+      }
       if (snake.Position.Y < 0 || snake.Position.Y > 480) snake.Velocity.Y *= -1;
 
       wanderTimer += dt;

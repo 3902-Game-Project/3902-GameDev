@@ -9,6 +9,9 @@ namespace GameProject.States {
     private SnakeSprite snake;
     private double timer;
 
+    private double animationTimer;
+    private int currentFrameIndex;
+
     public SnakeAttackState(SnakeSprite snake) {
       this.snake = snake;
 
@@ -33,13 +36,30 @@ namespace GameProject.States {
       this.snake.CurrentFrame = 0;
     }
 
-    public void Update(GameTime gameTime) {
-      timer += gameTime.ElapsedGameTime.TotalSeconds;
-      snake.Position += snake.Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-      if (timer > 0.5) {
-        snake.ChangeState(new SnakeIdleState(snake));
-      }
+   // Inside SnakeAttackState.cs
+public void Update(GameTime gameTime) {
+    float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+    timer += dt;
+    
+    // 1. ADD THIS ANIMATION LOGIC
+    // (You might need to define animationTimer and currentFrameIndex at the top of the class first)
+    animationTimer += dt;
+    if (animationTimer >= 0.05) // Fast animation for attack!
+    {
+        currentFrameIndex++;
+        if (currentFrameIndex >= snake.CurrentSourceRectangles.Count) {
+            currentFrameIndex = 0;
+        }
+        snake.CurrentFrame = currentFrameIndex;
+        animationTimer = 0;
     }
+
+    // 2. Existing movement logic
+    snake.Position += snake.Velocity * dt;
+
+    if (timer > 0.5) {
+        snake.ChangeState(new SnakeIdleState(snake));
+    }
+}
   }
 }
