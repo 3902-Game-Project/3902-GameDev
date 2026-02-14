@@ -10,7 +10,7 @@ internal class EnemySpriteFactory {
   private Texture2D snakeTexture;
 
   private static EnemySpriteFactory instance;
-  public static EnemySpriteFactory Instance {
+  public static EnemySpriteFactory Instance { // compiler does not like these instance methods -Aaron
     get { return instance; }
   }
 

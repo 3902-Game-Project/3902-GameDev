@@ -4,8 +4,8 @@ namespace GameProject.Commands;
 
 public class NextBlockCommand(Game1 game) : ICommand {
   public void Execute() {
-    game.BlockNumber++;
+    game.StateGame.BlockNumber++;
 
-    if (game.BlockNumber == game.Blocks.Count) { game.BlockNumber = 0; }
+    if (game.StateGame.BlockNumber >= game.StateGame.Blocks.Count) { game.StateGame.BlockNumber = 0; }
   }
 }

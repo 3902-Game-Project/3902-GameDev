@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "GameProject": {
+      "commandName": "Project",
+      "remoteDebugEnabled": true,
+      "nativeDebugging": false
+    }
+  }
+}

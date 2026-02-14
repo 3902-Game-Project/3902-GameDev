@@ -13,12 +13,13 @@ public class StateGameType(Game1 game) : IGameState {
   public int BlockNumber { get; set; } // temporary for sprint2
   
   
-
+  public IBlock BlockSprite { get; set; }
   public ISprite CurrentSprite { get; set; }
 
   public void Initialize() {
     keyboardController = new GameKeyboardController(game);
     Blocks = new List<IBlock>(); // temporary for sprint2
+    BlockNumber = Blocks.Count;
     
   }
 
@@ -29,6 +30,8 @@ public class StateGameType(Game1 game) : IGameState {
   public void Update(GameTime gameTime) {
     keyboardController.Update(gameTime);
     CurrentSprite.Update(gameTime);
+
+    //BlockSprite = Blocks[BlockNumber];
   }
 
   public void Draw(GameTime gameTime) {

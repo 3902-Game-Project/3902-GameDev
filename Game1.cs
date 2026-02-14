@@ -17,7 +17,7 @@ public class Game1 : Game {
   public StateMenuType StateMenu { get; private set; }
   public StateGameType StateGame { get; private set; }
   private IGameState currentState;
-  public static BlockSpriteFactory blockFactory;
+  public BlockSpriteFactory blockFactory;
 
   public Game1() {
     graphics = new GraphicsDeviceManager(this);
@@ -64,8 +64,6 @@ public class Game1 : Game {
 
   protected override void Draw(GameTime gameTime) {
     currentState.Draw(gameTime);
-
-    Blocks[BlockNumber].Draw(SpriteBatch);  // 
 
     base.Draw(gameTime);
   }
