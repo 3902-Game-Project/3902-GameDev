@@ -6,12 +6,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-public class WhipDefault : IItem {
+public class BombItem : IItem {
   private Texture2D texture;
   private Vector2 position;
   private List<Rectangle> sourceRectangles;
   private Rectangle currentSourceRect;
-  private Animation whipAnimation;
+  private Animation bombAnimation;
   private Vector2 origin;
 
   public void Draw(SpriteBatch spriteBatch) {
@@ -31,22 +31,22 @@ public class WhipDefault : IItem {
   }
 
   public void Update(GameTime gameTime) {
-    whipAnimation.Update(gameTime);
-    currentSourceRect = whipAnimation.CurrentFrame;
+    bombAnimation.Update(gameTime);
+    currentSourceRect = bombAnimation.CurrentFrame;
   }
 
   public void OnPickup() {
-    // Logic for using the whip item
+    // Logic for using the bomb item
   }
 
   public void Use() {
-    // Logic for using the whip item
+    // Logic for using the bomb item
   }
 
-  public WhipDefault(Texture2D texture, Vector2 startPosition) {
+  public BombItem(Texture2D texture, Vector2 startPosition) {
     this.texture = texture;
     this.position = startPosition;
-    whipAnimation = new Animation(sourceRectangles, 10);
-    currentSourceRect = whipAnimation.CurrentFrame;
+    bombAnimation = new Animation(sourceRectangles, 5);
+    currentSourceRect = bombAnimation.CurrentFrame;
   }
 }
