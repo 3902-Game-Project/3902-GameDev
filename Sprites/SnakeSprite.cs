@@ -1,99 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using GameProject.Interfaces;
+﻿using GameProject.Interfaces;
+using GameProject.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
-namespace GameProject.Sprites;
+namespace GameProject.Sprites {
+  public class SnakeSprite : IEnemy {
+    // Data needed by states
+    public Texture2D Texture { get; private set; }
+    public Vector2 Position;
+    public Vector2 Velocity;
+    public int FacingDirection = 1;
 
-public class SnakeSprite : IEnemy {
-  private Texture2D texture;
-  private Vector2 position;
-  private List<Rectangle> sourceRectangles;
+    public List<Rectangle> CurrentSourceRectangles;
+    public int CurrentFrame;
 
-  private Vector2 velocity;
-  private float speed = 100f;
-  private Random random;
-  private double directionTimer;
+    private ISnakeState state;
 
-  private int currentFrame;
-  private double animationTimer;
-
-  public SnakeSprite(Texture2D texture, Vector2 startPosition) {
-
-    this.texture = texture;
-    this.position = startPosition;
-    this.random = new Random();
-
-    ChangeDirection();
-
-    sourceRectangles = new List<Rectangle>();
-    // Rectangle(x, y, width, height)
-    sourceRectangles.Add(new Rectangle(11, 20, 10, 12));
-    sourceRectangles.Add(new Rectangle(43, 21, 10, 11));
-    sourceRectangles.Add(new Rectangle(75, 22, 10, 10));
-    sourceRectangles.Add(new Rectangle(106, 22, 11, 10));
-    sourceRectangles.Add(new Rectangle(138, 22, 11, 10));
-    sourceRectangles.Add(new Rectangle(170, 22, 11, 10));
-    sourceRectangles.Add(new Rectangle(203, 22, 10, 10));
-    sourceRectangles.Add(new Rectangle(235, 21, 10, 11));
-    sourceRectangles.Add(new Rectangle(267, 20, 10, 12));
-    sourceRectangles.Add(new Rectangle(299, 20, 10, 12));
-  }
-
-  public void Update(GameTime gameTime) {
-    float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-    animationTimer += dt;
-    if (animationTimer >= 0.2) {
-      currentFrame++;
-      if (currentFrame >= sourceRectangles.Count) currentFrame = 0;
-      animationTimer = 0;
+    public SnakeSprite(Texture2D texture, Vector2 position) {
+      Texture = texture;
+      Position = position;
+      state = new SnakeWanderState(this);
     }
 
-    position += velocity * dt;
-
-    directionTimer -= dt;
-    if (directionTimer <= 0) {
-      ChangeDirection();
-      directionTimer = 2.0;
+    public void ChangeState(ISnakeState newState) {
+      state = newState;
     }
 
-    if (position.X < 0 || position.X > 800) velocity.X *= -1;
-    if (position.Y < 0 || position.Y > 480) velocity.Y *= -1;
-  }
-
-  public void ChangeDirection() {
-    float randomX = (float)(random.NextDouble() * 2 - 1);
-    float randomY = (float)(random.NextDouble() * 2 - 1);
-
-    Vector2 direction = new Vector2(randomX, randomY);
-
-    if (direction != Vector2.Zero) {
-      direction.Normalize();
+    public void Update(GameTime gameTime) {
+      state.Update(gameTime);
+      if (Position.X < 0) Position.X = 0;
     }
 
-    velocity = direction * speed;
+    public void Draw(SpriteBatch spriteBatch) {
+      if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return;
+
+      Rectangle source = CurrentSourceRectangles[CurrentFrame];
+      SpriteEffects effect = (FacingDirection > 0) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+      Vector2 origin = new Vector2(source.Width / 2, source.Height);
+
+      spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, 2f, effect, 0f);
+    }
+
+    public void TakeDamage() { /* ... */ }
+    public void ChangeDirection() { /* Helper for states to use */ }
   }
-
-  public void Draw(SpriteBatch spriteBatch) {
-    Rectangle sourceRectangle = sourceRectangles[currentFrame];
-    SpriteEffects effect = (velocity.X > 0) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-
-    Vector2 origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height);
-
-    spriteBatch.Draw(
-      texture: texture,
-      position: position,
-      sourceRectangle: sourceRectangle,
-      color: Color.White,
-      rotation: 0f,
-      origin: origin,
-      scale: 2f,
-      effects: effect,
-      layerDepth: 0f
-    );
-  }
-
-  public void TakeDamage() { /* TODO */ }
 }
