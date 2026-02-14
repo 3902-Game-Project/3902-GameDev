@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Factories;
 
-internal class BlockSpriteFactory {
+public class BlockSpriteFactory {
   private Texture2D blockTextures;
 
   private static BlockSpriteFactory instance;
@@ -15,12 +15,14 @@ internal class BlockSpriteFactory {
     get { return instance; }
   }
 
-  private BlockSpriteFactory() {
-    instance = new BlockSpriteFactory();
+  public BlockSpriteFactory() {
+    //instance = new BlockSpriteFactory();
   }
 
-  public void LoadAllTextures(ContentManager content) {
-    blockTextures = content.Load<Texture2D>("desert-atlas-v1");
+  public void LoadAllTextures(Game1 game) { // changed from ContentManager content for sprint2 purposes
+    blockTextures = game.Content.Load<Texture2D>("desert-atlas-v1");
+    game.Blocks.Add(CreateSandBlockSprite());
+
   }
 
   public IBlock CreateSandBlockSprite() {

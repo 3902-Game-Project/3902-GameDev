@@ -17,8 +17,7 @@ public class Game1 : Game {
   public StateMenuType StateMenu { get; private set; }
   public StateGameType StateGame { get; private set; }
   private IGameState currentState;
-  public List<IBlock> Blocks; // temporary for sprint2
-  public int BlockNumber { get; set; } // temporary for sprint2
+  public static BlockSpriteFactory blockFactory;
 
   public Game1() {
     graphics = new GraphicsDeviceManager(this);
@@ -31,7 +30,7 @@ public class Game1 : Game {
     StateGame = new StateGameType(this);
     currentState = StateMenu;
 
-    Blocks = new List<IBlock>(); // temporary for sprint2
+    blockFactory = new BlockSpriteFactory();
   }
 
   public void ChangeState(IGameState state) {
@@ -52,8 +51,9 @@ public class Game1 : Game {
     GlobalVars.LoadContent();
     StateMenu.LoadContent();
     StateGame.LoadContent();
-    
-    EnemySpriteFactory.Instance.LoadAllTextures(Content);
+
+    blockFactory.LoadAllTextures(this);
+    // EnemySpriteFactory.Instance.LoadAllTextures(Content);  // compiler doesn't like this -Aaron
   }
 
   protected override void Update(GameTime gameTime) {
@@ -64,6 +64,8 @@ public class Game1 : Game {
 
   protected override void Draw(GameTime gameTime) {
     currentState.Draw(gameTime);
+
+    Blocks[BlockNumber].Draw(SpriteBatch);  // 
 
     base.Draw(gameTime);
   }
