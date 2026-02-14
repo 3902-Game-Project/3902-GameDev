@@ -16,7 +16,9 @@ public class GameKeyboardController(Game1 game) : IController {
     {Keys.D4, new LeftAndRightAnimatedCommand(game)},
     {Keys.O, new EnemySnakeCommand(game)},
     {Keys.Y, new NextBlockCommand(game)},
-    {Keys.T, new PreviousBlockCommand(game)}
+    {Keys.T, new PreviousBlockCommand(game)},
+    {Keys.Z, new PlayerUseItemCommand(game)},
+    {Keys.N, new PlayerUseItemCommand(game)}
   };
 
   public void Update(GameTime gameTime) {
