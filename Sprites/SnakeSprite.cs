@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace GameProject.Sprites {
   public class SnakeSprite : IEnemy {
-    // Public properties so states can change them
+    // Data needed by states
     public Texture2D Texture { get; private set; }
-    public Vector2 Position; // This needs to be a field or public property
+    public Vector2 Position;
     public Vector2 Velocity;
     public int FacingDirection = 1;
 
@@ -31,7 +31,7 @@ namespace GameProject.Sprites {
     public void Update(GameTime gameTime) {
       state.Update(gameTime);
 
-      // Optional: Keep inside bounds here or inside state
+      // Keep inside bounds
       if (Position.X < 0) Position.X = 0;
     }
 
@@ -50,6 +50,6 @@ namespace GameProject.Sprites {
     }
 
     public void TakeDamage() { /* ... */ }
-    public void ChangeDirection() { /* Helper if needed */ }
+    public void ChangeDirection() { /* Helper for states to use */ }
   }
 }
