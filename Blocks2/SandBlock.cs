@@ -9,7 +9,6 @@ public class SandBlock : IBlock{
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
-  private Vector2 xyVect;
 
 
 
@@ -17,7 +16,6 @@ public class SandBlock : IBlock{
     texture = sandTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
-    xyVect = xyPos;
     sourceRect = new Rectangle(0, 0, 63, 63); // will be in xml (or something else) file later -Aaron
   }
   public void Update(GameTime gameTime) {
