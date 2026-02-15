@@ -8,18 +8,19 @@ namespace GameProject.Factories;
 
 internal class EnemySpriteFactory {
   private Texture2D snakeTexture;
+  private Texture2D batTexture;
+  private static EnemySpriteFactory instance = new EnemySpriteFactory();
 
-  private static EnemySpriteFactory instance;
-  public static EnemySpriteFactory Instance { // compiler does not like these instance methods -Aaron
+  public static EnemySpriteFactory Instance {
     get { return instance; }
   }
 
   private EnemySpriteFactory() {
-    instance = new EnemySpriteFactory();
   }
 
   public void LoadAllTextures(ContentManager content) {
     snakeTexture = content.Load<Texture2D>("snakeSpritesheet");
+    batTexture = content.Load<Texture2D>("batSpritesheet");
   }
 
   public IEnemy CreateSnakeSprite() {
