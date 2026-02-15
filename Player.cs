@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameProject.Interfaces;
+using GameProject.PlayerStates;
 
 namespace GameProject {
   public class Player {
