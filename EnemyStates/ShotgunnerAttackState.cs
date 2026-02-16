@@ -6,39 +6,35 @@ using System.Collections.Generic;
 namespace GameProject.States {
   public class ShotgunnerAttackState : IShotgunnerState {
     private ShotgunnerSprite shotgunner;
-    private double timer;
+    private double stateTimer;
     private double animationTimer;
+    private double timePerFrame = 0.15;
 
     public ShotgunnerAttackState(ShotgunnerSprite shotgunner) {
       this.shotgunner = shotgunner;
 
-      // Lunge in the direction we are currently looking
-      this.shotgunner.Velocity = new Vector2(shotgunner.FacingDirection * 0, 0);
+      this.shotgunner.Velocity = Vector2.Zero;
 
       this.shotgunner.CurrentSourceRectangles = new List<Rectangle>
       {
-                new Rectangle(9, 142, 13, 16),
+                new Rectangle(10, 175, 14, 15),
+                new Rectangle(42, 174, 13, 16),
+                new Rectangle(73, 174, 16, 16)
             };
       this.shotgunner.CurrentFrame = 0;
     }
 
     public void Update(GameTime gameTime) {
       float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-      timer += dt;
-
       animationTimer += dt;
-      if (animationTimer >= 0.05) {
-        shotgunner.CurrentFrame++;
-        if (shotgunner.CurrentFrame >= shotgunner.CurrentSourceRectangles.Count)
-          shotgunner.CurrentFrame = 0;
-        animationTimer = 0;
+      if (animationTimer >= timePerFrame) {
+        if (shotgunner.CurrentFrame < shotgunner.CurrentSourceRectangles.Count - 1) {
+          shotgunner.CurrentFrame++;
+          animationTimer = 0; 
+        }
       }
-
-      // 2. Movement
-      shotgunner.Position += shotgunner.Velocity * dt;
-
-      // 3. Return to Idle
-      if (timer > 0.5) {
+      stateTimer += dt;
+      if (stateTimer > 1.0) {
         shotgunner.ChangeState(new ShotgunnerIdleState(shotgunner));
       }
     }

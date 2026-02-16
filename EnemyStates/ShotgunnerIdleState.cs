@@ -18,13 +18,16 @@ namespace GameProject.States {
       this.shotgunner.CurrentSourceRectangles = new List<Rectangle>
       {
           new Rectangle(9, 142, 13, 16),
+          new Rectangle(41, 141, 13, 17),
+          new Rectangle(73, 142, 13, 16),
+          new Rectangle(105, 143, 13, 15),
       };
       this.shotgunner.CurrentFrame = 0;
     }
 
     public void Update(GameTime gameTime) {
       animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
-      if (animationTimer > 0.1) {
+      if (animationTimer > 0.2) {
         shotgunner.CurrentFrame++;
         if (shotgunner.CurrentFrame >= shotgunner.CurrentSourceRectangles.Count) {
           shotgunner.CurrentFrame = 0;
