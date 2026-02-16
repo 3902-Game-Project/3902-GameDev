@@ -6,6 +6,9 @@
 Non-weapon items:
 	Whisky that acts as healing potion or damage doubler. Hurts you temporarily but makes you awesome for a period of time.
 	Milk can heal, but you have to actually milk a cow to get it.
+	Different potions (alcohol) gives you different abilities. ie Fireball gives you fire bullets.
+	Most other alcohols would not really make sense in the wild west, and we probably shouldn't make it so alocohol-centric.
+	If that wasn't the case, I would say vodka could give you ice bullets that freeze your enemy.
 
 Player:
 	

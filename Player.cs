@@ -24,7 +24,7 @@ namespace GameProject {
       // For now, attack state is default
       this.State = new PlayerUseItemState(this);
     }
-
+    // TODO: Moving methods
     public void UseItem() {
       State.UseItem();
     }
