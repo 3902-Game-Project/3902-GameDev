@@ -50,7 +50,7 @@ public class Shotgun : IItem {
   public void Use() {
     Vector2 bulletDirection = new Vector2(1, 0);
     for (int i = 0; i < pelletCount; i++) {
-      float angle = -spreadAngle / 2 + (spreadAngle / (pelletCount - 1)) * i;
+      float angle = -spreadAngle / 2 + spreadAngle / (pelletCount - 1) * i;
       Vector2 rotatedDirection = RotateVector(bulletDirection, angle);
       bulletProjectile.Instantiate(position, rotatedDirection, bulletVelocity, bulletLifetime);
     }
