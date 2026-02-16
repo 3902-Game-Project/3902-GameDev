@@ -38,8 +38,8 @@ public class StateGameType(Game1 game) : IGameState {
     game.GraphicsDevice.Clear(Color.CornflowerBlue);
 
     game.SpriteBatch.Begin();
-    CurrentSprite.Draw(game.SpriteBatch);
     Blocks[BlockNumber].Draw(game.SpriteBatch);
+    game.Player.Draw(game.SpriteBatch);
     game.SpriteBatch.End();
   }
 }
