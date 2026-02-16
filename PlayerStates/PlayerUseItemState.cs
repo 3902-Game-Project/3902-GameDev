@@ -29,6 +29,9 @@ namespace GameProject.PlayerStates {
     }
 
     public void Draw(SpriteBatch spriteBatch) {
+      Texture2D texture = player.game.GlobalVars.Assets.Textures.MetroTexture;
+      Rectangle sourceRect = new Rectangle(0, 0, 22, 30);
+      spriteBatch.Draw(texture, player.Position, sourceRect, Color.White);
     }
   }
 }
