@@ -10,9 +10,7 @@ namespace GameProject.Items;
 public class Revolver : IItem {
   private Texture2D texture;
   private Vector2 position;
-  private List<Rectangle> sourceRectangles;
-  private Animation revolverAnimation;
-  private Rectangle currentSourceRect;
+  private Rectangle sourceRectangle;
   private Vector2 origin;
 
   private IProjectile bulletProjectile;
@@ -20,12 +18,12 @@ public class Revolver : IItem {
   private float bulletLifetime = 2f;
 
   public void Draw(SpriteBatch spriteBatch) {
-    origin = new Vector2(currentSourceRect.Width / 2, currentSourceRect.Height / 2);
+    origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
 
     spriteBatch.Draw(
       texture,
       position,
-      currentSourceRect,
+      sourceRectangle,
       Color.White,
       0f,
       origin,
@@ -36,8 +34,6 @@ public class Revolver : IItem {
   }
 
   public void Update(GameTime gameTime) {
-    revolverAnimation.Update(gameTime);
-    currentSourceRect = revolverAnimation.CurrentFrame;
   }
 
   public void OnPickup() {
@@ -52,13 +48,7 @@ public class Revolver : IItem {
   public Revolver(Texture2D texture, Vector2 startPosition) {
     this.texture = texture;
     this.position = startPosition;
-    revolverAnimation = new Animation(sourceRectangles, 10);
-    currentSourceRect = revolverAnimation.CurrentFrame;
     bulletProjectile = new BulletDefault(texture);
-
-    sourceRectangles = new List<Rectangle> {
-      new Rectangle(0, 0, 8, 8)
-    };
-    revolverAnimation = new Animation(sourceRectangles, 10);
+    sourceRectangle = new Rectangle(0, 0, 8, 8);
   }
 }
