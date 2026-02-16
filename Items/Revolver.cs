@@ -55,5 +55,10 @@ public class Revolver : IItem {
     revolverAnimation = new Animation(sourceRectangles, 10);
     currentSourceRect = revolverAnimation.CurrentFrame;
     bulletProjectile = new BulletDefault(texture);
+
+    sourceRectangles = new List<Rectangle> {
+      new Rectangle(0, 0, 8, 8)
+    };
+    revolverAnimation = new Animation(sourceRectangles, 10);
   }
 }
