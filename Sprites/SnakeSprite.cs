@@ -23,7 +23,6 @@ namespace GameProject.Sprites
         {
             Texture = texture;
             Position = position;
-            // Start in Idle or Wander
             state = new SnakeWanderState(this);
         }
 
@@ -56,6 +55,5 @@ namespace GameProject.Sprites
         }
 
         public void TakeDamage() { /* ... */ }
-        public void ChangeDirection() { /* Helper for states to use */ }
     }
 }

@@ -20,10 +20,13 @@ internal class EnemySpriteFactory {
 
   public void LoadAllTextures(ContentManager content) {
     snakeTexture = content.Load<Texture2D>("snakeSpritesheet");
-    //batTexture = content.Load<Texture2D>("batSpritesheet");
+    batTexture = content.Load<Texture2D>("batSpritesheet");
   }
 
   public IEnemy CreateSnakeSprite() {
     return new SnakeSprite(snakeTexture, new Vector2(400, 200));
+  }
+  public IEnemy CreateBatSprite() {
+    return new BatSprite(batTexture, new Vector2(400, 200));
   }
 }

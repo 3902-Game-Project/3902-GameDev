@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GameProject.Factories;
+using GameProject.Interfaces;
 
 namespace GameProject.Commands;
-internal class EnemyBatCommand {
+
+public class EnemyBatCommand(Game1 game) : ICommand {
+  public void Execute() {
+    game.StateGame.CurrentSprite = EnemySpriteFactory.Instance.CreateBatSprite();
+  }
 }
