@@ -7,15 +7,14 @@ namespace GameProject.States {
   public class SnakeIdleState : ISnakeState {
     private SnakeSprite snake;
     private double timer;
+    private double animationTimer;
     private System.Random random;
 
     public SnakeIdleState(SnakeSprite snake) {
       this.snake = snake;
       this.random = new System.Random();
 
-      this.snake.Velocity = Vector2.Zero; // Stop moving
-
-      // Set Idle frames
+      this.snake.Velocity = Vector2.Zero;
       this.snake.CurrentSourceRectangles = new List<Rectangle>
       {
                 new Rectangle(11, 20, 10, 12),
@@ -33,6 +32,14 @@ namespace GameProject.States {
     }
 
     public void Update(GameTime gameTime) {
+      animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
+      if (animationTimer > 0.1) {
+        snake.CurrentFrame++;
+        if (snake.CurrentFrame >= snake.CurrentSourceRectangles.Count) {
+          snake.CurrentFrame = 0;
+        }
+        animationTimer = 0;
+      }
       timer += gameTime.ElapsedGameTime.TotalSeconds;
 
       if (timer > 1.0) {
