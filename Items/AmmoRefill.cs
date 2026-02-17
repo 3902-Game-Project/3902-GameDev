@@ -9,19 +9,16 @@ namespace GameProject.Items;
 public class AmmoRefill : IItem {
   private Texture2D texture;
   private Vector2 position;
-  private List<Rectangle> sourceRectangles;
-  private Rectangle currentSourceRect;
+  private Rectangle sourceRectangle;
   private Vector2 origin;
 
-  private Animation shootAnimation;
-
   public void Draw(SpriteBatch spriteBatch) {
-    origin = new Vector2(currentSourceRect.Width / 2, currentSourceRect.Height / 2);
+    origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
 
     spriteBatch.Draw(
       texture,
       position,
-      currentSourceRect,
+      sourceRectangle,
       Color.White,
       0f,
       origin,
@@ -32,8 +29,7 @@ public class AmmoRefill : IItem {
   }
 
   public void Update(GameTime gameTime) {
-    shootAnimation.Update(gameTime);
-    currentSourceRect = shootAnimation.CurrentFrame;
+
   }
 
   public void OnPickup() {
@@ -47,7 +43,6 @@ public class AmmoRefill : IItem {
   public AmmoRefill(Texture2D texture, Vector2 startPosition) {
     this.texture = texture;
     this.position = startPosition;
-    shootAnimation = new Animation(sourceRectangles, 10);
-    currentSourceRect = shootAnimation.CurrentFrame;
+    sourceRectangle = new Rectangle(0, 0, 8, 8);
   }
 }

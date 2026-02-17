@@ -18,7 +18,7 @@ internal class ItemSpriteFactory {
   }
 
   public void LoadAllTextures(ContentManager content) {
-    placeholderGunTexture = content.Load<Texture2D>("placeholderGunSpritesheet");
+    placeholderGunTexture = content.Load<Texture2D>("placeholderGuns");
   }
 
   public IItem CreateRevolver() {

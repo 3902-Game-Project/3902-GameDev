@@ -11,9 +11,7 @@ namespace GameProject.Items;
 public class Shotgun : IItem {
   private Texture2D texture;
   private Vector2 position;
-  private List<Rectangle> sourceRectangles;
-  private Animation shotgunAnimation;
-  private Rectangle currentSourceRect;
+  private Rectangle sourceRectangle;
   private Vector2 origin;
 
   private IProjectile bulletProjectile;
@@ -23,12 +21,12 @@ public class Shotgun : IItem {
   private float spreadAngle = 30f;
 
   public void Draw(SpriteBatch spriteBatch) {
-    origin = new Vector2(currentSourceRect.Width / 2, currentSourceRect.Height / 2);
+    origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
 
     spriteBatch.Draw(
       texture,
       position,
-      currentSourceRect,
+      sourceRectangle,
       Color.White,
       0f,
       origin,
@@ -39,8 +37,7 @@ public class Shotgun : IItem {
   }
 
   public void Update(GameTime gameTime) {
-    shotgunAnimation.Update(gameTime);
-    currentSourceRect = shotgunAnimation.CurrentFrame;
+
   }
 
   public void OnPickup() {
@@ -69,8 +66,7 @@ public class Shotgun : IItem {
   public Shotgun(Texture2D texture, Vector2 startPosition) {
     this.texture = texture;
     this.position = startPosition;
-    shotgunAnimation = new Animation(sourceRectangles, 10);
-    currentSourceRect = shotgunAnimation.CurrentFrame;
+    sourceRectangle = new Rectangle(0, 0, 8, 8);
     bulletProjectile = new BulletDefault(texture);
   }
 }

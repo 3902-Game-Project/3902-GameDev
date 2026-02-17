@@ -56,6 +56,7 @@ public class Game1 : Game {
 
     blockFactory.LoadAllTextures(this);
     EnemySpriteFactory.Instance.LoadAllTextures(Content);  // compiler doesn't like this -Aaron
+    ItemSpriteFactory.Instance.LoadAllTextures(Content);  // compiler doesn't like this -Aaron
   }
 
   protected override void Update(GameTime gameTime) {
