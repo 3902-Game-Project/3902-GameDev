@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using GameProject.Animations;
 using GameProject.Interfaces;
 using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
@@ -11,7 +9,7 @@ namespace GameProject.Items;
 public class Shotgun : IItem {
   private Texture2D texture;
   private Vector2 position;
-  private Rectangle sourceRectangle;
+  private Rectangle sourceRectangle = new Rectangle(0, 0, 8, 8);
   private Vector2 origin;
 
   private IProjectile bulletProjectile;

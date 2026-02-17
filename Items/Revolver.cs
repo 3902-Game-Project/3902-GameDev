@@ -10,7 +10,7 @@ namespace GameProject.Items;
 public class Revolver : IItem {
   private Texture2D texture;
   private Vector2 position;
-  private Rectangle sourceRectangle = new Rectangle(0, 0, 8, 8);
+  private Rectangle sourceRectangle;
   private Vector2 origin;
 
   private IProjectile bulletProjectile;

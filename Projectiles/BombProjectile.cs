@@ -14,8 +14,11 @@ public class BombProjectile : IProjectile
     private Rectangle currentSourceRect;
     private Animation bombAnimation;
     private Vector2 origin;
+    private bool isExpired = false;
 
-    public void Draw(SpriteBatch spriteBatch)
+  bool IProjectile.isExpired => isExpired;
+
+  public void Draw(SpriteBatch spriteBatch)
     {
         origin = new Vector2(currentSourceRect.Width / 2, currentSourceRect.Height / 2);
 
@@ -41,6 +44,8 @@ public class BombProjectile : IProjectile
     public void Instantiate(Vector2 startPosition, Vector2 direction, float velocity, float lifetime)
     {
         // Logic for instantiating the bomb projectile
+        this.position = startPosition;
+        this.isExpired = false;
     }
 
     public BombProjectile(Texture2D texture, Vector2 startPosition)
