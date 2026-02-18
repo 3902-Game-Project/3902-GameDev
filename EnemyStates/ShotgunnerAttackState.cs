@@ -17,9 +17,9 @@ namespace GameProject.States {
 
       this.shotgunner.CurrentSourceRectangles = new List<Rectangle>
       {
-                new Rectangle(10, 175, 14, 15),
-                new Rectangle(42, 174, 13, 16),
-                new Rectangle(73, 174, 16, 16)
+                new Rectangle(23, 418, 35, 37),
+                new Rectangle(100, 415, 32, 40),
+                new Rectangle(174, 415, 39, 40)
             };
       this.shotgunner.CurrentFrame = 0;
     }

@@ -55,8 +55,16 @@ public class Game1 : Game {
     StateGame.LoadContent();
 
     blockFactory.LoadAllTextures(this);
-    EnemySpriteFactory.Instance.LoadAllTextures(Content);  // compiler doesn't like this -Aaron
-    ItemSpriteFactory.Instance.LoadAllTextures(Content);  // compiler doesn't like this -Aaron
+    EnemySpriteFactory.Instance.LoadAllTextures(Content);
+
+    var snake = EnemySpriteFactory.Instance.CreateSnakeSprite();
+    StateGame.Enemies.Add(snake);
+
+    var shotgunner = EnemySpriteFactory.Instance.CreateShotgunnerSprite();
+    StateGame.Enemies.Add(shotgunner);
+
+    var bat = EnemySpriteFactory.Instance.CreateBatSprite();
+    StateGame.Enemies.Add(bat);
   }
 
   protected override void Update(GameTime gameTime) {

@@ -10,12 +10,18 @@ using GameProject.Interfaces;
 using GameProject.PlayerStates;
 
 namespace GameProject {
+  public enum FacingDirection {
+    Left,
+    Right
+  }
   public class Player {
     public Game1 game { get; private set; }
     public IPlayerState State { get; set; } // Current state
     public Vector2 Position { get; set; }
     public Vector2 Velocity { get; set; }
     public float Speed { get; set; } = 200f;
+
+    public FacingDirection Direction { get; set; } = FacingDirection.Right;
 
     public IItem CurrentItem { get; set; }
 
@@ -33,13 +39,15 @@ namespace GameProject {
       Velocity = new Vector2(Velocity.X, -Speed);
     }
     public void MoveDown() {
-      Velocity = new Vector2(Velocity.X, Speed); 
+      Velocity = new Vector2(Velocity.X, Speed);
     }
-    public void MoveLeft() { 
-      Velocity = new Vector2(-Speed, Velocity.Y); 
+    public void MoveLeft() {
+      Velocity = new Vector2(-Speed, Velocity.Y);
+      Direction = FacingDirection.Left;
     }
     public void MoveRight() {
       Velocity = new Vector2(Speed, Velocity.Y);
+      Direction = FacingDirection.Right;
     }
     // TODO: Moving methods
     public void UseItem() {
