@@ -10,13 +10,6 @@ public class GameKeyboardController(Game1 game) : IController {
   private Dictionary<Keys, ICommand> keyMappings = new Dictionary<Keys, ICommand> {
     {Keys.Q, new QuitCommand(game)},
     {Keys.R, new ReturnToMenuAndResetCommand(game)},
-    {Keys.D1, new FixedSpriteCommand(game)},
-    {Keys.D2, new AnimatedSpriteCommand(game)},
-    {Keys.D3, new UpAndDownCommand(game)},
-    {Keys.D4, new LeftAndRightAnimatedCommand(game)},
-    {Keys.O, new EnemySnakeCommand(game)},
-    {Keys.I, new EnemyBatCommand(game)},
-    {Keys.U, new EnemyShotgunnerCommand(game)},
     {Keys.Y, new NextBlockCommand(game)},
     {Keys.T, new PreviousBlockCommand(game)},
     {Keys.Z, new PlayerUseItemCommand(game)},
