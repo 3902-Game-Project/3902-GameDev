@@ -13,7 +13,7 @@ public class StateGameType(Game1 game) : IGameState {
   public List<IBlock> Blocks;
   public int BlockNumber { get; set; } = 0;
 
-  public ISprite CurrentSprite { get; set; }
+  public List<ISprite> Enemies {  get; set; } = new List<ISprite>();
 
   public void Initialize() {
     keyboardController = new GameKeyboardController(game);
@@ -24,16 +24,17 @@ public class StateGameType(Game1 game) : IGameState {
   }
 
   public void Update(GameTime gameTime) {
-    keyboardController.Update(gameTime);
-
-    if (CurrentSprite != null) {
-      CurrentSprite.Update(gameTime);
+    foreach (var enemy in Enemies) {
+      {
+        enemy.Update(gameTime);
+      }
     }
+
+    keyboardController.Update(gameTime);
   }
 
   public void Draw(GameTime gameTime) {
     game.GraphicsDevice.Clear(Color.CornflowerBlue);
-
     game.SpriteBatch.Begin();
 
     if (Blocks != null && Blocks.Count > 0 && BlockNumber < Blocks.Count) {
@@ -42,8 +43,10 @@ public class StateGameType(Game1 game) : IGameState {
 
     game.Player.Draw(game.SpriteBatch);
 
-    if (CurrentSprite != null) {
-      CurrentSprite.Draw(game.SpriteBatch);
+    foreach (var enemy in Enemies) {
+      {
+        enemy.Draw(game.SpriteBatch);
+      }
     }
 
     game.SpriteBatch.End();

@@ -56,9 +56,15 @@ public class Game1 : Game {
 
     blockFactory.LoadAllTextures(this);
     EnemySpriteFactory.Instance.LoadAllTextures(Content);
-    StateGame.CurrentSprite = EnemySpriteFactory.Instance.CreateSnakeSprite();
-    StateGame.CurrentSprite = EnemySpriteFactory.Instance.CreateShotgunnerSprite();
-    StateGame.CurrentSprite = EnemySpriteFactory.Instance.CreateBatSprite();
+
+    var snake = EnemySpriteFactory.Instance.CreateSnakeSprite();
+    StateGame.Enemies.Add(snake);
+
+    var shotgunner = EnemySpriteFactory.Instance.CreateShotgunnerSprite();
+    StateGame.Enemies.Add(shotgunner);
+
+    var bat = EnemySpriteFactory.Instance.CreateBatSprite();
+    StateGame.Enemies.Add(bat);
   }
 
   protected override void Update(GameTime gameTime) {
