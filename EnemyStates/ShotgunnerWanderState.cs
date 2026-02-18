@@ -19,10 +19,10 @@ namespace GameProject.States {
       this.random = new Random();
       this.shotgunner.CurrentSourceRectangles = new List<Rectangle>
       {
-          new Rectangle(9, 142, 13, 16),
-          new Rectangle(41, 141, 13, 17),
-          new Rectangle(73, 142, 13, 16),
-          new Rectangle(105, 143, 13, 15),
+          new Rectangle(21, 339, 32, 39),
+          new Rectangle(98, 337, 32, 41),
+          new Rectangle(174, 339, 32, 39),
+          new Rectangle(251, 341, 32, 37),
       };
       this.shotgunner.CurrentFrame = 0;
 
