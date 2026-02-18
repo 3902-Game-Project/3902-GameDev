@@ -6,48 +6,38 @@ using GameProject.Interfaces;
 namespace GameProject.PlayerStates {
   public class PlayerAnimatedMovingState : IPlayerState {
     private Player player;
-    private List<Rectangle> frames;
-    private int currentFrame;
-    private double timer;
-    private double fps = 10.0; 
+
+    private Rectangle SpriteRight = new Rectangle(766, 62, 213, 316);
+    private Rectangle SpriteLeft = new Rectangle(1528, 425, 180, 319);
 
     public PlayerAnimatedMovingState(Player player) {
       this.player = player;
-      this.currentFrame = 0;
-      this.timer = 0;
-
-      frames = new List<Rectangle> {
-                new Rectangle(76, 0, 24, 24),
-                new Rectangle(108, 0, 26, 24)
-            };
     }
 
     public void Update(GameTime gameTime) {
-      // 1. Handle Animation Timing
-      timer += gameTime.ElapsedGameTime.TotalSeconds;
-      if (timer >= 1.0 / fps) {
-        timer -= 1.0 / fps;
-        currentFrame++;
-
-        if (currentFrame >= frames.Count) {
-          currentFrame = 0;
-        }
-      }
-
+      // If velocity is zero, go back to static/idle
       if (player.Velocity == Vector2.Zero) {
         player.State = new PlayerStaticState(player);
       }
     }
 
-    public void UseItem() {
-    }
+    public void UseItem() { }
 
     public void Draw(SpriteBatch spriteBatch) {
-      Texture2D texture = player.game.GlobalVars.Assets.Textures.MetroTexture;
-      Rectangle sourceRect = frames[currentFrame];
+      Texture2D texture = player.game.GlobalVars.Assets.Textures.PlayerTexture;
 
-      // Center the origin
-      Vector2 origin = new Vector2(sourceRect.Width / 2, sourceRect.Height / 2);
+      Rectangle sourceRect;
+      Vector2 origin;
+
+      // Choose the sprite based on the Player's persistent Direction
+      if (player.Direction == FacingDirection.Right) {
+        sourceRect = SpriteRight;
+      } else {
+        sourceRect = SpriteLeft;
+      }
+
+      // Center the origin so the sprite doesn't jump around weirdly
+      origin = new Vector2(sourceRect.Width / 2, sourceRect.Height / 2);
 
       spriteBatch.Draw(
           texture,
@@ -56,8 +46,8 @@ namespace GameProject.PlayerStates {
           Color.White,
           0f,
           origin,
-          2f,
-          SpriteEffects.None, // Keeping your "no facing direction" rule
+          1f,
+          SpriteEffects.None,
           0f
       );
     }
