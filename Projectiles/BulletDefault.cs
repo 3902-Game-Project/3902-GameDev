@@ -12,6 +12,7 @@ public class BulletDefault : IProjectile {
     private float velocity;
     private float bulletLifetime;
     private float lifetimeCounter;
+    public bool IsExpired {get; private set;}
 
     public void Draw(SpriteBatch spriteBatch) {
         origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
@@ -38,17 +39,13 @@ public class BulletDefault : IProjectile {
         }
     }
 
-    public void Instantiate(Vector2 startPosition, Vector2 direction, float velocity, float lifetime) {
-        this.position = startPosition;
+    public BulletDefault(Texture2D texture, Vector2 startPosition, Vector2 direction, float velocity, float lifetime) {
+        this.texture = texture;
+        sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+        position = startPosition;
         this.direction = direction;
         this.velocity = velocity;
-        this.bulletLifetime = lifetime;
-        this.lifetimeCounter = 0f;
-        // Logic for setting the bullet's direction and velocity
-    }
-
-    public BulletDefault(Texture2D texture) {
-        this.texture = texture;
-        this.sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+        bulletLifetime = lifetime;
+        lifetimeCounter = 0f;
     }
 }

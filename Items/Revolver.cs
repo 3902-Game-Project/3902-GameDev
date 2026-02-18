@@ -1,31 +1,30 @@
 using System.Collections.Generic;
 using GameProject.Animations;
 using GameProject.Interfaces;
-using GameProject.Projectiles;
+using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using GameProject.Factories;
 
 namespace GameProject.Items;
 
 public class Revolver : IItem {
   private Texture2D texture;
   private Vector2 position;
-  private List<Rectangle> sourceRectangles;
-  private Animation revolverAnimation;
-  private Rectangle currentSourceRect;
+  private Rectangle sourceRectangle;
   private Vector2 origin;
 
-  private IProjectile bulletProjectile;
+  private ProjectileManager projectileManager;
   private float bulletVelocity = 10f;
   private float bulletLifetime = 2f;
 
   public void Draw(SpriteBatch spriteBatch) {
-    origin = new Vector2(currentSourceRect.Width / 2, currentSourceRect.Height / 2);
+    origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
 
     spriteBatch.Draw(
       texture,
       position,
-      currentSourceRect,
+      sourceRectangle,
       Color.White,
       0f,
       origin,
@@ -36,8 +35,6 @@ public class Revolver : IItem {
   }
 
   public void Update(GameTime gameTime) {
-    revolverAnimation.Update(gameTime);
-    currentSourceRect = revolverAnimation.CurrentFrame;
   }
 
   public void OnPickup() {
@@ -46,14 +43,14 @@ public class Revolver : IItem {
 
   public void Use() {
     Vector2 bulletDirection = new Vector2(1, 0);
-    bulletProjectile.Instantiate(position, bulletDirection, bulletVelocity, bulletLifetime);
+    projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(position, bulletDirection, bulletVelocity, bulletLifetime));
+
   }
 
-  public Revolver(Texture2D texture, Vector2 startPosition) {
+  public Revolver(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager) {
     this.texture = texture;
-    this.position = startPosition;
-    revolverAnimation = new Animation(sourceRectangles, 10);
-    currentSourceRect = revolverAnimation.CurrentFrame;
-    bulletProjectile = new BulletDefault(texture);
+    position = startPosition;
+    this.projectileManager = projectileManager;
+    sourceRectangle = new Rectangle(0, 0, 8, 8);
   }
 }

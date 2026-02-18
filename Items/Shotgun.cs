@@ -1,8 +1,8 @@
 using System;
-using System.Collections.Generic;
-using GameProject.Animations;
 using GameProject.Interfaces;
 using GameProject.Projectiles;
+using GameProject.Managers;
+using GameProject.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -11,24 +11,22 @@ namespace GameProject.Items;
 public class Shotgun : IItem {
   private Texture2D texture;
   private Vector2 position;
-  private List<Rectangle> sourceRectangles;
-  private Animation shotgunAnimation;
-  private Rectangle currentSourceRect;
+  private Rectangle sourceRectangle = new Rectangle(0, 0, 8, 8);
   private Vector2 origin;
 
-  private IProjectile bulletProjectile;
+  private ProjectileManager projectileManager;
   private float bulletVelocity = 10f;
   private float bulletLifetime = 0.5f;
   private int pelletCount = 5;
   private float spreadAngle = 30f;
 
   public void Draw(SpriteBatch spriteBatch) {
-    origin = new Vector2(currentSourceRect.Width / 2, currentSourceRect.Height / 2);
+    origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
 
     spriteBatch.Draw(
       texture,
       position,
-      currentSourceRect,
+      sourceRectangle,
       Color.White,
       0f,
       origin,
@@ -39,8 +37,7 @@ public class Shotgun : IItem {
   }
 
   public void Update(GameTime gameTime) {
-    shotgunAnimation.Update(gameTime);
-    currentSourceRect = shotgunAnimation.CurrentFrame;
+
   }
 
   public void OnPickup() {
@@ -52,7 +49,7 @@ public class Shotgun : IItem {
     for (int i = 0; i < pelletCount; i++) {
       float angle = -spreadAngle / 2 + spreadAngle / (pelletCount - 1) * i;
       Vector2 rotatedDirection = RotateVector(bulletDirection, angle);
-      bulletProjectile.Instantiate(position, rotatedDirection, bulletVelocity, bulletLifetime);
+      projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(position, rotatedDirection, bulletVelocity, bulletLifetime));
     }
   }
 
@@ -66,11 +63,10 @@ public class Shotgun : IItem {
     );
   }
 
-  public Shotgun(Texture2D texture, Vector2 startPosition) {
+  public Shotgun(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager) {
     this.texture = texture;
     this.position = startPosition;
-    shotgunAnimation = new Animation(sourceRectangles, 10);
-    currentSourceRect = shotgunAnimation.CurrentFrame;
-    bulletProjectile = new BulletDefault(texture);
+    this.projectileManager = projectileManager;
+    sourceRectangle = new Rectangle(0, 0, 8, 8);
   }
 }
