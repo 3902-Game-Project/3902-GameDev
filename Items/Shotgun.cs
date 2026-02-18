@@ -1,6 +1,8 @@
 using System;
 using GameProject.Interfaces;
 using GameProject.Projectiles;
+using GameProject.Managers;
+using GameProject.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,7 +14,7 @@ public class Shotgun : IItem {
   private Rectangle sourceRectangle = new Rectangle(0, 0, 8, 8);
   private Vector2 origin;
 
-  private IProjectile bulletProjectile;
+  private ProjectileManager projectileManager;
   private float bulletVelocity = 10f;
   private float bulletLifetime = 0.5f;
   private int pelletCount = 5;
@@ -47,7 +49,7 @@ public class Shotgun : IItem {
     for (int i = 0; i < pelletCount; i++) {
       float angle = -spreadAngle / 2 + spreadAngle / (pelletCount - 1) * i;
       Vector2 rotatedDirection = RotateVector(bulletDirection, angle);
-      bulletProjectile.Instantiate(position, rotatedDirection, bulletVelocity, bulletLifetime);
+      projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(position, rotatedDirection, bulletVelocity, bulletLifetime));
     }
   }
 
@@ -61,10 +63,10 @@ public class Shotgun : IItem {
     );
   }
 
-  public Shotgun(Texture2D texture, Vector2 startPosition) {
+  public Shotgun(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager) {
     this.texture = texture;
     this.position = startPosition;
+    this.projectileManager = projectileManager;
     sourceRectangle = new Rectangle(0, 0, 8, 8);
-    bulletProjectile = new BulletDefault(texture);
   }
 }
