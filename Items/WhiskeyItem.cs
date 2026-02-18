@@ -9,18 +9,16 @@ namespace GameProject.Items;
 public class WhiskeyItem : IItem {
   private Texture2D texture;
   private Vector2 position;
-  private List<Rectangle> sourceRectangles;
-  private Rectangle currentSourceRect;
-  private Animation whiskeyAnimation;
+  private Rectangle sourceRectangle;
   private Vector2 origin;
 
   public void Draw(SpriteBatch spriteBatch) {
-    origin = new Vector2(currentSourceRect.Width / 2, currentSourceRect.Height / 2);
+    origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
 
     spriteBatch.Draw(
       texture,
       position,
-      currentSourceRect,
+      sourceRectangle,
       Color.White,
       0f,
       origin,
@@ -31,8 +29,7 @@ public class WhiskeyItem : IItem {
   }
 
   public void Update(GameTime gameTime) {
-    whiskeyAnimation.Update(gameTime);
-    currentSourceRect = whiskeyAnimation.CurrentFrame;
+
   }
 
   public void OnPickup() {
@@ -46,7 +43,6 @@ public class WhiskeyItem : IItem {
   public WhiskeyItem(Texture2D texture, Vector2 startPosition) {
     this.texture = texture;
     this.position = startPosition;
-    whiskeyAnimation = new Animation(sourceRectangles, 10);
-    currentSourceRect = whiskeyAnimation.CurrentFrame;
+    sourceRectangle = new Rectangle(0, 0, 8, 8);
   }
 }

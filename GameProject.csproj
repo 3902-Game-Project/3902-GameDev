@@ -36,6 +36,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
-    <None Include="Commands\LeftAndRightAnimatedCommand.cs" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,6 @@
-using System.Collections.Generic;
-using GameProject.Animations;
 using GameProject.Interfaces;
-using GameProject.Projectiles;
+using GameProject.Factories;
+using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,22 +9,20 @@ namespace GameProject.Items;
 public class Rifle : IItem {
   private Texture2D texture;
   private Vector2 position;
-  private List<Rectangle> sourceRectangles;
-  private Animation rifleAnimation;
-  private Rectangle currentSourceRect;
+  private Rectangle sourceRectangle;
   private Vector2 origin;
-
-  private IProjectile bulletProjectile;
+  
+  private ProjectileManager projectileManager;
   private float bulletVelocity = 25f;
   private float bulletLifetime = 2f;
 
   public void Draw(SpriteBatch spriteBatch) {
-    origin = new Vector2(currentSourceRect.Width / 2, currentSourceRect.Height / 2);
+    origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
 
     spriteBatch.Draw(
       texture,
       position,
-      currentSourceRect,
+      sourceRectangle,
       Color.White,
       0f,
       origin,
@@ -36,8 +33,7 @@ public class Rifle : IItem {
   }
 
   public void Update(GameTime gameTime) {
-    rifleAnimation.Update(gameTime);
-    currentSourceRect = rifleAnimation.CurrentFrame;
+
   }
 
   public void OnPickup() {
@@ -46,14 +42,13 @@ public class Rifle : IItem {
 
   public void Use() {
     Vector2 bulletDirection = new Vector2(1, 0);
-    bulletProjectile.Instantiate(position, bulletDirection, bulletVelocity, bulletLifetime);
+    projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(position, bulletDirection, bulletVelocity, bulletLifetime));
   }
 
-  public Rifle(Texture2D texture, Vector2 startPosition) {
+  public Rifle(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager) {
     this.texture = texture;
     this.position = startPosition;
-    rifleAnimation = new Animation(sourceRectangles, 10);
-    currentSourceRect = rifleAnimation.CurrentFrame;
-    bulletProjectile = new BulletDefault(texture);
+    sourceRectangle = new Rectangle(0, 0, 8, 8);
+    this.projectileManager = projectileManager;
   }
 }
