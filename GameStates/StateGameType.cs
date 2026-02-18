@@ -4,42 +4,48 @@ using GameProject.Factories;
 using GameProject.Interfaces;
 using GameProject.Sprites;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.GameStates;
 
 public class StateGameType(Game1 game) : IGameState {
   private IController keyboardController;
-  public List<IBlock> Blocks; // temporary for sprint2
-  public int BlockNumber { get; set; } // temporary for sprint2
-  
-  
-  public IBlock BlockSprite { get; set; }
+  public List<IBlock> Blocks;
+  public int BlockNumber { get; set; } = 0;
+
   public ISprite CurrentSprite { get; set; }
 
   public void Initialize() {
     keyboardController = new GameKeyboardController(game);
-    Blocks = new List<IBlock>(); // temporary for sprint2
-    BlockNumber = Blocks.Count;
-    
+    Blocks = new List<IBlock>();
   }
 
   public void LoadContent() {
-    CurrentSprite = new FixedSprite(game.GlobalVars.Assets.Textures.MetroTexture, new Vector2(400, 200));
   }
 
   public void Update(GameTime gameTime) {
     keyboardController.Update(gameTime);
-    CurrentSprite.Update(gameTime);
 
-    //BlockSprite = Blocks[BlockNumber];
+    if (CurrentSprite != null) {
+      CurrentSprite.Update(gameTime);
+    }
   }
 
   public void Draw(GameTime gameTime) {
     game.GraphicsDevice.Clear(Color.CornflowerBlue);
 
     game.SpriteBatch.Begin();
-    Blocks[BlockNumber].Draw(game.SpriteBatch);
+
+    if (Blocks != null && Blocks.Count > 0 && BlockNumber < Blocks.Count) {
+      Blocks[BlockNumber].Draw(game.SpriteBatch);
+    }
+
     game.Player.Draw(game.SpriteBatch);
+
+    if (CurrentSprite != null) {
+      CurrentSprite.Draw(game.SpriteBatch);
+    }
+
     game.SpriteBatch.End();
   }
 }
