@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using GameProject.Animations;
 using GameProject.Interfaces;
-using GameProject.Projectiles;
+using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using GameProject.Factories;
 
 namespace GameProject.Items;
 
@@ -13,7 +14,7 @@ public class Revolver : IItem {
   private Rectangle sourceRectangle;
   private Vector2 origin;
 
-  private IProjectile bulletProjectile;
+  private ProjectileManager projectileManager;
   private float bulletVelocity = 10f;
   private float bulletLifetime = 2f;
 
@@ -42,13 +43,14 @@ public class Revolver : IItem {
 
   public void Use() {
     Vector2 bulletDirection = new Vector2(1, 0);
-    bulletProjectile.Instantiate(position, bulletDirection, bulletVelocity, bulletLifetime);
+    projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(position, bulletDirection, bulletVelocity, bulletLifetime));
+
   }
 
-  public Revolver(Texture2D texture, Vector2 startPosition) {
+  public Revolver(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager) {
     this.texture = texture;
     position = startPosition;
-    bulletProjectile = new BulletDefault(texture);
+    this.projectileManager = projectileManager;
     sourceRectangle = new Rectangle(0, 0, 8, 8);
   }
 }
