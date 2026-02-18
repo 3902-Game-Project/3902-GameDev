@@ -24,7 +24,7 @@ namespace GameProject.PlayerStates {
     public void UseItem() { }
 
     public void Draw(SpriteBatch spriteBatch) {
-      Texture2D texture = player.game.GlobalVars.Assets.Textures.PlayerTexture;
+      Texture2D texture = player.game.GlobalVars.Assets.Textures.PlayerTexture; //should make it global
 
       Rectangle sourceRect;
       Vector2 origin;
