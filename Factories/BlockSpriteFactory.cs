@@ -24,6 +24,7 @@ public class BlockSpriteFactory {
     blockTextures = game.Content.Load<Texture2D>("desert-atlas-v1");
     game.StateGame.Blocks.Add(new SandBlock(blockTextures, new Vector2(150, 300)));
     game.StateGame.Blocks.Add(new BarrelBlock(blockTextures, new Vector2(150, 300)));
+    game.StateGame.Blocks.Add(new CrateBlock(blockTextures, new Vector2(150, 300))); 
   }
 
   public IBlock CreateSandBlockSprite() {
