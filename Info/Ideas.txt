@@ -11,4 +11,6 @@ Non-weapon items:
 	If that wasn't the case, I would say vodka could give you ice bullets that freeze your enemy.
 
 Player:
-	
+
+Game name:
+	while () { west }
