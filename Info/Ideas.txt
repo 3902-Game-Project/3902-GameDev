@@ -14,3 +14,8 @@ Player:
 
 Game name:
 	while () { west }
+
+Team name:
+	The Westerns
+	The Western Gamers
+	Manifest Destiny
