@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.Controllers;
 
 public class GameKeyboardController(Game1 game) : IController {
+  private KeyboardState previousState;
+  private KeyboardState currentState;
+
   private Dictionary<Keys, ICommand> keyMappings = new Dictionary<Keys, ICommand> {
     {Keys.Q, new QuitCommand(game)},
     {Keys.R, new ReturnToMenuAndResetCommand(game)},
@@ -29,12 +32,13 @@ public class GameKeyboardController(Game1 game) : IController {
   };
 
   public void Update(GameTime gameTime) {
-    KeyboardState keyboardState = Keyboard.GetState();
+    previousState = currentState;
+    currentState = Keyboard.GetState();
 
-    foreach (Keys key in keyboardState.GetPressedKeys()) {
-      if (keyMappings.TryGetValue(key, out ICommand command)) {
-        command.Execute();
-      }
+    foreach (Keys key in currentState.GetPressedKeys()) {
+      if (((key == Keys.Y) || (key == Keys.T)) && previousState.IsKeyDown(key)) continue; // added for sprint2 -Aaron
+
+      if (keyMappings.TryGetValue(key, out ICommand command)) command.Execute();
     }
   }
 }

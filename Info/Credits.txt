@@ -4,6 +4,7 @@ Santosh
 Emmett
 JJ Weixel
 Eric
+Aaron
 
 Sprite Sheets:
 https://opengameart.org/content/animated-snake
