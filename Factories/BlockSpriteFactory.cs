@@ -21,16 +21,42 @@ public class BlockSpriteFactory {
   }
 
   public void LoadAllTextures(Game1 game) { // changed param from ContentManager content for sprint2 purposes
-    blockTextures = game.Content.Load<Texture2D>("desert-atlas-v1");
-    game.StateGame.Blocks.Add(new SandBlock(blockTextures, new Vector2(150, 300)));
-    game.StateGame.Blocks.Add(new BarrelBlock(blockTextures, new Vector2(150, 300)));
-    game.StateGame.Blocks.Add(new CrateBlock(blockTextures, new Vector2(150, 300))); 
+    blockTextures = game.Content.Load<Texture2D>("desert-atlas-v5");
+    game.StateGame.Blocks.Add(new SandBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new BarrelBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new CrateBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new MudBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new LadderBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new RockBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new WoodPlankBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new WoodStairBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new WoodCornerBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new LogBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new LogCornerBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new StatueBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new LockedVaultBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new FirePitBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new TableBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new StoolBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new CactusBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new WindowBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new ShelfBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new BarShelfBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new SmallDoorBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new LargeDoorBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new RedSandBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new RedXRockBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new RockHoleBlock(blockTextures, new Vector2(150, 100)));
   }
 
-  public IBlock CreateSandBlockSprite() {
-    return new SandBlock(blockTextures, new Vector2(150, 300));
+  public IBlock CreateSandBlockSprite(int x, int y) {
+    return new SandBlock(blockTextures, new Vector2(x, y));
   }
-  public IBlock CreateBarrelBlockSprite() {
-    return new BarrelBlock(blockTextures, new Vector2(150, 300));
+  public IBlock CreateBarrelBlockSprite(int x, int y) {
+    return new BarrelBlock(blockTextures, new Vector2(x, y));
   }
+  public IBlock CreateCrateBlockSprite(int x, int y) {
+    return new CrateBlock(blockTextures, new Vector2(x, y));
+  }
+  // add other create methods...
 }
