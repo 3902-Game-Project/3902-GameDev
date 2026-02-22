@@ -17,7 +17,6 @@ public class Game1 : Game {
   public StateGameType StateGame { get; private set; }
   private IGameState currentState;
   public BlockSpriteFactory blockFactory;
-  public Player Player { get; private set; }
 
   public Game1() {
     graphics = new GraphicsDeviceManager(this);
@@ -45,7 +44,6 @@ public class Game1 : Game {
     Assets.Initialize();
     StateMenu.Initialize();
     StateGame.Initialize();
-    Player = new Player(this);
 
     base.Initialize();
   }
@@ -73,15 +71,11 @@ public class Game1 : Game {
   protected override void Update(GameTime gameTime) {
     currentState.Update(gameTime);
 
-    Player.Update(gameTime);
-
     base.Update(gameTime);
   }
 
   protected override void Draw(GameTime gameTime) {
     currentState.Draw(gameTime);
-
-    //Player.Draw(SpriteBatch);
 
     base.Draw(gameTime);
   }

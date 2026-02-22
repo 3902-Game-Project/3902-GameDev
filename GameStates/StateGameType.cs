@@ -7,6 +7,7 @@ namespace GameProject.GameStates;
 
 public class StateGameType(Game1 game) : IGameState {
   private IController keyboardController;
+  public Player Player { get; private set; } = new Player(game);
   public List<IBlock> Blocks; // temporary for sprint2
   public int BlockNumber { get; set; } // temporary for sprint2
   public List<IItem> Items; // temporary for sprint2
@@ -45,7 +46,7 @@ public class StateGameType(Game1 game) : IGameState {
       Blocks[BlockNumber].Draw(game.SpriteBatch);
     }
 
-    game.Player.Draw(game.SpriteBatch);
+    Player.Draw(game.SpriteBatch);
 
     foreach (var enemy in Enemies) {
       enemy.Draw(game.SpriteBatch);
