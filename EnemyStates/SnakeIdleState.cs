@@ -17,16 +17,16 @@ public class SnakeIdleState : ISnakeState {
 
     this.snake.Velocity = Vector2.Zero;
     this.snake.CurrentSourceRectangles = new List<Rectangle> {
-      new Rectangle(11, 20, 10, 12),
-      new Rectangle(43, 21, 10, 11),
-      new Rectangle(75, 22, 10, 10),
-      new Rectangle(106, 22, 11, 10),
-      new Rectangle(138, 22, 11, 10),
-      new Rectangle(170, 22, 11, 10),
-      new Rectangle(203, 22, 10, 10),
-      new Rectangle(235, 21, 10, 11),
-      new Rectangle(267, 20, 10, 12),
-      new Rectangle(299, 20, 10, 12),
+      new(11, 20, 10, 12),
+      new(43, 21, 10, 11),
+      new(75, 22, 10, 10),
+      new(106, 22, 11, 10),
+      new(138, 22, 11, 10),
+      new(170, 22, 11, 10),
+      new(203, 22, 10, 10),
+      new(235, 21, 10, 11),
+      new(267, 20, 10, 12),
+      new(299, 20, 10, 12),
     };
     this.snake.CurrentFrame = 0;
   }

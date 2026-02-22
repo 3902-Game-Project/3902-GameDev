@@ -19,9 +19,9 @@ public class BatIdleState : IBatState {
 
     this.bat.CurrentSourceRectangles = new List<Rectangle> {
       //new Rectangle(3, 20, 25, 11),
-      new Rectangle(35, 5, 27, 22),
-      new Rectangle(66, 6, 29, 15),
-      new Rectangle(97, 1, 31, 21),
+      new(35, 5, 27, 22),
+      new(66, 6, 29, 15),
+      new(97, 1, 31, 21),
     };
     this.bat.CurrentFrame = 0;
   }

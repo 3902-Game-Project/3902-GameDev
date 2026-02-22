@@ -10,7 +10,7 @@ internal class EnemySpriteFactory {
   private Texture2D snakeTexture;
   private Texture2D batTexture;
   private Texture2D shotgunnerTexture;
-  private static EnemySpriteFactory instance = new EnemySpriteFactory();
+  private static EnemySpriteFactory instance = new();
 
   public static EnemySpriteFactory Instance {
     get { return instance; }

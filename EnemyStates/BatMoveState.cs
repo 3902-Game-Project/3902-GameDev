@@ -19,9 +19,9 @@ public class BatMoveState : IBatState {
     this.bat = bat;
     this.random = new Random();
     this.bat.CurrentSourceRectangles = new List<Rectangle> {
-      new Rectangle(38, 97, 17, 21),
-      new Rectangle(70, 102, 17, 15),
-      new Rectangle(102, 102, 15, 21),
+      new(38, 97, 17, 21),
+      new(70, 102, 17, 15),
+      new(102, 102, 15, 21),
     };
     this.bat.CurrentFrame = 0;
 
@@ -68,7 +68,7 @@ public class BatMoveState : IBatState {
     float speed = 100f;
     float randomX = (float)(random.NextDouble() * 2 - 1);
     float randomY = (float)(random.NextDouble() * 2 - 1);
-    Vector2 direction = new Vector2(randomX, randomY);
+    Vector2 direction = new(randomX, randomY);
 
     if (direction != Vector2.Zero) {
       direction.Normalize();

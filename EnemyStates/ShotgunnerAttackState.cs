@@ -17,9 +17,9 @@ public class ShotgunnerAttackState : IShotgunnerState {
     this.shotgunner.Velocity = Vector2.Zero;
 
     this.shotgunner.CurrentSourceRectangles = new List<Rectangle> {
-      new Rectangle(23, 418, 35, 37),
-      new Rectangle(100, 415, 32, 40),
-      new Rectangle(174, 415, 39, 40),
+      new(23, 418, 35, 37),
+      new(100, 415, 32, 40),
+      new(174, 415, 39, 40),
     };
     this.shotgunner.CurrentFrame = 0;
   }

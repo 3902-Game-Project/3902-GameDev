@@ -19,16 +19,16 @@ public class SnakeWanderState : ISnakeState {
     this.snake = snake;
     this.random = new Random();
     this.snake.CurrentSourceRectangles = new List<Rectangle> {
-      new Rectangle(10, 84, 13, 13),
-      new Rectangle(43, 84, 13, 13),
-      new Rectangle(75, 84, 13, 13),
-      new Rectangle(105, 84, 14, 13),
-      new Rectangle(136, 84, 14, 13),
-      new Rectangle(166, 85, 15, 12),
-      new Rectangle(198, 85, 16, 12),
-      new Rectangle(232, 85, 15, 12),
-      new Rectangle(266, 85, 12, 12),
-      new Rectangle(298, 85, 12, 12)
+      new(10, 84, 13, 13),
+      new(43, 84, 13, 13),
+      new(75, 84, 13, 13),
+      new(105, 84, 14, 13),
+      new(136, 84, 14, 13),
+      new(166, 85, 15, 12),
+      new(198, 85, 16, 12),
+      new(232, 85, 15, 12),
+      new(266, 85, 12, 12),
+      new(298, 85, 12, 12)
     };
     this.snake.CurrentFrame = 0;
 
@@ -75,7 +75,7 @@ public class SnakeWanderState : ISnakeState {
     float speed = 100f;
     float randomX = (float)(random.NextDouble() * 2 - 1);
     float randomY = (float)(random.NextDouble() * 2 - 1);
-    Vector2 direction = new Vector2(randomX, randomY);
+    Vector2 direction = new(randomX, randomY);
 
     if (direction != Vector2.Zero) {
       direction.Normalize();

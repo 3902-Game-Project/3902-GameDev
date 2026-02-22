@@ -18,16 +18,16 @@ public class SnakeAttackState : ISnakeState {
     this.snake.Velocity = new Vector2(snake.FacingDirection * lungeSpeed, 0);
 
     this.snake.CurrentSourceRectangles = new List<Rectangle> {
-      new Rectangle(10, 115, 12, 14),
-      new Rectangle(42, 116, 12, 13),
-      new Rectangle(75, 117, 12, 12),
-      new Rectangle(107, 118, 12, 11),
-      new Rectangle(137, 116, 15, 13),
-      new Rectangle(116, 118, 19, 10),
-      new Rectangle(195, 120, 20, 8),
-      new Rectangle(229, 121, 17, 8),
-      new Rectangle(263, 119, 15, 10),
-      new Rectangle(297, 117, 14, 12)
+      new(10, 115, 12, 14),
+      new(42, 116, 12, 13),
+      new(75, 117, 12, 12),
+      new(107, 118, 12, 11),
+      new(137, 116, 15, 13),
+      new(116, 118, 19, 10),
+      new(195, 120, 20, 8),
+      new(229, 121, 17, 8),
+      new(263, 119, 15, 10),
+      new(297, 117, 14, 12)
     };
     this.snake.CurrentFrame = 0;
   }

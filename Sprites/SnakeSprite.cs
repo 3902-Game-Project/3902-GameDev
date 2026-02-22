@@ -48,7 +48,7 @@ public class SnakeSprite : IEnemy {
     SpriteEffects effect = (FacingDirection > 0) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
     // Origin at feet
-    Vector2 origin = new Vector2(source.Width / 2, source.Height);
+    Vector2 origin = new(source.Width / 2, source.Height);
 
     spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, 2f, effect, 0f);
   }

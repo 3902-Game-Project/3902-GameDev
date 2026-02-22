@@ -8,8 +8,8 @@ public class PlayerStaticState : IPlayerState {
   private Player player;
 
   // Same rectangles as moving state
-  private Rectangle SpriteRight = new Rectangle(766, 62, 213, 316);
-  private Rectangle SpriteLeft = new Rectangle(1528, 425, 180, 319);
+  private Rectangle SpriteRight = new(766, 62, 213, 316);
+  private Rectangle SpriteLeft = new(1528, 425, 180, 319);
 
   public PlayerStaticState(Player player) {
     this.player = player;

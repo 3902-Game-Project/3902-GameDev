@@ -10,7 +10,7 @@ namespace GameProject.Items;
 public class Shotgun : IItem {
   private Texture2D texture;
   private Vector2 position;
-  private Rectangle sourceRectangle = new Rectangle(0, 0, 8, 8);
+  private Rectangle sourceRectangle = new(0, 0, 8, 8);
   private Vector2 origin;
 
   private ProjectileManager projectileManager;
@@ -40,7 +40,7 @@ public class Shotgun : IItem {
   public void OnPickup() { }
 
   public void Use() {
-    Vector2 bulletDirection = new Vector2(1, 0);
+    Vector2 bulletDirection = new(1, 0);
     for (int i = 0; i < pelletCount; i++) {
       float angle = -spreadAngle / 2 + spreadAngle / (pelletCount - 1) * i;
       Vector2 rotatedDirection = RotateVector(bulletDirection, angle);

@@ -10,7 +10,7 @@ public class GameKeyboardController(Game1 game) : IController {
   private KeyboardState previousState;
   private KeyboardState currentState;
 
-  private Dictionary<Keys, ICommand> keyMappings = new Dictionary<Keys, ICommand> {
+  private Dictionary<Keys, ICommand> keyMappings = new() {
     {Keys.Q, new QuitCommand(game)},
     {Keys.R, new ReturnToMenuAndResetCommand(game)},
     {Keys.Y, new NextBlockCommand(game)},

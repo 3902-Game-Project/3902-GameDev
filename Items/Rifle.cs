@@ -37,7 +37,7 @@ public class Rifle : IItem {
   public void OnPickup() { }
 
   public void Use() {
-    Vector2 bulletDirection = new Vector2(1, 0);
+    Vector2 bulletDirection = new(1, 0);
     projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(position, bulletDirection, bulletVelocity, bulletLifetime));
   }
 

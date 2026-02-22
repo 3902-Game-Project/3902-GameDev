@@ -18,7 +18,7 @@ public class FixedSprite : ISprite {
   }
 
   public void Draw(SpriteBatch spriteBatch) {
-    Rectangle sourceRect = new Rectangle(0, 0, 22, 30);
+    Rectangle sourceRect = new(0, 0, 22, 30);
     spriteBatch.Draw(texture, position, sourceRect, Color.White);
   }
 }

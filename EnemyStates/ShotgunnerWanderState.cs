@@ -19,10 +19,10 @@ public class ShotgunnerWanderState : IShotgunnerState {
     this.shotgunner = shotgunner;
     this.random = new Random();
     this.shotgunner.CurrentSourceRectangles = new List<Rectangle> {
-      new Rectangle(21, 339, 32, 39),
-      new Rectangle(98, 337, 32, 41),
-      new Rectangle(174, 339, 32, 39),
-      new Rectangle(251, 341, 32, 37),
+      new(21, 339, 32, 39),
+      new(98, 337, 32, 41),
+      new(174, 339, 32, 39),
+      new(251, 341, 32, 37),
     };
     this.shotgunner.CurrentFrame = 0;
 
@@ -69,7 +69,7 @@ public class ShotgunnerWanderState : IShotgunnerState {
     float speed = 100f;
     float randomX = (float)(random.NextDouble() * 2 - 1);
     float randomY = (float)(random.NextDouble() * 2 - 1);
-    Vector2 direction = new Vector2(randomX, randomY);
+    Vector2 direction = new(randomX, randomY);
 
     if (direction != Vector2.Zero) {
       direction.Normalize();
