@@ -1,0 +1,20 @@
+Author: Santosh
+Date: 2026-02-22
+Sprint: 2
+Class to review: Managers/ProjectileManager.cs
+Author of class: JJ
+Minutes taken to review: 46
+
+Readability:
+  What is readable:
+  The AddProjectile and Draw methods are readable as they are simple and only do one thing.
+
+  What is less readable:
+  The Update method has a more complex for loop that appears to iterate through the projectiles in reverse order. Not much can be done about this as removal must have correct indices.
+
+Code quality:
+  The constructor uses a design similar to what one would do in Java. In C#, the private field itself could be directly initialized without the need for a constructor.
+  The Update method checks an IsExpired field to see if a projectile needs to be deleted. This could be made more generic, by checking a ShouldDelete field instead, to allow for other reasons to delete than projectile expiry.
+
+Hypothetical code change:
+  Hypothetically a method could be added to delete a projectile. There are two ways that this could be added. The first is by adding a remove method to ProjectileManager that checks each element in the array until it finds the projectile to be removed, then removes it by index. This has O(n) complexity which might not be ideal for large numbers of removals. The second way is by adding a remove method to the projectile itself that sets IsExpired to true. This defers the deletion until ProjectileManager.Update is called again, and also runs the projectile's own Update method one more time before ultimately deleting it, which might be undesirable. The fix would be to move the projectile deletion code in ProjectileManager.Update above the call to the projectile's Update method, so deleted projectiles are removed before updating.
