@@ -2,8 +2,8 @@
 
 namespace GameProject.Commands;
 
-public class PlayerMoveDownCommand(Game1 game) : ICommand {
+public class PlayerMoveDownCommand(Player player) : ICommand {
   public void Execute() {
-    game.Player.MoveDown();
+    player.MoveDown();
   }
 }

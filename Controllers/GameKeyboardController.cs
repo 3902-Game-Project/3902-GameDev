@@ -15,17 +15,17 @@ public class GameKeyboardController(Game1 game) : IController {
     {Keys.R, new ReturnToMenuAndResetCommand(game)},
     {Keys.Y, new NextBlockCommand(game)},
     {Keys.T, new PreviousBlockCommand(game)},
-    {Keys.Z, new PlayerUseItemCommand(game)},
-    {Keys.N, new PlayerUseItemCommand(game)},
+    {Keys.Z, new PlayerUseItemCommand(game.StateGame.Player)},
+    {Keys.N, new PlayerUseItemCommand(game.StateGame.Player)},
 
-    {Keys.W, new PlayerMoveUpCommand(game)},
-    {Keys.S, new PlayerMoveDownCommand(game)},
-    {Keys.A, new PlayerMoveLeftCommand(game)},
-    {Keys.D, new PlayerMoveRightCommand(game)},
-    {Keys.Up, new PlayerMoveUpCommand(game)},
-    {Keys.Down, new PlayerMoveDownCommand(game)},
-    {Keys.Left, new PlayerMoveLeftCommand(game)},
-    {Keys.Right, new PlayerMoveRightCommand(game)},
+    {Keys.W, new PlayerMoveUpCommand(game.StateGame.Player)},
+    {Keys.S, new PlayerMoveDownCommand(game.StateGame.Player)},
+    {Keys.A, new PlayerMoveLeftCommand(game.StateGame.Player)},
+    {Keys.D, new PlayerMoveRightCommand(game.StateGame.Player)},
+    {Keys.Up, new PlayerMoveUpCommand(game.StateGame.Player)},
+    {Keys.Down, new PlayerMoveDownCommand(game.StateGame.Player)},
+    {Keys.Left, new PlayerMoveLeftCommand(game.StateGame.Player)},
+    {Keys.Right, new PlayerMoveRightCommand(game.StateGame.Player)},
   };
 
   public void Update(GameTime gameTime) {
