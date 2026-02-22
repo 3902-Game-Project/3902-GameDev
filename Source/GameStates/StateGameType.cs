@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 using GameProject.Controllers;
 using GameProject.Interfaces;
+using GameProject.Managers;
+using GameProject.Factories;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.GameStates;
 
@@ -38,14 +41,27 @@ public class StateGameType(Game1 game) : IGameState {
     foreach (var enemy in Enemies) {
       enemy.Update(gameTime);
     }
+
+    game.ProjectileManager.Update(gameTime);
+
   }
 
   public void Draw(GameTime gameTime) {
     game.GraphicsDevice.Clear(Color.CornflowerBlue);
-    game.SpriteBatch.Begin();
+    game.SpriteBatch.Begin(
+      SpriteSortMode.Deferred,
+      BlendState.AlphaBlend,
+      SamplerState.PointClamp,
+      DepthStencilState.None,
+      RasterizerState.CullNone
+    );
 
     if (Blocks != null && Blocks.Count > 0 && BlockNumber < Blocks.Count) {
       Blocks[BlockNumber].Draw(game.SpriteBatch);
+    }
+
+    if (Items != null && Items.Count > 0 && ItemNumber < Items.Count) {
+      Items[ItemNumber].Draw(game.SpriteBatch);
     }
 
     Player.Draw(game.SpriteBatch);
@@ -53,6 +69,8 @@ public class StateGameType(Game1 game) : IGameState {
     foreach (var enemy in Enemies) {
       enemy.Draw(game.SpriteBatch);
     }
+
+    game.ProjectileManager.Draw(game.SpriteBatch);
 
     game.SpriteBatch.End();
   }
