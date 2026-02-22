@@ -8,7 +8,7 @@ namespace GameProject.Factories;
 
 internal class ProjectileFactory {
   private Texture2D placeholderGunTexture;
-  private static ProjectileFactory instance = new();
+  private static ProjectileFactory instance = new ProjectileFactory();
 
   public static ProjectileFactory Instance {
     get { return instance; }
@@ -23,5 +23,9 @@ internal class ProjectileFactory {
 
   public IProjectile CreateBullet(Vector2 startPosition, Vector2 direction, float velocity, float lifetime) {
     return new BulletDefault(placeholderGunTexture, startPosition, direction, velocity, lifetime);
+  }
+
+  public IProjectile CreateBomb(Vector2 startPosition, Vector2 direction, float velocity, float lifetime) {
+    return new BombProjectile(placeholderGunTexture, startPosition, direction, velocity, lifetime);
   }
 }

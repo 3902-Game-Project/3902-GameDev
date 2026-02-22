@@ -73,12 +73,22 @@ public class Game1 : Game {
     StateGame.Enemies.Add(bat);
 
     ItemSpriteFactory.LoadAllTextures(Content);
+    ProjectileFactory.Instance.LoadAllTextures(Content);
+
+    var revolver = ItemSpriteFactory.CreateRevolver();
+    StateGame.Items.Add(revolver);
+
+    var rifle = ItemSpriteFactory.CreateRifle();
+    StateGame.Items.Add(rifle);
+
+    var shotgun = ItemSpriteFactory.CreateShotgun();
+    StateGame.Items.Add(shotgun);
   }
 
   protected override void Update(GameTime gameTime) {
     currentState.Update(gameTime);
     ProjectileManager.Update(gameTime);
-    
+
     base.Update(gameTime);
   }
 
