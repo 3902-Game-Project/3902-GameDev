@@ -64,6 +64,9 @@ public class Game1 : Game {
     var shotgunner = EnemySpriteFactory.Instance.CreateShotgunnerSprite();
     StateGame.Enemies.Add(shotgunner);
 
+    var rifleman = EnemySpriteFactory.Instance.CreateRifleSprite();
+    StateGame.Enemies.Add(rifleman);
+
     var bat = EnemySpriteFactory.Instance.CreateBatSprite();
     StateGame.Enemies.Add(bat);
   }
