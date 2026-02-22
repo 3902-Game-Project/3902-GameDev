@@ -24,7 +24,7 @@ internal class EnemySpriteFactory {
     snakeTexture = content.Load<Texture2D>("snakeSpritesheet");
     batTexture = content.Load<Texture2D>("batSpritesheet");
     shotgunnerTexture = content.Load<Texture2D>("shotgunnerSpritesheet");
-    rifleTexture = content.Load<Texture2D>("shotgunnerSpritesheet");
+    rifleTexture = content.Load<Texture2D>("rifleSpritesheet");
   }
 
   public IEnemy CreateSnakeSprite() {

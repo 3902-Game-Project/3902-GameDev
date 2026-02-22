@@ -15,14 +15,15 @@ public class RifleWanderState : IRifleState {
   private double animationTimer;
   private int currentFrameIndex;
 
-  public RifleWanderState(RifleSprite Rifle) {
+  public RifleWanderState(RifleSprite rifle) {
     this.rifle = rifle;
     this.random = new Random();
+
     this.rifle.CurrentSourceRectangles = new List<Rectangle> {
-      new(21, 339, 32, 39),
-      new(98, 337, 32, 41),
-      new(174, 339, 32, 39),
-      new(251, 341, 32, 37),
+      new(0, 64, 64, 64),
+      new(64, 64, 64, 64),
+      new(128, 64, 64, 64),
+      new(192, 64, 64, 64),
     };
     this.rifle.CurrentFrame = 0;
 

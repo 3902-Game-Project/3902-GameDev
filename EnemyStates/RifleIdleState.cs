@@ -17,10 +17,10 @@ public class RifleIdleState : IRifleState {
 
     this.rifle.Velocity = Vector2.Zero;
     this.rifle.CurrentSourceRectangles = new List<Rectangle> {
-      new(21, 339, 32, 39),
-      new(98, 337, 32, 41),
-      new(174, 339, 32, 39),
-      new(251, 341, 32, 37),
+      new(0, 0, 64, 64),
+      new(64, 0, 64, 64),
+      new(128, 0,64, 64),
+      new(192, 0, 64, 64),
     };
     this.rifle.CurrentFrame = 0;
   }
