@@ -2,23 +2,23 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Blocks2;
+namespace GameProject.Blocks;
 
-public class SandBlock : IBlock {
+public class LogCornerBlock : IBlock {
   private static Texture2D texture;
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
 
-  public SandBlock(Texture2D sandTexture, Vector2 xyPos) {
-    texture = sandTexture;
+  public LogCornerBlock(Texture2D LogCornerTexture, Vector2 xyPos) {
+    texture = LogCornerTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
-    sourceRect = new Rectangle(0, 0, 63, 63); // will be in xml (or something else) file later -Aaron
+    sourceRect = new Rectangle(192, 64, 63, 63); // will be in xml (or something else) file later -Aaron
   }
 
   public void Update(GameTime gameTime) {
-    // not needed
+    // implement later
   }
 
   public void Draw(SpriteBatch spriteBatch) {

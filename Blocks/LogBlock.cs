@@ -2,19 +2,19 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Blocks2;
+namespace GameProject.Blocks;
 
-public class StoolBlock : IBlock {
+public class LogBlock : IBlock {
   private static Texture2D texture;
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
 
-  public StoolBlock(Texture2D StoolTexture, Vector2 xyPos) {
-    texture = StoolTexture;
+  public LogBlock(Texture2D LogTexture, Vector2 xyPos) {
+    texture = LogTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
-    sourceRect = new Rectangle(448, 192, 63, 63); // will be in xml (or something else) file later -Aaron
+    sourceRect = new Rectangle(256, 64, 63, 63); // will be in xml (or something else) file later -Aaron
   }
 
   public void Update(GameTime gameTime) {

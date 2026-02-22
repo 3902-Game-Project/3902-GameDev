@@ -1,4 +1,4 @@
-﻿using GameProject.Blocks2;
+﻿using GameProject.Blocks;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

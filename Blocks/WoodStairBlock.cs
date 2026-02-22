@@ -2,19 +2,19 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Blocks2;
+namespace GameProject.Blocks;
 
-public class LockedVaultBlock : IBlock {
+public class WoodStairBlock : IBlock {
   private static Texture2D texture;
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
 
-  public LockedVaultBlock(Texture2D LockedVaultTexture, Vector2 xyPos) {
-    texture = LockedVaultTexture;
+  public WoodStairBlock(Texture2D WoodStairTexture, Vector2 xyPos) {
+    texture = WoodStairTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
-    sourceRect = new Rectangle(64, 128, 63, 63); // will be in xml (or something else) file later -Aaron
+    sourceRect = new Rectangle(64, 64, 63, 63); // will be in xml (or something else) file later -Aaron
   }
 
   public void Update(GameTime gameTime) {
@@ -23,7 +23,7 @@ public class LockedVaultBlock : IBlock {
 
   public void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(texture, new Vector2(XPos, YPos), sourceRect,
-                      Color.White, 0.0f, new Vector2(0, 0), 3.0f,
+                      Color.White, 0.0f, new Vector2(0, 0), 2.0f,
                       SpriteEffects.None, 0.0f);
   }
 }

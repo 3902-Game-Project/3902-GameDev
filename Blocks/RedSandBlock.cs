@@ -2,23 +2,23 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Blocks2;
+namespace GameProject.Blocks;
 
-public class MudBlock : IBlock {
+public class RedSandBlock : IBlock {
   private static Texture2D texture;
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
 
-  public MudBlock(Texture2D MudTexture, Vector2 xyPos) {
-    texture = MudTexture;
+  public RedSandBlock(Texture2D RedSandTexture, Vector2 xyPos) {
+    texture = RedSandTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
-    sourceRect = new Rectangle(192, 0, 63, 63); // will be in xml (or something else) file later -Aaron
+    sourceRect = new Rectangle(64, 256, 63, 63); // will be in xml (or something else) file later -Aaron
   }
 
   public void Update(GameTime gameTime) {
-    // check for collision, player cannot cross
+    // implement later
   }
 
   public void Draw(SpriteBatch spriteBatch) {
