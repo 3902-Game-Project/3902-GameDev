@@ -14,7 +14,7 @@ public class BombProjectile : IProjectile
     private Rectangle currentSourceRect;
     private Animation bombAnimation;
     private Vector2 origin;
-    private bool IsExpired = false;
+    public bool IsExpired { get; private set; } = false;
 
   public void Draw(SpriteBatch spriteBatch)
     {
