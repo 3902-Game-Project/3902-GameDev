@@ -7,7 +7,7 @@ namespace GameProject.Sprites;
 public class UpAndDownSprite(Texture2D texture, Vector2 startPosition) : ISprite {
   private readonly Vector2 startPosition = startPosition;
   private Vector2 position = startPosition;
-  private Rectangle sourceRectangle = new Rectangle(130, 0, 26, 31);
+  private Rectangle sourceRectangle = new(130, 0, 26, 31);
 
   private int direction = -1;
   private int speed = 2;

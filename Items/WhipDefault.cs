@@ -6,7 +6,7 @@ namespace GameProject.Items;
 
 public class WhipDefault(Texture2D texture, Vector2 startPosition) : IItem {
   private Vector2 position = startPosition;
-  private Rectangle sourceRectangle = new Rectangle(0, 0, 8, 8);
+  private Rectangle sourceRectangle = new(0, 0, 8, 8);
   private Vector2 origin;
 
   public void Draw(SpriteBatch spriteBatch) {
