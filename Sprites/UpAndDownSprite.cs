@@ -4,23 +4,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Sprites;
 
-public class UpAndDownSprite : ISprite {
-  private Texture2D texture;
-  private Vector2 position;
-  private Vector2 startPosition;
-  private Rectangle sourceRectangle;
+public class UpAndDownSprite(Texture2D texture, Vector2 startPosition) : ISprite {
+  private readonly Vector2 startPosition = startPosition;
+  private Vector2 position = startPosition;
+  private Rectangle sourceRectangle = new Rectangle(130, 0, 26, 31);
 
   private int direction = -1;
   private int speed = 2;
   private int jumpHeight = 50;
-
-  public UpAndDownSprite(Texture2D texture, Vector2 position) {
-    this.texture = texture;
-    this.position = position;
-    this.startPosition = position;
-
-    this.sourceRectangle = new Rectangle(130, 0, 26, 31);
-  }
 
   public void Update(GameTime gameTime) {
     position.Y += speed * direction;

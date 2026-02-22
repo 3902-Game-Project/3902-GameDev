@@ -4,15 +4,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerStates;
 
-public class PlayerAnimatedMovingState : IPlayerState {
-  private Player player;
-
+public class PlayerAnimatedMovingState(Player player) : IPlayerState {
   private Rectangle SpriteRight = new(766, 62, 213, 316);
   private Rectangle SpriteLeft = new(1528, 425, 180, 319);
-
-  public PlayerAnimatedMovingState(Player player) {
-    this.player = player;
-  }
 
   public void Update(GameTime gameTime) {
     // If velocity is zero, go back to static/idle

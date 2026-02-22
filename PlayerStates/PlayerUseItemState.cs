@@ -4,17 +4,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerStates;
 
-public class PlayerUseItemState : IPlayerState {
-  private Player player;
-  private int timer;
+public class PlayerUseItemState(Player player) : IPlayerState {
+  private int timer = 20;
 
-  public PlayerUseItemState(Player player) {
-    this.player = player;
-    this.timer = 20;
-  }
-
-  public void UseItem() {
-  }
+  public void UseItem() { }
 
   public void Update(GameTime gameTime) {
     timer--;

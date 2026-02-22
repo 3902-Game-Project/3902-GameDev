@@ -4,10 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-public class WhiskeyItem : IItem {
-  private Texture2D texture;
-  private Vector2 position;
-  private Rectangle sourceRectangle;
+public class WhiskeyItem(Texture2D texture, Vector2 startPosition) : IItem {
+  private Rectangle sourceRectangle = new Rectangle(0, 0, 8, 8);
   private Vector2 origin;
 
   public void Draw(SpriteBatch spriteBatch) {
@@ -15,7 +13,7 @@ public class WhiskeyItem : IItem {
 
     spriteBatch.Draw(
       texture,
-      position,
+      startPosition,
       sourceRectangle,
       Color.White,
       0f,
@@ -34,11 +32,5 @@ public class WhiskeyItem : IItem {
 
   public void Use() {
     // Logic for using the whiskey item
-  }
-
-  public WhiskeyItem(Texture2D texture, Vector2 startPosition) {
-    this.texture = texture;
-    this.position = startPosition;
-    sourceRectangle = new Rectangle(0, 0, 8, 8);
   }
 }

@@ -4,15 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Sprites;
 
-public class FixedSprite : ISprite {
-  private Texture2D texture;
-  private Vector2 position;
-
-  public FixedSprite(Texture2D texture, Vector2 position) {
-    this.texture = texture;
-    this.position = position;
-  }
-
+public class FixedSprite(Texture2D texture, Vector2 position) : ISprite {
   public void Update(GameTime gameTime) {
     // Static sprites don't change, so this can be empty!
   }

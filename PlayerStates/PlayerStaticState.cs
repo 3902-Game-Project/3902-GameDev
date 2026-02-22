@@ -4,16 +4,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerStates;
 
-public class PlayerStaticState : IPlayerState {
-  private Player player;
-
+public class PlayerStaticState(Player player) : IPlayerState {
   // Same rectangles as moving state
   private Rectangle SpriteRight = new(766, 62, 213, 316);
   private Rectangle SpriteLeft = new(1528, 425, 180, 319);
-
-  public PlayerStaticState(Player player) {
-    this.player = player;
-  }
 
   public void Update(GameTime gameTime) {
     // If we start moving, switch state

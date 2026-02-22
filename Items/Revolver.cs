@@ -6,13 +6,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-public class Revolver : IItem {
-  private Texture2D texture;
-  private Vector2 position;
-  private Rectangle sourceRectangle;
+public class Revolver(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager) : IItem {
+  private Rectangle sourceRectangle = new Rectangle(0, 0, 8, 8);
   private Vector2 origin;
 
-  private ProjectileManager projectileManager;
+  private ProjectileManager projectileManager = projectileManager;
   private float bulletVelocity = 10f;
   private float bulletLifetime = 2f;
 
@@ -21,7 +19,7 @@ public class Revolver : IItem {
 
     spriteBatch.Draw(
       texture,
-      position,
+      startPosition,
       sourceRectangle,
       Color.White,
       0f,
@@ -38,13 +36,6 @@ public class Revolver : IItem {
 
   public void Use() {
     Vector2 bulletDirection = new(1, 0);
-    projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(position, bulletDirection, bulletVelocity, bulletLifetime));
-  }
-
-  public Revolver(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager) {
-    this.texture = texture;
-    position = startPosition;
-    this.projectileManager = projectileManager;
-    sourceRectangle = new Rectangle(0, 0, 8, 8);
+    projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(startPosition, bulletDirection, bulletVelocity, bulletLifetime));
   }
 }

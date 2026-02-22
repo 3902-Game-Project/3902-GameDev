@@ -4,10 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-public class BombItem : IItem {
-  private Texture2D texture;
-  private Vector2 position;
-  private Rectangle sourceRectangle;
+public class BombItem(Texture2D texture, Vector2 startPosition) : IItem {
+  private Rectangle sourceRectangle = new Rectangle(0, 0, 8, 8);
   private Vector2 origin;
 
   public void Draw(SpriteBatch spriteBatch) {
@@ -15,7 +13,7 @@ public class BombItem : IItem {
 
     spriteBatch.Draw(
       texture,
-      position,
+      startPosition,
       sourceRectangle,
       Color.White,
       0f,
@@ -34,11 +32,5 @@ public class BombItem : IItem {
 
   public void Use() {
     // Logic for using the bomb item
-  }
-
-  public BombItem(Texture2D texture, Vector2 startPosition) {
-    this.texture = texture;
-    this.position = startPosition;
-    sourceRectangle = new Rectangle(0, 0, 8, 8);
   }
 }
