@@ -2,21 +2,25 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Blocks2;
+namespace GameProject.Blocks;
 
-public class RockHoleBlock : IBlock {
+public enum CrateState { solid, breaking, broken }
+
+public class CrateBlock : IBlock {
   private static Texture2D texture;
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
+  public CrateState CrateState { get; set; }
 
-
-  public RockHoleBlock(Texture2D RockHoleTexture, Vector2 xyPos) {
-    texture = RockHoleTexture;
+  public CrateBlock(Texture2D CrateTexture, Vector2 xyPos) {
+    texture = CrateTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
-    sourceRect = new Rectangle(384, 128, 63, 63); // will be in xml (or something else) file later -Aaron
+    CrateState = CrateState.solid;
+    sourceRect = new Rectangle(128, 0, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // implement later
   }
@@ -25,5 +29,10 @@ public class RockHoleBlock : IBlock {
     spriteBatch.Draw(texture, new Vector2(XPos, YPos), sourceRect,
                       Color.White, 0.0f, new Vector2(0, 0), 2.0f,
                       SpriteEffects.None, 0.0f);
+  }
+
+  public void ChangeState(CrateState state) {
+    CrateState = state;
+    // implement rest later...
   }
 }

@@ -1,81 +1,94 @@
-﻿using GameProject.Sprites;
-using GameProject.Interfaces;
-using Microsoft.Xna.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using GameProject.Interfaces;
+using GameProject.Sprites;
+using Microsoft.Xna.Framework;
 
-namespace GameProject.States {
-  public class SnakeWanderState : ISnakeState {
-    private SnakeSprite snake;
-    private Random random;
-    private double wanderTimer;
-    private double wanderDuration;
+namespace GameProject.States;
 
-    private double animationTimer;
-    private int currentFrameIndex;
+public class SnakeWanderState : ISnakeState {
+  private SnakeSprite snake;
+  private Random random;
+  private double wanderTimer;
+  private double wanderDuration;
 
-    public SnakeWanderState(SnakeSprite snake) {
-      this.snake = snake;
-      this.random = new Random();
-      this.snake.CurrentSourceRectangles = new List<Rectangle>
-      {
-                new Rectangle(10, 84, 13, 13),
-                new Rectangle(43, 84, 13, 13),
-                new Rectangle(75, 84, 13, 13),
-                new Rectangle(105, 84, 14, 13),
-                new Rectangle(136, 84, 14, 13),
-                new Rectangle(166, 85, 15, 12),
-                new Rectangle(198, 85, 16, 12),
-                new Rectangle(232, 85, 15, 12),
-                new Rectangle(266, 85, 12, 12),
-                new Rectangle(298, 85, 12, 12)
-            };
-      this.snake.CurrentFrame = 0;
+  private double animationTimer;
+  private int currentFrameIndex;
 
-      ChangeDirection();
-      wanderTimer = 0;
-      wanderDuration = 1.0 + (random.NextDouble() * 2.0);
+  public SnakeWanderState(SnakeSprite snake) {
+    this.snake = snake;
+    this.random = new Random();
+    this.snake.CurrentSourceRectangles = new List<Rectangle> {
+      new(10, 84, 13, 13),
+      new(43, 84, 13, 13),
+      new(75, 84, 13, 13),
+      new(105, 84, 14, 13),
+      new(136, 84, 14, 13),
+      new(166, 85, 15, 12),
+      new(198, 85, 16, 12),
+      new(232, 85, 15, 12),
+      new(266, 85, 12, 12),
+      new(298, 85, 12, 12)
+    };
+    this.snake.CurrentFrame = 0;
+
+    ChangeDirection();
+    wanderTimer = 0;
+    wanderDuration = 1.0 + (random.NextDouble() * 2.0);
+  }
+
+  public void Update(GameTime gameTime) {
+    float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+    animationTimer += dt;
+    if (animationTimer >= 0.2) {
+      currentFrameIndex++;
+      if (currentFrameIndex >= snake.CurrentSourceRectangles.Count) {
+        currentFrameIndex = 0;
+      }
+
+      snake.CurrentFrame = currentFrameIndex;
+      animationTimer = 0;
     }
 
-    public void Update(GameTime gameTime) {
-      float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+    snake.Position += snake.Velocity * dt;
 
-      animationTimer += dt;
-      if (animationTimer >= 0.2) {
-        currentFrameIndex++;
-        if (currentFrameIndex >= snake.CurrentSourceRectangles.Count) currentFrameIndex = 0;
-        snake.CurrentFrame = currentFrameIndex;
-        animationTimer = 0;
-      }
-
-      snake.Position += snake.Velocity * dt;
-
-      if (snake.Position.X < 0 || snake.Position.X > 800) {
-        snake.Velocity.X *= -1;
-        if (snake.Velocity.X > 0) snake.FacingDirection = 1;
-        else if (snake.Velocity.X < 0) snake.FacingDirection = -1;
-      }
-      if (snake.Position.Y < 0 || snake.Position.Y > 480) {
-        snake.Velocity.Y *= -1;
-      }
-
-      wanderTimer += dt;
-      if (wanderTimer >= wanderDuration) {
-        snake.ChangeState(new SnakeIdleState(snake));
+    if (snake.Position.X < 0 || snake.Position.X > 800) {
+      snake.Velocity.X *= -1;
+      if (snake.Velocity.X > 0) {
+        snake.FacingDirection = 1;
+      } else if (snake.Velocity.X < 0) {
+        snake.FacingDirection = -1;
       }
     }
+    if (snake.Position.Y < 0 || snake.Position.Y > 480) {
+      snake.Velocity.Y *= -1;
+    }
 
-    private void ChangeDirection() {
-      float speed = 100f;
-      float randomX = (float)(random.NextDouble() * 2 - 1);
-      float randomY = (float)(random.NextDouble() * 2 - 1);
-      Vector2 direction = new Vector2(randomX, randomY);
+    wanderTimer += dt;
+    if (wanderTimer >= wanderDuration) {
+      snake.ChangeState(new SnakeIdleState(snake));
+    }
+  }
 
-      if (direction != Vector2.Zero) direction.Normalize();
+  private void ChangeDirection() {
+    float speed = 100f;
+    float randomX = (float)(random.NextDouble() * 2 - 1);
+    float randomY = (float)(random.NextDouble() * 2 - 1);
+    Vector2 direction = new(randomX, randomY);
 
-      snake.Velocity = direction * speed;
-      if (snake.Velocity.X > 0) snake.FacingDirection = 1;
-      if (snake.Velocity.X < 0) snake.FacingDirection = -1;
+    if (direction != Vector2.Zero) {
+      direction.Normalize();
+    }
+
+    snake.Velocity = direction * speed;
+
+    if (snake.Velocity.X > 0) {
+      snake.FacingDirection = 1;
+    }
+
+    if (snake.Velocity.X < 0) {
+      snake.FacingDirection = -1;
     }
   }
 }

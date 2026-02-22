@@ -1,55 +1,48 @@
-﻿using System.Collections.Generic;
+﻿using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using GameProject.Interfaces;
 
-namespace GameProject.PlayerStates {
-  public class PlayerAnimatedMovingState : IPlayerState {
-    private Player player;
+namespace GameProject.PlayerStates;
 
-    private Rectangle SpriteRight = new Rectangle(766, 62, 213, 316);
-    private Rectangle SpriteLeft = new Rectangle(1528, 425, 180, 319);
+public class PlayerAnimatedMovingState(Player player) : IPlayerState {
+  private Rectangle SpriteRight = new(766, 62, 213, 316);
+  private Rectangle SpriteLeft = new(1528, 425, 180, 319);
 
-    public PlayerAnimatedMovingState(Player player) {
-      this.player = player;
+  public void Update(GameTime gameTime) {
+    // If velocity is zero, go back to static/idle
+    if (player.Velocity == Vector2.Zero) {
+      player.State = new PlayerStaticState(player);
+    }
+  }
+
+  public void UseItem() { }
+
+  public void Draw(SpriteBatch spriteBatch) {
+    Texture2D texture = player.game.Assets.Textures.PlayerTexture;
+
+    Rectangle sourceRect;
+    Vector2 origin;
+
+    // Choose the sprite based on the Player's persistent Direction
+    if (player.Direction == FacingDirection.Right) {
+      sourceRect = SpriteRight;
+    } else {
+      sourceRect = SpriteLeft;
     }
 
-    public void Update(GameTime gameTime) {
-      // If velocity is zero, go back to static/idle
-      if (player.Velocity == Vector2.Zero) {
-        player.State = new PlayerStaticState(player);
-      }
-    }
+    // Center the origin so the sprite doesn't jump around weirdly
+    origin = new Vector2(sourceRect.Width / 2, sourceRect.Height / 2);
 
-    public void UseItem() { }
-
-    public void Draw(SpriteBatch spriteBatch) {
-      Texture2D texture = player.game.GlobalVars.Assets.Textures.PlayerTexture;
-
-      Rectangle sourceRect;
-      Vector2 origin;
-
-      // Choose the sprite based on the Player's persistent Direction
-      if (player.Direction == FacingDirection.Right) {
-        sourceRect = SpriteRight;
-      } else {
-        sourceRect = SpriteLeft;
-      }
-
-      // Center the origin so the sprite doesn't jump around weirdly
-      origin = new Vector2(sourceRect.Width / 2, sourceRect.Height / 2);
-
-      spriteBatch.Draw(
-          texture,
-          player.Position,
-          sourceRect,
-          Color.White,
-          0f,
-          origin,
-          1f,
-          SpriteEffects.None,
-          0f
-      );
-    }
+    spriteBatch.Draw(
+      texture,
+      player.Position,
+      sourceRect,
+      Color.White,
+      0f,
+      origin,
+      1f,
+      SpriteEffects.None,
+      0f
+    );
   }
 }

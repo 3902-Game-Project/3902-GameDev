@@ -2,21 +2,21 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Blocks2;
+namespace GameProject.Blocks;
 
-public class LargeDoorBlock : IBlock {
+public class WoodCornerBlock : IBlock {
   private static Texture2D texture;
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
 
-
-  public LargeDoorBlock(Texture2D LargeDoorTexture, Vector2 xyPos) {
-    texture = LargeDoorTexture;
+  public WoodCornerBlock(Texture2D WoodCornerTexture, Vector2 xyPos) {
+    texture = WoodCornerTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
-    sourceRect = new Rectangle(448, 320, 63, 126); // will be in xml (or something else) file later -Aaron
+    sourceRect = new Rectangle(128, 64, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // implement later
   }

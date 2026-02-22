@@ -1,51 +1,53 @@
-﻿using GameProject.Sprites;
+﻿using System.Collections.Generic;
 using GameProject.Interfaces;
+using GameProject.Sprites;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 
-namespace GameProject.States {
-  public class SnakeIdleState : ISnakeState {
-    private SnakeSprite snake;
-    private double timer;
-    private double animationTimer;
-    private System.Random random;
+namespace GameProject.States;
 
-    public SnakeIdleState(SnakeSprite snake) {
-      this.snake = snake;
-      this.random = new System.Random();
+public class SnakeIdleState : ISnakeState {
+  private SnakeSprite snake;
+  private double timer;
+  private double animationTimer;
+  private System.Random random;
 
-      this.snake.Velocity = Vector2.Zero;
-      this.snake.CurrentSourceRectangles = new List<Rectangle>
-      {
-                new Rectangle(11, 20, 10, 12),
-                new Rectangle(43, 21, 10, 11),
-                new Rectangle(75, 22, 10, 10),
-                new Rectangle(106, 22, 11, 10),
-                new Rectangle(138, 22, 11, 10),
-                new Rectangle(170, 22, 11, 10),
-                new Rectangle(203, 22, 10, 10),
-                new Rectangle(235, 21, 10, 11),
-                new Rectangle(267, 20, 10, 12),
-                new Rectangle(299, 20, 10, 12)
-            };
-      this.snake.CurrentFrame = 0;
-    }
+  public SnakeIdleState(SnakeSprite snake) {
+    this.snake = snake;
+    this.random = new System.Random();
 
-    public void Update(GameTime gameTime) {
-      animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
-      if (animationTimer > 0.1) {
-        snake.CurrentFrame++;
-        if (snake.CurrentFrame >= snake.CurrentSourceRectangles.Count) {
-          snake.CurrentFrame = 0;
-        }
-        animationTimer = 0;
+    this.snake.Velocity = Vector2.Zero;
+    this.snake.CurrentSourceRectangles = new List<Rectangle> {
+      new(11, 20, 10, 12),
+      new(43, 21, 10, 11),
+      new(75, 22, 10, 10),
+      new(106, 22, 11, 10),
+      new(138, 22, 11, 10),
+      new(170, 22, 11, 10),
+      new(203, 22, 10, 10),
+      new(235, 21, 10, 11),
+      new(267, 20, 10, 12),
+      new(299, 20, 10, 12),
+    };
+    this.snake.CurrentFrame = 0;
+  }
+
+  public void Update(GameTime gameTime) {
+    animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
+    if (animationTimer > 0.1) {
+      snake.CurrentFrame++;
+      if (snake.CurrentFrame >= snake.CurrentSourceRectangles.Count) {
+        snake.CurrentFrame = 0;
       }
-      timer += gameTime.ElapsedGameTime.TotalSeconds;
+      animationTimer = 0;
+    }
+    timer += gameTime.ElapsedGameTime.TotalSeconds;
 
-      if (timer > 1.0) {
-        int choice = random.Next(0, 2);
-        if (choice == 0) snake.ChangeState(new SnakeAttackState(snake));
-        else snake.ChangeState(new SnakeWanderState(snake));
+    if (timer > 1.0) {
+      int choice = random.Next(0, 2);
+      if (choice == 0) {
+        snake.ChangeState(new SnakeAttackState(snake));
+      } else {
+        snake.ChangeState(new SnakeWanderState(snake));
       }
     }
   }

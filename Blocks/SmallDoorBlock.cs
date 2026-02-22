@@ -2,24 +2,21 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Blocks2;
+namespace GameProject.Blocks;
 
-public enum BarrelState { solid, breaking, broken }
-public class BarrelBlock : IBlock {
+public class SmallDoorBlock : IBlock {
   private static Texture2D texture;
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
-  public BarrelState BarrelState { get; set; }
- 
 
-  public BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) {
-    texture = barrelTexture;
+  public SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos) {
+    texture = SmallDoorTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
-    BarrelState = BarrelState.solid;
-    sourceRect = new Rectangle(64, 0, 63, 63); // will be in xml (or something else) file later -Aaron
+    sourceRect = new Rectangle(448, 256, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // implement later
   }
@@ -28,10 +25,5 @@ public class BarrelBlock : IBlock {
     spriteBatch.Draw(texture, new Vector2(XPos, YPos), sourceRect,
                       Color.White, 0.0f, new Vector2(0, 0), 2.0f,
                       SpriteEffects.None, 0.0f);
-  }
-
-  public void ChangeState(BarrelState state) {
-    BarrelState = state;
-    // implement rest later...
   }
 }

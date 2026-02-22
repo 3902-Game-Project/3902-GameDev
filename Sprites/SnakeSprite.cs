@@ -1,59 +1,57 @@
+using System.Collections.Generic;
 using GameProject.Interfaces;
 using GameProject.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 
-namespace GameProject.Sprites 
-{
-    public class SnakeSprite : IEnemy 
-    {
-        // Data needed by states
-        public Texture2D Texture { get; private set; }
-        public Vector2 Position; 
-        public Vector2 Velocity;
-        public int FacingDirection = 1;
+namespace GameProject.Sprites;
 
-        public List<Rectangle> CurrentSourceRectangles;
-        public int CurrentFrame;
+public class SnakeSprite : IEnemy {
+  // Data needed by states
+  public Texture2D Texture { get; private set; }
+  public Vector2 Position;
+  public Vector2 Velocity;
+  public int FacingDirection = 1;
 
-        private ISnakeState state;
+  public List<Rectangle> CurrentSourceRectangles;
+  public int CurrentFrame;
 
-        public SnakeSprite(Texture2D texture, Vector2 position) 
-        {
-            Texture = texture;
-            Position = position;
-            state = new SnakeWanderState(this);
-        }
+  private ISnakeState state;
 
-        public void ChangeState(ISnakeState newState) 
-        {
-            state = newState;
-        }
+  public SnakeSprite(Texture2D texture, Vector2 position) {
+    Texture = texture;
+    Position = position;
+    state = new SnakeWanderState(this);
+  }
 
-        public void Update(GameTime gameTime) 
-        {
-            state.Update(gameTime);
+  public void ChangeState(ISnakeState newState) {
+    state = newState;
+  }
 
-            // Keep inside bounds
-            if (Position.X < 0) Position.X = 0;
-        }
+  public void Update(GameTime gameTime) {
+    state.Update(gameTime);
 
-        public void Draw(SpriteBatch spriteBatch) 
-        {
-            if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return;
-
-            Rectangle source = CurrentSourceRectangles[CurrentFrame];
-
-            // Flip logic
-            SpriteEffects effect = (FacingDirection > 0) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-
-            // Origin at feet
-            Vector2 origin = new Vector2(source.Width / 2, source.Height);
-
-            spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, 2f, effect, 0f);
-        }
-
-        public void TakeDamage() { /* ... */ }
+    // Keep inside bounds
+    if (Position.X < 0) {
+      Position.X = 0;
     }
+  }
+
+  public void Draw(SpriteBatch spriteBatch) {
+    if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) {
+      return;
+    }
+
+    Rectangle source = CurrentSourceRectangles[CurrentFrame];
+
+    // Flip logic
+    SpriteEffects effect = (FacingDirection > 0) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+
+    // Origin at feet
+    Vector2 origin = new(source.Width / 2, source.Height);
+
+    spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, 2f, effect, 0f);
+  }
+
+  public void TakeDamage() { /* ... */ }
 }

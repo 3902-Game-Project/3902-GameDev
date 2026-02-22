@@ -2,21 +2,21 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Blocks2;
+namespace GameProject.Blocks;
 
-public class LogCornerBlock : IBlock {
+public class BarShelfBlock : IBlock {
   private static Texture2D texture;
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
 
-
-  public LogCornerBlock(Texture2D LogCornerTexture, Vector2 xyPos) {
-    texture = LogCornerTexture;
+  public BarShelfBlock(Texture2D BarShelfTexture, Vector2 xyPos) {
+    texture = BarShelfTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
-    sourceRect = new Rectangle(192, 64, 63, 63); // will be in xml (or something else) file later -Aaron
+    sourceRect = new Rectangle(256, 256, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // implement later
   }

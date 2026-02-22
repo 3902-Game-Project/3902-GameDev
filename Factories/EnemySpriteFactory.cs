@@ -10,7 +10,7 @@ internal class EnemySpriteFactory {
   private Texture2D snakeTexture;
   private Texture2D batTexture;
   private Texture2D shotgunnerTexture;
-  private static EnemySpriteFactory instance = new EnemySpriteFactory();
+  private static EnemySpriteFactory instance = new();
 
   public static EnemySpriteFactory Instance {
     get { return instance; }
@@ -28,9 +28,11 @@ internal class EnemySpriteFactory {
   public IEnemy CreateSnakeSprite() {
     return new SnakeSprite(snakeTexture, new Vector2(400, 200));
   }
+
   public IEnemy CreateBatSprite() {
     return new BatSprite(batTexture, new Vector2(400, 200));
   }
+
   public IEnemy CreateShotgunnerSprite() {
     return new ShotgunnerSprite(shotgunnerTexture, new Vector2(400, 200));
   }

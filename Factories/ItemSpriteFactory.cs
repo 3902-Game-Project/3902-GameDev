@@ -9,7 +9,7 @@ namespace GameProject.Factories;
 
 internal class ItemSpriteFactory {
   private Texture2D placeholderGunTexture;
-  private static ItemSpriteFactory instance = new ItemSpriteFactory();
+  private static ItemSpriteFactory instance = new();
   private ProjectileManager projectileManager;
 
   public static ItemSpriteFactory Instance {

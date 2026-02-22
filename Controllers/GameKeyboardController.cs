@@ -10,7 +10,7 @@ public class GameKeyboardController(Game1 game) : IController {
   private KeyboardState previousState;
   private KeyboardState currentState;
 
-  private Dictionary<Keys, ICommand> keyMappings = new Dictionary<Keys, ICommand> {
+  private readonly Dictionary<Keys, ICommand> keyMappings = new() {
     {Keys.Q, new QuitCommand(game)},
     {Keys.R, new ReturnToMenuAndResetCommand(game)},
     {Keys.Y, new NextBlockCommand(game)},
@@ -22,6 +22,10 @@ public class GameKeyboardController(Game1 game) : IController {
     {Keys.S, new PlayerMoveDownCommand(game)},
     {Keys.A, new PlayerMoveLeftCommand(game)},
     {Keys.D, new PlayerMoveRightCommand(game)},
+    {Keys.Up, new PlayerMoveUpCommand(game)},
+    {Keys.Down, new PlayerMoveDownCommand(game)},
+    {Keys.Left, new PlayerMoveLeftCommand(game)},
+    {Keys.Right, new PlayerMoveRightCommand(game)},
   };
 
   public void Update(GameTime gameTime) {
@@ -29,9 +33,13 @@ public class GameKeyboardController(Game1 game) : IController {
     currentState = Keyboard.GetState();
 
     foreach (Keys key in currentState.GetPressedKeys()) {
-      if (((key == Keys.Y) || (key == Keys.T)) && previousState.IsKeyDown(key)) continue; // added for sprint2 -Aaron
+      if (((key == Keys.Y) || (key == Keys.T)) && previousState.IsKeyDown(key)) {
+        continue; // added for sprint2 -Aaron
+      }
 
-      if (keyMappings.TryGetValue(key, out ICommand command)) command.Execute();
+      if (keyMappings.TryGetValue(key, out ICommand command)) {
+        command.Execute();
+      }
     }
   }
 }

@@ -1,15 +1,12 @@
-using System.Collections.Generic;
-using GameProject.Animations;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-public class WhipDefault : IItem {
-  private Texture2D texture;
-  private Vector2 position;
-  private Rectangle sourceRectangle;
+public class WhipDefault(Texture2D texture, Vector2 startPosition) : IItem {
+  private Vector2 position = startPosition;
+  private Rectangle sourceRectangle = new(0, 0, 8, 8);
   private Vector2 origin;
 
   public void Draw(SpriteBatch spriteBatch) {
@@ -28,9 +25,7 @@ public class WhipDefault : IItem {
     );
   }
 
-  public void Update(GameTime gameTime) {
-
-  }
+  public void Update(GameTime gameTime) { }
 
   public void OnPickup() {
     // Logic for using the whip item
@@ -38,11 +33,5 @@ public class WhipDefault : IItem {
 
   public void Use() {
     // Logic for using the whip item
-  }
-
-  public WhipDefault(Texture2D texture, Vector2 startPosition) {
-    this.texture = texture;
-    this.position = startPosition;
-    sourceRectangle = new Rectangle(0, 0, 8, 8);
   }
 }

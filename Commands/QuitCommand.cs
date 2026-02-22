@@ -2,14 +2,8 @@ using GameProject.Interfaces;
 
 namespace GameProject.Commands;
 
-public class QuitCommand : ICommand {
-  private Game1 myGame;
-
-  public QuitCommand(Game1 game) {
-    myGame = game;
-  }
-
+public class QuitCommand(Game1 game) : ICommand {
   public void Execute() {
-    myGame.Exit();
+    game.Exit();
   }
 }

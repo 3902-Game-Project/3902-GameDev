@@ -2,23 +2,23 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Blocks2;
+namespace GameProject.Blocks;
 
-public class WoodStairBlock : IBlock {
+public class SandBlock : IBlock {
   private static Texture2D texture;
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
 
-
-  public WoodStairBlock(Texture2D WoodStairTexture, Vector2 xyPos) {
-    texture = WoodStairTexture;
+  public SandBlock(Texture2D sandTexture, Vector2 xyPos) {
+    texture = sandTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
-    sourceRect = new Rectangle(64, 64, 63, 63); // will be in xml (or something else) file later -Aaron
+    sourceRect = new Rectangle(0, 0, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
-    // implement later
+    // not needed
   }
 
   public void Draw(SpriteBatch spriteBatch) {

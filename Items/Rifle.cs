@@ -1,18 +1,16 @@
-using GameProject.Interfaces;
 using GameProject.Factories;
+using GameProject.Interfaces;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-public class Rifle : IItem {
-  private Texture2D texture;
-  private Vector2 position;
-  private Rectangle sourceRectangle;
+public class Rifle(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager) : IItem {
+  private Rectangle sourceRectangle = new(0, 0, 8, 8);
   private Vector2 origin;
-  
-  private ProjectileManager projectileManager;
+
+  private ProjectileManager projectileManager = projectileManager;
   private float bulletVelocity = 25f;
   private float bulletLifetime = 2f;
 
@@ -21,7 +19,7 @@ public class Rifle : IItem {
 
     spriteBatch.Draw(
       texture,
-      position,
+      startPosition,
       sourceRectangle,
       Color.White,
       0f,
@@ -32,23 +30,12 @@ public class Rifle : IItem {
     );
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(GameTime gameTime) { }
 
-  }
-
-  public void OnPickup() {
-
-  }
+  public void OnPickup() { }
 
   public void Use() {
-    Vector2 bulletDirection = new Vector2(1, 0);
-    projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(position, bulletDirection, bulletVelocity, bulletLifetime));
-  }
-
-  public Rifle(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager) {
-    this.texture = texture;
-    this.position = startPosition;
-    sourceRectangle = new Rectangle(0, 0, 8, 8);
-    this.projectileManager = projectileManager;
+    Vector2 bulletDirection = new(1, 0);
+    projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(startPosition, bulletDirection, bulletVelocity, bulletLifetime));
   }
 }
