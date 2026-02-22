@@ -24,7 +24,7 @@ public class StateMenuType(Game1 game) : IGameState {
 
     game.SpriteBatch.Begin();
     game.SpriteBatch.DrawString(
-      spriteFont: game.GlobalVars.Assets.MainFont,
+      spriteFont: game.Assets.MainFont,
       text: START_TEXT,
       position:
         new Vector2(
@@ -32,7 +32,7 @@ public class StateMenuType(Game1 game) : IGameState {
           game.Window.ClientBounds.Height
         ) * 0.5f,
       color: Color.White,
-      origin: game.GlobalVars.Assets.MainFont.MeasureString(START_TEXT) * 0.5f,
+      origin: game.Assets.MainFont.MeasureString(START_TEXT) * 0.5f,
       rotation: 0.0f,
       scale: 1.0f,
       effects: SpriteEffects.None,

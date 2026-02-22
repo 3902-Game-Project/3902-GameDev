@@ -18,7 +18,7 @@ public class PlayerAnimatedMovingState(Player player) : IPlayerState {
   public void UseItem() { }
 
   public void Draw(SpriteBatch spriteBatch) {
-    Texture2D texture = player.game.GlobalVars.Assets.Textures.PlayerTexture;
+    Texture2D texture = player.game.Assets.Textures.PlayerTexture;
 
     Rectangle sourceRect;
     Vector2 origin;

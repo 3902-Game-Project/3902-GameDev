@@ -11,7 +11,7 @@ public class Game1 : Game {
   private readonly GraphicsDeviceManager graphics;
 
   public SpriteBatch SpriteBatch { get; private set; }
-  public GlobalVarStore GlobalVars { get; private set; }
+  public AssetStore Assets { get; private set; }
 
   public StateMenuType StateMenu { get; private set; }
   public StateGameType StateGame { get; private set; }
@@ -24,7 +24,7 @@ public class Game1 : Game {
     Content.RootDirectory = "Content";
     IsMouseVisible = true;
 
-    GlobalVars = new GlobalVarStore(this);
+    Assets = new AssetStore(this);
 
     StateMenu = new StateMenuType(this);
     StateGame = new StateGameType(this);
@@ -38,7 +38,7 @@ public class Game1 : Game {
   }
 
   protected override void Initialize() {
-    GlobalVars.Initialize();
+    Assets.Initialize();
     StateMenu.Initialize();
     StateGame.Initialize();
     Player = new Player(this);
@@ -49,7 +49,7 @@ public class Game1 : Game {
   protected override void LoadContent() {
     SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-    GlobalVars.LoadContent();
+    Assets.LoadContent();
     StateMenu.LoadContent();
     StateGame.LoadContent();
 
