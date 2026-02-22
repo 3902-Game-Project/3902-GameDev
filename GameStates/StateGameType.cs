@@ -4,6 +4,7 @@ using GameProject.Interfaces;
 using GameProject.Managers;
 using GameProject.Factories;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.GameStates;
 
@@ -47,7 +48,13 @@ public class StateGameType(Game1 game) : IGameState {
 
   public void Draw(GameTime gameTime) {
     game.GraphicsDevice.Clear(Color.CornflowerBlue);
-    game.SpriteBatch.Begin();
+    game.SpriteBatch.Begin(
+      SpriteSortMode.Deferred,
+      BlendState.AlphaBlend,
+      SamplerState.PointClamp,
+      DepthStencilState.None,
+      RasterizerState.CullNone
+    );
 
     if (Blocks != null && Blocks.Count > 0 && BlockNumber < Blocks.Count) {
       Blocks[BlockNumber].Draw(game.SpriteBatch);
