@@ -2,6 +2,7 @@
 using GameProject.GameStates;
 using GameProject.Globals;
 using GameProject.Interfaces;
+using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -17,6 +18,8 @@ public class Game1 : Game {
   public StateGameType StateGame { get; private set; }
   private IGameState currentState;
   public BlockSpriteFactory blockFactory;
+  public ProjectileManager ProjectileManager { get; private set; }
+  public ItemSpriteFactory ItemSpriteFactory { get; private set; }
 
   public Game1() {
     graphics = new GraphicsDeviceManager(this);
@@ -30,6 +33,8 @@ public class Game1 : Game {
     currentState = StateMenu;
 
     blockFactory = new BlockSpriteFactory();
+    ProjectileManager = new ProjectileManager();
+    ItemSpriteFactory = new ItemSpriteFactory(ProjectileManager);
   }
 
   public void ChangeState(IGameState state) {
@@ -66,11 +71,14 @@ public class Game1 : Game {
 
     var bat = EnemySpriteFactory.Instance.CreateBatSprite();
     StateGame.Enemies.Add(bat);
+
+    ItemSpriteFactory.LoadAllTextures(Content);
   }
 
   protected override void Update(GameTime gameTime) {
     currentState.Update(gameTime);
-
+    ProjectileManager.Update(gameTime);
+    
     base.Update(gameTime);
   }
 

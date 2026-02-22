@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using GameProject.Controllers;
 using GameProject.Interfaces;
+using GameProject.Managers;
+using GameProject.Factories;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.GameStates;
@@ -18,6 +20,9 @@ public class StateGameType(Game1 game) : IGameState {
   public IBlock BlockSprite { get; set; }
   public ISprite CurrentSprite { get; set; }
   public IItem ItemSprite { get; set; }
+
+  public ProjectileManager ProjectileManager { get; private set; }
+  public ItemSpriteFactory ItemSpriteFactory { get; private set; }
 
   public void Initialize() {
     keyboardController = new GameKeyboardController(game);
@@ -38,6 +43,7 @@ public class StateGameType(Game1 game) : IGameState {
     foreach (var enemy in Enemies) {
       enemy.Update(gameTime);
     }
+
   }
 
   public void Draw(GameTime gameTime) {
@@ -46,6 +52,10 @@ public class StateGameType(Game1 game) : IGameState {
 
     if (Blocks != null && Blocks.Count > 0 && BlockNumber < Blocks.Count) {
       Blocks[BlockNumber].Draw(game.SpriteBatch);
+    }
+
+    if (Items != null && Items.Count > 0 && ItemNumber < Items.Count) {
+      Items[ItemNumber].Draw(game.SpriteBatch);
     }
 
     Player.Draw(game.SpriteBatch);
