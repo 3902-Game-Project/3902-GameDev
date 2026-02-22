@@ -31,11 +31,13 @@ public class StateGameType(Game1 game) : IGameState {
   }
 
   public void Update(GameTime gameTime) {
+    keyboardController.Update(gameTime);
+
+    Player.Update(gameTime);
+
     foreach (var enemy in Enemies) {
       enemy.Update(gameTime);
     }
-
-    keyboardController.Update(gameTime);
   }
 
   public void Draw(GameTime gameTime) {
