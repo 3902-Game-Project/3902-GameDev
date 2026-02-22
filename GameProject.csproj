@@ -32,4 +32,7 @@
   <ItemGroup>
     <None Include=".editorconfig" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Info\Code Review\Sprint 2\" />
+  </ItemGroup>
 </Project>
