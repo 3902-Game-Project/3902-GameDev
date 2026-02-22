@@ -22,6 +22,10 @@ public class GameKeyboardController(Game1 game) : IController {
     {Keys.S, new PlayerMoveDownCommand(game)},
     {Keys.A, new PlayerMoveLeftCommand(game)},
     {Keys.D, new PlayerMoveRightCommand(game)},
+    {Keys.Up, new PlayerMoveUpCommand(game)},
+    {Keys.Down, new PlayerMoveDownCommand(game)},
+    {Keys.Left, new PlayerMoveLeftCommand(game)},
+    {Keys.Right, new PlayerMoveRightCommand(game)},
   };
 
   public void Update(GameTime gameTime) {
