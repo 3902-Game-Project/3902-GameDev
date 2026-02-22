@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Items;
 
 public class Revolver(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager) : IItem {
-  private Rectangle sourceRectangle = new(0, 0, 8, 8);
+  private Rectangle sourceRectangle = new(0, 0, 16, 9);
   private Vector2 origin;
 
   private ProjectileManager projectileManager = projectileManager;
