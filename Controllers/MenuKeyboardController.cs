@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.Controllers;
 
 public class MenuKeyboardController(Game1 game) : IController {
-  private Dictionary<Keys, ICommand> keyMappings = new() {
+  private readonly Dictionary<Keys, ICommand> keyMappings = new() {
     {Keys.Q, new QuitCommand(game)},
     {Keys.Enter, new StartGameCommand(game)},
   };

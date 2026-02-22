@@ -27,7 +27,7 @@ public class Game1 : Game {
     Assets = new AssetStore(this);
 
     StateMenu = new StateMenuType(this);
-    StateGame = new StateGameType(this);
+    ResetGameState();
     currentState = StateMenu;
 
     blockFactory = new BlockSpriteFactory();
@@ -35,6 +35,10 @@ public class Game1 : Game {
 
   public void ChangeState(IGameState state) {
     currentState = state;
+  }
+
+  public void ResetGameState() {
+    StateGame = new StateGameType(this);
   }
 
   protected override void Initialize() {
