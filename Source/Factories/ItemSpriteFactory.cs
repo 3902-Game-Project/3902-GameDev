@@ -7,17 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Factories;
 
-internal class ItemSpriteFactory {
+public class ItemSpriteFactory (ProjectileManager projectileManager) {
   private Texture2D placeholderGunTexture;
-  private static ItemSpriteFactory instance = new();
-  private ProjectileManager projectileManager;
-
-  public static ItemSpriteFactory Instance {
-    get { return instance; }
-  }
-
-  private ItemSpriteFactory() {
-  }
 
   public void LoadAllTextures(ContentManager content) {
     placeholderGunTexture = content.Load<Texture2D>("basic_guns_spritesheet");
