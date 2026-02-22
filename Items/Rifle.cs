@@ -1,5 +1,5 @@
-using GameProject.Interfaces;
 using GameProject.Factories;
+using GameProject.Interfaces;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,7 +11,7 @@ public class Rifle : IItem {
   private Vector2 position;
   private Rectangle sourceRectangle;
   private Vector2 origin;
-  
+
   private ProjectileManager projectileManager;
   private float bulletVelocity = 25f;
   private float bulletLifetime = 2f;
@@ -32,13 +32,9 @@ public class Rifle : IItem {
     );
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(GameTime gameTime) { }
 
-  }
-
-  public void OnPickup() {
-
-  }
+  public void OnPickup() { }
 
   public void Use() {
     Vector2 bulletDirection = new Vector2(1, 0);

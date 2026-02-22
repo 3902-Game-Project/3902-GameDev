@@ -1,10 +1,8 @@
-using System.Collections.Generic;
-using GameProject.Animations;
+using GameProject.Factories;
 using GameProject.Interfaces;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using GameProject.Factories;
 
 namespace GameProject.Items;
 
@@ -34,12 +32,9 @@ public class Revolver : IItem {
     );
   }
 
-  public void Update(GameTime gameTime) {
-  }
+  public void Update(GameTime gameTime) { }
 
-  public void OnPickup() {
-
-  }
+  public void OnPickup() { }
 
   public void Use() {
     Vector2 bulletDirection = new Vector2(1, 0);

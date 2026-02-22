@@ -1,10 +1,9 @@
 ﻿using GameProject.Factories;
+using GameProject.GameStates;
 using GameProject.Globals;
 using GameProject.Interfaces;
-using GameProject.GameStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 
 namespace GameProject;
 

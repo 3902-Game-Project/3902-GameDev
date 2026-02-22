@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using GameProject.Animations;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,9 +26,7 @@ public class AmmoRefill : IItem {
     );
   }
 
-  public void Update(GameTime gameTime) {
-
-  }
+  public void Update(GameTime gameTime) { }
 
   public void OnPickup() {
     // Logic for using the ammo refill item

@@ -1,8 +1,7 @@
 using System;
-using GameProject.Interfaces;
-using GameProject.Projectiles;
-using GameProject.Managers;
 using GameProject.Factories;
+using GameProject.Interfaces;
+using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -36,13 +35,9 @@ public class Shotgun : IItem {
     );
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(GameTime gameTime) { }
 
-  }
-
-  public void OnPickup() {
-
-  }
+  public void OnPickup() { }
 
   public void Use() {
     Vector2 bulletDirection = new Vector2(1, 0);

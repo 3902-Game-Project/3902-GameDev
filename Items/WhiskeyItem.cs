@@ -1,8 +1,6 @@
-using GameProject.Animations;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 
 namespace GameProject.Items;
 
@@ -28,9 +26,7 @@ public class WhiskeyItem : IItem {
     );
   }
 
-  public void Update(GameTime gameTime) {
-
-  }
+  public void Update(GameTime gameTime) { }
 
   public void OnPickup() {
     // Logic for using the whiskey item
