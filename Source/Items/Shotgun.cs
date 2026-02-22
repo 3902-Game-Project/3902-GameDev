@@ -9,7 +9,7 @@ namespace GameProject.Items;
 
 public class Shotgun(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager) : IItem {
   private Vector2 position = startPosition;
-  private Rectangle sourceRectangle = new(0, 0, 8, 8);
+  private Rectangle sourceRectangle = new(0, 10, 27, 9);
   private Vector2 origin;
 
   private ProjectileManager projectileManager = projectileManager;
