@@ -16,6 +16,7 @@ public class LockedVaultBlock : IBlock {
     YPos = xyPos.Y;
     sourceRect = new Rectangle(64, 128, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // implement later
   }

@@ -16,6 +16,7 @@ public class StatueBlock : IBlock {
     YPos = xyPos.Y;
     sourceRect = new Rectangle(0, 160, 63, 95); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // implement later
   }

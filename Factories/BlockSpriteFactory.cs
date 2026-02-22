@@ -1,9 +1,6 @@
 ﻿using GameProject.Blocks2;
 using GameProject.Interfaces;
-using GameProject.GameStates;
-using GameProject.Sprites;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Factories;
@@ -52,11 +49,14 @@ public class BlockSpriteFactory {
   public IBlock CreateSandBlockSprite(int x, int y) {
     return new SandBlock(blockTextures, new Vector2(x, y));
   }
+
   public IBlock CreateBarrelBlockSprite(int x, int y) {
     return new BarrelBlock(blockTextures, new Vector2(x, y));
   }
+
   public IBlock CreateCrateBlockSprite(int x, int y) {
     return new CrateBlock(blockTextures, new Vector2(x, y));
   }
+
   // add other create methods...
 }

@@ -10,13 +10,13 @@ public class RockHoleBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
 
-
   public RockHoleBlock(Texture2D RockHoleTexture, Vector2 xyPos) {
     texture = RockHoleTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
     sourceRect = new Rectangle(384, 128, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // implement later
   }

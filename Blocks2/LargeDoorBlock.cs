@@ -10,13 +10,13 @@ public class LargeDoorBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
 
-
   public LargeDoorBlock(Texture2D LargeDoorTexture, Vector2 xyPos) {
     texture = LargeDoorTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
     sourceRect = new Rectangle(448, 320, 63, 126); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // implement later
   }

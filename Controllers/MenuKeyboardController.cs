@@ -9,7 +9,7 @@ namespace GameProject.Controllers;
 public class MenuKeyboardController(Game1 game) : IController {
   private Dictionary<Keys, ICommand> keyMappings = new Dictionary<Keys, ICommand> {
     {Keys.Q, new QuitCommand(game)},
-    {Keys.Enter, new StartGameCommand(game)}
+    {Keys.Enter, new StartGameCommand(game)},
   };
 
   public void Update(GameTime gameTime) {

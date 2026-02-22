@@ -10,13 +10,13 @@ public class LogBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
 
-
   public LogBlock(Texture2D LogTexture, Vector2 xyPos) {
     texture = LogTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
     sourceRect = new Rectangle(256, 64, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // implement later
   }

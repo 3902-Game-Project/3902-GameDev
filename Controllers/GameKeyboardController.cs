@@ -29,9 +29,13 @@ public class GameKeyboardController(Game1 game) : IController {
     currentState = Keyboard.GetState();
 
     foreach (Keys key in currentState.GetPressedKeys()) {
-      if (((key == Keys.Y) || (key == Keys.T)) && previousState.IsKeyDown(key)) continue; // added for sprint2 -Aaron
+      if (((key == Keys.Y) || (key == Keys.T)) && previousState.IsKeyDown(key)) {
+        continue; // added for sprint2 -Aaron
+      }
 
-      if (keyMappings.TryGetValue(key, out ICommand command)) command.Execute();
+      if (keyMappings.TryGetValue(key, out ICommand command)) {
+        command.Execute();
+      }
     }
   }
 }

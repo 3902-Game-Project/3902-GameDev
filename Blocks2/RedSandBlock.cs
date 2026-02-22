@@ -10,13 +10,13 @@ public class RedSandBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
 
-
   public RedSandBlock(Texture2D RedSandTexture, Vector2 xyPos) {
     texture = RedSandTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
     sourceRect = new Rectangle(64, 256, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // implement later
   }

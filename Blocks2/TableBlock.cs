@@ -10,13 +10,13 @@ public class TableBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
 
-
   public TableBlock(Texture2D TableTexture, Vector2 xyPos) {
     texture = TableTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
     sourceRect = new Rectangle(384, 192, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // implement later
   }

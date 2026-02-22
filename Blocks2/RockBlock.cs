@@ -16,6 +16,7 @@ public class RockBlock : IBlock {
     YPos = xyPos.Y;
     sourceRect = new Rectangle(320, 0, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // implement later
   }

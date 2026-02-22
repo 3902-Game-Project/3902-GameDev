@@ -10,13 +10,13 @@ public class ShelfBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
 
-
   public ShelfBlock(Texture2D ShelfTexture, Vector2 xyPos) {
     texture = ShelfTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
     sourceRect = new Rectangle(128, 256, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // implement later
   }

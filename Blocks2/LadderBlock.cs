@@ -10,13 +10,13 @@ public class LadderBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
 
-
   public LadderBlock(Texture2D LadderTexture, Vector2 xyPos) {
     texture = LadderTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
     sourceRect = new Rectangle(256, 0, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // check is player climbing
   }

@@ -10,13 +10,13 @@ public class WoodCornerBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
 
-
   public WoodCornerBlock(Texture2D WoodCornerTexture, Vector2 xyPos) {
     texture = WoodCornerTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
     sourceRect = new Rectangle(128, 64, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // implement later
   }

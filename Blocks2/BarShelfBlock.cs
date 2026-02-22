@@ -10,13 +10,13 @@ public class BarShelfBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
 
-
   public BarShelfBlock(Texture2D BarShelfTexture, Vector2 xyPos) {
     texture = BarShelfTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
     sourceRect = new Rectangle(256, 256, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // implement later
   }

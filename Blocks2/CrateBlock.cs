@@ -5,13 +5,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks2;
 
 public enum CrateState { solid, breaking, broken }
+
 public class CrateBlock : IBlock {
   private static Texture2D texture;
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
   public CrateState CrateState { get; set; }
-
 
   public CrateBlock(Texture2D CrateTexture, Vector2 xyPos) {
     texture = CrateTexture;
@@ -20,6 +20,7 @@ public class CrateBlock : IBlock {
     CrateState = CrateState.solid;
     sourceRect = new Rectangle(128, 0, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // implement later
   }

@@ -10,13 +10,13 @@ public class MudBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
 
-
   public MudBlock(Texture2D MudTexture, Vector2 xyPos) {
     texture = MudTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
     sourceRect = new Rectangle(192, 0, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // check for collision, player cannot cross
   }

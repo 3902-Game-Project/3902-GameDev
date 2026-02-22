@@ -10,13 +10,13 @@ public class RedXRockBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
 
-
   public RedXRockBlock(Texture2D RedXRockTexture, Vector2 xyPos) {
     texture = RedXRockTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
     sourceRect = new Rectangle(448, 128, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // implement later
   }

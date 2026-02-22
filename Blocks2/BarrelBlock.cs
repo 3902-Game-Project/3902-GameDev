@@ -5,13 +5,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks2;
 
 public enum BarrelState { solid, breaking, broken }
+
 public class BarrelBlock : IBlock {
   private static Texture2D texture;
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
   public BarrelState BarrelState { get; set; }
- 
 
   public BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) {
     texture = barrelTexture;
@@ -20,6 +20,7 @@ public class BarrelBlock : IBlock {
     BarrelState = BarrelState.solid;
     sourceRect = new Rectangle(64, 0, 63, 63); // will be in xml (or something else) file later -Aaron
   }
+
   public void Update(GameTime gameTime) {
     // implement later
   }
