@@ -21,9 +21,6 @@ public class StateGameType(Game1 game) : IGameState {
   public ISprite CurrentSprite { get; set; }
   public IItem ItemSprite { get; set; }
 
-  public ProjectileManager ProjectileManager { get; private set; }
-  public ItemSpriteFactory ItemSpriteFactory { get; private set; }
-
   public void Initialize() {
     keyboardController = new GameKeyboardController(game);
     Blocks = new List<IBlock>(); // temporary for sprint2
@@ -44,6 +41,8 @@ public class StateGameType(Game1 game) : IGameState {
       enemy.Update(gameTime);
     }
 
+    game.ProjectileManager.Update(gameTime);
+
   }
 
   public void Draw(GameTime gameTime) {
@@ -63,6 +62,8 @@ public class StateGameType(Game1 game) : IGameState {
     foreach (var enemy in Enemies) {
       enemy.Draw(game.SpriteBatch);
     }
+
+    game.ProjectileManager.Draw(game.SpriteBatch);
 
     game.SpriteBatch.End();
   }

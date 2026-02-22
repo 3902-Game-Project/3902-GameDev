@@ -36,7 +36,7 @@ public class GameKeyboardController(Game1 game) : IController {
     currentState = Keyboard.GetState();
 
     foreach (Keys key in currentState.GetPressedKeys()) {
-      if (((key == Keys.Y) || (key == Keys.T)) && previousState.IsKeyDown(key)) {
+      if (((key == Keys.Y) || (key == Keys.T) || (key == Keys.U) || (key == Keys.I)) && previousState.IsKeyDown(key)) {
         continue; // added for sprint2 -Aaron
       }
 

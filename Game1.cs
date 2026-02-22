@@ -87,7 +87,6 @@ public class Game1 : Game {
 
   protected override void Update(GameTime gameTime) {
     currentState.Update(gameTime);
-    ProjectileManager.Update(gameTime);
 
     base.Update(gameTime);
   }
