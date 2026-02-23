@@ -43,6 +43,8 @@ public class Game1 : Game {
 
   public void ResetGameState() {
     StateGame = new StateGameType(this);
+    StateGame.Initialize();
+    StateGame.LoadContent();
   }
 
   protected override void Initialize() {
