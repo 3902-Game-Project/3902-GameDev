@@ -47,6 +47,12 @@ public class StateGameType(Game1 game) : IGameState {
     var rifleman = EnemySpriteFactory.Instance.CreateRifleSprite();
     Enemies.Add(rifleman);
 
+    var tumbleweed = EnemySpriteFactory.Instance.CreateTumbleweedSprite();
+    Enemies.Add(tumbleweed);
+
+    var cactus = EnemySpriteFactory.Instance.CreateCactusSprite();
+    Enemies.Add(cactus);
+
     var revolver = game.ItemSpriteFactory.CreateRevolver();
     Items.Add(revolver);
 
