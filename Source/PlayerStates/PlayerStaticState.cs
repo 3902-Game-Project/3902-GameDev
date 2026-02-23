@@ -40,7 +40,7 @@ public class PlayerStaticState(Player player) : IPlayerState {
       Color.White,
       0f,
       origin,
-      1f,
+      0.2f,
       SpriteEffects.None,
       0f
     );
