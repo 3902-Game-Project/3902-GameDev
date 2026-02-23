@@ -1,18 +1,30 @@
-﻿using GameProject.Interfaces;
+﻿using System.Collections.Generic;
+using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerStates;
 
 public class PlayerAnimatedMovingState(Player player) : IPlayerState {
-  private Rectangle SpriteRight = new(766, 62, 213, 316);
-  private Rectangle SpriteLeft = new(1528, 425, 180, 319);
+  private List<Rectangle> moveLeftFrames = [
+        new(1520, 419, 188, 327),
+        new(1860, 419, 188, 327)
+    ];
+
+  private List<Rectangle> moveRightFrames = [
+      new(2470, 51, 191, 326),
+      new(2152, 51, 191, 326)
+  ];
+
+  private int currentFrame = 0;
+  private double timer = 0;
+  private double frameInterval = 0.2;
 
   public void MoveUp() {
     player.Velocity = new Vector2(player.Velocity.X, -player.Speed);
   }
-  public void MoveDown() { 
-    player.Velocity = new Vector2(player.Velocity.X, player.Speed); 
+  public void MoveDown() {
+    player.Velocity = new Vector2(player.Velocity.X, player.Speed);
   }
   public void MoveLeft() {
     player.Velocity = new Vector2(-player.Speed, player.Velocity.Y);
@@ -24,9 +36,18 @@ public class PlayerAnimatedMovingState(Player player) : IPlayerState {
   }
 
   public void Update(GameTime gameTime) {
-    // If velocity is zero, go back to static/idle
-    if (player.Velocity != Vector2.Zero) {
-      player.State = player.MovingState;
+    if (player.Velocity == Vector2.Zero) {
+      player.State = player.StaticState;
+      currentFrame = 0;
+      return;
+    }
+    timer += gameTime.ElapsedGameTime.TotalSeconds;
+    if (timer > frameInterval) {
+      currentFrame++;
+      if (currentFrame >= moveLeftFrames.Count) {
+        currentFrame = 0;
+      }
+      timer = 0;
     }
   }
 
@@ -35,30 +56,26 @@ public class PlayerAnimatedMovingState(Player player) : IPlayerState {
   }
 
   public void Draw(SpriteBatch spriteBatch) {
-
     Rectangle sourceRect;
-    Vector2 origin;
 
-    // Choose the sprite based on the Player's persistent Direction
     if (player.Direction == FacingDirection.Right) {
-      sourceRect = SpriteRight;
+      sourceRect = moveRightFrames[currentFrame];
     } else {
-      sourceRect = SpriteLeft;
+      sourceRect = moveLeftFrames[currentFrame];
     }
 
-    // Center the origin so the sprite doesn't jump around weirdly
-    origin = new Vector2(sourceRect.Width / 2, sourceRect.Height / 2);
+    Vector2 origin = new Vector2(sourceRect.Width / 2, sourceRect.Height / 2);
 
     spriteBatch.Draw(
-      player.Texture,
-      player.Position,
-      sourceRect,
-      Color.White,
-      0f,
-      origin,
-      0.2f,
-      SpriteEffects.None,
-      0f
+        player.Texture,
+        player.Position,
+        sourceRect,
+        Color.White,
+        0f,
+        origin,
+        0.2f,
+        SpriteEffects.None,
+        0f
     );
   }
 }
