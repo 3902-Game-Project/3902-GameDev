@@ -23,6 +23,7 @@ public class GameKeyboardController(Game1 game) : IController {
 
     {Keys.O, new PreviousEnemyCommand(game)},
     {Keys.P, new NextEnemyCommand(game)},
+    {Keys.K, new DamageEnemyCommand(game)},
 
     {Keys.W, new PlayerMoveUpCommand(game.StateGame.Player)},
     {Keys.S, new PlayerMoveDownCommand(game.StateGame.Player)},

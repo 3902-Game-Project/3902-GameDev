@@ -18,7 +18,7 @@ public class StateGameType(Game1 game) : IGameState {
 
   public int EnemyNumber { get; set; } = 0;  // temporary for sprint2
 
-  public List<ISprite> Enemies { get; set; } = new List<ISprite>();
+  public List<IEnemy> Enemies { get; set; } = new List<IEnemy>();
 
   public IBlock BlockSprite { get; set; }
   public ISprite CurrentSprite { get; set; }
