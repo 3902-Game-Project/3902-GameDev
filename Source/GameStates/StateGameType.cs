@@ -44,7 +44,7 @@ public class StateGameType(Game1 game) : IGameState {
     var bat = EnemySpriteFactory.Instance.CreateBatSprite();
     Enemies.Add(bat);
 
-    var rifleman = EnemySpriteFactory.Instance.CreateRifleSprite();
+    var rifleman = EnemySpriteFactory.Instance.CreateRifleSprite(game.ProjectileManager);
     Enemies.Add(rifleman);
 
     var tumbleweed = EnemySpriteFactory.Instance.CreateTumbleweedSprite();

@@ -1,4 +1,5 @@
 ﻿using GameProject.Interfaces;
+using GameProject.Managers;
 using GameProject.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -40,8 +41,8 @@ internal class EnemySpriteFactory {
   public IEnemy CreateTumbleweedSprite() {
     return new TumbleSprite(tumbleweedTexture, new Vector2(400, 200));
   }
-  public IEnemy CreateRifleSprite() {
-    return new RifleSprite(rifleTexture, new Vector2(400, 200));
+  public IEnemy CreateRifleSprite(ProjectileManager projectileManager) {
+    return new RifleSprite(rifleTexture, new Vector2(400, 200), projectileManager);
   }
   public IEnemy CreateBatSprite() {
     return new BatSprite(batTexture, new Vector2(400, 200));
