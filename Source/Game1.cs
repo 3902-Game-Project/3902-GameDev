@@ -17,7 +17,7 @@ public class Game1 : Game {
   public StateMenuType StateMenu { get; private set; }
   public StateGameType StateGame { get; private set; }
   private IGameState currentState;
-  public BlockSpriteFactory blockFactory;
+  public BlockSpriteFactory BlockFactory;
   public ProjectileManager ProjectileManager { get; private set; }
   public ItemSpriteFactory ItemSpriteFactory { get; private set; }
 
@@ -32,7 +32,7 @@ public class Game1 : Game {
     StateGame = new StateGameType(this);
     currentState = StateMenu;
 
-    blockFactory = new BlockSpriteFactory();
+    BlockFactory = new BlockSpriteFactory();
     ProjectileManager = new ProjectileManager();
     ItemSpriteFactory = new ItemSpriteFactory(ProjectileManager);
   }
@@ -60,7 +60,6 @@ public class Game1 : Game {
 
     Assets.LoadContent();
 
-    blockFactory.LoadAllTextures(this);
     EnemySpriteFactory.Instance.LoadAllTextures(Content);
 
     ItemSpriteFactory.LoadAllTextures(Content);

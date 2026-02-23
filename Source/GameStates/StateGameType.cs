@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GameProject.Controllers;
 using GameProject.Factories;
 using GameProject.Interfaces;
@@ -30,6 +31,8 @@ public class StateGameType(Game1 game) : IGameState {
   }
 
   public void LoadContent() {
+    game.BlockFactory.LoadAllTextures(game);
+
     var snake = EnemySpriteFactory.Instance.CreateSnakeSprite();
     Enemies.Add(snake);
 
