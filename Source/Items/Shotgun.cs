@@ -7,16 +7,26 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-public class Shotgun(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager) : IItem {
-  private Vector2 position = startPosition;
-  private Rectangle sourceRectangle = new(0, 0, 8, 8);
+public class Shotgun : IItem {
+  private Vector2 position;
+  private Rectangle sourceRectangle = new(0, 10, 27, 9);
   private Vector2 origin;
+  private Texture2D texture;
+  private float scale = 3f;
 
-  private ProjectileManager projectileManager = projectileManager;
-  private float bulletVelocity = 10f;
+  private ProjectileManager projectileManager;
+  private float bulletVelocity = 250f;
   private float bulletLifetime = 0.5f;
   private int pelletCount = 5;
   private float spreadAngle = 30f;
+  private Vector2 bulletSpawnOffset;
+
+  public Shotgun(Texture2D texture, Vector2 position, ProjectileManager projectileManager) {
+    this.projectileManager = projectileManager;
+    this.texture = texture;
+    this.position = position;
+    this.bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 * (sourceRectangle.Height / 2 - 3)) * scale; // Adjust spawn offset based on the shotgun's size and scale
+  }
 
   public void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
@@ -28,7 +38,7 @@ public class Shotgun(Texture2D texture, Vector2 startPosition, ProjectileManager
       Color.White,
       0f,
       origin,
-      1f,
+      scale,
       SpriteEffects.None,
       0f
     );
@@ -40,10 +50,11 @@ public class Shotgun(Texture2D texture, Vector2 startPosition, ProjectileManager
 
   public void Use() {
     Vector2 bulletDirection = new(1, 0);
+    Vector2 bulletSpawnPosition = position + bulletSpawnOffset;
     for (int i = 0; i < pelletCount; i++) {
       float angle = -spreadAngle / 2 + spreadAngle / (pelletCount - 1) * i;
       Vector2 rotatedDirection = RotateVector(bulletDirection, angle);
-      projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(position, rotatedDirection, bulletVelocity, bulletLifetime));
+      projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(bulletSpawnPosition, rotatedDirection, bulletVelocity, bulletLifetime));
     }
   }
 

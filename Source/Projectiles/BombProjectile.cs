@@ -6,46 +6,59 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Projectiles;
 
-public class BombProjectile : IProjectile {
-  private Texture2D texture;
-  private Vector2 position;
-  private List<Rectangle> sourceRectangles;
-  private Rectangle currentSourceRect;
-  private Animation bombAnimation;
-  private Vector2 origin;
-  public bool IsExpired { get; private set; } = false;
+public class BombProjectile : IProjectile
+{
+    private Texture2D texture;
+    private Vector2 position;
+    private List<Rectangle> sourceRectangles = new List<Rectangle>
+    {
+        new Rectangle(16, 0, 5, 16),
+        new Rectangle(22, 0, 5, 16),
 
-  public void Draw(SpriteBatch spriteBatch) {
-    origin = new Vector2(currentSourceRect.Width / 2, currentSourceRect.Height / 2);
+    };
+    private Rectangle currentSourceRect;
+    private Animation bombAnimation;
+    private Vector2 origin;
+    public bool IsExpired { get; private set; } = false;
 
-    spriteBatch.Draw(
-      texture,
-      position,
-      currentSourceRect,
-      Color.White,
-      0f,
-      origin,
-      1f,
-      SpriteEffects.None,
-      0f
-    );
-  }
+    private Vector2 direction;
+    private float velocity;
+    private float lifetime;
+    private float lifetimeCounter;
 
-  public void Update(GameTime gameTime) {
-    bombAnimation.Update(gameTime);
-    currentSourceRect = bombAnimation.CurrentFrame;
-  }
 
-  public void Instantiate(Vector2 startPosition, Vector2 direction, float velocity, float lifetime) {
-    // Logic for instantiating the bomb projectile
-    this.position = startPosition;
-    this.IsExpired = false;
-  }
+  public void Draw(SpriteBatch spriteBatch)
+    {
+        origin = new Vector2(currentSourceRect.Width / 2, currentSourceRect.Height / 2);
 
-  public BombProjectile(Texture2D texture, Vector2 startPosition) {
-    this.texture = texture;
-    this.position = startPosition;
-    bombAnimation = new Animation(sourceRectangles, 5);
-    currentSourceRect = bombAnimation.CurrentFrame;
-  }
+        spriteBatch.Draw(
+            texture,
+            position,
+            currentSourceRect,
+            Color.White,
+            0f,
+            origin,
+            1f,
+            SpriteEffects.None,
+            0f
+        );
+    }
+
+    public void Update(GameTime gameTime)
+    {
+        bombAnimation.Update(gameTime);
+        currentSourceRect = bombAnimation.CurrentFrame;
+    }
+
+    public BombProjectile(Texture2D texture, Vector2 startPosition, Vector2 direction, float velocity, float lifetime)
+    {
+        this.texture = texture;
+        position = startPosition;
+        this.direction = direction;
+        this.velocity = velocity;
+        this.lifetime = lifetime;
+        lifetimeCounter = 0f;
+        bombAnimation = new Animation(sourceRectangles, 10);
+        currentSourceRect = bombAnimation.CurrentFrame;
+    }
 }

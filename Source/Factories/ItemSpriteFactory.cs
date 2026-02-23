@@ -7,23 +7,22 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Factories;
 
-internal class ItemSpriteFactory {
-  private Texture2D placeholderGunTexture;
-  private static ItemSpriteFactory instance = new();
-  private ProjectileManager projectileManager;
-
-  public static ItemSpriteFactory Instance {
-    get { return instance; }
-  }
-
-  private ItemSpriteFactory() {
-  }
+public class ItemSpriteFactory (ProjectileManager projectileManager) {
+  private Texture2D basicGunsTexture;
 
   public void LoadAllTextures(ContentManager content) {
-    placeholderGunTexture = content.Load<Texture2D>("placeholderGuns");
+    basicGunsTexture = content.Load<Texture2D>("basic_guns_spritesheet");
   }
 
   public IItem CreateRevolver() {
-    return new Revolver(placeholderGunTexture, new Vector2(300, 300), projectileManager);
+    return new Revolver(basicGunsTexture, new Vector2(300, 300), projectileManager);
+  }
+
+  public IItem CreateRifle() {
+    return new Rifle(basicGunsTexture, new Vector2(300, 300), projectileManager);
+  }
+
+  public IItem CreateShotgun() {
+    return new Shotgun(basicGunsTexture, new Vector2(300, 300), projectileManager);
   }
 }

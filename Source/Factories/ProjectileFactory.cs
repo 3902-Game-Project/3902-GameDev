@@ -7,8 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Factories;
 
 internal class ProjectileFactory {
-  private Texture2D placeholderGunTexture;
-  private static ProjectileFactory instance = new();
+  private Texture2D projectileTexture;
+  private static ProjectileFactory instance = new ProjectileFactory();
 
   public static ProjectileFactory Instance {
     get { return instance; }
@@ -18,10 +18,14 @@ internal class ProjectileFactory {
   }
 
   public void LoadAllTextures(ContentManager content) {
-    placeholderGunTexture = content.Load<Texture2D>("placeholderGuns");
+    projectileTexture = content.Load<Texture2D>("projectile_spritesheet");
   }
 
   public IProjectile CreateBullet(Vector2 startPosition, Vector2 direction, float velocity, float lifetime) {
-    return new BulletDefault(placeholderGunTexture, startPosition, direction, velocity, lifetime);
+    return new BulletDefault(projectileTexture, startPosition, direction, velocity, lifetime);
+  }
+
+  public IProjectile CreateBomb(Vector2 startPosition, Vector2 direction, float velocity, float lifetime) {
+    return new BombProjectile(projectileTexture, startPosition, direction, velocity, lifetime);
   }
 }

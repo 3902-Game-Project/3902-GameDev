@@ -6,8 +6,9 @@ namespace GameProject.Projectiles;
 
 public class BulletDefault(Texture2D texture, Vector2 startPosition, Vector2 direction, float velocity, float bulletLifetime) : IProjectile {
   private Vector2 position = startPosition;
-  private Rectangle sourceRectangle = new(0, 0, texture.Width, texture.Height);
+  private Rectangle sourceRectangle = new(8, 0, 7, 7);
   private Vector2 origin;
+  private float scale = 2f;
   private Vector2 direction = direction;
   private float lifetimeCounter = 0f;
   public bool IsExpired { get; private set; }
@@ -22,7 +23,7 @@ public class BulletDefault(Texture2D texture, Vector2 startPosition, Vector2 dir
       Color.White,
       0f,
       origin,
-      1f,
+      scale,
       SpriteEffects.None,
       0f
     );
