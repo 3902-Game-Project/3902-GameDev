@@ -53,5 +53,5 @@ public class SnakeSprite : IEnemy {
     spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, 2f, effect, 0f);
   }
 
-  public void TakeDamage() { /* ... */ }
+  public void TakeDamage() { ChangeState(new SnakeDeathState(this)); }
 }
