@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GameProject.Controllers;
-using GameProject.Interfaces;
-using GameProject.Managers;
 using GameProject.Factories;
+using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -31,6 +31,25 @@ public class StateGameType(Game1 game) : IGameState {
   }
 
   public void LoadContent() {
+    game.BlockFactory.LoadAllTextures(game);
+
+    var snake = EnemySpriteFactory.Instance.CreateSnakeSprite();
+    Enemies.Add(snake);
+
+    var shotgunner = EnemySpriteFactory.Instance.CreateShotgunnerSprite();
+    Enemies.Add(shotgunner);
+
+    var bat = EnemySpriteFactory.Instance.CreateBatSprite();
+    Enemies.Add(bat);
+
+    var revolver = game.ItemSpriteFactory.CreateRevolver();
+    Items.Add(revolver);
+
+    var rifle = game.ItemSpriteFactory.CreateRifle();
+    Items.Add(rifle);
+
+    var shotgun = game.ItemSpriteFactory.CreateShotgun();
+    Items.Add(shotgun);
   }
 
   public void Update(GameTime gameTime) {
@@ -43,7 +62,6 @@ public class StateGameType(Game1 game) : IGameState {
     }
 
     game.ProjectileManager.Update(gameTime);
-
   }
 
   public void Draw(GameTime gameTime) {
