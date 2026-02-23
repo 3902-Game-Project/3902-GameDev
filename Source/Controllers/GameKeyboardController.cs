@@ -21,6 +21,9 @@ public class GameKeyboardController(Game1 game) : IController {
     {Keys.I, new NextItemCommand(game)},
     {Keys.J, new UseCurrentItemCommand(game)},
 
+    {Keys.O, new PreviousEnemyCommand(game)},
+    {Keys.P, new NextEnemyCommand(game)},
+
     {Keys.W, new PlayerMoveUpCommand(game.StateGame.Player)},
     {Keys.S, new PlayerMoveDownCommand(game.StateGame.Player)},
     {Keys.A, new PlayerMoveLeftCommand(game.StateGame.Player)},
@@ -36,7 +39,7 @@ public class GameKeyboardController(Game1 game) : IController {
     currentState = Keyboard.GetState();
 
     foreach (Keys key in currentState.GetPressedKeys()) {
-      if (((key == Keys.Y) || (key == Keys.T) || (key == Keys.U) || (key == Keys.I)) && previousState.IsKeyDown(key)) {
+      if (((key == Keys.Y) || (key == Keys.T) || (key == Keys.U) || (key == Keys.I) || (key == Keys.O) || (key == Keys.P)) && previousState.IsKeyDown(key)) {
         continue; // added for sprint2 -Aaron
       }
 

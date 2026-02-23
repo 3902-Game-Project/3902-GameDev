@@ -61,8 +61,6 @@ public class Game1 : Game {
     Assets.LoadContent();
 
     EnemySpriteFactory.Instance.LoadAllTextures(Content);
-    var rifleman = EnemySpriteFactory.Instance.CreateRifleSprite();
-    StateGame.Enemies.Add(rifleman);
 
     ItemSpriteFactory.LoadAllTextures(Content);
     ProjectileFactory.Instance.LoadAllTextures(Content);

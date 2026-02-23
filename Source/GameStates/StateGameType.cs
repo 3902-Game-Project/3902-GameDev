@@ -16,6 +16,8 @@ public class StateGameType(Game1 game) : IGameState {
   public List<IItem> Items; // temporary for sprint2
   public int ItemNumber { get; set; } // temporary for sprint2
 
+  public int EnemyNumber { get; set; } = 0;  // temporary for sprint2
+
   public List<ISprite> Enemies { get; set; } = new List<ISprite>();
 
   public IBlock BlockSprite { get; set; }
@@ -42,6 +44,9 @@ public class StateGameType(Game1 game) : IGameState {
     var bat = EnemySpriteFactory.Instance.CreateBatSprite();
     Enemies.Add(bat);
 
+    var rifleman = EnemySpriteFactory.Instance.CreateRifleSprite();
+    Enemies.Add(rifleman);
+
     var revolver = game.ItemSpriteFactory.CreateRevolver();
     Items.Add(revolver);
 
@@ -54,11 +59,10 @@ public class StateGameType(Game1 game) : IGameState {
 
   public void Update(GameTime gameTime) {
     keyboardController.Update(gameTime);
-
     Player.Update(gameTime);
 
-    foreach (var enemy in Enemies) {
-      enemy.Update(gameTime);
+    if (Enemies != null && Enemies.Count > 0) {
+      Enemies[EnemyNumber].Update(gameTime);
     }
 
     game.ProjectileManager.Update(gameTime);
@@ -84,12 +88,11 @@ public class StateGameType(Game1 game) : IGameState {
 
     Player.Draw(game.SpriteBatch);
 
-    foreach (var enemy in Enemies) {
-      enemy.Draw(game.SpriteBatch);
+    if (Enemies != null && Enemies.Count > 0) {
+      Enemies[EnemyNumber].Draw(game.SpriteBatch);
     }
 
     game.ProjectileManager.Draw(game.SpriteBatch);
-
     game.SpriteBatch.End();
   }
 }
