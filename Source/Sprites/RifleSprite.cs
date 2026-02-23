@@ -21,7 +21,7 @@ public class RifleSprite : IEnemy {
   public RifleSprite(Texture2D texture, Vector2 position) {
     Texture = texture;
     Position = position;
-    state = new RifleDeathState(this);
+    state = new RifleWanderState(this);
   }
 
   public void ChangeState(IRifleState newState) {
