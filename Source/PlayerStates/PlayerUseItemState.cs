@@ -7,12 +7,17 @@ namespace GameProject.PlayerStates;
 public class PlayerUseItemState(Player player) : IPlayerState {
   private int timer = 20;
 
+  public void MoveUp() { }
+  public void MoveDown() { }
+  public void MoveLeft() { }
+  public void MoveRight() { }
   public void UseItem() { }
 
   public void Update(GameTime gameTime) {
     timer--;
     if (timer <= 0) {
       timer = 20;
+      player.State = player.StaticState;
     }
   }
 

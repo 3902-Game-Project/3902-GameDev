@@ -21,6 +21,12 @@ public class Player {
 
   public IItem CurrentItem { get; set; }
 
+  public Texture2D Texture { get; private set; }
+
+  public IPlayerState StaticState { get; private set; }
+  public IPlayerState MovingState { get; private set; }
+  public IPlayerState UseItemState { get; private set; }
+
   public Player(Game1 game) {
     this.game = game;
     this.Position = new Vector2(400, 300);
@@ -28,31 +34,20 @@ public class Player {
 
     // For now, attack state is default
     //this.State = new PlayerUseItemState(this);
-    this.State = new PlayerStaticState(this);
+    this.MovingState = new PlayerAnimatedMovingState(this);
+    this.StaticState = new PlayerStaticState(this);
+    this.UseItemState = new PlayerUseItemState(this);
+    this.State = StaticState;
   }
 
-  public void MoveUp() {
-    Velocity = new Vector2(Velocity.X, -Speed);
-  }
 
-  public void MoveDown() {
-    Velocity = new Vector2(Velocity.X, Speed);
-  }
-
-  public void MoveLeft() {
-    Velocity = new Vector2(-Speed, Velocity.Y);
-    Direction = FacingDirection.Left;
-  }
-
-  public void MoveRight() {
-    Velocity = new Vector2(Speed, Velocity.Y);
-    Direction = FacingDirection.Right;
-  }
-
-  // TODO: Moving methods
-
-  public void UseItem() {
-    State.UseItem();
+  public void MoveUp() => State.MoveUp();
+  public void MoveDown() => State.MoveDown();
+  public void MoveLeft() => State.MoveLeft();
+  public void MoveRight() => State.MoveRight();
+  public void UseItem() => State.UseItem();
+  public void LoadContent() {
+    this.Texture = game.Assets.Textures.PlayerTexture;
   }
 
   public void Update(GameTime gameTime) {
