@@ -1,0 +1,18 @@
+Readability:
+	Author: Aaron Vanderbilt
+	Date: 2/22/2026
+	Sprint: 2
+	File: 
+	File Author: Emmett
+	Time:
+	Comments:
+
+
+Code Quality:
+	Author: Aaron Vanderbilt
+	Date: 2/22/2026
+	Sprint: 2
+	File: 
+	File Author: Emmett
+	Time:
+	Comments:
