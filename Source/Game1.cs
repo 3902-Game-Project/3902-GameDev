@@ -29,7 +29,7 @@ public class Game1 : Game {
     Assets = new AssetStore(this);
 
     StateMenu = new StateMenuType(this);
-    ResetGameState();
+    StateGame = new StateGameType(this);
     currentState = StateMenu;
 
     blockFactory = new BlockSpriteFactory();
@@ -65,26 +65,8 @@ public class Game1 : Game {
     blockFactory.LoadAllTextures(this);
     EnemySpriteFactory.Instance.LoadAllTextures(Content);
 
-    var snake = EnemySpriteFactory.Instance.CreateSnakeSprite();
-    StateGame.Enemies.Add(snake);
-
-    var shotgunner = EnemySpriteFactory.Instance.CreateShotgunnerSprite();
-    StateGame.Enemies.Add(shotgunner);
-
-    var bat = EnemySpriteFactory.Instance.CreateBatSprite();
-    StateGame.Enemies.Add(bat);
-
     ItemSpriteFactory.LoadAllTextures(Content);
     ProjectileFactory.Instance.LoadAllTextures(Content);
-
-    var revolver = ItemSpriteFactory.CreateRevolver();
-    StateGame.Items.Add(revolver);
-
-    var rifle = ItemSpriteFactory.CreateRifle();
-    StateGame.Items.Add(rifle);
-
-    var shotgun = ItemSpriteFactory.CreateShotgun();
-    StateGame.Items.Add(shotgun);
   }
 
   protected override void Update(GameTime gameTime) {
