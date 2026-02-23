@@ -59,14 +59,15 @@ public class Game1 : Game {
     SpriteBatch = new SpriteBatch(GraphicsDevice);
 
     Assets.LoadContent();
-    StateMenu.LoadContent();
-    StateGame.LoadContent();
 
     blockFactory.LoadAllTextures(this);
     EnemySpriteFactory.Instance.LoadAllTextures(Content);
 
     ItemSpriteFactory.LoadAllTextures(Content);
     ProjectileFactory.Instance.LoadAllTextures(Content);
+
+    StateMenu.LoadContent();
+    StateGame.LoadContent();
   }
 
   protected override void Update(GameTime gameTime) {

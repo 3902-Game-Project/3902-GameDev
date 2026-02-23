@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using GameProject.Controllers;
-using GameProject.Interfaces;
-using GameProject.Managers;
 using GameProject.Factories;
+using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
