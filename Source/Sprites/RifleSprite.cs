@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GameProject.Interfaces;
+using GameProject.Managers;
 using GameProject.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,6 +10,7 @@ namespace GameProject.Sprites;
 public class RifleSprite : IEnemy {
   // Data needed by states
   public Texture2D Texture { get; private set; }
+  public ProjectileManager ProjectileManager { get; private set; }
   public Vector2 Position;
   public Vector2 Velocity;
   public int FacingDirection = 1;
@@ -18,10 +20,11 @@ public class RifleSprite : IEnemy {
 
   private IRifleState state;
 
-  public RifleSprite(Texture2D texture, Vector2 position) {
+  public RifleSprite(Texture2D texture, Vector2 position, ProjectileManager projectileManager) {
     Texture = texture;
     Position = position;
-    state = new RifleDeathState(this);
+    ProjectileManager = projectileManager;
+    state = new RifleWanderState(this);
   }
 
   public void ChangeState(IRifleState newState) {

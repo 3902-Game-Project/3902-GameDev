@@ -38,13 +38,13 @@ public class StateGameType(Game1 game) : IGameState {
     var snake = EnemySpriteFactory.Instance.CreateSnakeSprite();
     Enemies.Add(snake);
 
-    var shotgunner = EnemySpriteFactory.Instance.CreateShotgunnerSprite();
+    var shotgunner = EnemySpriteFactory.Instance.CreateShotgunnerSprite(game.ProjectileManager);
     Enemies.Add(shotgunner);
 
     var bat = EnemySpriteFactory.Instance.CreateBatSprite();
     Enemies.Add(bat);
 
-    var rifleman = EnemySpriteFactory.Instance.CreateRifleSprite();
+    var rifleman = EnemySpriteFactory.Instance.CreateRifleSprite(game.ProjectileManager);
     Enemies.Add(rifleman);
 
     var tumbleweed = EnemySpriteFactory.Instance.CreateTumbleweedSprite();
