@@ -32,7 +32,7 @@ internal class EnemySpriteFactory {
   }
 
   public IEnemy CreateRifleSprite() {
-    return new SnakeSprite(rifleTexture, new Vector2(200, 200));
+    return new RifleSprite(rifleTexture, new Vector2(200, 200));
   }
 
   public IEnemy CreateBatSprite() {

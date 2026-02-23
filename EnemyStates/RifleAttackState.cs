@@ -17,11 +17,9 @@ public class RifleAttackState : IRifleState {
     this.rifle.Velocity = Vector2.Zero;
 
     this.rifle.CurrentSourceRectangles = new List<Rectangle> {
-      new(8, 64, 44, 64),
-      new(72, 62, 44, 62),
-      new(136, 64, 44, 64),
-      new(264, 68, 48, 60),
-      new(328, 68, 48, 60),
+        new Rectangle(198, 91, 21, 27),
+        new Rectangle(260, 91, 21, 27),
+        new Rectangle(323, 89, 23, 29),
     };
     this.rifle.CurrentFrame = 0;
   }

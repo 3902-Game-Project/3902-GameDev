@@ -6,7 +6,6 @@ namespace GameProject.Sprites;
 
 public class FixedSprite(Texture2D texture, Vector2 position) : ISprite {
   public void Update(GameTime gameTime) {
-    // Static sprites don't change, so this can be empty!
   }
 
   public void Draw(SpriteBatch spriteBatch) {

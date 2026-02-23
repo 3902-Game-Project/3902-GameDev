@@ -20,10 +20,10 @@ public class RifleWanderState : IRifleState {
     this.random = new Random();
 
     this.rifle.CurrentSourceRectangles = new List<Rectangle> {
-      new(0, 64, 64, 64),
-      new(64, 64, 64, 64),
-      new(128, 64, 64, 64),
-      new(192, 64, 64, 64),
+      new(71, 130, 23, 28),
+      new(134, 130, 23, 28),
+      new(196, 130, 23, 28),
+      new(259, 130, 23, 28),
     };
     this.rifle.CurrentFrame = 0;
 

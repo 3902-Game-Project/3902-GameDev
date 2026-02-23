@@ -11,16 +11,17 @@ public class RifleIdleState : IRifleState {
   private double animationTimer;
   private System.Random random;
 
-  public RifleIdleState(RifleSprite Rifle) {
+  public RifleIdleState(RifleSprite rifle) {
     this.rifle = rifle;
     this.random = new System.Random();
 
     this.rifle.Velocity = Vector2.Zero;
+
     this.rifle.CurrentSourceRectangles = new List<Rectangle> {
-      new(0, 0, 64, 64),
-      new(64, 0, 64, 64),
-      new(128, 0,64, 64),
-      new(192, 0, 64, 64),
+      new(71, 130, 23, 28),
+      new(134, 130, 23, 28),
+      new(196, 130, 23, 28),
+      new(259, 130, 23, 28),
     };
     this.rifle.CurrentFrame = 0;
   }
