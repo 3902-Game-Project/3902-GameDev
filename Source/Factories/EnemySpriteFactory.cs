@@ -47,7 +47,7 @@ internal class EnemySpriteFactory {
   public IEnemy CreateBatSprite() {
     return new BatSprite(batTexture, new Vector2(400, 200));
   }
-  public IEnemy CreateShotgunnerSprite() {
-    return new ShotgunnerSprite(shotgunnerTexture, new Vector2(400, 200));
+  public IEnemy CreateShotgunnerSprite(ProjectileManager projectileManager) {
+    return new ShotgunnerSprite(shotgunnerTexture, new Vector2(400, 200), projectileManager);
   }
 }

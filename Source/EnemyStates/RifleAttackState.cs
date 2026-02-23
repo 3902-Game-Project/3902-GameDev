@@ -53,10 +53,10 @@ public class RifleAttackState : IRifleState {
     Vector2 bulletDirection = new Vector2(rifle.FacingDirection, 0f);
 
     // Calculate a spawn point so it comes out of the gun barrel, not his feet.
-    Vector2 spawnOffset = new Vector2(rifle.FacingDirection * 15f, -20f);
+    Vector2 spawnOffset = new Vector2(rifle.FacingDirection * 15f, -33f);
     Vector2 spawnPosition = rifle.Position + spawnOffset;
 
-    // Create the bullet using your Singleton Factory (Velocity: 300f, Lifetime: 2 seconds)
+    // Create the bullet (Velocity: 300f, Lifetime: 2 seconds)
     IProjectile bullet = ProjectileFactory.Instance.CreateBullet(spawnPosition, bulletDirection, 300f, 2f);
 
     if (rifle.ProjectileManager != null) {
