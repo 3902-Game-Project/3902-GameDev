@@ -21,7 +21,7 @@ public class RifleSprite : IEnemy {
   public RifleSprite(Texture2D texture, Vector2 position) {
     Texture = texture;
     Position = position;
-    state = new RifleWanderState(this);
+    state = new RifleDeathState(this);
   }
 
   public void ChangeState(IRifleState newState) {
@@ -53,5 +53,5 @@ public class RifleSprite : IEnemy {
     spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, 2f, effect, 0f);
   }
 
-  public void TakeDamage() { /* ... */ }
+  public void TakeDamage() { ChangeState(new RifleDeathState(this)); }
 }
