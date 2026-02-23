@@ -33,6 +33,7 @@ public class StateGameType(Game1 game) : IGameState {
   }
 
   public void LoadContent() {
+    Player.LoadContent();
     game.BlockFactory.LoadAllTextures(game);
 
     var snake = EnemySpriteFactory.Instance.CreateSnakeSprite();

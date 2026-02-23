@@ -7,5 +7,8 @@ public interface IPlayerState {
   void Update(GameTime gameTime);
   void Draw(SpriteBatch spriteBatch);
   void UseItem();
-  // TODO: Add MoveUp(), MoveDown(), MoveLeft(), MoveRight() here
+  void MoveUp();
+  void MoveDown();
+  void MoveLeft();
+  void MoveRight();
 }

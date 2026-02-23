@@ -8,17 +8,33 @@ public class PlayerAnimatedMovingState(Player player) : IPlayerState {
   private Rectangle SpriteRight = new(766, 62, 213, 316);
   private Rectangle SpriteLeft = new(1528, 425, 180, 319);
 
+  public void MoveUp() {
+    player.Velocity = new Vector2(player.Velocity.X, -player.Speed);
+  }
+  public void MoveDown() { 
+    player.Velocity = new Vector2(player.Velocity.X, player.Speed); 
+  }
+  public void MoveLeft() {
+    player.Velocity = new Vector2(-player.Speed, player.Velocity.Y);
+    player.Direction = FacingDirection.Left;
+  }
+  public void MoveRight() {
+    player.Velocity = new Vector2(player.Speed, player.Velocity.Y);
+    player.Direction = FacingDirection.Right;
+  }
+
   public void Update(GameTime gameTime) {
     // If velocity is zero, go back to static/idle
-    if (player.Velocity == Vector2.Zero) {
-      player.State = new PlayerStaticState(player);
+    if (player.Velocity != Vector2.Zero) {
+      player.State = player.MovingState;
     }
   }
 
-  public void UseItem() { }
+  public void UseItem() {
+    player.State = player.UseItemState;
+  }
 
   public void Draw(SpriteBatch spriteBatch) {
-    Texture2D texture = player.game.Assets.Textures.PlayerTexture;
 
     Rectangle sourceRect;
     Vector2 origin;
@@ -34,13 +50,13 @@ public class PlayerAnimatedMovingState(Player player) : IPlayerState {
     origin = new Vector2(sourceRect.Width / 2, sourceRect.Height / 2);
 
     spriteBatch.Draw(
-      texture,
+      player.Texture,
       player.Position,
       sourceRect,
       Color.White,
       0f,
       origin,
-      1f,
+      0.2f,
       SpriteEffects.None,
       0f
     );
