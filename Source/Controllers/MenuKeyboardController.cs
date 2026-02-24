@@ -1,24 +1,18 @@
 ﻿using System.Collections.Generic;
+using GameProject.AbstractClasses;
 using GameProject.Commands;
 using GameProject.Interfaces;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Controllers;
 
-public class MenuKeyboardController(Game1 game) : IController {
-  private readonly Dictionary<Keys, ICommand> keyMappings = new() {
+public class MenuKeyboardController(Game1 game) : AKeyboardController {
+  protected override Dictionary<Keys, ICommand> PressedMappings { get; } = new() {
     {Keys.Q, new QuitCommand(game)},
     {Keys.Enter, new StartGameCommand(game)},
   };
 
-  public void Update(GameTime gameTime) {
-    KeyboardState keyboardState = Keyboard.GetState();
+  protected override Dictionary<Keys, ICommand> DownMappings { get; } = new() { };
 
-    foreach (Keys key in keyboardState.GetPressedKeys()) {
-      if (keyMappings.TryGetValue(key, out ICommand command)) {
-        command.Execute();
-      }
-    }
-  }
+  protected override Dictionary<Keys, ICommand> ReleasedMappings { get; } = new() { };
 }
