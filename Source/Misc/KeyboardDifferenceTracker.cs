@@ -18,10 +18,10 @@ internal class KeyboardDifferenceTracker {
   }
 
   public IEnumerable<Keys> GetPressed() {
-    return keyboardState.GetPressedKeys().Where(key => pastKeyboardState.IsKeyDown(key));
+    return keyboardState.GetPressedKeys().Where(key => !pastKeyboardState.IsKeyDown(key));
   }
 
   public IEnumerable<Keys> GetReleased() {
-    return pastKeyboardState.GetPressedKeys().Where(key => keyboardState.IsKeyDown(key));
+    return pastKeyboardState.GetPressedKeys().Where(key => !keyboardState.IsKeyDown(key));
   }
 }
