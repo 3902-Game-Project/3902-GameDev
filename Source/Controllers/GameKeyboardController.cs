@@ -1,16 +1,13 @@
 using System.Collections.Generic;
+using GameProject.AbstractClasses;
 using GameProject.Commands;
 using GameProject.Interfaces;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Controllers;
 
-public class GameKeyboardController(Game1 game) : IController {
-  private KeyboardState previousState;
-  private KeyboardState currentState;
-
-  private readonly Dictionary<Keys, ICommand> keyMappings = new() {
+public class GameKeyboardController(Game1 game) : AKeyboardController {
+  protected override Dictionary<Keys, ICommand> PressedMappings { get; } = new() {
     {Keys.Q, new QuitCommand(game)},
     {Keys.R, new ReturnToMenuAndResetCommand(game)},
     {Keys.Y, new NextBlockCommand(game)},
@@ -24,7 +21,9 @@ public class GameKeyboardController(Game1 game) : IController {
     {Keys.O, new PreviousEnemyCommand(game)},
     {Keys.P, new NextEnemyCommand(game)},
     {Keys.K, new DamageEnemyCommand(game)},
+  };
 
+  protected override Dictionary<Keys, ICommand> DownMappings { get; } = new() {
     {Keys.W, new PlayerMoveUpCommand(game.StateGame.Player)},
     {Keys.S, new PlayerMoveDownCommand(game.StateGame.Player)},
     {Keys.A, new PlayerMoveLeftCommand(game.StateGame.Player)},
@@ -35,18 +34,5 @@ public class GameKeyboardController(Game1 game) : IController {
     {Keys.Right, new PlayerMoveRightCommand(game.StateGame.Player)},
   };
 
-  public void Update(GameTime gameTime) {
-    previousState = currentState;
-    currentState = Keyboard.GetState();
-
-    foreach (Keys key in currentState.GetPressedKeys()) {
-      if (((key == Keys.Y) || (key == Keys.T) || (key == Keys.U) || (key == Keys.I) || (key == Keys.O) || (key == Keys.P)) && previousState.IsKeyDown(key)) {
-        continue; // added for sprint2 -Aaron
-      }
-
-      if (keyMappings.TryGetValue(key, out ICommand command)) {
-        command.Execute();
-      }
-    }
-  }
+  protected override Dictionary<Keys, ICommand> ReleasedMappings { get; } = new() { };
 }
