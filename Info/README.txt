@@ -12,7 +12,6 @@ Program controls:
   Q to quit the game.
   R to reset to main menu.
 
-
   Enter to go from main menu to game.
 
 Code Metrics:
