@@ -35,6 +35,10 @@ public class PlayerStaticState(Player player) : IPlayerState {
     player.State = player.UseItemState;
   }
 
+  public void Die() {
+    player.State = player.DeadState;
+  }
+
   public void Draw(SpriteBatch spriteBatch) {
 
     Rectangle sourceRect;
@@ -62,3 +66,4 @@ public class PlayerStaticState(Player player) : IPlayerState {
     );
   }
 }
+

@@ -55,6 +55,10 @@ public class PlayerAnimatedMovingState(Player player) : IPlayerState {
     player.State = player.UseItemState;
   }
 
+  public void Die() {
+    player.State = player.DeadState;
+  }
+
   public void Draw(SpriteBatch spriteBatch) {
     Rectangle sourceRect;
 

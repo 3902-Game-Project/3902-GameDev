@@ -4,10 +4,7 @@ Program controls:
   T (previous) and Y (next) keys cycle between what block is drawn.
   Q to quit the game.
   R to reset to main menu.
-  W to move upwards
-  S to move downwards
-  A to move leftwards
-  D to move rightwards
+
 
   Enter to go from main menu to game.
 

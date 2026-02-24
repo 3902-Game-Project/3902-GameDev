@@ -13,6 +13,10 @@ public class PlayerUseItemState(Player player) : IPlayerState {
   public void MoveRight() { }
   public void UseItem() { }
 
+  public void Die() {
+    player.State = player.DeadState;
+  }
+
   public void Update(GameTime gameTime) {
     timer--;
     if (timer <= 0) {
