@@ -1,13 +1,16 @@
 Program controls:
-  Arrow keys and WASD keys move the player.
-  Z and N keys cause the player to attack.
+  W/Up to move player upwards.
+  S/Down to move player downwards.
+  A/Left to move player leftwards.
+  D/Right to move player rightwards.
+  Z and N keys cause the player to use item / attack.
   T (previous) and Y (next) keys cycle between what block is drawn.
+  U (previous) and I (next) keys cycle between what item is drawn.
+  J to cause the displayed item to be used.
+  O (previous) and P (next) keys cycle between what enemy is drawn.
+  K damages the currently drawn enemy.
   Q to quit the game.
   R to reset to main menu.
-  W to move upwards
-  S to move downwards
-  A to move leftwards
-  D to move rightwards
 
   Enter to go from main menu to game.
 
@@ -23,3 +26,6 @@ The burndown chart shows almost zero progress being made on the sprint since the
 Member specific:
   Santosh:
   At the end of the sprint I feel I should have taken on a bit more work, as I feel my role didn't take much work to achieve. Thus I could try a bigger role for sprint 3.
+
+Credits:
+  See "Info/Credits.txt" for attributions on this project.
