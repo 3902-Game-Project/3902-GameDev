@@ -26,6 +26,7 @@ public class Player {
   public IPlayerState StaticState { get; private set; }
   public IPlayerState MovingState { get; private set; }
   public IPlayerState UseItemState { get; private set; }
+  public IPlayerState DeadState { get; private set; }
 
   public Player(Game1 game) {
     this.game = game;
@@ -37,6 +38,7 @@ public class Player {
     this.MovingState = new PlayerAnimatedMovingState(this);
     this.StaticState = new PlayerStaticState(this);
     this.UseItemState = new PlayerUseItemState(this);
+    this.DeadState = new PlayerDeadState(this);
     this.State = StaticState;
   }
 
@@ -46,6 +48,7 @@ public class Player {
   public void MoveLeft() => State.MoveLeft();
   public void MoveRight() => State.MoveRight();
   public void UseItem() => State.UseItem();
+  public void Die() => State.Die();
   public void LoadContent() {
     this.Texture = game.Assets.Textures.PlayerTexture;
   }

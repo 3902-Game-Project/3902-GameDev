@@ -17,6 +17,7 @@ public class GameKeyboardController(Game1 game) : AKeyboardController {
     {Keys.U, new PreviousItemCommand(game)},
     {Keys.I, new NextItemCommand(game)},
     {Keys.J, new UseCurrentItemCommand(game)},
+    {Keys.E, new PlayerDieCommand(game.StateGame.Player)},
 
     {Keys.O, new PreviousEnemyCommand(game)},
     {Keys.P, new NextEnemyCommand(game)},
