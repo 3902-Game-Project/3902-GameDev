@@ -2,17 +2,27 @@ Readability:
 	Author: Aaron Vanderbilt
 	Date: 2/22/2026
 	Sprint: 2
-	File: 
+	File: player.cs
 	File Author: Emmett
-	Time:
-	Comments:
+	Time: ~ 2 minutes
+	Comments: The code is highly readable as there are no large
+		methods. Most of the code is declaring properties for the 
+		player with get/set methods. To make it more readable, I 
+		would meaningfully "group" the properties by similar types, 
+		and I would use consistent number of blank lines between
+		sections.
 
 
 Code Quality:
 	Author: Aaron Vanderbilt
 	Date: 2/22/2026
 	Sprint: 2
-	File: 
+	File: PlayerUseItemState.cs
 	File Author: Emmett
-	Time:
-	Comments:
+	Time: < 1 minute
+	Comments: The code is short and simple wwith only Update and Draw
+		mehtod implementations and 1 private member. There are 5 
+		inherited methods that are not implemented, so they might
+		not be necessary in the player state interface. Also, the 
+		UseItem method is not implemented even though it probably
+		should for this class.

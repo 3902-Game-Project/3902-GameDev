@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GameProject.Interfaces;
+using GameProject.Managers;
 using GameProject.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,6 +10,7 @@ namespace GameProject.Sprites;
 public class ShotgunnerSprite : IEnemy {
   // Data needed by states
   public Texture2D Texture { get; private set; }
+  public ProjectileManager ProjectileManager { get; private set; }
   public Vector2 Position;
   public Vector2 Velocity;
   public int FacingDirection = 1;
@@ -18,9 +20,10 @@ public class ShotgunnerSprite : IEnemy {
 
   private IShotgunnerState state;
 
-  public ShotgunnerSprite(Texture2D texture, Vector2 position) {
+  public ShotgunnerSprite(Texture2D texture, Vector2 position, ProjectileManager projectileManager) {
     Texture = texture;
     Position = position;
+    ProjectileManager = projectileManager;
     state = new ShotgunnerWanderState(this);
   }
 
@@ -50,7 +53,8 @@ public class ShotgunnerSprite : IEnemy {
     // Origin at feet
     Vector2 origin = new(source.Width / 2, source.Height);
 
-    spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, 2f, effect, 0f);
+    float scale = 1.6f;
+    spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, scale, effect, 0f);
   }
 
   public void TakeDamage() { ChangeState(new ShotgunnerDeathState(this)); }

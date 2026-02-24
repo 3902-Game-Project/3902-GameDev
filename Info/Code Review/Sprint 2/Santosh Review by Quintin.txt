@@ -1,0 +1,69 @@
+Author of the code review: Quintin Amon
+
+Date of the code review: 23 Feb
+
+Sprint number: 2
+
+Name of the .cs file being reviewed: StateGameType.cs, StateMenuType.cs
+
+Author of the .cs file being reviewed: Santosh
+
+Number of minutes taken to complete the review: [Time]
+
+Specific comments on what is readable and what is not:
+
+For StateMenuType.cs:
+
+What is readable: The use of named parameters in game.SpriteBatch.DrawString (e.g., spriteFont:, text:, position:) is good. 
+Using a private static readonly string for START_TEXT is also a good to avoid magic strings.
+
+What is not readable: The class naming convention is a little inconsistant. 
+StateMenuType might read better simply as MenuState or MenuGameState to align with standard naming practices.
+
+For StateGameType.cs: NOTE: Not all of the code here was written by Santosh, all parties had some small parts written in here.
+
+What is readable: The strict adherence to the standard MonoGame architecture (Initialize, LoadContent, Update, Draw) makes the execution flow highly predictable. 
+The use of interfaces (IBlock, IItem, IEnemy) as types for the lists clearly communicates the architectural intent to decouple the game logic.
+
+What is not readable (Inconsistent Initialization): There is an inconsistency in how lists are initialized. 
+Enemies is initialized inline (= new List<IEnemy>();), while Blocks and Items are declared, but then initialized down in the Initialize() method. 
+Standardizing this would improve readability.
+
+What is not readable: The LoadContent() method is becoming quite long with repetitive factory calls (EnemySpriteFactory.Instance.Create...).
+As more entities are added, this will become difficult to scan. 
+It would improve readability to extract these into private helper methods like LoadEnemies() and LoadItems().
+
+What is not readable: In Draw and Update, there are verbose checks like if (Enemies != null && Enemies.Count > 0). 
+Because Enemies is initialized inline at the top of the class, it will never be null, making the Enemies != null check unnecessary visual clutter.
+
+Code Quality / Maintainability Review
+Name of the .cs file being reviewed: StateGameType.cs
+
+Specific comments on code quality:
+
+Decoupling via Factories: The use of EnemySpriteFactory and ItemSpriteFactory in LoadContent() perfectly satisfies the Strongly Advised Design Suggestion to use the Factory Method pattern. 
+This abstracts the complex instantiation of sprites (which likely involves texture loading and setting up collision boxes) away from the game state logic. 
+If we need to change how a Shotgunner is created, we don't have to touch StateGameType.cs at all.
+
+State Pattern Foundation: Creating IGameState and splitting StateMenuType from StateGameType is a highly maintainable architectural choice. 
+It prevents the main game loop from becoming a massive set of if/else or switch statements checking if the game is paused, in a menu, or playing.
+
+Encapsulation Vulnerability: The properties for the lists and sprint-specific trackers (e.g., public List<IBlock> Blocks;, public int BlockNumber { get; set; }) are completely open.
+While marked as temporary for Sprint 2, having public setters on these lists means any other class in the project could accidentally overwrite the entire list or change the current index.
+Changing these to public List<IBlock> Blocks { get; private set; } would improve maintainability and safeguard the state's data.
+
+Inconsistent Factory Access: There is a slight architectural inconsistency in how factories are accessed. 
+EnemySpriteFactory.Instance utilizes the Singleton pattern, whereas game.BlockFactory and game.ItemSpriteFactory are accessed as properties of the main Game1 instance. 
+Standardizing on one approach across the entire team will make the codebase easier to maintain and test going forward.
+
+
+Hypothetical Change: In Sprint 2, the requirements ask us to use keys to cycle through the lists of enemies, items, and blocks one by one to test their animations and movements. 
+In Sprint 3, the requirement will change to actual gameplay, meaning we will need to update and draw all active enemies and items on the screen simultaneously, rather than just the one at the current index.
+
+Evaluation: The current implementation easily supports this change with minimal modification. 
+Because the architecture already relies on lists (List<IEnemy>, List<IItem>) that store objects implementing robust interfaces (IEnemy, IItem), the core structure is perfectly intact. 
+To implement the change, we would delete the ItemNumber and EnemyNumber index trackers, and replace the single-element updates/draws:
+if (Enemies != null && Enemies.Count > 0) { Enemies[EnemyNumber].Update(gameTime); }
+with a standard foreach loop:
+foreach (IEnemy enemy in Enemies) { enemy.Update(gameTime); }.
+The interfaces ensure that calling .Update() or .Draw() inside a loop will work universally for all objects without needing to know their specific concrete types (Snake, Bat, etc.).
