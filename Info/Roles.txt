@@ -1,5 +1,5 @@
 Aaron: level design, blocks and arenas
-Emmett: player attacking, picking up items, holding items, dropping items
+Emmett: player attacking, picking up items, holding items, dropping items. Potentially add health bar, other metrics like maybe aura. Add how the consumables change damage done and damage taken
 Eric: player movement
 Q: enemies, little bit of player
 Santosh: starting UI, refactoring
