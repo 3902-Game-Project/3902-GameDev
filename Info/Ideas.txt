@@ -11,6 +11,7 @@ Non-weapon items:
 	If that wasn't the case, I would say vodka could give you ice bullets that freeze your enemy.
 
 Player:
+	Aura is a measurable thing. The more aura you have the more damage you do to enemies. Can kill by mogging.
 
 Game name:
 	while () { west }
