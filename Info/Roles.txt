@@ -1,5 +1,5 @@
 Aaron: level design, blocks and arenas
-Emmett: player attacking
+Emmett: player attacking, picking up items, holding items, dropping items
 Eric: player movement
 Q: enemies, little bit of player
 Santosh: starting UI, refactoring
