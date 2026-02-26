@@ -7,13 +7,13 @@ namespace GameProject.PlayerStates;
 
 public class PlayerAnimatedMovingState(Player player) : IPlayerState {
   private List<Rectangle> moveLeftFrames = [
-        new(1520, 419, 188, 327),
-        new(1860, 419, 188, 327)
+        new(1531, 420, 171, 323),
+        new(1854, 427, 171, 323)
     ];
 
   private List<Rectangle> moveRightFrames = [
-      new(2470, 51, 191, 326),
-      new(2152, 51, 191, 326)
+      new(2161, 52, 171, 323),
+      new(2481, 54, 171, 323)
   ];
 
   private int currentFrame = 0;
