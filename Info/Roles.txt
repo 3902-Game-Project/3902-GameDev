@@ -1,6 +1,15 @@
+Sprint 2:
 Aaron: level design, blocks and arenas
-Emmett: player attacking, picking up items, holding items, dropping items. Potentially add health bar, other metrics like maybe aura. Add how the consumables change damage done and damage taken
+Emmett: player attacking
 Eric: player movement
 Q: enemies, little bit of player
 Santosh: starting UI, refactoring
 JJ: items
+
+Sprint 3:
+Eric: collision handling
+JJ: collision detecting players / blocks? (uncertain)
+Q: collision detecting enemies? (uncertain)
+Santosh: level loading from CSV; level manager; switching between levels
+Aaron: level designing CSV
+Emmett: Player: picking up items, holding items, dropping items. Potentially add health bar, other metrics like maybe aura. Add how the consumables change damage done and damage taken.
