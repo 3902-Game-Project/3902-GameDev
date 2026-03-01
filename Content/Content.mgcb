@@ -13,6 +13,11 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin 00_test.csv
+/importer:
+/processor:
+/build:00_test.csv
+
 #begin basic_guns_spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor

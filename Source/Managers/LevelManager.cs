@@ -6,6 +6,10 @@ using Microsoft.Xna.Framework.Content;
 namespace GameProject.Managers;
 
 internal class LevelManager : ILevelManager {
+  string[] LEVEL_NAMES = [
+    "00_test"
+  ];
+
   List<ILevel> levels = new();
 
   public void Initialize() {
