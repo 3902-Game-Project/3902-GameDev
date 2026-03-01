@@ -26,10 +26,6 @@ public class AmmoRefill(Texture2D texture, Vector2 startPosition) : IItem {
 
   public void Update(GameTime gameTime) { }
 
-  public void OnPickup() {
-    // Logic for using the ammo refill item
-  }
-
   public void Use() {
     // Logic for using the ammo refill item
   }

@@ -26,10 +26,6 @@ public class WhiskeyItem(Texture2D texture, Vector2 startPosition) : IItem {
 
   public void Update(GameTime gameTime) { }
 
-  public void OnPickup() {
-    // Logic for using the whiskey item
-  }
-
   public void Use() {
     // Logic for using the whiskey item
   }

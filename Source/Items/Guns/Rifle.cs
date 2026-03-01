@@ -44,8 +44,6 @@ public class Rifle : IItem {
 
   public void Update(GameTime gameTime) { }
 
-  public void OnPickup() { }
-
   public void Use() {
     Vector2 bulletDirection = new(1, 0);
     Vector2 bulletSpawnPosition = position + bulletSpawnOffset;
