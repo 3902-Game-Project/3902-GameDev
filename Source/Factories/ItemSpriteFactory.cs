@@ -17,7 +17,7 @@ public class ItemSpriteFactory (ProjectileManager projectileManager) {
   public IItem CreateRevolver() {
     GunStats stats = new GunStats {
       BulletVelocity = 200f,
-      FireRate = 5f
+      FireRate = .2f
     };
     return new RevolverItem(basicGunsTexture, new Vector2(300, 300), projectileManager, stats);
   }

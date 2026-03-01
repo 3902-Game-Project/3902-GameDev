@@ -47,6 +47,7 @@ public class RevolverItem : IItem {
 
   public void Update(GameTime gameTime) {
     fireMode.Update(gameTime);
+    Debug.WriteLine("Update Revolver");
   }
 
   public void Use(UseType useType) {

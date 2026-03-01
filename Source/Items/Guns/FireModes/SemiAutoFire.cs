@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
@@ -9,17 +10,18 @@ public class SemiAutoFire : IFireMode {
 
   public SemiAutoFire(GunStats stats) {
     this.stats = stats;
-    timeSinceLastShot = 0f;
+    timeSinceLastShot = stats.FireRate;
   }
 
   public bool CanFire(UseType useType) {
     bool canFire = true;
     if (useType != UseType.Pressed) canFire = false;
-    if (timeSinceLastShot >= stats.FireRate) canFire = false;
+    if (timeSinceLastShot < stats.FireRate) canFire = false;
     if (stats.CurrentAmmo == 0) canFire = false;
     if (canFire) {
       timeSinceLastShot = 0f;
     }
+    Debug.WriteLine($"TimeSinceLastShot: {timeSinceLastShot}");
     return canFire;
   }
 
