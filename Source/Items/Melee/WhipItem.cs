@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-public class WhipDefault(Texture2D texture, Vector2 startPosition) : IItem {
+public class WhipItem(Texture2D texture, Vector2 startPosition) : IItem {
   private Vector2 position = startPosition;
   private Rectangle sourceRectangle = new(0, 0, 8, 8);
   private Vector2 origin;

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-public class Rifle : IItem {
+public class RifleItem : IItem {
   private Rectangle sourceRectangle = new(0, 19, 37, 10);
   private Vector2 origin;
   private float scale = 3f;
@@ -18,7 +18,7 @@ public class Rifle : IItem {
   private Vector2 bulletSpawnOffset;
   private GunStats stats;
 
-  public Rifle(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager, GunStats stats) {
+  public RifleItem(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager, GunStats stats) {
     this.projectileManager = projectileManager;
     this.texture = texture;
     this.position = startPosition;
