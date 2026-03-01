@@ -15,12 +15,14 @@ public class Revolver : IItem {
 
   private ProjectileManager projectileManager;
   private GunStats stats;
+  private IProjectilePattern projectilePattern = new SingleShotPattern();
   private Vector2 bulletSpawnOffset;
 
   public Revolver(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager, GunStats stats) {
     this.projectileManager = projectileManager;
     this.texture = texture;
     this.stats = stats;
+    stats.BulletVelocity = 200f;
     position = startPosition;
     bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 *(sourceRectangle.Height / 2 - 3)) * scale;
   }
@@ -48,6 +50,6 @@ public class Revolver : IItem {
   public void Use() {
     Vector2 bulletDirection = new(1, 0);
     Vector2 bulletSpawnPosition = position + bulletSpawnOffset;
-    projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(bulletSpawnPosition, bulletDirection, stats.BulletVelocity, stats.BulletLifetime));
+    projectilePattern.SpawnProjectiles(projectileManager, bulletSpawnPosition, bulletDirection, stats);
   }
 }

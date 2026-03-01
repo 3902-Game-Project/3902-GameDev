@@ -15,6 +15,7 @@ public class Shotgun : IItem {
   private float scale = 3f;
 
   private ProjectileManager projectileManager;
+  private IProjectilePattern projectilePattern = new SpreadPattern();
   private Vector2 bulletSpawnOffset;
   private GunStats stats;
 
@@ -23,7 +24,9 @@ public class Shotgun : IItem {
     this.texture = texture;
     this.position = position;
     this.stats = stats;
-    this.bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 * (sourceRectangle.Height / 2 - 3)) * scale; // Adjust spawn offset based on the shotgun's size and scale
+    stats.SpreadAngle = 30f;
+    stats.PelletCount = 5;
+    bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 * (sourceRectangle.Height / 2 - 3)) * scale; // Adjust spawn offset based on the shotgun's size and scale
   }
 
   public void Draw(SpriteBatch spriteBatch) {
@@ -49,20 +52,6 @@ public class Shotgun : IItem {
   public void Use() {
     Vector2 bulletDirection = new(1, 0);
     Vector2 bulletSpawnPosition = position + bulletSpawnOffset;
-    for (int i = 0; i < stats.PelletCount; i++) {
-      float angle = -stats.SpreadAngle / 2 + stats.SpreadAngle / (stats.PelletCount - 1) * i;
-      Vector2 rotatedDirection = RotateVector(bulletDirection, angle);
-      projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(bulletSpawnPosition, rotatedDirection, stats.BulletVelocity, stats.BulletLifetime));
-    }
-  }
-
-  private Vector2 RotateVector(Vector2 vector, float angleDegrees) {
-    float angleRadians = MathHelper.ToRadians(angleDegrees);
-    float cos = (float)Math.Cos(angleRadians);
-    float sin = (float)Math.Sin(angleRadians);
-    return new Vector2(
-      vector.X * cos - vector.Y * sin,
-      vector.X * sin + vector.Y * cos
-    );
+    projectilePattern.SpawnProjectiles(projectileManager, bulletSpawnPosition, bulletDirection, stats);
   }
 }

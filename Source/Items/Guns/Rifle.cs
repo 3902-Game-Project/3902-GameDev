@@ -14,6 +14,7 @@ public class Rifle : IItem {
   private Vector2 position = new(300, 300);
 
   private ProjectileManager projectileManager;
+  private IProjectilePattern projectilePattern = new SingleShotPattern();
   private Vector2 bulletSpawnOffset;
   private GunStats stats;
 
@@ -22,6 +23,7 @@ public class Rifle : IItem {
     this.texture = texture;
     this.position = startPosition;
     this.stats = stats;
+    stats.BulletVelocity = 500f;
     this.bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 * (sourceRectangle.Height / 2 - 3)) * scale;
   }
 
@@ -48,6 +50,6 @@ public class Rifle : IItem {
   public void Use() {
     Vector2 bulletDirection = new(1, 0);
     Vector2 bulletSpawnPosition = position + bulletSpawnOffset;
-    projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(bulletSpawnPosition, bulletDirection, stats.BulletVelocity, stats.BulletLifetime));
+    projectilePattern.SpawnProjectiles(projectileManager, bulletSpawnPosition, bulletDirection, stats);
   }
 }
