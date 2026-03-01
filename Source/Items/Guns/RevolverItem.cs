@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using GameProject.Factories;
 using GameProject.Interfaces;
 using GameProject.Managers;
@@ -44,7 +45,9 @@ public class RevolverItem : IItem {
     );
   }
 
-  public void Update(GameTime gameTime) { }
+  public void Update(GameTime gameTime) {
+    fireMode.Update(gameTime);
+  }
 
   public void Use(UseType useType) {
     Vector2 bulletDirection = new(1, 0);

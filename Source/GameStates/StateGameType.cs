@@ -72,6 +72,10 @@ public class StateGameType(Game1 game) : IGameState {
       Enemies[EnemyNumber].Update(gameTime);
     }
 
+    if (Items != null && Items.Count > 0) {
+      Items[ItemNumber].Update(gameTime);
+    }
+
     game.ProjectileManager.Update(gameTime);
   }
 

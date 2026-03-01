@@ -17,6 +17,9 @@ public class SemiAutoFire : IFireMode {
     if (useType != UseType.Pressed) canFire = false;
     if (timeSinceLastShot >= stats.FireRate) canFire = false;
     if (stats.CurrentAmmo == 0) canFire = false;
+    if (canFire) {
+      timeSinceLastShot = 0f;
+    }
     return canFire;
   }
 
