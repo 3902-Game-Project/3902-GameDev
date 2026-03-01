@@ -15,14 +15,21 @@ public class ItemSpriteFactory (ProjectileManager projectileManager) {
   }
 
   public IItem CreateRevolver() {
-    return new Revolver(basicGunsTexture, new Vector2(300, 300), projectileManager);
+    var stats = new GunStats();
+    stats.BulletVelocity = 200f;
+    return new Revolver(basicGunsTexture, new Vector2(300, 300), projectileManager, stats);
   }
 
   public IItem CreateRifle() {
-    return new Rifle(basicGunsTexture, new Vector2(300, 300), projectileManager);
+    var stats = new GunStats();
+    stats.BulletVelocity = 500f;
+    return new Rifle(basicGunsTexture, new Vector2(300, 300), projectileManager, stats);
   }
 
   public IItem CreateShotgun() {
-    return new Shotgun(basicGunsTexture, new Vector2(300, 300), projectileManager);
+    var stats = new GunStats();
+    stats.SpreadAngle = 30f;
+    stats.PelletCount = 5;
+    return new Shotgun(basicGunsTexture, new Vector2(300, 300), projectileManager, stats);
   }
 }

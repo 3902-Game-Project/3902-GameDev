@@ -22,7 +22,6 @@ public class Revolver : IItem {
     this.projectileManager = projectileManager;
     this.texture = texture;
     this.stats = stats;
-    stats.BulletVelocity = 200f;
     position = startPosition;
     bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 *(sourceRectangle.Height / 2 - 3)) * scale;
   }

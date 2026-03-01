@@ -23,7 +23,6 @@ public class Rifle : IItem {
     this.texture = texture;
     this.position = startPosition;
     this.stats = stats;
-    stats.BulletVelocity = 500f;
     this.bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 * (sourceRectangle.Height / 2 - 3)) * scale;
   }
 
