@@ -4,7 +4,7 @@ using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Items;
+namespace GameProject.Items.Guns;
 
 public class Rifle : IItem {
   private Rectangle sourceRectangle = new(0, 19, 37, 10);
@@ -14,14 +14,14 @@ public class Rifle : IItem {
   private Vector2 position = new(300, 300);
 
   private ProjectileManager projectileManager;
-  private float bulletVelocity = 500f;
-  private float bulletLifetime = 2f;
   private Vector2 bulletSpawnOffset;
+  private GunStats stats;
 
-  public Rifle(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager) {
+  public Rifle(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager, GunStats stats) {
     this.projectileManager = projectileManager;
     this.texture = texture;
     this.position = startPosition;
+    this.stats = stats;
     this.bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 * (sourceRectangle.Height / 2 - 3)) * scale;
   }
 
@@ -48,6 +48,6 @@ public class Rifle : IItem {
   public void Use() {
     Vector2 bulletDirection = new(1, 0);
     Vector2 bulletSpawnPosition = position + bulletSpawnOffset;
-    projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(bulletSpawnPosition, bulletDirection, bulletVelocity, bulletLifetime));
+    projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(bulletSpawnPosition, bulletDirection, stats.BulletVelocity, stats.BulletLifetime));
   }
 }

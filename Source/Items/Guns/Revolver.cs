@@ -4,7 +4,7 @@ using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Items;
+namespace GameProject.Items.Guns;
 
 public class Revolver : IItem {
   private Rectangle sourceRectangle = new(0, 0, 16, 9);
@@ -14,16 +14,15 @@ public class Revolver : IItem {
   private Vector2 position = new(300, 300);
 
   private ProjectileManager projectileManager;
-  private float bulletVelocity = 200f;
-  private float bulletLifetime = 2f;
+  private GunStats stats;
   private Vector2 bulletSpawnOffset;
 
-  public Revolver(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager) {
+  public Revolver(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager, GunStats stats) {
     this.projectileManager = projectileManager;
-    this.bulletSpawnOffset = new(sourceRectangle.Width, 0);
     this.texture = texture;
-    this.position = startPosition;
-    this.bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 *(sourceRectangle.Height / 2 - 3)) * scale; // Adjust spawn offset based on the revolver's size and scale
+    this.stats = stats;
+    position = startPosition;
+    bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 *(sourceRectangle.Height / 2 - 3)) * scale;
   }
 
   public void Draw(SpriteBatch spriteBatch) {
@@ -49,6 +48,6 @@ public class Revolver : IItem {
   public void Use() {
     Vector2 bulletDirection = new(1, 0);
     Vector2 bulletSpawnPosition = position + bulletSpawnOffset;
-    projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(bulletSpawnPosition, bulletDirection, bulletVelocity, bulletLifetime));
+    projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(bulletSpawnPosition, bulletDirection, stats.BulletVelocity, stats.BulletLifetime));
   }
 }

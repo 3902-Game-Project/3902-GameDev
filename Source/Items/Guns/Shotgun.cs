@@ -5,7 +5,7 @@ using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Items;
+namespace GameProject.Items.Guns;
 
 public class Shotgun : IItem {
   private Vector2 position;
@@ -15,16 +15,14 @@ public class Shotgun : IItem {
   private float scale = 3f;
 
   private ProjectileManager projectileManager;
-  private float bulletVelocity = 250f;
-  private float bulletLifetime = 0.5f;
-  private int pelletCount = 5;
-  private float spreadAngle = 30f;
   private Vector2 bulletSpawnOffset;
+  private GunStats stats;
 
-  public Shotgun(Texture2D texture, Vector2 position, ProjectileManager projectileManager) {
+  public Shotgun(Texture2D texture, Vector2 position, ProjectileManager projectileManager, GunStats stats) {
     this.projectileManager = projectileManager;
     this.texture = texture;
     this.position = position;
+    this.stats = stats;
     this.bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 * (sourceRectangle.Height / 2 - 3)) * scale; // Adjust spawn offset based on the shotgun's size and scale
   }
 
@@ -51,10 +49,10 @@ public class Shotgun : IItem {
   public void Use() {
     Vector2 bulletDirection = new(1, 0);
     Vector2 bulletSpawnPosition = position + bulletSpawnOffset;
-    for (int i = 0; i < pelletCount; i++) {
-      float angle = -spreadAngle / 2 + spreadAngle / (pelletCount - 1) * i;
+    for (int i = 0; i < stats.PelletCount; i++) {
+      float angle = -stats.SpreadAngle / 2 + stats.SpreadAngle / (stats.PelletCount - 1) * i;
       Vector2 rotatedDirection = RotateVector(bulletDirection, angle);
-      projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(bulletSpawnPosition, rotatedDirection, bulletVelocity, bulletLifetime));
+      projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(bulletSpawnPosition, rotatedDirection, stats.BulletVelocity, stats.BulletLifetime));
     }
   }
 
