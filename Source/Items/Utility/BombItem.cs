@@ -30,7 +30,7 @@ public class BombItem(Texture2D texture, Vector2 startPosition) : IItem {
     // Logic for using the bomb item
   }
 
-  public void Use() {
+  public void Use(UseType useType) {
     // Logic for using the bomb item
   }
 }

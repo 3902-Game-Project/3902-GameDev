@@ -16,7 +16,7 @@ public class GameKeyboardController(Game1 game) : AKeyboardController {
     {Keys.N, new PlayerUseItemCommand(game.StateGame.Player)},
     {Keys.U, new PreviousItemCommand(game)},
     {Keys.I, new NextItemCommand(game)},
-    {Keys.J, new UseCurrentItemCommand(game)},
+    {Keys.J, new UseCurrentItemCommand(game, UseType.Pressed)},
     {Keys.E, new PlayerDieCommand(game.StateGame.Player)},
 
     {Keys.O, new PreviousEnemyCommand(game)},
@@ -33,6 +33,7 @@ public class GameKeyboardController(Game1 game) : AKeyboardController {
     {Keys.Down, new PlayerMoveDownCommand(game.StateGame.Player)},
     {Keys.Left, new PlayerMoveLeftCommand(game.StateGame.Player)},
     {Keys.Right, new PlayerMoveRightCommand(game.StateGame.Player)},
+    {Keys.J, new UseCurrentItemCommand(game, UseType.Held)},
   };
 
   protected override Dictionary<Keys, ICommand> ReleasedMappings { get; } = new() { };

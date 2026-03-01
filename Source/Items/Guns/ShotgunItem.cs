@@ -43,7 +43,7 @@ public class ShotgunItem : IItem {
 
   public void Update(GameTime gameTime) { }
 
-  public void Use() {
+  public void Use(UseType useType) {
     Vector2 bulletDirection = new(1, 0);
     Vector2 bulletSpawnPosition = position + bulletSpawnOffset;
     projectilePattern.SpawnProjectiles(projectileManager, bulletSpawnPosition, bulletDirection, stats);
