@@ -1,4 +1,4 @@
-namespace GameProject.Items.Guns;
+namespace GameProject.Items;
 
 public class GunStats {
   public float BulletVelocity { get; set; }

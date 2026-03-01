@@ -2,7 +2,7 @@ using GameProject.Items.Guns;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
 
-namespace GameProject.Interfaces.ItemInterfaces;
+namespace GameProject.Interfaces;
 public interface IProjectilePattern {
   void SpawnProjectiles(ProjectileManager projectileManager, Vector2 spawnPosition, Vector2 direction, GunStats stats);
 }

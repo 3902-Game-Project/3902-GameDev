@@ -5,7 +5,7 @@ using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Items.Guns;
+namespace GameProject.Items;
 
 public class Shotgun : IItem {
   private Vector2 position;

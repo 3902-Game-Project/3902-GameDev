@@ -4,7 +4,7 @@ using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Items.Guns;
+namespace GameProject.Items;
 
 public class Rifle : IItem {
   private Rectangle sourceRectangle = new(0, 19, 37, 10);

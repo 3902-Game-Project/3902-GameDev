@@ -1,4 +1,4 @@
-namespace GameProject.Interfaces.ItemInterfaces;
+namespace GameProject.Interfaces;
 public interface IFireMode {
   void Fire();
 }
