@@ -1,8 +1,9 @@
 0 = empty
+3 = player
 
 blocks:
 1 = wall
 2 = open passageway to other room
 
-entities:
-3 = player
+enemies:
+4 = snake
