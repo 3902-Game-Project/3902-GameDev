@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GameProject.Controllers;
 using GameProject.Factories;
 using GameProject.Interfaces;
+using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,6 +10,8 @@ namespace GameProject.GameStates;
 
 public class StateGameType(Game1 game) : IGameState {
   private IController keyboardController;
+  private IController mouseController;
+
   public Player Player { get; private set; } = new Player(game);
   public List<IBlock> Blocks; // temporary for sprint2
   public int BlockNumber { get; set; } // temporary for sprint2
@@ -24,12 +26,17 @@ public class StateGameType(Game1 game) : IGameState {
   public ISprite CurrentSprite { get; set; }
   public IItem ItemSprite { get; set; }
 
+  public ILevelManager LevelManager { get; private set; }
+
   public void Initialize() {
     keyboardController = new GameKeyboardController(game);
+    mouseController = new GameMouseController(game);
+    LevelManager = new LevelManager();
     Blocks = new List<IBlock>(); // temporary for sprint2
     BlockNumber = Blocks.Count; // temporary for sprint2
     Items = new List<IItem>(); // temporary for sprint2
     ItemNumber = Items.Count; // temporary for sprint2
+    LevelManager.Initialize();
   }
 
   public void LoadContent() {
@@ -62,10 +69,14 @@ public class StateGameType(Game1 game) : IGameState {
 
     var shotgun = game.ItemSpriteFactory.CreateShotgun();
     Items.Add(shotgun);
+
+    LevelManager.LoadContent(game.Content);
   }
 
   public void Update(GameTime gameTime) {
     keyboardController.Update(gameTime);
+    mouseController.Update(gameTime);
+    LevelManager.Update(gameTime);
     Player.Update(gameTime);
 
     if (Enemies != null && Enemies.Count > 0) {
@@ -104,6 +115,9 @@ public class StateGameType(Game1 game) : IGameState {
     }
 
     game.ProjectileManager.Draw(game.SpriteBatch);
+
+    LevelManager.Draw(gameTime);
+
     game.SpriteBatch.End();
   }
 }
