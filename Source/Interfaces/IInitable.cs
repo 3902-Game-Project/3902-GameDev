@@ -2,7 +2,7 @@
 
 namespace GameProject.Interfaces;
 
-internal interface IInitable {
+public interface IInitable {
   void Initialize();
 
   void LoadContent(ContentManager content);

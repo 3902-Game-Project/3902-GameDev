@@ -2,6 +2,6 @@
 
 namespace GameProject.Interfaces;
 
-internal interface IGPDrawable {
+public interface IGPDrawable {
   void Draw(GameTime gameTime);
 }
