@@ -34,4 +34,12 @@ internal class LevelManager : ILevelManager {
   public void Draw(GameTime gameTime) {
     levels[currentLevel].Draw(gameTime);
   }
+
+  public void SwitchLevel(int levelIndex) {
+    if (levelIndex < 0 || levelIndex >= LEVEL_NAMES.Length) {
+      throw new ArgumentException("Attempt to set level index out of bounds");
+    }
+
+    currentLevel = levelIndex;
+  }
 }
