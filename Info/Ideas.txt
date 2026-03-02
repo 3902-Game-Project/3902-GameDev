@@ -15,8 +15,10 @@ Player:
 
 Game name:
 	while () { west }
+  Chosen: High Noon Hangover - from ChatGPT
 
 Team name:
 	The Westerns
 	The Western Gamers
 	Manifest Destiny
+	Chosen: while () { west }
