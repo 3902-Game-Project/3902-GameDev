@@ -1,0 +1,8 @@
+0 = empty
+
+blocks:
+1 = wall
+2 = open passageway to other room
+
+entities:
+3 = player
