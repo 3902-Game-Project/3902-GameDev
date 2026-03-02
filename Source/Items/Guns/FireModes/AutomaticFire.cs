@@ -4,16 +4,19 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Items;
 
 public class AutomaticFire : IFireMode {
-  private float fireRate;
+  GunStats stats;
   private float timeSinceLastShot;
 
-  public AutomaticFire(float fireRate) {
-    this.fireRate = fireRate;
+  public AutomaticFire(GunStats stats) {
+    this.stats = stats;
     timeSinceLastShot = 0f;
   }
 
   public bool CanFire(UseType useType) {
-    return timeSinceLastShot >= fireRate;
+    bool canFire = true;
+    if (timeSinceLastShot < stats.FireRate) canFire = false;
+    if (canFire) timeSinceLastShot = 0f;
+    return canFire;
   }
 
   public void Update(GameTime gameTime) {
