@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GameProject.Controllers;
 using GameProject.Factories;
 using GameProject.Interfaces;
@@ -23,6 +22,8 @@ public class StateGameType(Game1 game) : IGameState {
   public IBlock BlockSprite { get; set; }
   public ISprite CurrentSprite { get; set; }
   public IItem ItemSprite { get; set; }
+
+  public ILevelManager LevelManager { get; private set; }
 
   public void Initialize() {
     keyboardController = new GameKeyboardController(game);

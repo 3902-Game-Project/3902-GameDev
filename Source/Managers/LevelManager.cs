@@ -12,8 +12,8 @@ internal class LevelManager : ILevelManager {
     "00_test"
   ];
 
-  List<ILevel> levels = new();
-  int currentLevel = 0;
+  private readonly List<ILevel> levels = new();
+  private int currentLevelIndex = 0;
 
   public void Initialize() { }
 
@@ -28,18 +28,27 @@ internal class LevelManager : ILevelManager {
   }
 
   public void Update(GameTime gameTime) {
-    levels[currentLevel].Update(gameTime);
+    levels[currentLevelIndex].Update(gameTime);
   }
 
   public void Draw(GameTime gameTime) {
-    levels[currentLevel].Draw(gameTime);
+    levels[currentLevelIndex].Draw(gameTime);
   }
 
-  public void SwitchLevel(int levelIndex) {
-    if (levelIndex < 0 || levelIndex >= LEVEL_NAMES.Length) {
+  public void SwitchLevel(int newLevelIndex) {
+    if (newLevelIndex < 0 || newLevelIndex >= LEVEL_NAMES.Length) {
       throw new ArgumentException("Attempt to set level index out of bounds");
     }
 
-    currentLevel = levelIndex;
+    if (newLevelIndex != currentLevelIndex)
+      currentLevelIndex = newLevelIndex;
+  }
+
+  public void PreviousLevel() {
+    SwitchLevel(Math.Max(currentLevelIndex - 1, 0));
+  }
+
+  public void NextLevel() {
+    SwitchLevel(Math.Min(currentLevelIndex + 1, LEVEL_NAMES.Length - 1));
   }
 }
