@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GameProject.Interfaces;
+using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
@@ -11,20 +13,25 @@ internal class LevelManager : ILevelManager {
   ];
 
   List<ILevel> levels = new();
+  int currentLevel = 0;
 
-  public void Initialize() {
-    throw new System.NotImplementedException();
-  }
+  public void Initialize() { }
 
   public void LoadContent(ContentManager content) {
-    throw new System.NotImplementedException();
+    if (LEVEL_NAMES.Length == 0) {
+      throw new ArgumentException("There must be at least one level to load");
+    }
+
+    foreach (var name in LEVEL_NAMES) {
+      levels.Add(Level.FromString(content.Load<string>(name)));
+    }
   }
 
   public void Update(GameTime gameTime) {
-    throw new System.NotImplementedException();
+    levels[currentLevel].Update(gameTime);
   }
 
   public void Draw(GameTime gameTime) {
-    throw new System.NotImplementedException();
+    levels[currentLevel].Draw(gameTime);
   }
 }
