@@ -9,6 +9,8 @@ namespace GameProject.GameStates;
 
 public class StateGameType(Game1 game) : IGameState {
   private IController keyboardController;
+  private IController mouseController;
+
   public Player Player { get; private set; } = new Player(game);
   public List<IBlock> Blocks; // temporary for sprint2
   public int BlockNumber { get; set; } // temporary for sprint2
@@ -27,6 +29,7 @@ public class StateGameType(Game1 game) : IGameState {
 
   public void Initialize() {
     keyboardController = new GameKeyboardController(game);
+    mouseController = new GameMouseController(game);
     Blocks = new List<IBlock>(); // temporary for sprint2
     BlockNumber = Blocks.Count; // temporary for sprint2
     Items = new List<IItem>(); // temporary for sprint2
@@ -67,6 +70,7 @@ public class StateGameType(Game1 game) : IGameState {
 
   public void Update(GameTime gameTime) {
     keyboardController.Update(gameTime);
+    mouseController.Update(gameTime);
     Player.Update(gameTime);
 
     if (Enemies != null && Enemies.Count > 0) {
