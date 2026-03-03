@@ -1,14 +1,32 @@
+using System;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
 public class BoxCollider : ICollider {
-  public Vector2 dimensions;
-  public Vector2 position;
+  private Vector2 _dimensions;
+  private Vector2 _position;
+  private float _rotation;
+
+  public Vector2 dimensions {
+    get => _dimensions;
+    set { _dimensions = value; SetCorners(); }
+  }
+
+  public Vector2 position {
+    get => _position;
+    set { _position = value; SetCorners(); }
+  }
+
+  public float rotation {
+    get => MathHelper.ToDegrees(rotation);
+    set { _rotation = MathHelper.ToRadians(value); SetCorners(); }
+  }
+
   public Vector2[] corners { get; private set; }
 
   public BoxCollider(Vector2 dimensions, Vector2 position) {
-    this.dimensions = dimensions;
-    this.position = position;
+    _dimensions = dimensions;
+    _position = position;
     corners = new Vector2[4];
     SetCorners();
   }
@@ -22,9 +40,21 @@ public class BoxCollider : ICollider {
   }
 
   private void SetCorners() {
-    corners[0] = new Vector2(position.X - dimensions.X * 0.5f, position.Y - dimensions.Y * 0.5f);
-    corners[1] = new Vector2(position.X + dimensions.X * 0.5f, position.Y - dimensions.Y * 0.5f);
-    corners[2] = new Vector2(position.X - dimensions.X * 0.5f, position.Y + dimensions.Y * 0.5f);
-    corners[3] = new Vector2(position.X + dimensions.X * 0.5f, position.Y + dimensions.Y * 0.5f);
+    Vector2[] localCorners = {
+      new Vector2(_dimensions.X * 0.5f, -1 *_dimensions.Y * 0.5f),
+      new Vector2(-1 * _dimensions.X * 0.5f, -1 * _dimensions.Y * 0.5f),
+      new Vector2(_dimensions.X * 0.5f, _dimensions.Y * 0.5f),
+      new Vector2(-1 * _dimensions.X * 0.5f, _dimensions.Y * 0.5f),
+    };
+
+    float cos = MathF.Cos(_rotation);
+    float sin = MathF.Sin(_rotation);
+
+    for (int i = 0; i < 4; i++) {
+      corners[i] = new Vector2(
+        _position.X + localCorners[i].X * cos - localCorners[i].Y * sin,
+        _position.X + localCorners[i].X * sin + localCorners[i].Y * cos
+      );
+    }
   }
 }
