@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using GameProject.Interfaces;
 using GameProject.Misc;
@@ -9,7 +8,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameProject.Managers;
 
-internal class LevelManager : ILevelManager {
+internal class LevelManager(Game1 game) : ILevelManager {
   string[] LEVEL_NAMES = [
     "00_test.csv"
   ];
@@ -25,7 +24,7 @@ internal class LevelManager : ILevelManager {
     }
 
     foreach (var name in LEVEL_NAMES) {
-      levels.Add(Level.FromString(File.ReadAllText(content.RootDirectory + "/" + name)));
+      levels.Add(Level.FromString(game, File.ReadAllText(content.RootDirectory + "/" + name)));
     }
   }
 

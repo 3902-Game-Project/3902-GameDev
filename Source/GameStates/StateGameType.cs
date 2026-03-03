@@ -31,7 +31,7 @@ public class StateGameType(Game1 game) : IGameState {
   public void Initialize() {
     keyboardController = new GameKeyboardController(game);
     mouseController = new GameMouseController(game);
-    LevelManager = new LevelManager();
+    LevelManager = new LevelManager(game);
     Blocks = new List<IBlock>(); // temporary for sprint2
     BlockNumber = Blocks.Count; // temporary for sprint2
     Items = new List<IItem>(); // temporary for sprint2
