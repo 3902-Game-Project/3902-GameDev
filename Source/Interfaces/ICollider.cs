@@ -4,5 +4,4 @@ namespace GameProject.Interfaces;
 
 public interface ICollider {
   bool CheckCollision(ICollider other);
-  void Update(GameTime gameTime);
 }

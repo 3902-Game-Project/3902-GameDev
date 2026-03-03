@@ -2,6 +2,7 @@ using System;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
+namespace GameProject.Colliders;
 public class BoxCollider : ICollider {
   private Vector2 _dimensions;
   private Vector2 _position;
@@ -33,10 +34,6 @@ public class BoxCollider : ICollider {
 
   public bool CheckCollision(ICollider other) {
     return false;
-  }
-
-  public void Update(GameTime gameTime) {
-    
   }
 
   private void SetCorners() {
