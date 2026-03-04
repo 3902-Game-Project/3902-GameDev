@@ -2,7 +2,7 @@ using System;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
-namespace GameProject.Colliders;
+namespace GameProject.Collisions;
 public class BoxCollider : ICollider {
   private Vector2 _dimensions;
   private Vector2 _position;

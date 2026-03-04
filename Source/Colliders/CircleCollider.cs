@@ -1,7 +1,7 @@
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
-namespace GameProject.Colliders;
+namespace GameProject.Collisions;
 public class CircleCollider : ICollider {
   public float radius;
   public Vector2 position;
