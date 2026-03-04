@@ -3,7 +3,8 @@
 
 blocks:
 1 = wall
-2 = open passageway to other room
+2:X = open passageway to other room
+  X = pairing id number; doorway connects to other doorway with same pairing ID
 
 enemies:
 4 = snake

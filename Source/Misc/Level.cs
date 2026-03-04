@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -14,8 +17,41 @@ internal class Level : ILevel {
     this.game = game;
   }
 
-  public static Level FromString(Game1 game, string levelData) {
+  public static Level FromString(Game1 game, string levelDataString) {
     var result = new Level(game);
+
+    var lines = Regex.Split(levelDataString, @"\r?\n");
+    var levelData = lines.Select((line) => line.Split(',')).ToArray();
+
+    if (levelData.Length > 0) {
+      for (int rowIndex = 0; rowIndex < levelData.Length; rowIndex++) {
+        var row = levelData[rowIndex];
+
+        if (row.Length != levelData[0].Length) {
+          throw new FormatException("line #" + (rowIndex + 1) + " length (" + row.Length + ") does not match first line length (" + levelData[0].Length + ")");
+        }
+
+        for (int colIndex = 0; colIndex < levelData[0].Length; colIndex++) {
+          var cell = row[colIndex];
+
+          var cellSplit = cell.Split(':');
+
+          var type = cellSplit[0];
+
+          switch (type) {
+            case "0":
+              // empty
+              break;
+
+            // TODO: do the rest of these cases
+
+            default:
+              throw new FormatException("unrecognized level block/entity type " + type);
+          }
+        }
+      }
+    }
+
     return result;
   }
 
