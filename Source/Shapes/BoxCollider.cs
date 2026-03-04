@@ -3,7 +3,8 @@ using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Collisions;
-public class BoxCollider : ICollider {
+public class BoxCollider : IShape {
+  public ShapeType Type { get; } = ShapeType.Box;
   private Vector2 _dimensions;
   private Vector2 _position;
   private float _rotation;
@@ -30,10 +31,6 @@ public class BoxCollider : ICollider {
     _position = position;
     corners = new Vector2[4];
     SetCorners();
-  }
-
-  public bool CheckCollision(ICollider other) {
-    return false;
   }
 
   private void SetCorners() {

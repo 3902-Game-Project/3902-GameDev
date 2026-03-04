@@ -2,7 +2,8 @@ using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Collisions;
-public class CircleCollider : ICollider {
+public class CircleCollider : IShape {
+  public ShapeType Type { get; } = ShapeType.Circle;
   public float radius;
   public Vector2 position;
 
