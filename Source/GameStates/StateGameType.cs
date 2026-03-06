@@ -77,7 +77,16 @@ public class StateGameType(Game1 game) : IGameState {
     keyboardController.Update(gameTime);
     mouseController.Update(gameTime);
     LevelManager.Update(gameTime);
+
     Player.Update(gameTime);
+
+    if (Blocks != null) {
+      foreach (IBlock block in Blocks) {
+        if (Player.Collider.CheckCollision(block.Collider)) {
+          System.Diagnostics.Debug.WriteLine("BOOP! The player hit a block!");
+        }
+      }
+    }
 
     if (Enemies != null && Enemies.Count > 0) {
       Enemies[EnemyNumber].Update(gameTime);

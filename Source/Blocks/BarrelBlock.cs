@@ -1,4 +1,5 @@
 ﻿using GameProject.Interfaces;
+using GameProject.Collisions; // ADDED: Need this for BoxCollider
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -13,12 +14,20 @@ public class BarrelBlock : IBlock {
   public float YPos { get; private set; }
   public BarrelState BarrelState { get; set; }
 
+  public ICollider Collider { get; private set; }
+
   public BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) {
     texture = barrelTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
     BarrelState = BarrelState.solid;
     sourceRect = new Rectangle(64, 0, 63, 63); // will be in xml (or something else) file later -Aaron
+
+    Vector2 dimensions = new Vector2(126, 126);
+
+    Vector2 centerPosition = new Vector2(XPos + 63, YPos + 63);
+
+    Collider = new BoxCollider(dimensions, centerPosition);
   }
 
   public void Update(GameTime gameTime) {
