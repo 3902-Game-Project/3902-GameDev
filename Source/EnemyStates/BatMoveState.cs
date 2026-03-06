@@ -47,7 +47,7 @@ public class BatMoveState : IBatState {
     bat.Position += bat.Velocity * dt;
 
     if (bat.Position.X < 0 || bat.Position.X > 800) {
-      bat.Velocity.X *= -1;
+      bat.Velocity = new Vector2(bat.Velocity.X * -1, bat.Velocity.Y);
       if (bat.Velocity.X > 0) {
         bat.FacingDirection = 1;
       } else if (bat.Velocity.X < 0) {
@@ -55,7 +55,7 @@ public class BatMoveState : IBatState {
       }
     }
     if (bat.Position.Y < 0 || bat.Position.Y > 480) {
-      bat.Velocity.Y *= -1;
+      bat.Velocity = new Vector2(bat.Velocity.X, bat.Velocity.Y * -1);
     }
 
     wanderTimer += dt;

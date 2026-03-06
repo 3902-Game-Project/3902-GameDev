@@ -13,6 +13,21 @@ public class BulletDefault(Texture2D texture, Vector2 startPosition, Vector2 dir
   private float lifetimeCounter = 0f;
   public bool IsExpired { get; private set; }
 
+  public void Expire() {
+    IsExpired = true;
+  }
+
+  public Rectangle BoundingBox {
+    get {
+      int width = (int)(sourceRectangle.Width * scale);
+      int height = (int)(sourceRectangle.Height * scale);
+      int x = (int)position.X - (width / 2);
+      int y = (int)position.Y - (height / 2);
+
+      return new Rectangle(x, y, width, height);
+    }
+  }
+
   public void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
 

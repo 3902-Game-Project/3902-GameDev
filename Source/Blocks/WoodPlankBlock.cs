@@ -11,6 +11,8 @@ public class WoodPlankBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
   public ICollider Collider { get; private set; }
+  public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 2f), (int)(sourceRect.Height * 2f));
+
   public WoodPlankBlock(Texture2D WoodPlankTexture, Vector2 xyPos) {
     texture = WoodPlankTexture;
     XPos = xyPos.X;

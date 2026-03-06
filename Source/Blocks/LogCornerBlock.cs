@@ -11,6 +11,8 @@ public class LogCornerBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
   public ICollider Collider { get; private set; }
+  public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 2f), (int)(sourceRect.Height * 2f));
+
   public LogCornerBlock(Texture2D LogCornerTexture, Vector2 xyPos) {
     texture = LogCornerTexture;
     XPos = xyPos.X;

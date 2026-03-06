@@ -14,6 +14,8 @@ public class CrateBlock : IBlock {
   public float YPos { get; private set; }
   public CrateState CrateState { get; set; }
   public ICollider Collider { get; private set; }
+  public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 2f), (int)(sourceRect.Height * 2f));
+
   public CrateBlock(Texture2D CrateTexture, Vector2 xyPos) {
     texture = CrateTexture;
     XPos = xyPos.X;

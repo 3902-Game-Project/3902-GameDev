@@ -49,15 +49,12 @@ public class RifleWanderState : IRifleState {
     rifle.Position += rifle.Velocity * dt;
 
     if (rifle.Position.X < 0 || rifle.Position.X > 800) {
-      rifle.Velocity.X *= -1;
-      if (rifle.Velocity.X > 0) {
-        rifle.FacingDirection = 1;
-      } else if (rifle.Velocity.X < 0) {
-        rifle.FacingDirection = -1;
-      }
+      rifle.Velocity = new Vector2(-rifle.Velocity.X, rifle.Velocity.Y);
+      if (rifle.Velocity.X > 0) rifle.FacingDirection = 1;
+      else if (rifle.Velocity.X < 0) rifle.FacingDirection = -1;
     }
     if (rifle.Position.Y < 0 || rifle.Position.Y > 480) {
-      rifle.Velocity.Y *= -1;
+      rifle.Velocity = new Vector2(rifle.Velocity.X, -rifle.Velocity.Y);
     }
 
     wanderTimer += dt;

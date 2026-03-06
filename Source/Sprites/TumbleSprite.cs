@@ -9,8 +9,18 @@ namespace GameProject.Sprites;
 public class TumbleSprite : IEnemy {
   public Texture2D Texture { get; private set; }
   public Vector2 Position;
-  public Vector2 Velocity;
-  public int FacingDirection = 1;
+  public Vector2 Velocity { get; set; }
+  public int FacingDirection { get; set; } = 1;
+  public Rectangle BoundingBox {
+    get {
+      if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return Rectangle.Empty;
+      Rectangle source = CurrentSourceRectangles[CurrentFrame];
+      float scale = 0.4f;
+      int width = (int)(source.Width * scale);
+      int height = (int)(source.Height * scale);
+      return new Rectangle((int)Position.X - (width / 2), (int)Position.Y - height, width, height);
+    }
+  }
 
   public List<Rectangle> CurrentSourceRectangles;
   public int CurrentFrame;
