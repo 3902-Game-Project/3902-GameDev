@@ -12,6 +12,7 @@ public class BarrelBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
   public BarrelState BarrelState { get; set; }
+  public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 2f), (int)(sourceRect.Height * 2f));
 
   public BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) {
     texture = barrelTexture;

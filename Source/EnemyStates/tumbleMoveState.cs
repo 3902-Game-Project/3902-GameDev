@@ -49,15 +49,12 @@ public class TumbleMoveState : ITumbleState {
     tumbleweed.Position += tumbleweed.Velocity * dt;
 
     if (tumbleweed.Position.X < 0 || tumbleweed.Position.X > 800) {
-      tumbleweed.Velocity.X *= -1;
-      if (tumbleweed.Velocity.X > 0) {
-        tumbleweed.FacingDirection = 1;
-      } else if (tumbleweed.Velocity.X < 0) {
-        tumbleweed.FacingDirection = -1;
-      }
+      tumbleweed.Velocity = new Vector2(-tumbleweed.Velocity.X, tumbleweed.Velocity.Y);
+      if (tumbleweed.Velocity.X > 0) tumbleweed.FacingDirection = 1;
+      else if (tumbleweed.Velocity.X < 0) tumbleweed.FacingDirection = -1;
     }
     if (tumbleweed.Position.Y < 0 || tumbleweed.Position.Y > 480) {
-      tumbleweed.Velocity.Y *= -1;
+      tumbleweed.Velocity = new Vector2(tumbleweed.Velocity.X, -tumbleweed.Velocity.Y);
     }
 
     wanderTimer += dt;

@@ -21,7 +21,19 @@ public class BombProjectile : IProjectile
     private Vector2 origin;
     public bool IsExpired { get; private set; } = false;
 
-    private Vector2 direction;
+  public void Expire() {
+    IsExpired = true;
+  }
+
+  public Rectangle BoundingBox {
+    get {
+      int width = currentSourceRect.Width;
+      int height = currentSourceRect.Height;
+      return new Rectangle((int)position.X - (width / 2), (int)position.Y - (height / 2), width, height);
+    }
+  }
+
+  private Vector2 direction;
     private float velocity;
     private float lifetime;
     private float lifetimeCounter;

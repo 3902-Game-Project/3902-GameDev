@@ -9,6 +9,7 @@ public class MudBlock : IBlock {
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
+  public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 2f), (int)(sourceRect.Height * 2f));
 
   public MudBlock(Texture2D MudTexture, Vector2 xyPos) {
     texture = MudTexture;

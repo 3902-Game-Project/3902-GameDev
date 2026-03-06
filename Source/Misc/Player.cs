@@ -23,6 +23,16 @@ public class Player {
 
   public Texture2D Texture { get; private set; }
 
+  public Rectangle BoundingBox {
+    get{
+      int width = (int)(171 * 0.2f);
+      int height = (int)(323 * 0.2f);
+      int x = (int)Position.X - (width / 2);
+      int y = (int)Position.Y - (height / 2);
+      return new Rectangle(x, y, width, height);
+    }
+  }
+
   public IPlayerState StaticState { get; private set; }
   public IPlayerState MovingState { get; private set; }
   public IPlayerState UseItemState { get; private set; }
@@ -51,6 +61,11 @@ public class Player {
   public void Die() => State.Die();
   public void LoadContent() {
     this.Texture = game.Assets.Textures.PlayerTexture;
+  }
+
+  public void TakeDamage() {
+    //Todo: Need to change this to take damage instead of dying
+    Die();
   }
 
   public void Update(GameTime gameTime) {

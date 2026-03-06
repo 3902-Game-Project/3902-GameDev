@@ -9,6 +9,7 @@ public class FirePitBlock : IBlock {
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
+  public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 2f), (int)(sourceRect.Height * 2f));
 
   public FirePitBlock(Texture2D FirePitTexture, Vector2 xyPos) {
     texture = FirePitTexture;
