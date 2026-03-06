@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GameProject.Collisions;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
