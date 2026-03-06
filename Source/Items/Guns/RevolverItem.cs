@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using GameProject.Enums;
 using GameProject.Factories;
 using GameProject.Interfaces;
 using GameProject.Managers;
@@ -19,6 +20,7 @@ public class RevolverItem : IItem {
   private IProjectilePattern projectilePattern = new SingleShotPattern();
   private IFireMode fireMode;
   private Vector2 bulletSpawnOffset;
+  public ItemCategory Category { get; } = ItemCategory.Sidearm;
 
   public RevolverItem(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager, GunStats stats) {
     this.projectileManager = projectileManager;

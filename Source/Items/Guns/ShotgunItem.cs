@@ -1,3 +1,4 @@
+using GameProject.Enums;
 using GameProject.Interfaces;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
@@ -16,6 +17,7 @@ public class ShotgunItem : IItem {
   private IProjectilePattern projectilePattern = new SpreadPattern();
   private Vector2 bulletSpawnOffset;
   private GunStats stats;
+  public ItemCategory Category { get; } = ItemCategory.Primary;
 
   public ShotgunItem(Texture2D texture, Vector2 position, ProjectileManager projectileManager, GunStats stats) {
     this.projectileManager = projectileManager;

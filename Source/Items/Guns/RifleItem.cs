@@ -1,3 +1,4 @@
+using GameProject.Enums;
 using GameProject.Factories;
 using GameProject.Interfaces;
 using GameProject.Managers;
@@ -17,6 +18,7 @@ public class RifleItem : IItem {
   private IProjectilePattern projectilePattern = new SingleShotPattern();
   private Vector2 bulletSpawnOffset;
   private GunStats stats;
+  public ItemCategory Category { get; } = ItemCategory.Primary;
 
   public RifleItem(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager, GunStats stats) {
     this.projectileManager = projectileManager;

@@ -1,3 +1,4 @@
+using GameProject.Enums;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,6 +9,7 @@ public class WhipItem(Texture2D texture, Vector2 startPosition) : IItem {
   private Vector2 position = startPosition;
   private Rectangle sourceRectangle = new(0, 0, 8, 8);
   private Vector2 origin;
+  public ItemCategory Category { get; } = ItemCategory.Melee;
 
   public void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
