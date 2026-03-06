@@ -6,9 +6,9 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Items;
 
 public class WhipItem(Texture2D texture, Vector2 startPosition) : IItem {
-  private Vector2 position = startPosition;
   private Rectangle sourceRectangle = new(0, 0, 8, 8);
   private Vector2 origin;
+  public Vector2 Position { get; set; } = startPosition;
   public ItemCategory Category { get; } = ItemCategory.Melee;
 
   public void Draw(SpriteBatch spriteBatch) {
@@ -16,7 +16,7 @@ public class WhipItem(Texture2D texture, Vector2 startPosition) : IItem {
 
     spriteBatch.Draw(
       texture,
-      position,
+      Position,
       sourceRectangle,
       Color.White,
       0f,

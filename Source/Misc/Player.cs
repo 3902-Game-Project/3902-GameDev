@@ -63,6 +63,14 @@ public class Player {
     State.Update(gameTime);
     Velocity = Vector2.Zero;
     Collider.position = this.Position;
+
+    if (Inventory.ActiveItem != null) {
+      Vector2 rightHandOffset = new Vector2(29, 32);
+      Vector2 leftHandOffset = new Vector2(3, 36);
+
+      Vector2 currentOffset = (Direction == FacingDirection.Right) ? rightHandOffset : leftHandOffset;
+      Inventory.ActiveItem.Position = this.Position + currentOffset;
+    }
   }
 
   public void Draw(SpriteBatch spriteBatch) {

@@ -12,6 +12,7 @@ public class ShotgunItem : IItem {
   private Vector2 origin;
   private Texture2D texture;
   private float scale = 3f;
+  public Vector2 Position { get; set; }
 
   private ProjectileManager projectileManager;
   private IProjectilePattern projectilePattern = new SpreadPattern();
