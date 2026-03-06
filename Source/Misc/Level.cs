@@ -75,6 +75,10 @@ internal class Level : ILevel {
     foreach (var enemy in enemies) {
       enemy.Update(gameTime);
     }
+
+    foreach (var pickup in pickups) {
+      pickup.Update(gameTime);
+    }
   }
 
   public void Draw(GameTime gameTime) {
