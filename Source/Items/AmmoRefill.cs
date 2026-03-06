@@ -8,6 +8,7 @@ namespace GameProject.Items;
 public class AmmoRefill(Texture2D texture, Vector2 startPosition) : IItem {
   private Rectangle sourceRectangle = new(0, 0, 8, 8);
   private Vector2 origin;
+  public Vector2 Position { get; set; } = startPosition;
   public ItemCategory Category { get; } = ItemCategory.Consumable; // Just to prevent errors for now - want to eventually make ammo something you gather by walking over it
 
 
@@ -16,7 +17,7 @@ public class AmmoRefill(Texture2D texture, Vector2 startPosition) : IItem {
 
     spriteBatch.Draw(
       texture,
-      startPosition,
+      Position,
       sourceRectangle,
       Color.White,
       0f,
