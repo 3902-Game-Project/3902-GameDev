@@ -48,7 +48,7 @@ namespace GameProject.Misc {
 
     private void DropItem(IItem itemToDrop) {
       IWorldPickup droppedItem = new ItemWorldPickup(itemToDrop);
-      player.game.LevelManager.CurrentLevel.AddPickup(droppedItem);
+      player.game.StateGame.LevelManager.CurrentLevel.AddPickup(droppedItem);
     }
 
     public void SwitchActiveItem(ItemCategory categoryToHold) {
