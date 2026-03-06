@@ -15,6 +15,7 @@ internal partial class Level : ILevel {
   private Game1 game;
   private List<IBlock> blocks = new();
   private List<IEnemy> enemies = new();
+  private List<IWorldPickup> pickups = new();
 
   private Level(Game1 game) {
     this.game = game;
@@ -80,6 +81,10 @@ internal partial class Level : ILevel {
     foreach (var enemy in enemies) {
       enemy.Update(gameTime);
     }
+
+    foreach (var pickup in pickups) {
+      pickup.Update(gameTime);
+    }
   }
 
   public void Draw(GameTime gameTime) {
@@ -90,5 +95,13 @@ internal partial class Level : ILevel {
     foreach (var enemy in enemies) {
       enemy.Update(gameTime);
     }
+
+    foreach (var pickup in pickups) {
+      pickup.Draw(game.SpriteBatch);
+    }
   }
+  public void AddPickup(IWorldPickup pickup) {
+    pickups.Add(pickup);
+  }
+
 }

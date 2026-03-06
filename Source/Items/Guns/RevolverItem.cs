@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using GameProject.Enums;
 using GameProject.Factories;
 using GameProject.Interfaces;
 using GameProject.Managers;
@@ -12,20 +13,21 @@ public class RevolverItem : IItem {
   private Vector2 origin;
   private Texture2D texture;
   private float scale = 3f;
-  private Vector2 position = new(300, 300);
+  public Vector2 Position { get; set; }
 
   private ProjectileManager projectileManager;
   private GunStats stats;
   private IProjectilePattern projectilePattern = new SingleShotPattern();
   private IFireMode fireMode;
   private Vector2 bulletSpawnOffset;
+  public ItemCategory Category { get; } = ItemCategory.Sidearm;
 
   public RevolverItem(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager, GunStats stats) {
     this.projectileManager = projectileManager;
     this.texture = texture;
     this.stats = stats;
     fireMode = new SemiAutoFire(stats);
-    position = startPosition;
+    Position = startPosition;
     bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 *(sourceRectangle.Height / 2 - 3)) * scale;
   }
 
@@ -34,7 +36,7 @@ public class RevolverItem : IItem {
 
     spriteBatch.Draw(
       texture,
-      position,
+      Position,
       sourceRectangle,
       Color.White,
       0f,
@@ -52,7 +54,7 @@ public class RevolverItem : IItem {
 
   public void Use(UseType useType) {
     Vector2 bulletDirection = new(1, 0);
-    Vector2 bulletSpawnPosition = position + bulletSpawnOffset;
+    Vector2 bulletSpawnPosition = Position + bulletSpawnOffset;
     if (fireMode.CanFire(useType)) {
       projectilePattern.SpawnProjectiles(projectileManager, bulletSpawnPosition, bulletDirection, stats);
     }

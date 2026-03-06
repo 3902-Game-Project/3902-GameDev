@@ -13,6 +13,8 @@ internal class LevelManager(Game1 game) : ILevelManager {
     "00_test.csv"
   ];
 
+  public ILevel CurrentLevel => levels[currentLevelIndex];
+
   private readonly List<ILevel> levels = new();
   private int currentLevelIndex = 0;
 
