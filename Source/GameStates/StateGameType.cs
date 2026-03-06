@@ -63,11 +63,9 @@ public class StateGameType(Game1 game) : IGameState {
     Enemies.Add(cactus);
 
     var revolver = game.ItemSpriteFactory.CreateRevolver();
-    Items.Add(revolver);
     Player.Inventory.PickupItem(revolver);
 
     var rifle = game.ItemSpriteFactory.CreateRifle();
-    Items.Add(rifle);
     Player.Inventory.PickupItem(rifle);
 
     var shotgun = game.ItemSpriteFactory.CreateShotgun();
