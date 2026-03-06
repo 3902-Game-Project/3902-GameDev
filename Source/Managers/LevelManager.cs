@@ -17,7 +17,6 @@ internal class LevelManager(Game1 game) : ILevelManager {
 
   private readonly List<ILevel> levels = new();
   private int currentLevelIndex = 0;
-  public ILevel CurrentLevel => levels[currentLevelIndex];
 
   public void Initialize() { }
 
