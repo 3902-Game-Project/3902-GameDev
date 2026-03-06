@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using GameProject.Factories;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -11,6 +12,9 @@ namespace GameProject.Misc;
 internal partial class Level : ILevel {
   [GeneratedRegex(@"\r?\n")]
   private static partial Regex NewlineSplitRegex();
+
+  private static readonly int BLOCK_WIDTH = 64;
+  private static readonly int BLOCK_HEIGHT = 64;
 
   private Game1 game;
   private List<IBlock> blocks = new();
@@ -22,7 +26,7 @@ internal partial class Level : ILevel {
   }
 
   public static Level FromString(Game1 game, string levelDataString) {
-    var result = new Level(game);
+    var level = new Level(game);
 
     var lines = NewlineSplitRegex().Split(levelDataString.Trim()); 
 
@@ -38,16 +42,20 @@ internal partial class Level : ILevel {
 
         for (int colIndex = 0; colIndex < levelData[0].Length; colIndex++) {
           var cell = row[colIndex];
-
           var cellSplit = cell.Split(':');
-
           var type = cellSplit[0];
+
+          float xPos = BLOCK_WIDTH * colIndex;
+          float yPos = BLOCK_HEIGHT * rowIndex;
+
           switch (type) {
             case "0":
               /* empty block, do nothing */
               break;
 
             case "1":
+              /* sand */
+              level.blocks.Add(game.BlockFactory.CreateSandBlockSprite(xPos, yPos));
               break;
 
             case "2":
@@ -66,7 +74,7 @@ internal partial class Level : ILevel {
       }
     }
 
-    return result;
+    return level;
   }
 
   public void Initialize() { }
