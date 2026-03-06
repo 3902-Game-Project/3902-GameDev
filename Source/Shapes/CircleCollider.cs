@@ -11,8 +11,4 @@ public class CircleCollider : IShape {
     this.radius = radius;
     this.position = position;
   }
-
-  public bool CheckCollision(ICollider other) {
-    return false;
-  }
 }
