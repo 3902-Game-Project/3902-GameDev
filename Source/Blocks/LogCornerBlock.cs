@@ -34,11 +34,3 @@ public class LogCornerBlock : IBlock {
                       SpriteEffects.None, 0.0f);
   }
 }
-
-  public ICollider Collider { get; private set; }
-
-  Vector2 dimensions = new Vector2(126, 126);
-
-  Vector2 centerPosition = new Vector2(XPos + 63, YPos + 63);
-
-    Collider = new BoxCollider(dimensions, centerPosition);
