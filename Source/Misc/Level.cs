@@ -26,7 +26,7 @@ internal partial class Level : ILevel {
   }
 
   public static Level FromString(Game1 game, string levelDataString) {
-    var result = new Level(game);
+    var level = new Level(game);
 
     var lines = NewlineSplitRegex().Split(levelDataString.Trim()); 
 
@@ -55,7 +55,7 @@ internal partial class Level : ILevel {
 
             case "1":
               /* sand */
-              game.BlockFactory.CreateSandBlockSprite(xPos, yPos);
+              level.blocks.Add(game.BlockFactory.CreateSandBlockSprite(xPos, yPos));
               break;
 
             case "2":
@@ -74,7 +74,7 @@ internal partial class Level : ILevel {
       }
     }
 
-    return result;
+    return level;
   }
 
   public void Initialize() { }
