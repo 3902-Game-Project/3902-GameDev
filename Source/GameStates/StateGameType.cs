@@ -4,6 +4,8 @@ using GameProject.Controllers;
 using GameProject.Factories;
 using GameProject.Interfaces;
 using GameProject.Managers;
+using GameProject.Source.Collision;
+using GameProject.Source.CollisionResponse;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,6 +14,8 @@ namespace GameProject.GameStates;
 public class StateGameType(Game1 game) : IGameState {
   private IController keyboardController;
   private IController mouseController;
+
+  private CollisionHandler collisionHandler;
 
   public Player Player { get; private set; } = new Player(game);
   public List<IBlock> Blocks; // temporary for sprint2
@@ -38,6 +42,7 @@ public class StateGameType(Game1 game) : IGameState {
     Items = new List<IItem>(); // temporary for sprint2
     ItemNumber = Items.Count; // temporary for sprint2
     LevelManager.Initialize();
+    collisionHandler = new CollisionHandler();
   }
 
   public void LoadContent() {
@@ -123,7 +128,31 @@ public class StateGameType(Game1 game) : IGameState {
     }
 
     game.ProjectileManager.Update(gameTime);
-  }
+
+    if (Enemies != null && Enemies.Count > 0 && EnemyNumber < Enemies.Count) {
+      var activeEnemy = Enemies[EnemyNumber];
+
+      //player vs enemy
+      CollisionSide playerEnemySide = CollisionDetector.GetCollisionSide(Player.BoundingBox, activeEnemy.BoundingBox);
+      if (playerEnemySide != CollisionSide.None) {
+        collisionHandler.HandleCollision(Player, activeEnemy, playerEnemySide);
+      }
+
+      //enemy vs block
+      if (Blocks != null && Blocks.Count > 0 && BlockNumber < Blocks.Count) {
+        var activeBlock = Blocks[BlockNumber];
+        CollisionSide enemyBlockSide = CollisionDetector.GetCollisionSide(activeEnemy.BoundingBox, activeBlock.BoundingBox);
+        if (enemyBlockSide != CollisionSide.None) {
+          collisionHandler.HandleCollision(activeEnemy, activeBlock, enemyBlockSide);
+        }
+      }
+
+      //Todo: bullet vs enemy
+
+
+    }
+
+    }
 
   public void Draw(GameTime gameTime) {
     game.GraphicsDevice.Clear(Color.CornflowerBlue);

@@ -7,4 +7,6 @@ public interface IBlock {
   ICollider Collider { get; }
   public void Update(GameTime gameTime);
   public void Draw(SpriteBatch spriteBatch);
+
+  Rectangle BoundingBox { get; }
 }

@@ -54,15 +54,12 @@ public class SnakeWanderState : ISnakeState {
     snake.Position += snake.Velocity * dt;
 
     if (snake.Position.X < 0 || snake.Position.X > 800) {
-      snake.Velocity.X *= -1;
-      if (snake.Velocity.X > 0) {
-        snake.FacingDirection = 1;
-      } else if (snake.Velocity.X < 0) {
-        snake.FacingDirection = -1;
-      }
+      snake.Velocity = new Vector2(-snake.Velocity.X, snake.Velocity.Y);
+      if (snake.Velocity.X > 0) snake.FacingDirection = 1;
+      else if (snake.Velocity.X < 0) snake.FacingDirection = -1;
     }
     if (snake.Position.Y < 0 || snake.Position.Y > 480) {
-      snake.Velocity.Y *= -1;
+      snake.Velocity = new Vector2(snake.Velocity.X, -snake.Velocity.Y);
     }
 
     wanderTimer += dt;

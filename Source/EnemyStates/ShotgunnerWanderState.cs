@@ -48,15 +48,12 @@ public class ShotgunnerWanderState : IShotgunnerState {
     shotgunner.Position += shotgunner.Velocity * dt;
 
     if (shotgunner.Position.X < 0 || shotgunner.Position.X > 800) {
-      shotgunner.Velocity.X *= -1;
-      if (shotgunner.Velocity.X > 0) {
-        shotgunner.FacingDirection = 1;
-      } else if (shotgunner.Velocity.X < 0) {
-        shotgunner.FacingDirection = -1;
-      }
+      shotgunner.Velocity = new Vector2(-shotgunner.Velocity.X, shotgunner.Velocity.Y);
+      if (shotgunner.Velocity.X > 0) shotgunner.FacingDirection = 1;
+      else if (shotgunner.Velocity.X < 0) shotgunner.FacingDirection = -1;
     }
     if (shotgunner.Position.Y < 0 || shotgunner.Position.Y > 480) {
-      shotgunner.Velocity.Y *= -1;
+      shotgunner.Velocity = new Vector2(shotgunner.Velocity.X, -shotgunner.Velocity.Y);
     }
 
     wanderTimer += dt;

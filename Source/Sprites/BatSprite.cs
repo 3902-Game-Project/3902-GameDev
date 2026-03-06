@@ -10,13 +10,30 @@ public class BatSprite : IEnemy {
   // Data needed by states
   public Texture2D Texture { get; private set; }
   public Vector2 Position;
-  public Vector2 Velocity;
-  public int FacingDirection = 1;
+  public Vector2 Velocity {  get; set; }
+  public int FacingDirection { get; set; } = 1;
 
   public List<Rectangle> CurrentSourceRectangles;
   public int CurrentFrame;
 
   private IBatState state;
+
+  public Rectangle BoundingBox {
+    get {
+      if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) {
+        return Rectangle.Empty;
+      }
+
+      Rectangle source = CurrentSourceRectangles[CurrentFrame];
+      float scale = 2f; // BatSprite uses 2f scale in Draw()
+      int width = (int)(source.Width * scale);
+      int height = (int)(source.Height * scale);
+      int x = (int)Position.X - (width / 2);
+      int y = (int)Position.Y - height;
+
+      return new Rectangle(x, y, width, height);
+    }
+  }
 
   public BatSprite(Texture2D texture, Vector2 position) {
     Texture = texture;
