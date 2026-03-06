@@ -1,3 +1,5 @@
 ﻿namespace GameProject.Interfaces;
 
-internal interface ILevel : IInitable, IUpdatable, IGPDrawable { }
+internal interface ILevel : IInitable, IUpdatable, IGPDrawable {
+  void AddPickup(IWorldPickup pickup);
+}
