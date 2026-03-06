@@ -46,15 +46,15 @@ public class BlockSpriteFactory {
     game.StateGame.Blocks.Add(new RockHoleBlock(blockTextures, new Vector2(150, 100)));
   }
 
-  public IBlock CreateSandBlockSprite(int x, int y) {
+  public IBlock CreateSandBlockSprite(float x, float y) {
     return new SandBlock(blockTextures, new Vector2(x, y));
   }
 
-  public IBlock CreateBarrelBlockSprite(int x, int y) {
+  public IBlock CreateBarrelBlockSprite(float x, float y) {
     return new BarrelBlock(blockTextures, new Vector2(x, y));
   }
 
-  public IBlock CreateCrateBlockSprite(int x, int y) {
+  public IBlock CreateCrateBlockSprite(float x, float y) {
     return new CrateBlock(blockTextures, new Vector2(x, y));
   }
 
