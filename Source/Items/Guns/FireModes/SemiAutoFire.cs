@@ -21,7 +21,6 @@ public class SemiAutoFire : IFireMode {
     if (canFire) {
       timeSinceLastShot = 0f;
     }
-    Debug.WriteLine($"TimeSinceLastShot: {timeSinceLastShot}");
     return canFire;
   }
 
