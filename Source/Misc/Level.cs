@@ -20,7 +20,9 @@ internal class Level : ILevel {
   public static Level FromString(Game1 game, string levelDataString) {
     var result = new Level(game);
 
-    var lines = Regex.Split(levelDataString, @"\r?\n");
+    var lines = Regex.Split(levelDataString, @"\r?\n")
+                     .Where(line => !string.IsNullOrWhiteSpace(line)); 
+
     var levelData = lines.Select((line) => line.Split(',')).ToArray();
 
     if (levelData.Length > 0) {
@@ -36,17 +38,22 @@ internal class Level : ILevel {
 
           var cellSplit = cell.Split(':');
 
-          var type = cellSplit[0];
-
+          var type = cellSplit[0].Trim();
           switch (type) {
+            case "":
             case "0":
-              // empty
+              break;
+            case "1":
+              break;
+            case "2":
+              break;
+            case "3":
+              break;
+            case "4":
               break;
 
-            // TODO: do the rest of these cases
-
             default:
-              throw new FormatException("unrecognized level block/entity type " + type);
+              throw new FormatException($"unrecognized level block/entity type '{type}'");
           }
         }
       }
