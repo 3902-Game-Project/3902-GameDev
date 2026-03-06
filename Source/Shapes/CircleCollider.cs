@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Collisions;
 public class CircleCollider : IShape {
-  public ShapeType type { get; } = ShapeType.Circle;
+  public ShapeType Type { get; } = ShapeType.Circle;
   public float radius;
   public Vector2 position;
 
