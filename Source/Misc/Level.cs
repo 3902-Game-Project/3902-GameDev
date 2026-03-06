@@ -8,7 +8,10 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameProject.Misc;
 
-internal class Level : ILevel {
+internal partial class Level : ILevel {
+  [GeneratedRegex(@"\r?\n")]
+  private static partial Regex NewlineSplitRegex();
+
   private Game1 game;
   private List<IBlock> blocks = new();
   private List<IEnemy> enemies = new();
@@ -20,7 +23,7 @@ internal class Level : ILevel {
   public static Level FromString(Game1 game, string levelDataString) {
     var result = new Level(game);
 
-    var lines = Regex.Split(levelDataString.Trim(), @"\r?\n"); 
+    var lines = NewlineSplitRegex().Split(levelDataString.Trim()); 
 
     var levelData = lines.Select((line) => line.Split(',')).ToArray();
 
@@ -40,13 +43,18 @@ internal class Level : ILevel {
           var type = cellSplit[0];
           switch (type) {
             case "0":
+              /* empty block, do nothing */
               break;
+
             case "1":
               break;
+
             case "2":
               break;
+
             case "3":
               break;
+
             case "4":
               break;
 
