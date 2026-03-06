@@ -1,57 +1,38 @@
-using System;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Collisions;
+
 public class BoxCollider : ICollider {
-  private Vector2 _dimensions;
-  private Vector2 _position;
-  private float _rotation;
-
-  public Vector2 dimensions {
-    get => _dimensions;
-    set { _dimensions = value; SetCorners(); }
-  }
-
-  public Vector2 position {
-    get => _position;
-    set { _position = value; SetCorners(); }
-  }
-
-  public float rotation {
-    get => MathHelper.ToDegrees(rotation);
-    set { _rotation = MathHelper.ToRadians(value); SetCorners(); }
-  }
-
-  public Vector2[] corners { get; private set; }
+  public Vector2 dimensions { get; set; }
+  public Vector2 position { get; set; } 
+  public float Left => position.X - (dimensions.X * 0.5f);
+  public float Right => position.X + (dimensions.X * 0.5f);
+  public float Top => position.Y - (dimensions.Y * 0.5f);
+  public float Bottom => position.Y + (dimensions.Y * 0.5f);
 
   public BoxCollider(Vector2 dimensions, Vector2 position) {
-    _dimensions = dimensions;
-    _position = position;
-    corners = new Vector2[4];
-    SetCorners();
+    this.dimensions = dimensions;
+    this.position = position;
   }
 
   public bool CheckCollision(ICollider other) {
+    if (other is BoxCollider box) {
+      return CheckBoxCollision(box);
+    } else if (other is CircleCollider circle) {
+      return CheckCircleCollision(circle);
+    }
     return false;
   }
 
-  private void SetCorners() {
-    Vector2[] localCorners = {
-      new Vector2(_dimensions.X * 0.5f, -1 *_dimensions.Y * 0.5f),
-      new Vector2(-1 * _dimensions.X * 0.5f, -1 * _dimensions.Y * 0.5f),
-      new Vector2(_dimensions.X * 0.5f, _dimensions.Y * 0.5f),
-      new Vector2(-1 * _dimensions.X * 0.5f, _dimensions.Y * 0.5f),
-    };
+  private bool CheckBoxCollision(BoxCollider other) {
+    return this.Left < other.Right &&
+           this.Right > other.Left &&
+           this.Top < other.Bottom &&
+           this.Bottom > other.Top;
+  }
 
-    float cos = MathF.Cos(_rotation);
-    float sin = MathF.Sin(_rotation);
-
-    for (int i = 0; i < 4; i++) {
-      corners[i] = new Vector2(
-        _position.X + localCorners[i].X * cos - localCorners[i].Y * sin,
-        _position.X + localCorners[i].X * sin + localCorners[i].Y * cos
-      );
-    }
+  private bool CheckCircleCollision(CircleCollider other) {
+    return false;
   }
 }

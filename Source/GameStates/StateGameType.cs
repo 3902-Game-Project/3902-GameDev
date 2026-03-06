@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GameProject.Collisions;
 using GameProject.Controllers;
 using GameProject.Factories;
 using GameProject.Interfaces;
@@ -78,6 +79,40 @@ public class StateGameType(Game1 game) : IGameState {
     mouseController.Update(gameTime);
     LevelManager.Update(gameTime);
     Player.Update(gameTime);
+
+    if (Blocks != null) {
+      foreach (IBlock block in Blocks) {
+
+        if (block.Collider is BoxCollider blockBox && Player.Collider is BoxCollider playerBox) {
+
+          if (playerBox.CheckCollision(blockBox)) {
+            float distanceX = playerBox.position.X - blockBox.position.X;
+            float distanceY = playerBox.position.Y - blockBox.position.Y;
+            float minDistanceX = (playerBox.dimensions.X / 2f) + (blockBox.dimensions.X / 2f);
+            float minDistanceY = (playerBox.dimensions.Y / 2f) + (blockBox.dimensions.Y / 2f);
+
+            float depthX = minDistanceX - System.Math.Abs(distanceX);
+            float depthY = minDistanceY - System.Math.Abs(distanceY);
+
+            if (depthX < depthY) {
+              if (distanceX > 0) {
+                Player.Position = new Vector2(Player.Position.X + depthX, Player.Position.Y);
+              } else {
+                Player.Position = new Vector2(Player.Position.X - depthX, Player.Position.Y);
+              }
+            } else {
+              if (distanceY > 0) {
+                Player.Position = new Vector2(Player.Position.X, Player.Position.Y + depthY);
+              } else {
+                Player.Position = new Vector2(Player.Position.X, Player.Position.Y - depthY);
+              }
+            }
+
+            Player.Collider.position = Player.Position;
+          }
+        }
+      }
+    }
 
     if (Enemies != null && Enemies.Count > 0) {
       Enemies[EnemyNumber].Update(gameTime);

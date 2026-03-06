@@ -1,5 +1,6 @@
 ﻿using GameProject.Interfaces;
 using GameProject.PlayerStates;
+using GameProject.Collisions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -23,6 +24,8 @@ public class Player {
 
   public Texture2D Texture { get; private set; }
 
+  public BoxCollider Collider { get; private set; }
+
   public IPlayerState StaticState { get; private set; }
   public IPlayerState MovingState { get; private set; }
   public IPlayerState UseItemState { get; private set; }
@@ -32,9 +35,8 @@ public class Player {
     this.game = game;
     this.Position = new Vector2(400, 300);
     this.Velocity = Vector2.Zero;
+    this.Collider = new BoxCollider(new Vector2(34, 64), this.Position);
 
-    // For now, attack state is default
-    //this.State = new PlayerUseItemState(this);
     this.MovingState = new PlayerAnimatedMovingState(this);
     this.StaticState = new PlayerStaticState(this);
     this.UseItemState = new PlayerUseItemState(this);
@@ -42,13 +44,13 @@ public class Player {
     this.State = StaticState;
   }
 
-
   public void MoveUp() => State.MoveUp();
   public void MoveDown() => State.MoveDown();
   public void MoveLeft() => State.MoveLeft();
   public void MoveRight() => State.MoveRight();
   public void UseItem() => State.UseItem();
   public void Die() => State.Die();
+
   public void LoadContent() {
     this.Texture = game.Assets.Textures.PlayerTexture;
   }
@@ -58,6 +60,7 @@ public class Player {
     Position += Velocity * dt;
     State.Update(gameTime);
     Velocity = Vector2.Zero;
+    Collider.position = this.Position;
   }
 
   public void Draw(SpriteBatch spriteBatch) {

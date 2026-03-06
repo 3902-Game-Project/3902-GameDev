@@ -1,4 +1,5 @@
-﻿using GameProject.Interfaces;
+﻿using GameProject.Collisions;
+using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -9,12 +10,20 @@ public class CactusBlock : IBlock {
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
+  public ICollider Collider { get; private set; }
 
   public CactusBlock(Texture2D CactusTexture, Vector2 xyPos) {
     texture = CactusTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
     sourceRect = new Rectangle(320, 256, 63, 63); // will be in xml (or something else) file later -Aaron
+
+
+    Vector2 dimensions = new Vector2(126, 126);
+
+    Vector2 centerPosition = new Vector2(XPos + 63, YPos + 63);
+
+    Collider = new BoxCollider(dimensions, centerPosition);
   }
 
   public void Update(GameTime gameTime) {
