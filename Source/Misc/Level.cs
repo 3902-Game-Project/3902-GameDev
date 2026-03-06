@@ -20,8 +20,7 @@ internal class Level : ILevel {
   public static Level FromString(Game1 game, string levelDataString) {
     var result = new Level(game);
 
-    var lines = Regex.Split(levelDataString, @"\r?\n")
-                     .Where(line => !string.IsNullOrWhiteSpace(line)); 
+    var lines = Regex.Split(levelDataString.Trim(), @"\r?\n"); 
 
     var levelData = lines.Select((line) => line.Split(',')).ToArray();
 
@@ -38,9 +37,8 @@ internal class Level : ILevel {
 
           var cellSplit = cell.Split(':');
 
-          var type = cellSplit[0].Trim();
+          var type = cellSplit[0];
           switch (type) {
-            case "":
             case "0":
               break;
             case "1":
