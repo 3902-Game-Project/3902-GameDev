@@ -77,15 +77,7 @@ public class Player {
     State.Draw(spriteBatch);
 
     if (Inventory.ActiveItem != null) {
-
-      Vector2 rightHandOffset = new Vector2(29, 32);
-      Vector2 leftHandOffset = new Vector2(3, 36);
-
-      Vector2 currentOffset = (Direction == FacingDirection.Right) ? rightHandOffset : leftHandOffset;
-
-      Vector2 itemDrawPosition = this.Position + currentOffset;
-
-      Inventory.ActiveItem.Draw(spriteBatch);
+        Inventory.ActiveItem.Draw(spriteBatch);
     }
   }
 }
