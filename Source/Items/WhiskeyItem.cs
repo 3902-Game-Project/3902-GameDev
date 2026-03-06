@@ -1,3 +1,4 @@
+using GameProject.Enums;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,13 +8,15 @@ namespace GameProject.Items;
 public class WhiskeyItem(Texture2D texture, Vector2 startPosition) : IItem {
   private Rectangle sourceRectangle = new(0, 0, 8, 8);
   private Vector2 origin;
+  public Vector2 Position { get; set; } = startPosition;
+  public ItemCategory Category { get; } = ItemCategory.Consumable;
 
   public void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
 
     spriteBatch.Draw(
       texture,
-      startPosition,
+      Position,
       sourceRectangle,
       Color.White,
       0f,

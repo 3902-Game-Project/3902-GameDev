@@ -8,10 +8,14 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameProject.Misc;
 
-internal class Level : ILevel {
+internal partial class Level : ILevel {
+  [GeneratedRegex(@"\r?\n")]
+  private static partial Regex NewlineSplitRegex();
+
   private Game1 game;
   private List<IBlock> blocks = new();
   private List<IEnemy> enemies = new();
+  private List<IWorldPickup> pickups = new();
 
   private Level(Game1 game) {
     this.game = game;
@@ -20,8 +24,7 @@ internal class Level : ILevel {
   public static Level FromString(Game1 game, string levelDataString) {
     var result = new Level(game);
 
-    var lines = Regex.Split(levelDataString, @"\r?\n")
-                     .Where(line => !string.IsNullOrWhiteSpace(line)); 
+    var lines = NewlineSplitRegex().Split(levelDataString.Trim()); 
 
     var levelData = lines.Select((line) => line.Split(',')).ToArray();
 
@@ -38,17 +41,21 @@ internal class Level : ILevel {
 
           var cellSplit = cell.Split(':');
 
-          var type = cellSplit[0].Trim();
+          var type = cellSplit[0];
           switch (type) {
-            case "":
             case "0":
+              /* empty block, do nothing */
               break;
+
             case "1":
               break;
+
             case "2":
               break;
+
             case "3":
               break;
+
             case "4":
               break;
 
@@ -74,6 +81,10 @@ internal class Level : ILevel {
     foreach (var enemy in enemies) {
       enemy.Update(gameTime);
     }
+
+    foreach (var pickup in pickups) {
+      pickup.Update(gameTime);
+    }
   }
 
   public void Draw(GameTime gameTime) {
@@ -84,5 +95,13 @@ internal class Level : ILevel {
     foreach (var enemy in enemies) {
       enemy.Update(gameTime);
     }
+
+    foreach (var pickup in pickups) {
+      pickup.Draw(game.SpriteBatch);
+    }
   }
+  public void AddPickup(IWorldPickup pickup) {
+    pickups.Add(pickup);
+  }
+
 }

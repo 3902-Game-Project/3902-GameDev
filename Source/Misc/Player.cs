@@ -1,6 +1,7 @@
-﻿using GameProject.Interfaces;
+﻿using GameProject.Collisions;
+using GameProject.Interfaces;
+using GameProject.Misc;
 using GameProject.PlayerStates;
-using GameProject.Collisions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -20,7 +21,7 @@ public class Player {
 
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
 
-  public IItem CurrentItem { get; set; }
+  public PlayerInventory Inventory { get; private set; }
 
   public Texture2D Texture { get; private set; }
 
@@ -45,6 +46,7 @@ public class Player {
     this.Position = new Vector2(400, 300);
     this.Velocity = Vector2.Zero;
     this.Collider = new BoxCollider(new Vector2(34, 64), this.Position);
+    this.Inventory = new PlayerInventory(this);
 
     this.MovingState = new PlayerAnimatedMovingState(this);
     this.StaticState = new PlayerStaticState(this);
@@ -75,9 +77,21 @@ public class Player {
     State.Update(gameTime);
     Velocity = Vector2.Zero;
     Collider.position = this.Position;
+
+    if (Inventory.ActiveItem != null) {
+      Vector2 rightHandOffset = new Vector2(29, 32);
+      Vector2 leftHandOffset = new Vector2(3, 36);
+
+      Vector2 currentOffset = (Direction == FacingDirection.Right) ? rightHandOffset : leftHandOffset;
+      Inventory.ActiveItem.Position = this.Position + currentOffset;
+    }
   }
 
   public void Draw(SpriteBatch spriteBatch) {
     State.Draw(spriteBatch);
+
+    if (Inventory.ActiveItem != null) {
+        Inventory.ActiveItem.Draw(spriteBatch);
+    }
   }
 }

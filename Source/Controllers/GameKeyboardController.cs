@@ -3,10 +3,12 @@ using GameProject.AbstractClasses;
 using GameProject.Commands;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework.Input;
+using GameProject.Enums;
 
 namespace GameProject.Controllers;
 
 public class GameKeyboardController(Game1 game) : AKeyboardController {
+
   protected override Dictionary<Keys, ICommand> PressedMappings { get; } = new() {
     {Keys.Q, new QuitCommand(game)},
     {Keys.R, new ReturnToMenuAndResetCommand(game)},
@@ -22,6 +24,11 @@ public class GameKeyboardController(Game1 game) : AKeyboardController {
     {Keys.O, new PreviousEnemyCommand(game)},
     {Keys.P, new NextEnemyCommand(game)},
     {Keys.K, new DamageEnemyCommand(game)},
+
+    {Keys.D1, new SwitchItemCommand(game, ItemCategory.Sidearm)},
+    {Keys.D2, new SwitchItemCommand(game, ItemCategory.Primary)},
+    {Keys.D3, new SwitchItemCommand(game, ItemCategory.Consumable)},
+    {Keys.D4, new SwitchItemCommand(game, ItemCategory.Melee)},
   };
 
   protected override Dictionary<Keys, ICommand> DownMappings { get; } = new() {
