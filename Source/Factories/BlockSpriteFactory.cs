@@ -36,6 +36,10 @@ public class BlockSpriteFactory {
     game.StateGame.Blocks.Add(new OpenVaultDoorBlock(blockTextures, new Vector2(150, 100)));
     game.StateGame.Blocks.Add(new FirePitBlock(blockTextures, new Vector2(150, 100)));
     game.StateGame.Blocks.Add(new SmallDoorBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new LargeDoorBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new RedSandBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new RedXRockBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new RockHoleBlock(blockTextures, new Vector2(150, 100)));
     game.StateGame.Blocks.Add(new FireBlock(blockTextures, new Vector2(150, 100)));
   }
 
