@@ -87,7 +87,7 @@ public class StateGameType(Game1 game) : IGameState {
 
     if (Blocks != null) {
       foreach (IBlock block in Blocks) {
-
+        block.Update(gameTime);
         if (block.Collider is BoxCollider blockBox && Player.Collider is BoxCollider playerBox) {
 
           if (playerBox.CheckCollision(blockBox)) {

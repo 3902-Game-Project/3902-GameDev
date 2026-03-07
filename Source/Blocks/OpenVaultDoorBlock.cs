@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class FireBlock : IBlock {
+public class OpenVaultDoorBlock : IBlock {
   private static Texture2D texture;
   private List<Rectangle> sourceRects;
   private int currentFrame;
@@ -18,13 +18,13 @@ public class FireBlock : IBlock {
   public ICollider Collider { get; private set; }
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRects[0].Width * 2f), (int)(sourceRects[0].Height * 2f));
 
-  public FireBlock(Texture2D FireTexture, Vector2 xyPos) {
-    texture = FireTexture;
+  public OpenVaultDoorBlock(Texture2D OpenVaultDoorTexture, Vector2 xyPos) {
+    texture = OpenVaultDoorTexture;
     currentFrame = 0;
     XPos = xyPos.X;
     YPos = xyPos.Y;
     State = BlockState.lit;
-    sourceRects = new List<Rectangle> { 
+    sourceRects = new List<Rectangle> {
       new Rectangle(384, 64, 64, 64),
       new Rectangle(448, 64, 64, 64)
     };
@@ -40,8 +40,8 @@ public class FireBlock : IBlock {
     float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
     animationTimer += dt;
     if (animationTimer >= timePerFrame) {
-        currentFrame = 1 - currentFrame;
-        animationTimer = 0;
+      currentFrame = 1 - currentFrame;
+      animationTimer = 0;
     }
   }
 

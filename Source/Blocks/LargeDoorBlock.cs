@@ -17,11 +17,11 @@ public class LargeDoorBlock : IBlock {
     texture = LargeDoorTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
-    sourceRect = new Rectangle(448, 320, 63, 126); // will be in xml (or something else) file later -Aaron
+    sourceRect = new Rectangle(448, 320, 64, 128); // will be in xml (or something else) file later -Aaron
 
-    Vector2 dimensions = new Vector2(126, 126);
+    Vector2 dimensions = new Vector2(64, 128);
 
-    Vector2 centerPosition = new Vector2(XPos + 63, YPos + 63);
+    Vector2 centerPosition = new Vector2(XPos + 64, YPos + 64);
 
     Collider = new BoxCollider(dimensions, centerPosition);
   }

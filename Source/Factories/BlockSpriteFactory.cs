@@ -44,6 +44,7 @@ public class BlockSpriteFactory {
     game.StateGame.Blocks.Add(new RedSandBlock(blockTextures, new Vector2(150, 100)));
     game.StateGame.Blocks.Add(new RedXRockBlock(blockTextures, new Vector2(150, 100)));
     game.StateGame.Blocks.Add(new RockHoleBlock(blockTextures, new Vector2(150, 100)));
+    game.StateGame.Blocks.Add(new FireBlock(blockTextures, new Vector2(150, 100)));
   }
 
   public IBlock CreateSandBlockSprite(float x, float y) {
