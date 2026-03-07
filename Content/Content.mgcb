@@ -14,8 +14,6 @@
 #---------------------------------- Content ---------------------------------#
 
 #begin 00_test.csv
-/importer:
-/processor:
 /copy:00_test.csv
 
 #begin basic_guns_spritesheet.png
@@ -77,6 +75,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:desert-atlas-v5.png
+
+#begin desert-atlas-v6.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:desert-atlas-v6.png
 
 #begin File.spritefont
 /importer:FontDescriptionImporter

@@ -18,7 +18,7 @@ public class BlockSpriteFactory {
   }
 
   public void LoadAllTextures(Game1 game) { // changed param from ContentManager content for sprint2 purposes
-    blockTextures = game.Content.Load<Texture2D>("desert-atlas-v5");
+    blockTextures = game.Content.Load<Texture2D>("desert-atlas-v6");
     game.StateGame.Blocks.Add(new SandBlock(blockTextures, new Vector2(150, 100)));
     game.StateGame.Blocks.Add(new BarrelBlock(blockTextures, new Vector2(150, 100)));
     game.StateGame.Blocks.Add(new CrateBlock(blockTextures, new Vector2(150, 100)));

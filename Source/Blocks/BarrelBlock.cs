@@ -22,11 +22,11 @@ public class BarrelBlock : IBlock {
     XPos = xyPos.X;
     YPos = xyPos.Y;
     BarrelState = BarrelState.solid;
-    sourceRect = new Rectangle(64, 0, 63, 63); // will be in xml (or something else) file later -Aaron
+    sourceRect = new Rectangle(64, 0, 64, 64); // will be in xml (or something else) file later -Aaron
 
-    Vector2 dimensions = new Vector2(126, 126);
+    Vector2 dimensions = new Vector2(128, 128);
 
-    Vector2 centerPosition = new Vector2(XPos + 63, YPos + 63);
+    Vector2 centerPosition = new Vector2(XPos + 64, YPos + 64);
 
     Collider = new BoxCollider(dimensions, centerPosition);
   }
