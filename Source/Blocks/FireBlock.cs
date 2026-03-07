@@ -24,7 +24,7 @@ public class FireBlock : IBlock {
     XPos = xyPos.X;
     YPos = xyPos.Y;
     State = BlockState.lit;
-    sourceRects = new List<Rectangle> {
+    sourceRects = new List<Rectangle> { 
       new Rectangle(384, 64, 64, 64),
       new Rectangle(448, 64, 64, 64)
     };
@@ -40,8 +40,8 @@ public class FireBlock : IBlock {
     float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
     animationTimer += dt;
     if (animationTimer >= timePerFrame) {
-      currentFrame = 1 - currentFrame;
-      animationTimer = 0;
+        currentFrame = 1 - currentFrame;
+        animationTimer = 0;
     }
   }
 
