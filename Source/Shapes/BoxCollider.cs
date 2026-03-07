@@ -2,7 +2,7 @@ using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Collisions;
-public class BoxCollider : IShape {
+public class BoxCollider : IShape, ICollider {
   public ShapeType Type { get; } = ShapeType.Box;
   public Vector2 dimensions { get; set; }
   public Vector2 position { get; set; } 
@@ -14,5 +14,16 @@ public class BoxCollider : IShape {
   public BoxCollider(Vector2 dimensions, Vector2 position) {
     this.dimensions = dimensions;
     this.position = position;
+  }
+
+
+  public bool CheckCollision(ICollider other) {
+    if (other is BoxCollider otherBox) {
+      return this.Left < otherBox.Right &&
+             this.Right > otherBox.Left &&
+             this.Top < otherBox.Bottom &&
+             this.Bottom > otherBox.Top;
+    }
+    return false;
   }
 }
