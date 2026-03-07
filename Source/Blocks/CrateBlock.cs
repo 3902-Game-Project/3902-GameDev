@@ -5,14 +5,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public enum CrateState { solid, breaking, broken }
-
 public class CrateBlock : IBlock {
   private static Texture2D texture;
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
-  public CrateState CrateState { get; set; }
+  public BlockState State { get; set; }
   public ICollider Collider { get; private set; }
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 2f), (int)(sourceRect.Height * 2f));
 
@@ -20,12 +18,12 @@ public class CrateBlock : IBlock {
     texture = CrateTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
-    CrateState = CrateState.solid;
-    sourceRect = new Rectangle(128, 0, 63, 63); // will be in xml (or something else) file later -Aaron
+    State = BlockState.still;
+    sourceRect = new Rectangle(128, 0, 64, 64); // will be in xml (or something else) file later -Aaron
 
-    Vector2 dimensions = new Vector2(126, 126);
+    Vector2 dimensions = new Vector2(128, 128);
 
-    Vector2 centerPosition = new Vector2(XPos + 63, YPos + 63);
+    Vector2 centerPosition = new Vector2(XPos + 64, YPos + 64);
 
     Collider = new BoxCollider(dimensions, centerPosition);
   }
@@ -36,12 +34,12 @@ public class CrateBlock : IBlock {
 
   public void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(texture, new Vector2(XPos, YPos), sourceRect,
-                      Color.White, 0.0f, new Vector2(0, 0), 2.0f,
+                      Color.White, 0.0f, new Vector2(0, 0), 1.0f,
                       SpriteEffects.None, 0.0f);
   }
 
-  public void ChangeState(CrateState state) {
-    CrateState = state;
+  public void ChangeState(BlockState state) {
+    State = state;
     // implement rest later...
   }
 }
