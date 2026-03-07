@@ -8,8 +8,10 @@ JJ: items
 
 Sprint 3:
 Eric: collision handling
+  Update: it seems they are doing player vs enemy collisions
 JJ: collision detecting players / blocks? (uncertain)
 Q: collision detecting enemies? (uncertain)
+  Update: it seems they are doing player vs block collisions
 Santosh: level loading from CSV; level manager; switching between levels
 Aaron: level designing CSV
 Emmett: Player: picking up items, holding items, dropping items. Potentially add health bar, other metrics like maybe aura. Add how the consumables change damage done and damage taken.
