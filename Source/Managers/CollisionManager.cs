@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GameProject.Collisions;
 using GameProject.Interfaces;
@@ -36,14 +37,25 @@ public class CollisionManager {
   }
 
   private bool BoxBoxCollision(BoxCollider b1, BoxCollider b2) {
-    
+    return !(b1.Right < b2.Left ||
+      b1.Left > b2.Right ||
+      b1.Top < b2.Bottom ||
+      b1.Bottom > b2.Top);
   }
 
   private bool BoxCircleCollision(BoxCollider b, CircleCollider c) {
-    
+    float closestX = Math.Clamp(c.position.X, b.Left, b.Left + b.width);
+    float closestY = Math.Clamp(c.position.Y, b.Top, b.Top + b.height);
+
+    float dx = c.position.X - closestX;
+    float dy = c.position.Y - closestY;
+
+    return (dx * dx + dy * dy) <= c.radius * c.radius;
   }
 
   private bool CircleCircleCollision(CircleCollider c1, CircleCollider c2) {
-    
+    float distance = MathF.Sqrt(MathF.Pow(c2.position.X - c1.position.X, 2) + MathF.Pow(c2.position.Y - c1.position.Y, 2));
+    if (distance <= c1.radius + c2.radius) return true;
+    return false;
   }
 }

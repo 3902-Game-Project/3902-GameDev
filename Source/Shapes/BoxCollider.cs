@@ -4,15 +4,17 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Collisions;
 public class BoxCollider : IShape, ICollider {
   public ShapeType Type { get; } = ShapeType.Box;
-  public Vector2 dimensions { get; set; }
+  public float width;
+  public float height;
   public Vector2 position { get; set; }
-  public float Left => position.X - (dimensions.X * 0.5f);
-  public float Right => position.X + (dimensions.X * 0.5f);
-  public float Top => position.Y - (dimensions.Y * 0.5f);
-  public float Bottom => position.Y + (dimensions.Y * 0.5f);
+  public float Left => position.X - (width * 0.5f);
+  public float Right => position.X + (width * 0.5f);
+  public float Top => position.Y - (height * 0.5f);
+  public float Bottom => position.Y + (height * 0.5f);
 
-  public BoxCollider(Vector2 dimensions, Vector2 position) {
-    this.dimensions = dimensions;
+  public BoxCollider(float width, float height, Vector2 position) {
+    this.width = width;
+    this.height = height;
     this.position = position;
   }
 
