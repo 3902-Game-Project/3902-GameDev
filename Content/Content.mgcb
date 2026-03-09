@@ -13,8 +13,8 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin ../../../../Downloads/desert-atlas-v6.png
-/copy:../../../../Downloads/desert-atlas-v6.png;desert-atlas-v6.png
+#begin desert-atlas-v6.png
+/copy:desert-atlas-v6.png
 
 #begin 00_test.csv
 /copy:00_test.csv
