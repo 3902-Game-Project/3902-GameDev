@@ -2,7 +2,7 @@
 3 = player
 
 blocks:
-1 = straight walls (log, rock
+1 = straight walls (log, rock)
 2:X = open passageway to other room
   X = pairing id number; doorway connects to other doorway with same pairing ID
 
