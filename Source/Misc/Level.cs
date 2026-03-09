@@ -17,8 +17,8 @@ internal partial class Level : ILevel {
   private static readonly int BLOCK_HEIGHT = 64;
 
   private Game1 game;
-  private List<IBlock> terrain = new(); // for non-collidable blocks -Aaron
-  public List<IBlock> blocks = new();
+  private List<IBlock> nonCollidableBlocks = new(); // for non-collidable blocks -Aaron
+  private List<IBlock> collidableBlocks = new();
   private List<IEnemy> enemies = new();
   private List<IWorldPickup> pickups = new();
 
@@ -69,12 +69,12 @@ internal partial class Level : ILevel {
                   switch (variation) {
                     case "0":
                       /* wall */
-                      level.blocks.Add(game.BlockFactory.CreateLogBlockSprite(xPos, yPos));
+                      level.collidableBlocks.Add(game.BlockFactory.CreateLogBlockSprite(xPos, yPos));
                       break;
 
                     case "1":
                       /* corner */
-                      level.blocks.Add(game.BlockFactory.CreateLogCornerBlockSprite(xPos, yPos));
+                      level.collidableBlocks.Add(game.BlockFactory.CreateLogCornerBlockSprite(xPos, yPos));
                       break;
 
                     default:
@@ -85,7 +85,7 @@ internal partial class Level : ILevel {
 
               case "2":
                 /* door */
-                level.blocks.Add(game.BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos));
+                level.collidableBlocks.Add(game.BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos));
                 break;
 
               case "3":
@@ -100,17 +100,17 @@ internal partial class Level : ILevel {
 
               case "5":
                 /* sand */
-                level.terrain.Add(game.BlockFactory.CreateSandBlockSprite(xPos, yPos));
+                level.nonCollidableBlocks.Add(game.BlockFactory.CreateSandBlockSprite(xPos, yPos));
                 break;
 
               case "6":
                 /* red sand */
-                level.terrain.Add(game.BlockFactory.CreateRedSandBlockSprite(xPos, yPos));
+                level.nonCollidableBlocks.Add(game.BlockFactory.CreateRedSandBlockSprite(xPos, yPos));
                 break;
 
               case "7":
                 /* wood plank */
-                level.terrain.Add(game.BlockFactory.CreateWoodPlankBlockSprite(xPos, yPos));
+                level.nonCollidableBlocks.Add(game.BlockFactory.CreateWoodPlankBlockSprite(xPos, yPos));
                 break;
 
               case "8": {
@@ -125,12 +125,12 @@ internal partial class Level : ILevel {
                   switch (variation) {
                     case "0":
                       /* wall */
-                      level.blocks.Add(game.BlockFactory.CreateRockBlockSprite(xPos, yPos));
+                      level.collidableBlocks.Add(game.BlockFactory.CreateRockBlockSprite(xPos, yPos));
                       break;
 
                     case "1":
                       /* corner */
-                      level.blocks.Add(game.BlockFactory.CreateRockCornerBlockSprite(xPos, yPos));
+                      level.collidableBlocks.Add(game.BlockFactory.CreateRockCornerBlockSprite(xPos, yPos));
                       break;
 
                     default:
@@ -155,7 +155,7 @@ internal partial class Level : ILevel {
   public void LoadContent(ContentManager content) { }
 
   public void Update(GameTime gameTime) {
-    foreach (var block in blocks) {
+    foreach (var block in collidableBlocks) {
       block.Update(gameTime);
     }
 
@@ -169,10 +169,10 @@ internal partial class Level : ILevel {
   }
 
   public void Draw(GameTime gameTime) {
-    foreach (var terr in terrain) {
+    foreach (var terr in nonCollidableBlocks) {
       terr.Draw(game.SpriteBatch);
     }
-    foreach (var block in blocks) {
+    foreach (var block in collidableBlocks) {
       block.Draw(game.SpriteBatch);
     }
 
