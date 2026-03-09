@@ -4,6 +4,7 @@ Each line in the file is a row of blocks in the game.
 Each cell (specific row and column) in the game is separated by "," in the file.
 If there are multiple blocks in the same cell (for example, a background block and an enemy), they are separated by ";".
 
+
 0 = empty
 3 = player
 
