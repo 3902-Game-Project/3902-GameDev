@@ -25,14 +25,18 @@ public class CollisionManager {
 
   
   private bool CheckCollison(ICollidable c1, ICollidable c2) {
-    BoxCollider b1 = c1 as BoxCollider;
-    BoxCollider b2 = c2 as BoxCollider;
-    if (b1 != null && b2 != null) return BoxBoxCollision(b1, b2);
-    CircleCollider s2 = c2 as CircleCollider;
-    if (b1 != null && s2 != null) return BoxCircleCollision(b1, s2);
-    CircleCollider s1 = c1 as CircleCollider;
-    if (b1 == null && b2 != null) return BoxCircleCollision(b2, s1);
-    if (s1 != null && s2 != null) return CircleCircleCollision(s1, s2);
+    if (c1.Shape.Type == ShapeType.Box && c2.Shape.Type == ShapeType.Box)
+      return BoxBoxCollision(c1.Shape as BoxCollider, c2.Shape as BoxCollider);
+
+    if (c1.Shape.Type == ShapeType.Box && c2.Shape.Type == ShapeType.Circle)
+      return BoxCircleCollision(c1.Shape as BoxCollider, c2.Shape as CircleCollider);
+
+    if (c1.Shape.Type == ShapeType.Circle && c2.Shape.Type == ShapeType.Box)
+      return BoxCircleCollision(c2.Shape as BoxCollider, c1.Shape as CircleCollider);
+
+    if (c1.Shape.Type == ShapeType.Circle && c2.Shape.Type == ShapeType.Circle)
+      return CircleCircleCollision(c1.Shape as CircleCollider, c2.Shape as CircleCollider);
+      
     return false;
   }
 
