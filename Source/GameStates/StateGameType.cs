@@ -18,17 +18,9 @@ public class StateGameType(Game1 game) : IGameState {
   private CollisionHandler collisionHandler;
 
   public Player Player { get; private set; } = new Player(game);
-  public List<IBlock> Blocks; // temporary for sprint2
-  public int BlockNumber { get; set; } // temporary for sprint2
   public List<IItem> Items; // temporary for sprint2
   public int ItemNumber { get; set; } // temporary for sprint2
-
-  public int EnemyNumber { get; set; } = 0;  // temporary for sprint2
-
-  public List<IEnemy> Enemies { get; set; } = new List<IEnemy>();
-
-  public IBlock BlockSprite { get; set; }
-  public ISprite CurrentSprite { get; set; }
+  
   public IItem ItemSprite { get; set; }
 
   public ILevelManager LevelManager { get; private set; }
@@ -37,8 +29,6 @@ public class StateGameType(Game1 game) : IGameState {
     keyboardController = new GameKeyboardController(game);
     mouseController = new GameMouseController(game);
     LevelManager = new LevelManager(game);
-    Blocks = new List<IBlock>(); // temporary for sprint2
-    BlockNumber = Blocks.Count; // temporary for sprint2
     Items = new List<IItem>(); // temporary for sprint2
     ItemNumber = Items.Count; // temporary for sprint2
     LevelManager.Initialize();
@@ -48,24 +38,6 @@ public class StateGameType(Game1 game) : IGameState {
   public void LoadContent() {
     Player.LoadContent();
     game.BlockFactory.LoadAllTextures(game);
-
-    var snake = EnemySpriteFactory.Instance.CreateSnakeSprite();
-    Enemies.Add(snake);
-
-    var shotgunner = EnemySpriteFactory.Instance.CreateShotgunnerSprite(game.ProjectileManager);
-    Enemies.Add(shotgunner);
-
-    var bat = EnemySpriteFactory.Instance.CreateBatSprite();
-    Enemies.Add(bat);
-
-    var rifleman = EnemySpriteFactory.Instance.CreateRifleSprite(game.ProjectileManager);
-    Enemies.Add(rifleman);
-
-    var tumbleweed = EnemySpriteFactory.Instance.CreateTumbleweedSprite();
-    Enemies.Add(tumbleweed);
-
-    var cactus = EnemySpriteFactory.Instance.CreateCactusSprite();
-    Enemies.Add(cactus);
 
     var revolver = game.ItemSpriteFactory.CreateRevolver();
     Player.Inventory.PickupItem(revolver);
@@ -85,6 +57,8 @@ public class StateGameType(Game1 game) : IGameState {
     LevelManager.Update(gameTime);
     Player.Update(gameTime);
 
+    // whoever is responsible for blocks move this into Level.cs and fix this to use collidableBlocks:
+    /*
     if (Blocks != null) {
       foreach (IBlock block in Blocks) {
         block.Update(gameTime);
@@ -118,10 +92,7 @@ public class StateGameType(Game1 game) : IGameState {
         }
       }
     }
-
-    if (Enemies != null && Enemies.Count > 0) {
-      Enemies[EnemyNumber].Update(gameTime);
-    }
+    */
 
     if (Items != null && Items.Count > 0) {
       Items[ItemNumber].Update(gameTime);
@@ -129,6 +100,8 @@ public class StateGameType(Game1 game) : IGameState {
 
     game.ProjectileManager.Update(gameTime);
 
+    // Move into Level.cs and fix:
+    /*
     if (Enemies != null && Enemies.Count > 0 && EnemyNumber < Enemies.Count) {
       var activeEnemy = Enemies[EnemyNumber];
 
@@ -149,6 +122,7 @@ public class StateGameType(Game1 game) : IGameState {
 
       //Todo: bullet vs enemy
     }
+    */
   }
 
   public void Draw(GameTime gameTime) {
@@ -163,19 +137,11 @@ public class StateGameType(Game1 game) : IGameState {
 
     LevelManager.Draw(gameTime);
 
-    if (Blocks != null && Blocks.Count > 0 && BlockNumber < Blocks.Count) {
-      Blocks[BlockNumber].Draw(game.SpriteBatch);
-    }
-
     if (Items != null && Items.Count > 0 && ItemNumber < Items.Count) {
       Items[ItemNumber].Draw(game.SpriteBatch);
     }
 
     Player.Draw(game.SpriteBatch);
-
-    if (Enemies != null && Enemies.Count > 0) {
-      Enemies[EnemyNumber].Draw(game.SpriteBatch);
-    }
 
     game.ProjectileManager.Draw(game.SpriteBatch);
 
