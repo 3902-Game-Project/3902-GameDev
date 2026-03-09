@@ -1,5 +1,4 @@
 ﻿Weapons:
-
 	Call the revolver the Peacemaker
 	Lever action rifle
 
@@ -22,3 +21,12 @@ Team name:
 	The Western Gamers
 	Manifest Destiny
 	Chosen: while () { west }
+
+Collision:
+  How to deal with all kinds of collisions:
+  
+  Collision between player and block: player stops
+  Collision between player and enemy: player damaged and stepped back
+  Collision between enemy and block: player change directions
+  Collision between enemy and bullet: bullet vanishes and enemy damaged
+  No collision between enemies - enemies can overlap
