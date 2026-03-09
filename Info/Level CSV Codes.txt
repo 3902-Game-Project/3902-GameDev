@@ -1,0 +1,18 @@
+
+
+0 = empty
+3 = player
+
+non colliding blocks:
+5 = sand
+6 = red sand
+7 = wood plank
+
+colliding blocks:
+1 = log
+8 = rock
+2:X = open passageway to other room
+  X = pairing id number; doorway connects to other doorway with same pairing ID
+
+enemies:
+4 = snake
