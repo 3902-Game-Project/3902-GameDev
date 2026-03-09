@@ -8,22 +8,15 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.Controllers;
 
 public class GameKeyboardController(Game1 game) : AKeyboardController {
-
   protected override Dictionary<Keys, ICommand> PressedMappings { get; } = new() {
     {Keys.Q, new QuitCommand(game)},
     {Keys.R, new ReturnToMenuAndResetCommand(game)},
-    {Keys.Y, new NextBlockCommand(game)},
-    {Keys.T, new PreviousBlockCommand(game)},
     {Keys.Z, new PlayerUseItemCommand(game.StateGame.Player)},
     {Keys.N, new PlayerUseItemCommand(game.StateGame.Player)},
     {Keys.U, new PreviousItemCommand(game)},
     {Keys.I, new NextItemCommand(game)},
     {Keys.J, new UseCurrentItemCommand(game, UseType.Pressed)},
     {Keys.E, new PlayerDieCommand(game.StateGame.Player)},
-
-    {Keys.O, new PreviousEnemyCommand(game)},
-    {Keys.P, new NextEnemyCommand(game)},
-    {Keys.K, new DamageEnemyCommand(game)},
 
     {Keys.D1, new SwitchItemCommand(game, ItemCategory.Sidearm)},
     {Keys.D2, new SwitchItemCommand(game, ItemCategory.Primary)},

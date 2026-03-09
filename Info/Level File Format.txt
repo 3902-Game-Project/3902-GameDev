@@ -36,3 +36,10 @@ enemies:
 11 = rifleman (PARSE TODO)
 12 = tumbleweed (PARSE TODO)
 13 = cactus (PARSE TODO)
+
+uncategorized blocks (they must be placed into a category before being added to level parser):
+LockedVaultBlock
+OpenVaultDoorBlock
+FirePitBlock
+SmallDoorBlock
+FireBlock
