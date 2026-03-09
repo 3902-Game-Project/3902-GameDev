@@ -13,7 +13,10 @@ non colliding blocks:
 7 = wood plank
 
 colliding blocks:
-1 = log
+1:X = log
+  X = variation:
+    0 = wall
+    1 = corner
 8:X = rock
   X = variation:
     0 = wall

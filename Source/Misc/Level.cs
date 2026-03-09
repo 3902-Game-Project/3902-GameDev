@@ -57,9 +57,31 @@ internal partial class Level : ILevel {
                 /* empty, do nothing */
                 break;
 
-              case "1":
-                /* log */
-                break;
+              case "1": {
+                  /* log */
+
+                  if (entrySplit.Length != 2) {
+                    throw new FormatException($"Expected 1 parameter for level block/entity type '{type}'");
+                  }
+
+                  var variation = entrySplit[1];
+
+                  switch (variation) {
+                    case "0":
+                      /* wall */
+                      level.blocks.Add(game.BlockFactory.CreateLogBlockSprite(xPos, yPos));
+                      break;
+
+                    case "1":
+                      /* corner */
+                      level.blocks.Add(game.BlockFactory.CreateLogCornerBlockSprite(xPos, yPos));
+                      break;
+
+                    default:
+                      throw new FormatException($"unrecognized level block/entity variation '{variation}'");
+                  }
+                  break;
+                }
 
               case "2":
                 /* door */
@@ -83,36 +105,39 @@ internal partial class Level : ILevel {
 
               case "6":
                 /* red sand */
+                level.terrain.Add(game.BlockFactory.CreateRedSandBlockSprite(xPos, yPos));
                 break;
 
               case "7":
                 /* wood plank */
+                level.terrain.Add(game.BlockFactory.CreateWoodPlankBlockSprite(xPos, yPos));
                 break;
 
-              case "8":
-                /* rock */
+              case "8": {
+                  /* rock */
 
-                if (entrySplit.Length != 2) {
-                  throw new FormatException($"Expected 1 parameter for level block/entity type '{type}'");
+                  if (entrySplit.Length != 2) {
+                    throw new FormatException($"Expected 1 parameter for level block/entity type '{type}'");
+                  }
+
+                  var variation = entrySplit[1];
+
+                  switch (variation) {
+                    case "0":
+                      /* wall */
+                      level.blocks.Add(game.BlockFactory.CreateRockBlockSprite(xPos, yPos));
+                      break;
+
+                    case "1":
+                      /* corner */
+                      level.blocks.Add(game.BlockFactory.CreateRockCornerBlockSprite(xPos, yPos));
+                      break;
+
+                    default:
+                      throw new FormatException($"unrecognized level block/entity variation '{variation}'");
+                  }
+                  break;
                 }
-
-                var variation = entrySplit[1];
-
-                switch (variation) {
-                  case "0":
-                    /* wall */
-                    level.blocks.Add(game.BlockFactory.CreateRockBlockSprite(xPos, yPos));
-                    break;
-
-                  case "1":
-                    /* corner */
-                    level.blocks.Add(game.BlockFactory.CreateRockCornerBlockSprite(xPos, yPos));
-                    break;
-
-                  default:
-                    throw new FormatException($"unrecognized level block/entity variation '{variation}'");
-                }
-                break;
 
               default:
                 throw new FormatException($"unrecognized level block/entity type '{type}'");
