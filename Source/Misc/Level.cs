@@ -52,36 +52,69 @@ internal partial class Level : ILevel {
             var entrySplit = entry.Trim().Split(':');
             var type = entrySplit[0];
 
-          switch (type) {
-            case "0":
-              /* empty/floor, do nothing */
-              level.terrain.Add(game.BlockFactory.CreateSandBlockSprite(xPos, yPos));
-              break;
+          var cell = row[colIndex];
+          var cellSplit = cell.Split(';');
 
-            case "1":
-              /* walls */
-              level.blocks.Add(game.BlockFactory.CreateRockBlockSprite(xPos, yPos));
-              break;
+          foreach (var entry in cellSplit) {
+            var entrySplit = entry.Trim().Split(':');
+            var type = entrySplit[0];
 
-            case "2":
-              // doors
-              level.blocks.Add(game.BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos));
-              break;
+            switch (type) {
+              case "0":
+                /* empty, do nothing */
+                break;
 
-            case "3":
-              // player pos
-              break;
+              case "1":
+                /* log */
+                break;
 
-            case "4":
-              // enemy
-              level.enemies.Add(EnemySpriteFactory.Instance.CreateSnakeSprite(xPos, yPos));
-              level.terrain.Add(game.BlockFactory.CreateSandBlockSprite(xPos, yPos));
-              break;
-            case "5":
-              break;
-            case "6":
-              level.blocks.Add(game.BlockFactory.CreateRockCornerBlockSprite(xPos, yPos));
-              break;
+              case "2":
+                /* door */
+                level.blocks.Add(game.BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos));
+                break;
+
+              case "3":
+                /* player position */
+                // TODO
+                break;
+
+              case "4":
+                /* snake */
+                level.enemies.Add(EnemySpriteFactory.Instance.CreateSnakeSprite(xPos, yPos));
+                break;
+
+              case "5":
+                /* sand */
+                level.terrain.Add(game.BlockFactory.CreateSandBlockSprite(xPos, yPos));
+                break;
+
+              case "6":
+                /* red sand */
+                break;
+
+              case "7":
+                /* wood plank */
+                break;
+
+              case "8":
+                /* rock */
+
+                if (entrySplit.Length != 2) {
+                  throw new FormatException($"Expected 1 parameter for level block/entity type '{type}'");
+                }
+
+                var variation = entrySplit[1];
+
+                switch (variation) {
+                  case "0":
+                    /* wall */
+                    level.blocks.Add(game.BlockFactory.CreateRockBlockSprite(xPos, yPos));
+                    break;
+
+                  case "1":
+                    /* corner */
+                    level.blocks.Add(game.BlockFactory.CreateRockCornerBlockSprite(xPos, yPos));
+                    break;
 
               case "8": {
                   /* rock */
