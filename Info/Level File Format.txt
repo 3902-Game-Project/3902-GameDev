@@ -14,9 +14,12 @@ non colliding blocks:
 
 colliding blocks:
 1 = log
-8 = rock
-2:X = open passageway to other room
-  X = pairing id number; doorway connects to other doorway with same pairing ID
+8:X = rock
+  X = variation:
+    0 = wall
+    1 = corner
+2:X = door to other room
+  X = pairing id number; door connects to other door with same pairing ID
 
 enemies:
 4 = snake
