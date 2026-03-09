@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using GameProject.Collisions;
 using GameProject.Factories;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
@@ -128,7 +127,7 @@ internal partial class Level : ILevel {
   public void Update(GameTime gameTime) {
     foreach (var block in collidableBlocks) {
       block.Update(gameTime);
-      }
+    }
 
     foreach (var enemy in enemies) {
       enemy.Update(gameTime);
