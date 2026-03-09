@@ -119,7 +119,6 @@ public class StateGameType(Game1 game) : IGameState {
 
       //Todo: bullet vs enemy
     }
-
   }
 
   public void Draw(GameTime gameTime) {
