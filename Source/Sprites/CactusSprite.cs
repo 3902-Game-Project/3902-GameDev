@@ -57,5 +57,5 @@ public class CactusSprite : IEnemy {
     spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, scale, effect, 0f);
   }
 
-  public void TakeDamage() {}
+  public void TakeDamage() { }
 }

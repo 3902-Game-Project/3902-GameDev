@@ -152,7 +152,7 @@ public class StateGameType(Game1 game) : IGameState {
 
     }
 
- }
+  }
 
   public void Draw(GameTime gameTime) {
     game.GraphicsDevice.Clear(Color.CornflowerBlue);

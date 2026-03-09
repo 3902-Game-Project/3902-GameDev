@@ -1,7 +1,6 @@
-﻿using GameProject.Interfaces;
-using GameProject.Enums;
+﻿using GameProject.Enums;
+using GameProject.Interfaces;
 using GameProject.WorldPickups;
-using Microsoft.Xna.Framework;
 
 namespace GameProject.Misc {
   public class PlayerInventory {

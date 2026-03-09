@@ -5,7 +5,7 @@ namespace GameProject.Collisions;
 public class BoxCollider : IShape, ICollider {
   public ShapeType Type { get; } = ShapeType.Box;
   public Vector2 dimensions { get; set; }
-  public Vector2 position { get; set; } 
+  public Vector2 position { get; set; }
   public float Left => position.X - (dimensions.X * 0.5f);
   public float Right => position.X + (dimensions.X * 0.5f);
   public float Top => position.Y - (dimensions.Y * 0.5f);

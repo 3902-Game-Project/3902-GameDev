@@ -1,5 +1,5 @@
-﻿using GameProject.Interfaces;
-using GameProject.Collisions; // ADDED: Need this for BoxCollider
+﻿using GameProject.Collisions; // ADDED: Need this for BoxCollider
+using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

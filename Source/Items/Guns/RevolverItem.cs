@@ -1,6 +1,4 @@
-using System.Diagnostics;
 using GameProject.Enums;
-using GameProject.Factories;
 using GameProject.Interfaces;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
@@ -28,7 +26,7 @@ public class RevolverItem : IItem {
     this.stats = stats;
     fireMode = new SemiAutoFire(stats);
     Position = startPosition;
-    bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 *(sourceRectangle.Height / 2 - 3)) * scale;
+    bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 * (sourceRectangle.Height / 2 - 3)) * scale;
   }
 
   public void Draw(SpriteBatch spriteBatch) {

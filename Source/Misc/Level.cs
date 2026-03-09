@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using GameProject.Collisions;
 using GameProject.Factories;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
@@ -18,7 +17,7 @@ internal partial class Level : ILevel {
   private static readonly int BLOCK_HEIGHT = 64;
 
   private Game1 game;
-  private List<IBlock> terrain= new(); // for non-collidable blocks -Aaron
+  private List<IBlock> terrain = new(); // for non-collidable blocks -Aaron
   public List<IBlock> blocks = new();
   private List<IEnemy> enemies = new();
   private List<IWorldPickup> pickups = new();
@@ -30,7 +29,7 @@ internal partial class Level : ILevel {
   public static Level FromString(Game1 game, string levelDataString) {
     var level = new Level(game);
 
-    var lines = NewlineSplitRegex().Split(levelDataString.Trim()); 
+    var lines = NewlineSplitRegex().Split(levelDataString.Trim());
 
     var levelData = lines.Select((line) => line.Split(',')).ToArray();
 
@@ -98,7 +97,7 @@ internal partial class Level : ILevel {
   public void Update(GameTime gameTime) {
     foreach (var block in blocks) {
       block.Update(gameTime);
-      }
+    }
 
     foreach (var enemy in enemies) {
       enemy.Update(gameTime);

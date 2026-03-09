@@ -47,8 +47,7 @@ public class RifleDeathState : IRifleState {
           isAnimationFinished = true;
         }
       }
-    }
-    else {
+    } else {
       deadHoldTimer += dt;
       if (deadHoldTimer >= timeToHoldLastFrame) {
         rifleman.CurrentSourceRectangles.Clear();

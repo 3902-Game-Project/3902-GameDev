@@ -12,7 +12,7 @@ public class SnakeDeathState : ISnakeState {
   private double timePerFrame = 0.15;
 
   private double deadHoldTimer;
-  private double timeToHoldLastFrame = 1.5; 
+  private double timeToHoldLastFrame = 1.5;
 
   private bool isAnimationFinished = false;
 
@@ -48,8 +48,7 @@ public class SnakeDeathState : ISnakeState {
           isAnimationFinished = true;
         }
       }
-    }
-    else {
+    } else {
       deadHoldTimer += dt;
       if (deadHoldTimer >= timeToHoldLastFrame) {
         snake.CurrentSourceRectangles.Clear();

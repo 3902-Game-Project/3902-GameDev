@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using GameProject.Factories;
 using GameProject.Interfaces;
 using GameProject.Sprites;
-using GameProject.Factories;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.States;

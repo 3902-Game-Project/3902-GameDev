@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Intrinsics.X86;
 using GameProject.Collisions;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
@@ -30,8 +29,11 @@ public class RockBlock : IBlock {
     Collider = new BoxCollider(dimensions, centerPosition);
   }
   public void Rotate() {
-    if (XPos > 0 && YPos > 0) { Rotation = (float)Math.PI; } 
-    else if (YPos > 0 && XPos == 0) { Rotation = 3f * (float)Math.PI / 2f; }
+    if (XPos > 0 && YPos > 0) {
+      Rotation = (float)Math.PI;
+    } else if (YPos > 0 && XPos == 0) {
+      Rotation = 3f * (float)Math.PI / 2f;
+    }
   }
 
   public void Update(GameTime gameTime) {
@@ -40,7 +42,7 @@ public class RockBlock : IBlock {
 
   public void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(texture, new Vector2(XPos, YPos), sourceRect,
-                      Color.White, Rotation, new Vector2(0,0), 1.0f,
+                      Color.White, Rotation, new Vector2(0, 0), 1.0f,
                       SpriteEffects.None, 0.0f);
   }
 }

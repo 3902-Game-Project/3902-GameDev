@@ -1,5 +1,5 @@
-﻿using GameProject.Interfaces;
-using GameProject.Enums;
+﻿using GameProject.Enums;
+using GameProject.Interfaces;
 
 namespace GameProject.Commands {
   public class SwitchItemCommand : ICommand {

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Factories;
 
-public class ItemSpriteFactory (ProjectileManager projectileManager) {
+public class ItemSpriteFactory(ProjectileManager projectileManager) {
   private Texture2D basicGunsTexture;
 
   public void LoadAllTextures(ContentManager content) {

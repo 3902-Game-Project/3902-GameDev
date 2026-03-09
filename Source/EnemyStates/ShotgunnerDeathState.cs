@@ -42,8 +42,7 @@ public class ShotgunnerDeathState : IShotgunnerState {
           isAnimationFinished = true;
         }
       }
-    }
-    else {
+    } else {
       deadHoldTimer += dt;
       if (deadHoldTimer >= timeToHoldLastFrame) {
         shotgunner.CurrentSourceRectangles.Clear();

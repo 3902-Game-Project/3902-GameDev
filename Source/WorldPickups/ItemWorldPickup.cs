@@ -16,10 +16,10 @@ public class ItemWorldPickup : IWorldPickup {
   }
 
   public void Update(GameTime gameTime) {
-    
+
   }
 
   public void OnPickup(Player player) {
-    
+
   }
 }

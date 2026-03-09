@@ -10,10 +10,10 @@ public class PlayerStaticState(Player player) : IPlayerState {
   private Rectangle SpriteLeft = new(1531, 420, 171, 323);
 
   public void MoveUp() {
-    player.Velocity = new Vector2(player.Velocity.X, -player.Speed); 
+    player.Velocity = new Vector2(player.Velocity.X, -player.Speed);
   }
   public void MoveDown() {
-    player.Velocity = new Vector2(player.Velocity.X, player.Speed); 
+    player.Velocity = new Vector2(player.Velocity.X, player.Speed);
   }
   public void MoveLeft() {
     player.Velocity = new Vector2(-player.Speed, player.Velocity.Y);

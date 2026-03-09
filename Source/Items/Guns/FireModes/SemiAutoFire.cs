@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 

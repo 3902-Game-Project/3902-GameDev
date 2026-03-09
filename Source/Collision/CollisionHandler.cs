@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameProject.Interfaces;
+﻿using GameProject.Interfaces;
 using GameProject.Source.CollisionResponse;
 using Microsoft.Xna.Framework;
 

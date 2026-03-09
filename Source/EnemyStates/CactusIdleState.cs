@@ -19,5 +19,5 @@ public class CactusIdleState : ICactusState {
     this.cactus.CurrentFrame = 0;
   }
 
-  public void Update(GameTime gameTime) {}
+  public void Update(GameTime gameTime) { }
 }

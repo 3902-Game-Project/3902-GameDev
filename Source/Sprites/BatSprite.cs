@@ -10,7 +10,7 @@ public class BatSprite : IEnemy {
   // Data needed by states
   public Texture2D Texture { get; private set; }
   public Vector2 Position;
-  public Vector2 Velocity {  get; set; }
+  public Vector2 Velocity { get; set; }
   public int FacingDirection { get; set; } = 1;
 
   public List<Rectangle> CurrentSourceRectangles;

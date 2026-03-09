@@ -27,7 +27,7 @@ public class Player {
 
   public BoxCollider Collider { get; private set; }
   public Rectangle BoundingBox {
-    get{
+    get {
       int width = (int)(171 * 0.2f);
       int height = (int)(323 * 0.2f);
       int x = (int)Position.X - (width / 2);
@@ -91,7 +91,7 @@ public class Player {
     State.Draw(spriteBatch);
 
     if (Inventory.ActiveItem != null) {
-        Inventory.ActiveItem.Draw(spriteBatch);
+      Inventory.ActiveItem.Draw(spriteBatch);
     }
   }
 }

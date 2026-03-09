@@ -1,8 +1,7 @@
+using GameProject.Factories;
 using GameProject.Interfaces;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
-using GameProject.Factories;
-using System;
 
 namespace GameProject.Items;
 

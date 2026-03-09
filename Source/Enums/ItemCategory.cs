@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameProject.Enums {
+﻿namespace GameProject.Enums {
   public enum ItemCategory {
     Melee,       // Whip, machete maybe, etc.
     Sidearm,     // Small guns (Revolver)
