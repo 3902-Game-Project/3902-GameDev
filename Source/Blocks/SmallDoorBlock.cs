@@ -31,7 +31,13 @@ public class SmallDoorBlock : IBlock {
   }
 
   public void Rotate() {
-    if (XPos == 0 && YPos == 0) { Rotation = MathHelper.ToRadians(270); } else if (XPos > 0 && YPos > 0) { Rotation = MathHelper.ToRadians(90); } else if (YPos > 0 && XPos == 0) { Rotation = MathHelper.ToRadians(180); }
+    if (XPos == 0 && YPos == 0) {
+      Rotation = MathHelper.ToRadians(270);
+    } else if (XPos > 0 && YPos > 0) {
+      Rotation = MathHelper.ToRadians(90);
+    } else if (YPos > 0 && XPos == 0) {
+      Rotation = MathHelper.ToRadians(180);
+    }
   }
   public void Update(GameTime gameTime) {
     // implement later
