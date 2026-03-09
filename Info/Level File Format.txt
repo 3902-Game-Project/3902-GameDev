@@ -11,6 +11,8 @@ non colliding blocks:
 5 = sand
 6 = red sand
 7 = wood plank
+21:X = Open vault door to other room
+  X = pairing id number; door connects to other door with same pairing ID
 
 colliding blocks:
 1:X = log
@@ -21,8 +23,25 @@ colliding blocks:
   X = variation:
     0 = wall
     1 = corner
+    2 = red X
+    3 = hole
 2:X = door to other room
   X = pairing id number; door connects to other door with same pairing ID
+17 = Barrel
+18 = Bar Shelf
+19 = Shelf
+20:X = Locked Vault door to other room
+  X = pairing id number; door connects to other door with same pairing ID
+22 = Fire pit (extinguished)
+23 = Fire (lit)
+24 = Ladder (how should we handle the collision?)
+25 = Mud
+26 = Crate
+27 = Stool
+28 = Table
+29 = Statue
+30 = Window
+
 
 items:
 14 = revolver (PARSE TODO)
