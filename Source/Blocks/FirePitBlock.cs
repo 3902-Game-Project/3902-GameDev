@@ -34,7 +34,7 @@ public class FirePitBlock : IBlock {
 
   public void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(texture, new Vector2(XPos, YPos), sourceRect,
-                      Color.White, 0.0f, new Vector2(0, 0), 2.0f,
+                      Color.White, 0.0f, new Vector2(0, 0), 1.0f,
                       SpriteEffects.None, 0.0f);
   }
 }
