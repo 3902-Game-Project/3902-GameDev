@@ -119,8 +119,8 @@ public class StateGameType(Game1 game) : IGameState {
 
       //Todo: bullet vs enemy
     }
-    */
-  }
+
+ }
 
   public void Draw(GameTime gameTime) {
     game.GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -133,6 +133,10 @@ public class StateGameType(Game1 game) : IGameState {
     );
 
     LevelManager.Draw(gameTime);
+
+    if (Blocks != null && Blocks.Count > 0 && BlockNumber < Blocks.Count) {
+      Blocks[BlockNumber].Draw(game.SpriteBatch);
+    }
 
     if (Items != null && Items.Count > 0 && ItemNumber < Items.Count) {
       Items[ItemNumber].Draw(game.SpriteBatch);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using GameProject.Collisions;
 using GameProject.Factories;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
@@ -52,66 +53,36 @@ internal partial class Level : ILevel {
             var entrySplit = entry.Trim().Split(':');
             var type = entrySplit[0];
 
-            switch (type) {
-              case "0":
-                /* empty, do nothing */
-                break;
+          switch (type) {
+            case "0":
+              /* empty/floor, do nothing */
+              level.terrain.Add(game.BlockFactory.CreateSandBlockSprite(xPos, yPos));
+              break;
 
-              case "1": {
-                  /* log */
+            case "1":
+              /* walls */
+              level.blocks.Add(game.BlockFactory.CreateRockBlockSprite(xPos, yPos));
+              break;
 
-                  if (entrySplit.Length != 2) {
-                    throw new FormatException($"Expected 1 parameter for level block/entity type '{type}'");
-                  }
+            case "2":
+              // doors
+              level.blocks.Add(game.BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos));
+              break;
 
-                  var variation = entrySplit[1];
+            case "3":
+              // player pos
+              break;
 
-                  switch (variation) {
-                    case "0":
-                      /* wall */
-                      level.collidableBlocks.Add(game.BlockFactory.CreateLogBlockSprite(xPos, yPos));
-                      break;
-
-                    case "1":
-                      /* corner */
-                      level.collidableBlocks.Add(game.BlockFactory.CreateLogCornerBlockSprite(xPos, yPos));
-                      break;
-
-                    default:
-                      throw new FormatException($"unrecognized level block/entity variation '{variation}'");
-                  }
-                  break;
-                }
-
-              case "2":
-                /* door */
-                level.collidableBlocks.Add(game.BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos));
-                break;
-
-              case "3":
-                /* player position */
-                // TODO
-                break;
-
-              case "4":
-                /* snake */
-                level.enemies.Add(EnemySpriteFactory.Instance.CreateSnakeSprite(xPos, yPos));
-                break;
-
-              case "5":
-                /* sand */
-                level.nonCollidableBlocks.Add(game.BlockFactory.CreateSandBlockSprite(xPos, yPos));
-                break;
-
-              case "6":
-                /* red sand */
-                level.nonCollidableBlocks.Add(game.BlockFactory.CreateRedSandBlockSprite(xPos, yPos));
-                break;
-
-              case "7":
-                /* wood plank */
-                level.nonCollidableBlocks.Add(game.BlockFactory.CreateWoodPlankBlockSprite(xPos, yPos));
-                break;
+            case "4":
+              // enemy
+              level.enemies.Add(EnemySpriteFactory.Instance.CreateSnakeSprite(xPos, yPos));
+              level.terrain.Add(game.BlockFactory.CreateSandBlockSprite(xPos, yPos));
+              break;
+            case "5":
+              break;
+            case "6":
+              level.blocks.Add(game.BlockFactory.CreateRockCornerBlockSprite(xPos, yPos));
+              break;
 
               case "8": {
                   /* rock */
@@ -157,7 +128,7 @@ internal partial class Level : ILevel {
   public void Update(GameTime gameTime) {
     foreach (var block in collidableBlocks) {
       block.Update(gameTime);
-    }
+      }
 
     foreach (var enemy in enemies) {
       enemy.Update(gameTime);
@@ -169,10 +140,10 @@ internal partial class Level : ILevel {
   }
 
   public void Draw(GameTime gameTime) {
-    foreach (var terr in nonCollidableBlocks) {
+    foreach (var terr in terrain) {
       terr.Draw(game.SpriteBatch);
     }
-    foreach (var block in collidableBlocks) {
+    foreach (var block in blocks) {
       block.Draw(game.SpriteBatch);
     }
 

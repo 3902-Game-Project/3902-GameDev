@@ -16,7 +16,7 @@ public class FireBlock : IBlock {
   public float YPos { get; private set; }
   public BlockState State { get; set; }
   public ICollider Collider { get; private set; }
-  public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRects[0].Width * 2f), (int)(sourceRects[0].Height * 2f));
+  public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRects[0].Width * 1f), (int)(sourceRects[0].Height * 1f));
 
   public FireBlock(Texture2D FireTexture, Vector2 xyPos) {
     texture = FireTexture;
