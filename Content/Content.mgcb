@@ -14,16 +14,7 @@
 #---------------------------------- Content ---------------------------------#
 
 #begin ../../../../Downloads/desert-atlas-v6.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../Downloads/desert-atlas-v6.png;desert-atlas-v6.png
+/copy:../../../../Downloads/desert-atlas-v6.png;desert-atlas-v6.png
 
 #begin 00_test.csv
 /copy:00_test.csv

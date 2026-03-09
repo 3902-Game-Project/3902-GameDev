@@ -17,11 +17,11 @@ public class StatueBlock : IBlock {
     texture = StatueTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
-    sourceRect = new Rectangle(0, 160, 63, 95); // will be in xml (or something else) file later -Aaron
+    sourceRect = new Rectangle(0, 160, 64, 96); // will be in xml (or something else) file later -Aaron
 
-    Vector2 dimensions = new Vector2(126, 126);
+    Vector2 dimensions = new Vector2(128, 192);
 
-    Vector2 centerPosition = new Vector2(XPos + 63, YPos + 63);
+    Vector2 centerPosition = new Vector2(XPos + 64, YPos + 96);
 
     Collider = new BoxCollider(dimensions, centerPosition);
   }
@@ -32,7 +32,7 @@ public class StatueBlock : IBlock {
 
   public void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(texture, new Vector2(XPos, YPos), sourceRect,
-                      Color.White, 0.0f, new Vector2(0, 0), 3.0f,
+                      Color.White, 0.0f, new Vector2(0, 0), 2.0f,
                       SpriteEffects.None, 0.0f);
   }
 }

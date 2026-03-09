@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using GameProject.Collisions;
 using GameProject.Factories;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
@@ -17,7 +18,8 @@ internal partial class Level : ILevel {
   private static readonly int BLOCK_HEIGHT = 64;
 
   private Game1 game;
-  private List<IBlock> blocks = new();
+  private List<IBlock> terrain= new(); // for non-collidable blocks -Aaron
+  public List<IBlock> blocks = new();
   private List<IEnemy> enemies = new();
   private List<IWorldPickup> pickups = new();
 
@@ -50,21 +52,33 @@ internal partial class Level : ILevel {
 
           switch (type) {
             case "0":
-              /* empty block, do nothing */
+              /* empty/floor, do nothing */
+              level.terrain.Add(game.BlockFactory.CreateSandBlockSprite(xPos, yPos));
               break;
 
             case "1":
-              /* sand */
-              level.blocks.Add(game.BlockFactory.CreateSandBlockSprite(xPos, yPos));
+              /* walls */
+              level.blocks.Add(game.BlockFactory.CreateRockBlockSprite(xPos, yPos));
               break;
 
             case "2":
+              // doors
+              level.blocks.Add(game.BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos));
               break;
 
             case "3":
+              // player pos
               break;
 
             case "4":
+              // enemy
+              level.enemies.Add(EnemySpriteFactory.Instance.CreateSnakeSprite(xPos, yPos));
+              level.terrain.Add(game.BlockFactory.CreateSandBlockSprite(xPos, yPos));
+              break;
+            case "5":
+              break;
+            case "6":
+              level.blocks.Add(game.BlockFactory.CreateRockCornerBlockSprite(xPos, yPos));
               break;
 
             default:
@@ -84,7 +98,7 @@ internal partial class Level : ILevel {
   public void Update(GameTime gameTime) {
     foreach (var block in blocks) {
       block.Update(gameTime);
-    }
+      }
 
     foreach (var enemy in enemies) {
       enemy.Update(gameTime);
@@ -96,6 +110,9 @@ internal partial class Level : ILevel {
   }
 
   public void Draw(GameTime gameTime) {
+    foreach (var terr in terrain) {
+      terr.Draw(game.SpriteBatch);
+    }
     foreach (var block in blocks) {
       block.Draw(game.SpriteBatch);
     }

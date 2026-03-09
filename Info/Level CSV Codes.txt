@@ -1,10 +1,11 @@
-0 = empty
+0 = empty / floor block (sand, red sand, woodplank)
 3 = player
 
 blocks:
-1 = sand
+1 = straight walls (log, rock
 2:X = open passageway to other room
   X = pairing id number; doorway connects to other doorway with same pairing ID
+
 
 enemies:
 4 = snake

@@ -35,6 +35,9 @@ internal class EnemySpriteFactory {
   public IEnemy CreateSnakeSprite() {
     return new SnakeSprite(snakeTexture, new Vector2(400, 200));
   }
+  public IEnemy CreateSnakeSprite(float xPos, float yPos) {
+    return new SnakeSprite(snakeTexture, new Vector2(xPos, yPos));
+  }
   public IEnemy CreateCactusSprite() {
     return new CactusSprite(cactusTexture, new Vector2(400, 200));
   }

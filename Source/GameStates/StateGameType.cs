@@ -152,7 +152,7 @@ public class StateGameType(Game1 game) : IGameState {
 
     }
 
-    }
+ }
 
   public void Draw(GameTime gameTime) {
     game.GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -163,6 +163,8 @@ public class StateGameType(Game1 game) : IGameState {
       DepthStencilState.None,
       RasterizerState.CullNone
     );
+
+    LevelManager.Draw(gameTime);
 
     if (Blocks != null && Blocks.Count > 0 && BlockNumber < Blocks.Count) {
       Blocks[BlockNumber].Draw(game.SpriteBatch);
@@ -179,8 +181,6 @@ public class StateGameType(Game1 game) : IGameState {
     }
 
     game.ProjectileManager.Draw(game.SpriteBatch);
-
-    LevelManager.Draw(gameTime);
 
     game.SpriteBatch.End();
   }

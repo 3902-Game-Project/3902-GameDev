@@ -13,12 +13,14 @@ internal class LevelManager(Game1 game) : ILevelManager {
     "00_test.csv"
   ];
 
-  public ILevel CurrentLevel => levels[currentLevelIndex];
-
   private readonly List<ILevel> levels = new();
   private int currentLevelIndex = 0;
 
-  public void Initialize() { }
+  public ILevel CurrentLevel => levels[currentLevelIndex];
+
+  public void Initialize() {
+    currentLevelIndex = 0;
+  }
 
   public void LoadContent(ContentManager content) {
     if (LEVEL_NAMES.Length == 0) {

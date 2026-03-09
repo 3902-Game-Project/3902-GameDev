@@ -1,37 +1,40 @@
 ﻿using System;
-using System.Runtime.Intrinsics.X86;
 using GameProject.Collisions;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Blocks;
+namespace GameProject.Source.Blocks;
 
-public class RockBlock : IBlock {
-  private static Texture2D texture;
+public class RockCornerBlock : IBlock {
+  private Texture2D texture;
   private Rectangle sourceRect;
   private Vector2 centerPosition;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
+
   public float Rotation { get; private set; }
   public ICollider Collider { get; private set; }
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 1f), (int)(sourceRect.Height * 1f));
 
-  public RockBlock(Texture2D RockTexture, Vector2 xyPos) {
-    texture = RockTexture;
+  public RockCornerBlock(Texture2D RockCornerTexture, Vector2 xyPos) {
+    texture = RockCornerTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
-    sourceRect = new Rectangle(320, 0, 64, 64); // will be in xml (or something else) file later -Aaron
+    Rotation = 0.0f;
+    sourceRect = new Rectangle(384, 0, 64, 64); // will be in xml (or something else) file later -Aaron
     //Rotate();
-    Vector2 dimensions = new Vector2(64, 64);
+    Vector2 dimensions = new Vector2(64, 64); // changed from 2f scale - 128
 
-    centerPosition = new Vector2(XPos + 32, YPos + 32);
+    centerPosition = new Vector2(XPos + 32, YPos + 32); // changed from 2f scale - 64
 
     Collider = new BoxCollider(dimensions, centerPosition);
   }
+
   public void Rotate() {
-    if (XPos > 0 && YPos > 0) { Rotation = (float)Math.PI; } 
-    else if (YPos > 0 && XPos == 0) { Rotation = 3f * (float)Math.PI / 2f; }
+    if (XPos == 0 && YPos == 0) { Rotation = MathHelper.ToRadians(270); } 
+    else if (XPos > 0 && YPos > 0) { Rotation = MathHelper.ToRadians(90); } 
+    else if (YPos > 0 && XPos == 0) { Rotation = MathHelper.ToRadians(180); }
   }
 
   public void Update(GameTime gameTime) {

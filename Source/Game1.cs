@@ -48,6 +48,10 @@ public class Game1 : Game {
   }
 
   protected override void Initialize() {
+    graphics.PreferredBackBufferHeight = 576;
+    graphics.PreferredBackBufferWidth = 960;
+    graphics.ApplyChanges();
+    
     Assets.Initialize();
     StateMenu.Initialize();
     StateGame.Initialize();

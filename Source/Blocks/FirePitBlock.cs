@@ -12,7 +12,7 @@ public class FirePitBlock : IBlock {
   public float YPos { get; private set; }
   public BlockState State { get; set; }
   public ICollider Collider { get; private set; }
-  public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 2f), (int)(sourceRect.Height * 2f));
+  public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 1f), (int)(sourceRect.Height * 1f));
 
   public FirePitBlock(Texture2D FirePitTexture, Vector2 xyPos) {
     texture = FirePitTexture;
@@ -21,9 +21,9 @@ public class FirePitBlock : IBlock {
     State = BlockState.extinguished;
     sourceRect = new Rectangle(320, 64, 64, 64); // will be in xml (or something else) file later -Aaron
 
-    Vector2 dimensions = new Vector2(128, 128);
+    Vector2 dimensions = new Vector2(64, 64);
 
-    Vector2 centerPosition = new Vector2(XPos + 64, YPos + 64);
+    Vector2 centerPosition = new Vector2(XPos + 32, YPos + 32);
 
     Collider = new BoxCollider(dimensions, centerPosition);
   }
@@ -34,7 +34,7 @@ public class FirePitBlock : IBlock {
 
   public void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(texture, new Vector2(XPos, YPos), sourceRect,
-                      Color.White, 0.0f, new Vector2(0, 0), 2.0f,
+                      Color.White, 0.0f, new Vector2(0, 0), 1.0f,
                       SpriteEffects.None, 0.0f);
   }
 }

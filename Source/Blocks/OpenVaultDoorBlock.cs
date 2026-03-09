@@ -11,7 +11,7 @@ public class OpenVaultDoorBlock : IBlock {
   private List<Rectangle> sourceRects;
   private int currentFrame;
   private double animationTimer;
-  private double timePerFrame = 0.15;
+  private double timePerFrame = 0.3;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
   public BlockState State { get; set; }
@@ -25,8 +25,11 @@ public class OpenVaultDoorBlock : IBlock {
     YPos = xyPos.Y;
     State = BlockState.lit;
     sourceRects = new List<Rectangle> {
-      new Rectangle(384, 64, 64, 64),
-      new Rectangle(448, 64, 64, 64)
+      new Rectangle(64, 192, 64, 64),
+      new Rectangle(128, 192, 64, 64),
+      new Rectangle(192, 192, 64, 64),
+      new Rectangle(256, 192, 64, 64),
+      new Rectangle(320, 192, 64, 64)
     };
 
     Vector2 dimensions = new Vector2(128, 128);
@@ -39,9 +42,11 @@ public class OpenVaultDoorBlock : IBlock {
   public void Update(GameTime gameTime) {
     float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
     animationTimer += dt;
-    if (animationTimer >= timePerFrame) {
-      currentFrame = 1 - currentFrame;
+    if (animationTimer >= timePerFrame) { // && currentFrame < sourceRects.Count - 1
+      currentFrame++;
+      if (currentFrame == sourceRects.Count) { currentFrame = 0; }  // remove for final game
       animationTimer = 0;
+
     }
   }
 
