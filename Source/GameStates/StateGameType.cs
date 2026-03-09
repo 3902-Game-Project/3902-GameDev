@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
-using GameProject.Collisions;
 using GameProject.Controllers;
-using GameProject.Factories;
 using GameProject.Interfaces;
 using GameProject.Managers;
 using GameProject.Source.Collision;
-using GameProject.Source.CollisionResponse;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -20,7 +17,7 @@ public class StateGameType(Game1 game) : IGameState {
   public Player Player { get; private set; } = new Player(game);
   public List<IItem> Items; // temporary for sprint2
   public int ItemNumber { get; set; } // temporary for sprint2
-  
+
   public IItem ItemSprite { get; set; }
 
   public ILevelManager LevelManager { get; private set; }
