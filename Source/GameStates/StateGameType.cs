@@ -88,8 +88,8 @@ public class StateGameType(Game1 game) : IGameState {
           }
         }
       }
-    }
-    */
+    }*/
+    
 
     if (Items != null && Items.Count > 0) {
       Items[ItemNumber].Update(gameTime);
@@ -115,10 +115,10 @@ public class StateGameType(Game1 game) : IGameState {
         if (enemyBlockSide != CollisionSide.None) {
           collisionHandler.HandleCollision(activeEnemy, activeBlock, enemyBlockSide);
         }
-      }
+      }*/
 
       //Todo: bullet vs enemy
-    }
+   
   }
 
   public void Draw(GameTime gameTime) {
@@ -133,9 +133,10 @@ public class StateGameType(Game1 game) : IGameState {
 
     LevelManager.Draw(gameTime);
 
-    if (Blocks != null && Blocks.Count > 0 && BlockNumber < Blocks.Count) {
+    // change to use Blocks from Level.cs
+    /*if (Blocks != null && Blocks.Count > 0 && BlockNumber < Blocks.Count) {
       Blocks[BlockNumber].Draw(game.SpriteBatch);
-    }
+    }*/
 
     if (Items != null && Items.Count > 0 && ItemNumber < Items.Count) {
       Items[ItemNumber].Draw(game.SpriteBatch);
