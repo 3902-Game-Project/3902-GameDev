@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using GameProject.Collisions;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
@@ -22,6 +21,7 @@ public class CollisionManager {
     }
   }
 
+  /*
   private bool CheckCollison(ICollidable c1, ICollidable c2) {
     
   }
@@ -37,4 +37,5 @@ public class CollisionManager {
   private bool CircleCircleCollision(CircleCollider c1, CircleCollider c2) {
     
   }
+  */
 }
