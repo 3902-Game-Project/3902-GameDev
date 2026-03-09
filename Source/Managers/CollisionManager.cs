@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GameProject.Collisions;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
@@ -21,9 +22,17 @@ public class CollisionManager {
     }
   }
 
-  /*
+  
   private bool CheckCollison(ICollidable c1, ICollidable c2) {
-    
+    BoxCollider b1 = c1 as BoxCollider;
+    BoxCollider b2 = c2 as BoxCollider;
+    CircleCollider s1 = c1 as CircleCollider;
+    CircleCollider s2 = c2 as CircleCollider;
+    if (b1 != null && b2 != null) return BoxBoxCollision(b1, b2);
+    if (b1 != null && s2 != null) return BoxCircleCollision(b1, s2);
+    if (b1 == null && b2 != null) return BoxCircleCollision(b2, s1);
+    if (s1 != null && s2 != null) return CircleCircleCollision(s1, s2);
+    return false;
   }
 
   private bool BoxBoxCollision(BoxCollider b1, BoxCollider b2) {
@@ -37,5 +46,4 @@ public class CollisionManager {
   private bool CircleCircleCollision(CircleCollider c1, CircleCollider c2) {
     
   }
-  */
 }
