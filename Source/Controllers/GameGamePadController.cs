@@ -1,4 +1,5 @@
-﻿using GameProject.Interfaces;
+﻿using GameProject.Commands;
+using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,8 +9,51 @@ internal class GameGamePadController(Game1 game) : IController {
   private GamePadState prevGamePadState = new();
   private GamePadState gamePadState = new();
 
+  private ICommand quitCommand = new QuitCommand(game);
+  private ICommand returnToMainMenuCommand = new ReturnToMenuAndResetCommand(game);
+  private ICommand useItemPressedCommand = new PlayerUseItemCommand(game.StateGame.Player, UseType.Pressed);
+  private ICommand useItemHeldCommand = new PlayerUseItemCommand(game.StateGame.Player, UseType.Held);
+  private ICommand useItemReleasedCommand = new PlayerUseItemCommand(game.StateGame.Player, UseType.Released);
+  private ICommand dieCommand = new PlayerDieCommand(game.StateGame.Player);
+  private ICommand playerMoveUpCommand = new PlayerMoveUpCommand(game.StateGame.Player);
+  private ICommand playerMoveDownCommand = new PlayerMoveDownCommand(game.StateGame.Player);
+  private ICommand playerMoveLeftCommand = new PlayerMoveLeftCommand(game.StateGame.Player);
+  private ICommand playerMoveRightCommand = new PlayerMoveRightCommand(game.StateGame.Player);
+  private ICommand prevLevelCommand = new PreviousLevelCommand(game);
+  private ICommand nextLevelCommand = new NextLevelCommand(game);
+
   public void Update(GameTime gameTime) {
     prevGamePadState = gamePadState;
     gamePadState = GamePad.GetState(PlayerIndex.One);
+
+    if (gamePadState.Buttons.Y == ButtonState.Pressed && prevGamePadState.Buttons.Y == ButtonState.Released) {
+      quitCommand.Execute();
+    } else if (gamePadState.Buttons.A == ButtonState.Pressed && prevGamePadState.Buttons.A == ButtonState.Released) {
+      returnToMainMenuCommand.Execute();
+    } else if (gamePadState.Buttons.B == ButtonState.Pressed && prevGamePadState.Buttons.B == ButtonState.Released) {
+      useItemPressedCommand.Execute();
+    } else if (gamePadState.Buttons.X == ButtonState.Pressed && prevGamePadState.Buttons.X == ButtonState.Released) {
+      dieCommand.Execute();
+    } else if (gamePadState.Buttons.RightShoulder == ButtonState.Pressed && prevGamePadState.Buttons.RightShoulder == ButtonState.Released) {
+      nextLevelCommand.Execute();
+    } else if (gamePadState.Buttons.LeftShoulder == ButtonState.Pressed && prevGamePadState.Buttons.LeftShoulder == ButtonState.Released) {
+      prevLevelCommand.Execute();
+    }
+
+    if (gamePadState.DPad.Up == ButtonState.Pressed) {
+      playerMoveUpCommand.Execute();
+    } else if (gamePadState.DPad.Down == ButtonState.Pressed) {
+      playerMoveDownCommand.Execute();
+    } else if (gamePadState.DPad.Left == ButtonState.Pressed) {
+      playerMoveLeftCommand.Execute();
+    } else if (gamePadState.DPad.Right == ButtonState.Pressed) {
+      playerMoveRightCommand.Execute();
+    } else if (gamePadState.Buttons.B == ButtonState.Pressed) {
+      useItemHeldCommand.Execute();
+    }
+
+    if (gamePadState.Buttons.B == ButtonState.Released && prevGamePadState.Buttons.B == ButtonState.Pressed) {
+      useItemReleasedCommand.Execute();
+    }
   }
 }

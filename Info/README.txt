@@ -1,20 +1,25 @@
 Controls:
   Main Menu:
-    Key                     Action
-    Enter/GamePadB          Go from main menu to game.
+    Key                    Action
+    Enter/GamePadB         Go from main menu to game.
+    Q/GamePadA             Quit the game.
 
   Game:
-    Key                     Action
-    W/Up/DPadUp             Moves player upwards.
-    S/Down/DPadDown         Moves player downwards.
-    A/Left/DPadLeft         Moves player leftwards.
-    D/Right/DPadRight       Moves player rightwards.
-    Z/N/GamePadB            Cause the player to use item / attack.
-    E/GamePadX              Instantly kills the player.
-    Q/GamePadY              Quit the game.
-    R/GamePadA              Reset to main menu.
-    MouseLeft/RightTrigger  Debug: switch to next level.
-    MouseRight/LeftTrigger  Debug: switch to previous level.
+    Key                    Action
+    W/Up/DPadUp            Moves player upwards.
+    S/Down/DPadDown        Moves player downwards.
+    A/Left/DPadLeft        Moves player leftwards.
+    D/Right/DPadRight      Moves player rightwards.
+    Z/N/GamePadB           Cause the player to use item / attack.
+    D0                     Switch to sidearm item.
+    D1                     Switch to primary item.
+    D2                     Switch to consumable item.
+    D3                     Switch to melee item.
+    E/GamePadX             Instantly kills the player.
+    Q/GamePadY             Quit the game.
+    R/GamePadA             Reset to main menu.
+    MouseLeft/RightBumper  Debug: switch to next level.
+    MouseRight/LeftBumper  Debug: switch to previous level.
 
 Code Metrics:
   Raw data stored at "Info/Code Metrics.txt"
