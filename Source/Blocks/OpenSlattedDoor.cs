@@ -13,14 +13,15 @@ public class OpenSlattedDoorBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
   public float Rotation { get; private set; }
-  
+  public string PairedLevelName { get; private set; }
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 1f), (int)(sourceRect.Height * 1f));
 
-  public OpenSlattedDoorBlock(Texture2D OpenSlattedDoorTexture, Vector2 xyPos) {
+  public OpenSlattedDoorBlock(Texture2D OpenSlattedDoorTexture, Vector2 xyPos, string pairedLevelName) {
     texture = OpenSlattedDoorTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
     Rotation = 0.0f;
+    PairedLevelName = pairedLevelName;
     sourceRect = new Rectangle(192, 128, 64, 64); // will be in xml (or something else) file later -Aaron
     //Rotate();
     dimensions = new Vector2(64, 64);

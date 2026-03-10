@@ -28,7 +28,7 @@ internal partial class Level : ILevel {
     this.game = game;
   }
 
-  public static Level FromString(Game1 game, string levelDataString) {
+  public static Level FromString(Game1 game, ISet<string> levelNames, string levelDataString) {
     var level = new Level(game);
 
     var lines = NewlineSplitRegex().Split(levelDataString.Trim());
@@ -87,11 +87,17 @@ internal partial class Level : ILevel {
                   break;
                 }
 
-              case "2":
-                /* door */
-                // TODO - SS: add pairing info
-                level.collidableBlocks.Add(game.BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos));
-                break;
+              case "2": {
+                  /* door */
+                  var pairedLevelName = entrySplit[1];
+
+                  if (!levelNames.Contains(pairedLevelName)) {
+                    throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+                  }
+
+                  level.collidableBlocks.Add(game.BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos, pairedLevelName));
+                  break;
+                }
 
               case "3":
                 /* player position */
@@ -214,17 +220,29 @@ internal partial class Level : ILevel {
                 level.collidableBlocks.Add(game.BlockFactory.CreateShelfBlockSprite(xPos, yPos));
                 break;
 
-              case "20":
-                /* locked vault door */
-                // TODO - SS: add pairing info
-                level.collidableBlocks.Add(game.BlockFactory.CreateLockedVaultBlockSprite(xPos, yPos));
-                break;
+              case "20": {
+                  /* locked vault door */
+                  var pairedLevelName = entrySplit[1];
 
-              case "21":
-                /* open vault door */
-                // TODO - SS: add pairing info
-                level.collidableBlocks.Add(game.BlockFactory.CreateOpenVaultDoorBlockSprite(xPos, yPos));
-                break;
+                  if (!levelNames.Contains(pairedLevelName)) {
+                    throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+                  }
+
+                  level.collidableBlocks.Add(game.BlockFactory.CreateLockedVaultBlockSprite(xPos, yPos, pairedLevelName));
+                  break;
+                }
+
+              case "21": {
+                  /* open vault door */
+                  var pairedLevelName = entrySplit[1];
+
+                  if (!levelNames.Contains(pairedLevelName)) {
+                    throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+                  }
+
+                  level.collidableBlocks.Add(game.BlockFactory.CreateOpenVaultDoorBlockSprite(xPos, yPos, pairedLevelName));
+                  break;
+                }
 
               case "22":
                 /* fire pit */
@@ -271,17 +289,29 @@ internal partial class Level : ILevel {
                 level.collidableBlocks.Add(game.BlockFactory.CreateWindowBlockSprite(xPos, yPos));
                 break;
 
-              case "31":
-                /* locked slatted door */
-                // TODO - SS: add pairing info
-                level.collidableBlocks.Add(game.BlockFactory.CreateLockedSlattedDoorSprite(xPos, yPos));
-                break;
+              case "31": {
+                  /* locked slatted door */
+                  var pairedLevelName = entrySplit[1];
 
-              case "32":
-                /* open slatted door */
-                // TODO - SS: add pairing info
-                level.collidableBlocks.Add(game.BlockFactory.CreateOpenSlattedDoorSprite(xPos, yPos));
-                break;
+                  if (!levelNames.Contains(pairedLevelName)) {
+                    throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+                  }
+
+                  level.collidableBlocks.Add(game.BlockFactory.CreateLockedSlattedDoorSprite(xPos, yPos, pairedLevelName));
+                  break;
+                }
+
+              case "32": {
+                  /* open slatted door */
+                  var pairedLevelName = entrySplit[1];
+
+                  if (!levelNames.Contains(pairedLevelName)) {
+                    throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+                  }
+
+                  level.collidableBlocks.Add(game.BlockFactory.CreateOpenSlattedDoorSprite(xPos, yPos, pairedLevelName));
+                  break;
+                }
 
               default:
                 throw new FormatException($"unrecognized level block/entity type '{type}'");
