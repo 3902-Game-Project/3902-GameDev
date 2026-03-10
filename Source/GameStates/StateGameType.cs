@@ -75,11 +75,6 @@ public class StateGameType(Game1 game) : IGameState {
         }
       }
     }*/
-    
-
-    if (Items != null && Items.Count > 0) {
-      Items[ItemNumber].Update(gameTime);
-    }
 
     game.ProjectileManager.Update(gameTime);
 
@@ -123,10 +118,6 @@ public class StateGameType(Game1 game) : IGameState {
     /*if (Blocks != null && Blocks.Count > 0 && BlockNumber < Blocks.Count) {
       Blocks[BlockNumber].Draw(game.SpriteBatch);
     }*/
-
-    if (Items != null && Items.Count > 0 && ItemNumber < Items.Count) {
-      Items[ItemNumber].Draw(game.SpriteBatch);
-    }
 
     Player.Draw(game.SpriteBatch);
 

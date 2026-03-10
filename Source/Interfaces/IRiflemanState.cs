@@ -2,6 +2,6 @@
 
 namespace GameProject.Interfaces;
 
-public interface IRifleState {
+public interface IRiflemanState {
   void Update(GameTime gameTime);
 }

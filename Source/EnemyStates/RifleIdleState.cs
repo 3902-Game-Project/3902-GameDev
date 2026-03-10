@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using GameProject.Interfaces;
-using GameProject.Sprites;
+using GameProject.Source.Enemies;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
-public class RifleIdleState : IRifleState {
-  private RifleSprite rifle;
+public class RifleIdleState : IRiflemanState {
+  private RiflemanSprite rifle;
   private double timer;
   private double animationTimer;
   private System.Random random;
 
-  public RifleIdleState(RifleSprite rifle) {
+  public RifleIdleState(RiflemanSprite rifle) {
     this.rifle = rifle;
     this.random = new System.Random();
 

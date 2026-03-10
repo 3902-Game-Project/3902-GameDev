@@ -11,7 +11,7 @@ internal class EnemySpriteFactory {
   private Texture2D snakeTexture;
   private Texture2D batTexture;
   private Texture2D shotgunnerTexture;
-  private Texture2D rifleTexture;
+  private Texture2D riflemanTexture;
   private Texture2D tumbleweedTexture;
   private Texture2D cactusTexture;
   private static EnemySpriteFactory instance = new();
@@ -27,30 +27,27 @@ internal class EnemySpriteFactory {
     snakeTexture = content.Load<Texture2D>("snakeSpritesheet");
     batTexture = content.Load<Texture2D>("batSpritesheet");
     shotgunnerTexture = content.Load<Texture2D>("shotgunnerSpritesheet");
-    rifleTexture = content.Load<Texture2D>("rifleSpritesheet");
+    riflemanTexture = content.Load<Texture2D>("rifleSpritesheet");
     tumbleweedTexture = content.Load<Texture2D>("tumbleweedSprite");
     cactusTexture = content.Load<Texture2D>("cactusSprite");
   }
 
-  public IEnemy CreateSnakeSprite() {
-    return new SnakeSprite(snakeTexture, new Vector2(400, 200));
-  }
   public IEnemy CreateSnakeSprite(float xPos, float yPos) {
     return new SnakeSprite(snakeTexture, new Vector2(xPos, yPos));
   }
-  public IEnemy CreateCactusSprite() {
+  public IEnemy CreateCactusSprite(float xPos, float yPos) {
     return new CactusSprite(cactusTexture, new Vector2(400, 200));
   }
-  public IEnemy CreateTumbleweedSprite() {
+  public IEnemy CreateTumbleweedSprite(float xPos, float yPos) {
     return new TumbleSprite(tumbleweedTexture, new Vector2(400, 200));
   }
-  public IEnemy CreateRifleSprite(ProjectileManager projectileManager) {
-    return new RifleSprite(rifleTexture, new Vector2(400, 200), projectileManager);
+  public IEnemy CreateRiflemanSprite(float xPos, float yPos, ProjectileManager projectileManager) {
+    return new RiflemanSprite(riflemanTexture, new Vector2(400, 200), projectileManager);
   }
-  public IEnemy CreateBatSprite() {
+  public IEnemy CreateBatSprite(float xPos, float yPos) {
     return new BatSprite(batTexture, new Vector2(400, 200));
   }
-  public IEnemy CreateShotgunnerSprite(ProjectileManager projectileManager) {
+  public IEnemy CreateShotgunnerSprite(float xPos, float yPos, ProjectileManager projectileManager) {
     return new ShotgunnerSprite(shotgunnerTexture, new Vector2(400, 200), projectileManager);
   }
 }

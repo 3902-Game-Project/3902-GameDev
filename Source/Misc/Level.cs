@@ -303,8 +303,8 @@ internal partial class Level : ILevel {
   public void LoadContent(ContentManager content) { }
 
   public void Update(GameTime gameTime) {
-    foreach (var block in collidableBlocks) {
-      block.Update(gameTime);
+    foreach (var collidableBlock in collidableBlocks) {
+      collidableBlock.Update(gameTime);
     }
 
     foreach (var enemy in enemies) {
@@ -317,11 +317,12 @@ internal partial class Level : ILevel {
   }
 
   public void Draw(GameTime gameTime) {
-    foreach (var terr in nonCollidableBlocks) {
-      terr.Draw(game.SpriteBatch);
+    foreach (var nonCollidableBlock in nonCollidableBlocks) {
+      nonCollidableBlock.Draw(game.SpriteBatch);
     }
-    foreach (var block in collidableBlocks) {
-      block.Draw(game.SpriteBatch);
+
+    foreach (var collidableBlock in collidableBlocks) {
+      collidableBlock.Draw(game.SpriteBatch);
     }
 
     foreach (var enemy in enemies) {

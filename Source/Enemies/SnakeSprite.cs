@@ -1,20 +1,17 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using GameProject.Interfaces;
-using GameProject.Managers;
 using GameProject.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Sprites;
+namespace GameProject.Enemies;
 
-public class RifleSprite : IEnemy {
+public class SnakeSprite : IEnemy {
   // Data needed by states
   public Texture2D Texture { get; private set; }
-  public ProjectileManager ProjectileManager { get; private set; }
   public Vector2 Position;
   public Vector2 Velocity { get; set; }
   public int FacingDirection { get; set; } = 1;
-
   public Rectangle BoundingBox {
     get {
       if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return Rectangle.Empty;
@@ -22,23 +19,22 @@ public class RifleSprite : IEnemy {
       float scale = 2f;
       int width = (int)(source.Width * scale);
       int height = (int)(source.Height * scale);
-      return new Rectangle((int)Position.X - (width / 2), (int)Position.Y - height, width, height);
+      return new Rectangle((int)Position.X - width / 2, (int)Position.Y - height, width, height);
     }
   }
 
   public List<Rectangle> CurrentSourceRectangles;
   public int CurrentFrame;
 
-  private IRifleState state;
+  private ISnakeState state;
 
-  public RifleSprite(Texture2D texture, Vector2 position, ProjectileManager projectileManager) {
+  public SnakeSprite(Texture2D texture, Vector2 position) {
     Texture = texture;
     Position = position;
-    ProjectileManager = projectileManager;
-    state = new RifleWanderState(this);
+    state = new SnakeWanderState(this);
   }
 
-  public void ChangeState(IRifleState newState) {
+  public void ChangeState(ISnakeState newState) {
     state = newState;
   }
 
@@ -59,7 +55,7 @@ public class RifleSprite : IEnemy {
     Rectangle source = CurrentSourceRectangles[CurrentFrame];
 
     // Flip logic
-    SpriteEffects effect = (FacingDirection > 0) ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+    SpriteEffects effect = FacingDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
     // Origin at feet
     Vector2 origin = new(source.Width / 2, source.Height);
@@ -67,5 +63,5 @@ public class RifleSprite : IEnemy {
     spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, 2f, effect, 0f);
   }
 
-  public void TakeDamage() { ChangeState(new RifleDeathState(this)); }
+  public void TakeDamage() { ChangeState(new SnakeDeathState(this)); }
 }
