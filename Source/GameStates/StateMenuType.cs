@@ -6,17 +6,20 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.GameStates;
 
 public class StateMenuType(Game1 game) : IGameState {
-  private static readonly string START_TEXT = "Press Enter to start!";
+  private static readonly string START_TEXT = "Press Enter/GamePadB to start!";
   private IController keyboardController;
+  private IController gamePadController;
 
   public void Initialize() {
     keyboardController = new MenuKeyboardController(game);
+    gamePadController = new GameGamePadController(game);
   }
 
   public void LoadContent() { }
 
   public void Update(GameTime gameTime) {
     keyboardController.Update(gameTime);
+    gamePadController.Update(gameTime);
   }
 
   public void Draw(GameTime gameTime) {
