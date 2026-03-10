@@ -6,7 +6,7 @@ namespace GameProject.Interfaces;
 public interface IPlayerState {
   void Update(GameTime gameTime);
   void Draw(SpriteBatch spriteBatch);
-  void UseItem();
+  void UseItem(UseType useType);
   void MoveUp();
   void MoveDown();
   void MoveLeft();

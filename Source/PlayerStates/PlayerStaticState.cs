@@ -31,7 +31,7 @@ public class PlayerStaticState(Player player) : IPlayerState {
     }
   }
 
-  public void UseItem() {
+  public void UseItem(UseType useType) {
     player.State = player.UseItemState;
   }
 

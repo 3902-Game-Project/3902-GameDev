@@ -59,7 +59,7 @@ public class Player {
   public void MoveDown() => State.MoveDown();
   public void MoveLeft() => State.MoveLeft();
   public void MoveRight() => State.MoveRight();
-  public void UseItem() => State.UseItem();
+  public void UseItem(UseType useType) => State.UseItem(useType);
   public void Die() => State.Die();
 
   public void LoadContent() {

@@ -4,6 +4,6 @@ namespace GameProject.Commands;
 
 public class UseCurrentItemCommand(Game1 game, UseType useType) : ICommand {
   public void Execute() {
-    game.StateGame.Items[game.StateGame.ItemNumber].Use(useType);
+    game.StateGame.Player.UseItem(useType);
   }
 }

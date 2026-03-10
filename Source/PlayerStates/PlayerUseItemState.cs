@@ -11,7 +11,7 @@ public class PlayerUseItemState(Player player) : IPlayerState {
   public void MoveDown() { }
   public void MoveLeft() { }
   public void MoveRight() { }
-  public void UseItem() { }
+  public void UseItem(UseType useType) { }
 
   public void Die() {
     player.State = player.DeadState;
