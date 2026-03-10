@@ -1,3 +1,4 @@
+using GameProject.Collisions;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Interfaces;
@@ -10,5 +11,5 @@ public interface ICollidable {
   Layer Layer { get; }
   Layer Mask { get; }
 
-  void OnCollision(ICollidable other);
+  void OnCollision(CollisionInfo collisionInfo);
 }
