@@ -18,6 +18,12 @@ public class BoxCollider : IShape, ICollider {
     this.position = position;
   }
 
+  // added the removed constructor to fix compile errors:
+  public BoxCollider(Vector2 dimensions, Vector2 position) {
+    width = dimensions.X;
+    height = dimensions.Y;
+    this.position = position;
+  }
 
   public bool CheckCollision(ICollider other) {
     if (other is BoxCollider otherBox) {
