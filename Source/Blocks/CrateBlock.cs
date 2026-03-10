@@ -11,7 +11,6 @@ public class CrateBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
   public BlockState State { get; set; }
-  public ICollider Collider { get; private set; }
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 2f), (int)(sourceRect.Height * 2f));
 
   public CrateBlock(Texture2D CrateTexture, Vector2 xyPos) {
@@ -25,7 +24,7 @@ public class CrateBlock : IBlock {
 
     Vector2 centerPosition = new Vector2(XPos + 64, YPos + 64);
 
-    Collider = new BoxCollider(dimensions, centerPosition);
+    
   }
 
   public void Update(GameTime gameTime) {

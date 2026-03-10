@@ -15,7 +15,6 @@ public class FireBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
   public BlockState State { get; set; }
-  public ICollider Collider { get; private set; }
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRects[0].Width * 1f), (int)(sourceRects[0].Height * 1f));
 
   public FireBlock(Texture2D FireTexture, Vector2 xyPos) {
@@ -33,7 +32,7 @@ public class FireBlock : IBlock {
 
     Vector2 centerPosition = new Vector2(XPos + 32, YPos + 32);
 
-    Collider = new BoxCollider(dimensions, centerPosition);
+    
   }
 
   public void Update(GameTime gameTime) {

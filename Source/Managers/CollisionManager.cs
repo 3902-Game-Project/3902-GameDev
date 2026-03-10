@@ -116,7 +116,9 @@ public class CollisionManager {
     float dx = c.position.X - closestX;
     float dy = c.position.Y - closestY;
 
-    return (dx * dx + dy * dy) <= c.radius * c.radius;
+    if ((dx * dx + dy * dy) > c.radius * c.radius) return false;
+
+    return true;
   }
 
   private bool CircleCircleCollision(CircleCollider c1, CircleCollider c2, out CollisionInfo info1, out CollisionInfo info2) {

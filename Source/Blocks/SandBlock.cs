@@ -9,7 +9,7 @@ public class SandBlock : IBlock {
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
-  public ICollider Collider { get; private set; }
+  
 
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 1f), (int)(sourceRect.Height * 1f));
 
@@ -23,7 +23,7 @@ public class SandBlock : IBlock {
 
     Vector2 centerPosition = new Vector2(XPos + 32, YPos + 32);
 
-    //Collider = new BoxCollider(dimensions, centerPosition); // no collision detection needed for the floor -Aaron
+    // // no collision detection needed for the floor -Aaron
   }
 
   public void Update(GameTime gameTime) {

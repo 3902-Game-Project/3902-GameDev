@@ -13,7 +13,7 @@ public class OpenSlattedDoorBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
   public float Rotation { get; private set; }
-  public ICollider Collider { get; private set; }
+  
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 1f), (int)(sourceRect.Height * 1f));
 
   public OpenSlattedDoorBlock(Texture2D OpenSlattedDoorTexture, Vector2 xyPos) {
@@ -27,7 +27,7 @@ public class OpenSlattedDoorBlock : IBlock {
 
     centerPosition = new Vector2(XPos + 32, YPos + 32);
 
-    //Collider = new BoxCollider(dimensions, centerPosition);
+    //
   }
 
   public void Rotate() {
