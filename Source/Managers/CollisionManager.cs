@@ -40,7 +40,7 @@ public class CollisionManager {
       return BoxCircleCollision(c1.Shape as BoxCollider, c2.Shape as CircleCollider, out info1, out info2);
 
     if (c1.Shape.Type == ShapeType.Circle && c2.Shape.Type == ShapeType.Box)
-      return BoxCircleCollision(c2.Shape as BoxCollider, c1.Shape as CircleCollider, out info1, out info2);
+      return BoxCircleCollision(c2.Shape as BoxCollider, c1.Shape as CircleCollider, out info2, out info1);
 
     if (c1.Shape.Type == ShapeType.Circle && c2.Shape.Type == ShapeType.Circle)
       return CircleCircleCollision(c1.Shape as CircleCollider, c2.Shape as CircleCollider, out info1, out info2);
@@ -110,13 +110,48 @@ public class CollisionManager {
     info1 = null;
     info2 = null;
 
-    float closestX = Math.Clamp(c.position.X, b.Left, b.Left + b.width);
-    float closestY = Math.Clamp(c.position.Y, b.Top, b.Top + b.height);
+    float closestX = Math.Clamp(c.position.X, b.Left, b.Right);
+    float closestY = Math.Clamp(c.position.Y, b.Top, b.Bottom);
 
     float dx = c.position.X - closestX;
     float dy = c.position.Y - closestY;
 
     if ((dx * dx + dy * dy) > c.radius * c.radius) return false;
+
+    Vector2 direction1 = new Vector2(c.position.X - closestX, c.position.Y - closestY);
+    direction1 = Vector2.Normalize(direction1);
+    Vector2 direction2 = Vector2.Negate(direction1);
+
+    CollisionSide side1, side2;
+
+    float magX = Math.Abs(direction1.X);
+    float magY = Math.Abs(direction1.Y);
+
+    if (magX > magY) {
+      // Horizontal dominant collision
+      if (direction1.X > 0) {
+        side1 = CollisionSide.Right;
+        side2 = CollisionSide.Left;
+      }
+      else {
+        side1 = CollisionSide.Left;
+        side2 = CollisionSide.Right;
+      }
+    }
+    else {
+      // Vertical dominant collision
+      if (direction1.Y > 0) {
+        side1 = CollisionSide.Top;
+        side2 = CollisionSide.Bottom;
+      }
+      else {
+        side1 = CollisionSide.Bottom;
+        side2 = CollisionSide.Top;
+      }
+    }
+
+    info1 = new CollisionInfo { Side = side1, Direction = direction1 };
+    info2 = new CollisionInfo { Side = side2, Direction = direction2 };
 
     return true;
   }
@@ -131,10 +166,9 @@ public class CollisionManager {
     float distSq = dx * dx + dy * dy;
     if (distSq > (r * r)) return false;
 
-    Vector2 direction1 = new Vector2(c2.position.X - c1.position.X, c2.position.Y - c1.position.Y);
-    Vector2.Normalize(direction1);
-    Vector2 direction2 = new Vector2(c1.position.X - c2.position.X, c1.position.Y - c2.position.Y);
-    Vector2.Normalize(direction2);
+    Vector2 direction1 = c2.position - c1.position;
+    direction1 = Vector2.Normalize(direction1);
+    Vector2 direction2 = Vector2.Negate(direction1);
 
     CollisionSide side1, side2;
 
