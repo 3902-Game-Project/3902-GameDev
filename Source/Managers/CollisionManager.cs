@@ -28,7 +28,7 @@ public class CollisionManager {
     }
   }
 
-  
+
   private bool CheckCollison(ICollidable c1, ICollidable c2, out CollisionInfo info1, out CollisionInfo info2) {
     info1 = null;
     info2 = null;
@@ -63,41 +63,32 @@ public class CollisionManager {
     Vector2 direction1;
     Vector2 direction2;
 
-    if (overlapX < overlapY)
-    {
-        // Horizontal collision
-        if (b1.position.X < b2.position.X)
-        {
-            side1 = CollisionSide.Right;
-            side2 = CollisionSide.Left;
-            direction1 = new Vector2(1, 0);
-            direction2 = new Vector2(-1, 0);
-        }
-        else
-        {
-            side1 = CollisionSide.Left;
-            side2 = CollisionSide.Right;
-            direction1 = new Vector2(-1, 0);
-            direction2 = new Vector2(1, 0);
-        }
-    }
-    else
-    {
-        // Vertical collision
-        if (b1.position.Y < b2.position.Y)
-        {
-            side1 = CollisionSide.Bottom;
-            side2 = CollisionSide.Top;
-            direction1 = new Vector2(0, 1);
-            direction2 = new Vector2(0, -1);
-        }
-        else
-        {
-            side1 = CollisionSide.Top;
-            side2 = CollisionSide.Bottom;
-            direction1 = new Vector2(0, -1);
-            direction2 = new Vector2(0, 1);
-        }
+    if (overlapX < overlapY) {
+      // Horizontal collision
+      if (b1.position.X < b2.position.X) {
+        side1 = CollisionSide.Right;
+        side2 = CollisionSide.Left;
+        direction1 = new Vector2(1, 0);
+        direction2 = new Vector2(-1, 0);
+      } else {
+        side1 = CollisionSide.Left;
+        side2 = CollisionSide.Right;
+        direction1 = new Vector2(-1, 0);
+        direction2 = new Vector2(1, 0);
+      }
+    } else {
+      // Vertical collision
+      if (b1.position.Y < b2.position.Y) {
+        side1 = CollisionSide.Bottom;
+        side2 = CollisionSide.Top;
+        direction1 = new Vector2(0, 1);
+        direction2 = new Vector2(0, -1);
+      } else {
+        side1 = CollisionSide.Top;
+        side2 = CollisionSide.Bottom;
+        direction1 = new Vector2(0, -1);
+        direction2 = new Vector2(0, 1);
+      }
     }
 
     info1 = new CollisionInfo { Side = side1, Direction = direction1 };
@@ -132,19 +123,16 @@ public class CollisionManager {
       if (direction1.X > 0) {
         side1 = CollisionSide.Right;
         side2 = CollisionSide.Left;
-      }
-      else {
+      } else {
         side1 = CollisionSide.Left;
         side2 = CollisionSide.Right;
       }
-    }
-    else {
+    } else {
       // Vertical dominant collision
       if (direction1.Y > 0) {
         side1 = CollisionSide.Top;
         side2 = CollisionSide.Bottom;
-      }
-      else {
+      } else {
         side1 = CollisionSide.Bottom;
         side2 = CollisionSide.Top;
       }
@@ -179,19 +167,16 @@ public class CollisionManager {
       if (direction1.X > 0) {
         side1 = CollisionSide.Right;
         side2 = CollisionSide.Left;
-      }
-      else {
+      } else {
         side1 = CollisionSide.Left;
         side2 = CollisionSide.Right;
       }
-    }
-    else {
+    } else {
       // Vertical dominant collision
       if (direction1.Y > 0) {
         side1 = CollisionSide.Top;
         side2 = CollisionSide.Bottom;
-      }
-      else {
+      } else {
         side1 = CollisionSide.Bottom;
         side2 = CollisionSide.Top;
       }

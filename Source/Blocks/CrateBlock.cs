@@ -1,5 +1,4 @@
-﻿using GameProject.Collisions;
-using GameProject.Interfaces;
+﻿using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -24,7 +23,7 @@ public class CrateBlock : IBlock {
 
     Vector2 centerPosition = new Vector2(XPos + 64, YPos + 64);
 
-    
+
   }
 
   public void Update(GameTime gameTime) {

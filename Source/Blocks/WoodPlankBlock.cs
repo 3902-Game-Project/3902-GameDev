@@ -9,7 +9,7 @@ public class WoodPlankBlock : IBlock {
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
-  
+
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 1f), (int)(sourceRect.Height * 1f));
 
   public WoodPlankBlock(Texture2D WoodPlankTexture, Vector2 xyPos) {

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using GameProject.Controllers;
+﻿using GameProject.Controllers;
 using GameProject.Interfaces;
 using GameProject.Managers;
 using GameProject.Source.Collision;
@@ -98,8 +97,8 @@ public class StateGameType(Game1 game) : IGameState {
         }
       }*/
 
-      //Todo: bullet vs enemy
-   
+    //Todo: bullet vs enemy
+
   }
 
   public void Draw(GameTime gameTime) {

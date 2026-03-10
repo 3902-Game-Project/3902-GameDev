@@ -1,5 +1,4 @@
-﻿using GameProject.Collisions;
-using GameProject.Interfaces;
+﻿using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,7 +9,7 @@ public class RockHoleBlock : IBlock {
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
-  
+
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 2f), (int)(sourceRect.Height * 2f));
 
   public RockHoleBlock(Texture2D RockHoleTexture, Vector2 xyPos) {
@@ -23,7 +22,7 @@ public class RockHoleBlock : IBlock {
 
     Vector2 centerPosition = new Vector2(XPos + 32, YPos + 32);
 
-    
+
   }
 
   public void Update(GameTime gameTime) {

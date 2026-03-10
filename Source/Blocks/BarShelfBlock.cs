@@ -1,5 +1,4 @@
-﻿using GameProject.Collisions; // 1. ADDED: Required for BoxCollider
-using GameProject.Interfaces;
+﻿using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,7 +11,7 @@ public class BarShelfBlock : IBlock {
   public float YPos { get; private set; }
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 2f), (int)(sourceRect.Height * 2f));
 
-   
+
 
 
   public BarShelfBlock(Texture2D BarShelfTexture, Vector2 xyPos) {
@@ -25,7 +24,7 @@ public class BarShelfBlock : IBlock {
 
     Vector2 centerPosition = new Vector2(XPos + 64, YPos + 64);
 
-    
+
 
   }
 

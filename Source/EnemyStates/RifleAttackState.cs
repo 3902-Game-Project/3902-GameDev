@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using GameProject.Enemies;
 using GameProject.Factories;
 using GameProject.Interfaces;
-using GameProject.Enemies;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.States;

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using GameProject.Collisions;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,7 +15,7 @@ public class OpenVaultDoorBlock : IBlock {
   public float YPos { get; private set; }
   public string PairedLevelName { get; private set; }
   public BlockState State { get; set; }
-  
+
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRects[0].Width * 2f), (int)(sourceRects[0].Height * 2f));
 
   public OpenVaultDoorBlock(Texture2D OpenVaultDoorTexture, Vector2 xyPos, string pairedLevelName) {
@@ -38,7 +37,7 @@ public class OpenVaultDoorBlock : IBlock {
 
     Vector2 centerPosition = new Vector2(XPos + 64, YPos + 64);
 
-    
+
   }
 
   public void Update(GameTime gameTime) {

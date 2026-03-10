@@ -15,5 +15,5 @@ public class CollisionInfo {
     Direction = direction;
   }
 
-  public CollisionInfo () {}
+  public CollisionInfo() { }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using GameProject.Collisions;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -32,7 +31,7 @@ public class FireBlock : IBlock {
 
     Vector2 centerPosition = new Vector2(XPos + 32, YPos + 32);
 
-    
+
   }
 
   public void Update(GameTime gameTime) {

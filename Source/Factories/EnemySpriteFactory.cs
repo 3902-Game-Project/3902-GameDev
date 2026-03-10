@@ -1,6 +1,6 @@
-﻿using GameProject.Interfaces;
+﻿using GameProject.Enemies;
+using GameProject.Interfaces;
 using GameProject.Managers;
-using GameProject.Enemies;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;

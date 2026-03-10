@@ -1,5 +1,4 @@
-﻿using GameProject.Collisions;
-using GameProject.Interfaces;
+﻿using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,7 +9,7 @@ public class ShelfBlock : IBlock {
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
-  
+
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 2f), (int)(sourceRect.Height * 2f));
 
   public ShelfBlock(Texture2D ShelfTexture, Vector2 xyPos) {
@@ -23,7 +22,7 @@ public class ShelfBlock : IBlock {
 
     Vector2 centerPosition = new Vector2(XPos + 63, YPos + 63);
 
-    
+
   }
 
   public void Update(GameTime gameTime) {

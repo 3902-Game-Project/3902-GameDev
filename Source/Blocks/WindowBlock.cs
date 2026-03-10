@@ -1,5 +1,4 @@
-﻿using GameProject.Collisions;
-using GameProject.Interfaces;
+﻿using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,7 +9,7 @@ public class WindowBlock : IBlock {
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
-  
+
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 1f), (int)(sourceRect.Height * 1f));
 
   public WindowBlock(Texture2D WindowTexture, Vector2 xyPos) {
@@ -23,7 +22,7 @@ public class WindowBlock : IBlock {
 
     Vector2 centerPosition = new Vector2(XPos + 32, YPos + 32);
 
-    
+
   }
 
   public void Update(GameTime gameTime) {
