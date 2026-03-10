@@ -27,8 +27,10 @@ internal class LevelManager(Game1 game) : ILevelManager {
       throw new ArgumentException("There must be at least one level to load");
     }
 
+    var levelNamesSet = new HashSet<string>(LEVEL_NAMES);
+
     foreach (var name in LEVEL_NAMES) {
-      levels.Add(Level.FromString(game, File.ReadAllText(content.RootDirectory + "/" + name)));
+      levels.Add(Level.FromString(game, levelNamesSet, File.ReadAllText(content.RootDirectory + "/" + name)));
     }
   }
 
