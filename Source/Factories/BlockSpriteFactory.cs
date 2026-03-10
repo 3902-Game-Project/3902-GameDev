@@ -2,6 +2,7 @@
 using GameProject.Interfaces;
 using GameProject.Source.Blocks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Factories;
@@ -18,8 +19,8 @@ public class BlockSpriteFactory {
     //instance = new BlockSpriteFactory();
   }
 
-  public void LoadAllTextures(Game1 game) { // changed param from ContentManager content for sprint2 purposes
-    blockTextures = game.Content.Load<Texture2D>("desert-atlas-v6");
+  public void LoadAllTextures(ContentManager content) {
+    blockTextures = content.Load<Texture2D>("desert-atlas-v6");
   }
 
   /* Floor Blocks */
