@@ -12,7 +12,7 @@ public class StateMenuType(Game1 game) : IGameState {
 
   public void Initialize() {
     keyboardController = new MenuKeyboardController(game);
-    gamePadController = new GameGamePadController(game);
+    gamePadController = new MenuGamePadController(game);
   }
 
   public void LoadContent() { }

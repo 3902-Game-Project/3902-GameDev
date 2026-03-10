@@ -26,13 +26,17 @@ internal class GameGamePadController(Game1 game) : IController {
     prevGamePadState = gamePadState;
     gamePadState = GamePad.GetState(PlayerIndex.One);
 
-    if (gamePadState.Buttons.Y == ButtonState.Pressed && prevGamePadState.Buttons.Y == ButtonState.Released) {
+    // The bindings don't match the readme. this is intentional, because
+    // the readme is in Xbox controller layout, but testing with a
+    // nintendo pro controller seems to suggest it is pro controller layout.
+
+    if (gamePadState.Buttons.X == ButtonState.Pressed && prevGamePadState.Buttons.X == ButtonState.Released) {
       quitCommand.Execute();
-    } else if (gamePadState.Buttons.A == ButtonState.Pressed && prevGamePadState.Buttons.A == ButtonState.Released) {
-      returnToMainMenuCommand.Execute();
     } else if (gamePadState.Buttons.B == ButtonState.Pressed && prevGamePadState.Buttons.B == ButtonState.Released) {
+      returnToMainMenuCommand.Execute();
+    } else if (gamePadState.Buttons.A == ButtonState.Pressed && prevGamePadState.Buttons.A == ButtonState.Released) {
       useItemPressedCommand.Execute();
-    } else if (gamePadState.Buttons.X == ButtonState.Pressed && prevGamePadState.Buttons.X == ButtonState.Released) {
+    } else if (gamePadState.Buttons.Y == ButtonState.Pressed && prevGamePadState.Buttons.Y == ButtonState.Released) {
       dieCommand.Execute();
     } else if (gamePadState.Buttons.RightShoulder == ButtonState.Pressed && prevGamePadState.Buttons.RightShoulder == ButtonState.Released) {
       nextLevelCommand.Execute();
