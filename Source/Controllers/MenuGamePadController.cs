@@ -21,7 +21,9 @@ internal class MenuGamePadController(Game1 game) : IController {
 
     if (gamePadState.Buttons.A == ButtonState.Pressed && prevGamePadState.Buttons.A == ButtonState.Released) {
       startGameCommand.Execute();
-    } else if (gamePadState.Buttons.B == ButtonState.Pressed && prevGamePadState.Buttons.B == ButtonState.Released) {
+    }
+    
+    if (gamePadState.Buttons.B == ButtonState.Pressed && prevGamePadState.Buttons.B == ButtonState.Released) {
       quitCommand.Execute();
     }
   }

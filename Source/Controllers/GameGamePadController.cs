@@ -32,27 +32,45 @@ internal class GameGamePadController(Game1 game) : IController {
 
     if (gamePadState.Buttons.X == ButtonState.Pressed && prevGamePadState.Buttons.X == ButtonState.Released) {
       quitCommand.Execute();
-    } else if (gamePadState.Buttons.B == ButtonState.Pressed && prevGamePadState.Buttons.B == ButtonState.Released) {
+    }
+
+    if (gamePadState.Buttons.B == ButtonState.Pressed && prevGamePadState.Buttons.B == ButtonState.Released) {
       returnToMainMenuCommand.Execute();
-    } else if (gamePadState.Buttons.A == ButtonState.Pressed && prevGamePadState.Buttons.A == ButtonState.Released) {
+    }
+
+    if (gamePadState.Buttons.A == ButtonState.Pressed && prevGamePadState.Buttons.A == ButtonState.Released) {
       useItemPressedCommand.Execute();
-    } else if (gamePadState.Buttons.Y == ButtonState.Pressed && prevGamePadState.Buttons.Y == ButtonState.Released) {
+    }
+
+    if (gamePadState.Buttons.Y == ButtonState.Pressed && prevGamePadState.Buttons.Y == ButtonState.Released) {
       dieCommand.Execute();
-    } else if (gamePadState.Buttons.RightShoulder == ButtonState.Pressed && prevGamePadState.Buttons.RightShoulder == ButtonState.Released) {
+    }
+
+    if (gamePadState.Buttons.RightShoulder == ButtonState.Pressed && prevGamePadState.Buttons.RightShoulder == ButtonState.Released) {
       nextLevelCommand.Execute();
-    } else if (gamePadState.Buttons.LeftShoulder == ButtonState.Pressed && prevGamePadState.Buttons.LeftShoulder == ButtonState.Released) {
+    }
+
+    if (gamePadState.Buttons.LeftShoulder == ButtonState.Pressed && prevGamePadState.Buttons.LeftShoulder == ButtonState.Released) {
       prevLevelCommand.Execute();
     }
 
     if (gamePadState.DPad.Up == ButtonState.Pressed) {
       playerMoveUpCommand.Execute();
-    } else if (gamePadState.DPad.Down == ButtonState.Pressed) {
+    }
+
+    if (gamePadState.DPad.Down == ButtonState.Pressed) {
       playerMoveDownCommand.Execute();
-    } else if (gamePadState.DPad.Left == ButtonState.Pressed) {
+    }
+
+    if (gamePadState.DPad.Left == ButtonState.Pressed) {
       playerMoveLeftCommand.Execute();
-    } else if (gamePadState.DPad.Right == ButtonState.Pressed) {
+    }
+
+    if (gamePadState.DPad.Right == ButtonState.Pressed) {
       playerMoveRightCommand.Execute();
-    } else if (gamePadState.Buttons.B == ButtonState.Pressed) {
+    }
+
+    if (gamePadState.Buttons.B == ButtonState.Pressed) {
       useItemHeldCommand.Execute();
     }
 
