@@ -46,9 +46,13 @@ Entry IDs:
     25 = Mud
     26 = Crate
     27 = Stool
+      Note: you must also specify a background block for this block!
     28 = Table
+      Note: you must also specify a background block for this block!
     29 = Statue
+      Note: you must also specify a background block for this block!
     30 = Window
+      Note: you might also need to specify a background block for this block!
     31:X = Locked slatted door to other room
       X = pairing id number; door connects to other door with same pairing ID
     32:X = Open slatted door to other room
