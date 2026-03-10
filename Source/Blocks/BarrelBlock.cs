@@ -13,7 +13,7 @@ public class BarrelBlock : IBlock {
   public BlockState State { get; set; }
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 2f), (int)(sourceRect.Height * 2f));
 
-  public ICollider Collider { get; private set; }
+   
 
   public BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) {
     texture = barrelTexture;
@@ -26,7 +26,7 @@ public class BarrelBlock : IBlock {
 
     Vector2 centerPosition = new Vector2(XPos + 64, YPos + 64);
 
-    Collider = new BoxCollider(dimensions, centerPosition);
+    
   }
 
   public void Update(GameTime gameTime) {

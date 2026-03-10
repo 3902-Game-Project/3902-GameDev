@@ -10,7 +10,7 @@ public class ShelfBlock : IBlock {
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
-  public ICollider Collider { get; private set; }
+  
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 2f), (int)(sourceRect.Height * 2f));
 
   public ShelfBlock(Texture2D ShelfTexture, Vector2 xyPos) {
@@ -23,7 +23,7 @@ public class ShelfBlock : IBlock {
 
     Vector2 centerPosition = new Vector2(XPos + 63, YPos + 63);
 
-    Collider = new BoxCollider(dimensions, centerPosition);
+    
   }
 
   public void Update(GameTime gameTime) {

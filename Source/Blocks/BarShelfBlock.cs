@@ -12,7 +12,7 @@ public class BarShelfBlock : IBlock {
   public float YPos { get; private set; }
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 2f), (int)(sourceRect.Height * 2f));
 
-  public ICollider Collider { get; private set; }
+   
 
 
   public BarShelfBlock(Texture2D BarShelfTexture, Vector2 xyPos) {
@@ -25,7 +25,7 @@ public class BarShelfBlock : IBlock {
 
     Vector2 centerPosition = new Vector2(XPos + 64, YPos + 64);
 
-    Collider = new BoxCollider(dimensions, centerPosition);
+    
 
   }
 

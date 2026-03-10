@@ -10,7 +10,6 @@ public enum BlockState {
   still, moving
 }   // for Crate,  
 public interface IBlock {
-  ICollider Collider { get; }
   public void Update(GameTime gameTime);
   public void Draw(SpriteBatch spriteBatch);
 

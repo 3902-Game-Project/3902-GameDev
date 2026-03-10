@@ -15,7 +15,7 @@ public class OpenVaultDoorBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
   public BlockState State { get; set; }
-  public ICollider Collider { get; private set; }
+  
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRects[0].Width * 2f), (int)(sourceRects[0].Height * 2f));
 
   public OpenVaultDoorBlock(Texture2D OpenVaultDoorTexture, Vector2 xyPos) {
@@ -36,7 +36,7 @@ public class OpenVaultDoorBlock : IBlock {
 
     Vector2 centerPosition = new Vector2(XPos + 64, YPos + 64);
 
-    Collider = new BoxCollider(dimensions, centerPosition);
+    
   }
 
   public void Update(GameTime gameTime) {

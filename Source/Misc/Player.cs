@@ -45,7 +45,6 @@ public class Player {
     this.game = game;
     this.Position = new Vector2(400, 300);
     this.Velocity = Vector2.Zero;
-    this.Collider = new BoxCollider(new Vector2(34, 64), this.Position);
     this.Inventory = new PlayerInventory(this);
 
     this.MovingState = new PlayerAnimatedMovingState(this);
@@ -76,7 +75,6 @@ public class Player {
     Position += Velocity * dt;
     State.Update(gameTime);
     Velocity = Vector2.Zero;
-    Collider.position = this.Position;
 
     if (Inventory.ActiveItem != null) {
       Vector2 rightHandOffset = new Vector2(29, 32);
