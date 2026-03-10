@@ -64,9 +64,9 @@ internal partial class Level : ILevel {
                     throw new FormatException($"Expected 1 parameter for level block/entity type '{type}'");
                   }
 
-                  //var variation = entrySplit[1];
+                  var variation = entrySplit[1];
 
-                  switch (entrySplit[1]) {
+                  switch (variation) {
                     case "0":
                       /* wall */
                       level.collidableBlocks.Add(game.BlockFactory.CreateLogBlockSprite(xPos, yPos));
@@ -78,7 +78,7 @@ internal partial class Level : ILevel {
                       break;
 
                     default:
-                      throw new FormatException($"unrecognized level block/entity variation '{entrySplit[1]}'");
+                      break;// throw new FormatException($"unrecognized level block/entity variation '{entrySplit[1]}'");
                   }
                   break;
                 }
@@ -113,7 +113,7 @@ internal partial class Level : ILevel {
                 level.nonCollidableBlocks.Add(game.BlockFactory.CreateWoodPlankBlockSprite(xPos, yPos));
                 break;
 
-              case "8":
+              case "8": {
                   /* rock */
 
                   if (entrySplit.Length != 2) {
@@ -134,13 +134,13 @@ internal partial class Level : ILevel {
                       break;
 
                     default:
-                      throw new FormatException($"unrecognized level block/entity variation '{variation}'");
+                      break;// throw new FormatException($"unrecognized level block/entity variation '{variation}'");
                   }
                   break;
-                
+                }
 
               default:
-                throw new FormatException($"unrecognized level block/entity type '{type}'");
+                break;// throw new FormatException($"unrecognized level block/entity type '{type}'");
             }
           }
         }
