@@ -14,24 +14,24 @@ public class ItemSpriteFactory(ProjectileManager projectileManager) {
     basicGunsTexture = content.Load<Texture2D>("basic_guns_spritesheet");
   }
 
-  public IItem CreateRevolver() {
+  public IItem CreateRevolver(float xPos, float yPos) {
     GunStats stats = new GunStats {
       BulletVelocity = 200f,
       FireRate = .2f
     };
-    return new RevolverItem(basicGunsTexture, new Vector2(300, 300), projectileManager, stats);
+    return new RevolverItem(basicGunsTexture, new Vector2(xPos, yPos), projectileManager, stats);
   }
 
-  public IItem CreateRifle() {
+  public IItem CreateRifle(float xPos, float yPos) {
     var stats = new GunStats();
     stats.BulletVelocity = 500f;
-    return new RifleItem(basicGunsTexture, new Vector2(300, 300), projectileManager, stats);
+    return new RifleItem(basicGunsTexture, new Vector2(xPos, yPos), projectileManager, stats);
   }
 
-  public IItem CreateShotgun() {
+  public IItem CreateShotgun(float xPos, float yPos) {
     var stats = new GunStats();
     stats.SpreadAngle = 30f;
     stats.PelletCount = 5;
-    return new ShotgunItem(basicGunsTexture, new Vector2(300, 300), projectileManager, stats);
+    return new ShotgunItem(basicGunsTexture, new Vector2(xPos, yPos), projectileManager, stats);
   }
 }

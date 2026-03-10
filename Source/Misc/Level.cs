@@ -161,7 +161,7 @@ internal partial class Level : ILevel {
 
               case "9":
                 /* shotgunner */
-                level.enemies.Add(EnemySpriteFactory.Instance.CreateShotgunnerSprite(xPos, yPos));
+                level.enemies.Add(EnemySpriteFactory.Instance.CreateShotgunnerSprite(xPos, yPos, game.ProjectileManager));
                 break;
 
               case "10":
@@ -171,7 +171,7 @@ internal partial class Level : ILevel {
 
               case "11":
                 /* rifleman */
-                level.enemies.Add(EnemySpriteFactory.Instance.CreateRiflemanSprite(xPos, yPos));
+                level.enemies.Add(EnemySpriteFactory.Instance.CreateRiflemanSprite(xPos, yPos, game.ProjectileManager));
                 break;
 
               case "12":
