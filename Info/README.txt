@@ -1,4 +1,4 @@
-Program controls:
+Controls:
   W/Up to move player upwards.
   S/Down to move player downwards.
   A/Left to move player leftwards.
