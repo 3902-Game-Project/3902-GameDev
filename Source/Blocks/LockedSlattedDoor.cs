@@ -13,14 +13,16 @@ public class LockedSlattedDoorBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
   public float Rotation { get; private set; }
+  public string PairedLevelName { get; private set; }
   public ICollider Collider { get; private set; }
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 1f), (int)(sourceRect.Height * 1f));
 
-  public LockedSlattedDoorBlock(Texture2D LockedSlattedDoorTexture, Vector2 xyPos) {
+  public LockedSlattedDoorBlock(Texture2D LockedSlattedDoorTexture, Vector2 xyPos, string pairedLevelName) {
     texture = LockedSlattedDoorTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
     Rotation = 0.0f;
+    PairedLevelName = pairedLevelName;
     sourceRect = new Rectangle(192, 128, 64, 64); // will be in xml (or something else) file later -Aaron
     //Rotate();
     dimensions = new Vector2(64, 64);

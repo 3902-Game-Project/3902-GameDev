@@ -10,13 +10,15 @@ public class LockedVaultBlock : IBlock {
   private Rectangle sourceRect;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
+  public string PairedLevelName { get; private set; }
   public ICollider Collider { get; private set; }
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 2f), (int)(sourceRect.Height * 2f));
 
-  public LockedVaultBlock(Texture2D LockedVaultTexture, Vector2 xyPos) {
+  public LockedVaultBlock(Texture2D LockedVaultTexture, Vector2 xyPos, string pairedLevelName) {
     texture = LockedVaultTexture;
     XPos = xyPos.X;
     YPos = xyPos.Y;
+    PairedLevelName = pairedLevelName;
     sourceRect = new Rectangle(64, 128, 64, 64); // will be in xml (or something else) file later -Aaron
 
     Vector2 dimensions = new Vector2(128, 128);

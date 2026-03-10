@@ -89,8 +89,8 @@ internal partial class Level : ILevel {
 
               case "2": {
                   /* door */
-                  var pairingID = entrySplit[1];
-                  level.collidableBlocks.Add(game.BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos, pairingID));
+                  var pairedLevelName = entrySplit[1];
+                  level.collidableBlocks.Add(game.BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos, pairedLevelName));
                   break;
                 }
 
@@ -217,15 +217,15 @@ internal partial class Level : ILevel {
 
               case "20": {
                   /* locked vault door */
-                  var pairingID = entrySplit[1];
-                  level.collidableBlocks.Add(game.BlockFactory.CreateLockedVaultBlockSprite(xPos, yPos, pairingID));
+                  var pairedLevelName = entrySplit[1];
+                  level.collidableBlocks.Add(game.BlockFactory.CreateLockedVaultBlockSprite(xPos, yPos, pairedLevelName));
                   break;
                 }
 
               case "21": {
                   /* open vault door */
-                  var pairingID = entrySplit[1];
-                  level.collidableBlocks.Add(game.BlockFactory.CreateOpenVaultDoorBlockSprite(xPos, yPos, pairingID));
+                  var pairedLevelName = entrySplit[1];
+                  level.collidableBlocks.Add(game.BlockFactory.CreateOpenVaultDoorBlockSprite(xPos, yPos, pairedLevelName));
                   break;
                 }
 
@@ -276,15 +276,15 @@ internal partial class Level : ILevel {
 
               case "31": {
                   /* locked slatted door */
-                  var pairingID = entrySplit[1];
-                  level.collidableBlocks.Add(game.BlockFactory.CreateLockedSlattedDoorSprite(xPos, yPos, pairingID));
+                  var pairedLevelName = entrySplit[1];
+                  level.collidableBlocks.Add(game.BlockFactory.CreateLockedSlattedDoorSprite(xPos, yPos, pairedLevelName));
                   break;
                 }
 
               case "32": {
                   /* open slatted door */
-                  var pairingID = entrySplit[1];
-                  level.collidableBlocks.Add(game.BlockFactory.CreateOpenSlattedDoorSprite(xPos, yPos, pairingID));
+                  var pairedLevelName = entrySplit[1];
+                  level.collidableBlocks.Add(game.BlockFactory.CreateOpenSlattedDoorSprite(xPos, yPos, pairedLevelName));
                   break;
                 }
 

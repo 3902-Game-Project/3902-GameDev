@@ -14,15 +14,17 @@ public class OpenVaultDoorBlock : IBlock {
   private double timePerFrame = 0.3;
   public float XPos { get; private set; }
   public float YPos { get; private set; }
+  public string PairedLevelName { get; private set; }
   public BlockState State { get; set; }
   public ICollider Collider { get; private set; }
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRects[0].Width * 2f), (int)(sourceRects[0].Height * 2f));
 
-  public OpenVaultDoorBlock(Texture2D OpenVaultDoorTexture, Vector2 xyPos) {
+  public OpenVaultDoorBlock(Texture2D OpenVaultDoorTexture, Vector2 xyPos, string pairedLevelName) {
     texture = OpenVaultDoorTexture;
     currentFrame = 0;
     XPos = xyPos.X;
     YPos = xyPos.Y;
+    PairedLevelName = pairedLevelName;
     State = BlockState.lit;
     sourceRects = new List<Rectangle> {
       new Rectangle(64, 192, 64, 64),

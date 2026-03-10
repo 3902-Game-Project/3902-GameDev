@@ -55,20 +55,20 @@ public class BlockSpriteFactory {
   }
 
   /* Doors */
-  public IBlock CreateSmallDoorBlockSprite(float x, float y, string pairingID) {
-    return new SmallDoorBlock(blockTextures, new Vector2(x, y), pairingID);
+  public IBlock CreateSmallDoorBlockSprite(float x, float y, string pairedLevelName) {
+    return new SmallDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName);
   }
-  public IBlock CreateLockedVaultBlockSprite(float x, float y, string pairingID) {
-    return new LockedVaultBlock(blockTextures, new Vector2(x, y), pairingID);
+  public IBlock CreateLockedVaultBlockSprite(float x, float y, string pairedLevelName) {
+    return new LockedVaultBlock(blockTextures, new Vector2(x, y), pairedLevelName);
   }
-  public IBlock CreateOpenVaultDoorBlockSprite(float x, float y, string pairingID) {
-    return new OpenVaultDoorBlock(blockTextures, new Vector2(x, y), pairingID);
+  public IBlock CreateOpenVaultDoorBlockSprite(float x, float y, string pairedLevelName) {
+    return new OpenVaultDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName);
   }
-  public IBlock CreateLockedSlattedDoorSprite(float x, float y, string pairingID) {
-    return new LockedSlattedDoorBlock(blockTextures, new Vector2(x, y), pairingID);
+  public IBlock CreateLockedSlattedDoorSprite(float x, float y, string pairedLevelName) {
+    return new LockedSlattedDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName);
   }
-  public IBlock CreateOpenSlattedDoorSprite(float x, float y, string pairingID) {
-    return new OpenSlattedDoorBlock(blockTextures, new Vector2(x, y), pairingID);
+  public IBlock CreateOpenSlattedDoorSprite(float x, float y, string pairedLevelName) {
+    return new OpenSlattedDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName);
   }
 
   /* Object Blocks */
