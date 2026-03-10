@@ -284,7 +284,7 @@ internal partial class Level : ILevel {
                 break;
 
               default:
-                break;// throw new FormatException($"unrecognized level block/entity type '{type}'");
+                throw new FormatException($"unrecognized level block/entity type '{type}'");
             }
           }
         }
