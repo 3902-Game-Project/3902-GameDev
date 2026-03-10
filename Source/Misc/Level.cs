@@ -177,7 +177,7 @@ internal partial class Level : ILevel {
     }
 
     foreach (var enemy in enemies) {
-      enemy.Update(gameTime);
+      enemy.Draw(game.SpriteBatch);
     }
 
     foreach (var pickup in pickups) {
