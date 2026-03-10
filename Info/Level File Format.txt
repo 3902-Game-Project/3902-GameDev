@@ -6,63 +6,71 @@ If there are multiple blocks in the same cell (for example, a background block a
 
 Entry IDs:
   Misc:
-  0 = Empty
-  3 = Player
+    0 = Empty
+    3 = Player
 
   Non colliding blocks:
-  5 = Sand
-  6 = Red Sand
-  7 = Wood Plank
+    5 = Sand
+    6 = Red Sand
+    7 = Wood Plank
 
   Colliding blocks:
-  1:X = Log
-    X = variation:
-      0 = wall
-      1 = corner
-  8:X = Rock
-    X = variation:
-      0 = wall
-      1 = corner
-      2 = red X
-      3 = hole
-  2:X = door to other room
-    X = pairing id number; door connects to other door with same pairing ID
-  17 = Barrel
-  18 = Bar Shelf
-  19 = Shelf
-  20:X = Locked vault door to other room
-    X = pairing id number; door connects to other door with same pairing ID
-  21:X = Open vault door to other room
-    X = pairing id number; door connects to other door with same pairing ID
-  22 = Fire pit (extinguished)
-  23 = Fire (lit)
-  24 = Ladder (how should we handle the collision?)
-  25 = Mud
-  26 = Crate
-  27 = Stool
-  28 = Table
-  29 = Statue
-  30 = Window
-  31:X = Locked slatted door to other room
-    X = pairing id number; door connects to other door with same pairing ID
-  32:X = Open slatted door to other room
-    X = pairing id number; door connects to other door with same pairing ID
+    1:X = Log
+      X = variation:
+        0 = wall
+        1 = corner
+    8:X = Rock
+      X = variation:
+        0 = wall
+        1 = corner
+        2 = red X
+        3 = hole
+    2:X = door to other room
+      X = pairing id number; door connects to other door with same pairing ID
+    17 = Barrel
+      Note: you must also specify a background block for this block!
+    18 = Bar Shelf
+      Note: you must also specify a background block for this block!
+    19 = Shelf
+      Note: you must also specify a background block for this block!
+    20:X = Locked vault door to other room
+      X = pairing id number; door connects to other door with same pairing ID
+    21:X = Open vault door to other room
+      X = pairing id number; door connects to other door with same pairing ID
+    22 = Fire pit (extinguished)
+      Note: you must also specify a background block for this block!
+    23 = Fire (lit)
+      Note: you must also specify a background block for this block!
+    24 = Ladder (how should we handle the collision?)
+      Note: you must also specify a background block for this block!
+    25 = Mud
+    26 = Crate
+    27 = Stool
+    28 = Table
+    29 = Statue
+    30 = Window
+    31:X = Locked slatted door to other room
+      X = pairing id number; door connects to other door with same pairing ID
+    32:X = Open slatted door to other room
+      X = pairing id number; door connects to other door with same pairing ID
 
   items:
-  14 = revolver
-  15 = rifle
-  16 = shotgun
+    Note: you must also specify a background block for items!
+    14 = revolver
+    15 = rifle
+    16 = shotgun
 
   enemies:
-  4 = snake
-  9 = shotgunner
-  10 = bat
-  11 = rifleman
-  12 = tumbleweed
-  13 = cactus
+    Note: you must also specify a background block for enemies!
+    4 = snake
+    9 = shotgunner
+    10 = bat
+    11 = rifleman
+    12 = tumbleweed
+    13 = cactus
 
   Gaps in the IDs:
-  None
+    None
 
   Biggest ID:
-  32
+    32
