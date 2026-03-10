@@ -10,6 +10,7 @@ namespace GameProject.GameStates;
 public class StateGameType(Game1 game) : IGameState {
   private IController keyboardController;
   private IController mouseController;
+  private IController gamePadController;
 
   private CollisionHandler collisionHandler;
 
@@ -20,6 +21,7 @@ public class StateGameType(Game1 game) : IGameState {
   public void Initialize() {
     keyboardController = new GameKeyboardController(game);
     mouseController = new GameMouseController(game);
+    gamePadController = new GameGamePadController(game);
     LevelManager = new LevelManager(game);
     LevelManager.Initialize();
     collisionHandler = new CollisionHandler();
@@ -36,6 +38,7 @@ public class StateGameType(Game1 game) : IGameState {
   public void Update(GameTime gameTime) {
     keyboardController.Update(gameTime);
     mouseController.Update(gameTime);
+    gamePadController.Update(gameTime);
     LevelManager.Update(gameTime);
     Player.Update(gameTime);
 
