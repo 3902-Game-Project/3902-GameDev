@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using GameProject.Factories;
 using GameProject.Interfaces;
+using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
@@ -21,6 +22,7 @@ internal partial class Level : ILevel {
   private List<IBlock> collidableBlocks = new();
   private List<IEnemy> enemies = new();
   private List<IWorldPickup> pickups = new();
+  public Vector2 PlayerPosition { get; private set; }
 
   private Level(Game1 game) {
     this.game = game;
@@ -32,6 +34,8 @@ internal partial class Level : ILevel {
     var lines = NewlineSplitRegex().Split(levelDataString.Trim());
 
     var levelData = lines.Select((line) => line.Split(',')).ToArray();
+
+    bool playerPositionSet = false;
 
     if (levelData.Length > 0) {
       for (int rowIndex = 0; rowIndex < levelData.Length; rowIndex++) {
@@ -78,19 +82,25 @@ internal partial class Level : ILevel {
                       break;
 
                     default:
-                      break;// throw new FormatException($"unrecognized level block/entity variation '{entrySplit[1]}'");
+                      throw new FormatException($"unrecognized level block/entity variation '{entrySplit[1]}'");
                   }
                   break;
                 }
 
               case "2":
                 /* door */
+                // TODO - SS: add pairing info
                 level.collidableBlocks.Add(game.BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos));
                 break;
 
               case "3":
                 /* player position */
-                // TODO
+                if (playerPositionSet) {
+                  throw new FormatException("default player position set twice in same level");
+                } else {
+                  level.PlayerPosition = new(xPos, yPos);
+                  playerPositionSet = true;
+                }
                 break;
 
               case "4":
@@ -133,11 +143,145 @@ internal partial class Level : ILevel {
                       level.collidableBlocks.Add(game.BlockFactory.CreateRockCornerBlockSprite(xPos, yPos));
                       break;
 
+                    case "2":
+                      /* red X */
+                      level.collidableBlocks.Add(game.BlockFactory.CreateRedXRockBlockSprite(xPos, yPos));
+                      break;
+
+                    case "3":
+                      /* hole */
+                      level.collidableBlocks.Add(game.BlockFactory.CreateRockHoleBlockSprite(xPos, yPos));
+                      break;
+
                     default:
-                      break;// throw new FormatException($"unrecognized level block/entity variation '{variation}'");
+                      throw new FormatException($"unrecognized level block/entity variation '{variation}'");
                   }
                   break;
                 }
+
+              case "9":
+                /* shotgunner */
+                level.enemies.Add(EnemySpriteFactory.Instance.CreateShotgunnerSprite(xPos, yPos));
+                break;
+
+              case "10":
+                /* bat */
+                level.enemies.Add(EnemySpriteFactory.Instance.CreateBatSprite(xPos, yPos));
+                break;
+
+              case "11":
+                /* rifleman */
+                level.enemies.Add(EnemySpriteFactory.Instance.CreateRiflemanSprite(xPos, yPos));
+                break;
+
+              case "12":
+                /* tumbleweed */
+                level.enemies.Add(EnemySpriteFactory.Instance.CreateTumbleweedSprite(xPos, yPos));
+                break;
+
+              case "13":
+                /* cactus */
+                level.enemies.Add(EnemySpriteFactory.Instance.CreateCactusSprite(xPos, yPos));
+                break;
+
+              case "14":
+                /* revolver */
+                level.pickups.Add(new ItemWorldPickup(game.ItemSpriteFactory.CreateRevolver(xPos, yPos)));
+                break;
+
+              case "15":
+                /* rifle */
+                level.pickups.Add(new ItemWorldPickup(game.ItemSpriteFactory.CreateRifle(xPos, yPos)));
+                break;
+
+              case "16":
+                /* shotgun */
+                level.pickups.Add(new ItemWorldPickup(game.ItemSpriteFactory.CreateShotgun(xPos, yPos)));
+                break;
+
+              case "17":
+                /* barrel */
+                level.collidableBlocks.Add(game.BlockFactory.CreateBarrelBlockSprite(xPos, yPos));
+                break;
+
+              case "18":
+                /* bar shelf */
+                level.collidableBlocks.Add(game.BlockFactory.CreateBarShelfBlockSprite(xPos, yPos));
+                break;
+
+              case "19":
+                /* shelf */
+                level.collidableBlocks.Add(game.BlockFactory.CreateShelfBlockSprite(xPos, yPos));
+                break;
+
+              case "20":
+                /* locked vault door */
+                // TODO - SS: add pairing info
+                level.collidableBlocks.Add(game.BlockFactory.CreateLockedVaultBlockSprite(xPos, yPos));
+                break;
+
+              case "21":
+                /* open vault door */
+                // TODO - SS: add pairing info
+                level.collidableBlocks.Add(game.BlockFactory.CreateOpenVaultDoorBlockSprite(xPos, yPos));
+                break;
+
+              case "22":
+                /* fire pit */
+                level.collidableBlocks.Add(game.BlockFactory.CreateFirePitBlockSprite(xPos, yPos));
+                break;
+
+              case "23":
+                /* fire */
+                level.collidableBlocks.Add(game.BlockFactory.CreateFireBlockSprite(xPos, yPos));
+                break;
+
+              case "24":
+                /* ladder */
+                level.collidableBlocks.Add(game.BlockFactory.CreateLadderBlockSprite(xPos, yPos));
+                break;
+
+              case "25":
+                /* mud */
+                level.collidableBlocks.Add(game.BlockFactory.CreateMudBlockSprite(xPos, yPos));
+                break;
+
+              case "26":
+                /* crate */
+                level.collidableBlocks.Add(game.BlockFactory.CreateCrateBlockSprite(xPos, yPos));
+                break;
+
+              case "27":
+                /* stool */
+                level.collidableBlocks.Add(game.BlockFactory.CreateStoolBlockSprite(xPos, yPos));
+                break;
+
+              case "28":
+                /* table */
+                level.collidableBlocks.Add(game.BlockFactory.CreateTableBlockSprite(xPos, yPos));
+                break;
+
+              case "29":
+                /* statue */
+                level.collidableBlocks.Add(game.BlockFactory.CreateStatueBlockSprite(xPos, yPos));
+                break;
+
+              case "30":
+                /* window */
+                level.collidableBlocks.Add(game.BlockFactory.CreateWindowBlockSprite(xPos, yPos));
+                break;
+
+              case "31":
+                /* locked slatted door */
+                // TODO - SS: add pairing info
+                level.collidableBlocks.Add(game.BlockFactory.CreateLockedSlattedDoorSprite(xPos, yPos));
+                break;
+
+              case "32":
+                /* open slatted door */
+                // TODO - SS: add pairing info
+                level.collidableBlocks.Add(game.BlockFactory.CreateOpenSlattedDoorSprite(xPos, yPos));
+                break;
 
               default:
                 break;// throw new FormatException($"unrecognized level block/entity type '{type}'");
@@ -145,6 +289,10 @@ internal partial class Level : ILevel {
           }
         }
       }
+    }
+
+    if (!playerPositionSet) {
+      throw new FormatException("default player position was not set in level");
     }
 
     return level;
