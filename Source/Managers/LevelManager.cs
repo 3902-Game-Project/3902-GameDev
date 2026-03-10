@@ -9,18 +9,27 @@ using Microsoft.Xna.Framework.Content;
 namespace GameProject.Managers;
 
 internal class LevelManager(Game1 game) : ILevelManager {
-  string[] LEVEL_NAMES = [
-    "00_test.csv"
+  private static string[] LEVEL_NAMES = [
+    "00_test"
   ];
+  private static string STARTING_LEVEL = LEVEL_NAMES[0];
 
-  private readonly List<ILevel> levels = new();
-  private int currentLevelIndex = 0;
+  private readonly Dictionary<string, ILevel> levels = new();
+  private string currentLevelName = STARTING_LEVEL;
 
-  public ILevel CurrentLevel => levels[currentLevelIndex];
+  private int CurrentLevelIndex => Array.IndexOf(LEVEL_NAMES, currentLevelName);
 
-  public void Initialize() {
-    currentLevelIndex = 0;
+  private void SwitchLevelByIndex(int newLevelIndex) {
+    if (newLevelIndex < 0 || newLevelIndex >= LEVEL_NAMES.Length) {
+      throw new ArgumentException("Attempt to set level index out of bounds");
+    }
+
+    SwitchLevel(LEVEL_NAMES[newLevelIndex]);
   }
+
+  public ILevel CurrentLevel => levels[currentLevelName];
+
+  public void Initialize() { }
 
   public void LoadContent(ContentManager content) {
     if (LEVEL_NAMES.Length == 0) {
@@ -30,32 +39,33 @@ internal class LevelManager(Game1 game) : ILevelManager {
     var levelNamesSet = new HashSet<string>(LEVEL_NAMES);
 
     foreach (var name in LEVEL_NAMES) {
-      levels.Add(Level.FromString(game, levelNamesSet, File.ReadAllText(content.RootDirectory + "/" + name)));
+      levels.Add(name, Level.FromString(game, levelNamesSet, File.ReadAllText(content.RootDirectory + "/" + name + ".csv")));
     }
   }
 
   public void Update(GameTime gameTime) {
-    levels[currentLevelIndex].Update(gameTime);
+    CurrentLevel.Update(gameTime);
   }
 
   public void Draw(GameTime gameTime) {
-    levels[currentLevelIndex].Draw(gameTime);
+    CurrentLevel.Draw(gameTime);
   }
 
-  public void SwitchLevel(int newLevelIndex) {
-    if (newLevelIndex < 0 || newLevelIndex >= LEVEL_NAMES.Length) {
-      throw new ArgumentException("Attempt to set level index out of bounds");
+  public void SwitchLevel(string newLevelName) {
+    if (!levels.ContainsKey(newLevelName)) {
+      throw new ArgumentException($"level name unknown: '{newLevelName}'");
     }
 
-    if (newLevelIndex != currentLevelIndex)
-      currentLevelIndex = newLevelIndex;
+    if (newLevelName != currentLevelName) {
+      currentLevelName = newLevelName;
+    }
   }
 
   public void PreviousLevel() {
-    SwitchLevel(Math.Max(currentLevelIndex - 1, 0));
+    SwitchLevelByIndex(Math.Max(CurrentLevelIndex - 1, 0));
   }
 
   public void NextLevel() {
-    SwitchLevel(Math.Min(currentLevelIndex + 1, LEVEL_NAMES.Length - 1));
+    SwitchLevelByIndex(Math.Min(CurrentLevelIndex + 1, LEVEL_NAMES.Length - 1));
   }
 }
