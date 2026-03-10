@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using GameProject.Interfaces;
-using GameProject.Sprites;
+using GameProject.Enemies;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
-public class RifleDeathState : IRifleState {
-  private RifleSprite rifleman;
+public class RifleDeathState : IRiflemanState {
+  private RiflemanSprite rifleman;
 
   private double animationTimer;
   private double timePerFrame = 0.15;
@@ -16,7 +16,7 @@ public class RifleDeathState : IRifleState {
 
   private bool isAnimationFinished = false;
 
-  public RifleDeathState(RifleSprite rifleman) {
+  public RifleDeathState(RiflemanSprite rifleman) {
     this.rifleman = rifleman;
 
 

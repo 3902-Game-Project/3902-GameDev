@@ -1,16 +1,13 @@
 ﻿using System.Collections.Generic;
 using GameProject.Interfaces;
-using GameProject.Managers;
 using GameProject.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Sprites;
+namespace GameProject.Enemies;
 
-public class ShotgunnerSprite : IEnemy {
-  // Data needed by states
+public class TumbleSprite : IEnemy {
   public Texture2D Texture { get; private set; }
-  public ProjectileManager ProjectileManager { get; private set; }
   public Vector2 Position;
   public Vector2 Velocity { get; set; }
   public int FacingDirection { get; set; } = 1;
@@ -18,33 +15,30 @@ public class ShotgunnerSprite : IEnemy {
     get {
       if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return Rectangle.Empty;
       Rectangle source = CurrentSourceRectangles[CurrentFrame];
-      float scale = 1.6f;
+      float scale = 0.4f;
       int width = (int)(source.Width * scale);
       int height = (int)(source.Height * scale);
-      return new Rectangle((int)Position.X - (width / 2), (int)Position.Y - height, width, height);
+      return new Rectangle((int)Position.X - width / 2, (int)Position.Y - height, width, height);
     }
   }
 
   public List<Rectangle> CurrentSourceRectangles;
   public int CurrentFrame;
 
-  private IShotgunnerState state;
+  private ITumbleState state;
 
-  public ShotgunnerSprite(Texture2D texture, Vector2 position, ProjectileManager projectileManager) {
+  public TumbleSprite(Texture2D texture, Vector2 position) {
     Texture = texture;
     Position = position;
-    ProjectileManager = projectileManager;
-    state = new ShotgunnerWanderState(this);
+    state = new TumbleIdleState(this);
   }
 
-  public void ChangeState(IShotgunnerState newState) {
+  public void ChangeState(ITumbleState newState) {
     state = newState;
   }
 
   public void Update(GameTime gameTime) {
     state.Update(gameTime);
-
-    // Keep inside bounds
     if (Position.X < 0) {
       Position.X = 0;
     }
@@ -57,15 +51,13 @@ public class ShotgunnerSprite : IEnemy {
 
     Rectangle source = CurrentSourceRectangles[CurrentFrame];
 
-    // Flip logic
-    SpriteEffects effect = (FacingDirection > 0) ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+    SpriteEffects effect = FacingDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
-    // Origin at feet
     Vector2 origin = new(source.Width / 2, source.Height);
 
-    float scale = 1.6f;
+    float scale = 0.4f;
     spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, scale, effect, 0f);
   }
 
-  public void TakeDamage() { ChangeState(new ShotgunnerDeathState(this)); }
+  public void TakeDamage() { ChangeState(new TumbleDeathState(this)); }
 }

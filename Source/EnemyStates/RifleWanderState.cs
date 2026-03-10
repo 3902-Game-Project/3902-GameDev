@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameProject.Interfaces;
-using GameProject.Sprites;
+using GameProject.Enemies;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
-public class RifleWanderState : IRifleState {
-  private RifleSprite rifle;
+public class RifleWanderState : IRiflemanState {
+  private RiflemanSprite rifle;
   private Random random;
   private double wanderTimer;
   private double wanderDuration;
@@ -15,7 +15,7 @@ public class RifleWanderState : IRifleState {
   private double animationTimer;
   private int currentFrameIndex;
 
-  public RifleWanderState(RifleSprite rifle) {
+  public RifleWanderState(RiflemanSprite rifle) {
     this.rifle = rifle;
     this.random = new Random();
 

@@ -4,7 +4,7 @@ using GameProject.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Sprites;
+namespace GameProject.Enemies;
 
 public class BatSprite : IEnemy {
   // Data needed by states
@@ -28,7 +28,7 @@ public class BatSprite : IEnemy {
       float scale = 2f; // BatSprite uses 2f scale in Draw()
       int width = (int)(source.Width * scale);
       int height = (int)(source.Height * scale);
-      int x = (int)Position.X - (width / 2);
+      int x = (int)Position.X - width / 2;
       int y = (int)Position.Y - height;
 
       return new Rectangle(x, y, width, height);
@@ -61,7 +61,7 @@ public class BatSprite : IEnemy {
     Rectangle source = CurrentSourceRectangles[CurrentFrame];
 
     // Flip logic
-    SpriteEffects effect = (FacingDirection > 0) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+    SpriteEffects effect = FacingDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
     // Origin at feet
     Vector2 origin = new(source.Width / 2, source.Height);

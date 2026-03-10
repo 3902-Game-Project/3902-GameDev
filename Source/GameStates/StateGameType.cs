@@ -15,10 +15,6 @@ public class StateGameType(Game1 game) : IGameState {
   private CollisionHandler collisionHandler;
 
   public Player Player { get; private set; } = new Player(game);
-  public List<IItem> Items; // temporary for sprint2
-  public int ItemNumber { get; set; } // temporary for sprint2
-
-  public IItem ItemSprite { get; set; }
 
   public ILevelManager LevelManager { get; private set; }
 
@@ -26,24 +22,14 @@ public class StateGameType(Game1 game) : IGameState {
     keyboardController = new GameKeyboardController(game);
     mouseController = new GameMouseController(game);
     LevelManager = new LevelManager(game);
-    Items = new List<IItem>(); // temporary for sprint2
-    ItemNumber = Items.Count; // temporary for sprint2
     LevelManager.Initialize();
     collisionHandler = new CollisionHandler();
   }
 
   public void LoadContent() {
     Player.LoadContent();
-    game.BlockFactory.LoadAllTextures(game);
 
-    var revolver = game.ItemSpriteFactory.CreateRevolver();
-    Player.Inventory.PickupItem(revolver);
-
-    var rifle = game.ItemSpriteFactory.CreateRifle();
-    Player.Inventory.PickupItem(rifle);
-
-    var shotgun = game.ItemSpriteFactory.CreateShotgun();
-    Items.Add(shotgun);
+    game.BlockFactory.LoadAllTextures(game.Content);
 
     LevelManager.LoadContent(game.Content);
   }
@@ -89,11 +75,6 @@ public class StateGameType(Game1 game) : IGameState {
         }
       }
     }*/
-    
-
-    if (Items != null && Items.Count > 0) {
-      Items[ItemNumber].Update(gameTime);
-    }
 
     game.ProjectileManager.Update(gameTime);
 
@@ -137,10 +118,6 @@ public class StateGameType(Game1 game) : IGameState {
     /*if (Blocks != null && Blocks.Count > 0 && BlockNumber < Blocks.Count) {
       Blocks[BlockNumber].Draw(game.SpriteBatch);
     }*/
-
-    if (Items != null && Items.Count > 0 && ItemNumber < Items.Count) {
-      Items[ItemNumber].Draw(game.SpriteBatch);
-    }
 
     Player.Draw(game.SpriteBatch);
 

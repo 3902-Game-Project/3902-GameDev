@@ -4,7 +4,7 @@ using GameProject.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Sprites;
+namespace GameProject.Enemies;
 
 public class CactusSprite : IEnemy {
   public Texture2D Texture { get; private set; }
@@ -19,7 +19,7 @@ public class CactusSprite : IEnemy {
       float scale = 0.2f;
       int width = (int)(source.Width * scale);
       int height = (int)(source.Height * scale);
-      return new Rectangle((int)Position.X - (width / 2), (int)Position.Y - height, width, height);
+      return new Rectangle((int)Position.X - width / 2, (int)Position.Y - height, width, height);
     }
   }
 
@@ -49,7 +49,7 @@ public class CactusSprite : IEnemy {
 
     Rectangle source = CurrentSourceRectangles[CurrentFrame];
 
-    SpriteEffects effect = (FacingDirection > 0) ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+    SpriteEffects effect = FacingDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
     Vector2 origin = new(source.Width / 2, source.Height);
 

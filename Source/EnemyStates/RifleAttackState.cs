@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
 using GameProject.Factories;
 using GameProject.Interfaces;
-using GameProject.Sprites;
+using GameProject.Enemies;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
-public class RifleAttackState : IRifleState {
-  private RifleSprite rifle;
+public class RifleAttackState : IRiflemanState {
+  private RiflemanSprite rifle;
   private double stateTimer;
   private double animationTimer;
   private double timePerFrame = 0.15;
 
   private bool hasFired = false;
 
-  public RifleAttackState(RifleSprite rifle) {
+  public RifleAttackState(RiflemanSprite rifle) {
     this.rifle = rifle;
 
     this.rifle.Velocity = Vector2.Zero;
