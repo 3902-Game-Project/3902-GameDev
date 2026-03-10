@@ -11,7 +11,6 @@ public class WoodCornerBlock : IBlock {
   public float XPos { get; private set; }
   public float YPos { get; private set; }
   public float Rotation { get; private set; }
-  
   public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 1f), (int)(sourceRect.Height * 1f));
 
   public WoodCornerBlock(Texture2D WoodCornerTexture, Vector2 xyPos) {
@@ -23,8 +22,6 @@ public class WoodCornerBlock : IBlock {
     Vector2 dimensions = new Vector2(128, 128);
 
     Vector2 centerPosition = new Vector2(XPos + 32, YPos + 32);
-
-    
   }
 
   public void Update(GameTime gameTime) {
