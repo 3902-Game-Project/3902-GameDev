@@ -87,11 +87,12 @@ internal partial class Level : ILevel {
                   break;
                 }
 
-              case "2":
-                /* door */
-                // TODO - SS: add pairing info
-                level.collidableBlocks.Add(game.BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos));
-                break;
+              case "2": {
+                  /* door */
+                  var pairingID = entrySplit[1];
+                  level.collidableBlocks.Add(game.BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos, pairingID));
+                  break;
+                }
 
               case "3":
                 /* player position */
@@ -214,17 +215,19 @@ internal partial class Level : ILevel {
                 level.collidableBlocks.Add(game.BlockFactory.CreateShelfBlockSprite(xPos, yPos));
                 break;
 
-              case "20":
-                /* locked vault door */
-                // TODO - SS: add pairing info
-                level.collidableBlocks.Add(game.BlockFactory.CreateLockedVaultBlockSprite(xPos, yPos));
-                break;
+              case "20": {
+                  /* locked vault door */
+                  var pairingID = entrySplit[1];
+                  level.collidableBlocks.Add(game.BlockFactory.CreateLockedVaultBlockSprite(xPos, yPos, pairingID));
+                  break;
+                }
 
-              case "21":
-                /* open vault door */
-                // TODO - SS: add pairing info
-                level.collidableBlocks.Add(game.BlockFactory.CreateOpenVaultDoorBlockSprite(xPos, yPos));
-                break;
+              case "21": {
+                  /* open vault door */
+                  var pairingID = entrySplit[1];
+                  level.collidableBlocks.Add(game.BlockFactory.CreateOpenVaultDoorBlockSprite(xPos, yPos, pairingID));
+                  break;
+                }
 
               case "22":
                 /* fire pit */
@@ -271,17 +274,19 @@ internal partial class Level : ILevel {
                 level.collidableBlocks.Add(game.BlockFactory.CreateWindowBlockSprite(xPos, yPos));
                 break;
 
-              case "31":
-                /* locked slatted door */
-                // TODO - SS: add pairing info
-                level.collidableBlocks.Add(game.BlockFactory.CreateLockedSlattedDoorSprite(xPos, yPos));
-                break;
+              case "31": {
+                  /* locked slatted door */
+                  var pairingID = entrySplit[1];
+                  level.collidableBlocks.Add(game.BlockFactory.CreateLockedSlattedDoorSprite(xPos, yPos, pairingID));
+                  break;
+                }
 
-              case "32":
-                /* open slatted door */
-                // TODO - SS: add pairing info
-                level.collidableBlocks.Add(game.BlockFactory.CreateOpenSlattedDoorSprite(xPos, yPos));
-                break;
+              case "32": {
+                  /* open slatted door */
+                  var pairingID = entrySplit[1];
+                  level.collidableBlocks.Add(game.BlockFactory.CreateOpenSlattedDoorSprite(xPos, yPos, pairingID));
+                  break;
+                }
 
               default:
                 throw new FormatException($"unrecognized level block/entity type '{type}'");
