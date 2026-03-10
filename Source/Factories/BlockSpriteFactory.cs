@@ -46,10 +46,28 @@ public class BlockSpriteFactory {
   public IBlock CreateRockCornerBlockSprite(float x, float y) {
     return new RockCornerBlock(blockTextures, new Vector2(x, y));
   }
+  public IBlock CreateRedXRockBlockSprite(float x, float y) {
+    return new RedXRockBlock(blockTextures, new Vector2(x, y));
+  }
+  public IBlock CreateRockHoleBlockSprite(float x, float y) {
+    return new RockHoleBlock(blockTextures, new Vector2(x, y));
+  }
 
   /* Doors */
   public IBlock CreateSmallDoorBlockSprite(float x, float y) {
     return new SmallDoorBlock(blockTextures, new Vector2(x, y));
+  }
+  public IBlock CreateLockedVaultBlockSprite(float x, float y) {
+    return new LockedVaultBlock(blockTextures, new Vector2(x, y));
+  }
+  public IBlock CreateOpenVaultDoorBlockSprite(float x, float y) {
+    return new OpenVaultDoorBlock(blockTextures, new Vector2(x, y));
+  }
+  public IBlock CreateLockedSlattedDoorSprite(float x, float y) {
+    return new LockedSlattedDoorBlock(blockTextures, new Vector2(x, y));
+  }
+  public IBlock CreateOpenSlattedDoorSprite(float x, float y) {
+    return new OpenSlattedDoorBlock(blockTextures, new Vector2(x, y));
   }
 
   /* Object Blocks */
@@ -59,6 +77,34 @@ public class BlockSpriteFactory {
   public IBlock CreateCrateBlockSprite(float x, float y) {
     return new CrateBlock(blockTextures, new Vector2(x, y));
   }
-
-  // add other create methods...
+  public IBlock CreateBarShelfBlockSprite(float x, float y) {
+    return new BarShelfBlock(blockTextures, new Vector2(x, y));
+  }
+  public IBlock CreateShelfBlockSprite(float x, float y) {
+    return new ShelfBlock(blockTextures, new Vector2(x, y));
+  }
+  public IBlock CreateFirePitBlockSprite(float x, float y) {
+    return new FirePitBlock(blockTextures, new Vector2(x, y));
+  }
+  public IBlock CreateFireBlockSprite(float x, float y) {
+    return new FireBlock(blockTextures, new Vector2(x, y));
+  }
+  public IBlock CreateLadderBlockSprite(float x, float y) {
+    return new LadderBlock(blockTextures, new Vector2(x, y));
+  }
+  public IBlock CreateMudBlockSprite(float x, float y) {
+    return new MudBlock(blockTextures, new Vector2(x, y));
+  }
+  public IBlock CreateStoolBlockSprite(float x, float y) {
+    return new StoolBlock(blockTextures, new Vector2(x, y));
+  }
+  public IBlock CreateTableBlockSprite(float x, float y) {
+    return new TableBlock(blockTextures, new Vector2(x, y));
+  }
+  public IBlock CreateStatueBlockSprite(float x, float y) {
+    return new StatueBlock(blockTextures, new Vector2(x, y));
+  }
+  public IBlock CreateWindowBlockSprite(float x, float y) {
+    return new WindowBlock(blockTextures, new Vector2(x, y));
+  }
 }
