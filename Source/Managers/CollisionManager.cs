@@ -20,7 +20,10 @@ public class CollisionManager {
       for (int j = i + 1; j < colliders.Count; j++) {
         ICollidable c2 = colliders[j];
         CollisionInfo info1 = null, info2 = null;
-        CheckCollison(c1, c2, out info1, out info2);
+        if (CheckCollison(c1, c2, out info1, out info2)) {
+          c1.OnCollision(info1);
+          c2.OnCollision(info2);
+        }
       }
     }
   }
@@ -57,6 +60,8 @@ public class CollisionManager {
 
     CollisionSide side1;
     CollisionSide side2;
+    Vector2 direction1;
+    Vector2 direction2;
 
     if (overlapX < overlapY)
     {
@@ -65,11 +70,15 @@ public class CollisionManager {
         {
             side1 = CollisionSide.Right;
             side2 = CollisionSide.Left;
+            direction1 = new Vector2(1, 0);
+            direction2 = new Vector2(-1, 0);
         }
         else
         {
             side1 = CollisionSide.Left;
             side2 = CollisionSide.Right;
+            direction1 = new Vector2(-1, 0);
+            direction2 = new Vector2(1, 0);
         }
     }
     else
@@ -79,16 +88,17 @@ public class CollisionManager {
         {
             side1 = CollisionSide.Bottom;
             side2 = CollisionSide.Top;
+            direction1 = new Vector2(0, 1);
+            direction2 = new Vector2(0, -1);
         }
         else
         {
             side1 = CollisionSide.Top;
             side2 = CollisionSide.Bottom;
+            direction1 = new Vector2(0, -1);
+            direction2 = new Vector2(0, 1);
         }
     }
-    
-    Vector2 direction1 = new Vector2(b2.position.X - b1.position.X, b2.position.Y - b1.position.Y);
-    Vector2 direction2 = new Vector2(b1.position.X - b2.position.X, b1.position.Y - b2.position.Y);
 
     info1 = new CollisionInfo { Side = side1, Direction = direction1 };
     info2 = new CollisionInfo { Side = side2, Direction = direction2 };
@@ -97,6 +107,9 @@ public class CollisionManager {
   }
 
   private bool BoxCircleCollision(BoxCollider b, CircleCollider c, out CollisionInfo info1, out CollisionInfo info2) {
+    info1 = null;
+    info2 = null;
+
     float closestX = Math.Clamp(c.position.X, b.Left, b.Left + b.width);
     float closestY = Math.Clamp(c.position.Y, b.Top, b.Top + b.height);
 
@@ -107,10 +120,50 @@ public class CollisionManager {
   }
 
   private bool CircleCircleCollision(CircleCollider c1, CircleCollider c2, out CollisionInfo info1, out CollisionInfo info2) {
+    info1 = null;
+    info2 = null;
+
     float dx = c2.position.X - c1.position.X;
     float dy = c2.position.Y - c1.position.Y;
     float r = c1.radius + c2.radius;
     float distSq = dx * dx + dy * dy;
-    return distSq <= (r * r);
+    if (distSq > (r * r)) return false;
+
+    Vector2 direction1 = new Vector2(c2.position.X - c1.position.X, c2.position.Y - c1.position.Y);
+    Vector2.Normalize(direction1);
+    Vector2 direction2 = new Vector2(c1.position.X - c2.position.X, c1.position.Y - c2.position.Y);
+    Vector2.Normalize(direction2);
+
+    CollisionSide side1, side2;
+
+    float magX = Math.Abs(direction1.X);
+    float magY = Math.Abs(direction1.Y);
+    if (magX > magY) {
+      // Horizontal dominant collision
+      if (direction1.X > 0) {
+        side1 = CollisionSide.Right;
+        side2 = CollisionSide.Left;
+      }
+      else {
+        side1 = CollisionSide.Left;
+        side2 = CollisionSide.Right;
+      }
+    }
+    else {
+      // Vertical dominant collision
+      if (direction1.Y > 0) {
+        side1 = CollisionSide.Top;
+        side2 = CollisionSide.Bottom;
+      }
+      else {
+        side1 = CollisionSide.Bottom;
+        side2 = CollisionSide.Top;
+      }
+    }
+
+    info1 = new CollisionInfo { Side = side1, Direction = direction1 };
+    info2 = new CollisionInfo { Side = side2, Direction = direction2 };
+
+    return true;
   }
 }
