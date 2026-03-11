@@ -24,7 +24,7 @@ Entry IDs:
         0 = wall
         1 = corner
         2 = red X
-        3 = hole
+        3:X = hole to other room
     2:X = door to other room
       X = level name
     17 = Barrel
@@ -45,6 +45,7 @@ Entry IDs:
       Note: you must also specify a background block for this block!
     25 = Mud
     26 = Crate
+      Note: you must also specify a background block for this block!
     27 = Stool
       Note: you must also specify a background block for this block!
     28 = Table
