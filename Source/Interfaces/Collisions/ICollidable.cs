@@ -1,9 +1,18 @@
+using System;
 using GameProject.Collisions;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Interfaces;
 
-public enum Layer { Player, Environment, Enemies, Projectiles, Pickups }
+[Flags]
+public enum Layer 
+{
+Environment = 0,
+Player = 1,
+Enemies = 2,
+Projectiles = 3,
+Pickups = 4 
+}
 
 public interface ICollidable {
   IShape Shape { get; }
