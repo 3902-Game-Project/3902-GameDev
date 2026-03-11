@@ -14,7 +14,7 @@ public class OpenSlattedDoorBlock : BaseBlock {
     texture = OpenSlattedDoorTexture;
     Rotation = 0.0f;
     PairedLevelName = pairedLevelName;
-    sourceRect = new Rectangle(192, 128, 64, 64);
+    sourceRect = new Rectangle(320, 128, 64, 64);
   }
 
   public void Rotate() {
