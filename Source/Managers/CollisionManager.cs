@@ -23,7 +23,7 @@ public class CollisionManager {
     colliders.Clear();
   }
 
-  private Texture2D debugTexture;
+  //private Texture2D debugTexture;
 
   /*
   public void DebugDraw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, Microsoft.Xna.Framework.Graphics.GraphicsDevice graphicsDevice) {
