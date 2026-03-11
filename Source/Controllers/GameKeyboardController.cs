@@ -19,6 +19,9 @@ public class GameKeyboardController(Game1 game) : AKeyboardController {
     {Keys.D2, new SwitchItemCommand(game, ItemCategory.Primary)},
     {Keys.D3, new SwitchItemCommand(game, ItemCategory.Consumable)},
     {Keys.D4, new SwitchItemCommand(game, ItemCategory.Melee)},
+
+    {Keys.T, new PreviousLevelCommand(game)},
+    {Keys.Y, new NextLevelCommand(game)},
   };
 
   protected override Dictionary<Keys, ICommand> DownMappings { get; } = new() {
