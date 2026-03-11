@@ -13,6 +13,14 @@ public class CollisionManager {
   public CollisionManager() {
     colliders = new List<ICollidable>();
   }
+  public void AddCollider(ICollidable collider) {
+    if (!colliders.Contains(collider)) {
+      colliders.Add(collider);
+    }
+  }
+  public void Clear() {
+    colliders.Clear();
+  }
 
   public void Update(GameTime gameTime) {
     for (int i = 0; i < colliders.Count - 1; i++) {

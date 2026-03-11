@@ -2,6 +2,7 @@
 using GameProject.Interfaces;
 using GameProject.Misc;
 using GameProject.PlayerStates;
+using GameProject.Source.CollisionResponse;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,7 +13,11 @@ public enum FacingDirection {
   Right
 }
 
-public class Player {
+public class Player : ICollidable {
+  public IShape Shape => Collider;
+  public BoxCollider Collider { get; private set; }
+  public Layer Mask { get; } = Layer.Environment;
+  public Layer Layer { get; } = Layer.Player;
   public Game1 game { get; private set; }
   public IPlayerState State { get; set; } // Current state
   public Vector2 Position { get; set; }
@@ -24,8 +29,6 @@ public class Player {
   public PlayerInventory Inventory { get; private set; }
 
   public Texture2D Texture { get; private set; }
-
-  public BoxCollider Collider { get; private set; }
   public Rectangle BoundingBox {
     get {
       int width = (int)(171 * 0.2f);
@@ -46,6 +49,10 @@ public class Player {
     this.Position = new Vector2(400, 300);
     this.Velocity = Vector2.Zero;
     this.Inventory = new PlayerInventory(this);
+
+    float width = 171 * 0.2f;
+    float height = 323 * 0.2f;
+    this.Collider = new BoxCollider(width, height, this.Position);
 
     this.MovingState = new PlayerAnimatedMovingState(this);
     this.StaticState = new PlayerStaticState(this);
@@ -76,6 +83,10 @@ public class Player {
     State.Update(gameTime);
     Velocity = Vector2.Zero;
 
+    if (Collider != null) {
+      Collider.position = this.Position;
+    }
+
     if (Inventory.ActiveItem != null) {
       Vector2 rightHandOffset = new Vector2(29, 32);
       Vector2 leftHandOffset = new Vector2(3, 36);
@@ -83,6 +94,21 @@ public class Player {
       Vector2 currentOffset = (Direction == FacingDirection.Right) ? rightHandOffset : leftHandOffset;
       Inventory.ActiveItem.Position = this.Position + currentOffset;
     }
+  }
+
+  public void OnCollision(CollisionInfo info) {
+    if (info.Collider is IBlock block) {
+      if (info.Side == CollisionSide.Left || info.Side == CollisionSide.Right) {
+        Velocity = new Vector2(0, Velocity.Y);
+      } else if (info.Side == CollisionSide.Top || info.Side == CollisionSide.Bottom) {
+        Velocity = new Vector2(Velocity.X, 0);
+      }
+
+      // Nudge player out of the wall
+      Position += info.Direction * 2f;
+      Collider.position = this.Position;
+    }
+    // ... handle enemy collisions here ...
   }
 
   public void Draw(SpriteBatch spriteBatch) {

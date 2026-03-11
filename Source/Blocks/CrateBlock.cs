@@ -4,41 +4,24 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class CrateBlock : IBlock {
-  private static Texture2D texture;
+public class CrateBlock : BaseBlock {
+  private Texture2D texture;
   private Rectangle sourceRect;
-  public float XPos { get; private set; }
-  public float YPos { get; private set; }
   public BlockState State { get; set; }
-  public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 1f), (int)(sourceRect.Height * 1f));
 
-  public CrateBlock(Texture2D CrateTexture, Vector2 xyPos) {
+  public CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : base(xyPos) {
     texture = CrateTexture;
-    XPos = xyPos.X;
-    YPos = xyPos.Y;
     State = BlockState.still;
-    sourceRect = new Rectangle(128, 0, 64, 64); // will be in xml (or something else) file later -Aaron
-
-    Vector2 dimensions = new Vector2(64, 64);
-
-    Vector2 centerPosition = new Vector2(XPos + 32, YPos + 32);
-
-
+    sourceRect = new Rectangle(128, 0, 64, 64);
   }
 
-  public void Update(GameTime gameTime) {
-    // implement later
-  }
+  public override void Update(GameTime gameTime) { }
 
-  public void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(texture, new Vector2(XPos, YPos), sourceRect,
-                      Color.White, 0.0f, new Vector2(0, 0), 1.0f,
-                      SpriteEffects.None, 0.0f);
+  public override void Draw(SpriteBatch spriteBatch) {
+    spriteBatch.Draw(texture, Position, sourceRect, Color.White, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 
   public void ChangeState(BlockState state) {
     State = state;
-    // implement rest later...
   }
 }
-

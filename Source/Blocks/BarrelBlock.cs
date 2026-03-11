@@ -4,42 +4,29 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class BarrelBlock : IBlock {
-  private static Texture2D texture;
+public class BarrelBlock : BaseBlock {
+  private Texture2D texture;
   private Rectangle sourceRect;
-  public float XPos { get; private set; }
-  public float YPos { get; private set; }
   public BlockState State { get; set; }
-  public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 1f), (int)(sourceRect.Height * 1f));
-
-
-
-  public BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) {
+  public BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) : base(xyPos) {
     texture = barrelTexture;
-    XPos = xyPos.X;
-    YPos = xyPos.Y;
     State = BlockState.solid;
-    sourceRect = new Rectangle(64, 0, 64, 64); // will be in xml (or something else) file later -Aaron
-
-    Vector2 dimensions = new Vector2(64, 64);
-
-    Vector2 centerPosition = new Vector2(XPos + 32, YPos + 32);
-
-
+    sourceRect = new Rectangle(64, 0, 64, 64);
   }
 
-  public void Update(GameTime gameTime) {
+  public override void Update(GameTime gameTime) {
     // implement later
   }
 
-  public void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(texture, new Vector2(XPos, YPos), sourceRect,
-                      Color.White, 0.0f, new Vector2(0, 0), 1.0f,
-                      SpriteEffects.None, 0.0f);
+  public override void Draw(SpriteBatch spriteBatch) {
+    // We use the inherited 'Position' variable here to draw the sprite
+    // exactly where the physical collision box is!
+    spriteBatch.Draw(texture, Position, sourceRect,
+                     Color.White, 0.0f, Vector2.Zero, 1.0f,
+                     SpriteEffects.None, 0.0f);
   }
 
   public void ChangeState(BlockState state) {
     State = state;
-    // implement rest later...
   }
 }

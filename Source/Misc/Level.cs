@@ -22,6 +22,8 @@ internal partial class Level : ILevel {
   private List<IBlock> collidableBlocks = new();
   private List<IEnemy> enemies = new();
   private List<IWorldPickup> pickups = new();
+  public List<IBlock> CollidableBlocks => collidableBlocks;
+  public List<IEnemy> Enemies => enemies;
   public Vector2 PlayerPosition { get; private set; }
 
   private Level(Game1 game) {

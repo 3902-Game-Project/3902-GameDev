@@ -4,34 +4,18 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class CactusBlock : IBlock {
-  private static Texture2D texture;
+public class CactusBlock : BaseBlock {
+  private Texture2D texture;
   private Rectangle sourceRect;
-  public float XPos { get; private set; }
-  public float YPos { get; private set; }
-  public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 2f), (int)(sourceRect.Height * 2f));
 
-  public CactusBlock(Texture2D CactusTexture, Vector2 xyPos) {
+  public CactusBlock(Texture2D CactusTexture, Vector2 xyPos) : base(xyPos, 128f, 128f) {
     texture = CactusTexture;
-    XPos = xyPos.X;
-    YPos = xyPos.Y;
-    sourceRect = new Rectangle(320, 256, 64, 64); // will be in xml (or something else) file later -Aaron
-
-
-    Vector2 dimensions = new Vector2(128, 128);
-
-    Vector2 centerPosition = new Vector2(XPos + 64, YPos + 64);
-
-
+    sourceRect = new Rectangle(320, 256, 64, 64);
   }
 
-  public void Update(GameTime gameTime) {
-    // implement later
-  }
+  public override void Update(GameTime gameTime) { }
 
-  public void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(texture, new Vector2(XPos, YPos), sourceRect,
-                      Color.White, 0.0f, new Vector2(0, 0), 2.0f,
-                      SpriteEffects.None, 0.0f);
+  public override void Draw(SpriteBatch spriteBatch) {
+    spriteBatch.Draw(texture, Position, sourceRect, Color.White, 0.0f, Vector2.Zero, 2.0f, SpriteEffects.None, 0.0f);
   }
 }

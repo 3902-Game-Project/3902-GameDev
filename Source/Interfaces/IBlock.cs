@@ -9,7 +9,7 @@ public enum BlockState {
   lit, extinguished,  // for FirePit
   still, moving
 }   // for Crate,  
-public interface IBlock {
+public interface IBlock : ICollidable {
   public void Update(GameTime gameTime);
   public void Draw(SpriteBatch spriteBatch);
 

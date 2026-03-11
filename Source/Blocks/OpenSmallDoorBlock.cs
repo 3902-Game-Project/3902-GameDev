@@ -4,47 +4,30 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class OpenSmallDoorBlock : IBlock {
-  private static Texture2D texture;
+public class OpenSmallDoorBlock : BaseBlock {
+  private Texture2D texture;
   private Rectangle sourceRect;
-  private Vector2 centerPosition;
-  private Vector2 dimensions;
-  public float XPos { get; private set; }
-  public float YPos { get; private set; }
   public float Rotation { get; private set; }
 
-  public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 1f), (int)(sourceRect.Height * 1f));
-
-  public OpenSmallDoorBlock(Texture2D OpenSmallDoorTexture, Vector2 xyPos) {
+  public OpenSmallDoorBlock(Texture2D OpenSmallDoorTexture, Vector2 xyPos) : base(xyPos) {
     texture = OpenSmallDoorTexture;
-    XPos = xyPos.X;
-    YPos = xyPos.Y;
     Rotation = 0.0f;
-    sourceRect = new Rectangle(448, 448, 64, 64); // will be in xml (or something else) file later -Aaron
-    //Rotate();
-    dimensions = new Vector2(64, 64);
-
-    centerPosition = new Vector2(XPos + 32, YPos + 32);
-
-    // // not collidable
+    sourceRect = new Rectangle(448, 448, 64, 64);
   }
 
   public void Rotate() {
-    if (XPos == 0 && YPos == 0) {
+    if (Position.X == 0 && Position.Y == 0) {
       Rotation = MathHelper.ToRadians(270);
-    } else if (XPos > 0 && YPos > 0) {
+    } else if (Position.X > 0 && Position.Y > 0) {
       Rotation = MathHelper.ToRadians(90);
-    } else if (YPos > 0 && XPos == 0) {
+    } else if (Position.Y > 0 && Position.X == 0) {
       Rotation = MathHelper.ToRadians(180);
     }
   }
-  public void Update(GameTime gameTime) {
-    // implement later
-  }
 
-  public void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(texture, new Vector2(XPos, YPos), sourceRect,
-                      Color.White, Rotation, new Vector2(0, 0), 1.0f,
-                      SpriteEffects.None, 0.0f);
+  public override void Update(GameTime gameTime) { }
+
+  public override void Draw(SpriteBatch spriteBatch) {
+    spriteBatch.Draw(texture, Position, sourceRect, Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 }

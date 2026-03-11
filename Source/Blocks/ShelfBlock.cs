@@ -4,34 +4,18 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class ShelfBlock : IBlock {
-  private static Texture2D texture;
+public class ShelfBlock : BaseBlock {
+  private Texture2D texture;
   private Rectangle sourceRect;
-  public float XPos { get; private set; }
-  public float YPos { get; private set; }
 
-  public Rectangle BoundingBox => new Rectangle((int)XPos, (int)YPos, (int)(sourceRect.Width * 2f), (int)(sourceRect.Height * 2f));
-
-  public ShelfBlock(Texture2D ShelfTexture, Vector2 xyPos) {
+  public ShelfBlock(Texture2D ShelfTexture, Vector2 xyPos) : base(xyPos, 126f, 126f) {
     texture = ShelfTexture;
-    XPos = xyPos.X;
-    YPos = xyPos.Y;
-    sourceRect = new Rectangle(128, 256, 63, 63); // will be in xml (or something else) file later -Aaron
-
-    Vector2 dimensions = new Vector2(126, 126);
-
-    Vector2 centerPosition = new Vector2(XPos + 63, YPos + 63);
-
-
+    sourceRect = new Rectangle(128, 256, 63, 63);
   }
 
-  public void Update(GameTime gameTime) {
-    // implement later
-  }
+  public override void Update(GameTime gameTime) { }
 
-  public void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(texture, new Vector2(XPos, YPos), sourceRect,
-                      Color.White, 0.0f, new Vector2(0, 0), 2.0f,
-                      SpriteEffects.None, 0.0f);
+  public override void Draw(SpriteBatch spriteBatch) {
+    spriteBatch.Draw(texture, Position, sourceRect, Color.White, 0.0f, Vector2.Zero, 2.0f, SpriteEffects.None, 0.0f);
   }
 }

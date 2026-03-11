@@ -2,7 +2,7 @@
 
 namespace GameProject.Interfaces;
 
-public interface IEnemy : ISprite {
+public interface IEnemy : ISprite, ICollidable  {
   void TakeDamage();
 
   Rectangle BoundingBox { get; }

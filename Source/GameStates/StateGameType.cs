@@ -12,7 +12,7 @@ public class StateGameType(Game1 game) : IGameState {
   private IController mouseController;
   private IController gamePadController;
 
-  private CollisionHandler collisionHandler;
+  private CollisionManager collisionManager;
 
   public Player Player { get; private set; } = new Player(game);
 
@@ -24,7 +24,8 @@ public class StateGameType(Game1 game) : IGameState {
     gamePadController = new GameGamePadController(game);
     LevelManager = new LevelManager(game);
     LevelManager.Initialize();
-    collisionHandler = new CollisionHandler();
+    collisionManager = new CollisionManager();
+    collisionManager.AddCollider(Player);
   }
 
   public void LoadContent() {
@@ -39,8 +40,23 @@ public class StateGameType(Game1 game) : IGameState {
     keyboardController.Update(gameTime);
     mouseController.Update(gameTime);
     gamePadController.Update(gameTime);
+
     LevelManager.Update(gameTime);
     Player.Update(gameTime);
+    game.ProjectileManager.Update(gameTime);
+
+    collisionManager.Clear();
+    collisionManager.AddCollider(Player);
+
+    if (LevelManager.CurrentLevel != null) {
+      foreach (var block in LevelManager.CurrentLevel.CollidableBlocks) {
+        collisionManager.AddCollider(block);
+      }
+      foreach (var enemy in LevelManager.CurrentLevel.Enemies) {
+        collisionManager.AddCollider(enemy);
+      }
+    }
+    collisionManager.Update(gameTime);
 
     // whoever is responsible for blocks move this into Level.cs and fix this to use collidableBlocks:
     /*
@@ -77,8 +93,6 @@ public class StateGameType(Game1 game) : IGameState {
         }
       }
     }*/
-
-    game.ProjectileManager.Update(gameTime);
 
     // Move into Level.cs and fix:
     /*
