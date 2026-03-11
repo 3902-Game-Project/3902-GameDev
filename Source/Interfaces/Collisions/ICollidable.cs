@@ -10,8 +10,8 @@ public enum Layer
 Environment = 0,
 Player = 1,
 Enemies = 2,
-Projectiles = 3,
-Pickups = 4 
+Projectiles = 4,
+Pickups = 8 
 }
 
 public interface ICollidable {
