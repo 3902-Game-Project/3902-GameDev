@@ -7,7 +7,7 @@ namespace GameProject.WorldPickups;
 public class ItemWorldPickup : BaseWorldPickup, ICollidable  {
   private IItem item;
 
-  public ItemWorldPickup(Vector2 position, IItem item) : base(position) {
+  public ItemWorldPickup(IItem item) : base(item.Position) {
     this.item = item;
   }
 
