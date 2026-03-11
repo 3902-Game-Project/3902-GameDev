@@ -34,8 +34,8 @@ public class BombProjectile : IProjectile {
 
   private Vector2 direction;
   private float velocity;
-  private float lifetime;
-  private float lifetimeCounter;
+  private double lifetime;
+  private double lifetimeCounter;
 
 
   public void Draw(SpriteBatch spriteBatch) {
@@ -57,6 +57,11 @@ public class BombProjectile : IProjectile {
   public void Update(GameTime gameTime) {
     bombAnimation.Update(gameTime);
     currentSourceRect = bombAnimation.CurrentFrame;
+
+    lifetimeCounter += gameTime.ElapsedGameTime.TotalSeconds;
+    if (lifetimeCounter >= lifetime) {
+      IsExpired = true;
+    }
   }
 
   public BombProjectile(Texture2D texture, Vector2 startPosition, Vector2 direction, float velocity, float lifetime) {

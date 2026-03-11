@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Interfaces;
 
-public enum Layer { Player, Environment, Enemies, Projectiles }
+public enum Layer { Player, Environment, Enemies, Projectiles, Pickups }
 
 public interface ICollidable {
   IShape Shape { get; }
