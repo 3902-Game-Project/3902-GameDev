@@ -5,7 +5,7 @@ using GameProject.Interfaces;
 
 namespace GameProject.Blocks;
 
-public abstract class BaseBlock : IBlock {
+public abstract class BaseBlock : IBlock, ICollidable {
   public IShape Shape => Collider;
   public BoxCollider Collider { get; private set; }
   public Vector2 Position { get; set; }
