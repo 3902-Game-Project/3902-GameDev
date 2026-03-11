@@ -7,6 +7,9 @@ namespace GameProject.PlayerStates;
 public class PlayerUseItemState(Player player) : IPlayerState {
   private int timer = 20;
 
+  private Rectangle SpriteRight = new(773, 56, 171, 323);
+  private Rectangle SpriteLeft = new(1531, 420, 171, 323);
+
   public void MoveUp() { }
   public void MoveDown() { }
   public void MoveLeft() { }
@@ -26,8 +29,26 @@ public class PlayerUseItemState(Player player) : IPlayerState {
   }
 
   public void Draw(SpriteBatch spriteBatch) {
-    Texture2D texture = player.game.Assets.Textures.MetroTexture;
-    Rectangle sourceRect = new(0, 0, 22, 30);
-    spriteBatch.Draw(texture, player.Position, sourceRect, Color.White);
+    Rectangle sourceRect;
+
+    if (player.Direction == FacingDirection.Right) {
+      sourceRect = SpriteRight;
+    } else {
+      sourceRect = SpriteLeft;
+    }
+
+    Vector2 origin = new Vector2(sourceRect.Width / 2, sourceRect.Height / 2);
+
+    spriteBatch.Draw(
+      player.Texture,
+      player.Position,
+      sourceRect,
+      Color.White,
+      0f,
+      origin,
+      0.2f, // Keeps the scale consistent with other states
+      SpriteEffects.None,
+      0f
+    );
   }
 }
