@@ -7,9 +7,10 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Items;
 
 public class RifleItem : IItem {
+  public FacingDirection Direction { get; set; } = FacingDirection.Right;
   private Rectangle sourceRectangle = new(0, 19, 37, 10);
   private Vector2 origin;
-  private float scale = 3f;
+  private float scale = 1.5f;
   private Texture2D texture;
   public Vector2 Position { get; set; }
 
@@ -30,6 +31,11 @@ public class RifleItem : IItem {
   public void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
 
+    SpriteEffects effects = SpriteEffects.None;
+    if (Direction == FacingDirection.Left) {
+      effects = SpriteEffects.FlipHorizontally;
+    }
+
     spriteBatch.Draw(
       texture,
       Position,
@@ -38,7 +44,7 @@ public class RifleItem : IItem {
       0f,
       origin,
       scale,
-      SpriteEffects.None,
+      effects,
       0f
     );
   }
@@ -46,8 +52,20 @@ public class RifleItem : IItem {
   public void Update(GameTime gameTime) { }
 
   public void Use(UseType useType) {
-    Vector2 bulletDirection = new(1, 0);
-    Vector2 bulletSpawnPosition = Position + bulletSpawnOffset;
+    Vector2 bulletDirection;
+    if (Direction == FacingDirection.Left) {
+      bulletDirection = new Vector2(-1, 0);
+    } else {
+      bulletDirection = new Vector2(1, 0);
+    }
+    float offsetX;
+    if (Direction == FacingDirection.Left) {
+      offsetX = -bulletSpawnOffset.X;
+    } else {
+      offsetX = bulletSpawnOffset.X;
+    }
+    Vector2 actualOffset = new Vector2(offsetX, bulletSpawnOffset.Y);
+    Vector2 bulletSpawnPosition = Position + actualOffset;
     projectilePattern.SpawnProjectiles(projectileManager, bulletSpawnPosition, bulletDirection, stats);
   }
 }

@@ -1,7 +1,6 @@
 ﻿using GameProject.Controllers;
 using GameProject.Interfaces;
 using GameProject.Managers;
-using GameProject.Source.Collision;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Items;
 
 public class BombItem(Texture2D texture, Vector2 startPosition) : IItem {
+  public FacingDirection Direction { get; set; } = FacingDirection.Right;
   private Rectangle sourceRectangle = new(0, 0, 8, 8);
   private Vector2 origin;
   public Vector2 Position { get; set; } = startPosition;

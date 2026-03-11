@@ -105,11 +105,17 @@ public class Player : ICollidable {
     }
 
     if (Inventory.ActiveItem != null) {
-      Vector2 rightHandOffset = new Vector2(29, 32);
-      Vector2 leftHandOffset = new Vector2(3, 36);
-
+      float unscaledWidth = 171f;
+      float unscaledHeight = 323f;
+      Vector2 spriteCenter = new Vector2(unscaledWidth / 2f, unscaledHeight / 2f);
+      float playerScale = 0.2f;
+      Vector2 rightHandUnscaled = new Vector2(75f, 203f);
+      Vector2 leftHandUnscaled = new Vector2(18f, 188f);
+      Vector2 rightHandOffset = (rightHandUnscaled - spriteCenter) * playerScale;
+      Vector2 leftHandOffset = (leftHandUnscaled - spriteCenter) * playerScale;
       Vector2 currentOffset = (Direction == FacingDirection.Right) ? rightHandOffset : leftHandOffset;
       Inventory.ActiveItem.Position = this.Position + currentOffset;
+      Inventory.ActiveItem.Direction = this.Direction;
     }
   }
 
