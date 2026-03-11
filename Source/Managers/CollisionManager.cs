@@ -23,9 +23,9 @@ public class CollisionManager {
     colliders.Clear();
   }
 
-  //private Texture2D debugTexture;
+  private Texture2D debugTexture;
 
-  /*
+  
   public void DebugDraw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, Microsoft.Xna.Framework.Graphics.GraphicsDevice graphicsDevice) {
     // Create a 1x1 white pixel if we haven't already
     if (debugTexture == null) {
@@ -41,7 +41,7 @@ public class CollisionManager {
       }
     }
   }
-  */
+  
 
   public void Update(GameTime gameTime) {
     for (int i = 0; i < colliders.Count - 1; i++) {
@@ -52,6 +52,7 @@ public class CollisionManager {
         if (CheckCollison(c1, c2, out info1, out info2)) {
           info1.Collider = c2;
           info2.Collider = c1;
+
           c1.OnCollision(info1);
           c2.OnCollision(info2);
         }
@@ -82,12 +83,16 @@ public class CollisionManager {
   private bool BoxBoxCollision(BoxCollider b1, BoxCollider b2, out CollisionInfo info1, out CollisionInfo info2) {
     info1 = null;
     info2 = null;
+
+    // 1. Check if they are completely missing each other
     if (b1.Right < b2.Left || b1.Left > b2.Right ||
-      b1.Top < b2.Bottom || b1.Bottom > b2.Top) {
+        b1.Top > b2.Bottom || b1.Bottom < b2.Top) {
       return false;
     }
+
+    // 2. FIXED: Calculate the exact positive overlap distance
     float overlapX = MathF.Min(b1.Right - b2.Left, b2.Right - b1.Left);
-    float overlapY = MathF.Min(b1.Top - b2.Bottom, b2.Top - b1.Bottom);
+    float overlapY = MathF.Min(b1.Bottom - b2.Top, b2.Bottom - b1.Top);
 
     CollisionSide side1;
     CollisionSide side2;
@@ -97,28 +102,32 @@ public class CollisionManager {
     if (overlapX < overlapY) {
       // Horizontal collision
       if (b1.position.X < b2.position.X) {
+        // b1 is on the Left, so push it LEFT (-1) to get it unstuck
         side1 = CollisionSide.Right;
         side2 = CollisionSide.Left;
-        direction1 = new Vector2(1, 0);
-        direction2 = new Vector2(-1, 0);
-      } else {
-        side1 = CollisionSide.Left;
-        side2 = CollisionSide.Right;
         direction1 = new Vector2(-1, 0);
         direction2 = new Vector2(1, 0);
+      } else {
+        // b1 is on the Right, so push it RIGHT (1)
+        side1 = CollisionSide.Left;
+        side2 = CollisionSide.Right;
+        direction1 = new Vector2(1, 0);
+        direction2 = new Vector2(-1, 0);
       }
     } else {
       // Vertical collision
       if (b1.position.Y < b2.position.Y) {
+        // b1 is ABOVE, so push it UP (-1)
         side1 = CollisionSide.Bottom;
         side2 = CollisionSide.Top;
-        direction1 = new Vector2(0, 1);
-        direction2 = new Vector2(0, -1);
-      } else {
-        side1 = CollisionSide.Top;
-        side2 = CollisionSide.Bottom;
         direction1 = new Vector2(0, -1);
         direction2 = new Vector2(0, 1);
+      } else {
+        // b1 is BELOW, so push it DOWN (1)
+        side1 = CollisionSide.Top;
+        side2 = CollisionSide.Bottom;
+        direction1 = new Vector2(0, 1);
+        direction2 = new Vector2(0, -1);
       }
     }
 
