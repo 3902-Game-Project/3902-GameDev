@@ -105,10 +105,17 @@ public class Player : ICollidable {
       }
 
       // Nudge player out of the wall
-      Position += info.Direction * 2f;
+      Position += info.Direction * info.Overlap;
       Collider.position = this.Position;
     }
-    // ... handle enemy collisions here ...
+    if (info.Collider is IEnemy enemy) {
+      float knockbackDistance = 50f;
+
+      Position += info.Direction * knockbackDistance;
+      Collider.position = this.Position;
+
+      TakeDamage();
+    }
   }
 
   public void Draw(SpriteBatch spriteBatch) {

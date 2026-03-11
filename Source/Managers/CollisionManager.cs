@@ -84,13 +84,11 @@ public class CollisionManager {
     info1 = null;
     info2 = null;
 
-    // 1. Check if they are completely missing each other
     if (b1.Right < b2.Left || b1.Left > b2.Right ||
         b1.Top > b2.Bottom || b1.Bottom < b2.Top) {
       return false;
     }
 
-    // 2. FIXED: Calculate the exact positive overlap distance
     float overlapX = MathF.Min(b1.Right - b2.Left, b2.Right - b1.Left);
     float overlapY = MathF.Min(b1.Bottom - b2.Top, b2.Bottom - b1.Top);
 
@@ -98,17 +96,17 @@ public class CollisionManager {
     CollisionSide side2;
     Vector2 direction1;
     Vector2 direction2;
+    float finalOverlap;
 
     if (overlapX < overlapY) {
       // Horizontal collision
+      finalOverlap = overlapX;
       if (b1.position.X < b2.position.X) {
-        // b1 is on the Left, so push it LEFT (-1) to get it unstuck
         side1 = CollisionSide.Right;
         side2 = CollisionSide.Left;
         direction1 = new Vector2(-1, 0);
         direction2 = new Vector2(1, 0);
       } else {
-        // b1 is on the Right, so push it RIGHT (1)
         side1 = CollisionSide.Left;
         side2 = CollisionSide.Right;
         direction1 = new Vector2(1, 0);
@@ -116,14 +114,13 @@ public class CollisionManager {
       }
     } else {
       // Vertical collision
+      finalOverlap = overlapY;
       if (b1.position.Y < b2.position.Y) {
-        // b1 is ABOVE, so push it UP (-1)
         side1 = CollisionSide.Bottom;
         side2 = CollisionSide.Top;
         direction1 = new Vector2(0, -1);
         direction2 = new Vector2(0, 1);
       } else {
-        // b1 is BELOW, so push it DOWN (1)
         side1 = CollisionSide.Top;
         side2 = CollisionSide.Bottom;
         direction1 = new Vector2(0, 1);
@@ -131,8 +128,8 @@ public class CollisionManager {
       }
     }
 
-    info1 = new CollisionInfo { Side = side1, Direction = direction1 };
-    info2 = new CollisionInfo { Side = side2, Direction = direction2 };
+    info1 = new CollisionInfo { Side = side1, Direction = direction1, Overlap = finalOverlap };
+    info2 = new CollisionInfo { Side = side2, Direction = direction2, Overlap = finalOverlap };
 
     return true;
   }
