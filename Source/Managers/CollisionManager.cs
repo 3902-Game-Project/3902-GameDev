@@ -50,6 +50,8 @@ public class CollisionManager {
         ICollidable c2 = colliders[j];
         CollisionInfo info1, info2;
         if (CheckCollison(c1, c2, out info1, out info2)) {
+          info1.Collider = c2;
+          info2.Collider = c1;
           c1.OnCollision(info1);
           c2.OnCollision(info2);
         }
