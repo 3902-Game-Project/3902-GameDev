@@ -7,32 +7,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-public class ShotgunnerSprite : IEnemy {
-  // Data needed by states
-  public Texture2D Texture { get; private set; }
+public class ShotgunnerSprite : BaseEnemy {
   public ProjectileManager ProjectileManager { get; private set; }
-  public Vector2 Position;
-  public Vector2 Velocity { get; set; }
-  public int FacingDirection { get; set; } = 1;
-  public Rectangle BoundingBox {
-    get {
-      if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return Rectangle.Empty;
-      Rectangle source = CurrentSourceRectangles[CurrentFrame];
-      float scale = 1.6f;
-      int width = (int)(source.Width * scale);
-      int height = (int)(source.Height * scale);
-      return new Rectangle((int)Position.X - width / 2, (int)Position.Y - height, width, height);
-    }
-  }
-
-  public List<Rectangle> CurrentSourceRectangles;
-  public int CurrentFrame;
-
   private IShotgunnerState state;
 
-  public ShotgunnerSprite(Texture2D texture, Vector2 position, ProjectileManager projectileManager) {
-    Texture = texture;
-    Position = position;
+  public ShotgunnerSprite(Texture2D texture, Vector2 position, ProjectileManager projectileManager) : base(texture, position, 48f, 96f) {
     ProjectileManager = projectileManager;
     state = new ShotgunnerWanderState(this);
   }
@@ -41,31 +20,25 @@ public class ShotgunnerSprite : IEnemy {
     state = newState;
   }
 
-  public void Update(GameTime gameTime) {
+  public override void Update(GameTime gameTime) {
     state.Update(gameTime);
 
-    // Keep inside bounds
     if (Position.X < 0) {
-      Position.X = 0;
+      Position = new Vector2(0, Position.Y);
     }
+
+    UpdateCollider();
   }
 
-  public void Draw(SpriteBatch spriteBatch) {
-    if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) {
-      return;
-    }
+  public override void Draw(SpriteBatch spriteBatch) {
+    if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return;
 
     Rectangle source = CurrentSourceRectangles[CurrentFrame];
-
-    // Flip logic
     SpriteEffects effect = FacingDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+    Vector2 origin = new(source.Width / 2f, source.Height);
 
-    // Origin at feet
-    Vector2 origin = new(source.Width / 2, source.Height);
-
-    float scale = 1.6f;
-    spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, scale, effect, 0f);
+    spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, 1.6f, effect, 0f);
   }
 
-  public void TakeDamage() { ChangeState(new ShotgunnerDeathState(this)); }
+  public override void TakeDamage() { ChangeState(new ShotgunnerDeathState(this)); }
 }
