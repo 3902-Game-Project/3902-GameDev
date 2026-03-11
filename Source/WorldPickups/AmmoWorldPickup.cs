@@ -5,24 +5,17 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.WorldPickups;
 
-public class AmmoWorldPickup : IWorldPickup, ICollidable {
+public class AmmoWorldPickup : BaseWorldPickup, ICollidable {
   private Texture2D texture;
-  private Rectangle sourceRectangle = new(9, 0, 9, 14);
+  private Rectangle sourceRectangle = new(9, 15, 12, 11);
   private Vector2 origin;
   private float scale = 2f;
 
-  public Vector2 Position { get; }
-  public IShape Shape { get; }
-  public Layer Layer { get; } = Layer.Pickups;
-  public Layer Mask { get; }= Layer.Player;
-
-  public AmmoWorldPickup(Texture2D texture, Vector2 startPosition) {
+  public AmmoWorldPickup(Texture2D texture, Vector2 position) : base(position) {
     this.texture = texture;
-    Position = startPosition;
-    Shape = new CircleCollider(10, Position);
   }
 
-  public void Draw(SpriteBatch spriteBatch) {
+  public override void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
 
     spriteBatch.Draw(
@@ -38,17 +31,6 @@ public class AmmoWorldPickup : IWorldPickup, ICollidable {
     );
   }
 
-  public void Update(GameTime gameTime) {
-
-  }
-
-  public void OnPickup(Player player) {
-
-  }
-
-  public void OnCollision(CollisionInfo info) {
-    if (info.Collider.Layer == Layer.Player && info.Collider as Player != null) {
-      OnPickup(info.Collider as Player);
-    }
+  public override void Update(GameTime gameTime) {
   }
 }
