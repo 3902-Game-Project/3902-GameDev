@@ -23,6 +23,11 @@ public class Player : ICollidable {
   public Vector2 Position { get; set; }
   public Vector2 Velocity { get; set; }
   public float Speed { get; set; } = 200f;
+  public int Health { get; private set; } = 100;
+
+  private float invincibilityTimer = 0f;
+  private readonly float invincibilityDuration = 1.5f;
+  public bool IsInvincible => invincibilityTimer > 0;
 
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
 
@@ -71,14 +76,26 @@ public class Player : ICollidable {
   public void LoadContent() {
     this.Texture = game.Assets.Textures.PlayerTexture;
   }
+  public void TakeDamage(int amount = 10) {
+    if (!IsInvincible) {
+      Health -= amount;
 
-  public void TakeDamage() {
-    //Todo: Need to change this to take damage instead of dying
-    Die();
+      invincibilityTimer = invincibilityDuration;
+
+      if (Health <= 0) {
+        Health = 0;
+        Die();
+      }
+    }
   }
 
   public void Update(GameTime gameTime) {
     float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+    if (invincibilityTimer > 0) {
+      invincibilityTimer -= dt;
+    }
+
     Position += Velocity * dt;
     State.Update(gameTime);
     Velocity = Vector2.Zero;
@@ -109,12 +126,12 @@ public class Player : ICollidable {
       Collider.position = this.Position;
     }
     if (info.Collider is IEnemy enemy) {
-      float knockbackDistance = 50f;
+      float knockbackDistance = 100f;
 
       Position += info.Direction * knockbackDistance;
       Collider.position = this.Position;
 
-      TakeDamage();
+      TakeDamage(50);
     }
   }
 
