@@ -138,7 +138,7 @@ public class StateGameType(Game1 game) : IGameState {
     Player.Draw(game.SpriteBatch);
 
     game.ProjectileManager.Draw(game.SpriteBatch);
-
+    collisionManager.DebugDraw(game.SpriteBatch, game.GraphicsDevice);
     game.SpriteBatch.End();
   }
 }

@@ -4,6 +4,7 @@ using GameProject.Collisions;
 using GameProject.Interfaces;
 using GameProject.Source.CollisionResponse;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Managers;
 
@@ -20,6 +21,24 @@ public class CollisionManager {
   }
   public void Clear() {
     colliders.Clear();
+  }
+
+  private Texture2D debugTexture;
+
+  public void DebugDraw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, Microsoft.Xna.Framework.Graphics.GraphicsDevice graphicsDevice) {
+    // Create a 1x1 white pixel if we haven't already
+    if (debugTexture == null) {
+      debugTexture = new Texture2D(graphicsDevice, 1, 1);
+      debugTexture.SetData(new[] { Color.White });
+    }
+
+    // Draw a semi-transparent red box over EVERY collider in the manager
+    foreach (var c in colliders) {
+      if (c.Shape is BoxCollider box) {
+        Rectangle rect = new Rectangle((int)box.Left, (int)box.Top, (int)box.width, (int)box.height);
+        spriteBatch.Draw(debugTexture, rect, Color.Red * 0.5f); // 50% transparent red
+      }
+    }
   }
 
   public void Update(GameTime gameTime) {
