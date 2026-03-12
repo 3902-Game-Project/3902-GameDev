@@ -7,6 +7,7 @@ namespace GameProject.Managers;
 
 public class ProjectileManager {
   private List<IProjectile> projectiles;
+  public List<IProjectile> Projectiles => projectiles;
 
   public ProjectileManager() {
     projectiles = new List<IProjectile>();
