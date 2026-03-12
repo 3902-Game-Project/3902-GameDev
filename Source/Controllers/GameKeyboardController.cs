@@ -11,8 +11,7 @@ public class GameKeyboardController(Game1 game) : AKeyboardController {
   protected override Dictionary<Keys, ICommand> PressedMappings { get; } = new() {
     {Keys.Q, new QuitCommand(game)},
     {Keys.R, new ReturnToMenuAndResetCommand(game)},
-    {Keys.Z, new PlayerUseItemCommand(game.StateGame.Player, UseType.Pressed)},
-    {Keys.N, new PlayerUseItemCommand(game.StateGame.Player, UseType.Pressed)},
+    {Keys.J, new PlayerUseItemCommand(game.StateGame.Player, UseType.Pressed)},
     {Keys.E, new PlayerDieCommand(game.StateGame.Player)},
 
     {Keys.D1, new SwitchItemCommand(game, ItemCategory.Sidearm)},
@@ -33,12 +32,10 @@ public class GameKeyboardController(Game1 game) : AKeyboardController {
     {Keys.Down, new PlayerMoveDownCommand(game.StateGame.Player)},
     {Keys.Left, new PlayerMoveLeftCommand(game.StateGame.Player)},
     {Keys.Right, new PlayerMoveRightCommand(game.StateGame.Player)},
-    {Keys.Z, new PlayerUseItemCommand(game.StateGame.Player, UseType.Held)},
-    {Keys.N, new PlayerUseItemCommand(game.StateGame.Player, UseType.Held)},
+    {Keys.J, new PlayerUseItemCommand(game.StateGame.Player, UseType.Held)}
   };
 
   protected override Dictionary<Keys, ICommand> ReleasedMappings { get; } = new() {
-    {Keys.Z, new PlayerUseItemCommand(game.StateGame.Player, UseType.Released)},
-    {Keys.N, new PlayerUseItemCommand(game.StateGame.Player, UseType.Released)},
+    {Keys.J, new PlayerUseItemCommand(game.StateGame.Player, UseType.Released)},
   };
 }
