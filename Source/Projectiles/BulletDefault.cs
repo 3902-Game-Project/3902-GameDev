@@ -1,18 +1,34 @@
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using GameProject.Collisions;
 
 namespace GameProject.Projectiles;
 
-public class BulletDefault(Texture2D texture, Vector2 startPosition, Vector2 direction, float velocity, float bulletLifetime) : IProjectile {
-  private Vector2 position = startPosition;
+public class BulletDefault : IProjectile, ICollidable {
+  private Texture2D texture;
   private Rectangle sourceRectangle = new(8, 0, 7, 7);
   private Vector2 origin;
   private float scale = 2f;
-  private Vector2 direction = direction;
+  private Vector2 direction;
+  private float velocity;
+  private float bulletLifetime;
   private float lifetimeCounter = 0f;
   public bool IsExpired { get; private set; }
-
+  public Vector2 Position { get; private set; }
+  public BoxCollider Collider { get; private set; }
+  public IShape Shape => Collider;
+  public Layer Layer { get; } = Layer.Projectiles;
+  public Layer Mask { get; } = Layer.Environment | Layer.Enemies;
+  public BulletDefault(Texture2D texture, Vector2 startPosition,
+    Vector2 direction, float velocity, float bulletLifetime) {
+    this.texture = texture;
+    this.Position = startPosition;
+    this.direction = direction;
+    this.velocity = velocity;
+    this.bulletLifetime = bulletLifetime;
+    this.Collider = new BoxCollider(sourceRectangle.Width * scale, sourceRectangle.Height * scale, Position);
+  }
   public void Expire() {
     IsExpired = true;
   }
@@ -21,8 +37,8 @@ public class BulletDefault(Texture2D texture, Vector2 startPosition, Vector2 dir
     get {
       int width = (int)(sourceRectangle.Width * scale);
       int height = (int)(sourceRectangle.Height * scale);
-      int x = (int)position.X - (width / 2);
-      int y = (int)position.Y - (height / 2);
+      int x = (int)Position.X - (width / 2);
+      int y = (int)Position.Y - (height / 2);
 
       return new Rectangle(x, y, width, height);
     }
@@ -33,7 +49,7 @@ public class BulletDefault(Texture2D texture, Vector2 startPosition, Vector2 dir
 
     spriteBatch.Draw(
       texture,
-      position,
+      Position,
       sourceRectangle,
       Color.White,
       0f,
@@ -46,10 +62,22 @@ public class BulletDefault(Texture2D texture, Vector2 startPosition, Vector2 dir
 
   public void Update(GameTime gameTime) {
     // Logic for updating the bullet's position and state
-    position += direction * velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+    Position += direction * velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+    Collider.position = Position;
     lifetimeCounter += (float)gameTime.ElapsedGameTime.TotalSeconds;
     if (lifetimeCounter >= bulletLifetime) {
       // Logic for destroying the bullet
+      Expire();
     }
   }
+
+  public void OnCollision(CollisionInfo collisionInfo) {
+    if (collisionInfo.Collider is IBlock) {
+      Expire();
+    } else if (collisionInfo.Collider is IEnemy enemy) {
+      enemy.TakeDamage();
+      Expire();
+    }
+  }
+
 }

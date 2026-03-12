@@ -58,65 +58,14 @@ public class StateGameType(Game1 game) : IGameState {
         collisionManager.AddCollider(enemy);
       }
     }
+
+    foreach (var projectile in game.ProjectileManager.Projectiles) {
+      if (projectile is ICollidable collidableProj) {
+        collisionManager.AddCollider(collidableProj);
+      }
+    }
+
     collisionManager.Update(gameTime);
-
-    // whoever is responsible for blocks move this into Level.cs and fix this to use collidableBlocks:
-    /*
-    if (Blocks != null) {
-      foreach (IBlock block in Blocks) {
-        block.Update(gameTime);
-        if (block.Collider is BoxCollider blockBox && Player.Collider is BoxCollider playerBox) {
-
-          if (playerBox.CheckCollision(blockBox)) {
-            float distanceX = playerBox.position.X - blockBox.position.X;
-            float distanceY = playerBox.position.Y - blockBox.position.Y;
-            float minDistanceX = (playerBox.dimensions.X / 2f) + (blockBox.dimensions.X / 2f);
-            float minDistanceY = (playerBox.dimensions.Y / 2f) + (blockBox.dimensions.Y / 2f);
-
-            float depthX = minDistanceX - System.Math.Abs(distanceX);
-            float depthY = minDistanceY - System.Math.Abs(distanceY);
-
-            if (depthX < depthY) {
-              if (distanceX > 0) {
-                Player.Position = new Vector2(Player.Position.X + depthX, Player.Position.Y);
-              } else {
-                Player.Position = new Vector2(Player.Position.X - depthX, Player.Position.Y);
-              }
-            } else {
-              if (distanceY > 0) {
-                Player.Position = new Vector2(Player.Position.X, Player.Position.Y + depthY);
-              } else {
-                Player.Position = new Vector2(Player.Position.X, Player.Position.Y - depthY);
-              }
-            }
-
-            Player.Collider.position = Player.Position;
-          }
-        }
-      }
-    }*/
-
-    // Move into Level.cs and fix:
-    /*
-    if (Enemies != null && Enemies.Count > 0 && EnemyNumber < Enemies.Count) {
-      var activeEnemy = Enemies[EnemyNumber];
-
-      //player vs enemy
-      CollisionSide playerEnemySide = CollisionDetector.GetCollisionSide(Player.BoundingBox, activeEnemy.BoundingBox);
-      if (playerEnemySide != CollisionSide.None) {
-        collisionHandler.HandleCollision(Player, activeEnemy, playerEnemySide);
-      }
-
-      //enemy vs block
-      if (Blocks != null && Blocks.Count > 0 && BlockNumber < Blocks.Count) {
-        var activeBlock = Blocks[BlockNumber];
-        CollisionSide enemyBlockSide = CollisionDetector.GetCollisionSide(activeEnemy.BoundingBox, activeBlock.BoundingBox);
-        if (enemyBlockSide != CollisionSide.None) {
-          collisionHandler.HandleCollision(activeEnemy, activeBlock, enemyBlockSide);
-        }
-      }*/
-
-    //Todo: bullet vs enemy
 
   }
 
@@ -131,11 +80,6 @@ public class StateGameType(Game1 game) : IGameState {
     );
 
     LevelManager.Draw(gameTime);
-
-    // change to use Blocks from Level.cs
-    /*if (Blocks != null && Blocks.Count > 0 && BlockNumber < Blocks.Count) {
-      Blocks[BlockNumber].Draw(game.SpriteBatch);
-    }*/
 
     Player.Draw(game.SpriteBatch);
 
