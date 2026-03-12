@@ -18,6 +18,7 @@ public class RifleItem : IItem {
   private IProjectilePattern projectilePattern = new SingleShotPattern();
   private Vector2 bulletSpawnOffset;
   private GunStats stats;
+  private IFireMode fireMode;
   public ItemCategory Category { get; } = ItemCategory.Primary;
 
   public RifleItem(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager, GunStats stats) {
@@ -25,7 +26,9 @@ public class RifleItem : IItem {
     this.texture = texture;
     this.Position = startPosition;
     this.stats = stats;
+    this.stats.FireRate /= 3f; //this line is to change the frequency of the bullets in rifle
     this.bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 * (sourceRectangle.Height / 2 - 3)) * scale;
+    this.fireMode = new AutomaticFire(this.stats);
   }
 
   public void Draw(SpriteBatch spriteBatch) {
@@ -49,7 +52,9 @@ public class RifleItem : IItem {
     );
   }
 
-  public void Update(GameTime gameTime) { }
+  public void Update(GameTime gameTime) {
+    fireMode.Update(gameTime);
+  }
 
   public void Use(UseType useType) {
     Vector2 bulletDirection;
@@ -66,6 +71,8 @@ public class RifleItem : IItem {
     }
     Vector2 actualOffset = new Vector2(offsetX, bulletSpawnOffset.Y);
     Vector2 bulletSpawnPosition = Position + actualOffset;
-    projectilePattern.SpawnProjectiles(projectileManager, bulletSpawnPosition, bulletDirection, stats);
+    if (fireMode.CanFire(useType)) {
+      projectilePattern.SpawnProjectiles(projectileManager, bulletSpawnPosition, bulletDirection, stats);
+    }
   }
 }

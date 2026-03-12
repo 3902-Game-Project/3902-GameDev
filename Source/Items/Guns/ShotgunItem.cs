@@ -19,6 +19,7 @@ public class ShotgunItem : IItem {
   private IProjectilePattern projectilePattern = new SpreadPattern();
   private Vector2 bulletSpawnOffset;
   private GunStats stats;
+  private IFireMode fireMode;
   public ItemCategory Category { get; } = ItemCategory.Primary;
 
   public ShotgunItem(Texture2D texture, Vector2 position, ProjectileManager projectileManager, GunStats stats) {
@@ -27,6 +28,7 @@ public class ShotgunItem : IItem {
     this.position = position;
     this.stats = stats;
     bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 * (sourceRectangle.Height / 2 - 3)) * scale; // Adjust spawn offset based on the shotgun's size and scale
+    this.fireMode = new SemiAutoFire(stats);
   }
 
   public void Draw(SpriteBatch spriteBatch) {
@@ -50,7 +52,9 @@ public class ShotgunItem : IItem {
     );
   }
 
-  public void Update(GameTime gameTime) { }
+  public void Update(GameTime gameTime) {
+    fireMode.Update(gameTime);
+  }
 
   public void Use(UseType useType) {
     Vector2 bulletDirection;
@@ -67,6 +71,8 @@ public class ShotgunItem : IItem {
     }
     Vector2 actualOffset = new Vector2(offsetX, bulletSpawnOffset.Y);
     Vector2 bulletSpawnPosition = Position + actualOffset;
-    projectilePattern.SpawnProjectiles(projectileManager, bulletSpawnPosition, bulletDirection, stats);
+    if (fireMode.CanFire(useType)) {
+      projectilePattern.SpawnProjectiles(projectileManager, bulletSpawnPosition, bulletDirection, stats);
+    }
   }
 }
