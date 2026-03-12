@@ -70,7 +70,12 @@ public class Player : ICollidable {
   public void MoveDown() => State.MoveDown();
   public void MoveLeft() => State.MoveLeft();
   public void MoveRight() => State.MoveRight();
-  public void UseItem(UseType useType) => State.UseItem(useType);
+  public void UseItem(UseType useType) {
+    if(Inventory.ActiveItem != null) {
+      Inventory.ActiveItem.Use(useType);
+      State.UseItem(useType);
+    }
+  }
   public void Die() => State.Die();
 
   public void LoadContent() {
@@ -116,6 +121,8 @@ public class Player : ICollidable {
       Vector2 currentOffset = (Direction == FacingDirection.Right) ? rightHandOffset : leftHandOffset;
       Inventory.ActiveItem.Position = this.Position + currentOffset;
       Inventory.ActiveItem.Direction = this.Direction;
+
+      Inventory.ActiveItem.Update(gameTime);
     }
   }
 
