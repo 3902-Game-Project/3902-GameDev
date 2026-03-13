@@ -2,6 +2,7 @@
 using GameProject.Enemies;
 using GameProject.Factories;
 using GameProject.Interfaces;
+using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
@@ -60,7 +61,9 @@ public class RifleAttackState : IRiflemanState {
 
     // Create the bullet (Velocity: 300f, Lifetime: 2 seconds)
     IProjectile bullet = ProjectileFactory.Instance.CreateBullet(spawnPosition, bulletDirection, 300f, 2f);
-
+    if(bullet is BulletDefault defaultBullet) {
+      defaultBullet.IsPlayerShot = false;
+    }
     game.StateGame.LevelManager.CurrentLevel.ProjectileManager.AddProjectile(bullet);
   }
 }
