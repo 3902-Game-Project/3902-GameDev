@@ -3,7 +3,8 @@
 namespace GameProject.Interfaces;
 
 public interface IEnemy : ISprite, ICollidable {
-  void TakeDamage();
+  void TakeDamage(int damage);
+  int Health { get; }
 
   Rectangle BoundingBox { get; }
   Vector2 Velocity { get; set; }
