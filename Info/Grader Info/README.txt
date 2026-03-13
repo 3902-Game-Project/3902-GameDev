@@ -22,11 +22,11 @@ Controls:
     T/MouseRight/LeftBumper  Debug: switch to previous level.
 
 Code Metrics:
-  Raw data stored at "Info/Grading Info/Code Metrics/Code Metrics.txt"
-  Graph at "Info/Grading Info/Code Metrics/Sprint 3/TODO"
+  Raw data stored at "Info/Grader Info/Code Metrics/Code Metrics.txt"
+  Graph at "Info/Grader Info/Code Metrics/Sprint 3/TODO"
 
 Code Reviews:
-  Found in the "Info/Grading Info/Code Review/Sprint 3" folder.
+  Found in the "Info/Grader Info/Code Review/Sprint 3" folder.
 
 Known bugs:
   Enemies can be killed after they are dead and replay their death animation.
