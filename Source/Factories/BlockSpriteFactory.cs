@@ -7,16 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Factories;
 
 public class BlockSpriteFactory(Game1 game) {
-  private static Texture2D blockTextures;
-
-  /*private static BlockSpriteFactory instance;
-  public static BlockSpriteFactory Instance {
-    get { return instance; }
-  }*/
-
-  public BlockSpriteFactory() {
-    //instance = new BlockSpriteFactory();
-  }
+  private Texture2D blockTextures;
 
   public void LoadAllTextures(ContentManager content) {
     blockTextures = content.Load<Texture2D>("desert-atlas-v6");
