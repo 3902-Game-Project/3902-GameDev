@@ -29,8 +29,6 @@ Code Reviews:
   Found in the "Info/Grader Info/Code Review/Sprint 3" folder.
 
 Known bugs:
-  Enemies can be killed after they are dead and replay their death animation.
-  Can collide with and get killed by dead or dying enemies.
   Cannot move to escape block if just barely collided into it.
   Gamepad support not currently complete. We ran out of time.
 
