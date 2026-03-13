@@ -61,6 +61,8 @@ public class LevelManager(Game1 game) : ILevelManager {
     if (newLevelName != currentLevelName) {
       currentLevelName = newLevelName;
     }
+
+    game.StateGame.Player.Position = CurrentLevel.PlayerPosition;
   }
 
   public void PreviousLevel() {

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameProject.Misc;
 
-internal class Level(
+public class Level(
   Game1 game,
   List<IBlock> nonCollidableBlocks, // for non-collidable collidableBlocks -Aaron
   List<IBlock> collidableBlocks,
