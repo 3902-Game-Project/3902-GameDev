@@ -46,6 +46,8 @@ public class OpenVaultDoorBlock : BaseBlock {
   }
 
   public override void OnCollision(CollisionInfo info) {
-    levelManager.SwitchLevel(PairedLevelName);
+    if (info.Collider is Player) {
+      levelManager.SwitchLevel(PairedLevelName);
+    }
   }
 }

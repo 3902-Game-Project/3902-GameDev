@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -27,7 +28,6 @@ public class Level : ILevel {
   public List<IBlock> CollidableBlocks => collidableBlocks;
   public List<IEnemy> Enemies => enemies;
   public Vector2 PlayerPosition { get; private set; }
-
 
   public Level(
     Game1 game,

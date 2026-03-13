@@ -66,7 +66,6 @@ public class StateGameType(Game1 game) : IGameState {
     }
 
     collisionManager.Update(gameTime);
-
   }
 
   public void Draw(GameTime gameTime) {
