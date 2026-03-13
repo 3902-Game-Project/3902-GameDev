@@ -65,6 +65,8 @@ public class LevelManager(Game1 game) : ILevelManager {
     }
 
     game.StateGame.Player.Position = CurrentLevel.PlayerPosition;
+
+    game.ProjectileManager.ClearProjectiles();
   }
 
   public void PreviousLevel() {

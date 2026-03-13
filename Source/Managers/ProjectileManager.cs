@@ -17,6 +17,10 @@ public class ProjectileManager {
     projectiles.Add(projectile);
   }
 
+  public void ClearProjectiles() {
+    projectiles.Clear();
+  }
+
   public void Update(GameTime gameTime) {
     for (int i = projectiles.Count - 1; i >= 0; i--) {
       projectiles[i].Update(gameTime);
