@@ -33,7 +33,7 @@ public class Game1 : Game {
     StateGame = new StateGameType(this);
     currentState = StateMenu;
 
-    BlockFactory = new BlockSpriteFactory();
+    BlockFactory = new BlockSpriteFactory(this);
     ProjectileManager = new ProjectileManager();
     ItemSpriteFactory = new ItemSpriteFactory(ProjectileManager);
   }

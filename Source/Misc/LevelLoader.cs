@@ -14,7 +14,7 @@ internal partial class LevelLoader {
   private static readonly int BLOCK_HEIGHT = 64;
 
   [GeneratedRegex(@"\r?\n")]
-  private static partial Regex NewlineSplitRegex();
+  private static partial Regex NewlineSplitRegex { get; }
 
   public static Level FromString(Game1 game, ISet<string> levelNames, string levelDataString) {
     List<IBlock> nonCollidableBlocks = new();
@@ -23,7 +23,7 @@ internal partial class LevelLoader {
     List<IWorldPickup> pickups = new();
     Vector2? playerPositionNullable = null;
 
-    var lines = NewlineSplitRegex().Split(levelDataString.Trim());
+    var lines = NewlineSplitRegex.Split(levelDataString.Trim());
 
     var levelData = lines.Select((line) => line.Split(',')).ToArray();
 
@@ -78,14 +78,14 @@ internal partial class LevelLoader {
                 }
 
               case "2": {
-                  /* door */
+                  /* open small door */
                   var pairedLevelName = entrySplit[1];
 
                   if (!levelNames.Contains(pairedLevelName)) {
                     throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
                   }
 
-                  collidableBlocks.Add(game.BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos, pairedLevelName));
+                  collidableBlocks.Add(game.BlockFactory.CreateOpenSmallDoorBlockSprite(xPos, yPos, pairedLevelName));
                   break;
                 }
 
@@ -299,6 +299,18 @@ internal partial class LevelLoader {
                   }
 
                   collidableBlocks.Add(game.BlockFactory.CreateOpenSlattedDoorSprite(xPos, yPos, pairedLevelName));
+                  break;
+                }
+
+              case "33": {
+                  /* locked small door */
+                  var pairedLevelName = entrySplit[1];
+
+                  if (!levelNames.Contains(pairedLevelName)) {
+                    throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+                  }
+
+                  collidableBlocks.Add(game.BlockFactory.CreateLockedSmallDoorBlockSprite(xPos, yPos, pairedLevelName));
                   break;
                 }
 

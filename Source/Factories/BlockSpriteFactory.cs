@@ -6,17 +6,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Factories;
 
-public class BlockSpriteFactory {
-  private static Texture2D blockTextures;
-
-  /*private static BlockSpriteFactory instance;
-  public static BlockSpriteFactory Instance {
-    get { return instance; }
-  }*/
-
-  public BlockSpriteFactory() {
-    //instance = new BlockSpriteFactory();
-  }
+public class BlockSpriteFactory(Game1 game) {
+  private Texture2D blockTextures;
 
   public void LoadAllTextures(ContentManager content) {
     blockTextures = content.Load<Texture2D>("desert-atlas-v6");
@@ -54,20 +45,23 @@ public class BlockSpriteFactory {
   }
 
   /* Doors */
-  public IBlock CreateSmallDoorBlockSprite(float x, float y, string pairedLevelName) {
-    return new SmallDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName);
+  public IBlock CreateLockedSmallDoorBlockSprite(float x, float y, string pairedLevelName) {
+    return new LockedSmallDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName);
+  }
+  public IBlock CreateOpenSmallDoorBlockSprite(float x, float y, string pairedLevelName) {
+    return new OpenSmallDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, game.StateGame.LevelManager);
   }
   public IBlock CreateLockedVaultBlockSprite(float x, float y, string pairedLevelName) {
     return new LockedVaultBlock(blockTextures, new Vector2(x, y), pairedLevelName);
   }
   public IBlock CreateOpenVaultDoorBlockSprite(float x, float y, string pairedLevelName) {
-    return new OpenVaultDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName);
+    return new OpenVaultDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, game.StateGame.LevelManager);
   }
   public IBlock CreateLockedSlattedDoorSprite(float x, float y, string pairedLevelName) {
     return new LockedSlattedDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName);
   }
   public IBlock CreateOpenSlattedDoorSprite(float x, float y, string pairedLevelName) {
-    return new OpenSlattedDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName);
+    return new OpenSlattedDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, game.StateGame.LevelManager);
   }
 
   /* Object Blocks */
