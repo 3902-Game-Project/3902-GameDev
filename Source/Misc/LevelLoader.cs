@@ -313,6 +313,7 @@ internal partial class LevelLoader {
                   collidableBlocks.Add(game.BlockFactory.CreateLockedSmallDoorBlockSprite(xPos, yPos, pairedLevelName));
                   break;
                 }
+
               case "34":
                 /* bank shelf */
                 collidableBlocks.Add(game.BlockFactory.CreateBankShelfBlockSprite(xPos, yPos));
@@ -322,10 +323,6 @@ internal partial class LevelLoader {
                 /* tellers desk */
                 collidableBlocks.Add(game.BlockFactory.CreateTellersDeskBlockSprite(xPos, yPos));
                 break;
-
-              case "": {
-                  break;
-               }
 
               default:
                 throw new FormatException($"unrecognized level block/entity type '{type}'");
