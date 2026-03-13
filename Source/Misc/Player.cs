@@ -16,6 +16,7 @@ public enum FacingDirection {
 public class Player : ICollidable {
   private static float PLAYER_WIDTH = 171.0f * 0.2f;
   private static float PLAYER_HEIGHT = 323.0f * 0.2f;
+  private static float KNOCKBACK_DISTANCE = 10f;
 
   public IShape Shape => Collider;
   public BoxCollider Collider { get; private set; }
@@ -142,9 +143,7 @@ public class Player : ICollidable {
       Collider.position = this.Position;
     }
     if (info.Collider is IEnemy enemy) {
-      float knockbackDistance = 100f;
-
-      Position += info.Direction * knockbackDistance;
+      Position += info.Direction * KNOCKBACK_DISTANCE;
       Collider.position = this.Position;
 
       TakeDamage(50);
