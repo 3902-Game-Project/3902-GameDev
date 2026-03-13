@@ -78,14 +78,14 @@ internal partial class LevelLoader {
                 }
 
               case "2": {
-                  /* door */
+                  /* open small door */
                   var pairedLevelName = entrySplit[1];
 
                   if (!levelNames.Contains(pairedLevelName)) {
                     throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
                   }
 
-                  collidableBlocks.Add(game.BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos, pairedLevelName));
+                  collidableBlocks.Add(game.BlockFactory.CreateOpenSmallDoorBlockSprite(xPos, yPos, pairedLevelName));
                   break;
                 }
 
@@ -299,6 +299,18 @@ internal partial class LevelLoader {
                   }
 
                   collidableBlocks.Add(game.BlockFactory.CreateOpenSlattedDoorSprite(xPos, yPos, pairedLevelName));
+                  break;
+                }
+
+              case "33": {
+                  /* locked small door */
+                  var pairedLevelName = entrySplit[1];
+
+                  if (!levelNames.Contains(pairedLevelName)) {
+                    throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+                  }
+
+                  collidableBlocks.Add(game.BlockFactory.CreateLockedSmallDoorBlockSprite(xPos, yPos, pairedLevelName));
                   break;
                 }
 

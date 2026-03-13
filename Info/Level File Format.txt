@@ -25,7 +25,9 @@ Entry IDs:
         1 = corner
         2 = red X
         3:X = hole to other room
-    2:X = door to other room
+    33:X = Locked small door to other room
+      X = level name
+    2:X = Open small door to other room
       X = level name
     17 = Barrel
       Note: you must also specify a background block for this block!
@@ -78,4 +80,4 @@ Entry IDs:
     None
 
   Biggest ID:
-    32
+    33
