@@ -1,5 +1,4 @@
 ﻿using GameProject.Interfaces;
-using GameProject.Managers;
 using GameProject.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,12 +6,10 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Enemies;
 
 public class ShotgunnerSprite : BaseEnemy {
-  public ProjectileManager ProjectileManager { get; private set; }
   private IShotgunnerState state;
 
-  public ShotgunnerSprite(Texture2D texture, Vector2 position, ProjectileManager projectileManager) : base(texture, position, 48f, 96f) {
-    ProjectileManager = projectileManager;
-    state = new ShotgunnerWanderState(this);
+  public ShotgunnerSprite(Texture2D texture, Vector2 position, Game1 game) : base(texture, position, 48f, 96f) {
+    state = new ShotgunnerWanderState(this, game);
   }
 
   public void ChangeState(IShotgunnerState newState) {

@@ -7,24 +7,26 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class RifleAttackState : IRiflemanState {
-  private RiflemanSprite rifle;
+  private RiflemanSprite rifleMan;
+  private Game1 game;
   private double stateTimer;
   private double animationTimer;
   private double timePerFrame = 0.15;
 
   private bool hasFired = false;
 
-  public RifleAttackState(RiflemanSprite rifle) {
-    this.rifle = rifle;
+  public RifleAttackState(RiflemanSprite rifleMan, Game1 game) {
+    this.rifleMan = rifleMan;
+    this.game = game;
 
-    this.rifle.Velocity = Vector2.Zero;
+    this.rifleMan.Velocity = Vector2.Zero;
 
-    this.rifle.CurrentSourceRectangles = new List<Rectangle> {
+    this.rifleMan.CurrentSourceRectangles = new List<Rectangle> {
       new(198, 91, 21, 27),
       new(260, 91, 22, 27),
       new(323, 89, 23, 29),
     };
-    this.rifle.CurrentFrame = 0;
+    this.rifleMan.CurrentFrame = 0;
   }
 
   public void Update(GameTime gameTime) {
@@ -32,35 +34,33 @@ public class RifleAttackState : IRiflemanState {
 
     animationTimer += dt;
     if (animationTimer >= timePerFrame) {
-      if (rifle.CurrentFrame < rifle.CurrentSourceRectangles.Count - 1) {
-        rifle.CurrentFrame++;
+      if (rifleMan.CurrentFrame < rifleMan.CurrentSourceRectangles.Count - 1) {
+        rifleMan.CurrentFrame++;
         animationTimer = 0;
       }
     }
 
-    if (rifle.CurrentFrame == rifle.CurrentSourceRectangles.Count - 1 && !hasFired) {
+    if (rifleMan.CurrentFrame == rifleMan.CurrentSourceRectangles.Count - 1 && !hasFired) {
       FireBullet();
       hasFired = true;
     }
 
     stateTimer += dt;
     if (stateTimer > 1.0) {
-      rifle.ChangeState(new RifleIdleState(rifle));
+      rifleMan.ChangeState(new RifleIdleState(rifleMan, game));
     }
   }
 
   private void FireBullet() {
-    Vector2 bulletDirection = new Vector2(rifle.FacingDirection, 0f);
+    Vector2 bulletDirection = new Vector2(rifleMan.FacingDirection, 0f);
 
     // Calculate a spawn point so it comes out of the gun barrel, not his feet.
-    Vector2 spawnOffset = new Vector2(rifle.FacingDirection * 15f, -33f);
-    Vector2 spawnPosition = rifle.Position + spawnOffset;
+    Vector2 spawnOffset = new Vector2(rifleMan.FacingDirection * 15f, -33f);
+    Vector2 spawnPosition = rifleMan.Position + spawnOffset;
 
     // Create the bullet (Velocity: 300f, Lifetime: 2 seconds)
     IProjectile bullet = ProjectileFactory.Instance.CreateBullet(spawnPosition, bulletDirection, 300f, 2f);
 
-    if (rifle.ProjectileManager != null) {
-      rifle.ProjectileManager.AddProjectile(bullet);
-    }
+    game.StateGame.LevelManager.CurrentLevel.ProjectileManager.AddProjectile(bullet);
   }
 }

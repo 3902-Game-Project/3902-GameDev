@@ -1,5 +1,4 @@
 ﻿using GameProject.Interfaces;
-using GameProject.Managers;
 using GameProject.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,12 +6,10 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Enemies;
 
 public class RiflemanSprite : BaseEnemy {
-  public ProjectileManager ProjectileManager { get; private set; }
   private IRiflemanState state;
 
-  public RiflemanSprite(Texture2D texture, Vector2 position, ProjectileManager projectileManager) : base(texture, position, 48f, 96f) {
-    ProjectileManager = projectileManager;
-    state = new RifleWanderState(this);
+  public RiflemanSprite(Texture2D texture, Vector2 position, Game1 game) : base(texture, position, 48f, 96f) {
+    state = new RifleWanderState(this, game);
   }
 
   public void ChangeState(IRiflemanState newState) {
@@ -41,4 +38,3 @@ public class RiflemanSprite : BaseEnemy {
 
   public override void TakeDamage() { ChangeState(new RifleDeathState(this)); }
 }
-

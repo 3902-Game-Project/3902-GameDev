@@ -7,12 +7,14 @@ namespace GameProject.States;
 
 public class ShotgunnerIdleState : IShotgunnerState {
   private ShotgunnerSprite shotgunner;
+  private Game1 game;
   private double timer;
   private double animationTimer;
   private System.Random random;
 
-  public ShotgunnerIdleState(ShotgunnerSprite shotgunner) {
+  public ShotgunnerIdleState(ShotgunnerSprite shotgunner, Game1 game) {
     this.shotgunner = shotgunner;
+    this.game = game;
     this.random = new System.Random();
 
     this.shotgunner.Velocity = Vector2.Zero;
@@ -39,9 +41,9 @@ public class ShotgunnerIdleState : IShotgunnerState {
     if (timer > 1.0) {
       int choice = random.Next(0, 2);
       if (choice == 0) {
-        shotgunner.ChangeState(new ShotgunnerAttackState(shotgunner));
+        shotgunner.ChangeState(new ShotgunnerAttackState(shotgunner, game));
       } else {
-        shotgunner.ChangeState(new ShotgunnerWanderState(shotgunner));
+        shotgunner.ChangeState(new ShotgunnerWanderState(shotgunner, game));
       }
     }
   }

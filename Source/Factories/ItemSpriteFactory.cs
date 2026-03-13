@@ -1,13 +1,12 @@
 using GameProject.Interfaces;
 using GameProject.Items;
-using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Factories;
 
-public class ItemSpriteFactory(ProjectileManager projectileManager) {
+public class ItemSpriteFactory(Game1 game) {
   private Texture2D basicGunsTexture;
 
   public void LoadAllTextures(ContentManager content) {
@@ -19,19 +18,19 @@ public class ItemSpriteFactory(ProjectileManager projectileManager) {
       BulletVelocity = 200f,
       FireRate = .2f
     };
-    return new RevolverItem(basicGunsTexture, new Vector2(xPos, yPos), projectileManager, stats);
+    return new RevolverItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
   }
 
   public IItem CreateRifle(float xPos, float yPos) {
     var stats = new GunStats();
     stats.BulletVelocity = 500f;
-    return new RifleItem(basicGunsTexture, new Vector2(xPos, yPos), projectileManager, stats);
+    return new RifleItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
   }
 
   public IItem CreateShotgun(float xPos, float yPos) {
     var stats = new GunStats();
     stats.SpreadAngle = 30f;
     stats.PelletCount = 5;
-    return new ShotgunItem(basicGunsTexture, new Vector2(xPos, yPos), projectileManager, stats);
+    return new ShotgunItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
   }
 }

@@ -20,6 +20,7 @@ public class LevelManager(Game1 game) : ILevelManager {
 
   private readonly Dictionary<string, ILevel> levels = new();
   private string currentLevelName = STARTING_LEVEL;
+  private string newLevelName = STARTING_LEVEL;
 
   private int CurrentLevelIndex => Array.IndexOf(LEVEL_NAMES, currentLevelName);
 
@@ -60,13 +61,18 @@ public class LevelManager(Game1 game) : ILevelManager {
       throw new ArgumentException($"level name unknown: '{newLevelName}'");
     }
 
-    if (newLevelName != currentLevelName) {
-      currentLevelName = newLevelName;
+    if (newLevelName != currentLevelName && !CurrentLevel.IsFadingOut()) {
+      CurrentLevel.FadeOut();
+      this.newLevelName = newLevelName;
     }
+  }
 
+  // Called by Level.cs when level fade out is complete
+  public void CompleteLevelSwitch() {
+    currentLevelName = newLevelName;
     game.StateGame.Player.Position = CurrentLevel.PlayerPosition;
-
-    game.ProjectileManager.ClearProjectiles();
+    CurrentLevel.FadeIn();
+    CurrentLevel.ProjectileManager.ClearProjectiles();
   }
 
   public void PreviousLevel() {
