@@ -14,8 +14,9 @@ public enum FacingDirection {
 }
 
 public class Player : ICollidable {
-  private static float PLAYER_WIDTH = 171.0f * 0.2f;
-  private static float PLAYER_HEIGHT = 323.0f * 0.2f;
+  private static float PLAYER_WIDTH = 171.0f * 0.15f;
+  private static float PLAYER_HEIGHT = 323.0f * 0.15f;
+  private static float KNOCKBACK_DISTANCE = 10f;
 
   public IShape Shape => Collider;
   public BoxCollider Collider { get; private set; }
@@ -58,8 +59,8 @@ public class Player : ICollidable {
     this.Velocity = Vector2.Zero;
     this.Inventory = new PlayerInventory(this);
 
-    float width = 171 * 0.2f;
-    float height = 323 * 0.2f;
+    float width = 171 * 0.15f;
+    float height = 323 * 0.15f;
     this.Collider = new BoxCollider(width, height, this.Position);
 
     this.MovingState = new PlayerAnimatedMovingState(this);
@@ -116,7 +117,7 @@ public class Player : ICollidable {
       float unscaledWidth = 171f;
       float unscaledHeight = 323f;
       Vector2 spriteCenter = new Vector2(unscaledWidth / 2f, unscaledHeight / 2f);
-      float playerScale = 0.2f;
+      float playerScale = 0.15f;
       Vector2 rightHandUnscaled = new Vector2(75f, 203f);
       Vector2 leftHandUnscaled = new Vector2(18f, 188f);
       Vector2 rightHandOffset = (rightHandUnscaled - spriteCenter) * playerScale;
@@ -142,9 +143,7 @@ public class Player : ICollidable {
       Collider.position = this.Position;
     }
     if (info.Collider is IEnemy enemy) {
-      float knockbackDistance = 100f;
-
-      Position += info.Direction * knockbackDistance;
+      Position += info.Direction * KNOCKBACK_DISTANCE;
       Collider.position = this.Position;
 
       TakeDamage(50);

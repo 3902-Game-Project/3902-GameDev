@@ -9,7 +9,7 @@ public class RifleItem : IItem {
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   private Rectangle sourceRectangle = new(0, 19, 37, 10);
   private Vector2 origin;
-  private float scale = 1.5f;
+  private float scale = 1f;
   private Texture2D texture;
   public Vector2 Position { get; set; }
 

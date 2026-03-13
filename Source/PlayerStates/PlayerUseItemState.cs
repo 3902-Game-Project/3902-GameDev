@@ -46,7 +46,7 @@ public class PlayerUseItemState(Player player) : IPlayerState {
       Color.White,
       0f,
       origin,
-      0.2f, // Keeps the scale consistent with other states
+      0.15f, // Keeps the scale consistent with other states
       SpriteEffects.None,
       0f
     );
