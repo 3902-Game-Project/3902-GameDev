@@ -11,6 +11,11 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Info\Code Review\**" />
+    <EmbeddedResource Remove="Info\Code Review\**" />
+    <None Remove="Info\Code Review\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>
@@ -31,9 +36,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Info\Code Review\Sprint 3\" />
-    <Folder Include="Info\Code Review\Sprint 2\" />
   </ItemGroup>
 </Project>
