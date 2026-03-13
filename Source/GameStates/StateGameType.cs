@@ -15,7 +15,7 @@ public class StateGameType(Game1 game) : IGameState {
 
   public Player Player { get; private set; } = new Player(game);
 
-  public LevelManager LevelManager { get; private set; }
+  public ILevelManager LevelManager { get; private set; }
 
   public void Initialize() {
     keyboardController = new GameKeyboardController(game);
