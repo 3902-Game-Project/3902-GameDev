@@ -5,17 +5,31 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameProject.Misc;
 
-public class Level(
-  Game1 game,
-  List<IBlock> nonCollidableBlocks, // for non-collidable collidableBlocks -Aaron
-  List<IBlock> collidableBlocks,
-  List<IEnemy> enemies,
-  List<IWorldPickup> pickups,
-  Vector2 playerPosition
-) : ILevel {
+public class Level : ILevel {
+  private Game1 game;
+  private List<IBlock> nonCollidableBlocks; // for non-collidable collidableBlocks -Aaron
+  private List<IBlock> collidableBlocks;
+  private List<IEnemy> enemies;
+  private List<IWorldPickup> pickups;
   public List<IBlock> CollidableBlocks => collidableBlocks;
   public List<IEnemy> Enemies => enemies;
-  public Vector2 PlayerPosition { get; private set; } = playerPosition;
+  public Vector2 PlayerPosition { get; private set; }
+
+  public Level(
+    Game1 game,
+    List<IBlock> nonCollidableBlocks, // for non-collidable collidableBlocks -Aaron
+    List<IBlock> collidableBlocks,
+    List<IEnemy> enemies,
+    List<IWorldPickup> pickups,
+    Vector2 playerPosition
+  ) {
+    this.game = game;
+    this.nonCollidableBlocks = nonCollidableBlocks;
+    this.collidableBlocks = collidableBlocks;
+    this.enemies = enemies;
+    this.pickups = pickups;
+    PlayerPosition = playerPosition;
+  }
 
   public void Initialize() { }
 
