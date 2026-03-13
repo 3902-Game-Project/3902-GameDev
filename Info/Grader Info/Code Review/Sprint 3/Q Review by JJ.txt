@@ -1,0 +1,18 @@
+Author: JJ
+Date: 2026-03-13
+Sprint: 3
+Class to review: Source/Blocks/BaseBlock.cs
+Author of class: Q
+Minutes taken to review: 15
+
+Readability:
+  What is readable:
+  The class is pretty simple as it's just an abstract class. Still, the structure and variable names
+  are very clear, so it's easy to read.
+
+  What is not readable:
+  I'm not 100% sure why the BoundingBox is given a System.NotImplementedException, but I might just
+  not be familiar with how it works.
+
+  Code Quality:
+  The code does not have any uneccessary coupling and it has high cohesion for all the requirements of a basic block.
