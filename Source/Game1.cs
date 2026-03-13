@@ -2,7 +2,6 @@
 using GameProject.GameStates;
 using GameProject.Globals;
 using GameProject.Interfaces;
-using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

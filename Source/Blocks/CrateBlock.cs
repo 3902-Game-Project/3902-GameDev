@@ -15,7 +15,7 @@ public class CrateBlock : BaseBlock {
     sourceRect = new Rectangle(128, 0, 64, 64);
   }
 
-  public override void Update(GameTime gameTime) { 
+  public override void Update(GameTime gameTime) {
     // update to handle collision
   }
 

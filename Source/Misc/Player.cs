@@ -39,8 +39,8 @@ public class Player : ICollidable {
   public Texture2D Texture { get; private set; }
   public Rectangle BoundingBox {
     get {
-      int width = (int) PLAYER_WIDTH;
-      int height = (int) PLAYER_HEIGHT;
+      int width = (int)PLAYER_WIDTH;
+      int height = (int)PLAYER_HEIGHT;
       int x = (int)Position.X - (width / 2);
       int y = (int)Position.Y - (height / 2);
       return new Rectangle(x, y, width, height);
