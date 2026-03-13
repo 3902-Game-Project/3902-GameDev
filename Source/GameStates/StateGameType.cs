@@ -54,7 +54,9 @@ public class StateGameType(Game1 game) : IGameState {
         collisionManager.AddCollider(block);
       }
       foreach (var enemy in LevelManager.CurrentLevel.Enemies) {
-        collisionManager.AddCollider(enemy);
+        if (enemy.Health > 0) {
+          collisionManager.AddCollider(enemy);
+        }
       }
     }
 

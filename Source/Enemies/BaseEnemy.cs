@@ -19,6 +19,7 @@ public abstract class BaseEnemy : IEnemy {
   public BoxCollider Collider { get; private set; }
   public Layer Layer { get; } = Layer.Enemies;
   public Layer Mask { get; } = Layer.Player;
+  public int Health { get; set; } = 100;
 
   public Rectangle BoundingBox => throw new System.NotImplementedException();
 
@@ -48,5 +49,5 @@ public abstract class BaseEnemy : IEnemy {
   }
   public abstract void Update(GameTime gameTime);
   public abstract void Draw(SpriteBatch spriteBatch);
-  public abstract void TakeDamage();
+  public abstract void TakeDamage(int damage);
 }

@@ -2,6 +2,7 @@
 using GameProject.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace GameProject.Enemies;
 
@@ -36,5 +37,13 @@ public class RiflemanSprite : BaseEnemy {
     spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, 2f, effect, 0f);
   }
 
-  public override void TakeDamage() { ChangeState(new RifleDeathState(this)); }
+  public override void TakeDamage(int damage) {
+    if(Health <= 0) {
+      return;
+    }
+    Health -= damage;
+    if (Health <= 0) {
+      ChangeState(new RifleDeathState(this));
+    }
+  }
 }

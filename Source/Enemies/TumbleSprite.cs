@@ -35,5 +35,13 @@ public class TumbleSprite : BaseEnemy {
     spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, 0.4f, effect, 0f);
   }
 
-  public override void TakeDamage() { ChangeState(new TumbleDeathState(this)); }
+  public override void TakeDamage(int damage) {
+    if (Health <= 0) {
+      return;
+    }
+    Health -= damage;
+    if (Health <= 0) {
+      ChangeState(new TumbleDeathState(this));
+    }
+  }
 }

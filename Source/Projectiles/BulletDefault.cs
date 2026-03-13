@@ -14,6 +14,7 @@ public class BulletDefault : IProjectile, ICollidable {
   private float velocity;
   private float bulletLifetime;
   private float lifetimeCounter = 0f;
+  private int damage = 50; //damage from bullet, can be changed
   public bool IsExpired { get; private set; }
   public Vector2 Position { get; private set; }
   public BoxCollider Collider { get; private set; }
@@ -75,7 +76,7 @@ public class BulletDefault : IProjectile, ICollidable {
     if (collisionInfo.Collider is IBlock) {
       Expire();
     } else if (collisionInfo.Collider is IEnemy enemy) {
-      enemy.TakeDamage();
+      enemy.TakeDamage(damage);
       Expire();
     }
   }

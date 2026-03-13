@@ -36,5 +36,13 @@ public class ShotgunnerSprite : BaseEnemy {
     spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, 1.6f, effect, 0f);
   }
 
-  public override void TakeDamage() { ChangeState(new ShotgunnerDeathState(this)); }
+  public override void TakeDamage(int damage) {
+    if (Health <= 0) {
+      return;
+    }
+    Health -= damage;
+    if (Health <= 0) {
+      ChangeState(new ShotgunnerDeathState(this));
+    }
+  }
 }

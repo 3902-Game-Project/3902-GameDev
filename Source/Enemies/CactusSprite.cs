@@ -32,5 +32,10 @@ public class CactusSprite : BaseEnemy {
     spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, 0.2f, effect, 0f);
   }
 
-  public override void TakeDamage() { }
+  public override void TakeDamage(int damage) {
+    if (Health <= 0) {
+      return;
+    }
+    Health -= damage;
+  }
 }
