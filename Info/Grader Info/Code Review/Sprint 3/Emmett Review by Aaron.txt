@@ -1,0 +1,22 @@
+Readability:
+	Author: Aaron Vanderbilt
+	Date: 3/13/2026
+	Sprint: 3
+	File: PlayerInventory.cs
+	File Author: Emmett
+	Time: ~ 2 minutes
+	Comments: The code is short and simple at this point. There are not too many members. All methods are short and fit on screen,
+    and their purpose is easily identified by their title. Overall it is highly readable.
+
+
+Code Quality:
+	Author: Aaron Vanderbilt
+	Date: 3/13/2026
+	Sprint: 3
+	File: RevolverItem.cs
+	File Author: Emmett
+	Time: ~ 3 minutes
+	Comments: The class is encapsulating all the data of the Revolver item, so it makes sense that there are a lot of private members
+    and some public properties. Aside from a constructor method, draw, and update, there is only 1 additional method to handle the
+    behavior of being used. In the Use method, there are 2 if-else statements that are identical so the behaviors inside could be 
+    consolidated into 1 if-else statement. Other than that, all method bodies fit on screen and have one purpose.  

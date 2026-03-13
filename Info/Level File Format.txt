@@ -25,9 +25,6 @@ Entry IDs:
         1 = corner
         2 = red X
         3:X = hole to other room
-    33:X = Locked small door to other room
-      X = level name
-      Note: you must also specify a background block for this block!
     2:X = Open small door to other room
       X = level name
       Note: you must also specify a background block for this block!
@@ -62,6 +59,9 @@ Entry IDs:
       X = level name
     32:X = Open slatted door to other room
       X = level name
+    33:X = Locked small door to other room
+      X = level name
+      Note: you must also specify a background block for this block!
     34 = Tellers desk
       Note: you might also need to specify a background block for this block!
     35 = Bank shelf
