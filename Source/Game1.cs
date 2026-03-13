@@ -14,7 +14,6 @@ public class Game1 : Game {
   public SpriteBatch SpriteBatch { get; private set; }
   public AssetStore Assets { get; private set; }
   public BlockSpriteFactory BlockFactory { get; private set; }
-  public ProjectileManager ProjectileManager { get; private set; }
   public ItemSpriteFactory ItemSpriteFactory { get; private set; }
 
   public IGameState StateMenu { get; private set; }
@@ -34,8 +33,7 @@ public class Game1 : Game {
     currentState = StateMenu;
 
     BlockFactory = new BlockSpriteFactory(this);
-    ProjectileManager = new ProjectileManager();
-    ItemSpriteFactory = new ItemSpriteFactory(ProjectileManager);
+    ItemSpriteFactory = new ItemSpriteFactory(this);
   }
 
   public void ChangeState(IGameState state) {

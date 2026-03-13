@@ -1,6 +1,5 @@
 using GameProject.Enums;
 using GameProject.Interfaces;
-using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -14,15 +13,15 @@ public class RifleItem : IItem {
   private Texture2D texture;
   public Vector2 Position { get; set; }
 
-  private ProjectileManager projectileManager;
+  private Game1 game;
   private IProjectilePattern projectilePattern = new SingleShotPattern();
   private Vector2 bulletSpawnOffset;
   private GunStats stats;
   private IFireMode fireMode;
   public ItemCategory Category { get; } = ItemCategory.Primary;
 
-  public RifleItem(Texture2D texture, Vector2 startPosition, ProjectileManager projectileManager, GunStats stats) {
-    this.projectileManager = projectileManager;
+  public RifleItem(Texture2D texture, Vector2 startPosition, Game1 game, GunStats stats) {
+    this.game = game;
     this.texture = texture;
     this.Position = startPosition;
     this.stats = stats;
@@ -72,7 +71,7 @@ public class RifleItem : IItem {
     Vector2 actualOffset = new Vector2(offsetX, bulletSpawnOffset.Y);
     Vector2 bulletSpawnPosition = Position + actualOffset;
     if (fireMode.CanFire(useType)) {
-      projectilePattern.SpawnProjectiles(projectileManager, bulletSpawnPosition, bulletDirection, stats);
+      projectilePattern.SpawnProjectiles(game.StateGame.LevelManager.CurrentLevel.ProjectileManager, bulletSpawnPosition, bulletDirection, stats);
     }
   }
 }

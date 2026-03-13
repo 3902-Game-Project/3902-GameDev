@@ -72,7 +72,7 @@ public class LevelManager(Game1 game) : ILevelManager {
     currentLevelName = newLevelName;
     game.StateGame.Player.Position = CurrentLevel.PlayerPosition;
     CurrentLevel.FadeIn();
-    game.ProjectileManager.ClearProjectiles();
+    CurrentLevel.ProjectileManager.ClearProjectiles();
   }
 
   public void PreviousLevel() {

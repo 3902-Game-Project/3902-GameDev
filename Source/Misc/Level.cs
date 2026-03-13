@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using GameProject.Interfaces;
+using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Misc;
 
@@ -30,13 +29,14 @@ public class Level : ILevel {
     game.SpriteBatch.Draw(
       texture: game.Assets.Textures.WhitePixel,
       destinationRectangle: new(0, 0, game.Window.ClientBounds.Width, game.Window.ClientBounds.Height),
-      color: Color.Black * (float) darkeningIntensity
+      color: Color.Black * (float)darkeningIntensity
     );
   }
 
   public List<IBlock> CollidableBlocks => collidableBlocks;
   public List<IEnemy> Enemies => enemies;
   public Vector2 PlayerPosition { get; private set; }
+  public ProjectileManager ProjectileManager { get; private set; }
 
   public Level(
     Game1 game,
@@ -52,6 +52,8 @@ public class Level : ILevel {
     this.enemies = enemies;
     this.pickups = pickups;
     PlayerPosition = playerPosition;
+
+    ProjectileManager = new ProjectileManager();
   }
 
   public void Initialize() { }
@@ -84,6 +86,8 @@ public class Level : ILevel {
         foreach (var pickup in pickups) {
           pickup.Update(gameTime);
         }
+
+        ProjectileManager.Update(gameTime);
         break;
 
       case FadingState.FadeOut:
@@ -115,6 +119,8 @@ public class Level : ILevel {
     foreach (var pickup in pickups) {
       pickup.Draw(game.SpriteBatch);
     }
+
+    ProjectileManager.Draw(game.SpriteBatch);
 
     if (fadeState == FadingState.FadeIn || fadeState == FadingState.FadeOut) {
       var fadeProgress = fadeTime / FADE_DURATION;

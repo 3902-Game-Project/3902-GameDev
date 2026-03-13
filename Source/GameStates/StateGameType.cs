@@ -45,7 +45,6 @@ public class StateGameType(Game1 game) : IGameState {
 
     LevelManager.Update(gameTime);
     Player.Update(gameTime);
-    game.ProjectileManager.Update(gameTime);
 
     collisionManager.Clear();
     collisionManager.AddCollider(Player);
@@ -59,7 +58,7 @@ public class StateGameType(Game1 game) : IGameState {
       }
     }
 
-    foreach (var projectile in game.ProjectileManager.Projectiles) {
+    foreach (var projectile in LevelManager.CurrentLevel.ProjectileManager.Projectiles) {
       if (projectile is ICollidable collidableProj) {
         collisionManager.AddCollider(collidableProj);
       }
@@ -82,7 +81,6 @@ public class StateGameType(Game1 game) : IGameState {
 
     Player.Draw(game.SpriteBatch);
 
-    game.ProjectileManager.Draw(game.SpriteBatch);
     // collisionManager.DebugDraw(game.SpriteBatch, game.GraphicsDevice);
     game.SpriteBatch.End();
   }
