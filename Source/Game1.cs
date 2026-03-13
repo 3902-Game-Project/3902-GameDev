@@ -13,13 +13,14 @@ public class Game1 : Game {
 
   public SpriteBatch SpriteBatch { get; private set; }
   public AssetStore Assets { get; private set; }
-
-  public StateMenuType StateMenu { get; private set; }
-  public StateGameType StateGame { get; private set; }
-  private IGameState currentState;
-  public BlockSpriteFactory BlockFactory;
+  public BlockSpriteFactory BlockFactory { get; private set; }
   public ProjectileManager ProjectileManager { get; private set; }
   public ItemSpriteFactory ItemSpriteFactory { get; private set; }
+
+  public IGameState StateMenu { get; private set; }
+  // StateGame must have explicit type as it is directly referenced as a global variable:
+  public StateGameType StateGame { get; private set; }
+  private IGameState currentState;
 
   public Game1() {
     graphics = new GraphicsDeviceManager(this);
