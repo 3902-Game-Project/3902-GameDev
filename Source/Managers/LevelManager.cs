@@ -13,7 +13,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
     "00_test",  // in current state, change the order to display other levels
     "01_level"
   ];
-  private static string STARTING_LEVEL = LEVEL_NAMES[0];
+  private static readonly string STARTING_LEVEL = LEVEL_NAMES[0];
 
   private readonly Dictionary<string, ILevel> levels = new();
   private string currentLevelName = STARTING_LEVEL;
@@ -40,7 +40,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
     var levelNamesSet = new HashSet<string>(LEVEL_NAMES);
 
     foreach (var name in LEVEL_NAMES) {
-      levels.Add(name, Level.FromString(game, levelNamesSet, File.ReadAllText(content.RootDirectory + "/" + name + ".csv")));
+      levels.Add(name, LevelLoader.FromString(game, levelNamesSet, File.ReadAllText(content.RootDirectory + "/" + name + ".csv")));
     }
   }
 
