@@ -10,7 +10,9 @@ namespace GameProject.Managers;
 
 public class LevelManager(Game1 game) : ILevelManager {
   private static string[] LEVEL_NAMES = [
-    "00_test",
+    "00_everything",
+    "00b_confinement",
+    "00c_non_confinement",
     "01_level",
     "02_level"
   ];
@@ -61,6 +63,8 @@ public class LevelManager(Game1 game) : ILevelManager {
     if (newLevelName != currentLevelName) {
       currentLevelName = newLevelName;
     }
+
+    game.StateGame.Player.Position = CurrentLevel.PlayerPosition;
   }
 
   public void PreviousLevel() {

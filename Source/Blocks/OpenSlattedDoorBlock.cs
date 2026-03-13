@@ -1,5 +1,5 @@
 ﻿using GameProject.Collisions;
-using GameProject.Managers;
+using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -8,11 +8,11 @@ namespace GameProject.Blocks;
 public class OpenSlattedDoorBlock : BaseBlock {
   private Texture2D texture;
   private Rectangle sourceRect;
-  private LevelManager levelManager;
+  private ILevelManager levelManager;
   public float Rotation { get; private set; }
   public string PairedLevelName { get; private set; }
 
-  public OpenSlattedDoorBlock(Texture2D OpenSlattedDoorTexture, Vector2 xyPos, string pairedLevelName, LevelManager levelManager) : base(xyPos) {
+  public OpenSlattedDoorBlock(Texture2D OpenSlattedDoorTexture, Vector2 xyPos, string pairedLevelName, ILevelManager levelManager) : base(xyPos) {
     texture = OpenSlattedDoorTexture;
     Rotation = 0.0f;
     PairedLevelName = pairedLevelName;

@@ -14,6 +14,9 @@ public enum FacingDirection {
 }
 
 public class Player : ICollidable {
+  private static float PLAYER_WIDTH = 171.0f * 0.2f;
+  private static float PLAYER_HEIGHT = 323.0f * 0.2f;
+
   public IShape Shape => Collider;
   public BoxCollider Collider { get; private set; }
   public Layer Mask { get; } = Layer.Environment;
@@ -36,8 +39,8 @@ public class Player : ICollidable {
   public Texture2D Texture { get; private set; }
   public Rectangle BoundingBox {
     get {
-      int width = (int)(171 * 0.2f);
-      int height = (int)(323 * 0.2f);
+      int width = (int) PLAYER_WIDTH;
+      int height = (int) PLAYER_HEIGHT;
       int x = (int)Position.X - (width / 2);
       int y = (int)Position.Y - (height / 2);
       return new Rectangle(x, y, width, height);

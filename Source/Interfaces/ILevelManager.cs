@@ -1,4 +1,6 @@
-﻿namespace GameProject.Interfaces;
+﻿using GameProject.Misc;
+
+namespace GameProject.Interfaces;
 
 public interface ILevelManager : IInitable, IUpdatable, IGPDrawable {
   ILevel CurrentLevel { get; }

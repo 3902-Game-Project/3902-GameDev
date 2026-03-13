@@ -12,6 +12,7 @@ namespace GameProject.Misc;
 internal partial class LevelLoader {
   private static readonly int BLOCK_WIDTH = 64;
   private static readonly int BLOCK_HEIGHT = 64;
+  private static readonly Vector2 PLAYER_POSITION_OFFSET = new(BLOCK_WIDTH / 2.0f, BLOCK_HEIGHT / 2.0f);
 
   [GeneratedRegex(@"\r?\n")]
   private static partial Regex NewlineSplitRegex { get; }
@@ -95,7 +96,7 @@ internal partial class LevelLoader {
                 if (playerPositionNullable is not null) {
                   throw new FormatException("default player position set twice in same level");
                 } else {
-                  playerPositionNullable = new(xPos, yPos);
+                  playerPositionNullable = new Vector2(xPos, yPos) + PLAYER_POSITION_OFFSET;
                 }
                 break;
 
