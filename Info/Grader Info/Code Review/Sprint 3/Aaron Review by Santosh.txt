@@ -2,7 +2,7 @@ Author: Santosh
 Date: 2026-03-13
 Sprint: 3
 Class to review: Source/Blocks/LockedSlattedDoor.cs
-Author of class: JJ
+Author of class: Aaron
 Minutes taken to review: 20
 
 Readability:
