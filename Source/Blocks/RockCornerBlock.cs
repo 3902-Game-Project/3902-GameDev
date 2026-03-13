@@ -1,6 +1,4 @@
-﻿using GameProject.Blocks;
-using GameProject.Interfaces;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks; // Note: Kept your specific namespace here!

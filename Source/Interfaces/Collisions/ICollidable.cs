@@ -5,13 +5,12 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Interfaces;
 
 [Flags]
-public enum Layer 
-{
-Environment = 0,
-Player = 1,
-Enemies = 2,
-Projectiles = 4,
-Pickups = 8 
+public enum Layer {
+  Environment = 0,
+  Player = 1,
+  Enemies = 2,
+  Projectiles = 4,
+  Pickups = 8
 }
 
 public interface ICollidable {

@@ -1,6 +1,5 @@
 ﻿using GameProject.Blocks;
 using GameProject.Interfaces;
-using GameProject.Blocks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;

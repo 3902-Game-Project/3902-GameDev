@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using GameProject.CollisionResponse;
 using GameProject.Collisions;
 using GameProject.Interfaces;
-using GameProject.CollisionResponse;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -25,7 +25,7 @@ public class CollisionManager {
 
   private Texture2D debugTexture;
 
-  
+
   public void DebugDraw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, Microsoft.Xna.Framework.Graphics.GraphicsDevice graphicsDevice) {
     // Create a 1x1 white pixel if we haven't already
     if (debugTexture == null) {
@@ -41,7 +41,7 @@ public class CollisionManager {
       }
     }
   }
-  
+
 
   public void Update(GameTime gameTime) {
     for (int i = 0; i < colliders.Count - 1; i++) {

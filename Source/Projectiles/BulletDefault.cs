@@ -1,7 +1,7 @@
+using GameProject.Collisions;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using GameProject.Collisions;
 
 namespace GameProject.Projectiles;
 

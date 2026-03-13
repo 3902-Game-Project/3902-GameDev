@@ -1,8 +1,8 @@
-﻿using GameProject.Collisions;
+﻿using GameProject.CollisionResponse;
+using GameProject.Collisions;
 using GameProject.Interfaces;
 using GameProject.Misc;
 using GameProject.PlayerStates;
-using GameProject.CollisionResponse;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -71,7 +71,7 @@ public class Player : ICollidable {
   public void MoveLeft() => State.MoveLeft();
   public void MoveRight() => State.MoveRight();
   public void UseItem(UseType useType) {
-    if(Inventory.ActiveItem != null) {
+    if (Inventory.ActiveItem != null) {
       Inventory.ActiveItem.Use(useType);
       State.UseItem(useType);
     }

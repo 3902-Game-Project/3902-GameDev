@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.WorldPickups;
 
-public class ItemWorldPickup : BaseWorldPickup, ICollidable  {
+public class ItemWorldPickup : BaseWorldPickup, ICollidable {
   private IItem item;
 
   public ItemWorldPickup(IItem item) : base(item.Position) {

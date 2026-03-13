@@ -34,7 +34,7 @@ public class RevolverItem : IItem {
     origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
 
     SpriteEffects effects = SpriteEffects.None;
-    if(Direction == FacingDirection.Left) {
+    if (Direction == FacingDirection.Left) {
       effects = SpriteEffects.FlipHorizontally;
     }
 

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using GameProject.Interfaces;
+﻿using GameProject.Interfaces;
 using GameProject.Managers;
 using GameProject.States;
 using Microsoft.Xna.Framework;

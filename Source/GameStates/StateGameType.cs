@@ -33,7 +33,7 @@ public class StateGameType(Game1 game) : IGameState {
     game.BlockFactory.LoadAllTextures(game.Content);
 
     Player.Inventory.PickupItem(game.ItemSpriteFactory.CreateRevolver(0f, 0f));
-    Player.Inventory.PickupItem(game.ItemSpriteFactory.CreateRifle(0f,0f));
+    Player.Inventory.PickupItem(game.ItemSpriteFactory.CreateRifle(0f, 0f));
 
     LevelManager.LoadContent(game.Content);
   }
