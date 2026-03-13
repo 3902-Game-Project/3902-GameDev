@@ -35,7 +35,7 @@ public class RifleDeathState : IRiflemanState {
   }
 
   public void Update(GameTime gameTime) {
-    float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
     if (!isAnimationFinished) {
       animationTimer += dt;

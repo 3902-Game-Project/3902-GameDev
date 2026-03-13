@@ -33,7 +33,7 @@ public class SnakeAttackState : ISnakeState {
   }
 
   public void Update(GameTime gameTime) {
-    float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
     timer += dt;
 
     animationTimer += dt;

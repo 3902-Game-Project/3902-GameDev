@@ -39,10 +39,10 @@ public class Player : ICollidable {
   public Texture2D Texture { get; private set; }
   public Rectangle BoundingBox {
     get {
-      int width = (int)PLAYER_WIDTH;
-      int height = (int)PLAYER_HEIGHT;
-      int x = (int)Position.X - (width / 2);
-      int y = (int)Position.Y - (height / 2);
+      int width = (int) PLAYER_WIDTH;
+      int height = (int) PLAYER_HEIGHT;
+      int x = (int) Position.X - (width / 2);
+      int y = (int) Position.Y - (height / 2);
       return new Rectangle(x, y, width, height);
     }
   }
@@ -98,7 +98,7 @@ public class Player : ICollidable {
   }
 
   public void Update(GameTime gameTime) {
-    float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
     if (invincibilityTimer > 0) {
       invincibilityTimer -= dt;

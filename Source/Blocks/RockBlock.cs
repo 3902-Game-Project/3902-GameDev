@@ -16,9 +16,9 @@ public class RockBlock : BaseBlock {
 
   public void Rotate() {
     if (Position.X > 0 && Position.Y > 0) {
-      Rotation = (float)Math.PI;
+      Rotation = (float) Math.PI;
     } else if (Position.Y > 0 && Position.X == 0) {
-      Rotation = 3f * (float)Math.PI / 2f;
+      Rotation = 3f * (float) Math.PI / 2f;
     }
   }
 

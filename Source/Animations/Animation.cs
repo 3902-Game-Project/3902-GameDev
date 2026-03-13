@@ -9,7 +9,7 @@ public class Animation(List<Rectangle> frames, int fps) {
   private float timer = 0f;
 
   public void Update(GameTime gameTime) {
-    float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
     timer += dt;
     if (timer >= frameDuration) {

@@ -29,7 +29,7 @@ public class Level : ILevel {
     game.SpriteBatch.Draw(
       texture: game.Assets.Textures.WhitePixel,
       destinationRectangle: new(0, 0, game.Window.ClientBounds.Width, game.Window.ClientBounds.Height),
-      color: Color.Black * (float)darkeningIntensity
+      color: Color.Black * (float) darkeningIntensity
     );
   }
 

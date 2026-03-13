@@ -24,6 +24,6 @@ public class SemiAutoFire : IFireMode {
   }
 
   public void Update(GameTime gameTime) {
-    timeSinceLastShot += (float)gameTime.ElapsedGameTime.TotalSeconds;
+    timeSinceLastShot += (float) gameTime.ElapsedGameTime.TotalSeconds;
   }
 }

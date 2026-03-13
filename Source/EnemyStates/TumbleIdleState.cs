@@ -32,7 +32,7 @@ public class TumbleIdleState : ITumbleState {
   }
 
   public void Update(GameTime gameTime) {
-    float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
     animationTimer += dt;
     if (animationTimer >= 0.2) {

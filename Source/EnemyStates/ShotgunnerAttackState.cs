@@ -30,7 +30,7 @@ public class ShotgunnerAttackState : IShotgunnerState {
   }
 
   public void Update(GameTime gameTime) {
-    float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
     animationTimer += dt;
     if (animationTimer >= timePerFrame) {
       if (shotgunner.CurrentFrame < shotgunner.CurrentSourceRectangles.Count - 1) {

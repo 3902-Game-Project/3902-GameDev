@@ -28,7 +28,7 @@ public class BombProjectile : IProjectile {
     get {
       int width = currentSourceRect.Width;
       int height = currentSourceRect.Height;
-      return new Rectangle((int)position.X - (width / 2), (int)position.Y - (height / 2), width, height);
+      return new Rectangle((int) position.X - (width / 2), (int) position.Y - (height / 2), width, height);
     }
   }
 

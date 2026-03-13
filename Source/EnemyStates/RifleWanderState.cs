@@ -35,7 +35,7 @@ public class RifleWanderState : IRiflemanState {
   }
 
   public void Update(GameTime gameTime) {
-    float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
     animationTimer += dt;
     if (animationTimer >= 0.2) {
@@ -67,8 +67,8 @@ public class RifleWanderState : IRiflemanState {
 
   private void ChangeDirection() {
     float speed = 100f;
-    float randomX = (float)(random.NextDouble() * 2 - 1);
-    float randomY = (float)(random.NextDouble() * 2 - 1);
+    float randomX = (float) (random.NextDouble() * 2 - 1);
+    float randomY = (float) (random.NextDouble() * 2 - 1);
     Vector2 direction = new(randomX, randomY);
 
     if (direction != Vector2.Zero) {

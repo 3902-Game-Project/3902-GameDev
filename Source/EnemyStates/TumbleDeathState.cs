@@ -23,7 +23,7 @@ public class TumbleDeathState : ITumbleState {
   }
 
   public void Update(GameTime gameTime) {
-    float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
     deadHoldTimer += dt;
 
     if (deadHoldTimer >= timeToHoldLastFrame) {

@@ -35,10 +35,10 @@ public class BulletDefault : IProjectile, ICollidable {
 
   public Rectangle BoundingBox {
     get {
-      int width = (int)(sourceRectangle.Width * scale);
-      int height = (int)(sourceRectangle.Height * scale);
-      int x = (int)Position.X - (width / 2);
-      int y = (int)Position.Y - (height / 2);
+      int width = (int) (sourceRectangle.Width * scale);
+      int height = (int) (sourceRectangle.Height * scale);
+      int x = (int) Position.X - (width / 2);
+      int y = (int) Position.Y - (height / 2);
 
       return new Rectangle(x, y, width, height);
     }
@@ -62,9 +62,9 @@ public class BulletDefault : IProjectile, ICollidable {
 
   public void Update(GameTime gameTime) {
     // Logic for updating the bullet's position and state
-    Position += direction * velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+    Position += direction * velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
     Collider.position = Position;
-    lifetimeCounter += (float)gameTime.ElapsedGameTime.TotalSeconds;
+    lifetimeCounter += (float) gameTime.ElapsedGameTime.TotalSeconds;
     if (lifetimeCounter >= bulletLifetime) {
       // Logic for destroying the bullet
       Expire();

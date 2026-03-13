@@ -36,7 +36,7 @@ public class CollisionManager {
     // Draw a semi-transparent red box over EVERY collider in the manager
     foreach (var c in colliders) {
       if (c.Shape is BoxCollider box) {
-        Rectangle rect = new Rectangle((int)box.Left, (int)box.Top, (int)box.width, (int)box.height);
+        Rectangle rect = new Rectangle((int) box.Left, (int) box.Top, (int) box.width, (int) box.height);
         spriteBatch.Draw(debugTexture, rect, Color.Red * 0.5f); // 50% transparent red
       }
     }

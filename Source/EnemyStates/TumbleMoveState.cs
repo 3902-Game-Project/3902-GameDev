@@ -33,7 +33,7 @@ public class TumbleMoveState : ITumbleState {
   }
 
   public void Update(GameTime gameTime) {
-    float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
     animationTimer += dt;
     if (animationTimer >= 0.2) {
@@ -65,7 +65,7 @@ public class TumbleMoveState : ITumbleState {
 
   private void ChangeDirection() {
     float speed = 75f;
-    float randomX = (float)(random.NextDouble() * 2 - 1);
+    float randomX = (float) (random.NextDouble() * 2 - 1);
 
     Vector2 direction = new(randomX, 0f);
 
