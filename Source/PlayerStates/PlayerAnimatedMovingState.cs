@@ -77,7 +77,7 @@ public class PlayerAnimatedMovingState(Player player) : IPlayerState {
         Color.White,
         0f,
         origin,
-        0.2f,
+        0.15f,
         SpriteEffects.None,
         0f
     );

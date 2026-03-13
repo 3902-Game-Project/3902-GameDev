@@ -11,7 +11,7 @@ public class ShotgunItem : IItem {
   private Rectangle sourceRectangle = new(0, 10, 27, 9);
   private Vector2 origin;
   private Texture2D texture;
-  private float scale = 1.5f;
+  private float scale = 1f;
   public Vector2 Position { get; set; }
 
   private Game1 game;
