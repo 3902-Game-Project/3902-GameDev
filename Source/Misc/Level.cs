@@ -113,7 +113,7 @@ public class Level : ILevel {
   }
 
   public void FadeIn() {
-    fadeState = FadingState.FadeOut;
+    fadeState = FadingState.FadeIn;
     fadeTime = 0.0;
   }
 
