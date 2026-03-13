@@ -36,6 +36,7 @@ public class CactusSprite : BaseEnemy {
     if (Health <= 0) {
       return;
     }
-    Health -= damage;
+    //Now cactus is unkillable
+    //Health -= damage;
   }
 }
