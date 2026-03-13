@@ -14,7 +14,7 @@ internal partial class LevelLoader {
   private static readonly int BLOCK_HEIGHT = 64;
 
   [GeneratedRegex(@"\r?\n")]
-  private static partial Regex NewlineSplitRegex();
+  private static partial Regex NewlineSplitRegex { get; }
 
   public static Level FromString(Game1 game, ISet<string> levelNames, string levelDataString) {
     List<IBlock> nonCollidableBlocks = new();
@@ -23,7 +23,7 @@ internal partial class LevelLoader {
     List<IWorldPickup> pickups = new();
     Vector2? playerPositionNullable = null;
 
-    var lines = NewlineSplitRegex().Split(levelDataString.Trim());
+    var lines = NewlineSplitRegex.Split(levelDataString.Trim());
 
     var levelData = lines.Select((line) => line.Split(',')).ToArray();
 
