@@ -7,12 +7,14 @@ namespace GameProject.States;
 
 public class RifleIdleState : IRiflemanState {
   private RiflemanSprite rifle;
+  private Game1 game;
   private double timer;
   private double animationTimer;
   private System.Random random;
 
-  public RifleIdleState(RiflemanSprite rifle) {
+  public RifleIdleState(RiflemanSprite rifle, Game1 game) {
     this.rifle = rifle;
+    this.game = game;
     this.random = new System.Random();
 
     this.rifle.Velocity = Vector2.Zero;
@@ -40,9 +42,9 @@ public class RifleIdleState : IRiflemanState {
     if (timer > 1.0) {
       int choice = random.Next(0, 2);
       if (choice == 0) {
-        rifle.ChangeState(new RifleAttackState(rifle));
+        rifle.ChangeState(new RifleAttackState(rifle, game));
       } else {
-        rifle.ChangeState(new RifleWanderState(rifle));
+        rifle.ChangeState(new RifleWanderState(rifle, game));
       }
     }
   }

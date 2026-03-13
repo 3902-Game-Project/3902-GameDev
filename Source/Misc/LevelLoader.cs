@@ -158,7 +158,7 @@ internal partial class LevelLoader {
 
               case "9":
                 /* shotgunner */
-                enemies.Add(EnemySpriteFactory.Instance.CreateShotgunnerSprite(xPos, yPos, game.ProjectileManager));
+                enemies.Add(EnemySpriteFactory.Instance.CreateShotgunnerSprite(xPos, yPos, game));
                 break;
 
               case "10":
@@ -168,7 +168,7 @@ internal partial class LevelLoader {
 
               case "11":
                 /* rifleman */
-                enemies.Add(EnemySpriteFactory.Instance.CreateRiflemanSprite(xPos, yPos, game.ProjectileManager));
+                enemies.Add(EnemySpriteFactory.Instance.CreateRiflemanSprite(xPos, yPos, game));
                 break;
 
               case "12":

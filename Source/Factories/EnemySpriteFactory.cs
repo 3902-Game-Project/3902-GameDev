@@ -41,13 +41,13 @@ internal class EnemySpriteFactory {
   public IEnemy CreateTumbleweedSprite(float xPos, float yPos) {
     return new TumbleSprite(tumbleweedTexture, new Vector2(xPos, yPos));
   }
-  public IEnemy CreateRiflemanSprite(float xPos, float yPos, ProjectileManager projectileManager) {
-    return new RiflemanSprite(riflemanTexture, new Vector2(xPos, yPos), projectileManager);
+  public IEnemy CreateRiflemanSprite(float xPos, float yPos, Game1 game) {
+    return new RiflemanSprite(riflemanTexture, new Vector2(xPos, yPos), game);
   }
   public IEnemy CreateBatSprite(float xPos, float yPos) {
     return new BatSprite(batTexture, new Vector2(xPos, yPos));
   }
-  public IEnemy CreateShotgunnerSprite(float xPos, float yPos, ProjectileManager projectileManager) {
-    return new ShotgunnerSprite(shotgunnerTexture, new Vector2(xPos, yPos), projectileManager);
+  public IEnemy CreateShotgunnerSprite(float xPos, float yPos, Game1 game) {
+    return new ShotgunnerSprite(shotgunnerTexture, new Vector2(xPos, yPos), game);
   }
 }
