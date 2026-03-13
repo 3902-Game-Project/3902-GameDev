@@ -22,8 +22,7 @@ public abstract class BaseBlock : IBlock, ICollidable {
     this.Collider = new BoxCollider(width, height, position + centerOffset);
   }
 
-  public virtual void OnCollision(CollisionInfo info) {
-  }
+  public virtual void OnCollision(CollisionInfo info) { }
   public abstract void Update(GameTime gameTime);
   public abstract void Draw(SpriteBatch spriteBatch);
 }

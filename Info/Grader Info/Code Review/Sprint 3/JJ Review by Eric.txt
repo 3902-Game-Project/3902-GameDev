@@ -1,0 +1,19 @@
+﻿Author: Eric
+Date: 2026-03-13
+Sprint: 3
+Class to review: Source/Interfaces/Collisions/ICollidable.cs Source/Blocks/BaseBlock.cs
+Author of class: JJ
+Minutes taken to review: 10
+
+Readability:
+  What is readable:
+  The interface ICollidable is pretty staightforward. Four variables and one method are defined. The use of enum makes it more readable 
+
+  What is less readable:
+  N/A
+
+Code quality:
+  The code is simple and easy to follow.
+ 
+Hypothetical code change and how well the code supports that change:
+  More layers might be needed later and there will be more collisions. I do not think we need to change anything in these interfaces, but just add new things.
