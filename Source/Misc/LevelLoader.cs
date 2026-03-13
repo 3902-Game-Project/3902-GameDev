@@ -47,6 +47,7 @@ internal partial class LevelLoader {
             var type = entrySplit[0];
 
             switch (type) {
+              case "":
               case "0":
                 /* empty, do nothing */
                 break;

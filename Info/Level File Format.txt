@@ -6,7 +6,7 @@ If there are multiple blocks in the same cell (for example, a background block a
 
 Entry IDs:
   Misc:
-    0 = Empty
+    0 or empty string = Empty
     3 = Player
 
   Non colliding blocks:
