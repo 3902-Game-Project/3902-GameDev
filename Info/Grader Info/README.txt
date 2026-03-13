@@ -10,7 +10,7 @@ Controls:
     S/Down/DPadDown          Moves player downwards.
     A/Left/DPadLeft          Moves player leftwards.
     D/Right/DPadRight        Moves player rightwards.
-    Z/N/GamePadB             Cause the player to use item / attack.
+    J/GamePadB             Cause the player to use item / attack.
     D0                       Switch to sidearm item.
     D1                       Switch to primary item.
     D2                       Switch to consumable item.
