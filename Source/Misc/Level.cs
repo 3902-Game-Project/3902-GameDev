@@ -4,6 +4,7 @@ using System.Diagnostics;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Misc;
 
@@ -24,6 +25,14 @@ public class Level : ILevel {
 
   private FadingState fadeState = FadingState.FadeIn;
   private double fadeTime = 0.0;
+
+  private void DrawFadeRectangle(double darkeningIntensity) {
+    game.SpriteBatch.Draw(
+      texture: game.Assets.Textures.WhitePixel,
+      destinationRectangle: new(0, 0, game.Window.ClientBounds.Width, game.Window.ClientBounds.Height),
+      color: Color.Black * (float) darkeningIntensity
+    );
+  }
 
   public List<IBlock> CollidableBlocks => collidableBlocks;
   public List<IEnemy> Enemies => enemies;
@@ -105,6 +114,16 @@ public class Level : ILevel {
 
     foreach (var pickup in pickups) {
       pickup.Draw(game.SpriteBatch);
+    }
+
+    if (fadeState == FadingState.FadeIn || fadeState == FadingState.FadeOut) {
+      var fadeProgress = fadeTime / FADE_DURATION;
+
+      if (fadeState == FadingState.FadeIn) {
+        DrawFadeRectangle(1.0 - fadeProgress);
+      } else {
+        DrawFadeRectangle(fadeProgress);
+      }
     }
   }
 
