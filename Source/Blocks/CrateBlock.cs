@@ -15,7 +15,9 @@ public class CrateBlock : BaseBlock {
     sourceRect = new Rectangle(128, 0, 64, 64);
   }
 
-  public override void Update(GameTime gameTime) { }
+  public override void Update(GameTime gameTime) { 
+    // update to handle collision
+  }
 
   public override void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(texture, Position, sourceRect, Color.White, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);

@@ -12,16 +12,17 @@ public class LockedSmallDoorBlock : BaseBlock {
   public LockedSmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, string pairedLevelName) : base(xyPos) {
     texture = SmallDoorTexture;
     Rotation = 0.0f;
+    //Rotate();
     PairedLevelName = pairedLevelName;
     sourceRect = new Rectangle(448, 256, 64, 64);
   }
 
   public void Rotate() {
-    if (Position.X == 0 && Position.Y == 0) {
+    if (Position.X == 0) {
       Rotation = MathHelper.ToRadians(270);
-    } else if (Position.X > 0 && Position.Y > 0) {
+    } else if (Position.X >= 960 - 64) {
       Rotation = MathHelper.ToRadians(90);
-    } else if (Position.Y > 0 && Position.X == 0) {
+    } else if (Position.Y >= 576 - 64) {
       Rotation = MathHelper.ToRadians(180);
     }
   }

@@ -37,7 +37,7 @@ public class OpenVaultDoorBlock : BaseBlock {
     animationTimer += dt;
     if (animationTimer >= timePerFrame) {
       currentFrame++;
-      if (currentFrame == sourceRects.Count) { currentFrame = 0; }
+      if (currentFrame == sourceRects.Count) { currentFrame = 0; }  // delete post sprint3
       animationTimer = 0;
     }
   }
