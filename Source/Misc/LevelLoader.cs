@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using System.Text.RegularExpressions;
 using GameProject.Factories;
 using GameProject.Interfaces;
 using GameProject.WorldPickups;
+using Microsoft.Xna.Framework;
 
 namespace GameProject.Misc;
 
@@ -21,13 +21,11 @@ internal partial class LevelLoader {
     List<IBlock> collidableBlocks = new();
     List<IEnemy> enemies = new();
     List<IWorldPickup> pickups = new();
-    Vector2 playerPosition;
+    Vector2? playerPositionNullable = null;
 
     var lines = NewlineSplitRegex().Split(levelDataString.Trim());
 
     var levelData = lines.Select((line) => line.Split(',')).ToArray();
-
-    bool playerPositionSet = false;
 
     if (levelData.Length > 0) {
       for (int rowIndex = 0; rowIndex < levelData.Length; rowIndex++) {
@@ -93,11 +91,10 @@ internal partial class LevelLoader {
 
               case "3":
                 /* player position */
-                if (playerPositionSet) {
+                if (playerPositionNullable is not null) {
                   throw new FormatException("default player position set twice in same level");
                 } else {
-                  playerPosition = new(xPos, yPos);
-                  playerPositionSet = true;
+                  playerPositionNullable = new(xPos, yPos);
                 }
                 break;
 
@@ -313,12 +310,12 @@ internal partial class LevelLoader {
       }
     }
 
-    if (!playerPositionSet) {
+    if (playerPositionNullable is Vector2 playerPosition) {
+      var level = new Level(game, nonCollidableBlocks, collidableBlocks, enemies, pickups, playerPosition);
+
+      return level;
+    } else {
       throw new FormatException("default player position was not set in level");
     }
-
-    var level = new Level(game, nonCollidableBlocks, collidableBlocks, enemies, pickups, playerPosition);
-
-    return level;
   }
 }
