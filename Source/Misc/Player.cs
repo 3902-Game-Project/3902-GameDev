@@ -14,8 +14,8 @@ public enum FacingDirection {
 }
 
 public class Player : ICollidable {
-  public static float PLAYER_WIDTH = 171.0f * 0.2f;
-  public static float PLAYER_HEIGHT = 323.0f * 0.2f;
+  private static float PLAYER_WIDTH = 171.0f * 0.2f;
+  private static float PLAYER_HEIGHT = 323.0f * 0.2f;
 
   public IShape Shape => Collider;
   public BoxCollider Collider { get; private set; }
