@@ -62,6 +62,10 @@ Entry IDs:
       X = level name
     32:X = Open slatted door to other room
       X = level name
+    33 = Tellers desk
+      Note: you might also need to specify a background block for this block!
+    34 = Bank shelf
+      Note: you might also need to specify a background block for this block!
 
   items:
     Note: you must also specify a background block for items!

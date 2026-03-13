@@ -10,8 +10,9 @@ namespace GameProject.Managers;
 
 public class LevelManager(Game1 game) : ILevelManager {
   private static string[] LEVEL_NAMES = [
-    "00_test",  // in current state, change the order to display other levels
-    "01_level"
+    "00_test",  
+    "01_level",
+    "02_level"
   ];
   private static readonly string STARTING_LEVEL = LEVEL_NAMES[0];
 

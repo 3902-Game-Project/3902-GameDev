@@ -77,6 +77,12 @@ public class BlockSpriteFactory(Game1 game) {
   public IBlock CreateShelfBlockSprite(float x, float y) {
     return new ShelfBlock(blockTextures, new Vector2(x, y));
   }
+  public IBlock CreateBankShelfBlockSprite(float x, float y) {
+    return new BankShelfBlock(blockTextures, new Vector2(x, y));
+  }
+  public IBlock CreateTellersDeskBlockSprite(float x, float y) {
+    return new TellersDeskBlock(blockTextures, new Vector2(x, y));
+  }
   public IBlock CreateFirePitBlockSprite(float x, float y) {
     return new FirePitBlock(blockTextures, new Vector2(x, y));
   }

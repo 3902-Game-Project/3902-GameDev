@@ -3,13 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class RockHoleBlock : BaseBlock {
+public class TellersDeskBlock : BaseBlock {
   private Texture2D texture;
   private Rectangle sourceRect;
 
-  public RockHoleBlock(Texture2D RockHoleTexture, Vector2 xyPos) : base(xyPos, 64f, 64f) {
-    texture = RockHoleTexture;
-    sourceRect = new Rectangle(384, 128, 64, 64);
+  public TellersDeskBlock(Texture2D TellersDeskTexture, Vector2 xyPos) : base(xyPos) {
+    texture = TellersDeskTexture;
+    sourceRect = new Rectangle(128, 320, 64, 64);
   }
 
   public override void Update(GameTime gameTime) { }
