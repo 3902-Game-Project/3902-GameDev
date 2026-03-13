@@ -31,6 +31,7 @@ Code Reviews:
 Known bugs:
   Cannot move to escape block if just barely collided into it.
   Walking diagonally up and to the left, player will get caught on block corners even on a flat wall (Unity also has this issue).
+  Player can move while level is fading in (and player is not visually faded in/out either).
   Gamepad support not currently complete. We ran out of time.
 
 Sprint 2 Report:
