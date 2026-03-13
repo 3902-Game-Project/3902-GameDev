@@ -8,4 +8,7 @@ public interface ILevel : IInitable, IUpdatable, IGPDrawable {
   List<IBlock> CollidableBlocks { get; }
   List<IEnemy> Enemies { get; }
   Vector2 PlayerPosition { get; }
+  void FadeIn();
+  void FadeOut();
+  bool IsFadingOut();
 }
