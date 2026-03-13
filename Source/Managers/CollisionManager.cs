@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using GameProject.Collisions;
 using GameProject.Interfaces;
-using GameProject.Source.CollisionResponse;
+using GameProject.CollisionResponse;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

@@ -3,7 +3,7 @@ using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Source.Blocks; // Note: Kept your specific namespace here!
+namespace GameProject.Blocks; // Note: Kept your specific namespace here!
 
 public class RockCornerBlock : BaseBlock {
   private Texture2D texture;

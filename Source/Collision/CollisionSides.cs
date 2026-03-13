@@ -1,4 +1,4 @@
-﻿namespace GameProject.Source.CollisionResponse;
+﻿namespace GameProject.CollisionResponse;
 public enum CollisionSide {
   Top,
   Bottom,

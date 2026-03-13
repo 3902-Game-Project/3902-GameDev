@@ -2,7 +2,7 @@
 using GameProject.Interfaces;
 using GameProject.Misc;
 using GameProject.PlayerStates;
-using GameProject.Source.CollisionResponse;
+using GameProject.CollisionResponse;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
