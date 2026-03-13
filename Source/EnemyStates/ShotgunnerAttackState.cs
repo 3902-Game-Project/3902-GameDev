@@ -2,6 +2,7 @@
 using GameProject.Enemies;
 using GameProject.Factories;
 using GameProject.Interfaces;
+using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
@@ -70,6 +71,16 @@ public class ShotgunnerAttackState : IShotgunnerState {
     IProjectile bullet1 = ProjectileFactory.Instance.CreateBullet(spawnPosition, dirStraight, bulletSpeed, bulletLifetime);
     IProjectile bullet2 = ProjectileFactory.Instance.CreateBullet(spawnPosition, dirUp, bulletSpeed, bulletLifetime);
     IProjectile bullet3 = ProjectileFactory.Instance.CreateBullet(spawnPosition, dirDown, bulletSpeed, bulletLifetime);
+
+    if(bullet1 is BulletDefault b1) {
+      b1.IsPlayerShot = false;
+    }
+    if (bullet2 is BulletDefault b2) {
+      b2.IsPlayerShot = false;
+    }
+    if (bullet3 is BulletDefault b3) {
+      b3.IsPlayerShot = false;
+    }
 
     // Add them all to the manager!
     game.StateGame.LevelManager.CurrentLevel.ProjectileManager.AddProjectile(bullet1);
