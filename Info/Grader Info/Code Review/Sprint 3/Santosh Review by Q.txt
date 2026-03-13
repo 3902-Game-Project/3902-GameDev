@@ -1,0 +1,19 @@
+Author: Q
+Date: 2026-03-13
+Sprint: 3
+Class to review: Level.cs, LevelLoader.cs, LevelManager.cs
+Author of class: Santosh
+Minutes taken to review: 15
+
+What is readable: The code has good naming convensions so everything that is named makes sense within the context.
+It is very easy to follow exactly where the code is going and doing with the naming convensions as some classes might make
+a call to another class and we can still understand what the code is doing without having to go looking for the class that
+was called.
+
+What is not readable: Due to the style that we went with and how the switch case is set up, some of the numbers would be completely
+non understandable without the comments.  There is also in LevelLoader a deep nesting of the switch case (if -> for -> for -> foreach -> switch).
+This is kind of difficult to understand but there may not be a better way that this could have been acomplished.
+
+Overall code quality: The code is written well and has a good amount of seperated code to other classes to avoid overloading the level with too many
+things to do.  The code makes good use of the already established things like our Block factory and Sprite factory and does a good job breaking up the
+level into the level.cs and the levelmanager.cs files so that all the levels arent shown in just one class.
