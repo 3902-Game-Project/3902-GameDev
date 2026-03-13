@@ -123,7 +123,7 @@ internal partial class LevelLoader {
               case "8": {
                   /* rock */
 
-                  if (entrySplit.Length != 2) {
+                  if (entrySplit.Length < 2) {
                     throw new FormatException($"Expected 1 parameter for level block/entity type '{type}'");
                   }
 
@@ -147,7 +147,13 @@ internal partial class LevelLoader {
 
                     case "3":
                       /* hole */
-                      collidableBlocks.Add(game.BlockFactory.CreateRockHoleBlockSprite(xPos, yPos));
+                      var pairedLevelName = entrySplit[2];
+
+                      if (!levelNames.Contains(pairedLevelName)) {
+                      throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+                      }
+
+                      collidableBlocks.Add(game.BlockFactory.CreateRockHoleBlockSprite(xPos, yPos, pairedLevelName));
                       break;
 
                     default:

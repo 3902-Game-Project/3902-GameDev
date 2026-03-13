@@ -40,11 +40,11 @@ public class BlockSpriteFactory(Game1 game) {
   public IBlock CreateRedXRockBlockSprite(float x, float y) {
     return new RedXRockBlock(blockTextures, new Vector2(x, y));
   }
-  public IBlock CreateRockHoleBlockSprite(float x, float y) {
-    return new RockHoleBlock(blockTextures, new Vector2(x, y));
-  }
 
   /* Doors */
+  public IBlock CreateRockHoleBlockSprite(float x, float y, string pairedLevelName) {
+    return new RockHoleBlock(blockTextures, new Vector2(x, y), pairedLevelName, game.StateGame.LevelManager);
+  }
   public IBlock CreateLockedSmallDoorBlockSprite(float x, float y, string pairedLevelName) {
     return new LockedSmallDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName);
   }

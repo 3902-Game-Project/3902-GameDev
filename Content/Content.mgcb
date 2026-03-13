@@ -28,6 +28,12 @@
 #begin 02_level.csv
 /copy:02_level.csv
 
+#begin 03_level.csv
+/copy:03_level.csv
+
+#begin 04_level.csv
+/copy:04_level.csv
+
 #begin basic_guns_spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor

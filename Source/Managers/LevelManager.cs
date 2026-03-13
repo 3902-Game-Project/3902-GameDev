@@ -14,7 +14,9 @@ public class LevelManager(Game1 game) : ILevelManager {
     "00b_confinement",
     "00c_non_confinement",
     "01_level",
-    "02_level"
+    "02_level",
+    "03_level",
+    "04_level"
   ];
   private static readonly string STARTING_LEVEL = LEVEL_NAMES[0];
 
