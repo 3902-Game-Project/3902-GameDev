@@ -30,6 +30,7 @@ Code Reviews:
 
 Known bugs:
   Cannot move to escape block if just barely collided into it.
+  Walking diagonally up and to the left, player will get caught on block corners even on a flat wall (Unity also has this issue).
   Gamepad support not currently complete. We ran out of time.
 
 Sprint 2 Report:
