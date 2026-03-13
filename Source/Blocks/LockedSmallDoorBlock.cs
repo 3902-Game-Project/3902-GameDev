@@ -3,13 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class SmallDoorBlock : BaseBlock {
+public class LockedSmallDoorBlock : BaseBlock {
   private Texture2D texture;
   private Rectangle sourceRect;
   public float Rotation { get; private set; }
   public string PairedLevelName { get; private set; }
 
-  public SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, string pairedLevelName) : base(xyPos) {
+  public LockedSmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, string pairedLevelName) : base(xyPos) {
     texture = SmallDoorTexture;
     Rotation = 0.0f;
     PairedLevelName = pairedLevelName;

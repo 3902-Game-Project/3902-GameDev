@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using GameProject.Collisions;
 using GameProject.Interfaces;
+using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -11,10 +13,11 @@ public class OpenVaultDoorBlock : BaseBlock {
   private int currentFrame;
   private double animationTimer;
   private double timePerFrame = 0.3;
+  private LevelManager levelManager;
   public string PairedLevelName { get; private set; }
   public BlockState State { get; set; }
 
-  public OpenVaultDoorBlock(Texture2D OpenVaultDoorTexture, Vector2 xyPos, string pairedLevelName) : base(xyPos, 128f, 128f) {
+  public OpenVaultDoorBlock(Texture2D OpenVaultDoorTexture, Vector2 xyPos, string pairedLevelName, LevelManager levelManager) : base(xyPos, 128f, 128f) {
     texture = OpenVaultDoorTexture;
     currentFrame = 0;
     PairedLevelName = pairedLevelName;
@@ -26,6 +29,7 @@ public class OpenVaultDoorBlock : BaseBlock {
       new Rectangle(256, 192, 64, 64),
       new Rectangle(320, 192, 64, 64)
     };
+    this.levelManager = levelManager;
   }
 
   public override void Update(GameTime gameTime) {
@@ -40,5 +44,9 @@ public class OpenVaultDoorBlock : BaseBlock {
 
   public override void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(texture, Position, sourceRects[currentFrame], Color.White, 0.0f, Vector2.Zero, 2.0f, SpriteEffects.None, 0.0f);
+  }
+
+  public override void OnCollision(CollisionInfo info) {
+    levelManager.SwitchLevel(PairedLevelName);
   }
 }

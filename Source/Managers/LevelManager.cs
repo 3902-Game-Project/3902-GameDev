@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameProject.Managers;
 
-internal class LevelManager(Game1 game) : ILevelManager {
+public class LevelManager(Game1 game) : ILevelManager {
   private static string[] LEVEL_NAMES = [
     "00_test",  // in current state, change the order to display other levels
     "01_level"

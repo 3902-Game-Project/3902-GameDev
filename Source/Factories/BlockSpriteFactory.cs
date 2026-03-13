@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Factories;
 
-public class BlockSpriteFactory {
+public class BlockSpriteFactory(Game1 game) {
   private static Texture2D blockTextures;
 
   /*private static BlockSpriteFactory instance;
@@ -54,20 +54,23 @@ public class BlockSpriteFactory {
   }
 
   /* Doors */
-  public IBlock CreateSmallDoorBlockSprite(float x, float y, string pairedLevelName) {
-    return new SmallDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName);
+  public IBlock CreateLockedSmallDoorBlockSprite(float x, float y, string pairedLevelName) {
+    return new LockedSmallDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName);
+  }
+  public IBlock CreateOpenSmallDoorBlockSprite(float x, float y, string pairedLevelName) {
+    return new OpenSmallDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, game.StateGame.LevelManager);
   }
   public IBlock CreateLockedVaultBlockSprite(float x, float y, string pairedLevelName) {
     return new LockedVaultBlock(blockTextures, new Vector2(x, y), pairedLevelName);
   }
   public IBlock CreateOpenVaultDoorBlockSprite(float x, float y, string pairedLevelName) {
-    return new OpenVaultDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName);
+    return new OpenVaultDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, game.StateGame.LevelManager);
   }
   public IBlock CreateLockedSlattedDoorSprite(float x, float y, string pairedLevelName) {
     return new LockedSlattedDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName);
   }
   public IBlock CreateOpenSlattedDoorSprite(float x, float y, string pairedLevelName) {
-    return new OpenSlattedDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName);
+    return new OpenSlattedDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, game.StateGame.LevelManager);
   }
 
   /* Object Blocks */
