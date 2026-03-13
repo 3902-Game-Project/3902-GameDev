@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using GameProject.Factories;
+﻿using System.Collections.Generic;
 using GameProject.Interfaces;
-using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
@@ -27,6 +22,10 @@ internal class Level(
   public void LoadContent(ContentManager content) { }
 
   public void Update(GameTime gameTime) {
+    foreach (var nonCollidableBlocks in nonCollidableBlocks) {
+      nonCollidableBlocks.Update(gameTime);
+    }
+
     foreach (var collidableBlock in collidableBlocks) {
       collidableBlock.Update(gameTime);
     }
