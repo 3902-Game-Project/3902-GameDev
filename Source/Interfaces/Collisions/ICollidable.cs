@@ -6,11 +6,12 @@ namespace GameProject.Interfaces;
 
 [Flags]
 public enum Layer {
-  Environment = 0,
-  Player = 1,
-  Enemies = 2,
-  Projectiles = 4,
-  Pickups = 8
+  None = 0,
+  Environment = 1,
+  Player = 2,
+  Enemies = 4,
+  Projectiles = 8,
+  Pickups = 16,
 }
 
 public interface ICollidable {
