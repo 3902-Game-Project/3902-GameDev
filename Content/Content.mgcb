@@ -16,6 +16,12 @@
 #begin 00_everything.csv
 /copy:00_everything.csv
 
+#begin 00b_confinement.csv
+/copy:00b_confinement.csv
+
+#begin 00c_non_confinement.csv
+/copy:00c_non_confinement.csv
+
 #begin 01_level.csv
 /copy:01_level.csv
 
