@@ -1,6 +1,7 @@
 ﻿Weapons:
 	Call the revolver the Peacemaker
 	Lever action rifle
+  Be able to face up and down and shoot up and down
 
 Non-weapon items:
 	Whisky that acts as healing potion or damage doubler. Hurts you temporarily but makes you awesome for a period of time.
