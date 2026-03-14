@@ -1,0 +1,17 @@
+﻿Author: Emmett
+Date: 2026-03-13
+Sprint: 3
+Class to review: Source/Managers/CollisionManager.cs, Source/Collision/CollisionHandler.cs
+Author of class: Eric
+Minutes taken to review: 15
+
+What is readable: The collision system is inherently complex, but the variable names for things like knockback distance, enemy health,
+and collision sides make the math and logic very easy to follow. The way the collision handling is separated from the detector keeps the
+files from getting too cluttered.
+
+What is not readable: The logic checking who a bullet belongs to (to fix the bug where enemies were killing themselves or each other with their own projectiles)
+got a little complicated. The nested checks to determine if a collision is valid before applying damage or destroying the bullet can be a bit tricky to read at a glance.
+
+Overall code quality: Overall, the code quality is really strong for such a massive mechanical feature. Making use of the ICollidable interface keeps the collision system
+decoupled from the specific player and enemy classes. It successfully manages a lot of moving parts (bullets, player health, weapon sizing, and unkillable cacti) while maintaining
+high cohesion and not overloading the main game loop.
