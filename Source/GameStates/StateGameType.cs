@@ -12,6 +12,8 @@ public class StateGameType(Game1 game) : IGameState {
   private IController gamePadController;
 
   private CollisionManager collisionManager;
+  private Texture2D healthBarTexture;
+  private Vector2 healthBarPosition = new Vector2(0, 0);
 
   public Player Player { get; private set; } = new Player(game);
 
@@ -36,6 +38,7 @@ public class StateGameType(Game1 game) : IGameState {
     Player.Inventory.PickupItem(game.ItemSpriteFactory.CreateRifle(0f, 0f));
 
     LevelManager.LoadContent(game.Content);
+    healthBarTexture = game.Content.Load<Texture2D>("blood_red_bar");
   }
 
   public void Update(GameTime gameTime) {
@@ -82,6 +85,33 @@ public class StateGameType(Game1 game) : IGameState {
     LevelManager.Draw(gameTime);
 
     Player.Draw(game.SpriteBatch);
+
+    float healthPercent = MathHelper.Clamp(Player.Health / 100f, 0f, 1f);
+    game.SpriteBatch.Draw(
+      texture: healthBarTexture,
+      position: healthBarPosition,
+      sourceRectangle: null,
+      color: Color.DarkSlateGray,
+      rotation: 0f,
+      origin: Vector2.Zero,
+      scale: 0.5f,  //scale of blood bar
+      effects: SpriteEffects.None,
+      layerDepth: 0f
+      );
+
+    int visibleWidth = (int) (healthBarTexture.Width * healthPercent);
+    Rectangle sourceRectangle = new Rectangle(0, 0, visibleWidth, healthBarTexture.Height);
+    game.SpriteBatch.Draw(
+      texture: healthBarTexture,
+      position: healthBarPosition,
+      sourceRectangle: sourceRectangle,
+      color: Color.White,
+      rotation: 0f,
+      origin: Vector2.Zero,
+      scale: 0.5f, //scale of the blood bar
+      effects: SpriteEffects.None,
+      layerDepth: 0f
+    );
 
     // collisionManager.DebugDraw(game.SpriteBatch, game.GraphicsDevice);
     game.SpriteBatch.End();
