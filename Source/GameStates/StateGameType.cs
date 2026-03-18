@@ -1,4 +1,5 @@
 ﻿using GameProject.Controllers;
+using GameProject.Enemies;
 using GameProject.Interfaces;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
@@ -83,7 +84,6 @@ public class StateGameType(Game1 game) : IGameState {
     );
 
     LevelManager.Draw(gameTime);
-
     Player.Draw(game.SpriteBatch);
 
     float healthPercent = MathHelper.Clamp(Player.Health / 100f, 0f, 1f);
@@ -98,6 +98,42 @@ public class StateGameType(Game1 game) : IGameState {
       effects: SpriteEffects.None,
       layerDepth: 0f
       );
+
+    if (LevelManager.CurrentLevel != null) {
+      foreach (var enemy in LevelManager.CurrentLevel.Enemies) {
+        if (enemy is BaseEnemy baseEnemy && baseEnemy.Health > 0) {
+          float enemyHealthPercent = MathHelper.Clamp((float) baseEnemy.Health / baseEnemy.MaxHealth, 0f, 1f);
+          float scaleWidth = healthBarTexture.Width * 0.15f;
+          Vector2 enemyHealthPositions = new Vector2(
+            baseEnemy.Position.X - (scaleWidth / 2f),
+            baseEnemy.Position.Y - baseEnemy.Collider.height);
+          game.SpriteBatch.Draw(texture: healthBarTexture,
+            position: enemyHealthPositions,
+            sourceRectangle: null,
+            color: Color.DarkSlateGray,
+            rotation: 0f,
+            origin: Vector2.Zero,
+            scale: 0.15f,
+            effects: SpriteEffects.None,
+            layerDepth: 0f
+            );
+          int enemyHealthVisible = (int) (healthBarTexture.Width * enemyHealthPercent);
+          Rectangle enemyHpSource = new Rectangle(0, 0, enemyHealthVisible, healthBarTexture.Height);
+
+          game.SpriteBatch.Draw(
+            texture: healthBarTexture,
+            position: enemyHealthPositions,
+            sourceRectangle: enemyHpSource,
+            color: Color.White,
+            rotation: 0f,
+            origin: Vector2.Zero,
+            scale: 0.15f,
+            effects: SpriteEffects.None,
+            layerDepth: 0f
+          );
+        }
+      }
+    }
 
     int visibleWidth = (int) (healthBarTexture.Width * healthPercent);
     Rectangle sourceRectangle = new Rectangle(0, 0, visibleWidth, healthBarTexture.Height);

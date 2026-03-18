@@ -20,6 +20,7 @@ public abstract class BaseEnemy : IEnemy {
   public Layer Layer { get; } = Layer.Enemies;
   public Layer Mask { get; } = Layer.Player;
   public int Health { get; set; } = 100;
+  public int MaxHealth { get; set; } = 100;
 
   public Rectangle BoundingBox => throw new System.NotImplementedException();
 
