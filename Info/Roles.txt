@@ -15,3 +15,11 @@ Q: collision detecting enemies? (uncertain)
 Santosh: level loading from CSV; level manager; switching between levels
 Aaron: level designing CSV
 Emmett: Player: picking up items, holding items, dropping items. Potentially add health bar, other metrics like maybe aura. Add how the consumables change damage done and damage taken.
+
+Sprint 4:
+Santosh: more gamestates (win, loss, pause, item screen) and transitions; fixing player movement when level transitioning bug
+Eric: player facing/firing up/down; holding on to keys; reset level on player death; heads up display; player visual indicator of taking damage
+Aaron: player using keys to open door
+Emmett: ability to pick up / drop items; more items than just guns
+JJ: sound effects, background music
+Q: ?
