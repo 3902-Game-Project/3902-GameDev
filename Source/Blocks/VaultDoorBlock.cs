@@ -33,10 +33,7 @@ public class VaultDoorBlock : BaseBlock {
   }
 
   public override void Update(GameTime gameTime) {
-    if (State == BlockState.locked) {
-      // check if player has key
-    }
-    else if (State == BlockState.opening) {
+    if (State == BlockState.opening) {
       float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
       animationTimer += dt;
       if (animationTimer >= timePerFrame) {
