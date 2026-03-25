@@ -55,7 +55,7 @@ public class BlockSpriteFactory(Game1 game) {
     return new LockedVaultBlock(blockTextures, new Vector2(x, y), pairedLevelName);
   }
   public IBlock CreateOpenVaultDoorBlockSprite(float x, float y, string pairedLevelName) {
-    return new OpenVaultDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, game.StateGame.LevelManager);
+    return new VaultDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, game.StateGame.LevelManager);
   }
   public IBlock CreateLockedSlattedDoorSprite(float x, float y, string pairedLevelName) {
     return new LockedSlattedDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName);
