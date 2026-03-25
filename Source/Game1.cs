@@ -16,6 +16,8 @@ public class Game1 : Game {
   public ItemSpriteFactory ItemSpriteFactory { get; private set; }
 
   public IGameState StateMenu { get; private set; }
+  public IGameState StateLoss { get; private set; }
+  public IGameState StateWin { get; private set; }
   // StateGame must have explicit type as it is directly referenced as a global variable:
   public StateGameType StateGame { get; private set; }
   private IGameState currentState;
@@ -28,6 +30,8 @@ public class Game1 : Game {
     Assets = new AssetStore(this);
 
     StateMenu = new StateMenuType(this);
+    StateLoss = new StateLossType(this);
+    StateWin = new StateWinType(this);
     StateGame = new StateGameType(this);
     currentState = StateMenu;
 
@@ -52,6 +56,8 @@ public class Game1 : Game {
 
     Assets.Initialize();
     StateMenu.Initialize();
+    StateLoss.Initialize();
+    StateWin.Initialize();
     StateGame.Initialize();
 
     base.Initialize();
@@ -68,6 +74,8 @@ public class Game1 : Game {
     ProjectileFactory.Instance.LoadAllTextures(Content);
 
     StateMenu.LoadContent();
+    StateLoss.LoadContent();
+    StateWin.LoadContent();
     StateGame.LoadContent();
   }
 

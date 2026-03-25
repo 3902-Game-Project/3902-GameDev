@@ -1,0 +1,46 @@
+﻿using GameProject.Controllers;
+using GameProject.Interfaces;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace GameProject.GameStates;
+
+public class StateWinType(Game1 game) : IGameState {
+  private static readonly string WIN_TEXT = "You've won!";
+  private IController keyboardController;
+  private IController gamePadController;
+
+  public void Initialize() {
+    keyboardController = new MenuKeyboardController(game);
+    gamePadController = new MenuGamePadController(game);
+  }
+
+  public void LoadContent() { }
+
+  public void Update(GameTime gameTime) {
+    keyboardController.Update(gameTime);
+    gamePadController.Update(gameTime);
+  }
+
+  public void Draw(GameTime gameTime) {
+    game.GraphicsDevice.Clear(Color.CornflowerBlue);
+
+    game.SpriteBatch.Begin();
+    game.SpriteBatch.DrawString(
+      spriteFont: game.Assets.MainFont,
+      text: WIN_TEXT,
+      position:
+        new Vector2(
+          game.Window.ClientBounds.Width,
+          game.Window.ClientBounds.Height
+        ) * 0.5f,
+      color: Color.White,
+      origin: game.Assets.MainFont.MeasureString(WIN_TEXT) * 0.5f,
+      rotation: 0.0f,
+      scale: 1.0f,
+      effects: SpriteEffects.None,
+      layerDepth: 0.0f
+    );
+    game.SpriteBatch.End();
+  }
+}
