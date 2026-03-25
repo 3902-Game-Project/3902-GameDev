@@ -5,7 +5,7 @@ namespace GameProject.Interfaces;
 
 public enum BlockState {
   solid, broken,   // for Barrel, 
-  locked, closed, blocked, open,  // for Doors,
+  locked, closed, opening, open,  // for Doors,
   lit, extinguished,  // for FirePit
   still, moving
 }   // for Crate,  
