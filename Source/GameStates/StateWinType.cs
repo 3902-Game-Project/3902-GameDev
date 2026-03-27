@@ -11,8 +11,8 @@ public class StateWinType(Game1 game) : IGameState {
   private IController gamePadController;
 
   public void Initialize() {
-    keyboardController = new MenuKeyboardController(game);
-    gamePadController = new MenuGamePadController(game);
+    keyboardController = new EndKeyboardController(game);
+    gamePadController = new EndGamePadController(game);
   }
 
   public void LoadContent() { }
