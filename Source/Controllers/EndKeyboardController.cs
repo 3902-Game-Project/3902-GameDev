@@ -1,0 +1,18 @@
+﻿using System.Collections.Generic;
+using GameProject.AbstractClasses;
+using GameProject.Commands;
+using GameProject.Interfaces;
+using Microsoft.Xna.Framework.Input;
+
+namespace GameProject.Controllers;
+
+public class EndKeyboardController(Game1 game) : AKeyboardController {
+  protected override Dictionary<Keys, ICommand> PressedMappings { get; } = new() {
+    {Keys.R, new ReturnToMenuAndResetCommand(game)},
+    {Keys.Q, new QuitCommand(game)},
+  };
+
+  protected override Dictionary<Keys, ICommand> DownMappings { get; } = new() { };
+
+  protected override Dictionary<Keys, ICommand> ReleasedMappings { get; } = new() { };
+}

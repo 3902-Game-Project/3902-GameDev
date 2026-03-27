@@ -9,8 +9,8 @@ namespace GameProject.Controllers;
 
 public class GameKeyboardController(Game1 game) : AKeyboardController {
   protected override Dictionary<Keys, ICommand> PressedMappings { get; } = new() {
-    {Keys.Q, new QuitCommand(game)},
     {Keys.R, new ReturnToMenuAndResetCommand(game)},
+    {Keys.Q, new QuitCommand(game)},
     {Keys.J, new PlayerUseItemCommand(game.StateGame.Player, UseType.Pressed)},
     {Keys.E, new PlayerDieCommand(game.StateGame.Player)},
 
