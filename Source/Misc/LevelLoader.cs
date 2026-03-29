@@ -65,14 +65,14 @@ internal partial class LevelLoader {
         }
 
       case "2": {
-          /* open small door */
+          /* small door */
           var pairedLevelName = entrySplit[1];
 
           if (!levelNames.Contains(pairedLevelName)) {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
           }
 
-          collidableBlocks.Add(game.BlockFactory.CreateOpenSmallDoorBlockSprite(xPos, yPos, pairedLevelName));
+          collidableBlocks.Add(game.BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos, pairedLevelName));
           break;
         }
 

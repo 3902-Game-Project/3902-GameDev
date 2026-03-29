@@ -11,7 +11,7 @@ public class TextureStore(Game1 game) : IGlobalData {
   public void Initialize() { }
 
   public void LoadContent() {
-    BlockTextures = game.Content.Load<Texture2D>("desert-atlas-v6");
+    BlockTextures = game.Content.Load<Texture2D>("desert-atlas-v7");
     PlayerTexture = game.Content.Load<Texture2D>("playerSpritesheet");
     WhitePixel = game.Content.Load<Texture2D>("WhitePixel");
   }

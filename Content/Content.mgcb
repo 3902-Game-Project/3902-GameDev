@@ -85,6 +85,9 @@
 #begin desert-atlas-v6.png
 /copy:desert-atlas-v6.png
 
+#begin desert-atlas-v7.png
+/copy:desert-atlas-v7.png
+
 #begin File.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
