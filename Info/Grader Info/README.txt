@@ -16,10 +16,15 @@ Controls:
     D2                       Switch to consumable item.
     D3                       Switch to melee item.
     E/GamePadX               Instantly kills the player.
-    Q/GamePadY               Quit the game.
     R/GamePadA               Reset to main menu.
+    Q/GamePadY               Quit the game.
     Y/MouseLeft/RightBumper  Debug: switch to next level.
     T/MouseRight/LeftBumper  Debug: switch to previous level.
+
+  Win/Loss Screen:
+    Key                      Action
+    R/GamePadA               Reset to main menu.
+    Q/GamePadY               Quit the game.
 
 Code Metrics:
   Raw data stored at "Info/Grader Info/Code Metrics/Code Metrics.txt"

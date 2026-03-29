@@ -17,6 +17,311 @@ internal partial class LevelLoader {
   [GeneratedRegex(@"\r?\n")]
   private static partial Regex NewlineSplitRegex { get; }
 
+  private static void AddCellEntry(
+    Game1 game,
+    ISet<string> levelNames,
+
+    string type,
+    string[] entrySplit,
+    float xPos,
+    float yPos,
+
+    List<IBlock> nonCollidableBlocks,
+    List<IBlock> collidableBlocks,
+    List<IEnemy> enemies,
+    List<IWorldPickup> pickups,
+    ref Vector2? playerPositionNullable
+  ) {
+    switch (type) {
+      case "":
+      case "0":
+        /* empty, do nothing */
+        break;
+
+      case "1": {
+          /* log */
+
+          if (entrySplit.Length != 2) {
+            throw new FormatException($"Expected 1 parameter for level block/entity type '{type}'");
+          }
+
+          var variation = entrySplit[1];
+
+          switch (variation) {
+            case "0":
+              /* wall */
+              collidableBlocks.Add(game.BlockFactory.CreateLogBlockSprite(xPos, yPos));
+              break;
+
+            case "1":
+              /* corner */
+              collidableBlocks.Add(game.BlockFactory.CreateLogCornerBlockSprite(xPos, yPos));
+              break;
+
+            default:
+              throw new FormatException($"unrecognized level block/entity variation '{entrySplit[1]}'");
+          }
+          break;
+        }
+
+      case "2": {
+          /* open small door */
+          var pairedLevelName = entrySplit[1];
+
+          if (!levelNames.Contains(pairedLevelName)) {
+            throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+          }
+
+          collidableBlocks.Add(game.BlockFactory.CreateOpenSmallDoorBlockSprite(xPos, yPos, pairedLevelName));
+          break;
+        }
+
+      case "3":
+        /* player position */
+        if (playerPositionNullable is not null) {
+          throw new FormatException("default player position set twice in same level");
+        } else {
+          playerPositionNullable = new Vector2(xPos, yPos) + PLAYER_POSITION_OFFSET;
+        }
+        break;
+
+      case "4":
+        /* snake */
+        enemies.Add(EnemySpriteFactory.Instance.CreateSnakeSprite(xPos, yPos));
+        break;
+
+      case "5":
+        /* sand */
+        nonCollidableBlocks.Add(game.BlockFactory.CreateSandBlockSprite(xPos, yPos));
+        break;
+
+      case "6":
+        /* red sand */
+        nonCollidableBlocks.Add(game.BlockFactory.CreateRedSandBlockSprite(xPos, yPos));
+        break;
+
+      case "7":
+        /* wood plank */
+        nonCollidableBlocks.Add(game.BlockFactory.CreateWoodPlankBlockSprite(xPos, yPos));
+        break;
+
+      case "8": {
+          /* rock */
+
+          if (entrySplit.Length < 2) {
+            throw new FormatException($"Expected 1 parameter for level block/entity type '{type}'");
+          }
+
+          var variation = entrySplit[1];
+
+          switch (variation) {
+            case "0":
+              /* wall */
+              collidableBlocks.Add(game.BlockFactory.CreateRockBlockSprite(xPos, yPos));
+              break;
+
+            case "1":
+              /* corner */
+              collidableBlocks.Add(game.BlockFactory.CreateRockCornerBlockSprite(xPos, yPos));
+              break;
+
+            case "2":
+              /* red X */
+              collidableBlocks.Add(game.BlockFactory.CreateRedXRockBlockSprite(xPos, yPos));
+              break;
+
+            case "3":
+              /* hole */
+              var pairedLevelName = entrySplit[2];
+
+              if (!levelNames.Contains(pairedLevelName)) {
+                throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+              }
+
+              collidableBlocks.Add(game.BlockFactory.CreateRockHoleBlockSprite(xPos, yPos, pairedLevelName));
+              break;
+
+            default:
+              throw new FormatException($"unrecognized level block/entity variation '{variation}'");
+          }
+          break;
+        }
+
+      case "9":
+        /* shotgunner */
+        enemies.Add(EnemySpriteFactory.Instance.CreateShotgunnerSprite(xPos, yPos, game));
+        break;
+
+      case "10":
+        /* bat */
+        enemies.Add(EnemySpriteFactory.Instance.CreateBatSprite(xPos, yPos));
+        break;
+
+      case "11":
+        /* rifleman */
+        enemies.Add(EnemySpriteFactory.Instance.CreateRiflemanSprite(xPos, yPos, game));
+        break;
+
+      case "12":
+        /* tumbleweed */
+        enemies.Add(EnemySpriteFactory.Instance.CreateTumbleweedSprite(xPos, yPos));
+        break;
+
+      case "13":
+        /* cactus */
+        enemies.Add(EnemySpriteFactory.Instance.CreateCactusSprite(xPos, yPos));
+        break;
+
+      case "14":
+        /* revolver */
+        pickups.Add(new ItemWorldPickup(game.ItemSpriteFactory.CreateRevolver(xPos, yPos)));
+        break;
+
+      case "15":
+        /* rifle */
+        pickups.Add(new ItemWorldPickup(game.ItemSpriteFactory.CreateRifle(xPos, yPos)));
+        break;
+
+      case "16":
+        /* shotgun */
+        pickups.Add(new ItemWorldPickup(game.ItemSpriteFactory.CreateShotgun(xPos, yPos)));
+        break;
+
+      case "17":
+        /* barrel */
+        collidableBlocks.Add(game.BlockFactory.CreateBarrelBlockSprite(xPos, yPos));
+        break;
+
+      case "18":
+        /* bar shelf */
+        collidableBlocks.Add(game.BlockFactory.CreateBarShelfBlockSprite(xPos, yPos));
+        break;
+
+      case "19":
+        /* shelf */
+        collidableBlocks.Add(game.BlockFactory.CreateShelfBlockSprite(xPos, yPos));
+        break;
+
+      case "20": {
+          /* locked vault door */
+          var pairedLevelName = entrySplit[1];
+
+          if (!levelNames.Contains(pairedLevelName)) {
+            throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+          }
+
+          collidableBlocks.Add(game.BlockFactory.CreateLockedVaultBlockSprite(xPos, yPos, pairedLevelName));
+          break;
+        }
+
+      case "21": {
+          /* open vault door */
+          var pairedLevelName = entrySplit[1];
+
+          if (!levelNames.Contains(pairedLevelName)) {
+            throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+          }
+
+          collidableBlocks.Add(game.BlockFactory.CreateOpenVaultDoorBlockSprite(xPos, yPos, pairedLevelName));
+          break;
+        }
+
+      case "22":
+        /* fire pit */
+        collidableBlocks.Add(game.BlockFactory.CreateFirePitBlockSprite(xPos, yPos));
+        break;
+
+      case "23":
+        /* fire */
+        collidableBlocks.Add(game.BlockFactory.CreateFireBlockSprite(xPos, yPos));
+        break;
+
+      case "24":
+        /* ladder */
+        collidableBlocks.Add(game.BlockFactory.CreateLadderBlockSprite(xPos, yPos));
+        break;
+
+      case "25":
+        /* mud */
+        collidableBlocks.Add(game.BlockFactory.CreateMudBlockSprite(xPos, yPos));
+        break;
+
+      case "26":
+        /* crate */
+        collidableBlocks.Add(game.BlockFactory.CreateCrateBlockSprite(xPos, yPos));
+        break;
+
+      case "27":
+        /* stool */
+        collidableBlocks.Add(game.BlockFactory.CreateStoolBlockSprite(xPos, yPos));
+        break;
+
+      case "28":
+        /* table */
+        collidableBlocks.Add(game.BlockFactory.CreateTableBlockSprite(xPos, yPos));
+        break;
+
+      case "29":
+        /* statue */
+        collidableBlocks.Add(game.BlockFactory.CreateStatueBlockSprite(xPos, yPos));
+        break;
+
+      case "30":
+        /* window */
+        collidableBlocks.Add(game.BlockFactory.CreateWindowBlockSprite(xPos, yPos));
+        break;
+
+      case "31": {
+          /* locked slatted door */
+          var pairedLevelName = entrySplit[1];
+
+          if (!levelNames.Contains(pairedLevelName)) {
+            throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+          }
+
+          collidableBlocks.Add(game.BlockFactory.CreateLockedSlattedDoorSprite(xPos, yPos, pairedLevelName));
+          break;
+        }
+
+      case "32": {
+          /* open slatted door */
+          var pairedLevelName = entrySplit[1];
+
+          if (!levelNames.Contains(pairedLevelName)) {
+            throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+          }
+
+          collidableBlocks.Add(game.BlockFactory.CreateOpenSlattedDoorSprite(xPos, yPos, pairedLevelName));
+          break;
+        }
+
+      case "33": {
+          /* locked small door */
+          var pairedLevelName = entrySplit[1];
+
+          if (!levelNames.Contains(pairedLevelName)) {
+            throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+          }
+
+          collidableBlocks.Add(game.BlockFactory.CreateLockedSmallDoorBlockSprite(xPos, yPos, pairedLevelName));
+          break;
+        }
+
+      case "34":
+        /* bank shelf */
+        collidableBlocks.Add(game.BlockFactory.CreateBankShelfBlockSprite(xPos, yPos));
+        break;
+
+      case "35":
+        /* tellers desk */
+        collidableBlocks.Add(game.BlockFactory.CreateTellersDeskBlockSprite(xPos, yPos));
+        break;
+
+      default:
+        throw new FormatException($"unrecognized level block/entity type '{type}'");
+    }
+  }
+
   public static Level FromString(Game1 game, ISet<string> levelNames, string levelDataString) {
     List<IBlock> nonCollidableBlocks = new();
     List<IBlock> collidableBlocks = new();
@@ -47,294 +352,21 @@ internal partial class LevelLoader {
             var entrySplit = entry.Trim().Split(':');
             var type = entrySplit[0];
 
-            switch (type) {
-              case "":
-              case "0":
-                /* empty, do nothing */
-                break;
+            AddCellEntry(
+              game,
+              levelNames,
 
-              case "1": {
-                  /* log */
+              type,
+              entrySplit,
+              xPos,
+              yPos,
 
-                  if (entrySplit.Length != 2) {
-                    throw new FormatException($"Expected 1 parameter for level block/entity type '{type}'");
-                  }
-
-                  var variation = entrySplit[1];
-
-                  switch (variation) {
-                    case "0":
-                      /* wall */
-                      collidableBlocks.Add(game.BlockFactory.CreateLogBlockSprite(xPos, yPos));
-                      break;
-
-                    case "1":
-                      /* corner */
-                      collidableBlocks.Add(game.BlockFactory.CreateLogCornerBlockSprite(xPos, yPos));
-                      break;
-
-                    default:
-                      throw new FormatException($"unrecognized level block/entity variation '{entrySplit[1]}'");
-                  }
-                  break;
-                }
-
-              case "2": {
-                  /* open small door */
-                  var pairedLevelName = entrySplit[1];
-
-                  if (!levelNames.Contains(pairedLevelName)) {
-                    throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
-                  }
-
-                  collidableBlocks.Add(game.BlockFactory.CreateOpenSmallDoorBlockSprite(xPos, yPos, pairedLevelName));
-                  break;
-                }
-
-              case "3":
-                /* player position */
-                if (playerPositionNullable is not null) {
-                  throw new FormatException("default player position set twice in same level");
-                } else {
-                  playerPositionNullable = new Vector2(xPos, yPos) + PLAYER_POSITION_OFFSET;
-                }
-                break;
-
-              case "4":
-                /* snake */
-                enemies.Add(EnemySpriteFactory.Instance.CreateSnakeSprite(xPos, yPos));
-                break;
-
-              case "5":
-                /* sand */
-                nonCollidableBlocks.Add(game.BlockFactory.CreateSandBlockSprite(xPos, yPos));
-                break;
-
-              case "6":
-                /* red sand */
-                nonCollidableBlocks.Add(game.BlockFactory.CreateRedSandBlockSprite(xPos, yPos));
-                break;
-
-              case "7":
-                /* wood plank */
-                nonCollidableBlocks.Add(game.BlockFactory.CreateWoodPlankBlockSprite(xPos, yPos));
-                break;
-
-              case "8": {
-                  /* rock */
-
-                  if (entrySplit.Length < 2) {
-                    throw new FormatException($"Expected 1 parameter for level block/entity type '{type}'");
-                  }
-
-                  var variation = entrySplit[1];
-
-                  switch (variation) {
-                    case "0":
-                      /* wall */
-                      collidableBlocks.Add(game.BlockFactory.CreateRockBlockSprite(xPos, yPos));
-                      break;
-
-                    case "1":
-                      /* corner */
-                      collidableBlocks.Add(game.BlockFactory.CreateRockCornerBlockSprite(xPos, yPos));
-                      break;
-
-                    case "2":
-                      /* red X */
-                      collidableBlocks.Add(game.BlockFactory.CreateRedXRockBlockSprite(xPos, yPos));
-                      break;
-
-                    case "3":
-                      /* hole */
-                      var pairedLevelName = entrySplit[2];
-
-                      if (!levelNames.Contains(pairedLevelName)) {
-                      throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
-                      }
-
-                      collidableBlocks.Add(game.BlockFactory.CreateRockHoleBlockSprite(xPos, yPos, pairedLevelName));
-                      break;
-
-                    default:
-                      throw new FormatException($"unrecognized level block/entity variation '{variation}'");
-                  }
-                  break;
-                }
-
-              case "9":
-                /* shotgunner */
-                enemies.Add(EnemySpriteFactory.Instance.CreateShotgunnerSprite(xPos, yPos, game));
-                break;
-
-              case "10":
-                /* bat */
-                enemies.Add(EnemySpriteFactory.Instance.CreateBatSprite(xPos, yPos));
-                break;
-
-              case "11":
-                /* rifleman */
-                enemies.Add(EnemySpriteFactory.Instance.CreateRiflemanSprite(xPos, yPos, game));
-                break;
-
-              case "12":
-                /* tumbleweed */
-                enemies.Add(EnemySpriteFactory.Instance.CreateTumbleweedSprite(xPos, yPos));
-                break;
-
-              case "13":
-                /* cactus */
-                enemies.Add(EnemySpriteFactory.Instance.CreateCactusSprite(xPos, yPos));
-                break;
-
-              case "14":
-                /* revolver */
-                pickups.Add(new ItemWorldPickup(game.ItemSpriteFactory.CreateRevolver(xPos, yPos)));
-                break;
-
-              case "15":
-                /* rifle */
-                pickups.Add(new ItemWorldPickup(game.ItemSpriteFactory.CreateRifle(xPos, yPos)));
-                break;
-
-              case "16":
-                /* shotgun */
-                pickups.Add(new ItemWorldPickup(game.ItemSpriteFactory.CreateShotgun(xPos, yPos)));
-                break;
-
-              case "17":
-                /* barrel */
-                collidableBlocks.Add(game.BlockFactory.CreateBarrelBlockSprite(xPos, yPos));
-                break;
-
-              case "18":
-                /* bar shelf */
-                collidableBlocks.Add(game.BlockFactory.CreateBarShelfBlockSprite(xPos, yPos));
-                break;
-
-              case "19":
-                /* shelf */
-                collidableBlocks.Add(game.BlockFactory.CreateShelfBlockSprite(xPos, yPos));
-                break;
-
-              case "20": {
-                  /* locked vault door */
-                  var pairedLevelName = entrySplit[1];
-
-                  if (!levelNames.Contains(pairedLevelName)) {
-                    throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
-                  }
-
-                  collidableBlocks.Add(game.BlockFactory.CreateLockedVaultBlockSprite(xPos, yPos, pairedLevelName));
-                  break;
-                }
-
-              case "21": {
-                  /* open vault door */
-                  var pairedLevelName = entrySplit[1];
-
-                  if (!levelNames.Contains(pairedLevelName)) {
-                    throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
-                  }
-
-                  collidableBlocks.Add(game.BlockFactory.CreateOpenVaultDoorBlockSprite(xPos, yPos, pairedLevelName));
-                  break;
-                }
-
-              case "22":
-                /* fire pit */
-                collidableBlocks.Add(game.BlockFactory.CreateFirePitBlockSprite(xPos, yPos));
-                break;
-
-              case "23":
-                /* fire */
-                collidableBlocks.Add(game.BlockFactory.CreateFireBlockSprite(xPos, yPos));
-                break;
-
-              case "24":
-                /* ladder */
-                collidableBlocks.Add(game.BlockFactory.CreateLadderBlockSprite(xPos, yPos));
-                break;
-
-              case "25":
-                /* mud */
-                collidableBlocks.Add(game.BlockFactory.CreateMudBlockSprite(xPos, yPos));
-                break;
-
-              case "26":
-                /* crate */
-                collidableBlocks.Add(game.BlockFactory.CreateCrateBlockSprite(xPos, yPos));
-                break;
-
-              case "27":
-                /* stool */
-                collidableBlocks.Add(game.BlockFactory.CreateStoolBlockSprite(xPos, yPos));
-                break;
-
-              case "28":
-                /* table */
-                collidableBlocks.Add(game.BlockFactory.CreateTableBlockSprite(xPos, yPos));
-                break;
-
-              case "29":
-                /* statue */
-                collidableBlocks.Add(game.BlockFactory.CreateStatueBlockSprite(xPos, yPos));
-                break;
-
-              case "30":
-                /* window */
-                collidableBlocks.Add(game.BlockFactory.CreateWindowBlockSprite(xPos, yPos));
-                break;
-
-              case "31": {
-                  /* locked slatted door */
-                  var pairedLevelName = entrySplit[1];
-
-                  if (!levelNames.Contains(pairedLevelName)) {
-                    throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
-                  }
-
-                  collidableBlocks.Add(game.BlockFactory.CreateLockedSlattedDoorSprite(xPos, yPos, pairedLevelName));
-                  break;
-                }
-
-              case "32": {
-                  /* open slatted door */
-                  var pairedLevelName = entrySplit[1];
-
-                  if (!levelNames.Contains(pairedLevelName)) {
-                    throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
-                  }
-
-                  collidableBlocks.Add(game.BlockFactory.CreateOpenSlattedDoorSprite(xPos, yPos, pairedLevelName));
-                  break;
-                }
-
-              case "33": {
-                  /* locked small door */
-                  var pairedLevelName = entrySplit[1];
-
-                  if (!levelNames.Contains(pairedLevelName)) {
-                    throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
-                  }
-
-                  collidableBlocks.Add(game.BlockFactory.CreateLockedSmallDoorBlockSprite(xPos, yPos, pairedLevelName));
-                  break;
-                }
-
-              case "34":
-                /* bank shelf */
-                collidableBlocks.Add(game.BlockFactory.CreateBankShelfBlockSprite(xPos, yPos));
-                break;
-
-              case "35":
-                /* tellers desk */
-                collidableBlocks.Add(game.BlockFactory.CreateTellersDeskBlockSprite(xPos, yPos));
-                break;
-
-              default:
-                throw new FormatException($"unrecognized level block/entity type '{type}'");
-            }
+              nonCollidableBlocks,
+              collidableBlocks,
+              enemies,
+              pickups,
+              ref playerPositionNullable
+            );
           }
         }
       }

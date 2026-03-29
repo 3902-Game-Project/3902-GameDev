@@ -105,6 +105,8 @@ public class Player : ICollidable {
       invincibilityTimer -= dt;
     }
 
+    if (Velocity != Vector2.Zero)
+      Velocity = Vector2.Normalize(Velocity) * Speed;
     Position += Velocity * dt;
     State.Update(gameTime);
     Velocity = Vector2.Zero;
