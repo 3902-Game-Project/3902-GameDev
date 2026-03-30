@@ -41,13 +41,13 @@ public class BlockSpriteFactory {
   public IBlock CreateRockCornerBlockSprite(float x, float y) {
     return new RockCornerBlock(blockTextures, new Vector2(x, y));
   }
-  public IBlock CreateRedXRockBlockSprite(float x, float y) {
+  public IBlock CreateRockRedXBlockSprite(float x, float y) {
     return new RedXRockBlock(blockTextures, new Vector2(x, y));
   }
 
   /* Doors */
-  public IBlock CreateRockHoleBlockSprite(float x, float y, string pairedLevelName) {
-    return new RockHoleBlock(blockTextures, new Vector2(x, y), pairedLevelName);
+  public IBlock CreateRockHoleBlockSprite(float x, float y, string pairedLevelName, ILevelManager levelManager) {
+    return new RockHoleBlock(blockTextures, new Vector2(x, y), pairedLevelName, levelManager);
   }
   public IBlock CreateSmallDoorBlockSprite(float x, float y, string pairedLevelName, ILevelManager levelManager) {
     return new SmallDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, levelManager);

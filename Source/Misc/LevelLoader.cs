@@ -66,7 +66,9 @@ internal partial class LevelLoader {
 
       case "2": {
           /* small door */
-          var pairedLevelName = entrySplit[1];
+          // TODO: add state support
+
+          var pairedLevelName = entrySplit[2];
 
           if (!levelNames.Contains(pairedLevelName)) {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
@@ -125,21 +127,23 @@ internal partial class LevelLoader {
               collidableBlocks.Add(BlockSpriteFactory.Instance.CreateRockCornerBlockSprite(xPos, yPos));
               break;
 
+
             case "2":
               /* red X */
-              collidableBlocks.Add(BlockSpriteFactory.Instance.CreateRedXRockBlockSprite(xPos, yPos));
+              collidableBlocks.Add(BlockSpriteFactory.Instance.CreateRockRedXBlockSprite(xPos, yPos));
               break;
 
-            case "3":
-              /* hole */
-              var pairedLevelName = entrySplit[2];
+            case "3": {
+                /* hole to other room */
+                var pairedLevelName = entrySplit[2];
 
-              if (!levelNames.Contains(pairedLevelName)) {
-                throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+                if (!levelNames.Contains(pairedLevelName)) {
+                  throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+                }
+
+                collidableBlocks.Add(BlockSpriteFactory.Instance.CreateRockHoleBlockSprite(xPos, yPos, pairedLevelName, game.StateGame.LevelManager));
+                break;
               }
-
-              collidableBlocks.Add(BlockSpriteFactory.Instance.CreateRockHoleBlockSprite(xPos, yPos, pairedLevelName));
-              break;
 
             default:
               throw new FormatException($"unrecognized level block/entity variation '{variation}'");
@@ -204,7 +208,9 @@ internal partial class LevelLoader {
 
       case "20": {
           /* vault door */
-          var pairedLevelName = entrySplit[1];
+          // TODO: add state support
+
+          var pairedLevelName = entrySplit[2];
 
           if (!levelNames.Contains(pairedLevelName)) {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
@@ -263,7 +269,9 @@ internal partial class LevelLoader {
 
       case "31": {
           /* slatted door */
-          var pairedLevelName = entrySplit[1];
+          // TODO: add state support
+
+          var pairedLevelName = entrySplit[2];
 
           if (!levelNames.Contains(pairedLevelName)) {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
