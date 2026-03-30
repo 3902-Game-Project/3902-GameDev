@@ -1,5 +1,6 @@
 using GameProject.Interfaces;
 using GameProject.Items;
+using GameProject.Source.Items.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -32,5 +33,9 @@ public class ItemSpriteFactory(Game1 game) {
     stats.SpreadAngle = 30f;
     stats.PelletCount = 5;
     return new ShotgunItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
+  }
+
+  public IItem CreateKey(float xPos, float yPos) {
+    return null;  // add key constructor method later
   }
 }
