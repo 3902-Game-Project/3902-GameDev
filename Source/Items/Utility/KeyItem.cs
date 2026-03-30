@@ -15,7 +15,7 @@ namespace GameProject.Source.Items.Utility;
 public class KeyItem : IItem, IWorldPickup {
   // add collision info
     public FacingDirection Direction { get; set; } = FacingDirection.Right;
-    private Rectangle sourceRectangle = new(0, 1344, 21, 39);
+    private Rectangle sourceRectangle = new(0, 1344, 21, 39); // CHANGE
     private Texture2D texture;
     private Vector2 origin;
     private ILevelManager levelManager;
