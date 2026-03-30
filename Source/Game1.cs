@@ -2,6 +2,7 @@
 using GameProject.GameStates;
 using GameProject.Globals;
 using GameProject.Interfaces;
+using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -18,8 +19,9 @@ public class Game1 : Game {
   public IGameState StateMenu { get; private set; }
   public IGameState StateLoss { get; private set; }
   public IGameState StateWin { get; private set; }
-  // StateGame must have explicit type as it is directly referenced as a global variable:
   public StateGameType StateGame { get; private set; }
+  public CollisionManager CollisionManager { get; private set; }
+
   private IGameState currentState;
 
   public Game1() {
@@ -50,6 +52,7 @@ public class Game1 : Game {
   }
 
   protected override void Initialize() {
+    CollisionManager = new CollisionManager();
     graphics.PreferredBackBufferHeight = 576;
     graphics.PreferredBackBufferWidth = 960;
     graphics.ApplyChanges();
