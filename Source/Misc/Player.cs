@@ -134,26 +134,16 @@ public class Player : ICollidable {
       Inventory.ActiveItem.Update(gameTime);
     }
   }
-
   public void OnCollision(CollisionInfo info) {
     if (info.Collider is IBlock block) {
-      if (info.Side == CollisionSide.Left || info.Side == CollisionSide.Right) {
-        Velocity = new Vector2(0, Velocity.Y);
-      } else if (info.Side == CollisionSide.Top || info.Side == CollisionSide.Bottom) {
-        Velocity = new Vector2(Velocity.X, 0);
-      }
-
       Position += info.Direction * (info.Overlap + 0.01f);
-      if (Collider != null) {
-        Collider.position = this.Position;
-      }
+
+      if (Collider != null) Collider.position = this.Position;
     }
 
     if (info.Collider is IEnemy enemy) {
       Position += info.Direction * KNOCKBACK_DISTANCE;
-      if (Collider != null) {
-        Collider.position = this.Position;
-      }
+      if (Collider != null) Collider.position = this.Position;
       TakeDamage(50);
     }
   }
