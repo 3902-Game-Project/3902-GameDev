@@ -16,8 +16,7 @@ internal class EnemySpriteFactory {
 
   public static EnemySpriteFactory Instance { get; } = new();
 
-  private EnemySpriteFactory() {
-  }
+  private EnemySpriteFactory() { }
 
   public void LoadAllTextures(ContentManager content) {
     snakeTexture = content.Load<Texture2D>("snakeSpritesheet");
@@ -31,12 +30,15 @@ internal class EnemySpriteFactory {
   public IEnemy CreateSnakeSprite(float xPos, float yPos) {
     return new SnakeSprite(snakeTexture, new Vector2(xPos, yPos));
   }
+
   public IEnemy CreateCactusSprite(float xPos, float yPos) {
     return new CactusSprite(cactusTexture, new Vector2(xPos, yPos));
   }
+
   public IEnemy CreateTumbleweedSprite(float xPos, float yPos) {
     return new TumbleSprite(tumbleweedTexture, new Vector2(xPos, yPos));
   }
+
   public IEnemy CreateRiflemanSprite(float xPos, float yPos, Game1 game) {
     return new RiflemanSprite(riflemanTexture, new Vector2(xPos, yPos), game);
   }

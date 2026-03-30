@@ -6,8 +6,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Factories;
 
-public class BlockSpriteFactory(Game1 game) {
+public class BlockSpriteFactory {
   private Texture2D blockTextures;
+
+  public static BlockSpriteFactory Instance { get; } = new();
+
+  private BlockSpriteFactory() { }
 
   public void LoadAllTextures(ContentManager content) {
     blockTextures = content.Load<Texture2D>("desert-atlas-v7");
@@ -45,14 +49,14 @@ public class BlockSpriteFactory(Game1 game) {
   public IBlock CreateRockHoleBlockSprite(float x, float y, string pairedLevelName) {
     return new RockHoleBlock(blockTextures, new Vector2(x, y), pairedLevelName);
   }
-  public IBlock CreateSmallDoorBlockSprite(float x, float y, string pairedLevelName) {
-    return new SmallDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, game.StateGame.LevelManager);
+  public IBlock CreateSmallDoorBlockSprite(float x, float y, string pairedLevelName, ILevelManager levelManager) {
+    return new SmallDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, levelManager);
   }
-  public IBlock CreateVaultDoorBlockSprite(float x, float y, string pairedLevelName) {
-    return new VaultDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, game.StateGame.LevelManager);
+  public IBlock CreateVaultDoorBlockSprite(float x, float y, string pairedLevelName, ILevelManager levelManager) {
+    return new VaultDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, levelManager);
   }
-  public IBlock CreateSlattedDoorSprite(float x, float y, string pairedLevelName) {
-    return new SlattedDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, game.StateGame.LevelManager);
+  public IBlock CreateSlattedDoorSprite(float x, float y, string pairedLevelName, ILevelManager levelManager) {
+    return new SlattedDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, levelManager);
   }
 
   /* Object Blocks */

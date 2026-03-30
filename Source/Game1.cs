@@ -13,7 +13,6 @@ public class Game1 : Game {
 
   public SpriteBatch SpriteBatch { get; private set; }
   public AssetStore Assets { get; private set; }
-  public BlockSpriteFactory BlockFactory { get; private set; }
   public ItemSpriteFactory ItemSpriteFactory { get; private set; }
 
   public IGameState StateMenu { get; private set; }
@@ -37,7 +36,6 @@ public class Game1 : Game {
     StateGame = new StateGameType(this);
     currentState = StateMenu;
 
-    BlockFactory = new BlockSpriteFactory(this);
     ItemSpriteFactory = new ItemSpriteFactory(this);
   }
 
@@ -71,6 +69,7 @@ public class Game1 : Game {
 
     Assets.LoadContent();
 
+    BlockSpriteFactory.Instance.LoadAllTextures(Content);
     EnemySpriteFactory.Instance.LoadAllTextures(Content);
 
     ItemSpriteFactory.LoadAllTextures(Content);
