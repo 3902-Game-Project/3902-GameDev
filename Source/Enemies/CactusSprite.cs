@@ -17,9 +17,12 @@ public class CactusSprite : BaseEnemy {
   }
 
   public override void Update(GameTime gameTime) {
-    state.Update(gameTime);
+    base.Update(gameTime);
 
-    UpdateCollider();
+    state.Update(gameTime);
+    if (Position.X < 0) {
+      Position = new Vector2(0, Position.Y);
+    }
   }
 
   public override void Draw(SpriteBatch spriteBatch) {
@@ -29,7 +32,9 @@ public class CactusSprite : BaseEnemy {
     SpriteEffects effect = FacingDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
     Vector2 origin = new(source.Width / 2f, source.Height);
 
-    spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, 0.2f, effect, 0f);
+    Color tintColor = DamageFlashTimer > 0 ? Color.Red : Color.White;
+
+    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, 0.2f, effect, 0f);
   }
 
   public override void TakeDamage(int damage) {

@@ -17,12 +17,12 @@ public class TumbleSprite : BaseEnemy {
   }
 
   public override void Update(GameTime gameTime) {
+    base.Update(gameTime);
+
     state.Update(gameTime);
     if (Position.X < 0) {
       Position = new Vector2(0, Position.Y);
     }
-
-    UpdateCollider();
   }
 
   public override void Draw(SpriteBatch spriteBatch) {
@@ -32,15 +32,17 @@ public class TumbleSprite : BaseEnemy {
     SpriteEffects effect = FacingDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
     Vector2 origin = new(source.Width / 2f, source.Height);
 
-    spriteBatch.Draw(Texture, Position, source, Color.White, 0f, origin, 0.4f, effect, 0f);
+    Color tintColor = DamageFlashTimer > 0 ? Color.Red : Color.White;
+
+    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, 0.4f, effect, 0f);
   }
 
   public override void TakeDamage(int damage) {
-    if (Health <= 0) {
-      return;
-    }
-    Health -= damage;
-    if (Health <= 0) {
+    bool wasAlive = Health > 0;
+
+    base.TakeDamage(damage);
+
+    if (wasAlive && Health <= 0) {
       ChangeState(new TumbleDeathState(this));
     }
   }
