@@ -21,6 +21,8 @@ public abstract class BaseEnemy : IEnemy {
   public Layer Mask { get; } = Layer.Player;
   public int Health { get; set; } = 100;
   public int MaxHealth { get; set; } = 100;
+  public float DamageFlashTimer {  get; protected set; }
+  protected const float DamageFlashDuration = 0.15f;
 
   public Rectangle BoundingBox => throw new System.NotImplementedException();
 
@@ -48,7 +50,19 @@ public abstract class BaseEnemy : IEnemy {
       UpdateCollider();
     }
   }
-  public abstract void Update(GameTime gameTime);
   public abstract void Draw(SpriteBatch spriteBatch);
-  public abstract void TakeDamage(int damage);
+
+  public virtual void Update(GameTime gameTime) {
+    if (DamageFlashTimer > 0) {
+      DamageFlashTimer -= (float) gameTime.ElapsedGameTime.TotalSeconds;
+    }
+    UpdateCollider();
+  }
+
+  public virtual void TakeDamage(int damage) {
+    if (Health <= 0) return;
+
+    Health -= damage;
+    DamageFlashTimer = DamageFlashDuration;
+  }
 }
