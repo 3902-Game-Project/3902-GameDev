@@ -1,6 +1,8 @@
-﻿using GameProject.CollisionResponse;
+﻿using System;
+using GameProject.CollisionResponse;
 using GameProject.Collisions;
 using GameProject.Interfaces;
+using GameProject.Managers;
 using GameProject.Misc;
 using GameProject.PlayerStates;
 using Microsoft.Xna.Framework;
@@ -23,7 +25,7 @@ public class Player : ICollidable {
   public Layer Mask { get; } = Layer.Environment;
   public Layer Layer { get; } = Layer.Player;
   public Game1 game { get; private set; }
-  public IPlayerState State { get; set; } // Current state
+  public IPlayerState State { get; set; }
   public Vector2 Position { get; set; }
   public Vector2 Velocity { get; set; }
   public float Speed { get; set; } = 200f;
@@ -36,8 +38,8 @@ public class Player : ICollidable {
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
 
   public PlayerInventory Inventory { get; private set; }
-
   public Texture2D Texture { get; private set; }
+
   public Rectangle BoundingBox {
     get {
       int width = (int) PLAYER_WIDTH;
@@ -85,12 +87,11 @@ public class Player : ICollidable {
   public void LoadContent() {
     this.Texture = game.Assets.Textures.PlayerTexture;
   }
+
   public void TakeDamage(int amount = 10) {
     if (!IsInvincible) {
       Health -= amount;
-
       invincibilityTimer = invincibilityDuration;
-
       if (Health <= 0) {
         Health = 0;
         Die();
@@ -98,22 +99,24 @@ public class Player : ICollidable {
     }
   }
 
-  public void Update(GameTime gameTime) {
+ public void Update(GameTime gameTime) {
     float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
-    if (invincibilityTimer > 0) {
-      invincibilityTimer -= dt;
-    }
+    if (invincibilityTimer > 0) invincibilityTimer -= dt;
+    if (Velocity != Vector2.Zero) Velocity = Vector2.Normalize(Velocity) * Speed;
+    float xStep = Velocity.X * dt;
+    float yStep = Velocity.Y * dt;
 
-    if (Velocity != Vector2.Zero)
-      Velocity = Vector2.Normalize(Velocity) * Speed;
-    Position += Velocity * dt;
+    Position = new Vector2(Position.X + xStep, Position.Y);
+    if (Collider != null) Collider.position = this.Position;
+    game.CollisionManager.ResolveCollisionsFor(this, CollisionAxis.X, MathF.Abs(yStep) + 1f);
+
+    Position = new Vector2(Position.X, Position.Y + yStep);
+    if (Collider != null) Collider.position = this.Position;
+    game.CollisionManager.ResolveCollisionsFor(this, CollisionAxis.Y, MathF.Abs(xStep) + 1f);
+
     State.Update(gameTime);
     Velocity = Vector2.Zero;
-
-    if (Collider != null) {
-      Collider.position = this.Position;
-    }
 
     if (Inventory.ActiveItem != null) {
       float unscaledWidth = 171f;
@@ -125,9 +128,9 @@ public class Player : ICollidable {
       Vector2 rightHandOffset = (rightHandUnscaled - spriteCenter) * playerScale;
       Vector2 leftHandOffset = (leftHandUnscaled - spriteCenter) * playerScale;
       Vector2 currentOffset = (Direction == FacingDirection.Right) ? rightHandOffset : leftHandOffset;
+
       Inventory.ActiveItem.Position = this.Position + currentOffset;
       Inventory.ActiveItem.Direction = this.Direction;
-
       Inventory.ActiveItem.Update(gameTime);
     }
   }
@@ -140,14 +143,17 @@ public class Player : ICollidable {
         Velocity = new Vector2(Velocity.X, 0);
       }
 
-      // Nudge player out of the wall
-      Position += info.Direction * info.Overlap;
-      Collider.position = this.Position;
+      Position += info.Direction * (info.Overlap + 0.01f);
+      if (Collider != null) {
+        Collider.position = this.Position;
+      }
     }
+
     if (info.Collider is IEnemy enemy) {
       Position += info.Direction * KNOCKBACK_DISTANCE;
-      Collider.position = this.Position;
-
+      if (Collider != null) {
+        Collider.position = this.Position;
+      }
       TakeDamage(50);
     }
   }
