@@ -10,7 +10,7 @@ public class BlockSpriteFactory(Game1 game) {
   private Texture2D blockTextures;
 
   public void LoadAllTextures(ContentManager content) {
-    blockTextures = content.Load<Texture2D>("desert-atlas-v6");
+    blockTextures = content.Load<Texture2D>("desert-atlas-v7");
   }
 
   /* Floor Blocks */
