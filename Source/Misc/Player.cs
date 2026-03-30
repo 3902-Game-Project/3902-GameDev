@@ -143,6 +143,9 @@ public class Player : ICollidable {
 
     if (info.Collider is IEnemy enemy) {
       Position += info.Direction * KNOCKBACK_DISTANCE;
+      if (Collider != null) {
+        Collider.position = this.Position;
+      }
       if (Collider != null) Collider.position = this.Position;
       TakeDamage(50);
     }
