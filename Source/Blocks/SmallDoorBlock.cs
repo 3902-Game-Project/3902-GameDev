@@ -18,7 +18,7 @@ public class SmallDoorBlock : BaseBlock {
   public SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, string pairedLevelName, ILevelManager levelManager) : base(xyPos) {
     texture = SmallDoorTexture;
     Rotation = 0.0f;
-    currentFrame = 1; // CHANGE LATER TO 0 = LOCKED
+    currentFrame = 0;
     State = BlockState.locked;
     sourceRects = new List<Rectangle> {
       new Rectangle(448, 256, 64, 64),

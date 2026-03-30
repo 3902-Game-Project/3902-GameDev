@@ -48,17 +48,11 @@ public class BlockSpriteFactory(Game1 game) {
   public IBlock CreateSmallDoorBlockSprite(float x, float y, string pairedLevelName) {
     return new SmallDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, game.StateGame.LevelManager);
   }
-  public IBlock CreateLockedVaultBlockSprite(float x, float y, string pairedLevelName) {
-    return new LockedVaultBlock(blockTextures, new Vector2(x, y), pairedLevelName);
-  }
-  public IBlock CreateOpenVaultDoorBlockSprite(float x, float y, string pairedLevelName) {
+  public IBlock CreateVaultDoorBlockSprite(float x, float y, string pairedLevelName) {
     return new VaultDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, game.StateGame.LevelManager);
   }
-  public IBlock CreateLockedSlattedDoorSprite(float x, float y, string pairedLevelName) {
-    return new SlattedDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName);
-  }
-  public IBlock CreateOpenSlattedDoorSprite(float x, float y, string pairedLevelName) {
-    return new OpenSlattedDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, game.StateGame.LevelManager);
+  public IBlock CreateSlattedDoorSprite(float x, float y, string pairedLevelName) {
+    return new SlattedDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, game.StateGame.LevelManager);
   }
 
   /* Object Blocks */
