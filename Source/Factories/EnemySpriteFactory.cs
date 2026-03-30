@@ -13,11 +13,8 @@ internal class EnemySpriteFactory {
   private Texture2D riflemanTexture;
   private Texture2D tumbleweedTexture;
   private Texture2D cactusTexture;
-  private static EnemySpriteFactory instance = new();
 
-  public static EnemySpriteFactory Instance {
-    get { return instance; }
-  }
+  public static EnemySpriteFactory Instance { get; } = new();
 
   private EnemySpriteFactory() {
   }
