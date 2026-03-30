@@ -24,7 +24,8 @@ Entry IDs:
         0 = wall
         1 = corner
         2 = red X
-        3:X = hole to other room
+        3:Y = hole to other room
+          Y = level name
     2:X:Y = Small door to other room
       X = state:
         0 = locked
