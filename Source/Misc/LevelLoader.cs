@@ -214,7 +214,7 @@ internal partial class LevelLoader {
           break;
         }
 
-      // case 21 - deleted for door consolidation -Aaron
+      /* case 21 -- empty (deleted for door consolidation -Aaron) */
 
       case "22":
         /* fire pit */
@@ -273,9 +273,9 @@ internal partial class LevelLoader {
           break;
         }
 
-      // case 32
+      /* case 32 -- empty */
 
-      // case 33
+      /* case 33 -- empty */
 
       case "34":
         /* bank shelf */

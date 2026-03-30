@@ -25,8 +25,11 @@ Entry IDs:
         1 = corner
         2 = red X
         3:X = hole to other room
-    2:X = Open small door to other room
-      X = level name
+    2:X:Y = Small door to other room
+      X = state:
+        0 = locked
+        1 = unlocked
+      Y = level name
       Note: you must also specify a background block for this block!
     17 = Barrel
       Note: you must also specify a background block for this block!
@@ -34,10 +37,12 @@ Entry IDs:
       Note: you must also specify a background block for this block!
     19 = Shelf
       Note: you must also specify a background block for this block!
-    20:X = Locked vault door to other room
-      X = level name
-    21:X = Open vault door to other room
-      X = level name
+    20:X:Y = Vault door to other room
+      X = state:
+        0 = locked
+        1 = opening
+        2 = unlocked
+      Y = level name
     22 = Fire pit (extinguished)
       Note: you must also specify a background block for this block!
     23 = Fire (lit)
@@ -55,13 +60,11 @@ Entry IDs:
       Note: you must also specify a background block for this block!
     30 = Window
       Note: you might also need to specify a background block for this block!
-    31:X = Locked slatted door to other room
-      X = level name
-    32:X = Open slatted door to other room
-      X = level name
-    33:X = Locked small door to other room
-      X = level name
-      Note: you must also specify a background block for this block!
+    31:X:Y = Slatted door to other room
+      X = state:
+        0 = locked
+        1 = unlocked
+      Y = level name
     34 = Tellers desk
       Note: you might also need to specify a background block for this block!
     35 = Bank shelf
@@ -83,7 +86,7 @@ Entry IDs:
     13 = cactus
 
   Gaps in the IDs:
-    None
+    21, 32, 33
 
   Biggest ID:
     35
