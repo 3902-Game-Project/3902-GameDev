@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GameProject.Collisions;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -43,5 +44,11 @@ public class SlattedDoorBlock : BaseBlock {
 
   public override void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(texture, Position, sourceRects[currentFrame], Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
+  }
+
+  public override void OnCollision(CollisionInfo info) {
+    if (State == BlockState.open && info.Collider is Player) {
+      levelManager.SwitchLevel(PairedLevelName);
+    }
   }
 }
