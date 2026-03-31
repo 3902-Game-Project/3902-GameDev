@@ -1,3 +1,4 @@
+using System;
 using GameProject.Interfaces;
 using GameProject.Items;
 using Microsoft.Xna.Framework;
@@ -35,6 +36,6 @@ public class ItemSpriteFactory(Game1 game) {
   }
 
   public IItem CreateKey(float xPos, float yPos) {
-    return null;  // add key constructor method later
+    throw new NotImplementedException("CreateKey not implemented"); // add key constructor method later
   }
 }
