@@ -193,17 +193,17 @@ internal partial class LevelLoader {
 
       case "14":
         /* revolver */
-        pickups.Add(new ItemWorldPickup(game.ItemSpriteFactory.CreateRevolver(xPos, yPos)));
+        pickups.Add(new ItemWorldPickup(ItemSpriteFactory.Instance.CreateRevolver(xPos, yPos, game)));
         break;
 
       case "15":
         /* rifle */
-        pickups.Add(new ItemWorldPickup(game.ItemSpriteFactory.CreateRifle(xPos, yPos)));
+        pickups.Add(new ItemWorldPickup(ItemSpriteFactory.Instance.CreateRifle(xPos, yPos, game)));
         break;
 
       case "16":
         /* shotgun */
-        pickups.Add(new ItemWorldPickup(game.ItemSpriteFactory.CreateShotgun(xPos, yPos)));
+        pickups.Add(new ItemWorldPickup(ItemSpriteFactory.Instance.CreateShotgun(xPos, yPos, game)));
         break;
 
       case "17":

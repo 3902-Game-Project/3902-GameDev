@@ -1,5 +1,6 @@
 ﻿using GameProject.Controllers;
 using GameProject.Enemies;
+using GameProject.Factories;
 using GameProject.Interfaces;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
@@ -33,8 +34,8 @@ public class StateGameType(Game1 game) : IGameState {
   public void LoadContent() {
     Player.LoadContent();
 
-    Player.Inventory.PickupItem(game.ItemSpriteFactory.CreateRevolver(0f, 0f));
-    Player.Inventory.PickupItem(game.ItemSpriteFactory.CreateRifle(0f, 0f));
+    Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateRevolver(0f, 0f, game));
+    Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateRifle(0f, 0f, game));
 
     LevelManager.LoadContent(game.Content);
     healthBarTexture = game.Content.Load<Texture2D>("blood_red_bar");
