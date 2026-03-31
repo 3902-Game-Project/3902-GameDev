@@ -16,11 +16,11 @@ public class VaultDoorBlock : BaseBlock {
   public string PairedLevelName { get; private set; }
   public BlockState State { get; private set; }
 
-  public VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, string pairedLevelName, ILevelManager levelManager) : base(xyPos, 128f, 128f) {
+  public VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, BlockState state, string pairedLevelName, ILevelManager levelManager) : base(xyPos, 128f, 128f) {
     texture = VaultDoorTexture;
     currentFrame = 0;
     PairedLevelName = pairedLevelName;
-    State = BlockState.locked;
+    State = state;
     sourceRects = new List<Rectangle> {
       new Rectangle(64, 128, 64, 64),
       new Rectangle(64, 192, 64, 64),

@@ -66,7 +66,22 @@ internal partial class LevelLoader {
 
       case "2": {
           /* small door */
-          // TODO: add state support
+          var stateString = entrySplit[1];
+
+          BlockState state;
+
+          switch (stateString) {
+            case "0":
+              state = BlockState.locked;
+              break;
+
+            case "1":
+              state = BlockState.open;
+              break;
+
+            default:
+              throw new FormatException($"unrecognized door state '{stateString}");
+          }
 
           var pairedLevelName = entrySplit[2];
 
@@ -74,7 +89,7 @@ internal partial class LevelLoader {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
           }
 
-          collidableBlocks.Add(BlockSpriteFactory.Instance.CreateSmallDoorBlockSprite(xPos, yPos, pairedLevelName, game.StateGame.LevelManager));
+          collidableBlocks.Add(BlockSpriteFactory.Instance.CreateSmallDoorBlockSprite(xPos, yPos, state, pairedLevelName, game.StateGame.LevelManager));
           break;
         }
 
@@ -208,7 +223,26 @@ internal partial class LevelLoader {
 
       case "20": {
           /* vault door */
-          // TODO: add state support
+          var stateString = entrySplit[1];
+
+          BlockState state;
+
+          switch (stateString) {
+            case "0":
+              state = BlockState.locked;
+              break;
+
+            case "1":
+              state = BlockState.opening;
+              break;
+
+            case "2":
+              state = BlockState.open;
+              break;
+
+            default:
+              throw new FormatException($"unrecognized door state '{stateString}");
+          }
 
           var pairedLevelName = entrySplit[2];
 
@@ -216,7 +250,7 @@ internal partial class LevelLoader {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
           }
 
-          collidableBlocks.Add(BlockSpriteFactory.Instance.CreateVaultDoorBlockSprite(xPos, yPos, pairedLevelName, game.StateGame.LevelManager));
+          collidableBlocks.Add(BlockSpriteFactory.Instance.CreateVaultDoorBlockSprite(xPos, yPos, state, pairedLevelName, game.StateGame.LevelManager));
           break;
         }
 
@@ -269,7 +303,22 @@ internal partial class LevelLoader {
 
       case "31": {
           /* slatted door */
-          // TODO: add state support
+          var stateString = entrySplit[1];
+
+          BlockState state;
+
+          switch (stateString) {
+            case "0":
+              state = BlockState.locked;
+              break;
+
+            case "1":
+              state = BlockState.open;
+              break;
+
+            default:
+              throw new FormatException($"unrecognized door state '{stateString}");
+          }
 
           var pairedLevelName = entrySplit[2];
 
@@ -277,7 +326,7 @@ internal partial class LevelLoader {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
           }
 
-          collidableBlocks.Add(BlockSpriteFactory.Instance.CreateSlattedDoorSprite(xPos, yPos, pairedLevelName, game.StateGame.LevelManager));
+          collidableBlocks.Add(BlockSpriteFactory.Instance.CreateSlattedDoorSprite(xPos, yPos, state, pairedLevelName, game.StateGame.LevelManager));
           break;
         }
 

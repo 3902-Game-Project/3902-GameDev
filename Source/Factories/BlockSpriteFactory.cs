@@ -49,14 +49,14 @@ public class BlockSpriteFactory {
   public IBlock CreateRockHoleBlockSprite(float x, float y, string pairedLevelName, ILevelManager levelManager) {
     return new RockHoleBlock(blockTextures, new Vector2(x, y), pairedLevelName, levelManager);
   }
-  public IBlock CreateSmallDoorBlockSprite(float x, float y, string pairedLevelName, ILevelManager levelManager) {
-    return new SmallDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, levelManager);
+  public IBlock CreateSmallDoorBlockSprite(float x, float y, BlockState state, string pairedLevelName, ILevelManager levelManager) {
+    return new SmallDoorBlock(blockTextures, new Vector2(x, y), state, pairedLevelName, levelManager);
   }
-  public IBlock CreateVaultDoorBlockSprite(float x, float y, string pairedLevelName, ILevelManager levelManager) {
-    return new VaultDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, levelManager);
+  public IBlock CreateVaultDoorBlockSprite(float x, float y, BlockState state, string pairedLevelName, ILevelManager levelManager) {
+    return new VaultDoorBlock(blockTextures, new Vector2(x, y), state, pairedLevelName, levelManager);
   }
-  public IBlock CreateSlattedDoorSprite(float x, float y, string pairedLevelName, ILevelManager levelManager) {
-    return new SlattedDoorBlock(blockTextures, new Vector2(x, y), pairedLevelName, levelManager);
+  public IBlock CreateSlattedDoorSprite(float x, float y, BlockState state, string pairedLevelName, ILevelManager levelManager) {
+    return new SlattedDoorBlock(blockTextures, new Vector2(x, y), state, pairedLevelName, levelManager);
   }
 
   /* Object Blocks */

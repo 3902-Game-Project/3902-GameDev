@@ -15,11 +15,11 @@ public class SmallDoorBlock : BaseBlock {
   public string PairedLevelName { get; private set; }
   public BlockState State { get; private set; }
 
-  public SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, string pairedLevelName, ILevelManager levelManager) : base(xyPos) {
+  public SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, BlockState state, string pairedLevelName, ILevelManager levelManager) : base(xyPos) {
     texture = SmallDoorTexture;
     Rotation = 0.0f;
     currentFrame = 0;
-    State = BlockState.locked;
+    State = state;
     sourceRects = new List<Rectangle> {
       new Rectangle(448, 256, 64, 64),
       new Rectangle(448, 448, 64, 64)

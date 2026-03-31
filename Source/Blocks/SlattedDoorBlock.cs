@@ -14,12 +14,12 @@ public class SlattedDoorBlock : BaseBlock {
   public string PairedLevelName { get; private set; }
   public BlockState State { get; private set; }
 
-  public SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, string pairedLevelName, ILevelManager levelManagers) : base(xyPos) {
+  public SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, BlockState state, string pairedLevelName, ILevelManager levelManagers) : base(xyPos) {
     texture = SlattedDoorTexture;
     Rotation = 0.0f;
     PairedLevelName = pairedLevelName;
     currentFrame = 0;
-    State = BlockState.locked;
+    State = state;
     sourceRects = new List<Rectangle> {
       new Rectangle(192, 128, 64, 64),
       new Rectangle(320, 128, 64, 64)
