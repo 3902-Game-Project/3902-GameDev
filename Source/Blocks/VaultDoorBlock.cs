@@ -18,9 +18,22 @@ public class VaultDoorBlock : BaseBlock {
 
   public VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, BlockState state, string pairedLevelName, ILevelManager levelManager) : base(xyPos, 128f, 128f) {
     texture = VaultDoorTexture;
-    currentFrame = 0;
     PairedLevelName = pairedLevelName;
     State = state;
+    switch (state) {
+      case BlockState.locked:
+      default:
+        currentFrame = 0;
+        break;
+
+      case BlockState.opening:
+        currentFrame = 1;
+        break;
+
+      case BlockState.open:
+        currentFrame = 5;
+        break;
+    }
     sourceRects = new List<Rectangle> {
       new Rectangle(64, 128, 64, 64),
       new Rectangle(64, 192, 64, 64),
