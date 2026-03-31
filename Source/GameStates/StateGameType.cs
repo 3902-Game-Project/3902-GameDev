@@ -19,13 +19,12 @@ public class StateGameType(Game1 game) : IGameState {
 
   public Player Player { get; private set; } = new Player(game);
 
-  public ILevelManager LevelManager { get; private set; }
+  public ILevelManager LevelManager { get; private set; } = new LevelManager(game);
 
   public void Initialize() {
     keyboardController = new GameKeyboardController(game);
     mouseController = new GameMouseController(game);
     gamePadController = new GameGamePadController(game);
-    LevelManager = new LevelManager(game);
     LevelManager.Initialize();
     collisionManager = new CollisionManager();
     collisionManager.AddCollider(Player);
