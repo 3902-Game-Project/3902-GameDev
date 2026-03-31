@@ -8,7 +8,7 @@ namespace GameProject.States;
 
 public class RifleWanderState : IRiflemanState {
   private RiflemanSprite rifle;
-  private Game1 game;
+  private ILevelManager levelManager;
   private Random random;
   private double wanderTimer;
   private double wanderDuration;
@@ -16,9 +16,9 @@ public class RifleWanderState : IRiflemanState {
   private double animationTimer;
   private int currentFrameIndex;
 
-  public RifleWanderState(RiflemanSprite rifle, Game1 game) {
+  public RifleWanderState(RiflemanSprite rifle, ILevelManager levelManager) {
     this.rifle = rifle;
-    this.game = game;
+    this.levelManager = levelManager;
     this.random = new Random();
 
     this.rifle.CurrentSourceRectangles = new List<Rectangle> {
@@ -61,7 +61,7 @@ public class RifleWanderState : IRiflemanState {
 
     wanderTimer += dt;
     if (wanderTimer >= wanderDuration) {
-      rifle.ChangeState(new RifleIdleState(rifle, game));
+      rifle.ChangeState(new RifleIdleState(rifle, levelManager));
     }
   }
 

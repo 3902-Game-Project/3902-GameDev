@@ -2,6 +2,7 @@
 using GameProject.Enemies;
 using GameProject.Factories;
 using GameProject.Interfaces;
+using GameProject.Managers;
 using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
 
@@ -9,16 +10,16 @@ namespace GameProject.States;
 
 public class RifleAttackState : IRiflemanState {
   private RiflemanSprite rifleMan;
-  private Game1 game;
+  private ILevelManager levelManager;
   private double stateTimer;
   private double animationTimer;
   private double timePerFrame = 0.15;
 
   private bool hasFired = false;
 
-  public RifleAttackState(RiflemanSprite rifleMan, Game1 game) {
+  public RifleAttackState(RiflemanSprite rifleMan, ILevelManager levelManager) {
     this.rifleMan = rifleMan;
-    this.game = game;
+    this.levelManager = levelManager;
 
     this.rifleMan.Velocity = Vector2.Zero;
 
@@ -48,7 +49,7 @@ public class RifleAttackState : IRiflemanState {
 
     stateTimer += dt;
     if (stateTimer > 1.0) {
-      rifleMan.ChangeState(new RifleIdleState(rifleMan, game));
+      rifleMan.ChangeState(new RifleIdleState(rifleMan, levelManager));
     }
   }
 
@@ -64,6 +65,6 @@ public class RifleAttackState : IRiflemanState {
     if (bullet is BulletDefault defaultBullet) {
       defaultBullet.IsPlayerShot = false;
     }
-    game.StateGame.LevelManager.CurrentLevel.ProjectileManager.AddProjectile(bullet);
+    levelManager.CurrentLevel.ProjectileManager.AddProjectile(bullet);
   }
 }

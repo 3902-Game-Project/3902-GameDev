@@ -9,16 +9,16 @@ namespace GameProject.States;
 
 public class ShotgunnerAttackState : IShotgunnerState {
   private ShotgunnerSprite shotgunner;
-  private Game1 game;
+  private ILevelManager levelManager;
   private double stateTimer;
   private double animationTimer;
   private double timePerFrame = 0.15;
 
   private bool hasFired = false;
 
-  public ShotgunnerAttackState(ShotgunnerSprite shotgunner, Game1 game) {
+  public ShotgunnerAttackState(ShotgunnerSprite shotgunner, ILevelManager levelManager) {
     this.shotgunner = shotgunner;
-    this.game = game;
+    this.levelManager = levelManager;
 
     this.shotgunner.Velocity = Vector2.Zero;
 
@@ -48,7 +48,7 @@ public class ShotgunnerAttackState : IShotgunnerState {
     // 3. State Transition
     stateTimer += dt;
     if (stateTimer > 1.0) {
-      shotgunner.ChangeState(new ShotgunnerIdleState(shotgunner, game));
+      shotgunner.ChangeState(new ShotgunnerIdleState(shotgunner, levelManager));
     }
   }
 
@@ -83,8 +83,8 @@ public class ShotgunnerAttackState : IShotgunnerState {
     }
 
     // Add them all to the manager!
-    game.StateGame.LevelManager.CurrentLevel.ProjectileManager.AddProjectile(bullet1);
-    game.StateGame.LevelManager.CurrentLevel.ProjectileManager.AddProjectile(bullet2);
-    game.StateGame.LevelManager.CurrentLevel.ProjectileManager.AddProjectile(bullet3);
+    levelManager.CurrentLevel.ProjectileManager.AddProjectile(bullet1);
+    levelManager.CurrentLevel.ProjectileManager.AddProjectile(bullet2);
+    levelManager.CurrentLevel.ProjectileManager.AddProjectile(bullet3);
   }
 }

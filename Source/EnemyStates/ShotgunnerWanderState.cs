@@ -8,7 +8,7 @@ namespace GameProject.States;
 
 public class ShotgunnerWanderState : IShotgunnerState {
   private ShotgunnerSprite shotgunner;
-  private Game1 game;
+  private ILevelManager levelManager;
   private Random random;
   private double wanderTimer;
   private double wanderDuration;
@@ -16,9 +16,9 @@ public class ShotgunnerWanderState : IShotgunnerState {
   private double animationTimer;
   private int currentFrameIndex;
 
-  public ShotgunnerWanderState(ShotgunnerSprite shotgunner, Game1 game) {
+  public ShotgunnerWanderState(ShotgunnerSprite shotgunner, ILevelManager levelManager) {
     this.shotgunner = shotgunner;
-    this.game = game;
+    this.levelManager = levelManager;
     this.random = new Random();
     this.shotgunner.CurrentSourceRectangles = new List<Rectangle> {
       new(21, 339, 32, 39),
@@ -60,7 +60,7 @@ public class ShotgunnerWanderState : IShotgunnerState {
 
     wanderTimer += dt;
     if (wanderTimer >= wanderDuration) {
-      shotgunner.ChangeState(new ShotgunnerIdleState(shotgunner, game));
+      shotgunner.ChangeState(new ShotgunnerIdleState(shotgunner, levelManager));
     }
   }
 

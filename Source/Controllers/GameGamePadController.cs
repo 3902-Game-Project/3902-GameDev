@@ -19,8 +19,8 @@ internal class GameGamePadController(Game1 game) : IController {
   private ICommand playerMoveDownCommand = new PlayerMoveDownCommand(game.StateGame.Player);
   private ICommand playerMoveLeftCommand = new PlayerMoveLeftCommand(game.StateGame.Player);
   private ICommand playerMoveRightCommand = new PlayerMoveRightCommand(game.StateGame.Player);
-  private ICommand prevLevelCommand = new PreviousLevelCommand(game);
-  private ICommand nextLevelCommand = new NextLevelCommand(game);
+  private ICommand prevLevelCommand = new PreviousLevelCommand(game.StateGame.LevelManager);
+  private ICommand nextLevelCommand = new NextLevelCommand(game.StateGame.LevelManager);
 
   public void Update(GameTime gameTime) {
     prevGamePadState = gamePadState;
