@@ -47,7 +47,7 @@ public class SlattedDoorBlock : BaseBlock {
     }
   }
 
-  public override void Update(GameTime gameTime) { 
+  public override void Update(GameTime gameTime) {
     // if player has key, change state to open
   }
 

@@ -55,7 +55,7 @@ public class VaultDoorBlock : BaseBlock {
         currentFrame++;
         animationTimer = 0;
       }
-      if (currentFrame >= sourceRects.Count) { 
+      if (currentFrame >= sourceRects.Count) {
         State = BlockState.open;
         currentFrame = sourceRects.Count - 1;
       }

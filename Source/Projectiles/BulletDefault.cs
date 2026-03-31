@@ -80,7 +80,7 @@ public class BulletDefault : IProjectile, ICollidable {
     } else if (collisionInfo.Collider is IEnemy enemy && IsPlayerShot) {
       enemy.TakeDamage(damage);
       Expire();
-    }else if(collisionInfo.Collider is Player player && !IsPlayerShot) {
+    } else if (collisionInfo.Collider is Player player && !IsPlayerShot) {
       player.TakeDamage(enemyDamage);
       Expire();
     }

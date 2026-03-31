@@ -47,7 +47,7 @@ public class SmallDoorBlock : BaseBlock {
     }
   }
 
-  public override void Update(GameTime gameTime) { 
+  public override void Update(GameTime gameTime) {
     // if all enemies defeated, change state to open
   }
 

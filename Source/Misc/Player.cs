@@ -1,5 +1,4 @@
 ﻿using System;
-using GameProject.CollisionResponse;
 using GameProject.Collisions;
 using GameProject.Interfaces;
 using GameProject.Managers;
@@ -99,7 +98,7 @@ public class Player : ICollidable {
     }
   }
 
- public void Update(GameTime gameTime) {
+  public void Update(GameTime gameTime) {
     float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
     if (invincibilityTimer > 0) invincibilityTimer -= dt;

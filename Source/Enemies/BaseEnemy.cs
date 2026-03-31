@@ -21,7 +21,7 @@ public abstract class BaseEnemy : IEnemy {
   public Layer Mask { get; } = Layer.Player;
   public int Health { get; set; } = 100;
   public int MaxHealth { get; set; } = 100;
-  public float DamageFlashTimer {  get; protected set; }
+  public float DamageFlashTimer { get; protected set; }
   protected const float DamageFlashDuration = 0.15f;
 
   public Rectangle BoundingBox => throw new System.NotImplementedException();
