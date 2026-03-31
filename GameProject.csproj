@@ -37,4 +37,7 @@
   <ItemGroup>
     <None Include=".editorconfig" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Info\Grader Info\Burndown Charts\Sprint 4\" />
+  </ItemGroup>
 </Project>
