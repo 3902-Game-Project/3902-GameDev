@@ -52,9 +52,8 @@ public class CollisionManager {
       ICollidable c1 = colliders[i];
       for (int j = i + 1; j < colliders.Count; j++) {
         ICollidable c2 = colliders[j];
-        CollisionInfo info1, info2;
         // Global updates use "Both"
-        if (CheckCollison(c1, c2, CollisionAxis.Both, out info1, out info2)) {
+        if (CheckCollison(c1, c2, CollisionAxis.Both, out CollisionInfo info1, out CollisionInfo info2)) {
           info1.Collider = c2;
           info2.Collider = c1;
 
@@ -68,8 +67,7 @@ public class CollisionManager {
     foreach (var otherEntity in colliders) {
       if (movingEntity == otherEntity) continue;
 
-      CollisionInfo info1, info2;
-      if (CheckCollison(movingEntity, otherEntity, axis, out info1, out info2, cornerTolerance)) {
+      if (CheckCollison(movingEntity, otherEntity, axis, out CollisionInfo info1, out CollisionInfo info2, cornerTolerance)) {
         info1.Collider = otherEntity;
         info2.Collider = movingEntity;
         movingEntity.OnCollision(info1);
