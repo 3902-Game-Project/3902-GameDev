@@ -63,6 +63,7 @@ public class CollisionManager : IUpdatable {
       }
     }
   }
+
   public void ResolveCollisionsFor(ICollidable movingEntity, CollisionAxis axis = CollisionAxis.Both, float cornerTolerance = 3.0f) {
     foreach (var otherEntity in colliders) {
       if (movingEntity == otherEntity) continue;
@@ -75,7 +76,8 @@ public class CollisionManager : IUpdatable {
       }
     }
   }
-  private bool CheckCollison(ICollidable c1, ICollidable c2, CollisionAxis axis, out CollisionInfo info1, out CollisionInfo info2, float cornerTolerance = 3.0f) {
+
+  private static bool CheckCollison(ICollidable c1, ICollidable c2, CollisionAxis axis, out CollisionInfo info1, out CollisionInfo info2, float cornerTolerance = 3.0f) {
     info1 = null;
     info2 = null;
 
@@ -93,7 +95,7 @@ public class CollisionManager : IUpdatable {
     return false;
   }
 
-  private bool BoxBoxCollision(BoxCollider b1, BoxCollider b2, CollisionAxis axis, float cornerTolerance, out CollisionInfo info1, out CollisionInfo info2) {
+  private static bool BoxBoxCollision(BoxCollider b1, BoxCollider b2, CollisionAxis axis, float cornerTolerance, out CollisionInfo info1, out CollisionInfo info2) {
     info1 = null;
     info2 = null;
 
@@ -149,7 +151,7 @@ public class CollisionManager : IUpdatable {
     return true;
   }
 
-  private bool BoxCircleCollision(BoxCollider b, CircleCollider c, out CollisionInfo info1, out CollisionInfo info2) {
+  private static bool BoxCircleCollision(BoxCollider b, CircleCollider c, out CollisionInfo info1, out CollisionInfo info2) {
     info1 = null; info2 = null;
 
     float closestX = Math.Clamp(c.position.X, b.Left, b.Right);
@@ -179,7 +181,7 @@ public class CollisionManager : IUpdatable {
     return true;
   }
 
-  private bool CircleCircleCollision(CircleCollider c1, CircleCollider c2, out CollisionInfo info1, out CollisionInfo info2) {
+  private static bool CircleCircleCollision(CircleCollider c1, CircleCollider c2, out CollisionInfo info1, out CollisionInfo info2) {
     info1 = null; info2 = null;
 
     float dx = c2.position.X - c1.position.X;
