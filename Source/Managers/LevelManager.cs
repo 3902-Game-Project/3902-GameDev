@@ -46,7 +46,7 @@ public class LevelManager(Game1 game) : ILevelManager {
     var levelNamesSet = new HashSet<string>(LEVEL_NAMES);
 
     foreach (var name in LEVEL_NAMES) {
-      levels.Add(name, LevelLoader.FromString(game, levelNamesSet, File.ReadAllText(content.RootDirectory + "/" + name + ".csv")));
+      levels.Add(name, LevelLoader.FromString(game, levelNamesSet, File.ReadAllText(content.RootDirectory + "/Levels/" + name + ".csv")));
     }
   }
 
