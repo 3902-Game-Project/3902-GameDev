@@ -13,28 +13,7 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin 00_everything.csv
-/copy:00_everything.csv
-
-#begin 00b_confinement.csv
-/copy:00b_confinement.csv
-
-#begin 00c_non_confinement.csv
-/copy:00c_non_confinement.csv
-
-#begin 01_level.csv
-/copy:01_level.csv
-
-#begin 02_level.csv
-/copy:02_level.csv
-
-#begin 03_level.csv
-/copy:03_level.csv
-
-#begin 04_level.csv
-/copy:04_level.csv
-
-#begin basic_guns_spritesheet.png
+#begin Enemies/batSpritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -44,9 +23,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:basic_guns_spritesheet.png
+/build:Enemies/batSpritesheet.png
 
-#begin batSpritesheet.png
+#begin Enemies/cactusSprite.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -56,9 +35,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:batSpritesheet.png
+/build:Enemies/cactusSprite.png
 
-#begin blood_red_bar.png
+#begin Enemies/riflemanSpritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -68,9 +47,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:blood_red_bar.png
+/build:Enemies/riflemanSpritesheet.png
 
-#begin cactusSprite.png
+#begin Enemies/shotgunnerSpritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -80,22 +59,145 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:cactusSprite.png
+/build:Enemies/shotgunnerSpritesheet.png
 
-#begin desert-atlas-v6.png
-/copy:desert-atlas-v6.png
+#begin Enemies/snakeSpritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Enemies/snakeSpritesheet.png
 
-#begin desert-atlas-v7.png
-/copy:desert-atlas-v7.png
+#begin Enemies/tumbleweedSprite.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Enemies/tumbleweedSprite.png
 
-#begin File.spritefont
+#begin Items/basic_guns_spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Items/basic_guns_spritesheet.png
+
+#begin Items/placeholderGuns.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Items/placeholderGuns.png
+
+#begin Items/revolver.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Items/revolver.png
+
+#begin Items/revolver1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Items/revolver1.png
+
+#begin Levels/00_everything.csv
+/copy:Levels/00_everything.csv
+
+#begin Levels/00b_confinement.csv
+/copy:Levels/00b_confinement.csv
+
+#begin Levels/00c_non_confinement.csv
+/copy:Levels/00c_non_confinement.csv
+
+#begin Levels/01_level.csv
+/copy:Levels/01_level.csv
+
+#begin Levels/02_level.csv
+/copy:Levels/02_level.csv
+
+#begin Levels/03_level.csv
+/copy:Levels/03_level.csv
+
+#begin Levels/04_level.csv
+/copy:Levels/04_level.csv
+
+#begin Misc/blood_red_bar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Misc/blood_red_bar.png
+
+#begin Misc/desert-atlas-v6.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Misc/desert-atlas-v6.png
+
+#begin Misc/desert-atlas-v7.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Misc/desert-atlas-v7.png
+
+#begin Misc/Font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:File.spritefont;CreditsFont.spritefont
+/build:Misc/Font.spritefont
 
-#begin PlaceholderGuns.png
+#begin Misc/playerSpritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -105,9 +207,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:PlaceholderGuns.png
+/build:Misc/playerSpritesheet.png
 
-#begin playerSpritesheet.png
+#begin Misc/projectile_spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -117,9 +219,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:playerSpritesheet.png
+/build:Misc/projectile_spritesheet.png
 
-#begin projectile_spritesheet.png
+#begin Misc/spriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -129,9 +231,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:projectile_spritesheet.png
+/build:Misc/spriteSheet.png
 
-#begin rifleSpritesheet.png
+#begin Misc/WhitePixel.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -141,53 +243,23 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:rifleSpritesheet.png
+/build:Misc/WhitePixel.png
 
-#begin shotgunnerSpritesheet.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:shotgunnerSpritesheet.png
+#begin Sound Effects/gun_shot_default.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sound Effects/gun_shot_default.mp3
 
-#begin snakeSpritesheet.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:snakeSpritesheet.png
+#begin Sound Effects/player_hurt.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sound Effects/player_hurt.ogg
 
-#begin tumbleweedSprite.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:tumbleweedSprite.png
-
-#begin WhitePixel.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:WhitePixel.png
+#begin Sound Effects/reload_default.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sound Effects/reload_default.mp3
 
