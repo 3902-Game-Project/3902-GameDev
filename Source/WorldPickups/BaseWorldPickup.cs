@@ -4,6 +4,8 @@ using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+namespace GameProject.WorldPickups;
+
 public abstract class BaseWorldPickup : IWorldPickup {
 
   public Vector2 Position { get; }
