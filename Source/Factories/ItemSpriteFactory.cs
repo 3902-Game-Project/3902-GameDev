@@ -15,7 +15,7 @@ public class ItemSpriteFactory {
   private ItemSpriteFactory() { }
 
   public void LoadAllTextures(ContentManager content) {
-    basicGunsTexture = content.Load<Texture2D>("basic_guns_spritesheet");
+    basicGunsTexture = content.Load<Texture2D>("Items/basic_guns_spritesheet");
   }
 
   public IItem CreateRevolver(float xPos, float yPos, Game1 game) {

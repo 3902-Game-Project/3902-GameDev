@@ -9,6 +9,6 @@ public class TextureStore(Game1 game) : IGlobalData {
   public void Initialize() { }
 
   public void LoadContent() {
-    WhitePixel = game.Content.Load<Texture2D>("WhitePixel");
+    WhitePixel = game.Content.Load<Texture2D>("Misc/WhitePixel");
   }
 }

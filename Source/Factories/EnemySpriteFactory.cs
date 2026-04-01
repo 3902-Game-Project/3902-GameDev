@@ -19,12 +19,12 @@ internal class EnemySpriteFactory {
   private EnemySpriteFactory() { }
 
   public void LoadAllTextures(ContentManager content) {
-    snakeTexture = content.Load<Texture2D>("snakeSpritesheet");
-    batTexture = content.Load<Texture2D>("batSpritesheet");
-    shotgunnerTexture = content.Load<Texture2D>("shotgunnerSpritesheet");
-    riflemanTexture = content.Load<Texture2D>("rifleSpritesheet");
-    tumbleweedTexture = content.Load<Texture2D>("tumbleweedSprite");
-    cactusTexture = content.Load<Texture2D>("cactusSprite");
+    snakeTexture = content.Load<Texture2D>("Enemies/snakeSpritesheet");
+    batTexture = content.Load<Texture2D>("Enemies/batSpritesheet");
+    shotgunnerTexture = content.Load<Texture2D>("Enemies/shotgunnerSpritesheet");
+    riflemanTexture = content.Load<Texture2D>("Enemies/riflemanSpritesheet");
+    tumbleweedTexture = content.Load<Texture2D>("Enemies/tumbleweedSprite");
+    cactusTexture = content.Load<Texture2D>("Enemies/cactusSprite");
   }
 
   public IEnemy CreateSnakeSprite(float xPos, float yPos) {

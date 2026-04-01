@@ -13,6 +13,6 @@ public class AssetStore(Game1 game) : IGlobalData {
 
   public void LoadContent() {
     Textures.LoadContent();
-    MainFont = game.Content.Load<SpriteFont>("CreditsFont");
+    MainFont = game.Content.Load<SpriteFont>("Misc/CreditsFont");
   }
 }
