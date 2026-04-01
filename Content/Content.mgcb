@@ -154,6 +154,13 @@
 /processorParam:TextureFormat=Color
 /build:Misc/blood_red_bar.png
 
+#begin Misc/CreditsFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Misc/CreditsFont.spritefont
+
 #begin Misc/desert-atlas-v7.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -165,13 +172,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Misc/desert-atlas-v7.png
-
-#begin Misc/Font.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:Misc/Font.spritefont
 
 #begin Misc/playerSpritesheet.png
 /importer:TextureImporter

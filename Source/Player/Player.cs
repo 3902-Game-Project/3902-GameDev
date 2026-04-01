@@ -92,7 +92,7 @@ public class Player : ICollidable {
   public void Die() => State.Die();
 
   public void LoadContent() {
-    Texture = contentManager.Load<Texture2D>("playerSpritesheet");
+    Texture = contentManager.Load<Texture2D>("Misc/playerSpritesheet");
   }
 
   public void TakeDamage(int amount = 10) {

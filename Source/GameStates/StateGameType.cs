@@ -44,7 +44,7 @@ public class StateGameType : IGameState {
     Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateRifle(0f, 0f, game));
 
     LevelManager.LoadContent(game.Content);
-    healthBarTexture = game.Content.Load<Texture2D>("blood_red_bar");
+    healthBarTexture = game.Content.Load<Texture2D>("Misc/blood_red_bar");
   }
 
   public void Update(GameTime gameTime) {
