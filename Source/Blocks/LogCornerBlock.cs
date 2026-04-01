@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 public class LogCornerBlock(Texture2D LogCornerTexture, Vector2 xyPos) : BaseBlock(xyPos) {
-  private Rectangle sourceRect = new Rectangle(192, 64, 64, 64);
+  private Rectangle sourceRect = new(192, 64, 64, 64);
 
   public override void Update(GameTime gameTime) { }
 

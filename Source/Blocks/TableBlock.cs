@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 public class TableBlock(Texture2D TableTexture, Vector2 xyPos) : BaseBlock(xyPos) {
-  private Rectangle sourceRect = new Rectangle(384, 192, 64, 64);
+  private Rectangle sourceRect = new(384, 192, 64, 64);
 
   public override void Update(GameTime gameTime) { }
 

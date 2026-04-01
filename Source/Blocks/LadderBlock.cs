@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 public class LadderBlock(Texture2D LadderTexture, Vector2 xyPos) : BaseBlock(xyPos) {
-  private Rectangle sourceRect = new Rectangle(256, 0, 64, 64);
+  private Rectangle sourceRect = new(256, 0, 64, 64);
 
   public override void Update(GameTime gameTime) { }
 

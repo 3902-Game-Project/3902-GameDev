@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 public class CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : BaseBlock(xyPos) {
-  private Rectangle sourceRect = new Rectangle(128, 0, 64, 64);
+  private Rectangle sourceRect = new(128, 0, 64, 64);
   public BlockState State { get; set; } = BlockState.still;
 
   public override void Update(GameTime gameTime) {
