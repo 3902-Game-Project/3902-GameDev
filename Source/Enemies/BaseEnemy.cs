@@ -28,7 +28,7 @@ public abstract class BaseEnemy(Texture2D texture, Vector2 position, float colli
 
   protected void UpdateCollider() {
     if (Collider != null) {
-      Collider.position = Position + new Vector2(0, -Collider.height / 2f);
+      Collider.Position = Position + new Vector2(0, -Collider.height / 2f);
     }
   }
 

@@ -111,11 +111,11 @@ public class Player : ICollidable {
     float yStep = Velocity.Y * dt;
 
     Position = new Vector2(Position.X + xStep, Position.Y);
-    if (Collider != null) Collider.position = Position;
+    if (Collider != null) Collider.Position = Position;
     collisionManager.ResolveCollisionsFor(this, CollisionAxis.X, MathF.Abs(yStep) + 1f);
 
     Position = new Vector2(Position.X, Position.Y + yStep);
-    if (Collider != null) Collider.position = Position;
+    if (Collider != null) Collider.Position = Position;
     collisionManager.ResolveCollisionsFor(this, CollisionAxis.Y, MathF.Abs(xStep) + 1f);
 
     State.Update(gameTime);
@@ -141,15 +141,15 @@ public class Player : ICollidable {
     if (info.Collider is IBlock) {
       Position += info.Direction * (info.Overlap + 0.01f);
 
-      if (Collider != null) Collider.position = Position;
+      if (Collider != null) Collider.Position = Position;
     }
 
     if (info.Collider is IEnemy) {
       Position += info.Direction * KNOCKBACK_DISTANCE;
       if (Collider != null) {
-        Collider.position = Position;
+        Collider.Position = Position;
       }
-      if (Collider != null) Collider.position = Position;
+      if (Collider != null) Collider.Position = Position;
       TakeDamage(50);
     }
   }
