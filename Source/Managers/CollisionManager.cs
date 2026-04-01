@@ -36,7 +36,7 @@ public class CollisionManager {
   public void DebugDraw(SpriteBatch spriteBatch, GraphicsDevice graphicsDevice) {
     if (debugTexture == null) {
       debugTexture = new Texture2D(graphicsDevice, 1, 1);
-      debugTexture.SetData(new[] { Color.White });
+      debugTexture.SetData([Color.White]);
     }
 
     foreach (var c in colliders) {
