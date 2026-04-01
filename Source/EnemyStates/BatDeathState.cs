@@ -6,13 +6,13 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class BatDeathState : IBatState {
-  private BatSprite bat;
+  private readonly BatSprite bat;
 
   private double animationTimer;
-  private double timePerFrame = 0.15;
+  private readonly double timePerFrame = 0.15;
 
   private double deadHoldTimer;
-  private double timeToHoldLastFrame = 1.5;
+  private readonly double timeToHoldLastFrame = 1.5;
 
   private bool isAnimationFinished = false;
 

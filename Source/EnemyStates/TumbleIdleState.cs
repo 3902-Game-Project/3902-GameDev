@@ -7,10 +7,10 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class TumbleIdleState : ITumbleState {
-  private TumbleSprite tumbleweed;
-  private Random random;
+  private readonly TumbleSprite tumbleweed;
+  private readonly Random random;
   private double idleTimer;
-  private double idleDuration;
+  private readonly double idleDuration;
 
   private double animationTimer;
   private int currentFrameIndex;

@@ -6,11 +6,11 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class ShotgunnerIdleState : IShotgunnerState {
-  private ShotgunnerSprite shotgunner;
-  private ILevelManager levelManager;
+  private readonly ShotgunnerSprite shotgunner;
+  private readonly ILevelManager levelManager;
   private double timer;
   private double animationTimer;
-  private System.Random random;
+  private readonly System.Random random;
 
   public ShotgunnerIdleState(ShotgunnerSprite shotgunner, ILevelManager levelManager) {
     this.shotgunner = shotgunner;

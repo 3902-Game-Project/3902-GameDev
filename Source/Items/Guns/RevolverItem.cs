@@ -9,14 +9,14 @@ public class RevolverItem : IItem {
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   private Rectangle sourceRectangle = new(0, 0, 16, 9);
   private Vector2 origin;
-  private Texture2D texture;
-  private float scale = 1f;
+  private readonly Texture2D texture;
+  private readonly float scale = 1f;
   public Vector2 Position { get; set; }
 
-  private Game1 game;
-  private GunStats stats;
-  private IProjectilePattern projectilePattern = new SingleShotPattern();
-  private IFireMode fireMode;
+  private readonly Game1 game;
+  private readonly GunStats stats;
+  private readonly IProjectilePattern projectilePattern = new SingleShotPattern();
+  private readonly IFireMode fireMode;
   private Vector2 bulletSpawnOffset;
   public ItemCategory Category { get; } = ItemCategory.Sidearm;
 

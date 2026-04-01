@@ -7,10 +7,10 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class SnakeWanderState : ISnakeState {
-  private SnakeSprite snake;
-  private Random random;
+  private readonly SnakeSprite snake;
+  private readonly Random random;
   private double wanderTimer;
-  private double wanderDuration;
+  private readonly double wanderDuration;
 
   private double animationTimer;
   private int currentFrameIndex;

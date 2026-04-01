@@ -7,10 +7,10 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 public class SmallDoorBlock : BaseBlock {
-  private Texture2D texture;
-  private int currentFrame;
-  private List<Rectangle> sourceRects;
-  private ILevelManager levelManager;
+  private readonly Texture2D texture;
+  private readonly int currentFrame;
+  private readonly List<Rectangle> sourceRects;
+  private readonly ILevelManager levelManager;
   public float Rotation { get; private set; }
   public string PairedLevelName { get; private set; }
   public BlockState State { get; private set; }

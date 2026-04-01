@@ -7,10 +7,10 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class BatMoveState : IBatState {
-  private BatSprite bat;
-  private Random random;
+  private readonly BatSprite bat;
+  private readonly Random random;
   private double wanderTimer;
-  private double wanderDuration;
+  private readonly double wanderDuration;
 
   private double animationTimer;
   private int currentFrameIndex;

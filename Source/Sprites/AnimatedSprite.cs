@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Sprites;
 
 internal class AnimatedSprite(Texture2D texture, Vector2 position) : ISprite {
-  private List<Rectangle> sourceRectangles =
+  private readonly List<Rectangle> sourceRectangles =
     [
       new Rectangle(0, 0, 23, 25),
       new Rectangle(22, 0, 23, 25),
@@ -15,7 +15,7 @@ internal class AnimatedSprite(Texture2D texture, Vector2 position) : ISprite {
 
   private int currentFrame = 0;
   private double timer = 0;
-  private double FrameInterval = 0.2; // How long we want to wait to change the frame of a sprite
+  private readonly double FrameInterval = 0.2; // How long we want to wait to change the frame of a sprite
 
   public void Update(GameTime gameTime) {
     timer += gameTime.ElapsedGameTime.TotalSeconds;

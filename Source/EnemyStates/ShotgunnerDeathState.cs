@@ -6,13 +6,13 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class ShotgunnerDeathState : IShotgunnerState {
-  private ShotgunnerSprite shotgunner;
+  private readonly ShotgunnerSprite shotgunner;
 
   private double animationTimer;
-  private double timePerFrame = 0.15;
+  private readonly double timePerFrame = 0.15;
 
   private double deadHoldTimer;
-  private double timeToHoldLastFrame = 2.0;
+  private readonly double timeToHoldLastFrame = 2.0;
 
   private bool isAnimationFinished = false;
 

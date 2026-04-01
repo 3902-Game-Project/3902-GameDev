@@ -9,15 +9,15 @@ public class RifleItem : IItem {
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   private Rectangle sourceRectangle = new(0, 19, 37, 10);
   private Vector2 origin;
-  private float scale = 1f;
-  private Texture2D texture;
+  private readonly float scale = 1f;
+  private readonly Texture2D texture;
   public Vector2 Position { get; set; }
 
-  private Game1 game;
-  private IProjectilePattern projectilePattern = new SingleShotPattern();
+  private readonly Game1 game;
+  private readonly IProjectilePattern projectilePattern = new SingleShotPattern();
   private Vector2 bulletSpawnOffset;
-  private GunStats stats;
-  private IFireMode fireMode;
+  private readonly GunStats stats;
+  private readonly IFireMode fireMode;
   public ItemCategory Category { get; } = ItemCategory.Primary;
 
   public RifleItem(Texture2D texture, Vector2 startPosition, Game1 game, GunStats stats) {

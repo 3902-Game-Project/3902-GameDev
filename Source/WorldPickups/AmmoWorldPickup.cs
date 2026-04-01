@@ -7,7 +7,7 @@ namespace GameProject.WorldPickups;
 public class AmmoWorldPickup(Texture2D texture, Vector2 position) : BaseWorldPickup(position), ICollidable {
   private Rectangle sourceRectangle = new(9, 15, 12, 11);
   private Vector2 origin;
-  private float scale = 2f;
+  private readonly float scale = 2f;
 
   public override void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);

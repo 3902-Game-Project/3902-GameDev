@@ -8,8 +8,8 @@ namespace GameProject.Controllers;
 internal class MenuGamePadController(Game1 game) : IController {
   private GamePadState prevGamePadState = new();
   private GamePadState gamePadState = new();
-  private ICommand quitCommand = new QuitCommand(game);
-  private ICommand startGameCommand = new StartGameCommand(game);
+  private readonly ICommand quitCommand = new QuitCommand(game);
+  private readonly ICommand startGameCommand = new StartGameCommand(game);
 
   public void Update(GameTime gameTime) {
     prevGamePadState = gamePadState;

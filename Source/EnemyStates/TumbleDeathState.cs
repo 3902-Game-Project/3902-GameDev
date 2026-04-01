@@ -6,10 +6,10 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class TumbleDeathState : ITumbleState {
-  private TumbleSprite tumbleweed;
+  private readonly TumbleSprite tumbleweed;
 
   private double deadHoldTimer;
-  private double timeToHoldLastFrame = 1.0;
+  private readonly double timeToHoldLastFrame = 1.0;
 
   public TumbleDeathState(TumbleSprite tumbleweed) {
     this.tumbleweed = tumbleweed;

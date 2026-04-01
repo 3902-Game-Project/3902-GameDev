@@ -6,13 +6,13 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class SnakeDeathState : ISnakeState {
-  private SnakeSprite snake;
+  private readonly SnakeSprite snake;
 
   private double animationTimer;
-  private double timePerFrame = 0.15;
+  private readonly double timePerFrame = 0.15;
 
   private double deadHoldTimer;
-  private double timeToHoldLastFrame = 1.5;
+  private readonly double timeToHoldLastFrame = 1.5;
 
   private bool isAnimationFinished = false;
 

@@ -6,19 +6,19 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.PlayerStates;
 
 public class PlayerAnimatedMovingState(Player player) : IPlayerState {
-  private List<Rectangle> moveLeftFrames = [
+  private readonly List<Rectangle> moveLeftFrames = [
         new(1531, 420, 171, 323),
         new(1854, 427, 171, 323)
     ];
 
-  private List<Rectangle> moveRightFrames = [
+  private readonly List<Rectangle> moveRightFrames = [
       new(2161, 52, 171, 323),
       new(2481, 54, 171, 323)
   ];
 
   private int currentFrame = 0;
   private double timer = 0;
-  private double frameInterval = 0.2;
+  private readonly double frameInterval = 0.2;
 
   public void MoveUp() {
     player.Velocity = new Vector2(player.Velocity.X, -player.Speed);

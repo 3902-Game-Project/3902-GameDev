@@ -7,10 +7,10 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class TumbleMoveState : ITumbleState {
-  private TumbleSprite tumbleweed;
-  private Random random;
+  private readonly TumbleSprite tumbleweed;
+  private readonly Random random;
   private double wanderTimer;
-  private double wanderDuration;
+  private readonly double wanderDuration;
 
   private double animationTimer;
   private int currentFrameIndex;

@@ -8,11 +8,11 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class RifleAttackState : IRiflemanState {
-  private RiflemanSprite rifleMan;
-  private ILevelManager levelManager;
+  private readonly RiflemanSprite rifleMan;
+  private readonly ILevelManager levelManager;
   private double stateTimer;
   private double animationTimer;
-  private double timePerFrame = 0.15;
+  private readonly double timePerFrame = 0.15;
 
   private bool hasFired = false;
 

@@ -16,7 +16,7 @@ public enum CollisionAxis {
 }
 
 public class CollisionManager {
-  private List<ICollidable> colliders;
+  private readonly List<ICollidable> colliders;
   private Texture2D debugTexture;
 
   public CollisionManager() {

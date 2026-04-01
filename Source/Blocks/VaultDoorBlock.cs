@@ -7,12 +7,12 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 public class VaultDoorBlock : BaseBlock {
-  private Texture2D texture;
-  private List<Rectangle> sourceRects;
+  private readonly Texture2D texture;
+  private readonly List<Rectangle> sourceRects;
   private int currentFrame;
   private double animationTimer;
-  private double timePerFrame = 0.3;
-  private ILevelManager levelManager;
+  private readonly double timePerFrame = 0.3;
+  private readonly ILevelManager levelManager;
   public string PairedLevelName { get; private set; }
   public BlockState State { get; private set; }
 

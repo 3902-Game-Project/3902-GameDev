@@ -6,16 +6,16 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Projectiles;
 
 public class BulletDefault : IProjectile, ICollidable {
-  private Texture2D texture;
+  private readonly Texture2D texture;
   private Rectangle sourceRectangle = new(8, 0, 7, 7);
   private Vector2 origin;
-  private float scale = 2f;
+  private readonly float scale = 2f;
   private Vector2 direction;
-  private float velocity;
-  private float bulletLifetime;
+  private readonly float velocity;
+  private readonly float bulletLifetime;
   private float lifetimeCounter = 0f;
-  private int damage = 50; //damage from bullet, can be changed
-  private int enemyDamage = 20;
+  private readonly int damage = 50; //damage from bullet, can be changed
+  private readonly int enemyDamage = 20;
   public bool IsExpired { get; private set; }
   public bool IsPlayerShot { get; set; } = true;
   public Vector2 Position { get; private set; }

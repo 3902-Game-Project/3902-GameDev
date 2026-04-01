@@ -21,7 +21,7 @@ public class Level(
     FadeOut,
   };
 
-  private static float FADE_DURATION = 0.2f;
+  private static readonly float FADE_DURATION = 0.2f;
   private FadingState fadeState = FadingState.FadeIn;
   private double fadeTime = 0.0;
 

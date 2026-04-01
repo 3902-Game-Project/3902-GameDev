@@ -6,13 +6,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 public class FireBlock(Texture2D FireTexture, Vector2 xyPos) : BaseBlock(xyPos) {
-  private List<Rectangle> sourceRects = [
+  private static readonly List<Rectangle> sourceRects = [
       new(384, 64, 64, 64),
       new(448, 64, 64, 64)
     ];
   private int currentFrame = 0;
   private double animationTimer;
-  private double timePerFrame = 0.15;
+  private readonly double timePerFrame = 0.15;
   public BlockState State { get; set; } = BlockState.lit;
 
   public override void Update(GameTime gameTime) {

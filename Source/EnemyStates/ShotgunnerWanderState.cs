@@ -7,11 +7,11 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class ShotgunnerWanderState : IShotgunnerState {
-  private ShotgunnerSprite shotgunner;
-  private ILevelManager levelManager;
-  private Random random;
+  private readonly ShotgunnerSprite shotgunner;
+  private readonly ILevelManager levelManager;
+  private readonly Random random;
   private double wanderTimer;
-  private double wanderDuration;
+  private readonly double wanderDuration;
 
   private double animationTimer;
   private int currentFrameIndex;

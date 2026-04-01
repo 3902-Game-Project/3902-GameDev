@@ -9,13 +9,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.GameStates;
 
 public class StateGameType : IGameState {
-  private Game1 game;
+  private readonly Game1 game;
 
   private IController keyboardController;
   private IController mouseController;
   private IController gamePadController;
 
-  private CollisionManager collisionManager = new();
+  private readonly CollisionManager collisionManager = new();
   private Texture2D healthBarTexture;
   private Vector2 healthBarPosition = new(0, 0);
 

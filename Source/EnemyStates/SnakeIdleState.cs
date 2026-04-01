@@ -6,10 +6,10 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class SnakeIdleState : ISnakeState {
-  private SnakeSprite snake;
+  private readonly SnakeSprite snake;
   private double timer;
   private double animationTimer;
-  private System.Random random;
+  private readonly System.Random random;
 
   public SnakeIdleState(SnakeSprite snake) {
     this.snake = snake;

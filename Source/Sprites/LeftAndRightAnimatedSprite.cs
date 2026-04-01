@@ -8,7 +8,7 @@ namespace GameProject.Sprites;
 public class LeftAndRightAnimatedSprite(Texture2D texture, Vector2 position) : ISprite {
   private Vector2 startPosition = position;
 
-  private List<Rectangle> sourceRectangles =
+  private readonly List<Rectangle> sourceRectangles =
     [
       new Rectangle(65, 0, 25, 25),
       new Rectangle(90, 0, 17, 25),
@@ -16,12 +16,12 @@ public class LeftAndRightAnimatedSprite(Texture2D texture, Vector2 position) : I
     ];
 
   private int direction = -1;
-  private int speed = 3;
-  private int sprintLength = 100;
+  private readonly int speed = 3;
+  private readonly int sprintLength = 100;
 
   private int currentFrame = 0;
   private double timer = 0;
-  private double FrameInterval = 0.2;
+  private readonly double FrameInterval = 0.2;
 
   public void Update(GameTime gameTime) {
     timer += gameTime.ElapsedGameTime.TotalSeconds;

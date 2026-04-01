@@ -6,9 +6,9 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class BatIdleState : IBatState {
-  private BatSprite bat;
+  private readonly BatSprite bat;
   private double timer;
-  private System.Random random;
+  private readonly System.Random random;
   private double animationTimer;
 
   public BatIdleState(BatSprite bat) {

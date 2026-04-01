@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class SnakeAttackState : ISnakeState {
-  private SnakeSprite snake;
+  private readonly SnakeSprite snake;
   private double timer;
   private double animationTimer;
 

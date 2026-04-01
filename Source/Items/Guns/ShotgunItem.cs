@@ -10,15 +10,15 @@ public class ShotgunItem : IItem {
   private Vector2 position;
   private Rectangle sourceRectangle = new(0, 10, 27, 9);
   private Vector2 origin;
-  private Texture2D texture;
-  private float scale = 1f;
+  private readonly Texture2D texture;
+  private readonly float scale = 1f;
   public Vector2 Position { get; set; }
 
-  private Game1 game;
-  private IProjectilePattern projectilePattern = new SpreadPattern();
+  private readonly Game1 game;
+  private readonly IProjectilePattern projectilePattern = new SpreadPattern();
   private Vector2 bulletSpawnOffset;
-  private GunStats stats;
-  private IFireMode fireMode;
+  private readonly GunStats stats;
+  private readonly IFireMode fireMode;
   public ItemCategory Category { get; } = ItemCategory.Primary;
 
   public ShotgunItem(Texture2D texture, Vector2 position, Game1 game, GunStats stats) {
