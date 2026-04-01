@@ -4,13 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.WorldPickups;
 
-public class ItemWorldPickup : BaseWorldPickup, ICollidable {
-  private IItem item;
-
-  public ItemWorldPickup(IItem item) : base(item.Position) {
-    this.item = item;
-  }
-
+public class ItemWorldPickup(IItem item) : BaseWorldPickup(item.Position), ICollidable {
   public override void Draw(SpriteBatch spriteBatch) {
     item.Draw(spriteBatch);
   }

@@ -7,7 +7,14 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameProject.Misc;
 
-public class Level : ILevel {
+public class Level(
+  Game1 game,
+  List<IBlock> nonCollidableBlocks, // for non-collidable collidableBlocks -Aaron
+  List<IBlock> collidableBlocks,
+  List<IEnemy> enemies,
+  List<IWorldPickup> pickups,
+  Vector2 playerPosition
+  ) : ILevel {
   public enum FadingState {
     FadeIn,
     Active,
@@ -15,13 +22,6 @@ public class Level : ILevel {
   };
 
   private static float FADE_DURATION = 0.2f;
-
-  private Game1 game;
-  private List<IBlock> nonCollidableBlocks; // for non-collidable collidableBlocks -Aaron
-  private List<IBlock> collidableBlocks;
-  private List<IEnemy> enemies;
-  private List<IWorldPickup> pickups;
-
   private FadingState fadeState = FadingState.FadeIn;
   private double fadeTime = 0.0;
 
@@ -35,26 +35,8 @@ public class Level : ILevel {
 
   public List<IBlock> CollidableBlocks => collidableBlocks;
   public List<IEnemy> Enemies => enemies;
-  public Vector2 PlayerPosition { get; private set; }
-  public ProjectileManager ProjectileManager { get; private set; }
-
-  public Level(
-    Game1 game,
-    List<IBlock> nonCollidableBlocks, // for non-collidable collidableBlocks -Aaron
-    List<IBlock> collidableBlocks,
-    List<IEnemy> enemies,
-    List<IWorldPickup> pickups,
-    Vector2 playerPosition
-  ) {
-    this.game = game;
-    this.nonCollidableBlocks = nonCollidableBlocks;
-    this.collidableBlocks = collidableBlocks;
-    this.enemies = enemies;
-    this.pickups = pickups;
-    PlayerPosition = playerPosition;
-
-    ProjectileManager = new ProjectileManager();
-  }
+  public Vector2 PlayerPosition { get; private set; } = playerPosition;
+  public ProjectileManager ProjectileManager { get; private set; } = new ProjectileManager();
 
   public void Initialize() { }
 

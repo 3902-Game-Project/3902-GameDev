@@ -7,16 +7,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-public abstract class BaseEnemy : IEnemy {
-  public Texture2D Texture { get; protected set; }
-  public Vector2 Position { get; set; }
+public abstract class BaseEnemy(Texture2D texture, Vector2 position, float colliderWidth = 64f, float colliderHeight = 64f) : IEnemy {
+  public Texture2D Texture { get; protected set; } = texture;
+  public Vector2 Position { get; set; } = position;
   public Vector2 Velocity { get; set; }
   public int FacingDirection { get; set; } = 1;
 
   public List<Rectangle> CurrentSourceRectangles;
   public int CurrentFrame;
   public IShape Shape => Collider;
-  public BoxCollider Collider { get; private set; }
+  public BoxCollider Collider { get; private set; } = new BoxCollider(colliderWidth, colliderHeight, position);
   public Layer Layer { get; } = Layer.Enemies;
   public Layer Mask { get; } = Layer.Player;
   public int Health { get; set; } = 100;
@@ -25,12 +25,6 @@ public abstract class BaseEnemy : IEnemy {
   protected const float DamageFlashDuration = 0.15f;
 
   public Rectangle BoundingBox => throw new System.NotImplementedException();
-
-  protected BaseEnemy(Texture2D texture, Vector2 position, float colliderWidth = 64f, float colliderHeight = 64f) {
-    Texture = texture;
-    Position = position;
-    Collider = new BoxCollider(colliderWidth, colliderHeight, position);
-  }
 
   protected void UpdateCollider() {
     if (Collider != null) {

@@ -3,14 +3,8 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Items;
 
-public class SemiAutoFire : IFireMode {
-  private GunStats stats;
-  private float timeSinceLastShot;
-
-  public SemiAutoFire(GunStats stats) {
-    this.stats = stats;
-    timeSinceLastShot = stats.FireRate;
-  }
+public class SemiAutoFire(GunStats stats) : IFireMode {
+  private float timeSinceLastShot = stats.FireRate;
 
   public bool CanFire(UseType useType) {
     bool canFire = true;
