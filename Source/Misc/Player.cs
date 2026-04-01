@@ -157,8 +157,6 @@ public class Player : ICollidable {
   public void Draw(SpriteBatch spriteBatch) {
     State.Draw(spriteBatch);
 
-    if (Inventory.ActiveItem != null) {
-      Inventory.ActiveItem.Draw(spriteBatch);
-    }
+    Inventory.ActiveItem?.Draw(spriteBatch);
   }
 }
