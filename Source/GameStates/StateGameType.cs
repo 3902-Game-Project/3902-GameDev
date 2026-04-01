@@ -111,7 +111,7 @@ public class StateGameType : IGameState {
           float scaleWidth = healthBarTexture.Width * 0.15f;
           Vector2 enemyHealthPositions = new(
             baseEnemy.Position.X - (scaleWidth / 2f),
-            baseEnemy.Position.Y - baseEnemy.Collider.height);
+            baseEnemy.Position.Y - baseEnemy.Collider.Height);
           game.SpriteBatch.Draw(texture: healthBarTexture,
             position: enemyHealthPositions,
             sourceRectangle: null,

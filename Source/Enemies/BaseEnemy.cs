@@ -13,8 +13,8 @@ public abstract class BaseEnemy(Texture2D texture, Vector2 position, float colli
   public Vector2 Velocity { get; set; }
   public int FacingDirection { get; set; } = 1;
 
-  public List<Rectangle> CurrentSourceRectangles;
-  public int CurrentFrame;
+  public List<Rectangle> CurrentSourceRectangles { get; }
+  public int CurrentFrame { get; }
   public IShape Shape => Collider;
   public BoxCollider Collider { get; private set; } = new BoxCollider(colliderWidth, colliderHeight, position);
   public Layer Layer { get; } = Layer.Enemies;
@@ -28,7 +28,7 @@ public abstract class BaseEnemy(Texture2D texture, Vector2 position, float colli
 
   protected void UpdateCollider() {
     if (Collider != null) {
-      Collider.Position = Position + new Vector2(0, -Collider.height / 2f);
+      Collider.Position = Position + new Vector2(0, -Collider.Height / 2f);
     }
   }
 

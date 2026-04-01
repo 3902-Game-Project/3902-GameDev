@@ -283,6 +283,10 @@ dotnet_style_qualification_for_property = false:suggestion
 dotnet_style_qualification_for_method = false:suggestion
 dotnet_style_qualification_for_event = false:suggestion
 dotnet_diagnostic.CA1859.severity = none
+dotnet_diagnostic.CA1051.severity = suggestion
+dotnet_diagnostic.CA1707.severity = suggestion
+dotnet_diagnostic.CA2215.severity = suggestion
+dotnet_diagnostic.CA2251.severity = suggestion
 
 [*.{txt,csv,mgcb,editorconfig}]
 tab_width = 2

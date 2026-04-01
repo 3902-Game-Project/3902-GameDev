@@ -41,7 +41,7 @@ public class CollisionManager : IUpdatable {
 
     foreach (var c in colliders) {
       if (c.Shape is BoxCollider box) {
-        Rectangle rect = new((int) box.Left, (int) box.Top, (int) box.width, (int) box.height);
+        Rectangle rect = new((int) box.Left, (int) box.Top, (int) box.Width, (int) box.Height);
         spriteBatch.Draw(debugTexture, rect, Color.Red * 0.5f);
       }
     }
@@ -115,10 +115,10 @@ public class CollisionManager : IUpdatable {
     Vector2 direction2;
     float finalOverlap;
 
-    float b1CenterX = b1.Left + (b1.width / 2f);
-    float b2CenterX = b2.Left + (b2.width / 2f);
-    float b1CenterY = b1.Top + (b1.height / 2f);
-    float b2CenterY = b2.Top + (b2.height / 2f);
+    float b1CenterX = b1.Left + (b1.Width / 2f);
+    float b2CenterX = b2.Left + (b2.Width / 2f);
+    float b1CenterY = b1.Top + (b1.Height / 2f);
+    float b2CenterY = b2.Top + (b2.Height / 2f);
 
     bool resolveHorizontally;
     if (axis == CollisionAxis.X) resolveHorizontally = true;
@@ -154,15 +154,15 @@ public class CollisionManager : IUpdatable {
   private static bool BoxCircleCollision(BoxCollider b, CircleCollider c, out CollisionInfo info1, out CollisionInfo info2) {
     info1 = null; info2 = null;
 
-    float closestX = Math.Clamp(c.position.X, b.Left, b.Right);
-    float closestY = Math.Clamp(c.position.Y, b.Top, b.Bottom);
+    float closestX = Math.Clamp(c.Position.X, b.Left, b.Right);
+    float closestY = Math.Clamp(c.Position.Y, b.Top, b.Bottom);
 
-    float dx = c.position.X - closestX;
-    float dy = c.position.Y - closestY;
+    float dx = c.Position.X - closestX;
+    float dy = c.Position.Y - closestY;
 
-    if ((dx * dx + dy * dy) > c.radius * c.radius) return false;
+    if ((dx * dx + dy * dy) > c.Radius * c.Radius) return false;
 
-    Vector2 direction1 = new(c.position.X - closestX, c.position.Y - closestY);
+    Vector2 direction1 = new(c.Position.X - closestX, c.Position.Y - closestY);
     direction1 = Vector2.Normalize(direction1);
     Vector2 direction2 = Vector2.Negate(direction1);
 
@@ -184,13 +184,13 @@ public class CollisionManager : IUpdatable {
   private static bool CircleCircleCollision(CircleCollider c1, CircleCollider c2, out CollisionInfo info1, out CollisionInfo info2) {
     info1 = null; info2 = null;
 
-    float dx = c2.position.X - c1.position.X;
-    float dy = c2.position.Y - c1.position.Y;
-    float r = c1.radius + c2.radius;
+    float dx = c2.Position.X - c1.Position.X;
+    float dy = c2.Position.Y - c1.Position.Y;
+    float r = c1.Radius + c2.Radius;
     float distSq = dx * dx + dy * dy;
     if (distSq > (r * r)) return false;
 
-    Vector2 direction1 = c2.position - c1.position;
+    Vector2 direction1 = c2.Position - c1.Position;
     direction1 = Vector2.Normalize(direction1);
     Vector2 direction2 = Vector2.Negate(direction1);
 
