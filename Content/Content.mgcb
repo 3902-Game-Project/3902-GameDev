@@ -97,18 +97,6 @@
 /processorParam:TextureFormat=Color
 /build:Items/basic_guns_spritesheet.png
 
-#begin Items/placeholderGuns.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Items/placeholderGuns.png
-
 #begin Items/revolver.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -166,18 +154,6 @@
 /processorParam:TextureFormat=Color
 /build:Misc/blood_red_bar.png
 
-#begin Misc/desert-atlas-v6.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Misc/desert-atlas-v6.png
-
 #begin Misc/desert-atlas-v7.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -220,18 +196,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Misc/projectile_spritesheet.png
-
-#begin Misc/spriteSheet.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Misc/spriteSheet.png
 
 #begin Misc/WhitePixel.png
 /importer:TextureImporter
