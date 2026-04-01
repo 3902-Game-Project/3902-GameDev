@@ -137,6 +137,7 @@ public class Player : ICollidable {
       Inventory.ActiveItem.Update(gameTime);
     }
   }
+
   public void OnCollision(CollisionInfo info) {
     if (info.Collider is IBlock) {
       Position += info.Direction * (info.Overlap + 0.01f);
