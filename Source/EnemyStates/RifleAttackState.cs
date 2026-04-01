@@ -2,7 +2,6 @@
 using GameProject.Enemies;
 using GameProject.Factories;
 using GameProject.Interfaces;
-using GameProject.Managers;
 using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
 
