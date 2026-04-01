@@ -41,7 +41,7 @@ public class CollisionManager {
 
     foreach (var c in colliders) {
       if (c.Shape is BoxCollider box) {
-        Rectangle rect = new Rectangle((int) box.Left, (int) box.Top, (int) box.width, (int) box.height);
+        Rectangle rect = new((int) box.Left, (int) box.Top, (int) box.width, (int) box.height);
         spriteBatch.Draw(debugTexture, rect, Color.Red * 0.5f);
       }
     }
@@ -162,7 +162,7 @@ public class CollisionManager {
 
     if ((dx * dx + dy * dy) > c.radius * c.radius) return false;
 
-    Vector2 direction1 = new Vector2(c.position.X - closestX, c.position.Y - closestY);
+    Vector2 direction1 = new(c.position.X - closestX, c.position.Y - closestY);
     direction1 = Vector2.Normalize(direction1);
     Vector2 direction2 = Vector2.Negate(direction1);
 

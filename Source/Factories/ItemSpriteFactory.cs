@@ -19,7 +19,7 @@ public class ItemSpriteFactory {
   }
 
   public IItem CreateRevolver(float xPos, float yPos, Game1 game) {
-    GunStats stats = new GunStats {
+    GunStats stats = new() {
       BulletVelocity = 200f,
       FireRate = .2f
     };

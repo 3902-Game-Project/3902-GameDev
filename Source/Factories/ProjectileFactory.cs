@@ -8,7 +8,7 @@ namespace GameProject.Factories;
 
 internal class ProjectileFactory {
   private Texture2D projectileTexture;
-  private static ProjectileFactory instance = new ProjectileFactory();
+  private static ProjectileFactory instance = new();
 
   public static ProjectileFactory Instance {
     get { return instance; }

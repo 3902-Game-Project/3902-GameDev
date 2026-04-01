@@ -17,7 +17,7 @@ public abstract class BaseBlock : IBlock, ICollidable {
 
   protected BaseBlock(Vector2 position, float width = 64f, float height = 64f) {
     this.Position = position;
-    Vector2 centerOffset = new Vector2(width / 2f, height / 2f);
+    Vector2 centerOffset = new(width / 2f, height / 2f);
 
     this.Collider = new BoxCollider(width, height, position + centerOffset);
   }

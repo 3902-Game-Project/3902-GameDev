@@ -35,12 +35,12 @@ public class VaultDoorBlock : BaseBlock {
         break;
     }
     sourceRects = new List<Rectangle> {
-      new Rectangle(64, 128, 64, 64),
-      new Rectangle(64, 192, 64, 64),
-      new Rectangle(128, 192, 64, 64),
-      new Rectangle(192, 192, 64, 64),
-      new Rectangle(256, 192, 64, 64),
-      new Rectangle(320, 192, 64, 64)
+      new(64, 128, 64, 64),
+      new(64, 192, 64, 64),
+      new(128, 192, 64, 64),
+      new(192, 192, 64, 64),
+      new(256, 192, 64, 64),
+      new(320, 192, 64, 64)
     };
     this.levelManager = levelManager;
   }

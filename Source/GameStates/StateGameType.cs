@@ -17,7 +17,7 @@ public class StateGameType : IGameState {
 
   private CollisionManager collisionManager = new();
   private Texture2D healthBarTexture;
-  private Vector2 healthBarPosition = new Vector2(0, 0);
+  private Vector2 healthBarPosition = new(0, 0);
 
   public Player Player { get; private set; }
 
@@ -109,7 +109,7 @@ public class StateGameType : IGameState {
         if (enemy is BaseEnemy baseEnemy && baseEnemy.Health > 0) {
           float enemyHealthPercent = MathHelper.Clamp((float) baseEnemy.Health / baseEnemy.MaxHealth, 0f, 1f);
           float scaleWidth = healthBarTexture.Width * 0.15f;
-          Vector2 enemyHealthPositions = new Vector2(
+          Vector2 enemyHealthPositions = new(
             baseEnemy.Position.X - (scaleWidth / 2f),
             baseEnemy.Position.Y - baseEnemy.Collider.height);
           game.SpriteBatch.Draw(texture: healthBarTexture,
@@ -123,7 +123,7 @@ public class StateGameType : IGameState {
             layerDepth: 0f
             );
           int enemyHealthVisible = (int) (healthBarTexture.Width * enemyHealthPercent);
-          Rectangle enemyHpSource = new Rectangle(0, 0, enemyHealthVisible, healthBarTexture.Height);
+          Rectangle enemyHpSource = new(0, 0, enemyHealthVisible, healthBarTexture.Height);
 
           game.SpriteBatch.Draw(
             texture: healthBarTexture,
@@ -141,7 +141,7 @@ public class StateGameType : IGameState {
     }
 
     int visibleWidth = (int) (healthBarTexture.Width * healthPercent);
-    Rectangle sourceRectangle = new Rectangle(0, 0, visibleWidth, healthBarTexture.Height);
+    Rectangle sourceRectangle = new(0, 0, visibleWidth, healthBarTexture.Height);
     game.SpriteBatch.Draw(
       texture: healthBarTexture,
       position: healthBarPosition,

@@ -53,10 +53,10 @@ public class RifleAttackState : IRiflemanState {
   }
 
   private void FireBullet() {
-    Vector2 bulletDirection = new Vector2(rifleMan.FacingDirection, 0f);
+    Vector2 bulletDirection = new(rifleMan.FacingDirection, 0f);
 
     // Calculate a spawn point so it comes out of the gun barrel, not his feet.
-    Vector2 spawnOffset = new Vector2(rifleMan.FacingDirection * 15f, -33f);
+    Vector2 spawnOffset = new(rifleMan.FacingDirection * 15f, -33f);
     Vector2 spawnPosition = rifleMan.Position + spawnOffset;
 
     // Create the bullet (Velocity: 300f, Lifetime: 2 seconds)

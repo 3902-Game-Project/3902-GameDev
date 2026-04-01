@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.AbstractClasses;
 
 public abstract class AKeyboardController : IController {
-  private KeyboardDifferenceTracker keyTracker = new();
+  private readonly KeyboardDifferenceTracker keyTracker = new();
 
   protected abstract Dictionary<Keys, ICommand> PressedMappings { get; }
   protected abstract Dictionary<Keys, ICommand> DownMappings { get; }

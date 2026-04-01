@@ -31,8 +31,8 @@ public class SlattedDoorBlock : BaseBlock {
         break;
     }
     sourceRects = new List<Rectangle> {
-      new Rectangle(192, 128, 64, 64),
-      new Rectangle(320, 128, 64, 64)
+      new(192, 128, 64, 64),
+      new(320, 128, 64, 64)
     };
     this.levelManager = levelManager;
   }

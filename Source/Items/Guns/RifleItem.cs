@@ -68,7 +68,7 @@ public class RifleItem : IItem {
     } else {
       offsetX = bulletSpawnOffset.X;
     }
-    Vector2 actualOffset = new Vector2(offsetX, bulletSpawnOffset.Y);
+    Vector2 actualOffset = new(offsetX, bulletSpawnOffset.Y);
     Vector2 bulletSpawnPosition = Position + actualOffset;
     if (fireMode.CanFire(useType)) {
       projectilePattern.SpawnProjectiles(game.StateGame.LevelManager.CurrentLevel.ProjectileManager, bulletSpawnPosition, bulletDirection, stats);

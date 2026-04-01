@@ -18,8 +18,8 @@ public class FireBlock : BaseBlock {
     currentFrame = 0;
     State = BlockState.lit;
     sourceRects = new List<Rectangle> {
-      new Rectangle(384, 64, 64, 64),
-      new Rectangle(448, 64, 64, 64)
+      new(384, 64, 64, 64),
+      new(448, 64, 64, 64)
     };
   }
 

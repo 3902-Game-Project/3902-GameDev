@@ -124,10 +124,10 @@ public class Player : ICollidable {
     if (Inventory.ActiveItem != null) {
       float unscaledWidth = 171f;
       float unscaledHeight = 323f;
-      Vector2 spriteCenter = new Vector2(unscaledWidth / 2f, unscaledHeight / 2f);
+      Vector2 spriteCenter = new(unscaledWidth / 2f, unscaledHeight / 2f);
       float playerScale = 0.15f;
-      Vector2 rightHandUnscaled = new Vector2(100f, 195f);
-      Vector2 leftHandUnscaled = new Vector2(18f, 188f);
+      Vector2 rightHandUnscaled = new(100f, 195f);
+      Vector2 leftHandUnscaled = new(18f, 188f);
       Vector2 rightHandOffset = (rightHandUnscaled - spriteCenter) * playerScale;
       Vector2 leftHandOffset = (leftHandUnscaled - spriteCenter) * playerScale;
       Vector2 currentOffset = (Direction == FacingDirection.Right) ? rightHandOffset : leftHandOffset;

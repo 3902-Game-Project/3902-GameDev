@@ -30,8 +30,8 @@ public class SmallDoorBlock : BaseBlock {
         break;
     }
     sourceRects = new List<Rectangle> {
-      new Rectangle(448, 256, 64, 64),
-      new Rectangle(448, 448, 64, 64)
+      new(448, 256, 64, 64),
+      new(448, 448, 64, 64)
     };
     PairedLevelName = pairedLevelName;
     this.levelManager = levelManager;

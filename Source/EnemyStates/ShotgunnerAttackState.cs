@@ -53,17 +53,17 @@ public class ShotgunnerAttackState : IShotgunnerState {
   }
 
   private void FireBullets() {
-    Vector2 spawnOffset = new Vector2(shotgunner.FacingDirection * 15f, -30f);
+    Vector2 spawnOffset = new(shotgunner.FacingDirection * 15f, -30f);
     Vector2 spawnPosition = shotgunner.Position + spawnOffset;
     float spreadY = 0.25f;
 
-    Vector2 dirStraight = new Vector2(shotgunner.FacingDirection, 0f);
+    Vector2 dirStraight = new(shotgunner.FacingDirection, 0f);
     dirStraight.Normalize();
 
-    Vector2 dirUp = new Vector2(shotgunner.FacingDirection, -spreadY);
+    Vector2 dirUp = new(shotgunner.FacingDirection, -spreadY);
     dirUp.Normalize();
 
-    Vector2 dirDown = new Vector2(shotgunner.FacingDirection, spreadY);
+    Vector2 dirDown = new(shotgunner.FacingDirection, spreadY);
     dirDown.Normalize();
     float bulletSpeed = 400f;
     float bulletLifetime = 0.6f;
