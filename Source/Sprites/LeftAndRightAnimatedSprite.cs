@@ -6,7 +6,10 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Sprites;
 
 public class LeftAndRightAnimatedSprite(Texture2D texture, Vector2 position) : ISprite {
-  private Vector2 startPosition = position;
+  // Parameter capture is intentional for this field specifically:
+#pragma warning disable CS9124 // Parameter is captured into the state of the enclosing type and its value is also used to initialize a field, property, or event.
+  private readonly Vector2 startPosition = position;
+#pragma warning restore CS9124 // Parameter is captured into the state of the enclosing type and its value is also used to initialize a field, property, or event.
 
   private readonly List<Rectangle> sourceRectangles =
     [
