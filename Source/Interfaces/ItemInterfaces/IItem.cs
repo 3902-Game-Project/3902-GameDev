@@ -7,5 +7,6 @@ public interface IItem : ISprite {
   ItemCategory Category { get; }
   FacingDirection Direction { get; set; }
   Vector2 Position { get; set; }
+  public void OnPickup(Player player);
   void Use(UseType useType);
 }

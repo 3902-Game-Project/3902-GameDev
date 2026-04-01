@@ -54,6 +54,8 @@ public class RevolverItem : IItem {
     fireMode.Update(gameTime);
   }
 
+  public void OnPickup(Player player) { }
+
   public void Use(UseType useType) {
     Vector2 bulletDirection;
     if (Direction == FacingDirection.Left) {
