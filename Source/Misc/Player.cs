@@ -5,6 +5,7 @@ using GameProject.Managers;
 using GameProject.Misc;
 using GameProject.PlayerStates;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject;
@@ -15,6 +16,8 @@ public enum FacingDirection {
 }
 
 public class Player : ICollidable {
+  private ContentManager contentManager;
+
   private static float PLAYER_WIDTH = 171.0f * 0.15f;
   private static float PLAYER_HEIGHT = 323.0f * 0.15f;
   private static float KNOCKBACK_DISTANCE = 10f;
@@ -54,8 +57,9 @@ public class Player : ICollidable {
   public IPlayerState UseItemState { get; private set; }
   public IPlayerState DeadState { get; private set; }
 
-  public Player(Game1 game) {
+  public Player(Game1 game, ContentManager contentManager) {
     this.game = game;
+    this.contentManager = contentManager;
     this.Position = new Vector2(400, 300);
     this.Velocity = Vector2.Zero;
     this.Inventory = new PlayerInventory(this);
@@ -84,7 +88,7 @@ public class Player : ICollidable {
   public void Die() => State.Die();
 
   public void LoadContent() {
-    this.Texture = game.Content.Load<Texture2D>("playerSpritesheet");
+    this.Texture = contentManager.Load<Texture2D>("playerSpritesheet");
   }
 
   public void TakeDamage(int amount = 10) {

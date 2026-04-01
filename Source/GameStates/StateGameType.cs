@@ -26,7 +26,7 @@ public class StateGameType : IGameState {
   public StateGameType(Game1 game) {
     this.game = game;
     LevelManager = new LevelManager(game);
-    Player = new Player(game);
+    Player = new Player(game, game.Content);
   }
 
   public void Initialize() {
