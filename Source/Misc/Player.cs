@@ -17,6 +17,7 @@ public enum FacingDirection {
 
 public class Player : ICollidable {
   private ContentManager contentManager;
+  private CollisionManager collisionManager;
 
   private static float PLAYER_WIDTH = 171.0f * 0.15f;
   private static float PLAYER_HEIGHT = 323.0f * 0.15f;
@@ -57,9 +58,10 @@ public class Player : ICollidable {
   public IPlayerState UseItemState { get; private set; }
   public IPlayerState DeadState { get; private set; }
 
-  public Player(Game1 game, ContentManager contentManager) {
+  public Player(Game1 game, ContentManager contentManager, CollisionManager collisionManager) {
     this.game = game;
     this.contentManager = contentManager;
+    this.collisionManager = collisionManager;
     this.Position = new Vector2(400, 300);
     this.Velocity = Vector2.Zero;
     this.Inventory = new PlayerInventory(this);
@@ -112,11 +114,11 @@ public class Player : ICollidable {
 
     Position = new Vector2(Position.X + xStep, Position.Y);
     if (Collider != null) Collider.position = this.Position;
-    game.CollisionManager.ResolveCollisionsFor(this, CollisionAxis.X, MathF.Abs(yStep) + 1f);
+    collisionManager.ResolveCollisionsFor(this, CollisionAxis.X, MathF.Abs(yStep) + 1f);
 
     Position = new Vector2(Position.X, Position.Y + yStep);
     if (Collider != null) Collider.position = this.Position;
-    game.CollisionManager.ResolveCollisionsFor(this, CollisionAxis.Y, MathF.Abs(xStep) + 1f);
+    collisionManager.ResolveCollisionsFor(this, CollisionAxis.Y, MathF.Abs(xStep) + 1f);
 
     State.Update(gameTime);
     Velocity = Vector2.Zero;
