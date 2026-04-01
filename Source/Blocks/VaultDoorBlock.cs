@@ -20,20 +20,11 @@ public class VaultDoorBlock : BaseBlock {
     texture = VaultDoorTexture;
     PairedLevelName = pairedLevelName;
     State = state;
-    switch (state) {
-      case BlockState.locked:
-      default:
-        currentFrame = 0;
-        break;
-
-      case BlockState.opening:
-        currentFrame = 1;
-        break;
-
-      case BlockState.open:
-        currentFrame = sourceRects.Count - 1;
-        break;
-    }
+    currentFrame = state switch {
+      BlockState.opening => 1,
+      BlockState.open => sourceRects.Count - 1,
+      _ => 0,
+    };
     sourceRects = [
       new(64, 128, 64, 64),
       new(64, 192, 64, 64),

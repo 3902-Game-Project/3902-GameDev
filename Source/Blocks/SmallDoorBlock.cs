@@ -19,16 +19,10 @@ public class SmallDoorBlock : BaseBlock {
     texture = SmallDoorTexture;
     Rotation = 0.0f;
     State = state;
-    switch (state) {
-      case BlockState.locked:
-      default:
-        currentFrame = 0;
-        break;
-
-      case BlockState.open:
-        currentFrame = 1;
-        break;
-    }
+    currentFrame = state switch {
+      BlockState.open => 1,
+      _ => 0,
+    };
     sourceRects = [
       new(448, 256, 64, 64),
       new(448, 448, 64, 64)

@@ -67,22 +67,11 @@ internal partial class LevelLoader {
       case "2": {
           /* small door */
           var stateString = entrySplit[1];
-
-          BlockState state;
-
-          switch (stateString) {
-            case "0":
-              state = BlockState.locked;
-              break;
-
-            case "1":
-              state = BlockState.open;
-              break;
-
-            default:
-              throw new FormatException($"unrecognized door state '{stateString}");
-          }
-
+          var state = stateString switch {
+            "0" => BlockState.locked,
+            "1" => BlockState.open,
+            _ => throw new FormatException($"unrecognized door state '{stateString}"),
+          };
           var pairedLevelName = entrySplit[2];
 
           if (!levelNames.Contains(pairedLevelName)) {
@@ -224,26 +213,12 @@ internal partial class LevelLoader {
       case "20": {
           /* vault door */
           var stateString = entrySplit[1];
-
-          BlockState state;
-
-          switch (stateString) {
-            case "0":
-              state = BlockState.locked;
-              break;
-
-            case "1":
-              state = BlockState.opening;
-              break;
-
-            case "2":
-              state = BlockState.open;
-              break;
-
-            default:
-              throw new FormatException($"unrecognized door state '{stateString}");
-          }
-
+          var state = stateString switch {
+            "0" => BlockState.locked,
+            "1" => BlockState.opening,
+            "2" => BlockState.open,
+            _ => throw new FormatException($"unrecognized door state '{stateString}"),
+          };
           var pairedLevelName = entrySplit[2];
 
           if (!levelNames.Contains(pairedLevelName)) {
@@ -304,22 +279,11 @@ internal partial class LevelLoader {
       case "31": {
           /* slatted door */
           var stateString = entrySplit[1];
-
-          BlockState state;
-
-          switch (stateString) {
-            case "0":
-              state = BlockState.locked;
-              break;
-
-            case "1":
-              state = BlockState.open;
-              break;
-
-            default:
-              throw new FormatException($"unrecognized door state '{stateString}");
-          }
-
+          var state = stateString switch {
+            "0" => BlockState.locked,
+            "1" => BlockState.open,
+            _ => throw new FormatException($"unrecognized door state '{stateString}"),
+          };
           var pairedLevelName = entrySplit[2];
 
           if (!levelNames.Contains(pairedLevelName)) {
