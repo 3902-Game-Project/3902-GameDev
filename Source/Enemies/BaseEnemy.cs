@@ -33,7 +33,7 @@ public abstract class BaseEnemy(Texture2D texture, Vector2 position, float colli
   }
 
   public virtual void OnCollision(CollisionInfo info) {
-    if (info.Collider is IBlock block) {
+    if (info.Collider is IBlock) {
       if (info.Side == CollisionSide.Left || info.Side == CollisionSide.Right) {
         Velocity = new Vector2(0, Velocity.Y);
         FacingDirection *= -1;

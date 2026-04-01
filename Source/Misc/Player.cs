@@ -138,13 +138,13 @@ public class Player : ICollidable {
     }
   }
   public void OnCollision(CollisionInfo info) {
-    if (info.Collider is IBlock block) {
+    if (info.Collider is IBlock) {
       Position += info.Direction * (info.Overlap + 0.01f);
 
       if (Collider != null) Collider.position = Position;
     }
 
-    if (info.Collider is IEnemy enemy) {
+    if (info.Collider is IEnemy) {
       Position += info.Direction * KNOCKBACK_DISTANCE;
       if (Collider != null) {
         Collider.position = Position;
