@@ -5,35 +5,23 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Sprites;
 
-public class LeftAndRightAnimatedSprite : ISprite {
-  private Texture2D texture;
-  private Vector2 position;
-  private Vector2 startPosition;
+public class LeftAndRightAnimatedSprite(Texture2D texture, Vector2 position) : ISprite {
+  private Vector2 startPosition = position;
 
-  private List<Rectangle> sourceRectangles;
-
-  private int direction = -1;
-  private int speed = 3;
-  private int sprintLength = 100;
-
-  private int currentFrame;
-  private double timer;
-  private double FrameInterval = 0.2;
-
-  public LeftAndRightAnimatedSprite(Texture2D texture, Vector2 position) {
-    this.texture = texture;
-    this.position = position;
-    startPosition = position;
-    timer = 0;
-    currentFrame = 0;
-
-    sourceRectangles =
+  private List<Rectangle> sourceRectangles =
     [
       new Rectangle(65, 0, 25, 25),
       new Rectangle(90, 0, 17, 25),
       new Rectangle(108, 0, 22, 25),
     ];
-  }
+
+  private int direction = -1;
+  private int speed = 3;
+  private int sprintLength = 100;
+
+  private int currentFrame = 0;
+  private double timer = 0;
+  private double FrameInterval = 0.2;
 
   public void Update(GameTime gameTime) {
     timer += gameTime.ElapsedGameTime.TotalSeconds;

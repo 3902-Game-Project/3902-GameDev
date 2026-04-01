@@ -5,23 +5,15 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class FireBlock : BaseBlock {
-  private Texture2D texture;
-  private List<Rectangle> sourceRects;
-  private int currentFrame;
-  private double animationTimer;
-  private double timePerFrame = 0.15;
-  public BlockState State { get; set; }
-
-  public FireBlock(Texture2D FireTexture, Vector2 xyPos) : base(xyPos) {
-    texture = FireTexture;
-    currentFrame = 0;
-    State = BlockState.lit;
-    sourceRects = [
+public class FireBlock(Texture2D FireTexture, Vector2 xyPos) : BaseBlock(xyPos) {
+  private List<Rectangle> sourceRects = [
       new(384, 64, 64, 64),
       new(448, 64, 64, 64)
     ];
-  }
+  private int currentFrame = 0;
+  private double animationTimer;
+  private double timePerFrame = 0.15;
+  public BlockState State { get; set; } = BlockState.lit;
 
   public override void Update(GameTime gameTime) {
     float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
@@ -33,6 +25,6 @@ public class FireBlock : BaseBlock {
   }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(texture, Position, sourceRects[currentFrame], Color.White, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
+    spriteBatch.Draw(FireTexture, Position, sourceRects[currentFrame], Color.White, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 }
