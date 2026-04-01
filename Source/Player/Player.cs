@@ -4,6 +4,7 @@ using GameProject.Interfaces;
 using GameProject.Managers;
 using GameProject.Misc;
 using GameProject.PlayerStates;
+using GameProject.Audio;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -41,6 +42,7 @@ public class Player : ICollidable {
 
   public PlayerInventory Inventory { get; private set; }
   public Texture2D Texture { get; private set; }
+  public PlayerSounds sfx { get; private set; }
 
   public Rectangle BoundingBox {
     get {
@@ -73,6 +75,8 @@ public class Player : ICollidable {
     UseItemState = new PlayerUseItemState(this);
     DeadState = new PlayerDeadState(this);
     State = StaticState;
+
+    sfx = new PlayerSounds();
   }
 
   public void MoveUp() => State.MoveUp();
@@ -99,6 +103,7 @@ public class Player : ICollidable {
         Health = 0;
         Die();
       }
+      sfx.hurtSFX.Play();
     }
   }
 
