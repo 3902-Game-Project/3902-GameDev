@@ -18,7 +18,6 @@ public class Game1 : Game {
   public IGameState StateLoss { get; private set; }
   public IGameState StateWin { get; private set; }
   public StateGameType StateGame { get; private set; }
-  public CollisionManager CollisionManager { get; private set; }
 
   private IGameState currentState;
 
@@ -47,7 +46,6 @@ public class Game1 : Game {
   }
 
   protected override void Initialize() {
-    CollisionManager = new CollisionManager();
     graphics.PreferredBackBufferHeight = 576;
     graphics.PreferredBackBufferWidth = 960;
     graphics.ApplyChanges();
