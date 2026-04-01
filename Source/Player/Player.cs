@@ -20,8 +20,8 @@ public class Player : ICollidable {
   private static readonly float PLAYER_HEIGHT = 323.0f * 0.15f;
   private static readonly float KNOCKBACK_DISTANCE = 10f;
 
-  readonly ContentManager contentManager;
-  readonly CollisionManager collisionManager;
+  private readonly ContentManager contentManager;
+  private readonly CollisionManager collisionManager;
 
   public IShape Shape => Collider;
   public BoxCollider Collider { get; private set; }
