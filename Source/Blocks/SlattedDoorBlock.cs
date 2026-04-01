@@ -6,30 +6,18 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class SlattedDoorBlock : BaseBlock {
-  private readonly Texture2D texture;
-  private readonly int currentFrame;
-  private readonly List<Rectangle> sourceRects;
-  private readonly ILevelManager levelManager;
-  public float Rotation { get; private set; }
-  public string PairedLevelName { get; private set; }
-  public BlockState State { get; private set; }
-
-  public SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, BlockState state, string pairedLevelName, ILevelManager levelManager) : base(xyPos) {
-    texture = SlattedDoorTexture;
-    Rotation = 0.0f;
-    PairedLevelName = pairedLevelName;
-    State = state;
-    currentFrame = state switch {
-      BlockState.open => 1,
-      _ => 0,
-    };
-    sourceRects = [
+public class SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, BlockState state, string pairedLevelName, ILevelManager levelManager) : BaseBlock(xyPos) {
+  private readonly int currentFrame = state switch {
+    BlockState.open => 1,
+    _ => 0,
+  };
+  private readonly List<Rectangle> sourceRects = [
       new(192, 128, 64, 64),
       new(320, 128, 64, 64)
     ];
-    this.levelManager = levelManager;
-  }
+  public float Rotation { get; private set; } = 0.0f;
+  public string PairedLevelName { get; private set; } = pairedLevelName;
+  public BlockState State { get; private set; } = state;
 
   public void Rotate() {
     if (Position.X == 0 && Position.Y == 0) {
@@ -46,7 +34,7 @@ public class SlattedDoorBlock : BaseBlock {
   }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(texture, Position, sourceRects[currentFrame], Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
+    spriteBatch.Draw(SlattedDoorTexture, Position, sourceRects[currentFrame], Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 
   public override void OnCollision(CollisionInfo info) {
