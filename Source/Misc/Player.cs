@@ -84,7 +84,7 @@ public class Player : ICollidable {
   public void Die() => State.Die();
 
   public void LoadContent() {
-    this.Texture = game.Assets.Textures.PlayerTexture;
+    this.Texture = game.Content.Load<Texture2D>("playerSpritesheet");
   }
 
   public void TakeDamage(int amount = 10) {
