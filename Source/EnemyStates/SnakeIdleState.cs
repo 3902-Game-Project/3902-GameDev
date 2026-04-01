@@ -13,7 +13,7 @@ public class SnakeIdleState : ISnakeState {
 
   public SnakeIdleState(SnakeSprite snake) {
     this.snake = snake;
-    this.random = new System.Random();
+    random = new System.Random();
 
     this.snake.Velocity = Vector2.Zero;
     this.snake.CurrentSourceRectangles = new List<Rectangle> {

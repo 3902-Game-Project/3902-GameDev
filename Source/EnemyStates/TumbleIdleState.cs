@@ -17,7 +17,7 @@ public class TumbleIdleState : ITumbleState {
 
   public TumbleIdleState(TumbleSprite tumbleweed) {
     this.tumbleweed = tumbleweed;
-    this.random = new Random();
+    random = new Random();
 
     this.tumbleweed.Velocity = Vector2.Zero;
 

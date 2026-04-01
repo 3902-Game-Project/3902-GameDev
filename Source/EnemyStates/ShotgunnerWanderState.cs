@@ -19,7 +19,7 @@ public class ShotgunnerWanderState : IShotgunnerState {
   public ShotgunnerWanderState(ShotgunnerSprite shotgunner, ILevelManager levelManager) {
     this.shotgunner = shotgunner;
     this.levelManager = levelManager;
-    this.random = new Random();
+    random = new Random();
     this.shotgunner.CurrentSourceRectangles = new List<Rectangle> {
       new(21, 339, 32, 39),
       new(98, 337, 32, 41),

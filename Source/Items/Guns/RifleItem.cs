@@ -23,11 +23,11 @@ public class RifleItem : IItem {
   public RifleItem(Texture2D texture, Vector2 startPosition, Game1 game, GunStats stats) {
     this.game = game;
     this.texture = texture;
-    this.Position = startPosition;
+    Position = startPosition;
     this.stats = stats;
     this.stats.FireRate /= 3f; //this line is to change the frequency of the bullets in rifle
-    this.bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 * (sourceRectangle.Height / 2 - 3)) * scale;
-    this.fireMode = new AutomaticFire(this.stats);
+    bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 * (sourceRectangle.Height / 2 - 3)) * scale;
+    fireMode = new AutomaticFire(this.stats);
   }
 
   public void Draw(SpriteBatch spriteBatch) {

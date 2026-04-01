@@ -17,7 +17,7 @@ public class SnakeWanderState : ISnakeState {
 
   public SnakeWanderState(SnakeSprite snake) {
     this.snake = snake;
-    this.random = new Random();
+    random = new Random();
     this.snake.CurrentSourceRectangles = new List<Rectangle> {
       new(10, 84, 13, 13),
       new(43, 84, 13, 13),

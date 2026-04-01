@@ -13,7 +13,7 @@ public class BatIdleState : IBatState {
 
   public BatIdleState(BatSprite bat) {
     this.bat = bat;
-    this.random = new System.Random();
+    random = new System.Random();
 
     this.bat.Velocity = Vector2.Zero;
 

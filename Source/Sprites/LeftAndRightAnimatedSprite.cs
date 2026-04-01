@@ -23,9 +23,9 @@ public class LeftAndRightAnimatedSprite : ISprite {
   public LeftAndRightAnimatedSprite(Texture2D texture, Vector2 position) {
     this.texture = texture;
     this.position = position;
-    this.startPosition = position;
-    this.timer = 0;
-    this.currentFrame = 0;
+    startPosition = position;
+    timer = 0;
+    currentFrame = 0;
 
     sourceRectangles = new List<Rectangle>();
     sourceRectangles.Add(new Rectangle(65, 0, 25, 25));

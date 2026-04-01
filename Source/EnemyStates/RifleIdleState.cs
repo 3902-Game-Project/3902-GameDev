@@ -15,7 +15,7 @@ public class RifleIdleState : IRiflemanState {
   public RifleIdleState(RiflemanSprite rifle, ILevelManager levelManager) {
     this.rifle = rifle;
     this.levelManager = levelManager;
-    this.random = new System.Random();
+    random = new System.Random();
 
     this.rifle.Velocity = Vector2.Zero;
 

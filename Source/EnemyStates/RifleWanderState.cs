@@ -19,7 +19,7 @@ public class RifleWanderState : IRiflemanState {
   public RifleWanderState(RiflemanSprite rifle, ILevelManager levelManager) {
     this.rifle = rifle;
     this.levelManager = levelManager;
-    this.random = new Random();
+    random = new Random();
 
     this.rifle.CurrentSourceRectangles = new List<Rectangle> {
       new(71, 130, 23, 28),

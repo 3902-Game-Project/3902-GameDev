@@ -17,7 +17,7 @@ public class TumbleMoveState : ITumbleState {
 
   public TumbleMoveState(TumbleSprite tumbleweed) {
     this.tumbleweed = tumbleweed;
-    this.random = new Random();
+    random = new Random();
 
     this.tumbleweed.CurrentSourceRectangles = new List<Rectangle> {
       new(36, 41, 108, 106),

@@ -60,19 +60,19 @@ public class Player : ICollidable {
   public Player(ContentManager contentManager, CollisionManager collisionManager, ILevelManager levelManager) {
     this.contentManager = contentManager;
     this.collisionManager = collisionManager;
-    this.Position = new Vector2(400, 300);
-    this.Velocity = Vector2.Zero;
-    this.Inventory = new PlayerInventory(levelManager);
+    Position = new Vector2(400, 300);
+    Velocity = Vector2.Zero;
+    Inventory = new PlayerInventory(levelManager);
 
     float width = 171 * 0.15f;
     float height = 323 * 0.15f;
-    this.Collider = new BoxCollider(width, height, this.Position);
+    Collider = new BoxCollider(width, height, Position);
 
-    this.MovingState = new PlayerAnimatedMovingState(this);
-    this.StaticState = new PlayerStaticState(this);
-    this.UseItemState = new PlayerUseItemState(this);
-    this.DeadState = new PlayerDeadState(this);
-    this.State = StaticState;
+    MovingState = new PlayerAnimatedMovingState(this);
+    StaticState = new PlayerStaticState(this);
+    UseItemState = new PlayerUseItemState(this);
+    DeadState = new PlayerDeadState(this);
+    State = StaticState;
   }
 
   public void MoveUp() => State.MoveUp();
@@ -88,7 +88,7 @@ public class Player : ICollidable {
   public void Die() => State.Die();
 
   public void LoadContent() {
-    this.Texture = contentManager.Load<Texture2D>("playerSpritesheet");
+    Texture = contentManager.Load<Texture2D>("playerSpritesheet");
   }
 
   public void TakeDamage(int amount = 10) {
@@ -111,11 +111,11 @@ public class Player : ICollidable {
     float yStep = Velocity.Y * dt;
 
     Position = new Vector2(Position.X + xStep, Position.Y);
-    if (Collider != null) Collider.position = this.Position;
+    if (Collider != null) Collider.position = Position;
     collisionManager.ResolveCollisionsFor(this, CollisionAxis.X, MathF.Abs(yStep) + 1f);
 
     Position = new Vector2(Position.X, Position.Y + yStep);
-    if (Collider != null) Collider.position = this.Position;
+    if (Collider != null) Collider.position = Position;
     collisionManager.ResolveCollisionsFor(this, CollisionAxis.Y, MathF.Abs(xStep) + 1f);
 
     State.Update(gameTime);
@@ -132,8 +132,8 @@ public class Player : ICollidable {
       Vector2 leftHandOffset = (leftHandUnscaled - spriteCenter) * playerScale;
       Vector2 currentOffset = (Direction == FacingDirection.Right) ? rightHandOffset : leftHandOffset;
 
-      Inventory.ActiveItem.Position = this.Position + currentOffset;
-      Inventory.ActiveItem.Direction = this.Direction;
+      Inventory.ActiveItem.Position = Position + currentOffset;
+      Inventory.ActiveItem.Direction = Direction;
       Inventory.ActiveItem.Update(gameTime);
     }
   }
@@ -141,15 +141,15 @@ public class Player : ICollidable {
     if (info.Collider is IBlock block) {
       Position += info.Direction * (info.Overlap + 0.01f);
 
-      if (Collider != null) Collider.position = this.Position;
+      if (Collider != null) Collider.position = Position;
     }
 
     if (info.Collider is IEnemy enemy) {
       Position += info.Direction * KNOCKBACK_DISTANCE;
       if (Collider != null) {
-        Collider.position = this.Position;
+        Collider.position = Position;
       }
-      if (Collider != null) Collider.position = this.Position;
+      if (Collider != null) Collider.position = Position;
       TakeDamage(50);
     }
   }

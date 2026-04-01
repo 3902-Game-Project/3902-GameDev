@@ -17,7 +17,7 @@ public class BatMoveState : IBatState {
 
   public BatMoveState(BatSprite bat) {
     this.bat = bat;
-    this.random = new Random();
+    random = new Random();
     this.bat.CurrentSourceRectangles = new List<Rectangle> {
       new(38, 97, 17, 21),
       new(70, 102, 17, 15),

@@ -19,8 +19,8 @@ internal class AnimatedSprite : ISprite {
 
     this.texture = texture;
     this.position = position;
-    this.currentFrame = 0;
-    this.timer = 0;
+    currentFrame = 0;
+    timer = 0;
 
     sourceRectangles = new List<Rectangle>();
     sourceRectangles.Add(new Rectangle(0, 0, 23, 25));

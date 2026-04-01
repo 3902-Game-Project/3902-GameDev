@@ -15,7 +15,7 @@ public class ShotgunnerIdleState : IShotgunnerState {
   public ShotgunnerIdleState(ShotgunnerSprite shotgunner, ILevelManager levelManager) {
     this.shotgunner = shotgunner;
     this.levelManager = levelManager;
-    this.random = new System.Random();
+    random = new System.Random();
 
     this.shotgunner.Velocity = Vector2.Zero;
     this.shotgunner.CurrentSourceRectangles = new List<Rectangle> {
