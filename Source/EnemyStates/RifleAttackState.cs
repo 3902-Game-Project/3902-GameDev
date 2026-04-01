@@ -22,11 +22,11 @@ public class RifleAttackState : IRiflemanState {
 
     this.rifleMan.Velocity = Vector2.Zero;
 
-    this.rifleMan.CurrentSourceRectangles = new List<Rectangle> {
+    this.rifleMan.CurrentSourceRectangles = [
       new(198, 91, 21, 27),
       new(260, 91, 22, 27),
       new(323, 89, 23, 29),
-    };
+    ];
     this.rifleMan.CurrentFrame = 0;
   }
 

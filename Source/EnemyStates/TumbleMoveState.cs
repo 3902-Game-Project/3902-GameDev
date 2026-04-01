@@ -19,12 +19,12 @@ public class TumbleMoveState : ITumbleState {
     this.tumbleweed = tumbleweed;
     random = new Random();
 
-    this.tumbleweed.CurrentSourceRectangles = new List<Rectangle> {
+    this.tumbleweed.CurrentSourceRectangles = [
       new(36, 41, 108, 106),
       new(202, 42, 109, 105),
       new(366, 42, 109, 105),
       new(533, 41, 107, 106)
-    };
+    ];
     this.tumbleweed.CurrentFrame = 0;
 
     ChangeDirection();

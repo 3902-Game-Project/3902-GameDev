@@ -350,10 +350,10 @@ internal partial class LevelLoader {
   }
 
   public static Level FromString(Game1 game, ISet<string> levelNames, string levelDataString) {
-    List<IBlock> nonCollidableBlocks = new();
-    List<IBlock> collidableBlocks = new();
-    List<IEnemy> enemies = new();
-    List<IWorldPickup> pickups = new();
+    List<IBlock> nonCollidableBlocks = [];
+    List<IBlock> collidableBlocks = [];
+    List<IEnemy> enemies = [];
+    List<IWorldPickup> pickups = [];
     Vector2? playerPositionNullable = null;
 
     var lines = NewlineSplitRegex.Split(levelDataString.Trim());

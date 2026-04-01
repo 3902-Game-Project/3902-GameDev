@@ -16,9 +16,9 @@ public class TumbleDeathState : ITumbleState {
 
     this.tumbleweed.Velocity = Vector2.Zero;
 
-    this.tumbleweed.CurrentSourceRectangles = new List<Rectangle> {
+    this.tumbleweed.CurrentSourceRectangles = [
       new(383, 227, 137, 106)
-    };
+    ];
     this.tumbleweed.CurrentFrame = 0;
   }
 

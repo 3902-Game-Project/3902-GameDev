@@ -18,11 +18,11 @@ public class BatMoveState : IBatState {
   public BatMoveState(BatSprite bat) {
     this.bat = bat;
     random = new Random();
-    this.bat.CurrentSourceRectangles = new List<Rectangle> {
+    this.bat.CurrentSourceRectangles = [
       new(38, 97, 17, 21),
       new(70, 102, 17, 15),
       new(102, 102, 15, 21),
-    };
+    ];
     this.bat.CurrentFrame = 0;
 
     ChangeDirection();

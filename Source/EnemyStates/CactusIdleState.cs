@@ -13,9 +13,9 @@ public class CactusIdleState : ICactusState {
 
     this.cactus.Velocity = Vector2.Zero;
 
-    this.cactus.CurrentSourceRectangles = new List<Rectangle> {
+    this.cactus.CurrentSourceRectangles = [
       new(228,55,222,264)
-    };
+    ];
     this.cactus.CurrentFrame = 0;
   }
 

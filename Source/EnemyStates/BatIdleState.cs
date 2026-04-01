@@ -17,12 +17,12 @@ public class BatIdleState : IBatState {
 
     this.bat.Velocity = Vector2.Zero;
 
-    this.bat.CurrentSourceRectangles = new List<Rectangle> {
+    this.bat.CurrentSourceRectangles = [
       //new Rectangle(3, 20, 25, 11),
       new(35, 5, 27, 22),
       new(66, 6, 29, 15),
       new(97, 1, 31, 21),
-    };
+    ];
     this.bat.CurrentFrame = 0;
   }
 

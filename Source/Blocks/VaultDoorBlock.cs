@@ -34,14 +34,14 @@ public class VaultDoorBlock : BaseBlock {
         currentFrame = sourceRects.Count - 1;
         break;
     }
-    sourceRects = new List<Rectangle> {
+    sourceRects = [
       new(64, 128, 64, 64),
       new(64, 192, 64, 64),
       new(128, 192, 64, 64),
       new(192, 192, 64, 64),
       new(256, 192, 64, 64),
       new(320, 192, 64, 64)
-    };
+    ];
     this.levelManager = levelManager;
   }
 

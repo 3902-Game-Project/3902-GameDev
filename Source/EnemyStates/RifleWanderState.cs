@@ -21,12 +21,12 @@ public class RifleWanderState : IRiflemanState {
     this.levelManager = levelManager;
     random = new Random();
 
-    this.rifle.CurrentSourceRectangles = new List<Rectangle> {
+    this.rifle.CurrentSourceRectangles = [
       new(71, 130, 23, 28),
       new(134, 130, 23, 28),
       new(196, 130, 23, 28),
       new(259, 130, 23, 28),
-    };
+    ];
     this.rifle.CurrentFrame = 0;
 
     ChangeDirection();

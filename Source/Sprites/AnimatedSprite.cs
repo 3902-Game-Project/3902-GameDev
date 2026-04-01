@@ -22,10 +22,12 @@ internal class AnimatedSprite : ISprite {
     currentFrame = 0;
     timer = 0;
 
-    sourceRectangles = new List<Rectangle>();
-    sourceRectangles.Add(new Rectangle(0, 0, 23, 25));
-    sourceRectangles.Add(new Rectangle(22, 0, 23, 25));
-    sourceRectangles.Add(new Rectangle(44, 0, 21, 25));
+    sourceRectangles =
+    [
+      new Rectangle(0, 0, 23, 25),
+      new Rectangle(22, 0, 23, 25),
+      new Rectangle(44, 0, 21, 25),
+    ];
   }
 
   public void Update(GameTime gameTime) {

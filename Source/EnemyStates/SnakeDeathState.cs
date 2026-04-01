@@ -20,7 +20,7 @@ public class SnakeDeathState : ISnakeState {
     this.snake = snake;
     this.snake.Velocity = Vector2.Zero;
 
-    this.snake.CurrentSourceRectangles = new List<Rectangle> {
+    this.snake.CurrentSourceRectangles = [
       new(76, 143, 8, 17),
       new(108, 143, 8, 17),
       new(140, 143, 8, 17),
@@ -31,7 +31,7 @@ public class SnakeDeathState : ISnakeState {
       new(235, 151, 12, 9),
       new(267, 153, 13, 7),
       new(299, 154, 15, 6)
-    };
+    ];
     this.snake.CurrentFrame = 0;
   }
 

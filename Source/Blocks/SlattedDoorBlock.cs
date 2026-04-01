@@ -30,10 +30,10 @@ public class SlattedDoorBlock : BaseBlock {
         currentFrame = 1;
         break;
     }
-    sourceRects = new List<Rectangle> {
+    sourceRects = [
       new(192, 128, 64, 64),
       new(320, 128, 64, 64)
-    };
+    ];
     this.levelManager = levelManager;
   }
 

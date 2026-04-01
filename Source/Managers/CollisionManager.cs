@@ -20,7 +20,7 @@ public class CollisionManager {
   private Texture2D debugTexture;
 
   public CollisionManager() {
-    colliders = new List<ICollidable>();
+    colliders = [];
   }
 
   public void AddCollider(ICollidable collider) {

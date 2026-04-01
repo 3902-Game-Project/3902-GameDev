@@ -16,7 +16,7 @@ public class SnakeIdleState : ISnakeState {
     random = new System.Random();
 
     this.snake.Velocity = Vector2.Zero;
-    this.snake.CurrentSourceRectangles = new List<Rectangle> {
+    this.snake.CurrentSourceRectangles = [
       new(11, 20, 10, 12),
       new(43, 21, 10, 11),
       new(75, 22, 10, 10),
@@ -27,7 +27,7 @@ public class SnakeIdleState : ISnakeState {
       new(235, 21, 10, 11),
       new(267, 20, 10, 12),
       new(299, 20, 10, 12),
-    };
+    ];
     this.snake.CurrentFrame = 0;
   }
 

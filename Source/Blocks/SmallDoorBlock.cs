@@ -29,10 +29,10 @@ public class SmallDoorBlock : BaseBlock {
         currentFrame = 1;
         break;
     }
-    sourceRects = new List<Rectangle> {
+    sourceRects = [
       new(448, 256, 64, 64),
       new(448, 448, 64, 64)
-    };
+    ];
     PairedLevelName = pairedLevelName;
     this.levelManager = levelManager;
   }

@@ -27,10 +27,12 @@ public class LeftAndRightAnimatedSprite : ISprite {
     timer = 0;
     currentFrame = 0;
 
-    sourceRectangles = new List<Rectangle>();
-    sourceRectangles.Add(new Rectangle(65, 0, 25, 25));
-    sourceRectangles.Add(new Rectangle(90, 0, 17, 25));
-    sourceRectangles.Add(new Rectangle(108, 0, 22, 25));
+    sourceRectangles =
+    [
+      new Rectangle(65, 0, 25, 25),
+      new Rectangle(90, 0, 17, 25),
+      new Rectangle(108, 0, 22, 25),
+    ];
   }
 
   public void Update(GameTime gameTime) {

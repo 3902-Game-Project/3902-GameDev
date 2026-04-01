@@ -17,10 +17,10 @@ public class FireBlock : BaseBlock {
     texture = FireTexture;
     currentFrame = 0;
     State = BlockState.lit;
-    sourceRects = new List<Rectangle> {
+    sourceRects = [
       new(384, 64, 64, 64),
       new(448, 64, 64, 64)
-    };
+    ];
   }
 
   public override void Update(GameTime gameTime) {

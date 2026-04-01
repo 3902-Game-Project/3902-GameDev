@@ -21,9 +21,9 @@ public class BatDeathState : IBatState {
 
     this.bat.Velocity = Vector2.Zero;
 
-    this.bat.CurrentSourceRectangles = new List<Rectangle> {
+    this.bat.CurrentSourceRectangles = [
       new(3, 20, 25, 11)
-    };
+    ];
     this.bat.CurrentFrame = 0;
   }
 

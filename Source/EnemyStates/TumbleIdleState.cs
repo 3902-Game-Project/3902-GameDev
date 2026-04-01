@@ -21,10 +21,10 @@ public class TumbleIdleState : ITumbleState {
 
     this.tumbleweed.Velocity = Vector2.Zero;
 
-    this.tumbleweed.CurrentSourceRectangles = new List<Rectangle> {
+    this.tumbleweed.CurrentSourceRectangles = [
       new(159, 217, 121, 110)
       //new(383, 227, 137, 106) death frames
-    };
+    ];
     this.tumbleweed.CurrentFrame = 0;
 
     idleTimer = 0;

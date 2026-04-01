@@ -10,7 +10,7 @@ public class ProjectileManager {
   public List<IProjectile> Projectiles => projectiles;
 
   public ProjectileManager() {
-    projectiles = new List<IProjectile>();
+    projectiles = [];
   }
 
   public void AddProjectile(IProjectile projectile) {

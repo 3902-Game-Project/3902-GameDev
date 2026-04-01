@@ -9,11 +9,11 @@ namespace GameProject.Projectiles;
 public class BombProjectile : IProjectile {
   private Texture2D texture;
   private Vector2 position;
-  private List<Rectangle> sourceRectangles = new() {
+  private List<Rectangle> sourceRectangles = [
         new Rectangle(16, 0, 5, 16),
         new Rectangle(22, 0, 5, 16),
 
-    };
+    ];
   private Rectangle currentSourceRect;
   private Animation bombAnimation;
   private Vector2 origin;
