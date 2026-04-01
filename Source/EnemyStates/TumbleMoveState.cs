@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using GameProject.Enemies;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
@@ -7,24 +6,24 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class TumbleMoveState : ITumbleState {
-  private TumbleSprite tumbleweed;
-  private Random random;
+  private readonly TumbleSprite tumbleweed;
+  private readonly Random random;
   private double wanderTimer;
-  private double wanderDuration;
+  private readonly double wanderDuration;
 
   private double animationTimer;
   private int currentFrameIndex;
 
   public TumbleMoveState(TumbleSprite tumbleweed) {
     this.tumbleweed = tumbleweed;
-    this.random = new Random();
+    random = new Random();
 
-    this.tumbleweed.CurrentSourceRectangles = new List<Rectangle> {
+    this.tumbleweed.CurrentSourceRectangles = [
       new(36, 41, 108, 106),
       new(202, 42, 109, 105),
       new(366, 42, 109, 105),
       new(533, 41, 107, 106)
-    };
+    ];
     this.tumbleweed.CurrentFrame = 0;
 
     ChangeDirection();

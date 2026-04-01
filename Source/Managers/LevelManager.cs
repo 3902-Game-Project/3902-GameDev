@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Content;
 namespace GameProject.Managers;
 
 public class LevelManager(Game1 game) : ILevelManager {
-  private static string[] LEVEL_NAMES = [
+  private static readonly string[] LEVEL_NAMES = [
     "00_everything",
     "00b_confinement",
     "00c_non_confinement",
@@ -20,7 +20,7 @@ public class LevelManager(Game1 game) : ILevelManager {
   ];
   private static readonly string STARTING_LEVEL = LEVEL_NAMES[0];
 
-  private readonly Dictionary<string, ILevel> levels = new();
+  private readonly Dictionary<string, ILevel> levels = [];
   private string currentLevelName = STARTING_LEVEL;
   private string newLevelName = STARTING_LEVEL;
 

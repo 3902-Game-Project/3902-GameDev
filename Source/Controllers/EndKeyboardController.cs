@@ -12,7 +12,7 @@ public class EndKeyboardController(Game1 game) : AKeyboardController {
     {Keys.Q, new QuitCommand(game)},
   };
 
-  protected override Dictionary<Keys, ICommand> DownMappings { get; } = new() { };
+  protected override Dictionary<Keys, ICommand> DownMappings { get; } = [];
 
-  protected override Dictionary<Keys, ICommand> ReleasedMappings { get; } = new() { };
+  protected override Dictionary<Keys, ICommand> ReleasedMappings { get; } = [];
 }

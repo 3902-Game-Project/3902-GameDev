@@ -2,8 +2,8 @@
 
 namespace GameProject.Commands;
 
-internal class PreviousLevelCommand(Game1 game) : ICommand {
+internal class PreviousLevelCommand(ILevelManager levelManager) : ICommand {
   public void Execute() {
-    game.StateGame.LevelManager.PreviousLevel();
+    levelManager.PreviousLevel();
   }
 }

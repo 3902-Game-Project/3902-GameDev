@@ -6,11 +6,11 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Managers;
 
 public class ProjectileManager {
-  private List<IProjectile> projectiles;
+  private readonly List<IProjectile> projectiles;
   public List<IProjectile> Projectiles => projectiles;
 
   public ProjectileManager() {
-    projectiles = new List<IProjectile>();
+    projectiles = [];
   }
 
   public void AddProjectile(IProjectile projectile) {

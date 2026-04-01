@@ -1,18 +1,17 @@
-﻿using System.Collections.Generic;
-using GameProject.Enemies;
+﻿using GameProject.Enemies;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
 public class RifleDeathState : IRiflemanState {
-  private RiflemanSprite rifleman;
+  private readonly RiflemanSprite rifleman;
 
   private double animationTimer;
-  private double timePerFrame = 0.15;
+  private readonly double timePerFrame = 0.15;
 
   private double deadHoldTimer;
-  private double timeToHoldLastFrame = 2.0;
+  private readonly double timeToHoldLastFrame = 2.0;
 
   private bool isAnimationFinished = false;
 
@@ -22,7 +21,7 @@ public class RifleDeathState : IRiflemanState {
 
     this.rifleman.Velocity = Vector2.Zero;
 
-    this.rifleman.CurrentSourceRectangles = new List<Rectangle> {
+    this.rifleman.CurrentSourceRectangles = [
         new(11,9,21,28),
         new(73,11,23,26),
         new(135,16,33,21),
@@ -30,7 +29,7 @@ public class RifleDeathState : IRiflemanState {
         new(260,22,40,15),
         new(323,23,39,14),
         new(385,25,40,12),
-    };
+    ];
     this.rifleman.CurrentFrame = 0;
   }
 

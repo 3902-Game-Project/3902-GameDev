@@ -8,26 +8,32 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.GameStates;
 
-public class StateGameType(Game1 game) : IGameState {
+public class StateGameType : IGameState {
+  private readonly Game1 game;
+
   private IController keyboardController;
   private IController mouseController;
   private IController gamePadController;
 
-  private CollisionManager collisionManager;
+  private readonly CollisionManager collisionManager = new();
   private Texture2D healthBarTexture;
-  private Vector2 healthBarPosition = new Vector2(0, 0);
+  private Vector2 healthBarPosition = new(0, 0);
 
-  public Player Player { get; private set; } = new Player(game);
+  public Player Player { get; private set; }
 
   public ILevelManager LevelManager { get; private set; }
+
+  public StateGameType(Game1 game) {
+    this.game = game;
+    LevelManager = new LevelManager(game);
+    Player = new Player(game.Content, collisionManager, LevelManager);
+  }
 
   public void Initialize() {
     keyboardController = new GameKeyboardController(game);
     mouseController = new GameMouseController(game);
     gamePadController = new GameGamePadController(game);
-    LevelManager = new LevelManager(game);
     LevelManager.Initialize();
-    collisionManager = new CollisionManager();
     collisionManager.AddCollider(Player);
   }
 
@@ -103,9 +109,9 @@ public class StateGameType(Game1 game) : IGameState {
         if (enemy is BaseEnemy baseEnemy && baseEnemy.Health > 0) {
           float enemyHealthPercent = MathHelper.Clamp((float) baseEnemy.Health / baseEnemy.MaxHealth, 0f, 1f);
           float scaleWidth = healthBarTexture.Width * 0.15f;
-          Vector2 enemyHealthPositions = new Vector2(
+          Vector2 enemyHealthPositions = new(
             baseEnemy.Position.X - (scaleWidth / 2f),
-            baseEnemy.Position.Y - baseEnemy.Collider.height);
+            baseEnemy.Position.Y - baseEnemy.Collider.Height);
           game.SpriteBatch.Draw(texture: healthBarTexture,
             position: enemyHealthPositions,
             sourceRectangle: null,
@@ -117,7 +123,7 @@ public class StateGameType(Game1 game) : IGameState {
             layerDepth: 0f
             );
           int enemyHealthVisible = (int) (healthBarTexture.Width * enemyHealthPercent);
-          Rectangle enemyHpSource = new Rectangle(0, 0, enemyHealthVisible, healthBarTexture.Height);
+          Rectangle enemyHpSource = new(0, 0, enemyHealthVisible, healthBarTexture.Height);
 
           game.SpriteBatch.Draw(
             texture: healthBarTexture,
@@ -135,7 +141,7 @@ public class StateGameType(Game1 game) : IGameState {
     }
 
     int visibleWidth = (int) (healthBarTexture.Width * healthPercent);
-    Rectangle sourceRectangle = new Rectangle(0, 0, visibleWidth, healthBarTexture.Height);
+    Rectangle sourceRectangle = new(0, 0, visibleWidth, healthBarTexture.Height);
     game.SpriteBatch.Draw(
       texture: healthBarTexture,
       position: healthBarPosition,

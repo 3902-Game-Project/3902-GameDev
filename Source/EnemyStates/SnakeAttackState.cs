@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using GameProject.Enemies;
+﻿using GameProject.Enemies;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
 public class SnakeAttackState : ISnakeState {
-  private SnakeSprite snake;
+  private readonly SnakeSprite snake;
   private double timer;
   private double animationTimer;
 
@@ -17,7 +16,7 @@ public class SnakeAttackState : ISnakeState {
     // Lunge in the direction we are currently looking
     this.snake.Velocity = new Vector2(snake.FacingDirection * lungeSpeed, 0);
 
-    this.snake.CurrentSourceRectangles = new List<Rectangle> {
+    this.snake.CurrentSourceRectangles = [
       new(10, 115, 12, 14),
       new(42, 116, 12, 13),
       new(75, 117, 12, 12),
@@ -28,7 +27,7 @@ public class SnakeAttackState : ISnakeState {
       new(229, 121, 17, 8),
       new(263, 119, 15, 10),
       new(297, 117, 14, 12)
-    };
+    ];
     this.snake.CurrentFrame = 0;
   }
 

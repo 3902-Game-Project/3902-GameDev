@@ -1,18 +1,17 @@
-﻿using System.Collections.Generic;
-using GameProject.Enemies;
+﻿using GameProject.Enemies;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
 public class SnakeDeathState : ISnakeState {
-  private SnakeSprite snake;
+  private readonly SnakeSprite snake;
 
   private double animationTimer;
-  private double timePerFrame = 0.15;
+  private readonly double timePerFrame = 0.15;
 
   private double deadHoldTimer;
-  private double timeToHoldLastFrame = 1.5;
+  private readonly double timeToHoldLastFrame = 1.5;
 
   private bool isAnimationFinished = false;
 
@@ -20,7 +19,7 @@ public class SnakeDeathState : ISnakeState {
     this.snake = snake;
     this.snake.Velocity = Vector2.Zero;
 
-    this.snake.CurrentSourceRectangles = new List<Rectangle> {
+    this.snake.CurrentSourceRectangles = [
       new(76, 143, 8, 17),
       new(108, 143, 8, 17),
       new(140, 143, 8, 17),
@@ -31,7 +30,7 @@ public class SnakeDeathState : ISnakeState {
       new(235, 151, 12, 9),
       new(267, 153, 13, 7),
       new(299, 154, 15, 6)
-    };
+    ];
     this.snake.CurrentFrame = 0;
   }
 

@@ -1,8 +1,9 @@
-using GameProject;
 using GameProject.Collisions;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
+namespace GameProject.WorldPickups;
 
 public abstract class BaseWorldPickup : IWorldPickup {
 
@@ -19,8 +20,7 @@ public abstract class BaseWorldPickup : IWorldPickup {
   public abstract void Draw(SpriteBatch spriteBatch);
   public abstract void Update(GameTime gameTime);
 
-  public virtual void OnPickup(Player player) {
-  }
+  public virtual void OnPickup(Player player) { }
 
   public virtual void OnCollision(CollisionInfo info) {
     if (info.Collider.Layer == Layer.Player && info.Collider as Player != null) {

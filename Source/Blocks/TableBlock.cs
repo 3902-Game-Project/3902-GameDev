@@ -3,18 +3,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class TableBlock : BaseBlock {
-  private Texture2D texture;
-  private Rectangle sourceRect;
-
-  public TableBlock(Texture2D TableTexture, Vector2 xyPos) : base(xyPos) {
-    texture = TableTexture;
-    sourceRect = new Rectangle(384, 192, 64, 64);
-  }
+public class TableBlock(Texture2D TableTexture, Vector2 xyPos) : BaseBlock(xyPos) {
+  private Rectangle sourceRect = new(384, 192, 64, 64);
 
   public override void Update(GameTime gameTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(texture, Position, sourceRect, Color.White, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
+    spriteBatch.Draw(TableTexture, Position, sourceRect, Color.White, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 }

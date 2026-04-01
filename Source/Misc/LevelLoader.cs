@@ -67,22 +67,11 @@ internal partial class LevelLoader {
       case "2": {
           /* small door */
           var stateString = entrySplit[1];
-
-          BlockState state;
-
-          switch (stateString) {
-            case "0":
-              state = BlockState.locked;
-              break;
-
-            case "1":
-              state = BlockState.open;
-              break;
-
-            default:
-              throw new FormatException($"unrecognized door state '{stateString}");
-          }
-
+          var state = stateString switch {
+            "0" => BlockState.locked,
+            "1" => BlockState.open,
+            _ => throw new FormatException($"unrecognized door state '{stateString}"),
+          };
           var pairedLevelName = entrySplit[2];
 
           if (!levelNames.Contains(pairedLevelName)) {
@@ -168,7 +157,7 @@ internal partial class LevelLoader {
 
       case "9":
         /* shotgunner */
-        enemies.Add(EnemySpriteFactory.Instance.CreateShotgunnerSprite(xPos, yPos, game));
+        enemies.Add(EnemySpriteFactory.Instance.CreateShotgunnerSprite(xPos, yPos, game.StateGame.LevelManager));
         break;
 
       case "10":
@@ -178,7 +167,7 @@ internal partial class LevelLoader {
 
       case "11":
         /* rifleman */
-        enemies.Add(EnemySpriteFactory.Instance.CreateRiflemanSprite(xPos, yPos, game));
+        enemies.Add(EnemySpriteFactory.Instance.CreateRiflemanSprite(xPos, yPos, game.StateGame.LevelManager));
         break;
 
       case "12":
@@ -224,26 +213,12 @@ internal partial class LevelLoader {
       case "20": {
           /* vault door */
           var stateString = entrySplit[1];
-
-          BlockState state;
-
-          switch (stateString) {
-            case "0":
-              state = BlockState.locked;
-              break;
-
-            case "1":
-              state = BlockState.opening;
-              break;
-
-            case "2":
-              state = BlockState.open;
-              break;
-
-            default:
-              throw new FormatException($"unrecognized door state '{stateString}");
-          }
-
+          var state = stateString switch {
+            "0" => BlockState.locked,
+            "1" => BlockState.opening,
+            "2" => BlockState.open,
+            _ => throw new FormatException($"unrecognized door state '{stateString}"),
+          };
           var pairedLevelName = entrySplit[2];
 
           if (!levelNames.Contains(pairedLevelName)) {
@@ -304,22 +279,11 @@ internal partial class LevelLoader {
       case "31": {
           /* slatted door */
           var stateString = entrySplit[1];
-
-          BlockState state;
-
-          switch (stateString) {
-            case "0":
-              state = BlockState.locked;
-              break;
-
-            case "1":
-              state = BlockState.open;
-              break;
-
-            default:
-              throw new FormatException($"unrecognized door state '{stateString}");
-          }
-
+          var state = stateString switch {
+            "0" => BlockState.locked,
+            "1" => BlockState.open,
+            _ => throw new FormatException($"unrecognized door state '{stateString}"),
+          };
           var pairedLevelName = entrySplit[2];
 
           if (!levelNames.Contains(pairedLevelName)) {
@@ -350,10 +314,10 @@ internal partial class LevelLoader {
   }
 
   public static Level FromString(Game1 game, ISet<string> levelNames, string levelDataString) {
-    List<IBlock> nonCollidableBlocks = new();
-    List<IBlock> collidableBlocks = new();
-    List<IEnemy> enemies = new();
-    List<IWorldPickup> pickups = new();
+    List<IBlock> nonCollidableBlocks = [];
+    List<IBlock> collidableBlocks = [];
+    List<IEnemy> enemies = [];
+    List<IWorldPickup> pickups = [];
     Vector2? playerPositionNullable = null;
 
     var lines = NewlineSplitRegex.Split(levelDataString.Trim());

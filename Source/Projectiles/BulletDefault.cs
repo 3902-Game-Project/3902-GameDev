@@ -6,16 +6,16 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Projectiles;
 
 public class BulletDefault : IProjectile, ICollidable {
-  private Texture2D texture;
+  private readonly Texture2D texture;
   private Rectangle sourceRectangle = new(8, 0, 7, 7);
   private Vector2 origin;
-  private float scale = 2f;
+  private readonly float scale = 2f;
   private Vector2 direction;
-  private float velocity;
-  private float bulletLifetime;
+  private readonly float velocity;
+  private readonly float bulletLifetime;
   private float lifetimeCounter = 0f;
-  private int damage = 50; //damage from bullet, can be changed
-  private int enemyDamage = 20;
+  private readonly int damage = 50; //damage from bullet, can be changed
+  private readonly int enemyDamage = 20;
   public bool IsExpired { get; private set; }
   public bool IsPlayerShot { get; set; } = true;
   public Vector2 Position { get; private set; }
@@ -26,11 +26,11 @@ public class BulletDefault : IProjectile, ICollidable {
   public BulletDefault(Texture2D texture, Vector2 startPosition,
     Vector2 direction, float velocity, float bulletLifetime) {
     this.texture = texture;
-    this.Position = startPosition;
+    Position = startPosition;
     this.direction = direction;
     this.velocity = velocity;
     this.bulletLifetime = bulletLifetime;
-    this.Collider = new BoxCollider(sourceRectangle.Width * scale, sourceRectangle.Height * scale, Position);
+    Collider = new BoxCollider(sourceRectangle.Width * scale, sourceRectangle.Height * scale, Position);
   }
   public void Expire() {
     IsExpired = true;
@@ -66,7 +66,7 @@ public class BulletDefault : IProjectile, ICollidable {
   public void Update(GameTime gameTime) {
     // Logic for updating the bullet's position and state
     Position += direction * velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
-    Collider.position = Position;
+    Collider.Position = Position;
     lifetimeCounter += (float) gameTime.ElapsedGameTime.TotalSeconds;
     if (lifetimeCounter >= bulletLifetime) {
       // Logic for destroying the bullet

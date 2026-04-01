@@ -1,24 +1,23 @@
-﻿using System.Collections.Generic;
-using GameProject.Enemies;
+﻿using GameProject.Enemies;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
 public class TumbleDeathState : ITumbleState {
-  private TumbleSprite tumbleweed;
+  private readonly TumbleSprite tumbleweed;
 
   private double deadHoldTimer;
-  private double timeToHoldLastFrame = 1.0;
+  private readonly double timeToHoldLastFrame = 1.0;
 
   public TumbleDeathState(TumbleSprite tumbleweed) {
     this.tumbleweed = tumbleweed;
 
     this.tumbleweed.Velocity = Vector2.Zero;
 
-    this.tumbleweed.CurrentSourceRectangles = new List<Rectangle> {
+    this.tumbleweed.CurrentSourceRectangles = [
       new(383, 227, 137, 106)
-    };
+    ];
     this.tumbleweed.CurrentFrame = 0;
   }
 

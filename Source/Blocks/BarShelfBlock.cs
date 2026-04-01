@@ -3,18 +3,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class BarShelfBlock : BaseBlock {
-  private Texture2D texture;
-  private Rectangle sourceRect;
-
-  public BarShelfBlock(Texture2D BarShelfTexture, Vector2 xyPos) : base(xyPos) {
-    texture = BarShelfTexture;
-    sourceRect = new Rectangle(256, 256, 64, 64);
-  }
+public class BarShelfBlock(Texture2D BarShelfTexture, Vector2 xyPos) : BaseBlock(xyPos) {
+  private Rectangle sourceRect = new(256, 256, 64, 64);
 
   public override void Update(GameTime gameTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(texture, Position, sourceRect, Color.White, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
+    spriteBatch.Draw(BarShelfTexture, Position, sourceRect, Color.White, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 }

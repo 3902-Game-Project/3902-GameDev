@@ -7,16 +7,15 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Projectiles;
 
 public class BombProjectile : IProjectile {
-  private Texture2D texture;
+  private readonly Texture2D texture;
   private Vector2 position;
-  private List<Rectangle> sourceRectangles = new List<Rectangle>
-  {
+  private readonly List<Rectangle> sourceRectangles = [
         new Rectangle(16, 0, 5, 16),
         new Rectangle(22, 0, 5, 16),
 
-    };
+    ];
   private Rectangle currentSourceRect;
-  private Animation bombAnimation;
+  private readonly Animation bombAnimation;
   private Vector2 origin;
   public bool IsExpired { get; private set; } = false;
 
@@ -33,8 +32,8 @@ public class BombProjectile : IProjectile {
   }
 
   private Vector2 direction;
-  private float velocity;
-  private double lifetime;
+  private readonly float velocity;
+  private readonly double lifetime;
   private double lifetimeCounter;
 
 

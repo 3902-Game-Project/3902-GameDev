@@ -10,15 +10,15 @@ public class ShotgunItem : IItem {
   private Vector2 position;
   private Rectangle sourceRectangle = new(0, 10, 27, 9);
   private Vector2 origin;
-  private Texture2D texture;
-  private float scale = 1f;
+  private readonly Texture2D texture;
+  private readonly float scale = 1f;
   public Vector2 Position { get; set; }
 
-  private Game1 game;
-  private IProjectilePattern projectilePattern = new SpreadPattern();
+  private readonly Game1 game;
+  private readonly IProjectilePattern projectilePattern = new SpreadPattern();
   private Vector2 bulletSpawnOffset;
-  private GunStats stats;
-  private IFireMode fireMode;
+  private readonly GunStats stats;
+  private readonly IFireMode fireMode;
   public ItemCategory Category { get; } = ItemCategory.Primary;
 
   public ShotgunItem(Texture2D texture, Vector2 position, Game1 game, GunStats stats) {
@@ -27,7 +27,7 @@ public class ShotgunItem : IItem {
     this.position = position;
     this.stats = stats;
     bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 * (sourceRectangle.Height / 2 - 3)) * scale; // Adjust spawn offset based on the shotgun's size and scale
-    this.fireMode = new SemiAutoFire(stats);
+    fireMode = new SemiAutoFire(stats);
   }
 
   public void Draw(SpriteBatch spriteBatch) {
@@ -55,6 +55,8 @@ public class ShotgunItem : IItem {
     fireMode.Update(gameTime);
   }
 
+  public void OnPickup(Player player) { }
+
   public void Use(UseType useType) {
     Vector2 bulletDirection;
     if (Direction == FacingDirection.Left) {
@@ -68,7 +70,7 @@ public class ShotgunItem : IItem {
     } else {
       offsetX = bulletSpawnOffset.X;
     }
-    Vector2 actualOffset = new Vector2(offsetX, bulletSpawnOffset.Y);
+    Vector2 actualOffset = new(offsetX, bulletSpawnOffset.Y);
     Vector2 bulletSpawnPosition = Position + actualOffset;
     if (fireMode.CanFire(useType)) {
       projectilePattern.SpawnProjectiles(game.StateGame.LevelManager.CurrentLevel.ProjectileManager, bulletSpawnPosition, bulletDirection, stats);

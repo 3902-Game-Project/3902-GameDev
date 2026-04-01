@@ -6,36 +6,18 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class SmallDoorBlock : BaseBlock {
-  private Texture2D texture;
-  private int currentFrame;
-  private List<Rectangle> sourceRects;
-  private ILevelManager levelManager;
-  public float Rotation { get; private set; }
-  public string PairedLevelName { get; private set; }
-  public BlockState State { get; private set; }
-
-  public SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, BlockState state, string pairedLevelName, ILevelManager levelManager) : base(xyPos) {
-    texture = SmallDoorTexture;
-    Rotation = 0.0f;
-    State = state;
-    switch (state) {
-      case BlockState.locked:
-      default:
-        currentFrame = 0;
-        break;
-
-      case BlockState.open:
-        currentFrame = 1;
-        break;
-    }
-    sourceRects = new List<Rectangle> {
-      new Rectangle(448, 256, 64, 64),
-      new Rectangle(448, 448, 64, 64)
-    };
-    PairedLevelName = pairedLevelName;
-    this.levelManager = levelManager;
-  }
+public class SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, BlockState state, string pairedLevelName, ILevelManager levelManager) : BaseBlock(xyPos) {
+  private readonly int currentFrame = state switch {
+    BlockState.open => 1,
+    _ => 0,
+  };
+  private readonly List<Rectangle> sourceRects = [
+      new(448, 256, 64, 64),
+      new(448, 448, 64, 64)
+    ];
+  public float Rotation { get; private set; } = 0.0f;
+  public string PairedLevelName { get; private set; } = pairedLevelName;
+  public BlockState State { get; private set; } = state;
 
   public void Rotate() {
     if (Position.X == 0 && Position.Y == 0) {
@@ -52,7 +34,7 @@ public class SmallDoorBlock : BaseBlock {
   }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(texture, Position, sourceRects[currentFrame], Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
+    spriteBatch.Draw(SmallDoorTexture, Position, sourceRects[currentFrame], Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 
   public override void OnCollision(CollisionInfo info) {

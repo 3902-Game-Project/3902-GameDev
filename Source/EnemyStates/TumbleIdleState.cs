@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using GameProject.Enemies;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
@@ -7,24 +6,24 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class TumbleIdleState : ITumbleState {
-  private TumbleSprite tumbleweed;
-  private Random random;
+  private readonly TumbleSprite tumbleweed;
+  private readonly Random random;
   private double idleTimer;
-  private double idleDuration;
+  private readonly double idleDuration;
 
   private double animationTimer;
   private int currentFrameIndex;
 
   public TumbleIdleState(TumbleSprite tumbleweed) {
     this.tumbleweed = tumbleweed;
-    this.random = new Random();
+    random = new Random();
 
     this.tumbleweed.Velocity = Vector2.Zero;
 
-    this.tumbleweed.CurrentSourceRectangles = new List<Rectangle> {
+    this.tumbleweed.CurrentSourceRectangles = [
       new(159, 217, 121, 110)
       //new(383, 227, 137, 106) death frames
-    };
+    ];
     this.tumbleweed.CurrentFrame = 0;
 
     idleTimer = 0;

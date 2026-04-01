@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using GameProject.Enemies;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
@@ -7,22 +6,22 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class BatMoveState : IBatState {
-  private BatSprite bat;
-  private Random random;
+  private readonly BatSprite bat;
+  private readonly Random random;
   private double wanderTimer;
-  private double wanderDuration;
+  private readonly double wanderDuration;
 
   private double animationTimer;
   private int currentFrameIndex;
 
   public BatMoveState(BatSprite bat) {
     this.bat = bat;
-    this.random = new Random();
-    this.bat.CurrentSourceRectangles = new List<Rectangle> {
+    random = new Random();
+    this.bat.CurrentSourceRectangles = [
       new(38, 97, 17, 21),
       new(70, 102, 17, 15),
       new(102, 102, 15, 21),
-    };
+    ];
     this.bat.CurrentFrame = 0;
 
     ChangeDirection();

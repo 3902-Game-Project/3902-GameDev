@@ -9,18 +9,18 @@ internal class GameGamePadController(Game1 game) : IController {
   private GamePadState prevGamePadState = new();
   private GamePadState gamePadState = new();
 
-  private ICommand quitCommand = new QuitCommand(game);
-  private ICommand returnToMainMenuCommand = new ReturnToMenuAndResetCommand(game);
-  private ICommand useItemPressedCommand = new PlayerUseItemCommand(game.StateGame.Player, UseType.Pressed);
-  private ICommand useItemHeldCommand = new PlayerUseItemCommand(game.StateGame.Player, UseType.Held);
-  private ICommand useItemReleasedCommand = new PlayerUseItemCommand(game.StateGame.Player, UseType.Released);
-  private ICommand dieCommand = new PlayerDieCommand(game.StateGame.Player);
-  private ICommand playerMoveUpCommand = new PlayerMoveUpCommand(game.StateGame.Player);
-  private ICommand playerMoveDownCommand = new PlayerMoveDownCommand(game.StateGame.Player);
-  private ICommand playerMoveLeftCommand = new PlayerMoveLeftCommand(game.StateGame.Player);
-  private ICommand playerMoveRightCommand = new PlayerMoveRightCommand(game.StateGame.Player);
-  private ICommand prevLevelCommand = new PreviousLevelCommand(game);
-  private ICommand nextLevelCommand = new NextLevelCommand(game);
+  private readonly ICommand quitCommand = new QuitCommand(game);
+  private readonly ICommand returnToMainMenuCommand = new ReturnToMenuAndResetCommand(game);
+  private readonly ICommand useItemPressedCommand = new PlayerUseItemCommand(game.StateGame.Player, UseType.Pressed);
+  private readonly ICommand useItemHeldCommand = new PlayerUseItemCommand(game.StateGame.Player, UseType.Held);
+  private readonly ICommand useItemReleasedCommand = new PlayerUseItemCommand(game.StateGame.Player, UseType.Released);
+  private readonly ICommand dieCommand = new PlayerDieCommand(game.StateGame.Player);
+  private readonly ICommand playerMoveUpCommand = new PlayerMoveUpCommand(game.StateGame.Player);
+  private readonly ICommand playerMoveDownCommand = new PlayerMoveDownCommand(game.StateGame.Player);
+  private readonly ICommand playerMoveLeftCommand = new PlayerMoveLeftCommand(game.StateGame.Player);
+  private readonly ICommand playerMoveRightCommand = new PlayerMoveRightCommand(game.StateGame.Player);
+  private readonly ICommand prevLevelCommand = new PreviousLevelCommand(game.StateGame.LevelManager);
+  private readonly ICommand nextLevelCommand = new NextLevelCommand(game.StateGame.LevelManager);
 
   public void Update(GameTime gameTime) {
     prevGamePadState = gamePadState;

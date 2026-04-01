@@ -10,8 +10,8 @@ public class UpAndDownSprite(Texture2D texture, Vector2 startPosition) : ISprite
   private Rectangle sourceRectangle = new(130, 0, 26, 31);
 
   private int direction = -1;
-  private int speed = 2;
-  private int jumpHeight = 50;
+  private readonly int speed = 2;
+  private readonly int jumpHeight = 50;
 
   public void Update(GameTime gameTime) {
     position.Y += speed * direction;

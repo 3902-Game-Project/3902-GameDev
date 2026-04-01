@@ -9,8 +9,8 @@ internal class GameMouseController(Game1 game) : IController {
   private MouseState prevMouseState = new();
   private MouseState mouseState = new();
 
-  private ICommand prevLevelCommand = new PreviousLevelCommand(game);
-  private ICommand nextLevelCommand = new NextLevelCommand(game);
+  private readonly ICommand prevLevelCommand = new PreviousLevelCommand(game.StateGame.LevelManager);
+  private readonly ICommand nextLevelCommand = new NextLevelCommand(game.StateGame.LevelManager);
 
   public void Update(GameTime gameTime) {
     prevMouseState = mouseState;

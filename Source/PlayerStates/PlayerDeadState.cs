@@ -19,7 +19,7 @@ public class PlayerDeadState(Player player) : IPlayerState {
   }
 
   public void Draw(SpriteBatch spriteBatch) {
-    Vector2 origin = new Vector2(deadSprite.Width / 2, deadSprite.Height / 2);
+    Vector2 origin = new(deadSprite.Width / 2, deadSprite.Height / 2);
 
     spriteBatch.Draw(
       player.Texture,

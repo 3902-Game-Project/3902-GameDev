@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using GameProject.Enemies;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
@@ -7,18 +6,18 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class SnakeWanderState : ISnakeState {
-  private SnakeSprite snake;
-  private Random random;
+  private readonly SnakeSprite snake;
+  private readonly Random random;
   private double wanderTimer;
-  private double wanderDuration;
+  private readonly double wanderDuration;
 
   private double animationTimer;
   private int currentFrameIndex;
 
   public SnakeWanderState(SnakeSprite snake) {
     this.snake = snake;
-    this.random = new Random();
-    this.snake.CurrentSourceRectangles = new List<Rectangle> {
+    random = new Random();
+    this.snake.CurrentSourceRectangles = [
       new(10, 84, 13, 13),
       new(43, 84, 13, 13),
       new(75, 84, 13, 13),
@@ -29,7 +28,7 @@ public class SnakeWanderState : ISnakeState {
       new(232, 85, 15, 12),
       new(266, 85, 12, 12),
       new(298, 85, 12, 12)
-    };
+    ];
     this.snake.CurrentFrame = 0;
 
     ChangeDirection();

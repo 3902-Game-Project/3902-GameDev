@@ -8,8 +8,8 @@ namespace GameProject.Enemies;
 public class ShotgunnerSprite : BaseEnemy {
   private IShotgunnerState state;
 
-  public ShotgunnerSprite(Texture2D texture, Vector2 position, Game1 game) : base(texture, position, 48f, 96f) {
-    state = new ShotgunnerWanderState(this, game);
+  public ShotgunnerSprite(Texture2D texture, Vector2 position, ILevelManager levelManager) : base(texture, position, 48f, 96f) {
+    state = new ShotgunnerWanderState(this, levelManager);
   }
 
   public void ChangeState(IShotgunnerState newState) {

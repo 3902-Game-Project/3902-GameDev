@@ -7,16 +7,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-public abstract class BaseEnemy : IEnemy {
-  public Texture2D Texture { get; protected set; }
-  public Vector2 Position { get; set; }
+public abstract class BaseEnemy(Texture2D texture, Vector2 position, float colliderWidth = 64f, float colliderHeight = 64f) : IEnemy {
+  public Texture2D Texture { get; protected set; } = texture;
+  public Vector2 Position { get; set; } = position;
   public Vector2 Velocity { get; set; }
   public int FacingDirection { get; set; } = 1;
 
-  public List<Rectangle> CurrentSourceRectangles;
-  public int CurrentFrame;
+  public List<Rectangle> CurrentSourceRectangles { get; set; }
+  public int CurrentFrame { get; set; }
   public IShape Shape => Collider;
-  public BoxCollider Collider { get; private set; }
+  public BoxCollider Collider { get; private set; } = new BoxCollider(colliderWidth, colliderHeight, position);
   public Layer Layer { get; } = Layer.Enemies;
   public Layer Mask { get; } = Layer.Player;
   public int Health { get; set; } = 100;
@@ -26,20 +26,14 @@ public abstract class BaseEnemy : IEnemy {
 
   public Rectangle BoundingBox => throw new System.NotImplementedException();
 
-  protected BaseEnemy(Texture2D texture, Vector2 position, float colliderWidth = 64f, float colliderHeight = 64f) {
-    Texture = texture;
-    Position = position;
-    Collider = new BoxCollider(colliderWidth, colliderHeight, position);
-  }
-
   protected void UpdateCollider() {
     if (Collider != null) {
-      Collider.position = this.Position + new Vector2(0, -Collider.height / 2f);
+      Collider.Position = Position + new Vector2(0, -Collider.Height / 2f);
     }
   }
 
   public virtual void OnCollision(CollisionInfo info) {
-    if (info.Collider is IBlock block) {
+    if (info.Collider is IBlock) {
       if (info.Side == CollisionSide.Left || info.Side == CollisionSide.Right) {
         Velocity = new Vector2(0, Velocity.Y);
         FacingDirection *= -1;

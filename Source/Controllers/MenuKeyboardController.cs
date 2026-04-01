@@ -12,7 +12,7 @@ public class MenuKeyboardController(Game1 game) : AKeyboardController {
     {Keys.Enter, new StartGameCommand(game)},
   };
 
-  protected override Dictionary<Keys, ICommand> DownMappings { get; } = new() { };
+  protected override Dictionary<Keys, ICommand> DownMappings { get; } = [];
 
-  protected override Dictionary<Keys, ICommand> ReleasedMappings { get; } = new() { };
+  protected override Dictionary<Keys, ICommand> ReleasedMappings { get; } = [];
 }

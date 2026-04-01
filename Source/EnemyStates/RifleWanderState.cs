@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using GameProject.Enemies;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
@@ -7,26 +6,26 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class RifleWanderState : IRiflemanState {
-  private RiflemanSprite rifle;
-  private Game1 game;
-  private Random random;
+  private readonly RiflemanSprite rifle;
+  private readonly ILevelManager levelManager;
+  private readonly Random random;
   private double wanderTimer;
-  private double wanderDuration;
+  private readonly double wanderDuration;
 
   private double animationTimer;
   private int currentFrameIndex;
 
-  public RifleWanderState(RiflemanSprite rifle, Game1 game) {
+  public RifleWanderState(RiflemanSprite rifle, ILevelManager levelManager) {
     this.rifle = rifle;
-    this.game = game;
-    this.random = new Random();
+    this.levelManager = levelManager;
+    random = new Random();
 
-    this.rifle.CurrentSourceRectangles = new List<Rectangle> {
+    this.rifle.CurrentSourceRectangles = [
       new(71, 130, 23, 28),
       new(134, 130, 23, 28),
       new(196, 130, 23, 28),
       new(259, 130, 23, 28),
-    };
+    ];
     this.rifle.CurrentFrame = 0;
 
     ChangeDirection();
@@ -61,7 +60,7 @@ public class RifleWanderState : IRiflemanState {
 
     wanderTimer += dt;
     if (wanderTimer >= wanderDuration) {
-      rifle.ChangeState(new RifleIdleState(rifle, game));
+      rifle.ChangeState(new RifleIdleState(rifle, levelManager));
     }
   }
 

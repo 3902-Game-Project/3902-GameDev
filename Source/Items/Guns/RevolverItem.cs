@@ -9,14 +9,14 @@ public class RevolverItem : IItem {
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   private Rectangle sourceRectangle = new(0, 0, 16, 9);
   private Vector2 origin;
-  private Texture2D texture;
-  private float scale = 1f;
+  private readonly Texture2D texture;
+  private readonly float scale = 1f;
   public Vector2 Position { get; set; }
 
-  private Game1 game;
-  private GunStats stats;
-  private IProjectilePattern projectilePattern = new SingleShotPattern();
-  private IFireMode fireMode;
+  private readonly Game1 game;
+  private readonly GunStats stats;
+  private readonly IProjectilePattern projectilePattern = new SingleShotPattern();
+  private readonly IFireMode fireMode;
   private Vector2 bulletSpawnOffset;
   public ItemCategory Category { get; } = ItemCategory.Sidearm;
 
@@ -54,6 +54,8 @@ public class RevolverItem : IItem {
     fireMode.Update(gameTime);
   }
 
+  public void OnPickup(Player player) { }
+
   public void Use(UseType useType) {
     Vector2 bulletDirection;
     if (Direction == FacingDirection.Left) {
@@ -67,7 +69,7 @@ public class RevolverItem : IItem {
     } else {
       offsetX = bulletSpawnOffset.X;
     }
-    Vector2 actualOffset = new Vector2(offsetX, bulletSpawnOffset.Y);
+    Vector2 actualOffset = new(offsetX, bulletSpawnOffset.Y);
     Vector2 bulletSpawnPosition = Position + actualOffset;
     if (fireMode.CanFire(useType)) {
       projectilePattern.SpawnProjectiles(game.StateGame.LevelManager.CurrentLevel.ProjectileManager, bulletSpawnPosition, bulletDirection, stats);

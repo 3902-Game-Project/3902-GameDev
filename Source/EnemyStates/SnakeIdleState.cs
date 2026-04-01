@@ -1,22 +1,21 @@
-﻿using System.Collections.Generic;
-using GameProject.Enemies;
+﻿using GameProject.Enemies;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
 public class SnakeIdleState : ISnakeState {
-  private SnakeSprite snake;
+  private readonly SnakeSprite snake;
   private double timer;
   private double animationTimer;
-  private System.Random random;
+  private readonly System.Random random;
 
   public SnakeIdleState(SnakeSprite snake) {
     this.snake = snake;
-    this.random = new System.Random();
+    random = new System.Random();
 
     this.snake.Velocity = Vector2.Zero;
-    this.snake.CurrentSourceRectangles = new List<Rectangle> {
+    this.snake.CurrentSourceRectangles = [
       new(11, 20, 10, 12),
       new(43, 21, 10, 11),
       new(75, 22, 10, 10),
@@ -27,7 +26,7 @@ public class SnakeIdleState : ISnakeState {
       new(235, 21, 10, 11),
       new(267, 20, 10, 12),
       new(299, 20, 10, 12),
-    };
+    ];
     this.snake.CurrentFrame = 0;
   }
 

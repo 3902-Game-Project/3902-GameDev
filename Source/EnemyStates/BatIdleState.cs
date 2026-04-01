@@ -1,28 +1,27 @@
-﻿using System.Collections.Generic;
-using GameProject.Enemies;
+﻿using GameProject.Enemies;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
 public class BatIdleState : IBatState {
-  private BatSprite bat;
+  private readonly BatSprite bat;
   private double timer;
-  private System.Random random;
+  private readonly System.Random random;
   private double animationTimer;
 
   public BatIdleState(BatSprite bat) {
     this.bat = bat;
-    this.random = new System.Random();
+    random = new System.Random();
 
     this.bat.Velocity = Vector2.Zero;
 
-    this.bat.CurrentSourceRectangles = new List<Rectangle> {
+    this.bat.CurrentSourceRectangles = [
       //new Rectangle(3, 20, 25, 11),
       new(35, 5, 27, 22),
       new(66, 6, 29, 15),
       new(97, 1, 31, 21),
-    };
+    ];
     this.bat.CurrentFrame = 0;
   }
 

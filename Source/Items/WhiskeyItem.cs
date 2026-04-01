@@ -30,6 +30,8 @@ public class WhiskeyItem(Texture2D texture, Vector2 startPosition) : IItem {
 
   public void Update(GameTime gameTime) { }
 
+  public void OnPickup(Player player) { }
+
   public void Use(UseType useType) {
     // Logic for using the whiskey item
   }

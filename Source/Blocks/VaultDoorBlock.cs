@@ -7,12 +7,12 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 public class VaultDoorBlock : BaseBlock {
-  private Texture2D texture;
-  private List<Rectangle> sourceRects;
+  private readonly Texture2D texture;
+  private readonly List<Rectangle> sourceRects;
   private int currentFrame;
   private double animationTimer;
-  private double timePerFrame = 0.3;
-  private ILevelManager levelManager;
+  private readonly double timePerFrame = 0.3;
+  private readonly ILevelManager levelManager;
   public string PairedLevelName { get; private set; }
   public BlockState State { get; private set; }
 
@@ -20,28 +20,19 @@ public class VaultDoorBlock : BaseBlock {
     texture = VaultDoorTexture;
     PairedLevelName = pairedLevelName;
     State = state;
-    switch (state) {
-      case BlockState.locked:
-      default:
-        currentFrame = 0;
-        break;
-
-      case BlockState.opening:
-        currentFrame = 1;
-        break;
-
-      case BlockState.open:
-        currentFrame = sourceRects.Count - 1;
-        break;
-    }
-    sourceRects = new List<Rectangle> {
-      new Rectangle(64, 128, 64, 64),
-      new Rectangle(64, 192, 64, 64),
-      new Rectangle(128, 192, 64, 64),
-      new Rectangle(192, 192, 64, 64),
-      new Rectangle(256, 192, 64, 64),
-      new Rectangle(320, 192, 64, 64)
+    currentFrame = state switch {
+      BlockState.opening => 1,
+      BlockState.open => sourceRects.Count - 1,
+      _ => 0,
     };
+    sourceRects = [
+      new(64, 128, 64, 64),
+      new(64, 192, 64, 64),
+      new(128, 192, 64, 64),
+      new(192, 192, 64, 64),
+      new(256, 192, 64, 64),
+      new(320, 192, 64, 64)
+    ];
     this.levelManager = levelManager;
   }
 

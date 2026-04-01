@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using GameProject.Enemies;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
@@ -7,25 +6,25 @@ using Microsoft.Xna.Framework;
 namespace GameProject.States;
 
 public class ShotgunnerWanderState : IShotgunnerState {
-  private ShotgunnerSprite shotgunner;
-  private Game1 game;
-  private Random random;
+  private readonly ShotgunnerSprite shotgunner;
+  private readonly ILevelManager levelManager;
+  private readonly Random random;
   private double wanderTimer;
-  private double wanderDuration;
+  private readonly double wanderDuration;
 
   private double animationTimer;
   private int currentFrameIndex;
 
-  public ShotgunnerWanderState(ShotgunnerSprite shotgunner, Game1 game) {
+  public ShotgunnerWanderState(ShotgunnerSprite shotgunner, ILevelManager levelManager) {
     this.shotgunner = shotgunner;
-    this.game = game;
-    this.random = new Random();
-    this.shotgunner.CurrentSourceRectangles = new List<Rectangle> {
+    this.levelManager = levelManager;
+    random = new Random();
+    this.shotgunner.CurrentSourceRectangles = [
       new(21, 339, 32, 39),
       new(98, 337, 32, 41),
       new(174, 339, 32, 39),
       new(251, 341, 32, 37),
-    };
+    ];
     this.shotgunner.CurrentFrame = 0;
 
     ChangeDirection();
@@ -60,7 +59,7 @@ public class ShotgunnerWanderState : IShotgunnerState {
 
     wanderTimer += dt;
     if (wanderTimer >= wanderDuration) {
-      shotgunner.ChangeState(new ShotgunnerIdleState(shotgunner, game));
+      shotgunner.ChangeState(new ShotgunnerIdleState(shotgunner, levelManager));
     }
   }
 

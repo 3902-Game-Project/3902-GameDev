@@ -15,12 +15,12 @@ public enum CollisionAxis {
   Y
 }
 
-public class CollisionManager {
-  private List<ICollidable> colliders;
+public class CollisionManager : IUpdatable {
+  private readonly List<ICollidable> colliders;
   private Texture2D debugTexture;
 
   public CollisionManager() {
-    colliders = new List<ICollidable>();
+    colliders = [];
   }
 
   public void AddCollider(ICollidable collider) {
@@ -36,12 +36,12 @@ public class CollisionManager {
   public void DebugDraw(SpriteBatch spriteBatch, GraphicsDevice graphicsDevice) {
     if (debugTexture == null) {
       debugTexture = new Texture2D(graphicsDevice, 1, 1);
-      debugTexture.SetData(new[] { Color.White });
+      debugTexture.SetData([Color.White]);
     }
 
     foreach (var c in colliders) {
       if (c.Shape is BoxCollider box) {
-        Rectangle rect = new Rectangle((int) box.Left, (int) box.Top, (int) box.width, (int) box.height);
+        Rectangle rect = new((int) box.Left, (int) box.Top, (int) box.Width, (int) box.Height);
         spriteBatch.Draw(debugTexture, rect, Color.Red * 0.5f);
       }
     }
@@ -52,9 +52,8 @@ public class CollisionManager {
       ICollidable c1 = colliders[i];
       for (int j = i + 1; j < colliders.Count; j++) {
         ICollidable c2 = colliders[j];
-        CollisionInfo info1, info2;
         // Global updates use "Both"
-        if (CheckCollison(c1, c2, CollisionAxis.Both, out info1, out info2)) {
+        if (CheckCollison(c1, c2, CollisionAxis.Both, out CollisionInfo info1, out CollisionInfo info2)) {
           info1.Collider = c2;
           info2.Collider = c1;
 
@@ -64,12 +63,12 @@ public class CollisionManager {
       }
     }
   }
+
   public void ResolveCollisionsFor(ICollidable movingEntity, CollisionAxis axis = CollisionAxis.Both, float cornerTolerance = 3.0f) {
     foreach (var otherEntity in colliders) {
       if (movingEntity == otherEntity) continue;
 
-      CollisionInfo info1, info2;
-      if (CheckCollison(movingEntity, otherEntity, axis, out info1, out info2, cornerTolerance)) {
+      if (CheckCollison(movingEntity, otherEntity, axis, out CollisionInfo info1, out CollisionInfo info2, cornerTolerance)) {
         info1.Collider = otherEntity;
         info2.Collider = movingEntity;
         movingEntity.OnCollision(info1);
@@ -77,7 +76,8 @@ public class CollisionManager {
       }
     }
   }
-  private bool CheckCollison(ICollidable c1, ICollidable c2, CollisionAxis axis, out CollisionInfo info1, out CollisionInfo info2, float cornerTolerance = 3.0f) {
+
+  private static bool CheckCollison(ICollidable c1, ICollidable c2, CollisionAxis axis, out CollisionInfo info1, out CollisionInfo info2, float cornerTolerance = 3.0f) {
     info1 = null;
     info2 = null;
 
@@ -95,7 +95,7 @@ public class CollisionManager {
     return false;
   }
 
-  private bool BoxBoxCollision(BoxCollider b1, BoxCollider b2, CollisionAxis axis, float cornerTolerance, out CollisionInfo info1, out CollisionInfo info2) {
+  private static bool BoxBoxCollision(BoxCollider b1, BoxCollider b2, CollisionAxis axis, float cornerTolerance, out CollisionInfo info1, out CollisionInfo info2) {
     info1 = null;
     info2 = null;
 
@@ -115,10 +115,10 @@ public class CollisionManager {
     Vector2 direction2;
     float finalOverlap;
 
-    float b1CenterX = b1.Left + (b1.width / 2f);
-    float b2CenterX = b2.Left + (b2.width / 2f);
-    float b1CenterY = b1.Top + (b1.height / 2f);
-    float b2CenterY = b2.Top + (b2.height / 2f);
+    float b1CenterX = b1.Left + (b1.Width / 2f);
+    float b2CenterX = b2.Left + (b2.Width / 2f);
+    float b1CenterY = b1.Top + (b1.Height / 2f);
+    float b2CenterY = b2.Top + (b2.Height / 2f);
 
     bool resolveHorizontally;
     if (axis == CollisionAxis.X) resolveHorizontally = true;
@@ -151,18 +151,18 @@ public class CollisionManager {
     return true;
   }
 
-  private bool BoxCircleCollision(BoxCollider b, CircleCollider c, out CollisionInfo info1, out CollisionInfo info2) {
+  private static bool BoxCircleCollision(BoxCollider b, CircleCollider c, out CollisionInfo info1, out CollisionInfo info2) {
     info1 = null; info2 = null;
 
-    float closestX = Math.Clamp(c.position.X, b.Left, b.Right);
-    float closestY = Math.Clamp(c.position.Y, b.Top, b.Bottom);
+    float closestX = Math.Clamp(c.Position.X, b.Left, b.Right);
+    float closestY = Math.Clamp(c.Position.Y, b.Top, b.Bottom);
 
-    float dx = c.position.X - closestX;
-    float dy = c.position.Y - closestY;
+    float dx = c.Position.X - closestX;
+    float dy = c.Position.Y - closestY;
 
-    if ((dx * dx + dy * dy) > c.radius * c.radius) return false;
+    if ((dx * dx + dy * dy) > c.Radius * c.Radius) return false;
 
-    Vector2 direction1 = new Vector2(c.position.X - closestX, c.position.Y - closestY);
+    Vector2 direction1 = new(c.Position.X - closestX, c.Position.Y - closestY);
     direction1 = Vector2.Normalize(direction1);
     Vector2 direction2 = Vector2.Negate(direction1);
 
@@ -181,16 +181,16 @@ public class CollisionManager {
     return true;
   }
 
-  private bool CircleCircleCollision(CircleCollider c1, CircleCollider c2, out CollisionInfo info1, out CollisionInfo info2) {
+  private static bool CircleCircleCollision(CircleCollider c1, CircleCollider c2, out CollisionInfo info1, out CollisionInfo info2) {
     info1 = null; info2 = null;
 
-    float dx = c2.position.X - c1.position.X;
-    float dy = c2.position.Y - c1.position.Y;
-    float r = c1.radius + c2.radius;
+    float dx = c2.Position.X - c1.Position.X;
+    float dy = c2.Position.Y - c1.Position.Y;
+    float r = c1.Radius + c2.Radius;
     float distSq = dx * dx + dy * dy;
     if (distSq > (r * r)) return false;
 
-    Vector2 direction1 = c2.position - c1.position;
+    Vector2 direction1 = c2.Position - c1.Position;
     direction1 = Vector2.Normalize(direction1);
     Vector2 direction2 = Vector2.Negate(direction1);
 

@@ -5,6 +5,7 @@ using GameProject.Managers;
 using GameProject.Misc;
 using GameProject.PlayerStates;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject;
@@ -15,15 +16,17 @@ public enum FacingDirection {
 }
 
 public class Player : ICollidable {
-  private static float PLAYER_WIDTH = 171.0f * 0.15f;
-  private static float PLAYER_HEIGHT = 323.0f * 0.15f;
-  private static float KNOCKBACK_DISTANCE = 10f;
+  private static readonly float PLAYER_WIDTH = 171.0f * 0.15f;
+  private static readonly float PLAYER_HEIGHT = 323.0f * 0.15f;
+  private static readonly float KNOCKBACK_DISTANCE = 10f;
+
+  readonly ContentManager contentManager;
+  readonly CollisionManager collisionManager;
 
   public IShape Shape => Collider;
   public BoxCollider Collider { get; private set; }
   public Layer Mask { get; } = Layer.Environment;
   public Layer Layer { get; } = Layer.Player;
-  public Game1 game { get; private set; }
   public IPlayerState State { get; set; }
   public Vector2 Position { get; set; }
   public Vector2 Velocity { get; set; }
@@ -54,21 +57,22 @@ public class Player : ICollidable {
   public IPlayerState UseItemState { get; private set; }
   public IPlayerState DeadState { get; private set; }
 
-  public Player(Game1 game) {
-    this.game = game;
-    this.Position = new Vector2(400, 300);
-    this.Velocity = Vector2.Zero;
-    this.Inventory = new PlayerInventory(this);
+  public Player(ContentManager contentManager, CollisionManager collisionManager, ILevelManager levelManager) {
+    this.contentManager = contentManager;
+    this.collisionManager = collisionManager;
+    Position = new Vector2(400, 300);
+    Velocity = Vector2.Zero;
+    Inventory = new PlayerInventory(levelManager);
 
     float width = 171 * 0.15f;
     float height = 323 * 0.15f;
-    this.Collider = new BoxCollider(width, height, this.Position);
+    Collider = new BoxCollider(width, height, Position);
 
-    this.MovingState = new PlayerAnimatedMovingState(this);
-    this.StaticState = new PlayerStaticState(this);
-    this.UseItemState = new PlayerUseItemState(this);
-    this.DeadState = new PlayerDeadState(this);
-    this.State = StaticState;
+    MovingState = new PlayerAnimatedMovingState(this);
+    StaticState = new PlayerStaticState(this);
+    UseItemState = new PlayerUseItemState(this);
+    DeadState = new PlayerDeadState(this);
+    State = StaticState;
   }
 
   public void MoveUp() => State.MoveUp();
@@ -84,7 +88,7 @@ public class Player : ICollidable {
   public void Die() => State.Die();
 
   public void LoadContent() {
-    this.Texture = game.Assets.Textures.PlayerTexture;
+    Texture = contentManager.Load<Texture2D>("playerSpritesheet");
   }
 
   public void TakeDamage(int amount = 10) {
@@ -107,12 +111,12 @@ public class Player : ICollidable {
     float yStep = Velocity.Y * dt;
 
     Position = new Vector2(Position.X + xStep, Position.Y);
-    if (Collider != null) Collider.position = this.Position;
-    game.CollisionManager.ResolveCollisionsFor(this, CollisionAxis.X, MathF.Abs(yStep) + 1f);
+    if (Collider != null) Collider.Position = Position;
+    collisionManager.ResolveCollisionsFor(this, CollisionAxis.X, MathF.Abs(yStep) + 1f);
 
     Position = new Vector2(Position.X, Position.Y + yStep);
-    if (Collider != null) Collider.position = this.Position;
-    game.CollisionManager.ResolveCollisionsFor(this, CollisionAxis.Y, MathF.Abs(xStep) + 1f);
+    if (Collider != null) Collider.Position = Position;
+    collisionManager.ResolveCollisionsFor(this, CollisionAxis.Y, MathF.Abs(xStep) + 1f);
 
     State.Update(gameTime);
     Velocity = Vector2.Zero;
@@ -120,32 +124,32 @@ public class Player : ICollidable {
     if (Inventory.ActiveItem != null) {
       float unscaledWidth = 171f;
       float unscaledHeight = 323f;
-      Vector2 spriteCenter = new Vector2(unscaledWidth / 2f, unscaledHeight / 2f);
+      Vector2 spriteCenter = new(unscaledWidth / 2f, unscaledHeight / 2f);
       float playerScale = 0.15f;
-      Vector2 rightHandUnscaled = new Vector2(100f, 195f);
-      Vector2 leftHandUnscaled = new Vector2(18f, 188f);
+      Vector2 rightHandUnscaled = new(100f, 195f);
+      Vector2 leftHandUnscaled = new(18f, 188f);
       Vector2 rightHandOffset = (rightHandUnscaled - spriteCenter) * playerScale;
       Vector2 leftHandOffset = (leftHandUnscaled - spriteCenter) * playerScale;
       Vector2 currentOffset = (Direction == FacingDirection.Right) ? rightHandOffset : leftHandOffset;
 
-      Inventory.ActiveItem.Position = this.Position + currentOffset;
-      Inventory.ActiveItem.Direction = this.Direction;
+      Inventory.ActiveItem.Position = Position + currentOffset;
+      Inventory.ActiveItem.Direction = Direction;
       Inventory.ActiveItem.Update(gameTime);
     }
   }
   public void OnCollision(CollisionInfo info) {
-    if (info.Collider is IBlock block) {
+    if (info.Collider is IBlock) {
       Position += info.Direction * (info.Overlap + 0.01f);
 
-      if (Collider != null) Collider.position = this.Position;
+      if (Collider != null) Collider.Position = Position;
     }
 
-    if (info.Collider is IEnemy enemy) {
+    if (info.Collider is IEnemy) {
       Position += info.Direction * KNOCKBACK_DISTANCE;
       if (Collider != null) {
-        Collider.position = this.Position;
+        Collider.Position = Position;
       }
-      if (Collider != null) Collider.position = this.Position;
+      if (Collider != null) Collider.Position = Position;
       TakeDamage(50);
     }
   }
@@ -153,8 +157,6 @@ public class Player : ICollidable {
   public void Draw(SpriteBatch spriteBatch) {
     State.Draw(spriteBatch);
 
-    if (Inventory.ActiveItem != null) {
-      Inventory.ActiveItem.Draw(spriteBatch);
-    }
+    Inventory.ActiveItem?.Draw(spriteBatch);
   }
 }

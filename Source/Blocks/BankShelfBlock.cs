@@ -3,18 +3,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class BankShelfBlock : BaseBlock {
-  private Texture2D texture;
-  private Rectangle sourceRect;
-
-  public BankShelfBlock(Texture2D BankShelfTexture, Vector2 xyPos) : base(xyPos) {
-    texture = BankShelfTexture;
-    sourceRect = new Rectangle(64, 320, 64, 64);
-  }
+public class BankShelfBlock(Texture2D BankShelfTexture, Vector2 xyPos) : BaseBlock(xyPos) {
+  private Rectangle sourceRect = new(64, 320, 64, 64);
 
   public override void Update(GameTime gameTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(texture, Position, sourceRect, Color.White, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
+    spriteBatch.Draw(BankShelfTexture, Position, sourceRect, Color.White, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 }

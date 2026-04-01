@@ -37,7 +37,7 @@ public class PlayerUseItemState(Player player) : IPlayerState {
       sourceRect = SpriteLeft;
     }
 
-    Vector2 origin = new Vector2(sourceRect.Width / 2, sourceRect.Height / 2);
+    Vector2 origin = new(sourceRect.Width / 2, sourceRect.Height / 2);
 
     spriteBatch.Draw(
       player.Texture,
