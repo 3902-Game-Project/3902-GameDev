@@ -5,6 +5,7 @@ using GameProject.Managers;
 using GameProject.Misc;
 using GameProject.PlayerStates;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject;
@@ -19,11 +20,13 @@ public class Player : ICollidable {
   private static float PLAYER_HEIGHT = 323.0f * 0.15f;
   private static float KNOCKBACK_DISTANCE = 10f;
 
+  ContentManager contentManager;
+  CollisionManager collisionManager;
+
   public IShape Shape => Collider;
   public BoxCollider Collider { get; private set; }
   public Layer Mask { get; } = Layer.Environment;
   public Layer Layer { get; } = Layer.Player;
-  public Game1 game { get; private set; }
   public IPlayerState State { get; set; }
   public Vector2 Position { get; set; }
   public Vector2 Velocity { get; set; }
@@ -54,11 +57,12 @@ public class Player : ICollidable {
   public IPlayerState UseItemState { get; private set; }
   public IPlayerState DeadState { get; private set; }
 
-  public Player(Game1 game) {
-    this.game = game;
+  public Player(ContentManager contentManager, CollisionManager collisionManager, ILevelManager levelManager) {
+    this.contentManager = contentManager;
+    this.collisionManager = collisionManager;
     this.Position = new Vector2(400, 300);
     this.Velocity = Vector2.Zero;
-    this.Inventory = new PlayerInventory(this);
+    this.Inventory = new PlayerInventory(levelManager);
 
     float width = 171 * 0.15f;
     float height = 323 * 0.15f;
@@ -84,7 +88,7 @@ public class Player : ICollidable {
   public void Die() => State.Die();
 
   public void LoadContent() {
-    this.Texture = game.Assets.Textures.PlayerTexture;
+    this.Texture = contentManager.Load<Texture2D>("playerSpritesheet");
   }
 
   public void TakeDamage(int amount = 10) {
@@ -108,11 +112,11 @@ public class Player : ICollidable {
 
     Position = new Vector2(Position.X + xStep, Position.Y);
     if (Collider != null) Collider.position = this.Position;
-    game.CollisionManager.ResolveCollisionsFor(this, CollisionAxis.X, MathF.Abs(yStep) + 1f);
+    collisionManager.ResolveCollisionsFor(this, CollisionAxis.X, MathF.Abs(yStep) + 1f);
 
     Position = new Vector2(Position.X, Position.Y + yStep);
     if (Collider != null) Collider.position = this.Position;
-    game.CollisionManager.ResolveCollisionsFor(this, CollisionAxis.Y, MathF.Abs(xStep) + 1f);
+    collisionManager.ResolveCollisionsFor(this, CollisionAxis.Y, MathF.Abs(xStep) + 1f);
 
     State.Update(gameTime);
     Velocity = Vector2.Zero;

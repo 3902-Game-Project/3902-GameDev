@@ -8,25 +8,31 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.GameStates;
 
-public class StateGameType(Game1 game) : IGameState {
+public class StateGameType : IGameState {
+  private Game1 game;
+
   private IController keyboardController;
   private IController mouseController;
   private IController gamePadController;
 
-  private CollisionManager collisionManager;
+  private CollisionManager collisionManager = new();
   private Texture2D healthBarTexture;
   private Vector2 healthBarPosition = new Vector2(0, 0);
 
-  public Player Player { get; private set; } = new Player(game);
+  public Player Player { get; private set; }
 
-  public ILevelManager LevelManager { get; private set; } = new LevelManager(game);
+  public ILevelManager LevelManager { get; private set; }
+
+  public StateGameType(Game1 game) {
+    LevelManager = new LevelManager(game);
+    Player = new Player(game.Content, collisionManager, LevelManager);
+  }
 
   public void Initialize() {
     keyboardController = new GameKeyboardController(game);
     mouseController = new GameMouseController(game);
     gamePadController = new GameGamePadController(game);
     LevelManager.Initialize();
-    collisionManager = new CollisionManager();
     collisionManager.AddCollider(Player);
   }
 

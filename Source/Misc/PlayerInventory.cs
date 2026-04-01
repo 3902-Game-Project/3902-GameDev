@@ -3,19 +3,13 @@ using GameProject.Interfaces;
 using GameProject.WorldPickups;
 
 namespace GameProject.Misc;
-public class PlayerInventory {
-  private Player player;
-
+public class PlayerInventory(ILevelManager levelManager) {
   public IItem Melee { get; private set; }
   public IItem Sidearm { get; private set; }
   public IItem Primary { get; private set; }
   public IItem Consumable { get; private set; }
 
   public IItem ActiveItem { get; private set; }
-
-  public PlayerInventory(Player player) {
-    this.player = player;
-  }
 
   public void PickupItem(IItem newItem) {
     switch (newItem.Category) {
@@ -47,7 +41,7 @@ public class PlayerInventory {
 
   private void DropItem(IItem itemToDrop) {
     IWorldPickup droppedItem = new ItemWorldPickup(itemToDrop);
-    player.game.StateGame.LevelManager.CurrentLevel.AddPickup(droppedItem);
+    levelManager.CurrentLevel.AddPickup(droppedItem);
   }
 
   public void SwitchActiveItem(ItemCategory categoryToHold) {
