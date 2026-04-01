@@ -16,18 +16,17 @@ public enum FacingDirection {
 }
 
 public class Player : ICollidable {
-  private ContentManager contentManager;
-  private CollisionManager collisionManager;
-
   private static float PLAYER_WIDTH = 171.0f * 0.15f;
   private static float PLAYER_HEIGHT = 323.0f * 0.15f;
   private static float KNOCKBACK_DISTANCE = 10f;
+
+  ContentManager contentManager;
+  CollisionManager collisionManager;
 
   public IShape Shape => Collider;
   public BoxCollider Collider { get; private set; }
   public Layer Mask { get; } = Layer.Environment;
   public Layer Layer { get; } = Layer.Player;
-  public Game1 game { get; private set; }
   public IPlayerState State { get; set; }
   public Vector2 Position { get; set; }
   public Vector2 Velocity { get; set; }
@@ -58,13 +57,12 @@ public class Player : ICollidable {
   public IPlayerState UseItemState { get; private set; }
   public IPlayerState DeadState { get; private set; }
 
-  public Player(Game1 game, ContentManager contentManager, CollisionManager collisionManager) {
-    this.game = game;
+  public Player(ContentManager contentManager, CollisionManager collisionManager, ILevelManager levelManager) {
     this.contentManager = contentManager;
     this.collisionManager = collisionManager;
     this.Position = new Vector2(400, 300);
     this.Velocity = Vector2.Zero;
-    this.Inventory = new PlayerInventory(this);
+    this.Inventory = new PlayerInventory(levelManager);
 
     float width = 171 * 0.15f;
     float height = 323 * 0.15f;
