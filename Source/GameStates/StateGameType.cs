@@ -24,9 +24,9 @@ public class StateGameType : IGameState {
   public ILevelManager LevelManager { get; private set; }
 
   public StateGameType(Game1 game) {
+    this.game = game;
     LevelManager = new LevelManager(game);
     Player = new Player(game);
-    this.game = game;
   }
 
   public void Initialize() {
