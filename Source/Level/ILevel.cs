@@ -14,4 +14,5 @@ public interface ILevel : IInitable, IUpdatable, IGPDrawable {
   void FadeOut();
   bool IsFadingOut();
   void RemovePickup(IWorldPickup pickup);
+  List<IWorldPickup> Pickups { get; }
 }
