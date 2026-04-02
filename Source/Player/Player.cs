@@ -143,6 +143,10 @@ public class Player : ICollidable {
   }
 
   public void OnCollision(CollisionInfo info) {
+    if (info.Collider is IWorldPickup pickup) {
+      HoveredPickup = pickup;
+      return;
+    }
     if (info.Collider is IBlock) {
       Position += info.Direction * (info.Overlap + 0.01f);
 
@@ -156,11 +160,6 @@ public class Player : ICollidable {
       }
       if (Collider != null) Collider.Position = Position;
       TakeDamage(50);
-    }
-
-    if (info.Collider is IWorldPickup pickup) {
-      HoveredPickup = pickup;
-      return;
     }
   }
   public void Interact() {
