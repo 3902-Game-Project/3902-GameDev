@@ -1,3 +1,4 @@
+using GameProject.Collisions;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,6 +16,10 @@ public class ItemWorldPickup(IItem item, Vector2 dropVelocity = default) : BaseW
 
     Position += Velocity * dt;
     item.Position = Position;
+
+    if (Shape is CircleCollider circle) {
+      circle.Position = Position;
+    }
 
     Velocity *= 0.85f;
     if (Velocity.LengthSquared() < 1f) Velocity = Vector2.Zero;
