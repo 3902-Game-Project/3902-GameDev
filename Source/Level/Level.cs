@@ -35,6 +35,8 @@ public class Level(
 
   public List<IBlock> CollidableBlocks => collidableBlocks;
   public List<IEnemy> Enemies => enemies;
+
+  public List<IWorldPickup> Pickups => pickups;
   public Vector2 PlayerPosition { get; private set; } = playerPosition;
   public ProjectileManager ProjectileManager { get; private set; } = new ProjectileManager();
 

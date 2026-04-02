@@ -7,6 +7,7 @@ using GameProject.PlayerStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using GameProject.WorldPickups;
 
 namespace GameProject;
 
@@ -24,7 +25,6 @@ public class Player : ICollidable {
   private readonly CollisionManager collisionManager;
 
   public IShape Shape => Collider;
-  public IWorldPickup HoveredPickup { get; private set; }
   public ILevelManager LevelManager { get; private set; }
   public BoxCollider Collider { get; private set; }
   public Layer Mask { get; } = Layer.Environment;
@@ -106,7 +106,6 @@ public class Player : ICollidable {
   }
 
   public void Update(GameTime gameTime) {
-    HoveredPickup = null;
     float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
     if (invincibilityTimer > 0) invincibilityTimer -= dt;
@@ -143,10 +142,6 @@ public class Player : ICollidable {
   }
 
   public void OnCollision(CollisionInfo info) {
-    if (info.Collider is IWorldPickup pickup) {
-      HoveredPickup = pickup;
-      return;
-    }
     if (info.Collider is IBlock) {
       Position += info.Direction * (info.Overlap + 0.01f);
 
@@ -163,10 +158,25 @@ public class Player : ICollidable {
     }
   }
   public void Interact() {
-    if (HoveredPickup != null) {
-      HoveredPickup.OnPickup(this);
-      LevelManager.CurrentLevel.RemovePickup(HoveredPickup);
-      HoveredPickup = null;
+    if (LevelManager?.CurrentLevel == null) return;
+
+    float grabRange = 75f;
+    IWorldPickup closestPickup = null;
+    float closestDistance = float.MaxValue;
+
+    foreach (var pickup in LevelManager.CurrentLevel.Pickups) {
+      if (pickup is BaseWorldPickup basePickup) {
+        float distance = Vector2.Distance(this.Position, basePickup.Position);
+        if (distance < grabRange && distance < closestDistance) {
+          closestDistance = distance;
+          closestPickup = pickup;
+        }
+      }
+    }
+
+    if (closestPickup != null) {
+      closestPickup.OnPickup(this);
+      LevelManager.CurrentLevel.RemovePickup(closestPickup);
     }
   }
 
