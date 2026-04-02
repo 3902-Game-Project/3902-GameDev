@@ -14,13 +14,11 @@ public class GameKeyboardController(Game1 game) : AKeyboardController {
     {Keys.J, new PlayerUseItemCommand(game.StateGame.Player, UseType.Pressed)},
     {Keys.E, new PlayerDieCommand(game.StateGame.Player)},
 
-    {Keys.D1, new SwitchItemCommand(game.StateGame.Player, ItemCategory.Sidearm)},
-    {Keys.D2, new SwitchItemCommand(game.StateGame.Player, ItemCategory.Primary)},
-    {Keys.D3, new SwitchItemCommand(game.StateGame.Player, ItemCategory.Consumable)},
-    {Keys.D4, new SwitchItemCommand(game.StateGame.Player, ItemCategory.Melee)},
-
     {Keys.T, new PreviousLevelCommand(game.StateGame.LevelManager)},
     {Keys.Y, new NextLevelCommand(game.StateGame.LevelManager)},
+   
+    { Keys.F, new PlayerInteractCommand(game.StateGame.Player) },
+    { Keys.Space, new SwapWeaponCommand(game.StateGame.Player) }
   };
 
   protected override Dictionary<Keys, ICommand> DownMappings { get; } = new() {

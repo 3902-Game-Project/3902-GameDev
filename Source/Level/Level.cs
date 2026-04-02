@@ -118,6 +118,9 @@ public class Level(
   public void AddPickup(IWorldPickup pickup) {
     pickups.Add(pickup);
   }
+  public void RemovePickup(IWorldPickup pickup) {
+    pickups.Remove(pickup);
+  }
 
   public void FadeIn() {
     fadeState = FadingState.FadeIn;
