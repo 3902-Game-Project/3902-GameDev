@@ -24,6 +24,8 @@ public class Player : ICollidable {
   private readonly CollisionManager collisionManager;
 
   public IShape Shape => Collider;
+  public IWorldPickup HoveredPickup { get; private set; }
+  public ILevelManager LevelManager { get; private set; }
   public BoxCollider Collider { get; private set; }
   public Layer Mask { get; } = Layer.Environment;
   public Layer Layer { get; } = Layer.Player;
@@ -60,6 +62,7 @@ public class Player : ICollidable {
   public Player(ContentManager contentManager, CollisionManager collisionManager, ILevelManager levelManager) {
     this.contentManager = contentManager;
     this.collisionManager = collisionManager;
+    this.LevelManager = levelManager;
     Position = new Vector2(400, 300);
     Velocity = Vector2.Zero;
     Inventory = new PlayerInventory(levelManager);
@@ -103,6 +106,7 @@ public class Player : ICollidable {
   }
 
   public void Update(GameTime gameTime) {
+    HoveredPickup = null;
     float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
     if (invincibilityTimer > 0) invincibilityTimer -= dt;
@@ -152,6 +156,18 @@ public class Player : ICollidable {
       }
       if (Collider != null) Collider.Position = Position;
       TakeDamage(50);
+    }
+
+    if (info.Collider is IWorldPickup pickup) {
+      HoveredPickup = pickup;
+      return;
+    }
+  }
+  public void Interact() {
+    if (HoveredPickup != null) {
+      HoveredPickup.OnPickup(this);
+      LevelManager.CurrentLevel.RemovePickup(HoveredPickup);
+      HoveredPickup = null;
     }
   }
 
