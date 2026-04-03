@@ -10,14 +10,16 @@ namespace GameProject;
 
 public class Game1 : Game {
   private readonly GraphicsDeviceManager graphics;
-
   public SpriteBatch SpriteBatch { get; private set; }
   public AssetStore Assets { get; private set; }
-
   public IGameState StateMenu { get; private set; }
   public IGameState StateLoss { get; private set; }
   public IGameState StateWin { get; private set; }
   public StateGameType StateGame { get; private set; }
+  public Viewport DefaultViewport { get; private set; }
+  public Viewport HudViewport { get; private set; }
+  public Viewport GameViewport { get; private set; }
+  public readonly int HudHeight = 100;
 
   private IGameState currentState;
 
@@ -46,9 +48,13 @@ public class Game1 : Game {
   }
 
   protected override void Initialize() {
-    graphics.PreferredBackBufferHeight = 576;
+    graphics.PreferredBackBufferHeight = 576 + HudHeight;
     graphics.PreferredBackBufferWidth = 960;
     graphics.ApplyChanges();
+
+    DefaultViewport = GraphicsDevice.Viewport;
+    HudViewport = new Viewport(0, 0, graphics.PreferredBackBufferWidth, HudHeight);
+    GameViewport = new Viewport(0, HudHeight, graphics.PreferredBackBufferWidth, 576);
 
     Assets.Initialize();
     StateMenu.Initialize();
@@ -84,7 +90,6 @@ public class Game1 : Game {
 
   protected override void Draw(GameTime gameTime) {
     currentState.Draw(gameTime);
-
     base.Draw(gameTime);
   }
 }
