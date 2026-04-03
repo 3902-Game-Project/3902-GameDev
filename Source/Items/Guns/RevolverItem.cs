@@ -1,6 +1,8 @@
 using GameProject.Enums;
+using GameProject.Factories;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
@@ -19,6 +21,9 @@ public class RevolverItem : IItem {
   private readonly IFireMode fireMode;
   private Vector2 bulletSpawnOffset;
   public ItemCategory Category { get; } = ItemCategory.Sidearm;
+
+  private SoundEffect gunshotSFX = SoundFactory.Instance.CreateGunshotDefaultSFX();
+  private SoundEffect reloadSFX = SoundFactory.Instance.CreateReloadDefaultSFX();
 
   public RevolverItem(Texture2D texture, Vector2 startPosition, Game1 game, GunStats stats) {
     this.game = game;
@@ -73,6 +78,7 @@ public class RevolverItem : IItem {
     Vector2 bulletSpawnPosition = Position + actualOffset;
     if (fireMode.CanFire(useType)) {
       projectilePattern.SpawnProjectiles(game.StateGame.LevelManager.CurrentLevel.ProjectileManager, bulletSpawnPosition, bulletDirection, stats);
+      gunshotSFX.Play();
     }
   }
 }
