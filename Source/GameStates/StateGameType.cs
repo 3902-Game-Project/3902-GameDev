@@ -93,7 +93,7 @@ public class StateGameType : IGameState {
     Player.Draw(game.SpriteBatch);
 
     if (LevelManager.CurrentLevel != null) {
-      foreach (var enemy in LevelManager.CurrentLevel.Enemies) {
+      foreach (var enemy in LevelManager.CurrentLevel.Enemies) { // Move this to Level.cs (For Eric)
         if (enemy is BaseEnemy baseEnemy && baseEnemy.Health > 0) {
           float enemyHealthPercent = MathHelper.Clamp((float) baseEnemy.Health / baseEnemy.MaxHealth, 0f, 1f);
           float scaleWidth = healthBarTexture.Width * 0.15f;
