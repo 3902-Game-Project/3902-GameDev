@@ -1,5 +1,7 @@
-﻿using GameProject.Enums;
+﻿using GameProject.Collisions;
+using GameProject.Enums;
 using GameProject.Interfaces;
+using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,11 +14,13 @@ public class KeyItem : IItem, IWorldPickup {
   private Vector2 origin;
   private Texture2D texture;
   private ILevelManager levelMangaer;
+  private CollisionManager collisionManager;
   public Vector2 Position { get; set; }
   public bool IsCollected { get; set; }
   public ItemCategory Category { get; } = ItemCategory.Consumable;
 
-  public KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager levelManagers) {
+  public KeyItem(Texture2D keyTexture, Vector2 startPosition, CollisionManager collisionManagers, ILevelManager levelManagers) {
+    collisionManager = collisionManagers;
     levelMangaer = levelManagers;
     Position = startPosition;
     texture = keyTexture;
@@ -46,9 +50,16 @@ public class KeyItem : IItem, IWorldPickup {
   }
 
   public void Use(UseType useType) {
-    // Logic for using the key item
+    // unlocks and changes door state, remove key from inventory if used correctly
   }
   public void OnPickup(Player player) {
-    // if player collides with key, put key in inventory
+    IsCollected = true;
+    levelMangaer.CurrentLevel.Pickups.Remove(this);
+    // place in player inventory
+  }
+  public virtual void OnCollision(CollisionInfo info) {
+    if (info.Collider.Layer == Layer.Player && info.Collider as Player != null) {
+      OnPickup(info.Collider as Player);
+    }
   }
 }
