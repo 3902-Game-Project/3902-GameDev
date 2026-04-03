@@ -3,6 +3,7 @@ using GameProject.Enemies;
 using GameProject.Factories;
 using GameProject.Interfaces;
 using GameProject.Managers;
+using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

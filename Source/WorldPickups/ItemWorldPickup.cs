@@ -1,5 +1,6 @@
 using GameProject.Collisions;
 using GameProject.Interfaces;
+using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -25,7 +26,7 @@ public class ItemWorldPickup(IItem item, Vector2 dropVelocity = default) : BaseW
     if (Velocity.LengthSquared() < 1f) Velocity = Vector2.Zero;
   }
 
-  public void OnPickup(Player player) {
+  public override void OnPickup(Player player) {
     player.Inventory.PickupItem(item);
   }
 }

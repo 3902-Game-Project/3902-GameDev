@@ -2,6 +2,8 @@
 using GameProject.Enums;
 using GameProject.Interfaces;
 using GameProject.Managers;
+using GameProject.PlayerSpace;
+using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -54,12 +56,7 @@ public class KeyItem : IItem, IWorldPickup {
   }
   public void OnPickup(Player player) {
     IsCollected = true;
-    levelManager.CurrentLevel.Pickups.Remove(this);
-    // place in player inventory
-  }
-  public virtual void OnCollision(CollisionInfo info) {
-    if (info.Collider.Layer == Layer.Player && info.Collider as Player != null) {
-      OnPickup(info.Collider as Player);
-    }
+    //Player.Inventory.PickUpItem(this);
+    levelMangaer.CurrentLevel.Pickups.Remove(this);
   }
 }

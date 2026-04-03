@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using GameProject.WorldPickups;
 
-namespace GameProject;
+namespace GameProject.PlayerSpace;
 
 public enum FacingDirection {
   Left,

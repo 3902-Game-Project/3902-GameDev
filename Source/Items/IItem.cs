@@ -1,4 +1,5 @@
 using GameProject.Enums;
+using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Interfaces;
