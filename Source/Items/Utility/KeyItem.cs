@@ -5,28 +5,40 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Source.Items.Utility;
 
-public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager levelManagers) : IItem, IWorldPickup {
+public class KeyItem : IItem, IWorldPickup {
   // add collision info
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   private Rectangle sourceRectangle = new(0, 1344, 21, 39); // CHANGE
   private Vector2 origin;
-  public Vector2 Position { get; set; } = startPosition;
+  private Texture2D texture;
+  private ILevelManager levelMangaer;
+  public Vector2 Position { get; set; }
+  public bool IsCollected { get; set; }
   public ItemCategory Category { get; } = ItemCategory.Consumable;
 
-  public void Draw(SpriteBatch spriteBatch) {
-    origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
+  public KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager levelManagers) {
+    levelMangaer = levelManagers;
+    Position = startPosition;
+    texture = keyTexture;
+    IsCollected = false;
+  }
 
-    spriteBatch.Draw(
-      keyTexture,
-      Position,
-      sourceRectangle,
-      Color.White,
-      0f,
-      origin,
-      1f,
-      SpriteEffects.None,
-      0f
-    );
+  public void Draw(SpriteBatch spriteBatch) {
+    if (!IsCollected) {
+      origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
+      
+      spriteBatch.Draw(
+        texture,
+        Position,
+        sourceRectangle,
+        Color.White,
+        0f,
+        origin,
+        1f,
+        SpriteEffects.None,
+        0f
+      );
+    }
   }
 
   public void Update(GameTime gameTime) {
@@ -34,7 +46,7 @@ public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager 
   }
 
   public void Use(UseType useType) {
-    // Logic for using the whiskey item
+    // Logic for using the key item
   }
   public void OnPickup(Player player) {
     // if player collides with key, put key in inventory
