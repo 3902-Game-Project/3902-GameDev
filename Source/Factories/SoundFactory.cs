@@ -17,11 +17,11 @@ internal class SoundFactory {
   private SoundFactory() {
   }
 
-  public void LoadAllSounds(ContentManager content)
+  public void LoadAllContent(ContentManager content)
   {
-    playerHurtSFX = content.Load<SoundEffect>("player_hurt");
-    gunshotDefaultSFX = content.Load<SoundEffect>("gun_default");
-    reloadDefaultSFX = content.Load<SoundEffect>("reload_default");
+    playerHurtSFX = content.Load<SoundEffect>("Sound Effects/player_hurt");
+    gunshotDefaultSFX = content.Load<SoundEffect>("Sound Effects/gun_shot_default");
+    reloadDefaultSFX = content.Load<SoundEffect>("Sound Effects/reload_default");
   }
 
   public SoundEffect CreatePlayerHurtSFX() {
