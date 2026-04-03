@@ -16,24 +16,35 @@ public class SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, BlockStat
       new(448, 448, 64, 64)
     ];
   public float Rotation { get; private set; } = 0.0f;
+  private bool rotated = false;
   public string PairedLevelName { get; private set; } = pairedLevelName;
   public BlockState State { get; private set; } = state;
 
   public void Rotate() {
-    if (Position.X == 0 && Position.Y == 0) {
-      Rotation = MathHelper.ToRadians(270);
+    float x = Position.X, y = Position.Y;
+    if (Position.X == 0 ) {
+      Rotation = MathHelper.ToRadians(90);
+      x += 64;
+      //y = Position.Y + 64;
     } else if (Position.X > 0 && Position.Y > 0) {
       Rotation = MathHelper.ToRadians(90);
+      x += 64;
+      y += 64;
     } else if (Position.Y > 0 && Position.X == 0) {
-      Rotation = MathHelper.ToRadians(180);
+      Rotation = MathHelper.ToRadians(90);
+      x -= 64;
+      y += 64;
     }
+    Position = new(x, y);
+    rotated = true;
   }
-
+  
   public override void Update(GameTime gameTime) {
     // if all enemies defeated, change state to open
   }
 
   public override void Draw(SpriteBatch spriteBatch) {
+    if (!rotated) { this.Rotate(); }
     spriteBatch.Draw(SmallDoorTexture, Position, sourceRects[currentFrame], Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 
