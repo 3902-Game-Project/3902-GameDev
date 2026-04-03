@@ -8,6 +8,7 @@ using GameProject.Audio;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using GameProject.WorldPickups;
 
 namespace GameProject;
 
@@ -21,10 +22,11 @@ public class Player : ICollidable {
   private static readonly float PLAYER_HEIGHT = 323.0f * 0.15f;
   private static readonly float KNOCKBACK_DISTANCE = 10f;
 
-  readonly ContentManager contentManager;
-  readonly CollisionManager collisionManager;
+  private readonly ContentManager contentManager;
+  private readonly CollisionManager collisionManager;
 
   public IShape Shape => Collider;
+  public ILevelManager LevelManager { get; private set; }
   public BoxCollider Collider { get; private set; }
   public Layer Mask { get; } = Layer.Environment;
   public Layer Layer { get; } = Layer.Player;
@@ -62,6 +64,7 @@ public class Player : ICollidable {
   public Player(ContentManager contentManager, CollisionManager collisionManager, ILevelManager levelManager) {
     this.contentManager = contentManager;
     this.collisionManager = collisionManager;
+    this.LevelManager = levelManager;
     Position = new Vector2(400, 300);
     Velocity = Vector2.Zero;
     Inventory = new PlayerInventory(levelManager);
@@ -142,6 +145,7 @@ public class Player : ICollidable {
       Inventory.ActiveItem.Update(gameTime);
     }
   }
+
   public void OnCollision(CollisionInfo info) {
     if (info.Collider is IBlock) {
       Position += info.Direction * (info.Overlap + 0.01f);
@@ -156,6 +160,28 @@ public class Player : ICollidable {
       }
       if (Collider != null) Collider.Position = Position;
       TakeDamage(50);
+    }
+  }
+  public void Interact() {
+    if (LevelManager?.CurrentLevel == null) return;
+
+    float grabRange = 75f;
+    IWorldPickup closestPickup = null;
+    float closestDistance = float.MaxValue;
+
+    foreach (var pickup in LevelManager.CurrentLevel.Pickups) {
+      if (pickup is BaseWorldPickup basePickup) {
+        float distance = Vector2.Distance(this.Position, basePickup.Position);
+        if (distance < grabRange && distance < closestDistance) {
+          closestDistance = distance;
+          closestPickup = pickup;
+        }
+      }
+    }
+
+    if (closestPickup != null) {
+      closestPickup.OnPickup(this);
+      LevelManager.CurrentLevel.RemovePickup(closestPickup);
     }
   }
 

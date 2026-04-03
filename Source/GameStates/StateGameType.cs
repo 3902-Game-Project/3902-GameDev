@@ -80,6 +80,7 @@ public class StateGameType : IGameState {
 
   public void Draw(GameTime gameTime) {
     game.GraphicsDevice.Clear(Color.CornflowerBlue);
+    game.GraphicsDevice.Viewport = game.GameViewport;
     game.SpriteBatch.Begin(
       SpriteSortMode.Deferred,
       BlendState.AlphaBlend,
@@ -90,19 +91,6 @@ public class StateGameType : IGameState {
 
     LevelManager.Draw(gameTime);
     Player.Draw(game.SpriteBatch);
-
-    float healthPercent = MathHelper.Clamp(Player.Health / 100f, 0f, 1f);
-    game.SpriteBatch.Draw(
-      texture: healthBarTexture,
-      position: healthBarPosition,
-      sourceRectangle: null,
-      color: Color.DarkSlateGray,
-      rotation: 0f,
-      origin: Vector2.Zero,
-      scale: 0.5f,  //scale of blood bar
-      effects: SpriteEffects.None,
-      layerDepth: 0f
-      );
 
     if (LevelManager.CurrentLevel != null) {
       foreach (var enemy in LevelManager.CurrentLevel.Enemies) {
@@ -139,6 +127,29 @@ public class StateGameType : IGameState {
         }
       }
     }
+    game.SpriteBatch.End();
+    game.GraphicsDevice.Viewport = game.HudViewport;
+    game.SpriteBatch.Begin(
+      SpriteSortMode.Deferred,
+      BlendState.AlphaBlend,
+      SamplerState.PointClamp,
+      DepthStencilState.None,
+      RasterizerState.CullNone
+    );
+    healthBarPosition = new Vector2(20, 20);
+    float healthPercent = MathHelper.Clamp(Player.Health / 100f, 0f, 1f);
+    game.SpriteBatch.Draw(
+      texture: healthBarTexture,
+      position: healthBarPosition,
+      sourceRectangle: null,
+      color: Color.DarkSlateGray,
+      rotation: 0f,
+      origin: Vector2.Zero,
+      scale: 0.5f,  //scale of blood bar
+      effects: SpriteEffects.None,
+      layerDepth: 0f
+      );
+
 
     int visibleWidth = (int) (healthBarTexture.Width * healthPercent);
     Rectangle sourceRectangle = new(0, 0, visibleWidth, healthBarTexture.Height);
@@ -154,7 +165,10 @@ public class StateGameType : IGameState {
       layerDepth: 0f
     );
 
+    //draw player's items, keys...
+
     // collisionManager.DebugDraw(game.SpriteBatch, game.GraphicsDevice);
     game.SpriteBatch.End();
+    game.GraphicsDevice.Viewport = game.DefaultViewport;
   }
 }

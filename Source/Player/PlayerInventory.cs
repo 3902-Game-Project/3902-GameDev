@@ -1,53 +1,41 @@
-﻿using GameProject.Enums;
+﻿using System;
+using System.Collections.Generic;
 using GameProject.Interfaces;
 using GameProject.WorldPickups;
+using Microsoft.Xna.Framework;
 
 namespace GameProject.Misc;
+
 public class PlayerInventory(ILevelManager levelManager) {
-  public IItem Melee { get; private set; }
-  public IItem Sidearm { get; private set; }
-  public IItem Primary { get; private set; }
-  public IItem Consumable { get; private set; }
+  private readonly Random random = new();
 
-  public IItem ActiveItem { get; private set; }
+  public List<IItem> Weapons { get; private set; } = new List<IItem>();
+  public int ActiveWeaponIndex { get; private set; } = 0;
 
-  public void PickupItem(IItem newItem) {
-    switch (newItem.Category) {
-      case ItemCategory.Sidearm:
-        if (Sidearm != null) { DropItem(Sidearm); }
-        Sidearm = newItem;
-        ActiveItem = Sidearm;
-        break;
+  public IItem ActiveItem => Weapons.Count > 0 ? Weapons[ActiveWeaponIndex] : null;
 
-      case ItemCategory.Primary:
-        if (Primary != null) { DropItem(Primary); }
-        Primary = newItem;
-        ActiveItem = Primary;
-        break;
-
-      case ItemCategory.Consumable:
-        if (Consumable != null) { DropItem(Consumable); }
-        Consumable = newItem;
-        ActiveItem = Consumable;
-        break;
-
-      case ItemCategory.Melee:
-        if (Melee != null) { DropItem(Melee); }
-        Melee = newItem;
-        ActiveItem = Melee;
-        break;
+  public void PickupItem(IItem newWeapon) {
+    if (Weapons.Count < 2) {
+      Weapons.Add(newWeapon);
+      ActiveWeaponIndex = Weapons.Count - 1;
+    } else {
+      DropItem(ActiveItem);
+      Weapons[ActiveWeaponIndex] = newWeapon;
     }
   }
 
   private void DropItem(IItem itemToDrop) {
-    IWorldPickup droppedItem = new ItemWorldPickup(itemToDrop);
+    float tossX = random.Next(-100, 100);
+    float tossY = random.Next(-150, -50);
+    Vector2 dropVelocity = new Vector2(tossX, tossY);
+
+    IWorldPickup droppedItem = new ItemWorldPickup(itemToDrop, dropVelocity);
     levelManager.CurrentLevel.AddPickup(droppedItem);
   }
 
-  public void SwitchActiveItem(ItemCategory categoryToHold) {
-    if (categoryToHold == ItemCategory.Sidearm && Sidearm != null) ActiveItem = Sidearm;
-    if (categoryToHold == ItemCategory.Primary && Primary != null) ActiveItem = Primary;
-    if (categoryToHold == ItemCategory.Consumable && Consumable != null) ActiveItem = Consumable;
-    if (categoryToHold == ItemCategory.Melee && Melee != null) ActiveItem = Melee;
+  public void SwapActiveWeapon() {
+    if (Weapons.Count > 1) {
+      ActiveWeaponIndex = (ActiveWeaponIndex == 0) ? 1 : 0;
+    }
   }
 }

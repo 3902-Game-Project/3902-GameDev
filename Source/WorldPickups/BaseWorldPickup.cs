@@ -7,7 +7,7 @@ namespace GameProject.WorldPickups;
 
 public abstract class BaseWorldPickup : IWorldPickup {
 
-  public Vector2 Position { get; }
+  public Vector2 Position { get; set; }
   public IShape Shape { get; }
   public Layer Layer { get; } = Layer.Pickups;
   public Layer Mask { get; } = Layer.Player;
