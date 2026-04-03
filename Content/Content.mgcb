@@ -211,19 +211,19 @@
 
 #begin Sound Effects/gun_shot_default.mp3
 /importer:Mp3Importer
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sound Effects/gun_shot_default.mp3
 
 #begin Sound Effects/player_hurt.ogg
 /importer:OggImporter
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sound Effects/player_hurt.ogg
 
 #begin Sound Effects/reload_default.mp3
 /importer:Mp3Importer
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sound Effects/reload_default.mp3
 

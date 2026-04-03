@@ -30,11 +30,6 @@ public class Game1 : Game {
 
     Assets = new AssetStore(this);
 
-    StateMenu = new StateMenuType(this);
-    StateLoss = new StateLossType(this);
-    StateWin = new StateWinType(this);
-    StateGame = new StateGameType(this);
-    currentState = StateMenu;
   }
 
   public void ChangeState(IGameState state) {
@@ -56,12 +51,6 @@ public class Game1 : Game {
     HudViewport = new Viewport(0, 0, graphics.PreferredBackBufferWidth, HudHeight);
     GameViewport = new Viewport(0, HudHeight, graphics.PreferredBackBufferWidth, 576);
 
-    Assets.Initialize();
-    StateMenu.Initialize();
-    StateLoss.Initialize();
-    StateWin.Initialize();
-    StateGame.Initialize();
-
     base.Initialize();
   }
 
@@ -75,6 +64,18 @@ public class Game1 : Game {
     SoundFactory.Instance.LoadAllContent(Content);
     ItemSpriteFactory.Instance.LoadAllTextures(Content);
     ProjectileFactory.Instance.LoadAllTextures(Content);
+
+    StateMenu = new StateMenuType(this);
+    StateLoss = new StateLossType(this);
+    StateWin = new StateWinType(this);
+    StateGame = new StateGameType(this);
+    currentState = StateMenu;
+
+    Assets.Initialize();
+    StateMenu.Initialize();
+    StateLoss.Initialize();
+    StateWin.Initialize();
+    StateGame.Initialize();
 
     StateMenu.LoadContent();
     StateLoss.LoadContent();
