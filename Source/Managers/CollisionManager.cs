@@ -15,7 +15,7 @@ public enum CollisionAxis {
   Y
 }
 
-public class CollisionManager : IUpdatable {
+public class CollisionManager : IGPUpdatable {
   private readonly List<ICollidable> colliders;
   private Texture2D debugTexture;
 

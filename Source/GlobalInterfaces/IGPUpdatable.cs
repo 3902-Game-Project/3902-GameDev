@@ -2,6 +2,6 @@
 
 namespace GameProject.Interfaces;
 
-public interface IUpdatable {
+public interface IGPUpdatable {
   void Update(GameTime gameTime);
 }
