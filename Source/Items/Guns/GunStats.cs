@@ -1,3 +1,6 @@
+using GameProject.Factories;
+using Microsoft.Xna.Framework.Audio;
+
 namespace GameProject.Items;
 
 public class GunStats {
@@ -10,6 +13,8 @@ public class GunStats {
   public int MaxAmmo { get; set; } = 1;
   public int CurrentAmmo { get; set; } = 1;
   public float BaseDamage { get; set; } = 0f;
+  public SoundEffect GunshotSFX { get; set; } = SoundFactory.Instance.CreateGunshotDefaultSFX();
+  public SoundEffect ReloadSFX { get; set; } = SoundFactory.Instance.CreateReloadDefaultSFX();
 
   public GunStats() { }
 }

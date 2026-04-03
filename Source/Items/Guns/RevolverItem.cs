@@ -22,9 +22,6 @@ public class RevolverItem : IItem {
   private Vector2 bulletSpawnOffset;
   public ItemCategory Category { get; } = ItemCategory.Sidearm;
 
-  private SoundEffect gunshotSFX = SoundFactory.Instance.CreateGunshotDefaultSFX();
-  private SoundEffect reloadSFX = SoundFactory.Instance.CreateReloadDefaultSFX();
-
   public RevolverItem(Texture2D texture, Vector2 startPosition, Game1 game, GunStats stats) {
     this.game = game;
     this.texture = texture;
@@ -78,7 +75,7 @@ public class RevolverItem : IItem {
     Vector2 bulletSpawnPosition = Position + actualOffset;
     if (fireMode.CanFire(useType)) {
       projectilePattern.SpawnProjectiles(game.StateGame.LevelManager.CurrentLevel.ProjectileManager, bulletSpawnPosition, bulletDirection, stats);
-      gunshotSFX.Play();
+      stats.GunshotSFX.Play();
     }
   }
 }
