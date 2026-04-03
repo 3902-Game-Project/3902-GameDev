@@ -28,14 +28,13 @@ Controls:
 
 Code Metrics:
   Raw data stored at "Info/Grader Info/Code Metrics/Code Metrics.txt"
-  Graph at "Info/Grader Info/Code Metrics/Sprint 3/TODO"
+  Graph at "Info/Grader Info/Code Metrics/Sprint 3/2026-03-13.png"
 
 Code Reviews:
   Found in the "Info/Grader Info/Code Review/Sprint 3" folder.
 
 Known bugs:
   Cannot move to escape block if just barely collided into it.
-  Walking diagonally up and to the left, player will get caught on block corners even on a flat wall (Unity also has this issue).
   Player can move while level is fading in (and player is not visually faded in/out either).
   Gamepad support not currently complete. We ran out of time.
 
