@@ -4,20 +4,29 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Items;
 
 public class SemiAutoFire(GunStats stats) : IFireMode {
-  private float timeSinceLastShot = stats.FireRate;
+  private float countdown = 0;
 
   public bool CanFire(UseType useType) {
     bool canFire = true;
-    if (useType != UseType.Pressed) canFire = false;
-    if (timeSinceLastShot < stats.FireRate) canFire = false;
-    if (stats.CurrentAmmo == 0) canFire = false;
-    if (canFire) {
-      timeSinceLastShot = 0f;
+
+    if (useType != UseType.Pressed) return false;
+
+    if (stats.CurrentAmmo <= 0) {
+      countdown = stats.ReloadTime;
+      stats.CurrentAmmo = stats.MaxAmmo;
+      stats.ReloadSFX.Play();
+      return false;
     }
+
+    if (countdown > 0) return false;
+
+    countdown = stats.FireRate;
+    stats.CurrentAmmo--;
+
     return canFire;
   }
 
   public void Update(GameTime gameTime) {
-    timeSinceLastShot += (float) gameTime.ElapsedGameTime.TotalSeconds;
+    countdown -= (float) gameTime.ElapsedGameTime.TotalSeconds;
   }
 }

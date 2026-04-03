@@ -21,14 +21,20 @@ public class ItemSpriteFactory {
   public IItem CreateRevolver(float xPos, float yPos, Game1 game) {
     GunStats stats = new() {
       BulletVelocity = 200f,
-      FireRate = .2f
+      FireRate = .2f,
+      MaxAmmo = 6,
+      CurrentAmmo = 6,
+      ReloadTime = 1.5f
     };
     return new RevolverItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
   }
 
   public IItem CreateRifle(float xPos, float yPos, Game1 game) {
     var stats = new GunStats {
-      BulletVelocity = 500f
+      BulletVelocity = 500f,
+      MaxAmmo = 1,
+      CurrentAmmo = 1,
+      ReloadTime = 1f
     };
     return new RifleItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
   }
@@ -36,7 +42,10 @@ public class ItemSpriteFactory {
   public IItem CreateShotgun(float xPos, float yPos, Game1 game) {
     var stats = new GunStats {
       SpreadAngle = 30f,
-      PelletCount = 5
+      PelletCount = 5,
+      MaxAmmo = 2,
+      CurrentAmmo = 2,
+      ReloadTime = 2f
     };
     return new ShotgunItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
   }

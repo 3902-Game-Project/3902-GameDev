@@ -1,6 +1,8 @@
 using GameProject.Enums;
+using GameProject.Factories;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
@@ -27,7 +29,7 @@ public class RifleItem : IItem {
     this.stats = stats;
     this.stats.FireRate /= 3f; //this line is to change the frequency of the bullets in rifle
     bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 * (sourceRectangle.Height / 2 - 3)) * scale;
-    fireMode = new AutomaticFire(this.stats);
+    fireMode = new SemiAutoFire(this.stats);
   }
 
   public void Draw(SpriteBatch spriteBatch) {
@@ -74,6 +76,7 @@ public class RifleItem : IItem {
     Vector2 bulletSpawnPosition = Position + actualOffset;
     if (fireMode.CanFire(useType)) {
       projectilePattern.SpawnProjectiles(game.StateGame.LevelManager.CurrentLevel.ProjectileManager, bulletSpawnPosition, bulletDirection, stats);
+      stats.GunshotSFX.Play();
     }
   }
 }
