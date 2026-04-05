@@ -57,6 +57,6 @@ public class KeyItem : IItem, IWorldPickup {
   public void OnPickup(Player player) {
     IsCollected = true;
     //Player.Inventory.PickUpItem(this);
-    levelMangaer.CurrentLevel.Pickups.Remove(this);
+    levelManager.CurrentLevel.Pickups.Remove(this);
   }
 }
