@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Interfaces;
 
-public interface ILevel : IInitable, IUpdatable, IGPDrawable {
+public interface ILevel : IInitable, IGPUpdatable, IGPDrawable {
   List<IBlock> CollidableBlocks { get; }
   List<IEnemy> Enemies { get; }
   Vector2 PlayerPosition { get; }

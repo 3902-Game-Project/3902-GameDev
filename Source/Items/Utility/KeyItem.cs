@@ -2,6 +2,8 @@
 using GameProject.Enums;
 using GameProject.Interfaces;
 using GameProject.Managers;
+using GameProject.PlayerSpace;
+using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -13,15 +15,15 @@ public class KeyItem : IItem, IWorldPickup {
   private Rectangle sourceRectangle = new(0, 1344, 21, 39); // CHANGE
   private Vector2 origin;
   private Texture2D texture;
-  private ILevelManager levelMangaer;
+  private ILevelManager levelManager;
   private CollisionManager collisionManager;
   public Vector2 Position { get; set; }
   public bool IsCollected { get; set; }
   public ItemCategory Category { get; } = ItemCategory.Consumable;
 
-  public KeyItem(Texture2D keyTexture, Vector2 startPosition, CollisionManager collisionManagers, ILevelManager levelManagers) {
-    collisionManager = collisionManagers;
-    levelMangaer = levelManagers;
+  public KeyItem(Texture2D keyTexture, Vector2 startPosition, CollisionManager collisionManager, ILevelManager levelManager) {
+    this.collisionManager = collisionManager;
+    this.levelManager = levelManager;
     Position = startPosition;
     texture = keyTexture;
     IsCollected = false;
@@ -54,12 +56,7 @@ public class KeyItem : IItem, IWorldPickup {
   }
   public void OnPickup(Player player) {
     IsCollected = true;
+    //Player.Inventory.PickUpItem(this);
     levelMangaer.CurrentLevel.Pickups.Remove(this);
-    // place in player inventory
-  }
-  public virtual void OnCollision(CollisionInfo info) {
-    if (info.Collider.Layer == Layer.Player && info.Collider as Player != null) {
-      OnPickup(info.Collider as Player);
-    }
   }
 }
