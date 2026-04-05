@@ -28,6 +28,7 @@ public class ShotgunItem : IItem {
     this.texture = texture;
     this.position = position;
     this.stats = stats;
+    Position = position;
     bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 * (sourceRectangle.Height / 2 - 3)) * scale; // Adjust spawn offset based on the shotgun's size and scale
     fireMode = new SemiAutoFire(stats);
   }

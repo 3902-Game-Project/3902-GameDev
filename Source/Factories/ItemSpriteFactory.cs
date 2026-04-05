@@ -20,7 +20,7 @@ public class ItemSpriteFactory {
 
   public IItem CreateRevolver(float xPos, float yPos, Game1 game) {
     GunStats stats = new() {
-      BulletVelocity = 200f,
+      BulletVelocity = 1000f,
       FireRate = .2f,
       MaxAmmo = 6,
       CurrentAmmo = 6,
@@ -31,7 +31,7 @@ public class ItemSpriteFactory {
 
   public IItem CreateRifle(float xPos, float yPos, Game1 game) {
     var stats = new GunStats {
-      BulletVelocity = 500f,
+      BulletVelocity = 2500f,
       MaxAmmo = 1,
       CurrentAmmo = 1,
       ReloadTime = 1f
@@ -41,7 +41,7 @@ public class ItemSpriteFactory {
 
   public IItem CreateShotgun(float xPos, float yPos, Game1 game) {
     var stats = new GunStats {
-      SpreadAngle = 30f,
+      SpreadAngle = 10f,
       PelletCount = 5,
       MaxAmmo = 2,
       CurrentAmmo = 2,

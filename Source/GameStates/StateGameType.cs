@@ -40,7 +40,7 @@ public class StateGameType : IGameState {
   public void LoadContent() {
     Player.LoadContent();
 
-    Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateRevolver(0f, 0f, game));
+    Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateShotgun(0f, 0f, game));
     Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateRifle(0f, 0f, game));
 
     LevelManager.LoadContent(game.Content);
