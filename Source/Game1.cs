@@ -33,7 +33,12 @@ public class Game1 : Game {
   }
 
   public void ChangeState(IGameState state) {
+    SoundManager.Instance.StopAll();
     currentState = state;
+
+    if (state == StateGame) {
+      SoundManager.Instance.PlayLoop(SoundID.Background);
+    }
   }
 
   public void ResetGameState() {

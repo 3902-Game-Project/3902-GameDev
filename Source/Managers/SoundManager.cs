@@ -8,14 +8,26 @@ namespace GameProject.Managers;
 public enum SoundID {
   PlayerHurt,
   GunshotDefault,
-  ReloadDefault
+  ReloadDefault,
+  Background
 }
 internal class SoundManager {
 
   private Dictionary<SoundID, SoundEffect> sounds = new();
   private Dictionary<SoundID, LoopingSound> loops = new();
 
+  private bool musicEnabled = true;
+
+  public bool MusicEnabled {
+    get => musicEnabled;
+    set {
+      musicEnabled = value;
+      UpdateVolumes();
+    } 
+  }
+
   private float masterVolume = 1.0f;
+
   public float MasterVolume { 
     get => masterVolume;
     set {
@@ -42,6 +54,7 @@ internal class SoundManager {
     sounds[SoundID.PlayerHurt] = content.Load<SoundEffect>("Sound Effects/player_hurt");
     sounds[SoundID.GunshotDefault] = content.Load<SoundEffect>("Sound Effects/gun_shot_default");
     sounds[SoundID.ReloadDefault] = content.Load<SoundEffect>("Sound Effects/reload_default");
+    sounds[SoundID.Background] = content.Load<SoundEffect>("Sound Effects/background_music");
   }
 
   public void Play(SoundID id, float volume = 1.0f, float pitch = 0f, float pan = 0f) {
@@ -96,8 +109,11 @@ internal class SoundManager {
   }
 
   private void UpdateVolumes() {
+    float newVolume = MasterVolume;
+    if (!musicEnabled) 
+      newVolume = 0;
     foreach (var loop in loops.Values) {
-      loop.Instance.Volume = loop.Volume * MasterVolume;
+      loop.Instance.Volume = loop.Volume * newVolume;
     }
   }
 }
