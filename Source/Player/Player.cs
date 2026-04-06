@@ -59,7 +59,7 @@ public class Player : ICollidable {
   public IPlayerState UseItemState { get; private set; }
   public IPlayerState DeadState { get; private set; }
 
-  public Player(ContentManager contentManager, CollisionManager collisionManager, ILevelManager levelManager) {
+  public Player(ContentManager contentManager, CollisionManager collisionManager, ILevelManager levelManager, Game1 game) {
     this.contentManager = contentManager;
     this.collisionManager = collisionManager;
     this.LevelManager = levelManager;
@@ -74,7 +74,7 @@ public class Player : ICollidable {
     MovingState = new PlayerAnimatedMovingState(this);
     StaticState = new PlayerStaticState(this);
     UseItemState = new PlayerUseItemState(this);
-    DeadState = new PlayerDeadState(this);
+    DeadState = new PlayerDeadState(this, game);
     State = StaticState;
   }
 
