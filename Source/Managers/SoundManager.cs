@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameProject.Managers;
 
-internal enum SoundID {
+public enum SoundID {
   PlayerHurt,
   GunshotDefault,
   ReloadDefault
@@ -38,16 +38,15 @@ internal class SoundManager {
   private SoundManager() {
   }
 
-  public void Load(ContentManager content) {
+  public void LoadAllContent(ContentManager content) {
     sounds[SoundID.PlayerHurt] = content.Load<SoundEffect>("Sound Effects/player_hurt");
     sounds[SoundID.GunshotDefault] = content.Load<SoundEffect>("Sound Effects/gun_shot_default");
     sounds[SoundID.ReloadDefault] = content.Load<SoundEffect>("Sound Effects/reload_default");
   }
 
   public void Play(SoundID id, float volume = 1.0f, float pitch = 0f, float pan = 0f) {
-    if (sounds.TryGetValue(id, out SoundEffect sound)) {
-      sound.Play(volume * MasterVolume, pitch, pan);
-    }
+    SoundEffect sound = sounds[id];
+    sound.Play(volume * MasterVolume, pitch, pan);
   }
 
   public void PlayLoop(SoundID id, float volume = 1.0f) {

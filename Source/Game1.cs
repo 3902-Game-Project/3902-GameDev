@@ -61,7 +61,7 @@ public class Game1 : Game {
 
     BlockSpriteFactory.Instance.LoadAllTextures(Content);
     EnemySpriteFactory.Instance.LoadAllTextures(Content);
-    SoundFactory.Instance.LoadAllContent(Content);
+    SoundManager.Instance.LoadAllContent(Content);
     ItemSpriteFactory.Instance.LoadAllTextures(Content);
     ProjectileFactory.Instance.LoadAllTextures(Content);
 
