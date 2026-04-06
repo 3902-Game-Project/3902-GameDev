@@ -1,4 +1,5 @@
 using GameProject.Interfaces;
+using GameProject.Managers;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Items;
@@ -14,7 +15,7 @@ public class SemiAutoFire(GunStats stats) : IFireMode {
     if (stats.CurrentAmmo <= 0) {
       countdown = stats.ReloadTime;
       stats.CurrentAmmo = stats.MaxAmmo;
-      stats.ReloadSFX.Play();
+      SoundManager.Instance.Play(stats.ReloadID);
       return false;
     }
 

@@ -5,6 +5,7 @@ using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using GameProject.Managers;
 
 namespace GameProject.Items;
 
@@ -77,7 +78,7 @@ public class RifleItem : IItem {
     Vector2 bulletSpawnPosition = Position + actualOffset;
     if (fireMode.CanFire(useType)) {
       projectilePattern.SpawnProjectiles(game.StateGame.LevelManager.CurrentLevel.ProjectileManager, bulletSpawnPosition, bulletDirection, stats);
-      stats.GunshotSFX.Play();
+      SoundManager.Instance.Play(stats.GunshotID);
     }
   }
 }

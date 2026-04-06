@@ -1,4 +1,5 @@
 using GameProject.Interfaces;
+using GameProject.Managers;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Items;
@@ -13,7 +14,7 @@ public class AutomaticFire(GunStats stats) : IFireMode {
     } else if (useType == UseType.Pressed) {
       countdown = stats.ReloadTime;
       stats.CurrentAmmo = stats.MaxAmmo;
-      stats.ReloadSFX.Play();
+      SoundManager.Instance.Play(stats.ReloadID);
       return false;
     }
 
