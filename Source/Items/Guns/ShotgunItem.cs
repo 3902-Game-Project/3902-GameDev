@@ -1,9 +1,7 @@
 using GameProject.Enums;
-using GameProject.Factories;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using GameProject.PlayerSpace;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using GameProject.Managers;
 
@@ -11,7 +9,6 @@ namespace GameProject.Items;
 
 public class ShotgunItem : IItem {
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
-  private Vector2 position;
   private Rectangle sourceRectangle = new(0, 10, 27, 9);
   private Vector2 origin;
   private readonly Texture2D texture;
@@ -28,7 +25,7 @@ public class ShotgunItem : IItem {
   public ShotgunItem(Texture2D texture, Vector2 position, Game1 game, GunStats stats) {
     this.game = game;
     this.texture = texture;
-    this.position = position;
+    Position = position;
     this.stats = stats;
     Position = position;
     bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 * (sourceRectangle.Height / 2 - 3)) * scale; // Adjust spawn offset based on the shotgun's size and scale
@@ -45,7 +42,7 @@ public class ShotgunItem : IItem {
 
     spriteBatch.Draw(
       texture,
-      position,
+      Position,
       sourceRectangle,
       Color.White,
       0f,
