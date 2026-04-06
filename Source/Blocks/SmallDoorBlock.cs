@@ -23,19 +23,19 @@ public class SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, BlockStat
 
   public void Rotate() {
     float x = Position.X, y = Position.Y;
-    if (Position.X == 0 ) {
+    if (Position.X < 64) {
       Rotation = MathHelper.ToRadians(90);
       x += 64;
       //y = Position.Y + 64;
-    } else if (Position.X > 0 && Position.Y > 0) {
+    } else if (Position.X >= 896 && Position.Y >= 64) {
       Rotation = MathHelper.ToRadians(90);
       x += 64;
-      y += 64;
-    } else if (Position.Y > 0 && Position.X == 0) {
-      Rotation = MathHelper.ToRadians(90);
-      x -= 64;
-      y += 64;
-    }
+      //y += 64;
+    } //else if (Position.Y > 0 && Position.X == 0) {
+      //Rotation = MathHelper.ToRadians(90);
+     // x -= 64;
+      //y += 64;
+    //}
     Position = new(x, y);
     rotated = true;
   }
@@ -45,7 +45,9 @@ public class SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, BlockStat
   }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    //if (!rotated) { this.Rotate(); }
+    if (!rotated) {
+      this.Rotate();
+    }
     spriteBatch.Draw(SmallDoorTexture, Position, sourceRects[currentFrame], Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 
