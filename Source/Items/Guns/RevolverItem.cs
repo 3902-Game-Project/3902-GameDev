@@ -1,9 +1,7 @@
 using GameProject.Enums;
-using GameProject.Factories;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using GameProject.PlayerSpace;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using GameProject.Managers;
 
