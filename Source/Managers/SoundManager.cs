@@ -3,18 +3,32 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 
-public class SoundManager {
+internal class SoundManager {
 
   private Dictionary<string, SoundEffect> sounds = new();
-  private Dictionary<string, SoundEffectInstance> instances = new();
+  private Dictionary<string, LoopingSound> loops = new();
 
   private float masterVolume = 1.0f;
   public float MasterVolume { 
-    get { return masterVolume; }
+    get => masterVolume;
     set {
       masterVolume = Math.Clamp(value, 0.0f, 1.0f);
       UpdateVolumes();
     } 
+  }
+
+  private class LoopingSound {
+    public SoundEffectInstance Instance;
+    public float Volume;
+  }
+
+  private static readonly SoundManager instance = new();
+
+  public static SoundManager Instance {
+    get { return instance; }
+  }
+
+  private SoundManager() {
   }
 
   public void Load(ContentManager content) {
@@ -29,49 +43,55 @@ public class SoundManager {
     }
   }
 
-  public void PlayLoop(string name) {
-    if (!sounds.TryGetValue(name, out SoundEffect sound)) 
-      return;
-    
-    if (instances.TryGetValue(name, out SoundEffectInstance instance)) {
-      if (instance.State == SoundState.Playing) 
-        return;
-      
-      instance.IsLooped = true;
-      instance.Volume = MasterVolume;
-      instance.Play();
-      return;
-    }
+  public void PlayLoop(string name, float volume = 1.0f) {
+    if (!sounds.TryGetValue(name, out var sound))
+            return;
 
-    instance = sound.CreateInstance();
-    instance.IsLooped = true;
-    instance.Volume = MasterVolume;
-    instance.Play();
+        if (loops.TryGetValue(name, out var loop))
+        {
+            if (loop.Instance.State == SoundState.Playing)
+                return;
 
-    instances[name] = instance;
+            loop.Volume = volume;
+            loop.Instance.IsLooped = true;
+            loop.Instance.Volume = volume * MasterVolume;
+            loop.Instance.Play();
+            return;
+        }
+
+        var instance = sound.CreateInstance();
+        instance.IsLooped = true;
+        instance.Volume = volume * MasterVolume;
+        instance.Play();
+
+        loops[name] = new LoopingSound
+        {
+            Instance = instance,
+            Volume = volume
+        };
   }
 
   public void Stop(string name) {
-    if (instances.TryGetValue(name, out var instance))
+    if (loops.TryGetValue(name, out var loop))
     {
-        instance.Stop();
-        instance.Dispose();
-        instances.Remove(name);
+        loop.Instance.Stop();
+        loop.Instance.Dispose();
+        loops.Remove(name);
     }
   }
 
   public void StopAll() {
-    foreach (var instance in instances.Values)
+    foreach (var loop in loops.Values)
     {
-        instance.Stop();
-        instance.Dispose();
+        loop.Instance.Stop();
+        loop.Instance.Dispose();
     }
-    instances.Clear();
+    loops.Clear();
   }
 
   private void UpdateVolumes() {
-    foreach (SoundEffectInstance instance in instances.Values) {
-      instance.Volume = MasterVolume;
+    foreach (var loop in loops.Values) {
+      loop.Instance.Volume = loop.Volume * MasterVolume;
     }
   }
 }
