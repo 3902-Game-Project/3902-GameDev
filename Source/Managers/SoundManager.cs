@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 
+namespace GameProject.Managers;
+
+internal enum SoundID {
+  PlayerHurt,
+  GunshotDefault,
+  ReloadDefault
+}
 internal class SoundManager {
 
-  private Dictionary<string, SoundEffect> sounds = new();
-  private Dictionary<string, LoopingSound> loops = new();
+  private Dictionary<SoundID, SoundEffect> sounds = new();
+  private Dictionary<SoundID, LoopingSound> loops = new();
 
   private float masterVolume = 1.0f;
   public float MasterVolume { 
@@ -32,51 +39,51 @@ internal class SoundManager {
   }
 
   public void Load(ContentManager content) {
-    sounds["playerHurt"] = content.Load<SoundEffect>("Sound Effects/player_hurt");
-    sounds["gunshotDefault"] = content.Load<SoundEffect>("Sound Effects/gun_shot_default");
-    sounds["reloadDefault"] = content.Load<SoundEffect>("Sound Effects/reload_default");
+    sounds[SoundID.PlayerHurt] = content.Load<SoundEffect>("Sound Effects/player_hurt");
+    sounds[SoundID.GunshotDefault] = content.Load<SoundEffect>("Sound Effects/gun_shot_default");
+    sounds[SoundID.ReloadDefault] = content.Load<SoundEffect>("Sound Effects/reload_default");
   }
 
-  public void Play(string name, float volume = 1.0f, float pitch = 0f, float pan = 0f) {
-    if (sounds.TryGetValue(name, out SoundEffect sound)) {
+  public void Play(SoundID id, float volume = 1.0f, float pitch = 0f, float pan = 0f) {
+    if (sounds.TryGetValue(id, out SoundEffect sound)) {
       sound.Play(volume * MasterVolume, pitch, pan);
     }
   }
 
-  public void PlayLoop(string name, float volume = 1.0f) {
-    if (!sounds.TryGetValue(name, out var sound))
+  public void PlayLoop(SoundID id, float volume = 1.0f) {
+    if (!sounds.TryGetValue(id, out var sound))
             return;
 
-        if (loops.TryGetValue(name, out var loop))
-        {
-            if (loop.Instance.State == SoundState.Playing)
-                return;
-
-            loop.Volume = volume;
-            loop.Instance.IsLooped = true;
-            loop.Instance.Volume = volume * MasterVolume;
-            loop.Instance.Play();
+    if (loops.TryGetValue(id, out var loop))
+    {
+        if (loop.Instance.State == SoundState.Playing)
             return;
-        }
 
-        var instance = sound.CreateInstance();
-        instance.IsLooped = true;
-        instance.Volume = volume * MasterVolume;
-        instance.Play();
+        loop.Volume = volume;
+        loop.Instance.IsLooped = true;
+        loop.Instance.Volume = volume * MasterVolume;
+        loop.Instance.Play();
+        return;
+    }
 
-        loops[name] = new LoopingSound
-        {
-            Instance = instance,
-            Volume = volume
-        };
+    var instance = sound.CreateInstance();
+    instance.IsLooped = true;
+    instance.Volume = volume * MasterVolume;
+    instance.Play();
+
+    loops[id] = new LoopingSound
+    {
+        Instance = instance,
+        Volume = volume
+    };
   }
 
-  public void Stop(string name) {
-    if (loops.TryGetValue(name, out var loop))
+  public void Stop(SoundID id) {
+    if (loops.TryGetValue(id, out var loop))
     {
         loop.Instance.Stop();
         loop.Instance.Dispose();
-        loops.Remove(name);
+        loops.Remove(id);
     }
   }
 
