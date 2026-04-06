@@ -227,9 +227,9 @@
 /processorParam:Quality=Best
 /build:Sound Effects/reload_default.mp3
 
-#begin Sound Effects/western_rock-metal_song.mp3
+#begin Music/background_music.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sound Effects/western_rock-metal_song.mp3;Sound Effects/background_music.mp3
+/build:Music/western_rock-metal_song.mp3;Music/background_music.mp3
 
