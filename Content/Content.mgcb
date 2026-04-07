@@ -142,6 +142,33 @@
 #begin Levels/04_level.csv
 /copy:Levels/04_level.csv
 
+#begin Levels/05_level.csv
+/copy:Levels/05_level.csv
+
+#begin Levels/06_level.csv
+/copy:Levels/06_level.csv
+
+#begin Levels/07_level.csv
+/copy:Levels/07_level.csv
+
+#begin Levels/08_level.csv
+/copy:Levels/08_level.csv
+
+#begin Levels/09_level.csv
+/copy:Levels/09_level.csv
+
+#begin Levels/10_level.csv
+/copy:Levels/10_level.csv
+
+#begin Levels/11_level.csv
+/copy:Levels/11_level.csv
+
+#begin Levels/12_level.csv
+/copy:Levels/12_level.csv
+
+#begin Levels/13_level.csv
+/copy:Levels/13_level.csv
+
 #begin Misc/blood_red_bar.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -209,6 +236,12 @@
 /processorParam:TextureFormat=Color
 /build:Misc/WhitePixel.png
 
+#begin Music/western_rock-metal_song.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/western_rock-metal_song.mp3;Music/background_music.mp3
+
 #begin Sound Effects/gun_shot_default.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
@@ -226,10 +259,4 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sound Effects/reload_default.mp3
-
-#begin Music/background_music.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Music/western_rock-metal_song.mp3;Music/background_music.mp3
 
