@@ -5,4 +5,8 @@ https://www.gamedeveloperstudio.com/tools/spritesheet_slicer.php
 https://spritemapping.com/tool
 https://george-bailey.itch.io/sprite-slicer
 
-https://freesound.org/people/qubodup/sounds/804615/
+Sounds:
+Player Hurt: https://freesound.org/people/qubodup/sounds/804615/ 
+Door: https://opengameart.org/content/door-open-door-close
+Reload: https://cdn.pixabay.com/download/audio/2026/01/28/audio_6f27cf2120.mp3?filename=foisal72-gun-load-475276.mp3
+Gunshot: https://cdn.pixabay.com/download/audio/2021/08/04/audio_b744a46b49.mp3?filename=freesound_community-gun-shot-6178.mp3
