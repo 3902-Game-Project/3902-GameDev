@@ -12,17 +12,15 @@ public class SemiAutoFire(GunStats stats) : IFireMode {
 
     if (useType != UseType.Pressed) return false;
 
-    if (stats.CurrentAmmo <= 0) {
-      countdown = stats.ReloadTime;
-      stats.CurrentAmmo = stats.MaxAmmo;
-      SoundManager.Instance.Play(stats.ReloadID);
-      return false;
-    }
-
     if (countdown > 0) return false;
 
     countdown = stats.FireRate;
     stats.CurrentAmmo--;
+    if (stats.CurrentAmmo <= 0) {
+      countdown = stats.ReloadTime;
+      stats.CurrentAmmo = stats.MaxAmmo;
+      SoundManager.Instance.Play(stats.ReloadID);
+    }
 
     return canFire;
   }

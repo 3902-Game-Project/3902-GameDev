@@ -11,14 +11,14 @@ public class AutomaticFire(GunStats stats) : IFireMode {
     if (stats.CurrentAmmo > 0) {
       if (countdown > 0) return false;
       countdown = stats.FireRate;
-    } else if (useType == UseType.Pressed) {
-      countdown = stats.ReloadTime;
-      stats.CurrentAmmo = stats.MaxAmmo;
-      SoundManager.Instance.Play(stats.ReloadID);
-      return false;
     }
 
     stats.CurrentAmmo--;
+    if (stats.CurrentAmmo <= 0) {
+      countdown = stats.ReloadTime;
+      stats.CurrentAmmo = stats.MaxAmmo;
+      SoundManager.Instance.Play(stats.ReloadID);
+    }
 
     return true;
   }
