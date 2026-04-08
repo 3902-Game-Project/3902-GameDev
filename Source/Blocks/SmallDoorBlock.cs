@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GameProject.Collisions;
 using GameProject.Interfaces;
+using GameProject.Managers;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -54,6 +55,7 @@ public class SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, BlockStat
   public override void OnCollision(CollisionInfo info) {
     if (State == BlockState.open && info.Collider is Player) {
       levelManager.SwitchLevel(PairedLevelName);
+      SoundManager.Instance.Play(SoundID.Door);
     }
   }
 }

@@ -9,7 +9,8 @@ public enum SoundID {
   PlayerHurt,
   GunshotDefault,
   ReloadDefault,
-  Background
+  Background,
+  Door
 }
 internal class SoundManager {
 
@@ -55,6 +56,7 @@ internal class SoundManager {
     sounds[SoundID.GunshotDefault] = content.Load<SoundEffect>("Sound Effects/gun_shot_default");
     sounds[SoundID.ReloadDefault] = content.Load<SoundEffect>("Sound Effects/reload_default");
     sounds[SoundID.Background] = content.Load<SoundEffect>("Music/background_music");
+    sounds[SoundID.Door] = content.Load<SoundEffect>("Sound Effects/door-01");
   }
 
   public void Play(SoundID id, float volume = 1.0f, float pitch = 0f, float pan = 0f) {
