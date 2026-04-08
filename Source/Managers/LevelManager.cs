@@ -16,7 +16,16 @@ public class LevelManager(Game1 game) : ILevelManager {
     "01_level",
     "02_level",
     "03_level",
-    "04_level"
+    "04_level",
+    "05_level",
+    "06_level",
+    "07_level",
+    "08_level",
+    "09_level",
+    "10_level",
+    "11_level",
+    "12_level",
+    "13_level",
   ];
   private static readonly string STARTING_LEVEL = LEVEL_NAMES[0];
 

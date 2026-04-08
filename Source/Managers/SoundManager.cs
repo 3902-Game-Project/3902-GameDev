@@ -54,7 +54,7 @@ internal class SoundManager {
     sounds[SoundID.PlayerHurt] = content.Load<SoundEffect>("Sound Effects/player_hurt");
     sounds[SoundID.GunshotDefault] = content.Load<SoundEffect>("Sound Effects/gun_shot_default");
     sounds[SoundID.ReloadDefault] = content.Load<SoundEffect>("Sound Effects/reload_default");
-    sounds[SoundID.Background] = content.Load<SoundEffect>("Sound Effects/background_music");
+    sounds[SoundID.Background] = content.Load<SoundEffect>("Music/background_music");
   }
 
   public void Play(SoundID id, float volume = 1.0f, float pitch = 0f, float pan = 0f) {

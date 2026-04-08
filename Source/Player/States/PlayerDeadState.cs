@@ -1,11 +1,14 @@
 ﻿using GameProject.Interfaces;
+using GameProject.Misc;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerStates;
 
-public class PlayerDeadState(Player player) : IPlayerState {
+public class PlayerDeadState(Player player, Game1 game) : IPlayerState {
+  static double LOSS_SCREEN_TIME = 3.0;
+  private GPTimer deadTimer = new();
 
   private Rectangle deadSprite = new(1470, 1060, 304, 97);
   public void MoveUp() { }
@@ -17,6 +20,12 @@ public class PlayerDeadState(Player player) : IPlayerState {
 
   public void Update(GameTime gameTime) {
     player.Velocity = Vector2.Zero;
+
+    deadTimer.Update(gameTime);
+
+    if (deadTimer.Time >= LOSS_SCREEN_TIME) {
+      game.ChangeState(game.StateLoss);
+    }
   }
 
   public void Draw(SpriteBatch spriteBatch) {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GameProject.Collisions;
 using GameProject.Interfaces;
 using GameProject.PlayerSpace;
@@ -16,18 +17,26 @@ public class SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, Block
       new(192, 128, 64, 64),
       new(320, 128, 64, 64)
     ];
+  private Boolean rotated = false;
   public float Rotation { get; private set; } = 0.0f;
   public string PairedLevelName { get; private set; } = pairedLevelName;
   public BlockState State { get; private set; } = state;
 
   public void Rotate() {
-    if (Position.X == 0 && Position.Y == 0) {
+    float x = Position.X, y = Position.Y;
+    if (x < 64) {
       Rotation = MathHelper.ToRadians(270);
-    } else if (Position.X > 0 && Position.Y > 0) {
+      y += 64;
+    } else if (x >= 896 && y >= 64) {
       Rotation = MathHelper.ToRadians(90);
-    } else if (Position.Y > 0 && Position.X == 0) {
+      x += 64;
+    } else if (y >= 512 && x >= 64) {
       Rotation = MathHelper.ToRadians(180);
+      x += 64;
+      y += 64;
     }
+    Position = new(x, y);
+    rotated = true;
   }
 
   public override void Update(GameTime gameTime) {
@@ -35,6 +44,7 @@ public class SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, Block
   }
 
   public override void Draw(SpriteBatch spriteBatch) {
+    if (!rotated) { this.Rotate(); }
     spriteBatch.Draw(SlattedDoorTexture, Position, sourceRects[currentFrame], Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 

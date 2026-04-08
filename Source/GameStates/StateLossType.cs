@@ -6,7 +6,8 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.GameStates;
 
 public class StateLossType(Game1 game) : IGameState {
-  private static readonly string LOSS_TEXT = "Game Over";
+  private static readonly string LOSS_TEXT_1 = "Game Over";
+  private static readonly string LOSS_TEXT_2 = "Press R/GamePadA for main menu, Q/GamePadY to quit.";
   private IController keyboardController;
   private IController gamePadController;
 
@@ -28,14 +29,29 @@ public class StateLossType(Game1 game) : IGameState {
     game.SpriteBatch.Begin();
     game.SpriteBatch.DrawString(
       spriteFont: game.Assets.MainFont,
-      text: LOSS_TEXT,
+      text: LOSS_TEXT_1,
       position:
         new Vector2(
           game.Window.ClientBounds.Width,
           game.Window.ClientBounds.Height
-        ) * 0.5f,
+        ) * 0.5f + new Vector2(0.0f, -10.0f),
       color: Color.White,
-      origin: game.Assets.MainFont.MeasureString(LOSS_TEXT) * 0.5f,
+      origin: game.Assets.MainFont.MeasureString(LOSS_TEXT_1) * 0.5f,
+      rotation: 0.0f,
+      scale: 1.0f,
+      effects: SpriteEffects.None,
+      layerDepth: 0.0f
+    );
+    game.SpriteBatch.DrawString(
+      spriteFont: game.Assets.MainFont,
+      text: LOSS_TEXT_2,
+      position:
+        new Vector2(
+          game.Window.ClientBounds.Width,
+          game.Window.ClientBounds.Height
+        ) * 0.5f + new Vector2(0.0f, 10.0f),
+      color: Color.White,
+      origin: game.Assets.MainFont.MeasureString(LOSS_TEXT_2) * 0.5f,
       rotation: 0.0f,
       scale: 1.0f,
       effects: SpriteEffects.None,
