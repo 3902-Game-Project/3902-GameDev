@@ -1,9 +1,7 @@
-﻿using GameProject.Collisions;
-using GameProject.Enums;
+﻿using GameProject.Enums;
 using GameProject.Interfaces;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
-using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
