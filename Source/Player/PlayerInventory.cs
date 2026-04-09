@@ -27,7 +27,7 @@ public class PlayerInventory(ILevelManager levelManager) {
   private void DropItem(IItem itemToDrop) {
     float tossX = random.Next(-100, 100);
     float tossY = random.Next(-150, -50);
-    Vector2 dropVelocity = new Vector2(tossX, tossY);
+    Vector2 dropVelocity = new(tossX, tossY);
 
     IWorldPickup droppedItem = new ItemWorldPickup(itemToDrop, dropVelocity);
     levelManager.CurrentLevel.AddPickup(droppedItem);
