@@ -7,7 +7,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Source.Items.Utility;
 
-public class KeyItem(Texture2D keyTexture, Vector2 startPosition, CollisionManager collisionManager, ILevelManager levelManager) : IItem, IWorldPickup {
+public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager levelManager) : IItem, IWorldPickup {
+  // Removed parameter (CollisionManager collisionManager) to remove warning - Santosh
+
   // add collision info
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   private Rectangle sourceRectangle = new(0, 1344, 21, 39); // CHANGE
