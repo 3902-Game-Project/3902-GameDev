@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject;
 
 public class Game1 : Game {
+  public static readonly int HUD_HEIGHT = 100;
+
   private readonly GraphicsDeviceManager graphics;
   public SpriteBatch SpriteBatch { get; private set; }
   public AssetStore Assets { get; private set; }
@@ -19,7 +21,6 @@ public class Game1 : Game {
   public Viewport DefaultViewport { get; private set; }
   public Viewport HudViewport { get; private set; }
   public Viewport GameViewport { get; private set; }
-  public readonly int HudHeight = 100;
 
   private IGameState currentState;
 
@@ -48,13 +49,13 @@ public class Game1 : Game {
   }
 
   protected override void Initialize() {
-    graphics.PreferredBackBufferHeight = 576 + HudHeight;
+    graphics.PreferredBackBufferHeight = 576 + HUD_HEIGHT;
     graphics.PreferredBackBufferWidth = 960;
     graphics.ApplyChanges();
 
     DefaultViewport = GraphicsDevice.Viewport;
-    HudViewport = new Viewport(0, 0, graphics.PreferredBackBufferWidth, HudHeight);
-    GameViewport = new Viewport(0, HudHeight, graphics.PreferredBackBufferWidth, 576);
+    HudViewport = new Viewport(0, 0, graphics.PreferredBackBufferWidth, HUD_HEIGHT);
+    GameViewport = new Viewport(0, HUD_HEIGHT, graphics.PreferredBackBufferWidth, 576);
 
     base.Initialize();
   }
