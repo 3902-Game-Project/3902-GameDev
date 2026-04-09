@@ -9,7 +9,7 @@ namespace GameProject.Misc;
 public class PlayerInventory(ILevelManager levelManager) {
   private readonly Random random = new();
 
-  public List<IItem> Weapons { get; private set; } = new List<IItem>();
+  public List<IItem> Weapons { get; private set; } = [];
   public int ActiveWeaponIndex { get; private set; } = 0;
 
   public IItem ActiveItem => Weapons.Count > 0 ? Weapons[ActiveWeaponIndex] : null;

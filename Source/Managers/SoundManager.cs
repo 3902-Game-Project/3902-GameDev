@@ -13,9 +13,8 @@ public enum SoundID {
   Door
 }
 internal class SoundManager {
-
-  private Dictionary<SoundID, SoundEffect> sounds = new();
-  private Dictionary<SoundID, LoopingSound> loops = new();
+  private readonly Dictionary<SoundID, SoundEffect> sounds = [];
+  private readonly Dictionary<SoundID, LoopingSound> loops = [];
 
   private bool musicEnabled = true;
 

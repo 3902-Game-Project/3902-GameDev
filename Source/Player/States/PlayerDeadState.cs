@@ -7,8 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.PlayerStates;
 
 public class PlayerDeadState(Player player, Game1 game) : IPlayerState {
-  static double LOSS_SCREEN_TIME = 3.0;
-  private GPTimer deadTimer = new();
+  private static readonly double LOSS_SCREEN_TIME = 3.0;
+  private readonly GPTimer deadTimer = new();
 
   private Rectangle deadSprite = new(1470, 1060, 304, 97);
   public void MoveUp() { }
