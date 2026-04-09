@@ -15,7 +15,7 @@ public class GameKeyboardController(Game1 game) : AKeyboardController {
 
     {Keys.T, new PreviousLevelCommand(game.StateGame.LevelManager)},
     {Keys.Y, new NextLevelCommand(game.StateGame.LevelManager)},
-   
+
     { Keys.F, new PlayerInteractCommand(game.StateGame.Player) },
     { Keys.Space, new SwapWeaponCommand(game.StateGame.Player) },
     { Keys.Tab, new ToggleMusicCommand() }

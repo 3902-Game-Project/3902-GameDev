@@ -4,10 +4,10 @@ using GameProject.Interfaces;
 using GameProject.Managers;
 using GameProject.Misc;
 using GameProject.PlayerStates;
+using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using GameProject.WorldPickups;
 
 namespace GameProject.PlayerSpace;
 

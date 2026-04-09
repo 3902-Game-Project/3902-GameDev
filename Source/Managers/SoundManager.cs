@@ -24,17 +24,17 @@ internal class SoundManager {
     set {
       musicEnabled = value;
       UpdateVolumes();
-    } 
+    }
   }
 
   private float masterVolume = 1.0f;
 
-  public float MasterVolume { 
+  public float MasterVolume {
     get => masterVolume;
     set {
       masterVolume = Math.Clamp(value, 0.0f, 1.0f);
       UpdateVolumes();
-    } 
+    }
   }
 
   private class LoopingSound {
@@ -66,18 +66,17 @@ internal class SoundManager {
 
   public void PlayLoop(SoundID id, float volume = 1.0f) {
     if (!sounds.TryGetValue(id, out var sound))
-            return;
+      return;
 
-    if (loops.TryGetValue(id, out var loop))
-    {
-        if (loop.Instance.State == SoundState.Playing)
-            return;
-
-        loop.Volume = volume;
-        loop.Instance.IsLooped = true;
-        loop.Instance.Volume = volume * MasterVolume;
-        loop.Instance.Play();
+    if (loops.TryGetValue(id, out var loop)) {
+      if (loop.Instance.State == SoundState.Playing)
         return;
+
+      loop.Volume = volume;
+      loop.Instance.IsLooped = true;
+      loop.Instance.Volume = volume * MasterVolume;
+      loop.Instance.Play();
+      return;
     }
 
     var instance = sound.CreateInstance();
@@ -85,34 +84,31 @@ internal class SoundManager {
     instance.Volume = volume * MasterVolume;
     instance.Play();
 
-    loops[id] = new LoopingSound
-    {
-        Instance = instance,
-        Volume = volume
+    loops[id] = new LoopingSound {
+      Instance = instance,
+      Volume = volume
     };
   }
 
   public void Stop(SoundID id) {
-    if (loops.TryGetValue(id, out var loop))
-    {
-        loop.Instance.Stop();
-        loop.Instance.Dispose();
-        loops.Remove(id);
+    if (loops.TryGetValue(id, out var loop)) {
+      loop.Instance.Stop();
+      loop.Instance.Dispose();
+      loops.Remove(id);
     }
   }
 
   public void StopAll() {
-    foreach (var loop in loops.Values)
-    {
-        loop.Instance.Stop();
-        loop.Instance.Dispose();
+    foreach (var loop in loops.Values) {
+      loop.Instance.Stop();
+      loop.Instance.Dispose();
     }
     loops.Clear();
   }
 
   private void UpdateVolumes() {
     float newVolume = MasterVolume;
-    if (!musicEnabled) 
+    if (!musicEnabled)
       newVolume = 0;
     foreach (var loop in loops.Values) {
       loop.Instance.Volume = loop.Volume * newVolume;

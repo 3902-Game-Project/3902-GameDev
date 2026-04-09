@@ -1,5 +1,5 @@
-using GameProject.Managers;
 using GameProject.Interfaces;
+using GameProject.Managers;
 
 namespace GameProject.Commands;
 

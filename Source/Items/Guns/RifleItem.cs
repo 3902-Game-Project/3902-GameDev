@@ -1,9 +1,9 @@
 using GameProject.Enums;
-using GameProject.PlayerSpace;
 using GameProject.Interfaces;
+using GameProject.Managers;
+using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using GameProject.Managers;
 
 namespace GameProject.Items;
 

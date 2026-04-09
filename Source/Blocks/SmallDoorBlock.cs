@@ -32,15 +32,16 @@ public class SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, BlockStat
       Rotation = MathHelper.ToRadians(90);
       x += 64;
       //y += 64;
-    } //else if (Position.Y > 0 && Position.X == 0) {
-      //Rotation = MathHelper.ToRadians(90);
-     // x -= 64;
-      //y += 64;
+    }
+    //else if (Position.Y > 0 && Position.X == 0) {
+    //  Rotation = MathHelper.ToRadians(90);
+    //  x -= 64;
+    //  y += 64;
     //}
     Position = new(x, y);
     rotated = true;
   }
-  
+
   public override void Update(GameTime gameTime) {
     // if all enemies defeated, change state to open
   }

@@ -30,7 +30,7 @@ public class KeyItem : IItem, IWorldPickup {
   public void Draw(SpriteBatch spriteBatch) {
     if (!IsCollected) {
       origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
-      
+
       spriteBatch.Draw(
         texture,
         Position,
