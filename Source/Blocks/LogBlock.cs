@@ -28,7 +28,7 @@ public class LogBlock(Texture2D LogTexture, Vector2 xyPos) : BaseBlock(xyPos) {
   public override void Update(GameTime gameTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    if (!rotated) { this.Rotate(); }
+    if (!rotated) { Rotate(); }
     spriteBatch.Draw(LogTexture, Position, sourceRect, Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 }

@@ -29,7 +29,7 @@ public class LogCornerBlock(Texture2D LogCornerTexture, Vector2 xyPos) : BaseBlo
   public override void Update(GameTime gameTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    if (!rotated) { this.Rotate(); }
+    if (!rotated) { Rotate(); }
     spriteBatch.Draw(LogCornerTexture, Position, sourceRect, Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 }

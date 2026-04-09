@@ -62,7 +62,7 @@ public class Player : ICollidable {
   public Player(ContentManager contentManager, CollisionManager collisionManager, ILevelManager levelManager, Game1 game) {
     this.contentManager = contentManager;
     this.collisionManager = collisionManager;
-    this.LevelManager = levelManager;
+    LevelManager = levelManager;
     Position = new Vector2(400, 300);
     Velocity = Vector2.Zero;
     Inventory = new PlayerInventory(levelManager);
@@ -167,7 +167,7 @@ public class Player : ICollidable {
 
     foreach (var pickup in LevelManager.CurrentLevel.Pickups) {
       if (pickup is BaseWorldPickup basePickup) {
-        float distance = Vector2.Distance(this.Position, basePickup.Position);
+        float distance = Vector2.Distance(Position, basePickup.Position);
         if (distance < grabRange && distance < closestDistance) {
           closestDistance = distance;
           closestPickup = pickup;

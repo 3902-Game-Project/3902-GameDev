@@ -44,7 +44,7 @@ public class SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, Block
   }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    if (!rotated) { this.Rotate(); }
+    if (!rotated) { Rotate(); }
     spriteBatch.Draw(SlattedDoorTexture, Position, sourceRects[currentFrame], Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 

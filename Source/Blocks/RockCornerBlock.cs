@@ -29,7 +29,7 @@ public class RockCornerBlock(Texture2D RockCornerTexture, Vector2 xyPos) : BaseB
   public override void Update(GameTime gameTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    if (!rotated) { this.Rotate(); }
+    if (!rotated) { Rotate(); }
     spriteBatch.Draw(RockCornerTexture, Position, sourceRect, Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 }
