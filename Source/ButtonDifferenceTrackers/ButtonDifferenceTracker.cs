@@ -1,5 +1,26 @@
-﻿namespace GameProject.ButtonDifferenceTrackers;
+﻿using System.Collections.Generic;
+using System.Linq;
 
-internal class ButtonDifferenceTracker {
+namespace GameProject.ButtonDifferenceTrackers;
 
+internal class ButtonDifferenceTracker<ButtonsEnum> {
+  private ButtonsEnum[] pastButtonState = [];
+  private ButtonsEnum[] currentButtonState = [];
+
+  public void Update(ButtonsEnum[] newButtonState) {
+    pastButtonState = currentButtonState;
+    currentButtonState = newButtonState;
+  }
+
+  public IEnumerable<ButtonsEnum> GetDown() {
+    return currentButtonState;
+  }
+
+  public IEnumerable<ButtonsEnum> GetPressed() {
+    return currentButtonState.Where(button => !pastButtonState.Contains(button));
+  }
+
+  public IEnumerable<ButtonsEnum> GetReleased() {
+    return pastButtonState.Where(button => !currentButtonState.Contains(button));
+  }
 }
