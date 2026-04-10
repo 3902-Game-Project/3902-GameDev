@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.ButtonDiffTrackers;
 
 internal class GamePadDiffTracker : ButtonDiffTracker<Buttons> {
-  private static float TRIGGER_THRESHOLD = 0.9f;
+  private static readonly float TRIGGER_THRESHOLD = 0.9f;
 
   public void Update(GamePadState gamePadState) {
     var pressedButtons = new List<Buttons>();
