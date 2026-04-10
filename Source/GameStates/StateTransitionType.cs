@@ -24,4 +24,8 @@ public class StateTransitionType(Game1 game) : IGameState {
   public void Draw(GameTime gameTime) {
     screenFader.Draw(gameTime);
   }
+
+  public void OnStateEnter() { }
+
+  public void OnStateLeave() { }
 }

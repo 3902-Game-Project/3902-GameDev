@@ -7,6 +7,7 @@ namespace GameProject.GameStates;
 
 public class StateItemType(Game1 game) : IGameState {
   private static readonly string TITLE_TEXT = "Item Selection Screen (WIP)";
+  private static readonly string RETURN_TEXT = "Press R/GamePadA to return to game, Q/GamePadY to quit.";
   private IController keyboardController;
   private IController gamePadController;
 
@@ -33,9 +34,24 @@ public class StateItemType(Game1 game) : IGameState {
         new Vector2(
           game.Window.ClientBounds.Width,
           game.Window.ClientBounds.Height
-        ) * 0.5f,
+        ) * 0.5f + new Vector2(0.0f, -10.0f),
       color: Color.White,
       origin: game.Assets.MainFont.MeasureString(TITLE_TEXT) * 0.5f,
+      rotation: 0.0f,
+      scale: 1.0f,
+      effects: SpriteEffects.None,
+      layerDepth: 0.0f
+    );
+    game.SpriteBatch.DrawString(
+      spriteFont: game.Assets.MainFont,
+      text: RETURN_TEXT,
+      position:
+        new Vector2(
+          game.Window.ClientBounds.Width,
+          game.Window.ClientBounds.Height
+        ) * 0.5f + new Vector2(0.0f, 10.0f),
+      color: Color.White,
+      origin: game.Assets.MainFont.MeasureString(RETURN_TEXT) * 0.5f,
       rotation: 0.0f,
       scale: 1.0f,
       effects: SpriteEffects.None,
