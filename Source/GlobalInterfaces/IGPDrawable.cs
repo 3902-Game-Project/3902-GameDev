@@ -1,7 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Interfaces;
 
 public interface IGPDrawable {
-  void Draw(GameTime gameTime);
+  void Draw(SpriteBatch spriteBatch);
 }

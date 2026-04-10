@@ -80,10 +80,12 @@ public class StateGameType : IGameState {
     collisionManager.Update(gameTime);
   }
 
-  public void Draw(GameTime gameTime) {
-    game.GraphicsDevice.Clear(Color.CornflowerBlue);
-    game.GraphicsDevice.Viewport = game.GameViewport;
-    game.SpriteBatch.Begin(
+  public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
+    graphicsDevice.Clear(Color.CornflowerBlue);
+
+    graphicsDevice.Viewport = game.GameViewport;
+
+    spriteBatch.Begin(
       SpriteSortMode.Deferred,
       BlendState.AlphaBlend,
       SamplerState.PointClamp,
@@ -91,8 +93,8 @@ public class StateGameType : IGameState {
       RasterizerState.CullNone
     );
 
-    LevelManager.Draw(gameTime);
-    Player.Draw(game.SpriteBatch);
+    LevelManager.Draw(spriteBatch);
+    Player.Draw(spriteBatch);
 
     if (LevelManager.CurrentLevel != null) {
       foreach (var enemy in LevelManager.CurrentLevel.Enemies) { // Move this to Level.cs (For Eric)
@@ -102,7 +104,7 @@ public class StateGameType : IGameState {
           Vector2 enemyHealthPositions = new(
             baseEnemy.Position.X - (scaleWidth / 2f),
             baseEnemy.Position.Y - baseEnemy.Collider.Height);
-          game.SpriteBatch.Draw(texture: healthBarTexture,
+          spriteBatch.Draw(texture: healthBarTexture,
             position: enemyHealthPositions,
             sourceRectangle: null,
             color: Color.DarkSlateGray,
@@ -115,7 +117,7 @@ public class StateGameType : IGameState {
           int enemyHealthVisible = (int) (healthBarTexture.Width * enemyHealthPercent);
           Rectangle enemyHpSource = new(0, 0, enemyHealthVisible, healthBarTexture.Height);
 
-          game.SpriteBatch.Draw(
+          spriteBatch.Draw(
             texture: healthBarTexture,
             position: enemyHealthPositions,
             sourceRectangle: enemyHpSource,
@@ -129,18 +131,22 @@ public class StateGameType : IGameState {
         }
       }
     }
-    game.SpriteBatch.End();
-    game.GraphicsDevice.Viewport = game.HudViewport;
-    game.SpriteBatch.Begin(
+
+    spriteBatch.End();
+
+    graphicsDevice.Viewport = game.HudViewport;
+
+    spriteBatch.Begin(
       SpriteSortMode.Deferred,
       BlendState.AlphaBlend,
       SamplerState.PointClamp,
       DepthStencilState.None,
       RasterizerState.CullNone
     );
+
     healthBarPosition = new Vector2(20, 20);
     float healthPercent = MathHelper.Clamp(Player.Health / 100f, 0f, 1f);
-    game.SpriteBatch.Draw(
+    spriteBatch.Draw(
       texture: healthBarTexture,
       position: healthBarPosition,
       sourceRectangle: null,
@@ -150,12 +156,12 @@ public class StateGameType : IGameState {
       scale: 0.5f,  //scale of blood bar
       effects: SpriteEffects.None,
       layerDepth: 0f
-      );
+    );
 
 
     int visibleWidth = (int) (healthBarTexture.Width * healthPercent);
     Rectangle sourceRectangle = new(0, 0, visibleWidth, healthBarTexture.Height);
-    game.SpriteBatch.Draw(
+    spriteBatch.Draw(
       texture: healthBarTexture,
       position: healthBarPosition,
       sourceRectangle: sourceRectangle,
@@ -169,9 +175,11 @@ public class StateGameType : IGameState {
 
     //draw player's items, keys...
 
-    // collisionManager.DebugDraw(game.SpriteBatch, game.GraphicsDevice);
-    game.SpriteBatch.End();
-    game.GraphicsDevice.Viewport = game.DefaultViewport;
+    // collisionManager.DebugDraw(spriteBatch, graphicsDevice);
+
+    spriteBatch.End();
+
+    graphicsDevice.Viewport = game.DefaultViewport;
   }
 
   public void OnStateEnter() {

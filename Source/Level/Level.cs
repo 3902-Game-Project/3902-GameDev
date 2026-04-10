@@ -3,6 +3,7 @@ using GameProject.Interfaces;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Misc;
 
@@ -45,24 +46,24 @@ public class Level(
     ProjectileManager.Update(gameTime);
   }
 
-  public void Draw(GameTime gameTime) {
+  public void Draw(SpriteBatch spriteBatch) {
     foreach (var nonCollidableBlock in nonCollidableBlocks) {
-      nonCollidableBlock.Draw(game.SpriteBatch);
+      nonCollidableBlock.Draw(spriteBatch);
     }
 
     foreach (var collidableBlock in collidableBlocks) {
-      collidableBlock.Draw(game.SpriteBatch);
+      collidableBlock.Draw(spriteBatch);
     }
 
     foreach (var enemy in enemies) {
-      enemy.Draw(game.SpriteBatch);
+      enemy.Draw(spriteBatch);
     }
 
     foreach (var pickup in pickups) {
-      pickup.Draw(game.SpriteBatch);
+      pickup.Draw(spriteBatch);
     }
 
-    ProjectileManager.Draw(game.SpriteBatch);
+    ProjectileManager.Draw(spriteBatch);
   }
 
   public void AddPickup(IWorldPickup pickup) {

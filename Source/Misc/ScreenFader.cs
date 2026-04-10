@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Misc;
 
-internal class ScreenFader(SpriteBatch spriteBatch, Texture2D whitePixelTexture, GameWindow gameWindow) : IGPUpdatable, IGPDrawable {
+internal class ScreenFader(SpriteBatch spriteBatch, Texture2D whitePixelTexture, GameWindow gameWindow) : IGPUpdatable, ILowLevelDrawable {
   public enum FadingState {
     FadeIn,
     FadeOut,
@@ -54,7 +54,7 @@ internal class ScreenFader(SpriteBatch spriteBatch, Texture2D whitePixelTexture,
     }
   }
 
-  public void Draw(GameTime gameTime) {
+  public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
     var fadeProgress = fadeTime / FADE_DURATION;
 
     switch (FadeState) {

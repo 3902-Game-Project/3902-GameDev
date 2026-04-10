@@ -24,11 +24,11 @@ public class StateLossType(Game1 game) : IGameState {
     gamePadController.Update(gameTime);
   }
 
-  public void Draw(GameTime gameTime) {
-    game.GraphicsDevice.Clear(Color.CornflowerBlue);
+  public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
+    graphicsDevice.Clear(Color.CornflowerBlue);
 
-    game.SpriteBatch.Begin();
-    game.SpriteBatch.DrawString(
+    spriteBatch.Begin();
+    spriteBatch.DrawString(
       spriteFont: game.Assets.MainFont,
       text: TITLE_TEXT,
       position:
@@ -43,7 +43,7 @@ public class StateLossType(Game1 game) : IGameState {
       effects: SpriteEffects.None,
       layerDepth: 0.0f
     );
-    game.SpriteBatch.DrawString(
+    spriteBatch.DrawString(
       spriteFont: game.Assets.MainFont,
       text: RETURN_TEXT,
       position:
@@ -58,7 +58,7 @@ public class StateLossType(Game1 game) : IGameState {
       effects: SpriteEffects.None,
       layerDepth: 0.0f
     );
-    game.SpriteBatch.End();
+    spriteBatch.End();
   }
 
   public void OnStateEnter() { }

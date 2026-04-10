@@ -3,13 +3,14 @@ using GameProject.Interfaces;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.GameStates;
 
 // StateTransitionType is never intended to be the target of game1.ChangeState; it manages fading between 2 states as a result of game1.ChangeState
 public class StateTransitionType(Game1 game) : IGameState {
   private readonly ScreenFader screenFader = new(
-    game.SpriteBatch,
+    spriteBatch,
     game.Assets.Textures.WhitePixel,
     game.Window
   );
@@ -48,25 +49,25 @@ public class StateTransitionType(Game1 game) : IGameState {
     }
   }
 
-  public void Draw(GameTime gameTime) {
+  public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
     switch (screenFader.FadeState) {
       case ScreenFader.FadingState.FadeOut:
-        fromGameState.Draw(gameTime);
+        fromGameState.Draw(graphicsDevice, spriteBatch);
         break;
 
       case ScreenFader.FadingState.FadedOut:
       case ScreenFader.FadingState.FadeIn:
       case ScreenFader.FadingState.FadedIn:
-        toGameState.Draw(gameTime);
+        toGameState.Draw(graphicsDevice, spriteBatch);
         break;
 
       default:
         throw new Exception("Unknown fading state value");
     }
 
-    game.SpriteBatch.Begin();
-    screenFader.Draw(gameTime);
-    game.SpriteBatch.End();
+    spriteBatch.Begin();
+    screenFader.Draw(spriteBatch);
+    spriteBatch.End();
   }
 
   public void OnStateEnter() {
