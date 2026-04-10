@@ -10,9 +10,6 @@ public interface ILevel : IInitable, IGPUpdatable, IGPDrawable {
   Vector2 PlayerPosition { get; }
   public ProjectileManager ProjectileManager { get; }
   void AddPickup(IWorldPickup pickup);
-  void FadeIn();
-  void FadeOut();
-  bool IsFadingOut();
   void RemovePickup(IWorldPickup pickup);
   List<IWorldPickup> Pickups { get; }
 }
