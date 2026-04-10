@@ -22,10 +22,10 @@ internal class ScreenFader(SpriteBatch spriteBatch, Texture2D whitePixelTexture,
     );
   }
 
-  private static readonly float FADE_DURATION = 0.2f;
+  private static readonly float FADE_DURATION = 2.0f;
   private double fadeTime = 0.0;
 
-  public FadingState FadeState { get; private set; } = FadingState.FadedOut;
+  public FadingState FadeState { get; private set; } = FadingState.FadedIn;
 
   public void Update(GameTime gameTime) {
     switch (FadeState) {
@@ -56,14 +56,27 @@ internal class ScreenFader(SpriteBatch spriteBatch, Texture2D whitePixelTexture,
   }
 
   public void Draw(GameTime gameTime) {
-    if (FadeState == FadingState.FadeIn || FadeState == FadingState.FadeOut) {
-      var fadeProgress = fadeTime / FADE_DURATION;
+    var fadeProgress = fadeTime / FADE_DURATION;
 
-      if (FadeState == FadingState.FadeIn) {
+    switch (FadeState) {
+      case FadingState.FadeIn:
         DrawFadeRectangle(1.0 - fadeProgress);
-      } else {
+        break;
+
+      case FadingState.FadeOut:
         DrawFadeRectangle(fadeProgress);
-      }
+        break;
+
+      case FadingState.FadedIn:
+        /* do nothing */
+        break;
+
+      case FadingState.FadedOut:
+        DrawFadeRectangle(1.0);
+        break;
+
+      default:
+        throw new Exception("Unknown fading state value");
     }
   }
 
