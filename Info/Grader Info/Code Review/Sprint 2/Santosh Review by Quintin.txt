@@ -14,7 +14,7 @@ Specific comments on what is readable and what is not:
 
 For StateMenuType.cs:
 
-What is readable: The use of named parameters in game.SpriteBatch.DrawString (e.g., spriteFont:, text:, position:) is good. 
+What is readable: The use of named parameters in spriteBatch.DrawString (e.g., spriteFont:, text:, position:) is good. 
 Using a private static readonly string for START_TEXT is also a good to avoid magic strings.
 
 What is not readable: The class naming convention is a little inconsistant. 

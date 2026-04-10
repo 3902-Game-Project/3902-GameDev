@@ -1,6 +1,7 @@
 ﻿using GameProject.Controllers;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.GameStates;
@@ -15,18 +16,18 @@ public class StateMenuType(Game1 game) : IGameState {
     gamePadController = new MenuGamePadController(game);
   }
 
-  public void LoadContent() { }
+  public void LoadContent(ContentManager content) { }
 
   public void Update(GameTime gameTime) {
     keyboardController.Update(gameTime);
     gamePadController.Update(gameTime);
   }
 
-  public void Draw(GameTime gameTime) {
-    game.GraphicsDevice.Clear(Color.CornflowerBlue);
+  public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
+    graphicsDevice.Clear(Color.CornflowerBlue);
 
-    game.SpriteBatch.Begin();
-    game.SpriteBatch.DrawString(
+    spriteBatch.Begin();
+    spriteBatch.DrawString(
       spriteFont: game.Assets.MainFont,
       text: START_TEXT,
       position:
@@ -41,7 +42,7 @@ public class StateMenuType(Game1 game) : IGameState {
       effects: SpriteEffects.None,
       layerDepth: 0.0f
     );
-    game.SpriteBatch.End();
+    spriteBatch.End();
   }
 
   public void OnStateEnter() { }

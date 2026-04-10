@@ -7,6 +7,7 @@ using GameProject.Interfaces;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Managers;
 
@@ -65,8 +66,8 @@ public class LevelManager(Game1 game) : ILevelManager {
     CurrentLevel.Update(gameTime);
   }
 
-  public void Draw(GameTime gameTime) {
-    CurrentLevel.Draw(gameTime);
+  public void Draw(SpriteBatch spriteBatch) {
+    CurrentLevel.Draw(spriteBatch);
   }
 
   public void SwitchLevel(string newLevelName) {
