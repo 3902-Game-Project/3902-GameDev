@@ -49,7 +49,7 @@ public class Game1 : Game {
   public void ResetGameState() {
     StateGame = new StateGameType(this);
     StateGame.Initialize();
-    StateGame.LoadContent();
+    StateGame.LoadContent(Content);
   }
 
   protected override void Initialize() {
@@ -93,13 +93,13 @@ public class Game1 : Game {
     StateItemScreen.Initialize();
     StateGame.Initialize();
 
-    StateTransition.LoadContent();
-    StateMenu.LoadContent();
-    StateLoss.LoadContent();
-    StateWin.LoadContent();
-    StatePause.LoadContent();
-    StateItemScreen.LoadContent();
-    StateGame.LoadContent();
+    StateTransition.LoadContent(Content);
+    StateMenu.LoadContent(Content);
+    StateLoss.LoadContent(Content);
+    StateWin.LoadContent(Content);
+    StatePause.LoadContent(Content);
+    StateItemScreen.LoadContent(Content);
+    StateGame.LoadContent(Content);
   }
 
   protected override void Update(GameTime gameTime) {
@@ -109,7 +109,7 @@ public class Game1 : Game {
   }
 
   protected override void Draw(GameTime gameTime) {
-    currentState.Draw(gameTime);
+    currentState.Draw(GraphicsDevice, SpriteBatch);
 
     base.Draw(gameTime);
   }
