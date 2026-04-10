@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using GameProject.Interfaces;
@@ -31,7 +33,7 @@ public class LevelManager(Game1 game) : ILevelManager {
 
   private readonly Dictionary<string, ILevel> levels = [];
   private string currentLevelName = STARTING_LEVEL;
-  private string newLevelName = STARTING_LEVEL;
+  private string? fadeToLevelName = null;
 
   private int CurrentLevelIndex => Array.IndexOf(LEVEL_NAMES, currentLevelName);
 
@@ -72,17 +74,24 @@ public class LevelManager(Game1 game) : ILevelManager {
       throw new ArgumentException($"level name unknown: '{newLevelName}'");
     }
 
-    if (newLevelName != currentLevelName && !CurrentLevel.IsFadingOut()) {
-      CurrentLevel.FadeOut();
-      this.newLevelName = newLevelName;
+    if (newLevelName != currentLevelName) {
+      fadeToLevelName = newLevelName;
+      // reloading StateGame to trigger level change code in the future
+      game.ChangeState(game.StateGame);
     }
   }
 
-  // Called by Level.cs when level fade out is complete
+  // Called by StateGameType.cs when beginning to fade in stategame
+  // If there is a level switch queued, process it now
   public void CompleteLevelSwitch() {
-    currentLevelName = newLevelName;
+    if (fadeToLevelName == null) {
+      // No level switch queued
+      return;
+    }
+
+    currentLevelName = fadeToLevelName;
+    fadeToLevelName = null;
     game.StateGame.Player.Position = CurrentLevel.PlayerPosition;
-    CurrentLevel.FadeIn();
     CurrentLevel.ProjectileManager.ClearProjectiles();
   }
 

@@ -14,9 +14,12 @@ public class Game1 : Game {
   private readonly GraphicsDeviceManager graphics;
   public SpriteBatch SpriteBatch { get; private set; }
   public AssetStore Assets { get; private set; }
+  private StateTransitionType StateTransition;
   public IGameState StateMenu { get; private set; }
   public IGameState StateLoss { get; private set; }
   public IGameState StateWin { get; private set; }
+  public IGameState StatePause { get; private set; }
+  public IGameState StateItemScreen { get; private set; }
   public StateGameType StateGame { get; private set; }
   public Viewport DefaultViewport { get; private set; }
   public Viewport HudViewport { get; private set; }
@@ -30,16 +33,17 @@ public class Game1 : Game {
     IsMouseVisible = true;
 
     Assets = new AssetStore(this);
-
   }
 
-  public void ChangeState(IGameState state) {
-    SoundManager.Instance.StopAll();
-    currentState = state;
+  public void ChangeState(IGameState newState) {
+    StateTransition.SetFadingStates(currentState, newState);
+    ChangeStateWithoutFading(StateTransition);
+  }
 
-    if (state == StateGame) {
-      SoundManager.Instance.PlayLoop(SoundID.Background);
-    }
+  public void ChangeStateWithoutFading(IGameState newState) {
+    currentState.OnStateLeave();
+    currentState = newState;
+    newState.OnStateEnter();
   }
 
   public void ResetGameState() {
@@ -71,21 +75,30 @@ public class Game1 : Game {
     ItemSpriteFactory.Instance.LoadAllTextures(Content);
     ProjectileFactory.Instance.LoadAllTextures(Content);
 
+    StateTransition = new StateTransitionType(this);
     StateMenu = new StateMenuType(this);
     StateLoss = new StateLossType(this);
     StateWin = new StateWinType(this);
+    StatePause = new StatePauseType(this);
+    StateItemScreen = new StateItemScreenType(this);
     StateGame = new StateGameType(this);
     currentState = StateMenu;
 
     Assets.Initialize();
+    StateTransition.Initialize();
     StateMenu.Initialize();
     StateLoss.Initialize();
     StateWin.Initialize();
+    StatePause.Initialize();
+    StateItemScreen.Initialize();
     StateGame.Initialize();
 
+    StateTransition.LoadContent();
     StateMenu.LoadContent();
     StateLoss.LoadContent();
     StateWin.LoadContent();
+    StatePause.LoadContent();
+    StateItemScreen.LoadContent();
     StateGame.LoadContent();
   }
 
@@ -97,6 +110,7 @@ public class Game1 : Game {
 
   protected override void Draw(GameTime gameTime) {
     currentState.Draw(gameTime);
+
     base.Draw(gameTime);
   }
 }

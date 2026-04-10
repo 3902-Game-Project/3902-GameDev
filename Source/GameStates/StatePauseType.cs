@@ -5,15 +5,15 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.GameStates;
 
-public class StateWinType(Game1 game) : IGameState {
-  private static readonly string TITLE_TEXT = "You've won!";
-  private static readonly string RETURN_TEXT = "Press R/GamePadA for main menu, Q/GamePadY to quit.";
+public class StatePauseType(Game1 game) : IGameState {
+  private static readonly string TITLE_TEXT = "Paused";
+  private static readonly string RETURN_TEXT = "Press P/GamePadB to return to game, Q/GamePadY to quit.";
   private IController keyboardController;
   private IController gamePadController;
 
   public void Initialize() {
-    keyboardController = new EndKeyboardController(game);
-    gamePadController = new EndGamePadController(game);
+    keyboardController = new PauseKeyboardController(game);
+    gamePadController = new PauseGamePadController(game);
   }
 
   public void LoadContent() { }

@@ -7,4 +7,8 @@ public interface IGameState {
   void LoadContent();
   void Update(GameTime gameTime);
   void Draw(GameTime gameTime);
+  void OnStateEnter();
+  void OnStateLeave();
+  void OnStateStartFadeIn();
+  void OnStateEndFadeOut();
 }

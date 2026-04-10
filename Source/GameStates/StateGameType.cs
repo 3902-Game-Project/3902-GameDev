@@ -172,4 +172,18 @@ public class StateGameType : IGameState {
     game.SpriteBatch.End();
     game.GraphicsDevice.Viewport = game.DefaultViewport;
   }
+
+  public void OnStateEnter() {
+    SoundManager.Instance.PlayLoop(SoundID.Background);
+  }
+
+  public void OnStateLeave() {
+    SoundManager.Instance.StopAll();
+  }
+
+  public void OnStateStartFadeIn() {
+    LevelManager.CompleteLevelSwitch();
+  }
+
+  public void OnStateEndFadeOut() { }
 }
