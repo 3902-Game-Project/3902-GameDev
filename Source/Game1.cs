@@ -14,9 +14,12 @@ public class Game1 : Game {
   private readonly GraphicsDeviceManager graphics;
   public SpriteBatch SpriteBatch { get; private set; }
   public AssetStore Assets { get; private set; }
+  private StateTransitionType StateTransition;
   public IGameState StateMenu { get; private set; }
   public IGameState StateLoss { get; private set; }
   public IGameState StateWin { get; private set; }
+  public IGameState StatePause { get; private set; }
+  public IGameState StateItem { get; private set; }
   public StateGameType StateGame { get; private set; }
   public Viewport DefaultViewport { get; private set; }
   public Viewport HudViewport { get; private set; }
@@ -34,7 +37,8 @@ public class Game1 : Game {
   }
 
   public void ChangeState(IGameState state) {
-
+    StateTransition.SetToState(state);
+    ChangeStateWithoutFading(StateTransition);
   }
 
   public void ChangeStateWithoutFading(IGameState state) {
@@ -96,6 +100,7 @@ public class Game1 : Game {
 
   protected override void Draw(GameTime gameTime) {
     currentState.Draw(gameTime);
+
     base.Draw(gameTime);
   }
 }
