@@ -175,6 +175,7 @@ public class StateGameType : IGameState {
 
   public void OnStateEnter() {
     SoundManager.Instance.PlayLoop(SoundID.Background);
+    LevelManager.CompleteLevelSwitch();
   }
 
   public void OnStateLeave() {

@@ -74,21 +74,30 @@ public class Game1 : Game {
     ItemSpriteFactory.Instance.LoadAllTextures(Content);
     ProjectileFactory.Instance.LoadAllTextures(Content);
 
+    StateTransition = new StateTransitionType(this);
     StateMenu = new StateMenuType(this);
     StateLoss = new StateLossType(this);
     StateWin = new StateWinType(this);
+    StatePause = new StatePauseType(this);
+    StateItem = new StateItemType(this);
     StateGame = new StateGameType(this);
     currentState = StateMenu;
 
     Assets.Initialize();
+    StateTransition.Initialize();
     StateMenu.Initialize();
     StateLoss.Initialize();
     StateWin.Initialize();
+    StatePause.Initialize();
+    StateItem.Initialize();
     StateGame.Initialize();
 
+    StateTransition.LoadContent();
     StateMenu.LoadContent();
     StateLoss.LoadContent();
     StateWin.LoadContent();
+    StatePause.LoadContent();
+    StateItem.LoadContent();
     StateGame.LoadContent();
   }
 
