@@ -109,7 +109,7 @@ public class Game1 : Game {
   }
 
   protected override void Draw(GameTime gameTime) {
-    currentState.Draw(GraphicsDevice, SpriteBatch);
+    currentState.LowLevelDraw(GraphicsDevice, SpriteBatch);
 
     base.Draw(gameTime);
   }

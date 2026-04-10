@@ -49,23 +49,23 @@ public class StateTransitionType(Game1 game) : IGameState {
     }
   }
 
-  public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
+  public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
     switch (screenFader.FadeState) {
       case ScreenFader.FadingState.FadeOut:
-        fromGameState.Draw(graphicsDevice, spriteBatch);
+        fromGameState.LowLevelDraw(graphicsDevice, spriteBatch);
         break;
 
       case ScreenFader.FadingState.FadedOut:
       case ScreenFader.FadingState.FadeIn:
       case ScreenFader.FadingState.FadedIn:
-        toGameState.Draw(graphicsDevice, spriteBatch);
+        toGameState.LowLevelDraw(graphicsDevice, spriteBatch);
         break;
 
       default:
         throw new Exception("Unknown fading state value");
     }
 
-    screenFader.Draw(graphicsDevice, spriteBatch);
+    screenFader.LowLevelDraw(graphicsDevice, spriteBatch);
   }
 
   public void OnStateEnter() {

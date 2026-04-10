@@ -54,7 +54,7 @@ internal class ScreenFader(SpriteBatch spriteBatch, Texture2D whitePixelTexture,
     }
   }
 
-  public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
+  public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
     var fadeProgress = fadeTime / FADE_DURATION;
 
     spriteBatch.Begin();

@@ -80,7 +80,7 @@ public class StateGameType : IGameState {
     collisionManager.Update(gameTime);
   }
 
-  public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
+  public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
     graphicsDevice.Clear(Color.CornflowerBlue);
 
     graphicsDevice.Viewport = game.GameViewport;

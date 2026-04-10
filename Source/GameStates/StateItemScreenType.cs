@@ -24,7 +24,7 @@ public class StateItemScreenType(Game1 game) : IGameState {
     gamePadController.Update(gameTime);
   }
 
-  public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
+  public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
     graphicsDevice.Clear(Color.CornflowerBlue);
 
     spriteBatch.Begin();
