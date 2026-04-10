@@ -3,7 +3,7 @@ using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace GameProject.AbstractClasses;
+namespace GameProject.Controllers;
 
 public abstract class AKeyboardController : IController {
   private readonly KeyboardDifferenceTracker keyTracker = new();
