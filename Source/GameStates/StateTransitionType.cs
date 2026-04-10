@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 namespace GameProject.GameStates;
 
 public class StateTransitionType(Game1 game) : IGameState {
-  private ScreenFader screenFader = new(
+  private readonly ScreenFader screenFader = new(
     game.SpriteBatch,
     game.Assets.Textures.WhitePixel,
     game.Window

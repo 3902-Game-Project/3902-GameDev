@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using GameProject.Interfaces;
 using GameProject.Misc;
@@ -83,6 +84,10 @@ public class LevelManager(Game1 game) : ILevelManager {
 
   // Called by StateGameType.cs when fade out is complete
   public void CompleteLevelSwitch() {
+    if (fadeToLevelName == null) {
+      throw new InvalidConstraintException("CompleteLevelSwitch called when fadeToLevelName still null");
+    }
+
     currentLevelName = fadeToLevelName;
     fadeToLevelName = null;
     game.StateGame.Player.Position = CurrentLevel.PlayerPosition;
