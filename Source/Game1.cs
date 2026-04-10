@@ -37,7 +37,7 @@ public class Game1 : Game {
   }
 
   public void ChangeState(IGameState state) {
-    StateTransition.SetToState(state);
+    StateTransition.SetFadingStates(currentState, state);
     ChangeStateWithoutFading(StateTransition);
   }
 
