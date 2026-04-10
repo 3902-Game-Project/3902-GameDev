@@ -1,13 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using GameProject.Misc;
 using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.ButtonDiffTrackers;
 
 internal class GamePadDiffTracker : ButtonDiffTracker<Buttons> {
   private static readonly float TRIGGER_THRESHOLD = 0.9f;
+  private static readonly float STICK_THRESHOLD_SQUARED = 0.9f * 0.9f;
+  // Use MathF.PI * (5.0f / 16.0f) for perfectly sized octagonal stick regions (allowing diagonals)
+  // Use MathF.PI * (1.0f / 4.0f) for cardinal directions only
+  private static readonly float STICK_DIAGONAL_ANGLE_THRESHOLD = MathF.PI * (5.0f / 16.0f);
 
   public void Update(GamePadState gamePadState) {
     var pressedButtons = new List<Buttons>();
+
+    // Add buttons (in order of Buttons Enum)
 
     if (gamePadState.Buttons.A == ButtonState.Pressed) {
       pressedButtons.Add(Buttons.A);
@@ -49,7 +57,25 @@ internal class GamePadDiffTracker : ButtonDiffTracker<Buttons> {
       pressedButtons.Add(Buttons.LeftStick);
     }
 
-    /* Omitted left thumbstick direction buttons */
+    if (gamePadState.ThumbSticks.Left.LengthSquared() > STICK_THRESHOLD_SQUARED) {
+      var angle = VectorFuncs.Angle(gamePadState.ThumbSticks.Left);
+
+      if (angle >= MathF.PI * 1.5f - STICK_DIAGONAL_ANGLE_THRESHOLD && angle <= MathF.PI * 1.5 + STICK_DIAGONAL_ANGLE_THRESHOLD) {
+        pressedButtons.Add(Buttons.LeftThumbstickDown);
+      }
+
+      if (angle >= MathF.PI - STICK_DIAGONAL_ANGLE_THRESHOLD && angle <= MathF.PI + STICK_DIAGONAL_ANGLE_THRESHOLD) {
+        pressedButtons.Add(Buttons.LeftThumbstickLeft);
+      }
+
+      if (angle >= 0.0f && angle <= STICK_DIAGONAL_ANGLE_THRESHOLD || angle >= MathF.PI * 2.0f - STICK_DIAGONAL_ANGLE_THRESHOLD && angle <= MathF.PI * 2.0f) {
+        pressedButtons.Add(Buttons.LeftThumbstickRight);
+      }
+
+      if (angle >= MathF.PI * 0.5f - STICK_DIAGONAL_ANGLE_THRESHOLD && angle <= MathF.PI * 0.5 + STICK_DIAGONAL_ANGLE_THRESHOLD) {
+        pressedButtons.Add(Buttons.LeftThumbstickUp);
+      }
+    }
 
     if (gamePadState.Triggers.Left >= TRIGGER_THRESHOLD) {
       pressedButtons.Add(Buttons.LeftTrigger);
@@ -63,7 +89,25 @@ internal class GamePadDiffTracker : ButtonDiffTracker<Buttons> {
       pressedButtons.Add(Buttons.RightStick);
     }
 
-    /* Omitted right thumbstick direction buttons */
+    if (gamePadState.ThumbSticks.Right.LengthSquared() > STICK_THRESHOLD_SQUARED) {
+      var angle = VectorFuncs.Angle(gamePadState.ThumbSticks.Right);
+
+      if (angle >= MathF.PI * 1.5f - STICK_DIAGONAL_ANGLE_THRESHOLD && angle <= MathF.PI * 1.5 + STICK_DIAGONAL_ANGLE_THRESHOLD) {
+        pressedButtons.Add(Buttons.RightThumbstickDown);
+      }
+
+      if (angle >= MathF.PI - STICK_DIAGONAL_ANGLE_THRESHOLD && angle <= MathF.PI + STICK_DIAGONAL_ANGLE_THRESHOLD) {
+        pressedButtons.Add(Buttons.RightThumbstickLeft);
+      }
+
+      if (angle >= 0.0f && angle <= STICK_DIAGONAL_ANGLE_THRESHOLD || angle >= MathF.PI * 2.0f - STICK_DIAGONAL_ANGLE_THRESHOLD && angle <= MathF.PI * 2.0f) {
+        pressedButtons.Add(Buttons.RightThumbstickRight);
+      }
+
+      if (angle >= MathF.PI * 0.5f - STICK_DIAGONAL_ANGLE_THRESHOLD && angle <= MathF.PI * 0.5 + STICK_DIAGONAL_ANGLE_THRESHOLD) {
+        pressedButtons.Add(Buttons.RightThumbstickUp);
+      }
+    }
 
     if (gamePadState.Triggers.Right >= TRIGGER_THRESHOLD) {
       pressedButtons.Add(Buttons.RightTrigger);
