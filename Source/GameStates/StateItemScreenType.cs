@@ -7,7 +7,7 @@ namespace GameProject.GameStates;
 
 public class StateItemScreenType(Game1 game) : IGameState {
   private static readonly string TITLE_TEXT = "Item Selection Screen (WIP)";
-  private static readonly string RETURN_TEXT = "Press R/GamePadA to return to game, Q/GamePadY to quit.";
+  private static readonly string RETURN_TEXT = "Press I/GamePadB to return to game, Q/GamePadY to quit.";
   private IController keyboardController;
   private IController gamePadController;
 
