@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GameProject.ButtonDiffTrackers;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -6,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.Controllers;
 
 public abstract class AKeyboardController : IController {
-  private readonly KeyboardDifferenceTracker keyTracker = new();
+  private readonly KeyboardDiffTracker keyTracker = new();
 
   protected abstract Dictionary<Keys, ICommand> PressedMappings { get; }
   protected abstract Dictionary<Keys, ICommand> DownMappings { get; }

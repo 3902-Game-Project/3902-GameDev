@@ -16,12 +16,11 @@ public enum FacingDirection {
   Right
 }
 
-public class Player : ICollidable {
+public class Player : IInitable, ICollidable {
   private static readonly float PLAYER_WIDTH = 171.0f * 0.15f;
   private static readonly float PLAYER_HEIGHT = 323.0f * 0.15f;
   private static readonly float KNOCKBACK_DISTANCE = 10f;
 
-  private readonly ContentManager contentManager;
   private readonly CollisionManager collisionManager;
 
   public IShape Shape => Collider;
@@ -59,8 +58,7 @@ public class Player : ICollidable {
   public IPlayerState UseItemState { get; private set; }
   public IPlayerState DeadState { get; private set; }
 
-  public Player(ContentManager contentManager, CollisionManager collisionManager, ILevelManager levelManager, Game1 game) {
-    this.contentManager = contentManager;
+  public Player(CollisionManager collisionManager, ILevelManager levelManager, Game1 game) {
     this.collisionManager = collisionManager;
     LevelManager = levelManager;
     Position = new Vector2(400, 300);
@@ -90,7 +88,9 @@ public class Player : ICollidable {
   }
   public void Die() => State.Die();
 
-  public void LoadContent() {
+  public void Initialize() { }
+
+  public void LoadContent(ContentManager contentManager) {
     Texture = contentManager.Load<Texture2D>("Misc/playerSpritesheet");
   }
 

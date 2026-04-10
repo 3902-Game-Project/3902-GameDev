@@ -28,7 +28,7 @@ public class StateGameType : IGameState {
   public StateGameType(Game1 game) {
     this.game = game;
     LevelManager = new LevelManager(game);
-    Player = new Player(game.Content, collisionManager, LevelManager, game);
+    Player = new Player(collisionManager, LevelManager, game);
   }
 
   public void Initialize() {
@@ -40,7 +40,7 @@ public class StateGameType : IGameState {
   }
 
   public void LoadContent(ContentManager content) {
-    Player.LoadContent();
+    Player.LoadContent(content);
 
     Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateShotgun(0f, 0f, game));
     Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateRifle(0f, 0f, game));

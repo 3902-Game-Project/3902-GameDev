@@ -1,30 +1,21 @@
-﻿using GameProject.Commands;
+﻿using System.Collections.Generic;
+using GameProject.Commands;
 using GameProject.Interfaces;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Controllers;
 
-internal class EndGamePadController(Game1 game) : IController {
-  private GamePadState prevGamePadState = new();
-  private GamePadState gamePadState = new();
-  private readonly ICommand quitCommand = new QuitCommand(game);
-  private readonly ICommand returnToMainMenuCommand = new ReturnToMenuAndResetCommand(game);
+internal class EndGamePadController(Game1 game) : AGamePadController {
+  // The bindings don't match the readme. this is intentional, because
+  // the readme is in Xbox controller layout, but testing with a
+  // nintendo pro controller seems to suggest it is pro controller layout.
 
-  public void Update(GameTime gameTime) {
-    prevGamePadState = gamePadState;
-    gamePadState = GamePad.GetState(PlayerIndex.One);
+  protected override Dictionary<Buttons, ICommand> PressedMappings { get; } = new() {
+    { Buttons.B, new ReturnToMenuAndResetCommand(game) },
+    { Buttons.X, new QuitCommand(game) },
+  };
 
-    // The bindings don't match the readme. this is intentional, because
-    // the readme is in Xbox controller layout, but testing with a
-    // nintendo pro controller seems to suggest it is pro controller layout.
+  protected override Dictionary<Buttons, ICommand> DownMappings { get; } = [];
 
-    if (gamePadState.Buttons.B == ButtonState.Pressed && prevGamePadState.Buttons.B == ButtonState.Released) {
-      returnToMainMenuCommand.Execute();
-    }
-
-    if (gamePadState.Buttons.X == ButtonState.Pressed && prevGamePadState.Buttons.X == ButtonState.Released) {
-      quitCommand.Execute();
-    }
-  }
+  protected override Dictionary<Buttons, ICommand> ReleasedMappings { get; } = [];
 }
