@@ -1,5 +1,5 @@
 ﻿namespace GameProject.ButtonDifferenceTrackers;
 
-internal class AButtonDifferenceTracker {
+internal class ButtonDifferenceTracker {
 
 }
