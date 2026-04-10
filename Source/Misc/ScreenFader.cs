@@ -57,6 +57,8 @@ internal class ScreenFader(SpriteBatch spriteBatch, Texture2D whitePixelTexture,
   public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
     var fadeProgress = fadeTime / FADE_DURATION;
 
+    spriteBatch.Begin();
+
     switch (FadeState) {
       case FadingState.FadeIn:
         DrawFadeRectangle(1.0 - fadeProgress);
@@ -77,6 +79,8 @@ internal class ScreenFader(SpriteBatch spriteBatch, Texture2D whitePixelTexture,
       default:
         throw new Exception("Unknown fading state value");
     }
+
+    spriteBatch.End();
   }
 
   public void FadeIn() {

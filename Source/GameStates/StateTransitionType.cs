@@ -65,9 +65,7 @@ public class StateTransitionType(Game1 game) : IGameState {
         throw new Exception("Unknown fading state value");
     }
 
-    spriteBatch.Begin();
-    screenFader.Draw(spriteBatch);
-    spriteBatch.End();
+    screenFader.Draw(graphicsDevice, spriteBatch);
   }
 
   public void OnStateEnter() {
