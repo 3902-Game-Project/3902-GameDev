@@ -33,7 +33,6 @@ public class Game1 : Game {
     IsMouseVisible = true;
 
     Assets = new AssetStore(this);
-
   }
 
   public void ChangeState(IGameState state) {
