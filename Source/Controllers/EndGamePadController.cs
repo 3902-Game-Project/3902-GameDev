@@ -11,8 +11,8 @@ internal class EndGamePadController(Game1 game) : AGamePadController {
   // nintendo pro controller seems to suggest it is pro controller layout.
 
   protected override Dictionary<Buttons, ICommand> PressedMappings { get; } = new() {
-    {Buttons.B, new ReturnToMenuAndResetCommand(game)},
-    {Buttons.X, new QuitCommand(game)},
+    { Buttons.B, new ReturnToMenuAndResetCommand(game) },
+    { Buttons.X, new QuitCommand(game) },
   };
 
   protected override Dictionary<Buttons, ICommand> DownMappings { get; } = [];

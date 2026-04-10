@@ -7,8 +7,8 @@ namespace GameProject.Controllers;
 
 public class PauseKeyboardController(Game1 game) : AKeyboardController {
   protected override Dictionary<Keys, ICommand> PressedMappings { get; } = new() {
-    {Keys.P, new ReturnToGameCommand(game)},
-    {Keys.Q, new QuitCommand(game)},
+    { Keys.P, new ReturnToGameCommand(game) },
+    { Keys.Q, new QuitCommand(game) },
   };
 
   protected override Dictionary<Keys, ICommand> DownMappings { get; } = [];

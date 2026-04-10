@@ -7,8 +7,8 @@ namespace GameProject.Controllers;
 
 public class EndKeyboardController(Game1 game) : AKeyboardController {
   protected override Dictionary<Keys, ICommand> PressedMappings { get; } = new() {
-    {Keys.R, new ReturnToMenuAndResetCommand(game)},
-    {Keys.Q, new QuitCommand(game)},
+    { Keys.R, new ReturnToMenuAndResetCommand(game) },
+    { Keys.Q, new QuitCommand(game) },
   };
 
   protected override Dictionary<Keys, ICommand> DownMappings { get; } = [];

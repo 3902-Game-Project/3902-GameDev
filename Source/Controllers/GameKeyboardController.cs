@@ -19,7 +19,7 @@ public class GameKeyboardController(Game1 game) : AKeyboardController {
 
     { Keys.F, new PlayerInteractCommand(game.StateGame.Player) },
     { Keys.Space, new SwapWeaponCommand(game.StateGame.Player) },
-    { Keys.Tab, new ToggleMusicCommand() }
+    { Keys.Tab, new ToggleMusicCommand() },
   };
 
   protected override Dictionary<Keys, ICommand> DownMappings { get; } = new() {
@@ -31,7 +31,7 @@ public class GameKeyboardController(Game1 game) : AKeyboardController {
     { Keys.Down, new PlayerMoveDownCommand(game.StateGame.Player) },
     { Keys.Left, new PlayerMoveLeftCommand(game.StateGame.Player) },
     { Keys.Right, new PlayerMoveRightCommand(game.StateGame.Player) },
-    { Keys.J, new PlayerUseItemCommand(game.StateGame.Player, UseType.Held) }
+    { Keys.J, new PlayerUseItemCommand(game.StateGame.Player, UseType.Held) },
   };
 
   protected override Dictionary<Keys, ICommand> ReleasedMappings { get; } = new() {
