@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -68,7 +69,7 @@ internal class ScreenFader(SpriteBatch spriteBatch, Texture2D whitePixelTexture,
 
   public void FadeIn() {
     if (FadeState != FadingState.FadedOut) {
-      return;
+      throw new InvalidOperationException("Cannot fade in if not faded out");
     }
 
     FadeState = FadingState.FadeIn;
@@ -77,7 +78,7 @@ internal class ScreenFader(SpriteBatch spriteBatch, Texture2D whitePixelTexture,
 
   public void FadeOut() {
     if (FadeState != FadingState.FadedIn) {
-      return;
+      throw new InvalidOperationException("Cannot fade out if not faded in");
     }
 
     FadeState = FadingState.FadeOut;

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using GameProject.Interfaces;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
