@@ -7,7 +7,7 @@ internal class ButtonDifferenceTracker<ButtonsEnum> {
   private ButtonsEnum[] pastButtonState = [];
   private ButtonsEnum[] currentButtonState = [];
 
-  public void Update(ButtonsEnum[] newButtonState) {
+  protected void UpdateButtonState(ButtonsEnum[] newButtonState) {
     pastButtonState = currentButtonState;
     currentButtonState = newButtonState;
   }
