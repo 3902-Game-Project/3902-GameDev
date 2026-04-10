@@ -1,6 +1,7 @@
 ﻿using GameProject.Controllers;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.GameStates;
@@ -16,7 +17,7 @@ public class StateItemScreenType(Game1 game) : IGameState {
     gamePadController = new ItemScreenGamePadController(game);
   }
 
-  public void LoadContent() { }
+  public void LoadContent(ContentManager content) { }
 
   public void Update(GameTime gameTime) {
     keyboardController.Update(gameTime);

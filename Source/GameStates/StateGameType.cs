@@ -5,6 +5,7 @@ using GameProject.Interfaces;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.GameStates;
@@ -38,14 +39,14 @@ public class StateGameType : IGameState {
     collisionManager.AddCollider(Player);
   }
 
-  public void LoadContent() {
+  public void LoadContent(ContentManager content) {
     Player.LoadContent();
 
     Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateShotgun(0f, 0f, game));
     Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateRifle(0f, 0f, game));
 
-    LevelManager.LoadContent(game.Content);
-    healthBarTexture = game.Content.Load<Texture2D>("Misc/blood_red_bar");
+    LevelManager.LoadContent(content);
+    healthBarTexture = content.Load<Texture2D>("Misc/blood_red_bar");
   }
 
   public void Update(GameTime gameTime) {

@@ -2,6 +2,7 @@
 using GameProject.Interfaces;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 namespace GameProject.GameStates;
 
@@ -18,7 +19,7 @@ public class StateTransitionType(Game1 game) : IGameState {
 
   public void Initialize() { }
 
-  public void LoadContent() { }
+  public void LoadContent(ContentManager content) { }
 
   public void Update(GameTime gameTime) {
     screenFader.Update(gameTime);
