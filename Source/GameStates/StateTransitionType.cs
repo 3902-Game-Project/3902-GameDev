@@ -45,7 +45,9 @@ public class StateTransitionType(Game1 game) : IGameState {
   }
 
   public void Draw(GameTime gameTime) {
+    game.SpriteBatch.Begin();
     screenFader.Draw(gameTime);
+    game.SpriteBatch.End();
 
     switch (screenFader.FadeState) {
       case ScreenFader.FadingState.FadeOut:
