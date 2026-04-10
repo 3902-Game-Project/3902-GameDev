@@ -63,4 +63,8 @@ public class StateWinType(Game1 game) : IGameState {
   public void OnStateEnter() { }
 
   public void OnStateLeave() { }
+
+  public void OnStateStartFadeIn() { }
+
+  public void OnStateEndFadeOut() { }
 }

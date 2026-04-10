@@ -5,6 +5,7 @@ using GameProject.Interfaces;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace GameProject;
 
@@ -35,13 +36,15 @@ public class Game1 : Game {
     Assets = new AssetStore(this);
   }
 
-  public void ChangeState(IGameState state) {
-    StateTransition.SetFadingStates(currentState, state);
+  public void ChangeState(IGameState newState) {
+    StateTransition.SetFadingStates(currentState, newState);
     ChangeStateWithoutFading(StateTransition);
   }
 
-  public void ChangeStateWithoutFading(IGameState state) {
-    currentState = state;
+  public void ChangeStateWithoutFading(IGameState newState) {
+    currentState.OnStateLeave();
+    currentState = newState;
+    newState.OnStateEnter();
   }
 
   public void ResetGameState() {
