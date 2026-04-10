@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Misc;
 
 public class Level(
-  Game1 game,
   List<IBlock> nonCollidableBlocks, // for non-collidable collidableBlocks -Aaron
   List<IBlock> collidableBlocks,
   List<IEnemy> enemies,
