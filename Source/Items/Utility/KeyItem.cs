@@ -4,7 +4,7 @@ using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Source.Items.Utility;
+namespace GameProject.Items.Utility;
 
 public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager levelManager) : IItem, IWorldPickup {
   // Removed parameter (CollisionManager collisionManager) to remove warning - Santosh
