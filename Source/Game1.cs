@@ -19,7 +19,7 @@ public class Game1 : Game {
   public IGameState StateLoss { get; private set; }
   public IGameState StateWin { get; private set; }
   public IGameState StatePause { get; private set; }
-  public IGameState StateItem { get; private set; }
+  public IGameState StateItemScreen { get; private set; }
   public StateGameType StateGame { get; private set; }
   public Viewport DefaultViewport { get; private set; }
   public Viewport HudViewport { get; private set; }
@@ -80,7 +80,7 @@ public class Game1 : Game {
     StateLoss = new StateLossType(this);
     StateWin = new StateWinType(this);
     StatePause = new StatePauseType(this);
-    StateItem = new StateItemType(this);
+    StateItemScreen = new StateItemScreenType(this);
     StateGame = new StateGameType(this);
     currentState = StateMenu;
 
@@ -90,7 +90,7 @@ public class Game1 : Game {
     StateLoss.Initialize();
     StateWin.Initialize();
     StatePause.Initialize();
-    StateItem.Initialize();
+    StateItemScreen.Initialize();
     StateGame.Initialize();
 
     StateTransition.LoadContent();
@@ -98,7 +98,7 @@ public class Game1 : Game {
     StateLoss.LoadContent();
     StateWin.LoadContent();
     StatePause.LoadContent();
-    StateItem.LoadContent();
+    StateItemScreen.LoadContent();
     StateGame.LoadContent();
   }
 

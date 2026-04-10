@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Controllers;
 
-internal class ItemGamePadController(Game1 game) : IController {
+internal class ItemScreenGamePadController(Game1 game) : IController {
   private GamePadState prevGamePadState = new();
   private GamePadState gamePadState = new();
   private readonly ICommand quitCommand = new QuitCommand(game);
