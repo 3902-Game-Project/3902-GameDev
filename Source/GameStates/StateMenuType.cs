@@ -8,6 +8,7 @@ namespace GameProject.GameStates;
 
 public class StateMenuType(Game1 game) : IGameState {
   private static readonly string START_TEXT = "Press Enter/GamePadB to start!";
+  private static readonly string QUIT_TEXT = "Press Q/GamePadA to quit";
   private IController keyboardController;
   private IController gamePadController;
 
@@ -34,9 +35,24 @@ public class StateMenuType(Game1 game) : IGameState {
         new Vector2(
           game.Window.ClientBounds.Width,
           game.Window.ClientBounds.Height
-        ) * 0.5f,
+        ) * 0.5f + new Vector2(0.0f, -10.0f),
       color: Color.White,
       origin: game.Assets.MainFont.MeasureString(START_TEXT) * 0.5f,
+      rotation: 0.0f,
+      scale: 1.0f,
+      effects: SpriteEffects.None,
+      layerDepth: 0.0f
+    );
+    spriteBatch.DrawString(
+      spriteFont: game.Assets.MainFont,
+      text: QUIT_TEXT,
+      position:
+        new Vector2(
+          game.Window.ClientBounds.Width,
+          game.Window.ClientBounds.Height
+        ) * 0.5f + new Vector2(0.0f, 10.0f),
+      color: Color.White,
+      origin: game.Assets.MainFont.MeasureString(QUIT_TEXT) * 0.5f,
       rotation: 0.0f,
       scale: 1.0f,
       effects: SpriteEffects.None,
