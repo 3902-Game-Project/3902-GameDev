@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace GameProject.ButtonDifferenceTrackers;
+namespace GameProject.ButtonDiffTrackers;
 
-internal class ButtonDifferenceTracker<ButtonsEnum> {
+internal class ButtonDiffTracker<ButtonsEnum> {
   private ButtonsEnum[] pastButtonState = [];
   private ButtonsEnum[] currentButtonState = [];
 

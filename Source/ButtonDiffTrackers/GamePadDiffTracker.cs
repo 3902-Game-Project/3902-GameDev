@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 
-namespace GameProject.ButtonDifferenceTrackers;
+namespace GameProject.ButtonDiffTrackers;
 
-internal class GamePadDifferenceTracker : ButtonDifferenceTracker<Buttons> {
+internal class GamePadDiffTracker : ButtonDiffTracker<Buttons> {
   private static float TRIGGER_THRESHOLD = 0.9f;
 
   public void Update(GamePadState gamePadState) {

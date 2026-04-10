@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Input;
 
-namespace GameProject.ButtonDifferenceTrackers;
+namespace GameProject.ButtonDiffTrackers;
 
-internal class KeyboardDifferenceTracker : ButtonDifferenceTracker<Keys> {
+internal class KeyboardDiffTracker : ButtonDiffTracker<Keys> {
   public void Update(KeyboardState keyboardState) {
     UpdateButtonState(keyboardState.GetPressedKeys());
   }
