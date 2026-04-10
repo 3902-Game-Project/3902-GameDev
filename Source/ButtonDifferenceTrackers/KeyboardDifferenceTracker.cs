@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.Xna.Framework.Input;
 
-namespace GameProject;
+namespace GameProject.ButtonDifferenceTrackers;
 
 internal class KeyboardDifferenceTracker {
   private KeyboardState pastKeyboardState = new();
