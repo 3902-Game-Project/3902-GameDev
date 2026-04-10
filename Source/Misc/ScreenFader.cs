@@ -21,7 +21,7 @@ internal class ScreenFader(SpriteBatch spriteBatch, Texture2D whitePixelTexture,
     );
   }
 
-  private static readonly float FADE_DURATION = 2.0f;
+  private static readonly float FADE_DURATION = 1.0f;
   private double fadeTime = 0.0;
 
   public FadingState FadeState { get; private set; } = FadingState.FadedIn;

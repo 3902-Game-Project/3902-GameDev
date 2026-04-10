@@ -81,10 +81,12 @@ public class LevelManager(Game1 game) : ILevelManager {
     }
   }
 
-  // Called by StateGameType.cs when fade out is complete
+  // Called by StateGameType.cs when beginning to fade in stategame
+  // If there is a level switch queued, process it now
   public void CompleteLevelSwitch() {
     if (fadeToLevelName == null) {
-      throw new InvalidOperationException("CompleteLevelSwitch called when fadeToLevelName still null");
+      // No level switch queued
+      return;
     }
 
     currentLevelName = fadeToLevelName;
