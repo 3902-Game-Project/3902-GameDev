@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using GameProject.Interfaces;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
@@ -45,10 +46,6 @@ public class StateTransitionType(Game1 game) : IGameState {
   }
 
   public void Draw(GameTime gameTime) {
-    game.SpriteBatch.Begin();
-    screenFader.Draw(gameTime);
-    game.SpriteBatch.End();
-
     switch (screenFader.FadeState) {
       case ScreenFader.FadingState.FadeOut:
         fromGameState.Draw(gameTime);
@@ -63,6 +60,10 @@ public class StateTransitionType(Game1 game) : IGameState {
       default:
         throw new Exception("Unknown fading state value");
     }
+
+    game.SpriteBatch.Begin();
+    screenFader.Draw(gameTime);
+    game.SpriteBatch.End();
   }
 
   public void OnStateEnter() {
