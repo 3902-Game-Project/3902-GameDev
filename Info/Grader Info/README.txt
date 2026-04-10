@@ -2,7 +2,7 @@ Controls:
   Main Menu:
     Key                      Action
     Enter/GamePadB           Go from main menu to game.
-    Q/GamePadA               Quit the game.
+    Q/GamePadY               Quit the game.
 
   Game:
     Key                      Action
