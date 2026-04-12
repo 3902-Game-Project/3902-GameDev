@@ -229,7 +229,10 @@ internal partial class LevelLoader {
           break;
         }
 
-      /* case 21 -- empty (deleted for door consolidation -Aaron) */
+      case "21":
+        /* key item */
+        pickups.Add(new ItemWorldPickup(ItemSpriteFactory.Instance.CreateKey(xPos, yPos, game.StateGame.LevelManager)));
+        break;
 
       case "22":
         /* fire pit */

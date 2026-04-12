@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Factories;
 
 public class BlockSpriteFactory {
-  private Texture2D blockTextures;
+  public static Texture2D blockTextures;
 
   public static BlockSpriteFactory Instance { get; } = new();
 

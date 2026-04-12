@@ -45,12 +45,26 @@ public class SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, Block
 
   public override void Draw(SpriteBatch spriteBatch) {
     if (!rotated) { Rotate(); }
-    spriteBatch.Draw(SlattedDoorTexture, Position, sourceRects[currentFrame], Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
+    spriteBatch.Draw(
+      SlattedDoorTexture, 
+      Position, 
+      sourceRects[currentFrame], 
+      Color.White, 
+      Rotation, 
+      Vector2.Zero, 
+      1.0f, 
+      SpriteEffects.None, 
+      0.0f
+    );
   }
 
   public override void OnCollision(CollisionInfo info) {
     if (State == BlockState.open && info.Collider is Player) {
       levelManager.SwitchLevel(PairedLevelName);
     }
+  }
+
+  public void ChangeState(BlockState state) {
+    State = state;
   }
 }

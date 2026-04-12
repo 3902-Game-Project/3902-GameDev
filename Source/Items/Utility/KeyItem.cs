@@ -1,25 +1,29 @@
-﻿using GameProject.Enums;
+﻿using GameProject;
+using GameProject.Blocks;
+using GameProject.Enums;
+using GameProject.GameStates;
 using GameProject.Interfaces;
+using GameProject.Managers;
+using GameProject.Misc;
 using GameProject.PlayerSpace;
+using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items.Utility;
 
-public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager levelManager) : IItem, IWorldPickup {
-  // Removed parameter (CollisionManager collisionManager) to remove warning - Santosh
-
-  // add collision info
+public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager levelManager) : IItem {
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
-  private Rectangle sourceRectangle = new(0, 1344, 21, 39); // CHANGE
+  private Rectangle sourceRectangle = new(17, 448, 7, 13);
   private Vector2 origin;
+  private ILevelManager levelManagers = levelManager;
   public Vector2 Position { get; set; } = startPosition;
   public bool IsCollected { get; set; } = false;
   public ItemCategory Category { get; } = ItemCategory.Consumable;
 
   public void Draw(SpriteBatch spriteBatch) {
     if (!IsCollected) {
-      origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
+      origin = new Vector2(sourceRectangle.Width, sourceRectangle.Height);  // removed " / 2"
 
       spriteBatch.Draw(
         keyTexture,
@@ -28,7 +32,7 @@ public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager 
         Color.White,
         0f,
         origin,
-        1f,
+        2f,
         SpriteEffects.None,
         0f
       );
@@ -40,11 +44,21 @@ public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager 
   }
 
   public void Use(UseType useType) {
-    // unlocks and changes door state, remove key from inventory if used correctly
+    foreach (var block in levelManagers.CurrentLevel.CollidableBlocks) {
+      if (block is VaultDoorBlock) {
+        VaultDoorBlock temp = (VaultDoorBlock)block;
+        temp.ChangeState(BlockState.opening);
+      }  
+      else if (block is SlattedDoorBlock) {
+        SlattedDoorBlock temp = (SlattedDoorBlock)block;
+        temp.ChangeState(BlockState.open);
+      }
+    }
+    // DELETE ITEM
   }
   public void OnPickup(Player player) {
     IsCollected = true;
     //Player.Inventory.PickUpItem(this);
-    levelManager.CurrentLevel.Pickups.Remove(this);
+    //levelManager.CurrentLevel.Pickups.Remove(this); in player class
   }
 }

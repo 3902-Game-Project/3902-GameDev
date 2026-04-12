@@ -10,6 +10,8 @@ namespace GameProject;
 
 public class Game1 : Game {
   public static readonly int HUD_HEIGHT = 100;
+  public static readonly int GAME_HEIGHT = 576;
+  public static readonly int GAME_WIDTH = 960;
 
   private readonly GraphicsDeviceManager graphics;
   public SpriteBatch SpriteBatch { get; private set; }
@@ -53,13 +55,13 @@ public class Game1 : Game {
   }
 
   protected override void Initialize() {
-    graphics.PreferredBackBufferHeight = 576 + HUD_HEIGHT;
-    graphics.PreferredBackBufferWidth = 960;
+    graphics.PreferredBackBufferHeight = GAME_HEIGHT + HUD_HEIGHT;
+    graphics.PreferredBackBufferWidth = GAME_WIDTH;
     graphics.ApplyChanges();
 
     DefaultViewport = GraphicsDevice.Viewport;
     HudViewport = new Viewport(0, 0, graphics.PreferredBackBufferWidth, HUD_HEIGHT);
-    GameViewport = new Viewport(0, HUD_HEIGHT, graphics.PreferredBackBufferWidth, 576);
+    GameViewport = new Viewport(0, HUD_HEIGHT, graphics.PreferredBackBufferWidth, GAME_HEIGHT);
 
     base.Initialize();
   }

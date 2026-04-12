@@ -76,6 +76,7 @@ Entry IDs:
     14 = revolver
     15 = rifle
     16 = shotgun
+    21 = key item
 
   enemies:
     Note: you must also specify a background block for enemies!
