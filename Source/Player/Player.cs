@@ -19,7 +19,6 @@ public enum FacingDirection {
 public class Player : IInitable, ICollidable {
   private static readonly float PLAYER_WIDTH = 171.0f * 0.15f;
   private static readonly float PLAYER_HEIGHT = 323.0f * 0.15f;
-  private static readonly float KNOCKBACK_DISTANCE = 10f;
 
   private readonly CollisionManager collisionManager;
 
