@@ -40,12 +40,10 @@ public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager 
 
   public void Use(UseType useType) {
     foreach (var block in levelManagers.CurrentLevel.CollidableBlocks) {
-      if (block is VaultDoorBlock) {
-        VaultDoorBlock temp = (VaultDoorBlock) block;
-        temp.ChangeState(BlockState.opening);
-      } else if (block is SlattedDoorBlock) {
-        SlattedDoorBlock temp = (SlattedDoorBlock) block;
-        temp.ChangeState(BlockState.open);
+      if (block is VaultDoorBlock vaultDoorBlock) {
+        vaultDoorBlock.ChangeState(BlockState.opening);
+      } else if (block is SlattedDoorBlock slattedDoorBlock) {
+        slattedDoorBlock.ChangeState(BlockState.open);
       }
     }
     // DELETE ITEM
