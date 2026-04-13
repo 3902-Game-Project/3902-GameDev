@@ -31,7 +31,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
     "12_level",
     "13_level",
   ];
-  private static readonly string STARTING_LEVEL = LEVEL_NAMES[0];
+  private static readonly string STARTING_LEVEL = "01_level";
 
   private readonly Dictionary<string, ILevel> levels = [];
   private string currentLevelName = STARTING_LEVEL;
@@ -91,6 +91,10 @@ internal class LevelManager(Game1 game) : ILevelManager {
   public void LoadContent(ContentManager content) {
     if (LEVEL_NAMES.Length == 0) {
       throw new ArgumentException("There must be at least one level to load");
+    }
+
+    if (CurrentLevelIndex == -1) {
+      throw new ArgumentException("Starting level name not present in levels list");
     }
 
     var levelNamesSet = new HashSet<string>(LEVEL_NAMES);
