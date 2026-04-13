@@ -63,6 +63,6 @@ public class RifleAttackState : IRiflemanState {
     if (bullet is BulletDefault defaultBullet) {
       defaultBullet.IsPlayerShot = false;
     }
-    levelManager.CurrentLevel.ProjectileManager.AddProjectile(bullet);
+    levelManager.CurrentLevel.ProjectileManager.Add(bullet);
   }
 }

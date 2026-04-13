@@ -82,8 +82,8 @@ public class ShotgunnerAttackState : IShotgunnerState {
     }
 
     // Add them all to the manager!
-    levelManager.CurrentLevel.ProjectileManager.AddProjectile(bullet1);
-    levelManager.CurrentLevel.ProjectileManager.AddProjectile(bullet2);
-    levelManager.CurrentLevel.ProjectileManager.AddProjectile(bullet3);
+    levelManager.CurrentLevel.ProjectileManager.Add(bullet1);
+    levelManager.CurrentLevel.ProjectileManager.Add(bullet2);
+    levelManager.CurrentLevel.ProjectileManager.Add(bullet3);
   }
 }

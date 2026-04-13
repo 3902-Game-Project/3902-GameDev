@@ -10,6 +10,7 @@ public interface ILevel : IInitable, IGPUpdatable, IGPDrawable {
   List<IEnemy> Enemies { get; }
   Vector2 PlayerPosition { get; }
   public ProjectileManager ProjectileManager { get; }
+  public CollisionManager CollisionManager { get; }
   void AddPickup(IWorldPickup pickup);
   void RemovePickup(IWorldPickup pickup);
   List<IWorldPickup> Pickups { get; }

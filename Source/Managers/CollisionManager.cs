@@ -23,9 +23,15 @@ public class CollisionManager : IGPUpdatable {
     colliders = [];
   }
 
-  public void AddCollider(ICollidable collider) {
+  public void Add(ICollidable collider) {
     if (!colliders.Contains(collider)) {
       colliders.Add(collider);
+    }
+  }
+
+  public void Remove(ICollidable collider) {
+    if (colliders.Contains(collider)) {
+      colliders.Remove(collider);
     }
   }
 
@@ -84,7 +90,7 @@ public class CollisionManager : IGPUpdatable {
     if (c1.Shape.Type == ShapeType.Box && c2.Shape.Type == ShapeType.Box)
       return BoxBoxCollision(c1.Shape as BoxCollider, c2.Shape as BoxCollider, axis, cornerTolerance, out info1, out info2);
 
-    // Circle collisions don't need the tolerance — they resolve radially
+    // Circle collisions don't need the tolerance ï¿½ they resolve radially
     if (c1.Shape.Type == ShapeType.Box && c2.Shape.Type == ShapeType.Circle)
       return BoxCircleCollision(c1.Shape as BoxCollider, c2.Shape as CircleCollider, out info1, out info2);
     if (c1.Shape.Type == ShapeType.Circle && c2.Shape.Type == ShapeType.Box)

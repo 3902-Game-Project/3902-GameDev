@@ -7,6 +7,7 @@ using GameProject.Globals;
 using GameProject.Interfaces;
 using GameProject.Items;
 using GameProject.Managers;
+using GameProject.Misc;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -94,7 +95,7 @@ public class StateGameType : IGameState {
     );
 
     LevelManager.Initialize();
-    collisionManager.AddCollider(Player);
+    collisionManager.Add(Player);
   }
 
   public void LoadContent(ContentManager contentManager) {
@@ -113,31 +114,7 @@ public class StateGameType : IGameState {
 
     LevelManager.Update(gameTime);
     Player.Update(gameTime);
-
-    collisionManager.Clear();
-    collisionManager.AddCollider(Player);
-
-    if (LevelManager.CurrentLevel != null) {
-      foreach (var block in LevelManager.CurrentLevel.CollidableBlocks) {
-        collisionManager.AddCollider(block);
-      }
-      foreach (var doorBlock in LevelManager.CurrentLevel.Doors) {
-        collisionManager.AddCollider(doorBlock);
-      }
-      foreach (var enemy in LevelManager.CurrentLevel.Enemies) {
-        if (enemy.Health > 0) {
-          collisionManager.AddCollider(enemy);
-        }
-      }
-    }
-
-    foreach (var projectile in LevelManager.CurrentLevel.ProjectileManager.Projectiles) {
-      if (projectile is ICollidable collidableProj) {
-        collisionManager.AddCollider(collidableProj);
-      }
-    }
-
-    collisionManager.Update(gameTime);
+    
   }
 
   public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
@@ -277,6 +254,22 @@ public class StateGameType : IGameState {
 
   public void OnStateEnter() {
     SoundManager.Instance.PlayLoop(SoundID.Background);
+
+    if (LevelManager.CurrentLevel != null) {
+      LevelManager.CurrentLevel.CollisionManager.Clear();
+      LevelManager.CurrentLevel.CollisionManager.Add(Player);
+      foreach (var block in LevelManager.CurrentLevel.CollidableBlocks) {
+        LevelManager.CurrentLevel.CollisionManager.Add(block);
+      }
+      foreach (var doorBlock in LevelManager.CurrentLevel.Doors) {
+        LevelManager.CurrentLevel.CollisionManager.Add(doorBlock);
+      }
+      foreach (var enemy in LevelManager.CurrentLevel.Enemies) {
+        if (enemy.Health > 0) {
+          LevelManager.CurrentLevel.CollisionManager.Add(enemy);
+        }
+      }
+    }
   }
 
   public void OnStateLeave() {
