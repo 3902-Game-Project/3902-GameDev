@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 public class TellersDeskBlock(Texture2D TellersDeskTexture, Vector2 xyPos) : BaseBlock(xyPos) {
-  private Rectangle sourceRect = new(128, 320, 64, 64);
+  private static Rectangle sourceRect = new(128, 320, 64, 64);
 
   public override void Update(GameTime gameTime) { }
 

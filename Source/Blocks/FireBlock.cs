@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -13,7 +12,6 @@ public class FireBlock(Texture2D FireTexture, Vector2 xyPos) : BaseBlock(xyPos) 
   private int currentFrame = 0;
   private double animationTimer;
   private readonly double timePerFrame = 0.15;
-  public FirePitBlockState State { get; set; } = FirePitBlockState.Lit;
 
   public override void Update(GameTime gameTime) {
     float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;

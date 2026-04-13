@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 public class ShelfBlock(Texture2D ShelfTexture, Vector2 xyPos) : BaseBlock(xyPos, 64f, 64f) {
-  private Rectangle sourceRect = new(128, 256, 64, 64);
+  private static Rectangle sourceRect = new(128, 256, 64, 64);
 
   public override void Update(GameTime gameTime) { }
 

@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 public class SmallDoorBlock : BaseBlock {
-  private readonly List<Rectangle> sourceRects = [
+  private static readonly List<Rectangle> sourceRects = [
     new(448, 256, 64, 64),
     new(448, 448, 64, 64)
   ];

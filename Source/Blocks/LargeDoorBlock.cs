@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 public class LargeDoorBlock(Texture2D LargeDoorTexture, Vector2 xyPos) : BaseBlock(xyPos, 64f, 128f) {
-  private Rectangle sourceRect = new(448, 320, 64, 128);
+  private static Rectangle sourceRect = new(448, 320, 64, 128);
 
   public override void Update(GameTime gameTime) { }
 

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 public class BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) : BaseBlock(xyPos) {
-  private Rectangle sourceRect = new(64, 0, 64, 64);
+  private static Rectangle sourceRect = new(64, 0, 64, 64);
   public BarrelBlockState State { get; set; } = BarrelBlockState.Solid;
 
   public override void Update(GameTime gameTime) {

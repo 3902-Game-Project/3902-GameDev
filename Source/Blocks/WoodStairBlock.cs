@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 public class WoodStairBlock(Texture2D WoodStairTexture, Vector2 xyPos) : BaseBlock(xyPos) {
-  private Rectangle sourceRect = new(64, 64, 64, 64);
+  private static Rectangle sourceRect = new(64, 64, 64, 64);
 
   public override void Update(GameTime gameTime) { }
 

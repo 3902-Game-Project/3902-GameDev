@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GameProject.Collisions;
 using GameProject.Interfaces;
 using GameProject.PlayerSpace;
@@ -10,7 +9,7 @@ namespace GameProject.Blocks;
 
 public class SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, LockableDoorBlockState state, string pairedLevelName, ILevelManager levelManager) : BaseBlock(xyPos) {
   private int currentFrame = 0;
-  private readonly List<Rectangle> sourceRects = [
+  private static readonly List<Rectangle> sourceRects = [
       new(192, 128, 64, 64),
       new(320, 128, 64, 64)
     ];

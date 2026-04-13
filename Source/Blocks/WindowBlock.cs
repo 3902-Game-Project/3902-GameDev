@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 public class WindowBlock(Texture2D WindowTexture, Vector2 xyPos) : BaseBlock(xyPos) {
-  private Rectangle sourceRect = new(384, 256, 64, 64);
+  private static Rectangle sourceRect = new(384, 256, 64, 64);
 
   public override void Update(GameTime gameTime) { }
 

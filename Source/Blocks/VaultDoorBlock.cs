@@ -9,7 +9,14 @@ namespace GameProject.Blocks;
 
 public class VaultDoorBlock : BaseBlock {
   private readonly Texture2D texture;
-  private readonly List<Rectangle> sourceRects;
+  private static readonly List<Rectangle> sourceRects = [
+    new(64, 128, 64, 64),
+    new(64, 192, 64, 64),
+    new(128, 192, 64, 64),
+    new(192, 192, 64, 64),
+    new(256, 192, 64, 64),
+    new(320, 192, 64, 64)
+  ];
   private int currentFrame;
   private double animationTimer;
   private readonly double timePerFrame = 0.3;
@@ -26,14 +33,6 @@ public class VaultDoorBlock : BaseBlock {
       VaultDoorBlockState.Open => sourceRects.Count - 1,
       _ => 0,
     };
-    sourceRects = [
-      new(64, 128, 64, 64),
-      new(64, 192, 64, 64),
-      new(128, 192, 64, 64),
-      new(192, 192, 64, 64),
-      new(256, 192, 64, 64),
-      new(320, 192, 64, 64)
-    ];
     this.levelManager = levelManager;
   }
 

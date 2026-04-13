@@ -1,12 +1,10 @@
-﻿using GameProject.Interfaces;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
 public class FirePitBlock(Texture2D FirePitTexture, Vector2 xyPos) : BaseBlock(xyPos) {
-  private Rectangle sourceRect = new(320, 64, 64, 64);
-  public FirePitBlockState State { get; set; } = FirePitBlockState.Extinguished;
+  private static Rectangle sourceRect = new(320, 64, 64, 64);
 
   public override void Update(GameTime gameTime) { }
 
