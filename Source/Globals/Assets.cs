@@ -1,18 +1,18 @@
-﻿using GameProject.Interfaces;
+﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Globals;
 
-public class AssetStore(Game1 game) : IGlobalData {
-  public TextureStore Textures { get; private set; } = new TextureStore(game);
-  public SpriteFont MainFont { get; private set; }
+public static class AssetStore {
+  public static TextureStore Textures { get; private set; } = new TextureStore();
+  public static SpriteFont MainFont { get; private set; }
 
-  public void Initialize() {
+  public static void Initialize() {
     Textures.Initialize();
   }
 
-  public void LoadContent() {
-    Textures.LoadContent();
-    MainFont = game.Content.Load<SpriteFont>("Misc/CreditsFont");
+  public static void LoadContent(ContentManager contentManager) {
+    Textures.LoadContent(contentManager);
+    MainFont = contentManager.Load<SpriteFont>("Misc/CreditsFont");
   }
 }

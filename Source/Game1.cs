@@ -15,7 +15,10 @@ public class Game1 : Game {
 
   private readonly GraphicsDeviceManager graphics;
   public SpriteBatch SpriteBatch { get; private set; }
-  public AssetStore Assets { get; private set; }
+  public Viewport DefaultViewport { get; private set; }
+  public Viewport HudViewport { get; private set; }
+  public Viewport GameViewport { get; private set; }
+
   private StateTransitionType StateTransition;
   public IGameState StateMenu { get; private set; }
   public IGameState StateLoss { get; private set; }
@@ -23,9 +26,6 @@ public class Game1 : Game {
   public IGameState StatePause { get; private set; }
   public IGameState StateItemScreen { get; private set; }
   public StateGameType StateGame { get; private set; }
-  public Viewport DefaultViewport { get; private set; }
-  public Viewport HudViewport { get; private set; }
-  public Viewport GameViewport { get; private set; }
 
   private IGameState currentState;
 
@@ -33,8 +33,6 @@ public class Game1 : Game {
     graphics = new GraphicsDeviceManager(this);
     Content.RootDirectory = "Content";
     IsMouseVisible = true;
-
-    Assets = new AssetStore(this);
   }
 
   public void ChangeState(IGameState newState) {
@@ -69,7 +67,7 @@ public class Game1 : Game {
   protected override void LoadContent() {
     SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-    Assets.LoadContent();
+    AssetStore.LoadContent(Content);
 
     BlockSpriteFactory.Instance.LoadAllTextures(Content);
     EnemySpriteFactory.Instance.LoadAllTextures(Content);
