@@ -1,6 +1,7 @@
 ﻿using GameProject.Controllers;
 using GameProject.Enemies;
 using GameProject.Factories;
+using GameProject.Globals;
 using GameProject.Interfaces;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
@@ -108,7 +109,7 @@ public class StateGameType : IGameState {
     var healthBarPosition = new Vector2(20, 20);
     float healthPercent = MathHelper.Clamp(Player.Health / 100f, 0f, 1f);
     spriteBatch.Draw(
-      texture: healthBarTexture,
+      texture: TextureStore.HealthBar,
       position: healthBarPosition,
       sourceRectangle: null,
       color: Color.DarkSlateGray,
@@ -120,10 +121,10 @@ public class StateGameType : IGameState {
     );
 
 
-    int visibleWidth = (int) (healthBarTexture.Width * healthPercent);
-    Rectangle sourceRectangle = new(0, 0, visibleWidth, healthBarTexture.Height);
+    int visibleWidth = (int) (TextureStore.HealthBar.Width * healthPercent);
+    Rectangle sourceRectangle = new(0, 0, visibleWidth, TextureStore.HealthBar.Height);
     spriteBatch.Draw(
-      texture: healthBarTexture,
+      texture: TextureStore.HealthBar,
       position: healthBarPosition,
       sourceRectangle: sourceRectangle,
       color: Color.White,

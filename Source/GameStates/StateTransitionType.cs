@@ -1,4 +1,5 @@
 ﻿using System;
+using GameProject.Globals;
 using GameProject.Interfaces;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
@@ -11,7 +12,7 @@ namespace GameProject.GameStates;
 public class StateTransitionType(Game1 game) : IGameState {
   private readonly ScreenFader screenFader = new(
     game.SpriteBatch,
-    game.Assets.Textures.WhitePixel,
+    TextureStore.WhitePixel,
     game.Window
   );
 
