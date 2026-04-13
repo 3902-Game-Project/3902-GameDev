@@ -7,15 +7,29 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-public class RevolverItem : DefaultGun {
+public class RevolverItem : IItem {
+  public FacingDirection Direction { get; set; } = FacingDirection.Right;
+  private Rectangle sourceRectangle = new(0, 0, 16, 9);
+  private Vector2 origin;
+  private readonly Texture2D texture;
+  private readonly float scale = 1f;
+  public Vector2 Position { get; set; }
 
-  public RevolverItem(Texture2D texture, Vector2 startPosition, Game1 game, GunStats stats)
-    : base(texture, startPosition, game, stats) {
+  private readonly Game1 game;
+  private readonly GunStats stats;
+  private readonly IProjectilePattern projectilePattern = new SingleShotPattern();
+  private readonly IFireMode fireMode;
+  private Vector2 bulletSpawnOffset;
+  public ItemCategory Category { get; } = ItemCategory.Sidearm;
 
-    this.sourceRectangle = new(0, 0, 16, 9);
-    Category = ItemCategory.Sidearm;
-
+  public RevolverItem(Texture2D texture, Vector2 startPosition, Game1 game, GunStats stats) {
+    this.game = game;
+    this.texture = texture;
+    this.stats = stats;
+    fireMode = new SemiAutoFire(stats);
+    Position = startPosition;
     bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 * (sourceRectangle.Height / 2 - 3)) * scale;
+  }
 
   public void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
