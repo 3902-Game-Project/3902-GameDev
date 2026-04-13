@@ -41,7 +41,7 @@ public class StateGameType : IGameState {
             { Keys.R, new ReturnToMenuAndResetCommand(game) },
             { Keys.Q, new QuitCommand(game) },
             { Keys.P, new PauseCommand(game) },
-            { Keys.I, new ItemScreenCommand(game) },
+            { Keys.I, new OpenItemScreenCommand(game) },
             { Keys.J, new PlayerUseItemCommand(Player, UseType.Pressed) },
             { Keys.E, new PlayerDieCommand(Player) },
             { Keys.T, new PreviousLevelCommand(LevelManager) },
