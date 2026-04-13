@@ -9,10 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 public class SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, BlockState state, string pairedLevelName, ILevelManager levelManager) : BaseBlock(xyPos) {
-  private readonly int currentFrame = state switch {
-    BlockState.open => 1,
-    _ => 0,
-  };
+  private int currentFrame = 0;
   private readonly List<Rectangle> sourceRects = [
       new(192, 128, 64, 64),
       new(320, 128, 64, 64)
@@ -40,7 +37,9 @@ public class SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, Block
   }
 
   public override void Update(GameTime gameTime) {
-    // if player has key, change state to open
+    if (State == BlockState.open) {
+      currentFrame = sourceRects.Count - 1;
+    }
   }
 
   public override void Draw(SpriteBatch spriteBatch) {

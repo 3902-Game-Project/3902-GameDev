@@ -62,6 +62,9 @@ public class StateGameType : IGameState {
       foreach (var block in LevelManager.CurrentLevel.CollidableBlocks) {
         collisionManager.AddCollider(block);
       }
+      foreach (var doorBlock in LevelManager.CurrentLevel.Doors) {
+        collisionManager.AddCollider(doorBlock);
+      }
       foreach (var enemy in LevelManager.CurrentLevel.Enemies) {
         if (enemy.Health > 0) {
           collisionManager.AddCollider(enemy);

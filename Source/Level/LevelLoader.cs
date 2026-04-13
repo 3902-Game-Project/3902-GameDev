@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using GameProject.Factories;
 using GameProject.Interfaces;
+using GameProject.Managers;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 
@@ -28,6 +29,7 @@ internal partial class LevelLoader {
 
     List<IBlock> nonCollidableBlocks,
     List<IBlock> collidableBlocks,
+    List<IBlock> doors,
     List<IEnemy> enemies,
     List<IWorldPickup> pickups,
     ref Vector2? playerPositionNullable
@@ -78,7 +80,7 @@ internal partial class LevelLoader {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
           }
 
-          collidableBlocks.Add(BlockSpriteFactory.Instance.CreateSmallDoorBlockSprite(xPos, yPos, state, pairedLevelName, game.StateGame.LevelManager));
+          doors.Add(BlockSpriteFactory.Instance.CreateSmallDoorBlockSprite(xPos, yPos, state, pairedLevelName, game.StateGame.LevelManager));
           break;
         }
 
@@ -145,7 +147,7 @@ internal partial class LevelLoader {
                   throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
                 }
 
-                collidableBlocks.Add(BlockSpriteFactory.Instance.CreateRockHoleBlockSprite(xPos, yPos, pairedLevelName, game.StateGame.LevelManager));
+                doors.Add(BlockSpriteFactory.Instance.CreateRockHoleBlockSprite(xPos, yPos, pairedLevelName, game.StateGame.LevelManager));
                 break;
               }
 
@@ -168,6 +170,7 @@ internal partial class LevelLoader {
       case "11":
         /* rifleman */
         enemies.Add(EnemySpriteFactory.Instance.CreateRiflemanSprite(xPos, yPos, game.StateGame.LevelManager));
+         
         break;
 
       case "12":
@@ -225,7 +228,7 @@ internal partial class LevelLoader {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
           }
 
-          collidableBlocks.Add(BlockSpriteFactory.Instance.CreateVaultDoorBlockSprite(xPos, yPos, state, pairedLevelName, game.StateGame.LevelManager));
+          doors.Add(BlockSpriteFactory.Instance.CreateVaultDoorBlockSprite(xPos, yPos, state, pairedLevelName, game.StateGame.LevelManager));
           break;
         }
 
@@ -293,11 +296,14 @@ internal partial class LevelLoader {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
           }
 
-          collidableBlocks.Add(BlockSpriteFactory.Instance.CreateSlattedDoorSprite(xPos, yPos, state, pairedLevelName, game.StateGame.LevelManager));
+          doors.Add(BlockSpriteFactory.Instance.CreateSlattedDoorSprite(xPos, yPos, state, pairedLevelName, game.StateGame.LevelManager));
           break;
         }
 
-      /* case 32 -- empty */
+      case "32":
+        /* treasure block */
+        collidableBlocks.Add(BlockSpriteFactory.Instance.CreateTreasureBlockSprite(xPos, yPos));
+        break;
 
       /* case 33 -- empty */
 
@@ -319,6 +325,7 @@ internal partial class LevelLoader {
   public static Level FromString(Game1 game, ISet<string> levelNames, string levelDataString) {
     List<IBlock> nonCollidableBlocks = [];
     List<IBlock> collidableBlocks = [];
+    List<IBlock> doors = [];
     List<IEnemy> enemies = [];
     List<IWorldPickup> pickups = [];
     Vector2? playerPositionNullable = null;
@@ -357,6 +364,7 @@ internal partial class LevelLoader {
 
               nonCollidableBlocks,
               collidableBlocks,
+              doors,
               enemies,
               pickups,
               ref playerPositionNullable
@@ -367,7 +375,7 @@ internal partial class LevelLoader {
     }
 
     if (playerPositionNullable is Vector2 playerPosition) {
-      var level = new Level(nonCollidableBlocks, collidableBlocks, enemies, pickups, playerPosition);
+      var level = new Level(nonCollidableBlocks, collidableBlocks, doors, enemies, pickups, playerPosition);
 
       return level;
     } else {

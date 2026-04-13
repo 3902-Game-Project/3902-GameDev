@@ -9,10 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 public class SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, BlockState state, string pairedLevelName, ILevelManager levelManager) : BaseBlock(xyPos) {
-  private readonly int currentFrame = state switch {
-    BlockState.open => 1,
-    _ => 0,
-  };
+  private int currentFrame = 0;
   private readonly List<Rectangle> sourceRects = [
       new(448, 256, 64, 64),
       new(448, 448, 64, 64)
@@ -27,23 +24,19 @@ public class SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, BlockStat
     if (Position.X < 64) {
       Rotation = MathHelper.ToRadians(90);
       x += 64;
-      //y = Position.Y + 64;
     } else if (Position.X >= 896 && Position.Y >= 64) {
       Rotation = MathHelper.ToRadians(90);
       x += 64;
-      //y += 64;
     }
-    //else if (Position.Y > 0 && Position.X == 0) {
-    //  Rotation = MathHelper.ToRadians(90);
-    //  x -= 64;
-    //  y += 64;
-    //}
+
     Position = new(x, y);
     rotated = true;
   }
 
   public override void Update(GameTime gameTime) {
-    // if all enemies defeated, change state to open
+    if (State == BlockState.open) {
+      currentFrame = 1;
+    }
   }
 
   public override void Draw(SpriteBatch spriteBatch) {
@@ -58,5 +51,9 @@ public class SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, BlockStat
       levelManager.SwitchLevel(PairedLevelName);
       SoundManager.Instance.Play(SoundID.Door);
     }
+  }
+
+  public void ChangeState(BlockState state) {
+    State = state;
   }
 }

@@ -14,7 +14,7 @@ public class BlockSpriteFactory {
   private BlockSpriteFactory() { }
 
   public void LoadAllTextures(ContentManager content) {
-    blockTextures = content.Load<Texture2D>("Misc/desert-atlas-v7");
+    blockTextures = content.Load<Texture2D>("Misc/desert-atlas-v8");
   }
 
   /* Floor Blocks */
@@ -60,6 +60,9 @@ public class BlockSpriteFactory {
   }
 
   /* Object Blocks */
+  public IBlock CreateTreasureBlockSprite(float x, float y) {
+    return new TreasureBlock(blockTextures, new Vector2(x, y));
+  }
   public IBlock CreateBarrelBlockSprite(float x, float y) {
     return new BarrelBlock(blockTextures, new Vector2(x, y));
   }

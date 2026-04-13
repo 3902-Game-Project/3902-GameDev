@@ -40,11 +40,11 @@ public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager 
   }
 
   public void Update(GameTime gameTime) {
-    // if key is picked up, stop drawing key
+    // if key is picked up... currently held like weapon
   }
 
   public void Use(UseType useType) {
-    foreach (var block in levelManagers.CurrentLevel.CollidableBlocks) {
+    foreach (var block in levelManagers.CurrentLevel.Doors) {
       if (block is VaultDoorBlock) {
         VaultDoorBlock temp = (VaultDoorBlock)block;
         temp.ChangeState(BlockState.opening);
@@ -58,7 +58,5 @@ public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager 
   }
   public void OnPickup(Player player) {
     IsCollected = true;
-    //Player.Inventory.PickUpItem(this);
-    //levelManager.CurrentLevel.Pickups.Remove(this); in player class
   }
 }

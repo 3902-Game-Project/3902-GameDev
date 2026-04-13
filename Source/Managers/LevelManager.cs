@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using GameProject.Blocks;
 using GameProject.Interfaces;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
@@ -62,7 +63,7 @@ public class LevelManager(Game1 game) : ILevelManager {
     }
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(GameTime gameTime) { 
     CurrentLevel.Update(gameTime);
   }
 
@@ -103,4 +104,6 @@ public class LevelManager(Game1 game) : ILevelManager {
   public void NextLevel() {
     SwitchLevelByIndex(Math.Min(CurrentLevelIndex + 1, LEVEL_NAMES.Length - 1));
   }
+
+  
 }
