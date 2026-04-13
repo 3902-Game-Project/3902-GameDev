@@ -51,20 +51,32 @@ internal class LevelManager(Game1 game) : ILevelManager {
     // Wrap player position around if player is at edge
 
     if (
-      game.StateGame.Player.Position.X <= LevelLoader.PLAYER_LEFT_BOUNDARY_THRESHOLD ||
-      game.StateGame.Player.Position.X >= LevelLoader.PLAYER_RIGHT_BOUNDARY_THRESHOLD
+      game.StateGame.Player.Position.X <= LevelLoader.PLAYER_LEFT_BOUNDARY_THRESHOLD
     ) {
       game.StateGame.Player.Position = new(
-        LevelLoader.LEVEL_WIDTH - game.StateGame.Player.Position.X,
+        LevelLoader.PLAYER_RIGHT_POS_AFTER_TELEPORT,
         game.StateGame.Player.Position.Y
       );
     } else if (
-      game.StateGame.Player.Position.Y <= LevelLoader.PLAYER_TOP_BOUNDARY_THRESHOLD ||
+        game.StateGame.Player.Position.X >= LevelLoader.PLAYER_RIGHT_BOUNDARY_THRESHOLD
+      ) {
+      game.StateGame.Player.Position = new(
+        LevelLoader.PLAYER_LEFT_POS_AFTER_TELEPORT,
+        game.StateGame.Player.Position.Y
+      );
+    } else if (
+      game.StateGame.Player.Position.Y <= LevelLoader.PLAYER_TOP_BOUNDARY_THRESHOLD
+    ) {
+      game.StateGame.Player.Position = new(
+        game.StateGame.Player.Position.X,
+        LevelLoader.PLAYER_BOTTOM_POS_AFTER_TELEPORT
+      );
+    } else if (
       game.StateGame.Player.Position.Y >= LevelLoader.PLAYER_BOTTOM_BOUNDARY_THRESHOLD
     ) {
       game.StateGame.Player.Position = new(
         game.StateGame.Player.Position.X,
-        LevelLoader.LEVEL_HEIGHT - game.StateGame.Player.Position.Y
+        LevelLoader.PLAYER_TOP_POS_AFTER_TELEPORT
       );
     } else {
       // No wrapping possible, use default position
