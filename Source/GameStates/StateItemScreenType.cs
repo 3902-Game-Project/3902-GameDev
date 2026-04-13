@@ -1,6 +1,7 @@
 ﻿using GameProject.Controllers;
 using GameProject.Interfaces;
 using GameProject.PlayerSpace;
+using GameProject.Globals; // Needed for MiscAssetStore
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,9 +12,6 @@ public class StateItemScreenType(Game1 game) : IGameState {
   private static readonly string RETURN_TEXT = "Press I/GamePadB to return to game, Q/GamePadY to quit.";
   private IController keyboardController;
   private IController gamePadController;
-
-  // NEW: A local variable to hold our font
-  private SpriteFont mainFont;
 
   public int SelectedWeaponIndex { get; private set; } = 0;
 
@@ -49,10 +47,8 @@ public class StateItemScreenType(Game1 game) : IGameState {
     }
   }
 
-  public void LoadContent(ContentManager content) {
-    // NEW: Load the font directly here!
-    mainFont = content.Load<SpriteFont>("MainFont");
-  }
+  // We can leave this empty now because MiscAssetStore handles the loading!
+  public void LoadContent(ContentManager content) { }
 
   public void Update(GameTime gameTime) {
     keyboardController.Update(gameTime);
@@ -71,14 +67,16 @@ public class StateItemScreenType(Game1 game) : IGameState {
       RasterizerState.CullNone
     );
 
-    // NEW: Replaced game.Assets.MainFont with our local mainFont
+    // Grab the font directly from the team's global store
+    SpriteFont font = MiscAssetStore.Instance.MainFont;
+
     spriteBatch.DrawString(
-      mainFont,
+      font,
       RETURN_TEXT,
       new Vector2(game.Window.ClientBounds.Width, game.Window.ClientBounds.Height) * 0.5f + new Vector2(0.0f, 50.0f),
       Color.White,
       0.0f,
-      mainFont.MeasureString(RETURN_TEXT) * 0.5f,
+      font.MeasureString(RETURN_TEXT) * 0.5f,
       1.0f,
       SpriteEffects.None,
       0.0f
@@ -102,9 +100,8 @@ public class StateItemScreenType(Game1 game) : IGameState {
 
           weapon.DrawUI(spriteBatch, uiPosition, scale, tint);
 
-          // NEW: Replaced game.Assets.MainFont with our local mainFont
           if (i == player.Inventory.ActiveWeaponIndex) {
-            spriteBatch.DrawString(mainFont, "Equipped", new Vector2(uiX - 30, uiY + 50), Color.Yellow);
+            spriteBatch.DrawString(font, "Equipped", new Vector2(uiX - 30, uiY + 50), Color.Yellow);
           }
         }
       }
@@ -136,7 +133,6 @@ public class StateItemScreenType(Game1 game) : IGameState {
       for (int i = 0; i < player.Inventory.Keys.Count; i++) {
         IItem key = player.Inventory.Keys[i];
 
-        // Draw them in a little horizontal row
         Vector2 keyUiPosition = new Vector2(keyStartX + (i * 30), keyStartY);
         key.DrawUI(spriteBatch, keyUiPosition, 1f, Color.White);
       }
