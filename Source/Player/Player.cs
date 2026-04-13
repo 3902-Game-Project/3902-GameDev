@@ -38,6 +38,7 @@ internal class Player : IInitable, ICollidable {
   public bool IsInvincible => invincibilityTimer > 0;
 
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
+  private Vector2 lastInputVelocity = Vector2.Zero;
 
   public PlayerInventory Inventory { get; private set; }
   public Texture2D Texture { get; private set; }
@@ -103,6 +104,19 @@ internal class Player : IInitable, ICollidable {
 
   public void Update(GameTime gameTime) {
     float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
+    if (Velocity.X != 0 && lastInputVelocity.X == 0) {
+      Direction = (Velocity.X > 0) ? FacingDirection.Right : FacingDirection.Left;
+    }
+    if (Velocity.Y != 0 && lastInputVelocity.Y == 0) {
+      Direction = (Velocity.Y > 0) ? FacingDirection.Down : FacingDirection.Up;
+    }
+    if (Velocity.X != 0 && Velocity.Y == 0) {
+      Direction = (Velocity.X > 0) ? FacingDirection.Right : FacingDirection.Left;
+    }
+    if (Velocity.Y != 0 && Velocity.X == 0) {
+      Direction = (Velocity.Y > 0) ? FacingDirection.Down : FacingDirection.Up;
+    }
+    lastInputVelocity = Velocity;
 
     if (invincibilityTimer > 0) invincibilityTimer -= dt;
     if (Velocity != Vector2.Zero) Velocity = Vector2.Normalize(Velocity) * Speed;
