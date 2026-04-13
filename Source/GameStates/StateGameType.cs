@@ -254,8 +254,8 @@ internal class StateGameType : IGameState {
     graphicsDevice.Viewport = game.DefaultViewport;
   }
 
-  public void OnStateEnter(bool nextStateIsCurrentState) {
-    if (!nextStateIsCurrentState) {
+  public void OnStateEnter(bool prevStateIsCurrentState) {
+    if (!prevStateIsCurrentState) {
       SoundManager.Instance.PlayLoop(SoundID.Background);
     }
 
@@ -282,7 +282,7 @@ internal class StateGameType : IGameState {
     }
   }
 
-  public void OnStateStartFadeIn(bool nextStateIsCurrentState) {
+  public void OnStateStartFadeIn(bool prevStateIsCurrentState) {
     LevelManager.CompleteLevelSwitch();
   }
 
