@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using GameProject.Interfaces;
 using GameProject.Misc;
+using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -31,7 +32,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
     "12_level",
     "13_level",
   ];
-  private static readonly string STARTING_LEVEL = LEVEL_NAMES[0];
+  private static readonly string STARTING_LEVEL = "01_level";
 
   private readonly Dictionary<string, ILevel> levels = [];
   private string currentLevelName = STARTING_LEVEL;
@@ -51,20 +52,32 @@ internal class LevelManager(Game1 game) : ILevelManager {
     // Wrap player position around if player is at edge
 
     if (
-      game.StateGame.Player.Position.X <= LevelLoader.PLAYER_LEFT_BOUNDARY_THRESHOLD ||
-      game.StateGame.Player.Position.X >= LevelLoader.PLAYER_RIGHT_BOUNDARY_THRESHOLD
+      game.StateGame.Player.Position.X <= LevelLoader.PLAYER_LEFT_BOUNDARY_THRESHOLD
     ) {
       game.StateGame.Player.Position = new(
-        LevelLoader.LEVEL_WIDTH - game.StateGame.Player.Position.X,
+        LevelLoader.PLAYER_RIGHT_POS_AFTER_TELEPORT,
         game.StateGame.Player.Position.Y
       );
     } else if (
-      game.StateGame.Player.Position.Y <= LevelLoader.PLAYER_TOP_BOUNDARY_THRESHOLD ||
+        game.StateGame.Player.Position.X >= LevelLoader.PLAYER_RIGHT_BOUNDARY_THRESHOLD
+      ) {
+      game.StateGame.Player.Position = new(
+        LevelLoader.PLAYER_LEFT_POS_AFTER_TELEPORT,
+        game.StateGame.Player.Position.Y
+      );
+    } else if (
+      game.StateGame.Player.Position.Y <= LevelLoader.PLAYER_TOP_BOUNDARY_THRESHOLD
+    ) {
+      game.StateGame.Player.Position = new(
+        game.StateGame.Player.Position.X,
+        LevelLoader.PLAYER_BOTTOM_POS_AFTER_TELEPORT
+      );
+    } else if (
       game.StateGame.Player.Position.Y >= LevelLoader.PLAYER_BOTTOM_BOUNDARY_THRESHOLD
     ) {
       game.StateGame.Player.Position = new(
         game.StateGame.Player.Position.X,
-        LevelLoader.LEVEL_HEIGHT - game.StateGame.Player.Position.Y
+        LevelLoader.PLAYER_TOP_POS_AFTER_TELEPORT
       );
     } else {
       // No wrapping possible, use default position
@@ -73,6 +86,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
   }
 
   public ILevel CurrentLevel => levels[currentLevelName];
+  public CollisionManager CollisionManager => CurrentLevel.CollisionManager;
 
   public void Initialize() { }
 
@@ -81,10 +95,18 @@ internal class LevelManager(Game1 game) : ILevelManager {
       throw new ArgumentException("There must be at least one level to load");
     }
 
+    if (CurrentLevelIndex == -1) {
+      throw new ArgumentException("Starting level name not present in levels list");
+    }
+
     var levelNamesSet = new HashSet<string>(LEVEL_NAMES);
 
     foreach (var name in LEVEL_NAMES) {
-      levels.Add(name, LevelLoader.FromString(game, levelNamesSet, File.ReadAllText(content.RootDirectory + "/Levels/" + name + ".csv")));
+      var level = LevelLoader.FromString(game, levelNamesSet, File.ReadAllText(content.RootDirectory + "/Levels/" + name + ".csv"));
+
+      level.CollisionManager.Add(game.StateGame.Player);
+
+      levels.Add(name, level);
     }
   }
 

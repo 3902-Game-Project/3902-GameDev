@@ -28,9 +28,6 @@ internal class ProjectileManager {
   public void Update(GameTime gameTime) {
     for (int i = projectiles.Count - 1; i >= 0; i--) {
       projectiles[i].Update(gameTime);
-      if (projectiles[i].IsExpired) {
-        projectiles.RemoveAt(i);
-      }
     }
   }
 

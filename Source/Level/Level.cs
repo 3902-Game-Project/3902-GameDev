@@ -17,7 +17,7 @@ internal class Level(
   List<IEnemy> enemies,
   List<IWorldPickup> pickups,
   Vector2 playerPosition
-  ) : ILevel {
+) : ILevel {
   private void CheckLevelClear() {
     if (Enemies.Count == 0) {
       foreach (var door in Doors) {
@@ -75,7 +75,8 @@ internal class Level(
       pickup.Update(gameTime);
     }
 
-    foreach (var projectile in ProjectileManager.Projectiles) {
+    for (int i = 0; i < ProjectileManager.Projectiles.Count; i ++) {
+      IProjectile projectile = ProjectileManager.Projectiles[i];
       if (projectile is ICollidable collidableProj) {
         CollisionManager.Add(collidableProj);
       }
@@ -84,6 +85,8 @@ internal class Level(
         if (projectile is ICollidable expiredProj) {
           CollisionManager.Remove(expiredProj);
         }
+        ProjectileManager.Remove(projectile);
+        i--;
       }
     }
 

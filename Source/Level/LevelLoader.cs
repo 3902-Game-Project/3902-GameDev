@@ -21,10 +21,14 @@ internal partial class LevelLoader {
 
   public static readonly int LEVEL_WIDTH = LEVEL_WIDTH_BLOCKS * BLOCK_WIDTH;
   public static readonly int LEVEL_HEIGHT = LEVEL_HEIGHT_BLOCKS * BLOCK_HEIGHT;
-  public static readonly int PLAYER_LEFT_BOUNDARY_THRESHOLD = BLOCK_WIDTH * 2;
-  public static readonly int PLAYER_TOP_BOUNDARY_THRESHOLD = BLOCK_WIDTH * 2;
-  public static readonly int PLAYER_RIGHT_BOUNDARY_THRESHOLD = LEVEL_WIDTH - BLOCK_WIDTH * 2;
-  public static readonly int PLAYER_BOTTOM_BOUNDARY_THRESHOLD = LEVEL_HEIGHT - BLOCK_WIDTH * 2;
+  public static readonly float PLAYER_LEFT_BOUNDARY_THRESHOLD = BLOCK_WIDTH * 2.0f;
+  public static readonly float PLAYER_TOP_BOUNDARY_THRESHOLD = BLOCK_WIDTH * 2.0f;
+  public static readonly float PLAYER_RIGHT_BOUNDARY_THRESHOLD = LEVEL_WIDTH - BLOCK_WIDTH * 2.0f;
+  public static readonly float PLAYER_BOTTOM_BOUNDARY_THRESHOLD = LEVEL_HEIGHT - BLOCK_WIDTH * 2.0f;
+  public static readonly float PLAYER_LEFT_POS_AFTER_TELEPORT = BLOCK_WIDTH * 1.5f;
+  public static readonly float PLAYER_TOP_POS_AFTER_TELEPORT = BLOCK_WIDTH * 1.5f;
+  public static readonly float PLAYER_RIGHT_POS_AFTER_TELEPORT = LEVEL_WIDTH - BLOCK_WIDTH * 1.5f;
+  public static readonly float PLAYER_BOTTOM_POS_AFTER_TELEPORT = LEVEL_HEIGHT - BLOCK_WIDTH * 1.5f;
 
   private static void AddCellEntry(
     Game1 game,
