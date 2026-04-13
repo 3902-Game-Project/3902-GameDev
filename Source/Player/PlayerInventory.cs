@@ -25,6 +25,7 @@ internal class PlayerInventory(ILevelManager levelManager) {
   public void EquipWeapon(int index) {
     if (index >= 0 && index < Weapons.Count) {
       ActiveWeaponIndex = index;
+      ActiveItem?.OnEquip();
     }
   }
 
@@ -39,6 +40,7 @@ internal class PlayerInventory(ILevelManager levelManager) {
         DropItem(ActiveItem);
         Weapons[ActiveWeaponIndex] = newItem;
       }
+      ActiveItem?.OnEquip();
     } else if (newItem is KeyItem) {
       // If it's a key, put it in the new Keys list!
       Keys.Add(newItem);
@@ -60,6 +62,7 @@ internal class PlayerInventory(ILevelManager levelManager) {
   public void SwapActiveWeapon() {
     if (Weapons.Count > 1) {
       ActiveWeaponIndex = (ActiveWeaponIndex == 0) ? 1 : 0;
+      ActiveItem?.OnEquip();
     }
   }
 }

@@ -34,6 +34,13 @@ internal abstract class DefaultGun : IItem {
     projectilePattern = new SingleShotPattern();
   }
 
+  public virtual void OnEquip() {
+    fireMode?.OnEquip();
+  }
+  public virtual void OnUnequip() {
+    fireMode?.OnUnequip();
+  }
+
   public virtual void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
 

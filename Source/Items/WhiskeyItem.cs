@@ -12,6 +12,8 @@ internal class WhiskeyItem(Texture2D texture, Vector2 startPosition) : IItem {
   private Vector2 origin;
   public Vector2 Position { get; set; } = startPosition;
   public ItemCategory Category { get; } = ItemCategory.Consumable;
+  public void OnEquip() { }
+  public void OnUnequip() { }
 
   public void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
