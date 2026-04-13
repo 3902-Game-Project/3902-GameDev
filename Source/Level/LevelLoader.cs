@@ -231,7 +231,7 @@ internal partial class LevelLoader {
 
       case "21":
         /* key item */
-        pickups.Add(new ItemWorldPickup(ItemSpriteFactory.Instance.CreateKey(xPos, yPos, game.StateGame.LevelManager)));
+        pickups.Add(new ItemWorldPickup(ItemSpriteFactory.CreateKey(xPos, yPos, game.StateGame.LevelManager)));
         break;
 
       case "22":
