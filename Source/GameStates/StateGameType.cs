@@ -197,6 +197,20 @@ public class StateGameType : IGameState {
       );
     }
 
+    Vector2 mapPosition = new Vector2(keysStartPosition.X + 100, keysStartPosition.Y);
+    spriteBatch.Draw(
+      texture: TextureStore.Instance.MainBlockItemAtlas,
+      position: mapPosition,
+      sourceRectangle: new Rectangle(128, 448, 111, 97),  // FIX
+      color: Color.White,
+      rotation: 0f,
+      origin: Vector2.Zero,
+      scale: 2f,
+      effects: SpriteEffects.None,
+      layerDepth: 0f
+    );
+
+
     spriteBatch.End();
 
     graphicsDevice.Viewport = game.DefaultViewport;
