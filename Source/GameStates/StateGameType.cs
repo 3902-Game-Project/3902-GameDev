@@ -59,11 +59,8 @@ public class StateGameType : IGameState {
             { Keys.Down, new PlayerMoveDownCommand(Player) },
             { Keys.Left, new PlayerMoveLeftCommand(Player) },
             { Keys.Right, new PlayerMoveRightCommand(Player) },
-            { Keys.J, new PlayerUseItemCommand(Player, UseType.Held) },
-        },
-        releasedMappings: new Dictionary<Keys, ICommand> {
-            { Keys.J, new PlayerUseItemCommand(Player, UseType.Released) },
         }
+        
     );
 
     gamePadController = new GamePadController(
