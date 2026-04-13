@@ -4,6 +4,7 @@ using GameProject.Globals;
 using GameProject.Interfaces;
 using GameProject.Items;
 using GameProject.Managers;
+using GameProject.Misc;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -57,11 +58,9 @@ public class StateGameType : IGameState {
 
     foreach (var projectile in LevelManager.CurrentLevel.ProjectileManager.Projectiles) {
       if (projectile is ICollidable collidableProj) {
-        collisionManager.Add(collidableProj);
+        LevelManager.CurrentLevel.CollisionManager.Add(collidableProj);
       }
     }
-
-    collisionManager.Update(gameTime);
   }
 
   public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
@@ -187,19 +186,19 @@ public class StateGameType : IGameState {
 
   public void OnStateEnter() {
     SoundManager.Instance.PlayLoop(SoundID.Background);
-        collisionManager.Clear();
-    collisionManager.Add(Player);
 
     if (LevelManager.CurrentLevel != null) {
+      LevelManager.CurrentLevel.CollisionManager.Clear();
+      LevelManager.CurrentLevel.CollisionManager.Add(Player);
       foreach (var block in LevelManager.CurrentLevel.CollidableBlocks) {
-        collisionManager.Add(block);
+        LevelManager.CurrentLevel.CollisionManager.Add(block);
       }
       foreach (var doorBlock in LevelManager.CurrentLevel.Doors) {
-        collisionManager.Add(doorBlock);
+        LevelManager.CurrentLevel.CollisionManager.Add(doorBlock);
       }
       foreach (var enemy in LevelManager.CurrentLevel.Enemies) {
         if (enemy.Health > 0) {
-          collisionManager.Add(enemy);
+          LevelManager.CurrentLevel.CollisionManager.Add(enemy);
         }
       }
     }

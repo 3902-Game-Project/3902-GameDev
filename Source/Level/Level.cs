@@ -36,6 +36,7 @@ public class Level(
   public List<IWorldPickup> Pickups => pickups;
   public Vector2 PlayerPosition { get; private set; } = playerPosition;
   public ProjectileManager ProjectileManager { get; private set; } = new ProjectileManager();
+  public CollisionManager CollisionManager { get; private set; } = new CollisionManager();
 
   public void Initialize() { }
 
@@ -62,6 +63,7 @@ public class Level(
       if (enemy.Health <= 0) {
         DeadEnemies.Add(enemy);
         enemies.Remove(enemy);
+        CollisionManager.Remove(enemy);
       }
     }
 
@@ -74,6 +76,7 @@ public class Level(
     }
 
     ProjectileManager.Update(gameTime);
+    CollisionManager.Update(gameTime);
 
     CheckLevelClear();
   }
