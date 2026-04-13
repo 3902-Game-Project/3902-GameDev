@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using GameProject.Factories;
 using GameProject.Interfaces;
-using GameProject.Managers;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 
@@ -170,7 +169,6 @@ internal partial class LevelLoader {
       case "11":
         /* rifleman */
         enemies.Add(EnemySpriteFactory.Instance.CreateRiflemanSprite(xPos, yPos, game.StateGame.LevelManager));
-         
         break;
 
       case "12":

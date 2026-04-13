@@ -50,7 +50,6 @@ public class Level(
       if (enemy.Health <= 0 && !DeadEnemies.Contains(enemy)) {
         DeadEnemies.Add(enemy);
       }
-      
     }
 
     foreach (var pickup in pickups) {
