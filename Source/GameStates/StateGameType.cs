@@ -1,5 +1,4 @@
 ﻿using GameProject.Controllers;
-using GameProject.Enemies;
 using GameProject.Factories;
 using GameProject.Globals;
 using GameProject.Interfaces;

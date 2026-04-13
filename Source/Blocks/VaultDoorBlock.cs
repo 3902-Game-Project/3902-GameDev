@@ -60,7 +60,6 @@ public class VaultDoorBlock : BaseBlock {
     if (State == BlockState.open && info.Collider is Player) {
       levelManager.SwitchLevel(PairedLevelName);
     }
-    
   }
 
   public void ChangeState(BlockState state) {

@@ -1,12 +1,7 @@
-﻿using GameProject;
-using GameProject.Blocks;
+﻿using GameProject.Blocks;
 using GameProject.Enums;
-using GameProject.GameStates;
 using GameProject.Interfaces;
-using GameProject.Managers;
-using GameProject.Misc;
 using GameProject.PlayerSpace;
-using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -46,11 +41,10 @@ public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager 
   public void Use(UseType useType) {
     foreach (var block in levelManagers.CurrentLevel.CollidableBlocks) {
       if (block is VaultDoorBlock) {
-        VaultDoorBlock temp = (VaultDoorBlock)block;
+        VaultDoorBlock temp = (VaultDoorBlock) block;
         temp.ChangeState(BlockState.opening);
-      }  
-      else if (block is SlattedDoorBlock) {
-        SlattedDoorBlock temp = (SlattedDoorBlock)block;
+      } else if (block is SlattedDoorBlock) {
+        SlattedDoorBlock temp = (SlattedDoorBlock) block;
         temp.ChangeState(BlockState.open);
       }
     }

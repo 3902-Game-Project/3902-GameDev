@@ -1,6 +1,5 @@
 ﻿using GameProject.Collisions;
 using GameProject.Interfaces;
-using GameProject.Managers;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,7 +8,7 @@ namespace GameProject.Blocks;
 
 public class CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : BaseBlock(xyPos) {
   private Rectangle sourceRect = new(128, 0, 64, 64);
-  private  const float velocity = 2f;
+  private const float velocity = 2f;
   private Vector2 direction;
   public BlockState State { get; set; } = BlockState.still;
 
@@ -28,8 +27,7 @@ public class CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : BaseBlock(xyPos
   public override void OnCollision(CollisionInfo info) {
     if (info.Collider is IBlock || info.Collider is IEnemy) {
       State = BlockState.still;
-    }
-    else if (State == BlockState.still && info.Collider is Player) {
+    } else if (State == BlockState.still && info.Collider is Player) {
       State = BlockState.moving;
 
       switch (info.Side) {
@@ -54,7 +52,6 @@ public class CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : BaseBlock(xyPos
           break;
       }
     }
-    
   }
 
   protected void UpdateCollider() {
