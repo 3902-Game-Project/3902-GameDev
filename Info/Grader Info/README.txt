@@ -35,7 +35,7 @@ Code Reviews:
 
 Known bugs:
   Cannot move to escape block if just barely collided into it.
-  Gun does not follow player until after level fade-in animation is complete.
+  
   Gamepad support not currently complete. We ran out of time.
 
 Sprint 2 Report:

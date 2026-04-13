@@ -125,18 +125,6 @@ public class Player : IInitable, ICollidable {
     Velocity = Vector2.Zero;
 
     if (Inventory.ActiveItem != null) {
-      float unscaledWidth = 171f;
-      float unscaledHeight = 323f;
-      Vector2 spriteCenter = new(unscaledWidth / 2f, unscaledHeight / 2f);
-      float playerScale = 0.15f;
-      Vector2 rightHandUnscaled = new(100f, 195f);
-      Vector2 leftHandUnscaled = new(18f, 188f);
-      Vector2 rightHandOffset = (rightHandUnscaled - spriteCenter) * playerScale;
-      Vector2 leftHandOffset = (leftHandUnscaled - spriteCenter) * playerScale;
-      Vector2 currentOffset = (Direction == FacingDirection.Right) ? rightHandOffset : leftHandOffset;
-
-      Inventory.ActiveItem.Position = Position + currentOffset;
-      Inventory.ActiveItem.Direction = Direction;
       Inventory.ActiveItem.Update(gameTime);
     }
   }
@@ -177,6 +165,21 @@ public class Player : IInitable, ICollidable {
 
   public void Draw(SpriteBatch spriteBatch) {
     State.Draw(spriteBatch);
+
+    if (Inventory.ActiveItem != null) {
+      float unscaledWidth = 171f;
+      float unscaledHeight = 323f;
+      Vector2 spriteCenter = new(unscaledWidth / 2f, unscaledHeight / 2f);
+      float playerScale = 0.15f;
+      Vector2 rightHandUnscaled = new(100f, 195f);
+      Vector2 leftHandUnscaled = new(18f, 188f);
+      Vector2 rightHandOffset = (rightHandUnscaled - spriteCenter) * playerScale;
+      Vector2 leftHandOffset = (leftHandUnscaled - spriteCenter) * playerScale;
+      Vector2 currentOffset = (Direction == FacingDirection.Right) ? rightHandOffset : leftHandOffset;
+
+      Inventory.ActiveItem.Position = Position + currentOffset;
+      Inventory.ActiveItem.Direction = Direction;
+    }
 
     Inventory.ActiveItem?.Draw(spriteBatch);
   }
