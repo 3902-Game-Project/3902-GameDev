@@ -141,8 +141,7 @@ internal class Player : IInitable, ICollidable {
 
   public void OnCollision(CollisionInfo info) {
     if (info.Collider is IBlock) {
-      Position += info.Direction * (info.Overlap + 0.01f);
-
+      Position = CollisionHelper.GetNudgedPosition(info, Position, info.Overlap + 0.01f);
       if (Collider != null) Collider.Position = Position;
     }
 
