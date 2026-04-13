@@ -17,15 +17,28 @@ internal class PlayerAnimatedMovingState(Player player) : IPlayerState {
       new(2481, 54, 171, 323)
   ];
 
+  //need to update below 2 later
+  private readonly List<Rectangle> moveUpFrames = [
+      new(453, 425, 161, 322),
+      new(453, 425, 161, 322)
+  ];
+
+  private readonly List<Rectangle> moveDownFrames = [
+      new(455, 58, 161, 318),
+      new(455, 58, 161, 318)
+  ];
+
   private int currentFrame = 0;
   private double timer = 0;
   private readonly double frameInterval = 0.2;
 
   public void MoveUp() {
     player.Velocity = new Vector2(player.Velocity.X, -player.Speed);
+    player.Direction = FacingDirection.Up;
   }
   public void MoveDown() {
     player.Velocity = new Vector2(player.Velocity.X, player.Speed);
+    player.Direction = FacingDirection.Down;
   }
   public void MoveLeft() {
     player.Velocity = new Vector2(-player.Speed, player.Velocity.Y);
@@ -45,7 +58,7 @@ internal class PlayerAnimatedMovingState(Player player) : IPlayerState {
     timer += gameTime.ElapsedGameTime.TotalSeconds;
     if (timer > frameInterval) {
       currentFrame++;
-      if (currentFrame >= moveLeftFrames.Count) {
+      if (currentFrame >= 2) {
         currentFrame = 0;
       }
       timer = 0;
@@ -61,14 +74,19 @@ internal class PlayerAnimatedMovingState(Player player) : IPlayerState {
   }
 
   public void Draw(SpriteBatch spriteBatch) {
-    Rectangle sourceRect;
+    List<Rectangle> activeFrames;
 
     if (player.Direction == FacingDirection.Right) {
-      sourceRect = moveRightFrames[currentFrame];
+      activeFrames = moveRightFrames;
+    } else if (player.Direction == FacingDirection.Left) {
+      activeFrames = moveLeftFrames;
+    } else if (player.Direction == FacingDirection.Up) {
+      activeFrames = moveUpFrames;
     } else {
-      sourceRect = moveLeftFrames[currentFrame];
+      activeFrames = moveDownFrames;
     }
-
+    int frameIndex = currentFrame % activeFrames.Count;
+    Rectangle sourceRect = activeFrames[frameIndex];
     Vector2 origin = new(sourceRect.Width / 2, sourceRect.Height / 2);
 
     spriteBatch.Draw(

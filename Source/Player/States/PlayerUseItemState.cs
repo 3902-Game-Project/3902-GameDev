@@ -10,7 +10,8 @@ internal class PlayerUseItemState(Player player) : IPlayerState {
 
   private Rectangle SpriteRight = new(773, 56, 171, 323);
   private Rectangle SpriteLeft = new(1531, 420, 171, 323);
-
+  private Rectangle SpriteUp = new(453, 425, 161, 322);
+  private Rectangle SpriteDown = new(455, 58, 161, 318);
   public void MoveUp() { }
   public void MoveDown() { }
   public void MoveLeft() { }
@@ -34,8 +35,12 @@ internal class PlayerUseItemState(Player player) : IPlayerState {
 
     if (player.Direction == FacingDirection.Right) {
       sourceRect = SpriteRight;
-    } else {
+    } else if (player.Direction == FacingDirection.Left) {
       sourceRect = SpriteLeft;
+    } else if (player.Direction == FacingDirection.Up) {
+      sourceRect = SpriteUp;
+    } else {
+      sourceRect = SpriteDown;
     }
 
     Vector2 origin = new(sourceRect.Width / 2, sourceRect.Height / 2);
