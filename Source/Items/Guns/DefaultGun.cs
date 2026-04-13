@@ -59,7 +59,7 @@ public abstract class DefaultGun : IItem {
       Position,
       sourceRectangle,
       Color.White,
-      0f,
+      rotation,
       origin,
       scale,
       effects,
