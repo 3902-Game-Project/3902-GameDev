@@ -9,7 +9,8 @@ namespace GameProject.Controllers;
 public class GamePadController : IController {
   private static readonly PlayerIndex PLAYER_INDEX = PlayerIndex.One;
 
-  private readonly GamePadDiffTracker gamePadTracker = new();
+  // Tracking of presses / releases must be shared across GameStates
+  private static readonly GamePadDiffTracker gamePadTracker = new();
 
   private readonly Dictionary<Buttons, ICommand> pressedMappings;
   private readonly Dictionary<Buttons, ICommand> downMappings;

@@ -7,7 +7,8 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.Controllers;
 
 public class MouseController : IController {
-  private readonly MouseDiffTracker mouseTracker = new();
+  // Tracking of presses / releases must be shared across GameStates
+  private static readonly MouseDiffTracker mouseTracker = new();
 
   private readonly Dictionary<MouseButtons, ICommand> pressedMappings;
   private readonly Dictionary<MouseButtons, ICommand> downMappings;
