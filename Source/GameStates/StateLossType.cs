@@ -79,11 +79,11 @@ internal class StateLossType(Game1 game) : IGameState {
     spriteBatch.End();
   }
 
-  public void OnStateEnter() { }
+  public void OnStateEnter(bool nextStateIsSameState) { }
 
-  public void OnStateLeave() { }
+  public void OnStateLeave(bool nextStateIsSameState) { }
 
-  public void OnStateStartFadeIn() { }
+  public void OnStateStartFadeIn(bool nextStateIsSameState) { }
 
-  public void OnStateEndFadeOut() { }
+  public void OnStateEndFadeOut(bool nextStateIsSameState) { }
 }

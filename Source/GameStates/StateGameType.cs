@@ -255,7 +255,7 @@ internal class StateGameType : IGameState {
     graphicsDevice.Viewport = game.DefaultViewport;
   }
 
-  public void OnStateEnter() {
+  public void OnStateEnter(bool nextStateIsSameState) {
     SoundManager.Instance.PlayLoop(SoundID.Background);
 
     if (LevelManager.CurrentLevel != null) {
@@ -275,13 +275,13 @@ internal class StateGameType : IGameState {
     }
   }
 
-  public void OnStateLeave() {
+  public void OnStateLeave(bool nextStateIsSameState) {
     SoundManager.Instance.StopAll();
   }
 
-  public void OnStateStartFadeIn() {
+  public void OnStateStartFadeIn(bool nextStateIsSameState) {
     LevelManager.CompleteLevelSwitch();
   }
 
-  public void OnStateEndFadeOut() { }
+  public void OnStateEndFadeOut(bool nextStateIsSameState) { }
 }
