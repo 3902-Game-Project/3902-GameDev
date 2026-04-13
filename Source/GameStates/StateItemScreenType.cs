@@ -21,14 +21,14 @@ public class StateItemScreenType(Game1 game) : IGameState {
   public void Initialize() {
     keyboardController = new KeyboardController(
         pressedMappings: new Dictionary<Keys, ICommand> {
-            { Keys.I, new ReturnToGameCommand(game) },
+            { Keys.I, new ReturnToGameNoFadeCommand(game) },
             { Keys.Q, new QuitCommand(game) },
         }
     );
 
     gamePadController = new GamePadController(
         pressedMappings: new Dictionary<Buttons, ICommand> {
-            { Buttons.A, new ReturnToGameCommand(game) },
+            { Buttons.A, new ReturnToGameNoFadeCommand(game) },
             { Buttons.X, new QuitCommand(game) },
         }
     );
