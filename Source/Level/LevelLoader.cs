@@ -302,7 +302,7 @@ internal partial class LevelLoader {
 
       case "32":
         /* treasure block */
-        collidableBlocks.Add(BlockSpriteFactory.Instance.CreateTreasureBlockSprite(xPos, yPos));
+        collidableBlocks.Add(BlockSpriteFactory.CreateTreasureBlockSprite(xPos, yPos));
         break;
 
       /* case 33 -- empty */
