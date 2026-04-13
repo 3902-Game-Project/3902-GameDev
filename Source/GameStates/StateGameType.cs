@@ -35,7 +35,7 @@ public class StateGameType : IGameState {
     mouseController = new GameMouseController(game);
     gamePadController = new GameGamePadController(game);
     LevelManager.Initialize();
-    collisionManager.AddCollider(Player);
+    collisionManager.Add(Player);
   }
 
   public void LoadContent(ContentManager contentManager) {
@@ -55,26 +55,9 @@ public class StateGameType : IGameState {
     LevelManager.Update(gameTime);
     Player.Update(gameTime);
 
-    collisionManager.Clear();
-    collisionManager.AddCollider(Player);
-
-    if (LevelManager.CurrentLevel != null) {
-      foreach (var block in LevelManager.CurrentLevel.CollidableBlocks) {
-        collisionManager.AddCollider(block);
-      }
-      foreach (var doorBlock in LevelManager.CurrentLevel.Doors) {
-        collisionManager.AddCollider(doorBlock);
-      }
-      foreach (var enemy in LevelManager.CurrentLevel.Enemies) {
-        if (enemy.Health > 0) {
-          collisionManager.AddCollider(enemy);
-        }
-      }
-    }
-
     foreach (var projectile in LevelManager.CurrentLevel.ProjectileManager.Projectiles) {
       if (projectile is ICollidable collidableProj) {
-        collisionManager.AddCollider(collidableProj);
+        collisionManager.Add(collidableProj);
       }
     }
 
@@ -204,6 +187,22 @@ public class StateGameType : IGameState {
 
   public void OnStateEnter() {
     SoundManager.Instance.PlayLoop(SoundID.Background);
+        collisionManager.Clear();
+    collisionManager.Add(Player);
+
+    if (LevelManager.CurrentLevel != null) {
+      foreach (var block in LevelManager.CurrentLevel.CollidableBlocks) {
+        collisionManager.Add(block);
+      }
+      foreach (var doorBlock in LevelManager.CurrentLevel.Doors) {
+        collisionManager.Add(doorBlock);
+      }
+      foreach (var enemy in LevelManager.CurrentLevel.Enemies) {
+        if (enemy.Health > 0) {
+          collisionManager.Add(enemy);
+        }
+      }
+    }
   }
 
   public void OnStateLeave() {
