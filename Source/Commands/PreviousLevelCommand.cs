@@ -1,6 +1,4 @@
-﻿using GameProject.GlobalInterfaces;
-
-namespace GameProject.Commands;
+﻿namespace GameProject.Commands;
 
 internal class PreviousLevelCommand(ILevelManager levelManager) : ICommand {
   public void Execute() {

@@ -1,9 +1,7 @@
-﻿using GameProject.GlobalInterfaces;
-using GameProject.PlayerSpace;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.PlayerStates;
+namespace GameProject.PlayerSpace.States;
 
 internal class PlayerUseItemState(Player player) : IPlayerState {
   private int timer = 20;

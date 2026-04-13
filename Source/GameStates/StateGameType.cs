@@ -1,14 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using GameProject.ButtonDiffTrackers;
 using GameProject.Commands;
 using GameProject.Controllers;
 using GameProject.Factories;
 using GameProject.Globals;
-using GameProject.GlobalInterfaces;
 using GameProject.Items;
 using GameProject.Managers;
-using GameProject.Misc;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -23,7 +20,7 @@ internal class StateGameType : IGameState {
   private IController keyboardController;
   private IController mouseController;
   private IController gamePadController;
-  
+
   public Player Player { get; private set; }
 
   public ILevelManager LevelManager { get; private set; }

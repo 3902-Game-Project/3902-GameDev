@@ -2,8 +2,6 @@
 using GameProject.Collisions;
 using GameProject.GlobalInterfaces;
 using GameProject.Managers;
-using GameProject.Misc;
-using GameProject.PlayerStates;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -21,7 +19,7 @@ internal enum FacingDirection {
 internal class Player : IInitable, ICollidable {
   private static readonly float PLAYER_WIDTH = 171.0f * 0.15f;
   private static readonly float PLAYER_HEIGHT = 323.0f * 0.15f;
-  
+
   public IShape Shape => Collider;
   public ILevelManager LevelManager { get; private set; }
   public BoxCollider Collider { get; private set; }

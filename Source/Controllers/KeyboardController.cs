@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using GameProject.ButtonDiffTrackers;
-using GameProject.GlobalInterfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 

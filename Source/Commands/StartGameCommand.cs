@@ -1,6 +1,4 @@
-﻿using GameProject.GlobalInterfaces;
-
-namespace GameProject.Commands;
+﻿namespace GameProject.Commands;
 
 internal class StartGameCommand(Game1 game) : ICommand {
   public void Execute() {

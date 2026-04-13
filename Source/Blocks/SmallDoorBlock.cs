@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using GameProject.Collisions;
-using GameProject.GlobalInterfaces;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;

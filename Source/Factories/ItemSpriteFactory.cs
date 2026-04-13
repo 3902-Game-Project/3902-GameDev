@@ -1,7 +1,5 @@
 using GameProject.Globals;
-using GameProject.GlobalInterfaces;
 using GameProject.Items;
-using GameProject.Items.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;

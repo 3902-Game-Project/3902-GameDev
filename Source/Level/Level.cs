@@ -2,7 +2,6 @@
 using GameProject.Blocks;
 using GameProject.Enemies;
 using GameProject.Globals;
-using GameProject.GlobalInterfaces;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;

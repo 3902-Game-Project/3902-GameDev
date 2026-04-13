@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GameProject.Enums;
-using GameProject.GlobalInterfaces;
-using GameProject.Items.Utility; // Needed to identify KeyItems
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 

@@ -1,4 +1,3 @@
-using GameProject.GlobalInterfaces;
 using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;

@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using GameProject.GlobalInterfaces;
-using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

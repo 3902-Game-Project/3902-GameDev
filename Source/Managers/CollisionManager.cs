@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using GameProject.CollisionResponse;
 using GameProject.Collisions;
 using GameProject.GlobalInterfaces;
 using Microsoft.Xna.Framework;

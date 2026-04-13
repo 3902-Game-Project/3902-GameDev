@@ -1,6 +1,4 @@
 ﻿using System;
-using GameProject.Enemies;
-using GameProject.GlobalInterfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies.BatStates;

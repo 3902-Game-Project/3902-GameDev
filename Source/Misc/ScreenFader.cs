@@ -1,6 +1,6 @@
 ﻿using System;
-using GameProject.Globals;
 using GameProject.GlobalInterfaces;
+using GameProject.Globals;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

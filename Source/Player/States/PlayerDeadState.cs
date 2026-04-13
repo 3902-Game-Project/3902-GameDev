@@ -1,6 +1,4 @@
-﻿using GameProject.GlobalInterfaces;
-using GameProject.Misc;
-using GameProject.PlayerSpace;
+﻿using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
