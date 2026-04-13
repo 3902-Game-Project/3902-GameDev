@@ -1,9 +1,12 @@
-﻿using GameProject.Controllers;
+﻿using System.Collections.Generic;
+using GameProject.Commands;
+using GameProject.Controllers;
 using GameProject.Globals;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.GameStates;
 
@@ -14,8 +17,19 @@ public class StateWinType(Game1 game) : IGameState {
   private IController gamePadController;
 
   public void Initialize() {
-    keyboardController = new EndKeyboardController(game);
-    gamePadController = new EndGamePadController(game);
+    keyboardController = new KeyboardController(
+        pressedMappings: new Dictionary<Keys, ICommand> {
+            { Keys.R, new ReturnToMenuAndResetCommand(game) },
+            { Keys.Q, new QuitCommand(game) },
+        }
+    );
+
+    gamePadController = new GamePadController(
+        pressedMappings: new Dictionary<Buttons, ICommand> {
+            { Buttons.B, new ReturnToMenuAndResetCommand(game) },
+            { Buttons.X, new QuitCommand(game) },
+        }
+    );
   }
 
   public void LoadContent(ContentManager content) { }

@@ -6,12 +6,21 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Controllers;
 
-public abstract class AKeyboardController : IController {
+public class KeyboardController : IController {
   private readonly KeyboardDiffTracker keyTracker = new();
 
-  protected abstract Dictionary<Keys, ICommand> PressedMappings { get; }
-  protected abstract Dictionary<Keys, ICommand> DownMappings { get; }
-  protected abstract Dictionary<Keys, ICommand> ReleasedMappings { get; }
+  private readonly Dictionary<Keys, ICommand> pressedMappings;
+  private readonly Dictionary<Keys, ICommand> downMappings;
+  private readonly Dictionary<Keys, ICommand> releasedMappings;
+
+  public KeyboardController(
+        Dictionary<Keys, ICommand> pressedMappings = null,
+        Dictionary<Keys, ICommand> downMappings = null,
+        Dictionary<Keys, ICommand> releasedMappings = null) {
+    this.pressedMappings = pressedMappings ?? [];
+    this.downMappings = downMappings ?? [];
+    this.releasedMappings = releasedMappings ?? [];
+  }
 
   public void Update(GameTime gameTime) {
     KeyboardState keyboardState = Keyboard.GetState();
@@ -19,19 +28,19 @@ public abstract class AKeyboardController : IController {
     keyTracker.Update(keyboardState);
 
     foreach (Keys key in keyTracker.GetPressed()) {
-      if (PressedMappings.TryGetValue(key, out ICommand command)) {
+      if (pressedMappings.TryGetValue(key, out ICommand command)) {
         command.Execute();
       }
     }
 
     foreach (Keys key in keyTracker.GetDown()) {
-      if (DownMappings.TryGetValue(key, out ICommand command)) {
+      if (downMappings.TryGetValue(key, out ICommand command)) {
         command.Execute();
       }
     }
 
     foreach (Keys key in keyTracker.GetReleased()) {
-      if (ReleasedMappings.TryGetValue(key, out ICommand command)) {
+      if (releasedMappings.TryGetValue(key, out ICommand command)) {
         command.Execute();
       }
     }
