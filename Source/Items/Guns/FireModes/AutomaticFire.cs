@@ -22,6 +22,17 @@ public class AutomaticFire(GunStats stats) : IFireMode {
     return true;
   }
 
+  public void OnEquip() {
+    if (stats.CurrentAmmo <= 0) {
+      countdown = stats.ReloadTime;
+      SoundManager.Instance.Play(stats.ReloadID);
+    }
+  }
+
+  public void OnUnequip() {
+    countdown = 0f;
+  }
+
   public void Update(GameTime gameTime) {
     if (countdown > 0) {
       countdown -= (float) gameTime.ElapsedGameTime.TotalSeconds;

@@ -16,6 +16,8 @@ public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager 
   public bool IsCollected { get; set; } = false;
   private Vector2 origin;
   public ItemCategory Category { get; } = ItemCategory.Consumable;
+  public void OnEquip() { }
+  public void OnUnequip() { }
 
   public void Draw(SpriteBatch spriteBatch) {
     if (!IsCollected) {
