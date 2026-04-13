@@ -76,9 +76,13 @@ public class Level(
     }
 
     foreach (var projectile in ProjectileManager.Projectiles) {
+      if (projectile is ICollidable collidableProj) {
+        CollisionManager.Add(collidableProj);
+      }
+
       if (projectile.IsExpired) {
-        if (projectile is ICollidable collidableProj) {
-          CollisionManager.Remove(collidableProj);
+        if (projectile is ICollidable expiredProj) {
+          CollisionManager.Remove(expiredProj);
         }
       }
     }

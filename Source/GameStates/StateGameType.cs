@@ -55,12 +55,7 @@ public class StateGameType : IGameState {
 
     LevelManager.Update(gameTime);
     Player.Update(gameTime);
-
-    foreach (var projectile in LevelManager.CurrentLevel.ProjectileManager.Projectiles) {
-      if (projectile is ICollidable collidableProj) {
-        LevelManager.CurrentLevel.CollisionManager.Add(collidableProj);
-      }
-    }
+    
   }
 
   public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
