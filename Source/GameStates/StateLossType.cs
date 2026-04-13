@@ -18,20 +18,20 @@ internal class StateLossType(Game1 game) : IGameState {
 
   public void Initialize() {
     keyboardController = new KeyboardController(
-        pressedMappings: new Dictionary<Keys, ICommand> {
-            { Keys.R, new ReturnToMenuAndResetCommand(game) },
-            { Keys.Q, new QuitCommand(game) },
-        }
+      pressedMappings: new Dictionary<Keys, ICommand> {
+        { Keys.R, new ReturnToMenuAndResetCommand(game) },
+        { Keys.Q, new QuitCommand(game) },
+      }
     );
 
     // The gamepad bindings don't match the readme. this is intentional, because
     // the readme is in Xbox controller layout, but testing with a
     // nintendo pro controller seems to suggest it is pro controller layout.
     gamePadController = new GamePadController(
-        pressedMappings: new Dictionary<Buttons, ICommand> {
-            { Buttons.B, new ReturnToMenuAndResetCommand(game) },
-            { Buttons.X, new QuitCommand(game) },
-        }
+      pressedMappings: new Dictionary<Buttons, ICommand> {
+        { Buttons.B, new ReturnToMenuAndResetCommand(game) },
+        { Buttons.X, new QuitCommand(game) },
+      }
     );
   }
 

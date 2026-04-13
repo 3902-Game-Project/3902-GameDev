@@ -37,64 +37,64 @@ internal class StateGameType : IGameState {
 
   public void Initialize() {
     keyboardController = new KeyboardController(
-        pressedMappings: new Dictionary<Keys, ICommand> {
-            { Keys.R, new ReturnToMenuAndResetCommand(game) },
-            { Keys.Q, new QuitCommand(game) },
-            { Keys.P, new PauseCommand(game) },
-            { Keys.I, new OpenItemScreenCommand(game) },
-            { Keys.J, new PlayerUseItemCommand(Player, UseType.Pressed) },
-            { Keys.E, new PlayerDieCommand(Player) },
-            { Keys.T, new PreviousLevelCommand(LevelManager) },
-            { Keys.Y, new NextLevelCommand(LevelManager) },
-            { Keys.F, new PlayerInteractCommand(Player) },
-            { Keys.Space, new SwapWeaponCommand(Player) },
-            { Keys.Tab, new ToggleMusicCommand() },
-        },
-        downMappings: new Dictionary<Keys, ICommand> {
-            { Keys.W, new PlayerMoveUpCommand(Player) },
-            { Keys.S, new PlayerMoveDownCommand(Player) },
-            { Keys.A, new PlayerMoveLeftCommand(Player) },
-            { Keys.D, new PlayerMoveRightCommand(Player) },
-            { Keys.Up, new PlayerMoveUpCommand(Player) },
-            { Keys.Down, new PlayerMoveDownCommand(Player) },
-            { Keys.Left, new PlayerMoveLeftCommand(Player) },
-            { Keys.Right, new PlayerMoveRightCommand(Player) },
-            { Keys.J, new PlayerUseItemCommand(Player, UseType.Held) },
-        },
-        releasedMappings: new Dictionary<Keys, ICommand> {
-            { Keys.J, new PlayerUseItemCommand(Player, UseType.Released) },
-        }
+      pressedMappings: new Dictionary<Keys, ICommand> {
+        { Keys.R, new ReturnToMenuAndResetCommand(game) },
+        { Keys.Q, new QuitCommand(game) },
+        { Keys.P, new PauseCommand(game) },
+        { Keys.I, new OpenItemScreenCommand(game) },
+        { Keys.J, new PlayerUseItemCommand(Player, UseType.Pressed) },
+        { Keys.E, new PlayerDieCommand(Player) },
+        { Keys.T, new PreviousLevelCommand(LevelManager) },
+        { Keys.Y, new NextLevelCommand(LevelManager) },
+        { Keys.F, new PlayerInteractCommand(Player) },
+        { Keys.Space, new SwapWeaponCommand(Player) },
+        { Keys.Tab, new ToggleMusicCommand() },
+      },
+      downMappings: new Dictionary<Keys, ICommand> {
+        { Keys.W, new PlayerMoveUpCommand(Player) },
+        { Keys.S, new PlayerMoveDownCommand(Player) },
+        { Keys.A, new PlayerMoveLeftCommand(Player) },
+        { Keys.D, new PlayerMoveRightCommand(Player) },
+        { Keys.Up, new PlayerMoveUpCommand(Player) },
+        { Keys.Down, new PlayerMoveDownCommand(Player) },
+        { Keys.Left, new PlayerMoveLeftCommand(Player) },
+        { Keys.Right, new PlayerMoveRightCommand(Player) },
+        { Keys.J, new PlayerUseItemCommand(Player, UseType.Held) },
+      },
+      releasedMappings: new Dictionary<Keys, ICommand> {
+          { Keys.J, new PlayerUseItemCommand(Player, UseType.Released) },
+      }
     );
 
     mouseController = new MouseController(
-        pressedMappings: new Dictionary<MouseButtons, ICommand> {
-            { MouseButtons.Right, new PreviousLevelCommand(LevelManager) },
-            { MouseButtons.Left, new NextLevelCommand(LevelManager) },
-        }
+      pressedMappings: new Dictionary<MouseButtons, ICommand> {
+        { MouseButtons.Right, new PreviousLevelCommand(LevelManager) },
+        { MouseButtons.Left, new NextLevelCommand(LevelManager) },
+      }
     );
 
     // The gamepad bindings don't match the readme. this is intentional, because
     // the readme is in Xbox controller layout, but testing with a
     // nintendo pro controller seems to suggest it is pro controller layout.
     gamePadController = new GamePadController(
-        pressedMappings: new Dictionary<Buttons, ICommand> {
-            { Buttons.X, new QuitCommand(game) },
-            { Buttons.B, new ReturnToMenuAndResetCommand(game) },
-            { Buttons.A, new PlayerUseItemCommand(Player, UseType.Pressed) },
-            { Buttons.Y, new PlayerDieCommand(Player) },
-            { Buttons.LeftShoulder, new PreviousLevelCommand(LevelManager) },
-            { Buttons.RightShoulder, new NextLevelCommand(LevelManager) },
-        },
-        downMappings: new Dictionary<Buttons, ICommand> {
-            { Buttons.A, new PlayerUseItemCommand(Player, UseType.Held) },
-            { Buttons.DPadUp, new PlayerMoveUpCommand(Player) },
-            { Buttons.DPadDown, new PlayerMoveDownCommand(Player) },
-            { Buttons.DPadLeft, new PlayerMoveLeftCommand(Player) },
-            { Buttons.DPadRight, new PlayerMoveRightCommand(Player) },
-        },
-        releasedMappings: new Dictionary<Buttons, ICommand> {
-            { Buttons.A, new PlayerUseItemCommand(Player, UseType.Released) },
-        }
+      pressedMappings: new Dictionary<Buttons, ICommand> {
+        { Buttons.X, new QuitCommand(game) },
+        { Buttons.B, new ReturnToMenuAndResetCommand(game) },
+        { Buttons.A, new PlayerUseItemCommand(Player, UseType.Pressed) },
+        { Buttons.Y, new PlayerDieCommand(Player) },
+        { Buttons.LeftShoulder, new PreviousLevelCommand(LevelManager) },
+        { Buttons.RightShoulder, new NextLevelCommand(LevelManager) },
+      },
+      downMappings: new Dictionary<Buttons, ICommand> {
+        { Buttons.A, new PlayerUseItemCommand(Player, UseType.Held) },
+        { Buttons.DPadUp, new PlayerMoveUpCommand(Player) },
+        { Buttons.DPadDown, new PlayerMoveDownCommand(Player) },
+        { Buttons.DPadLeft, new PlayerMoveLeftCommand(Player) },
+        { Buttons.DPadRight, new PlayerMoveRightCommand(Player) },
+      },
+      releasedMappings: new Dictionary<Buttons, ICommand> {
+        { Buttons.A, new PlayerUseItemCommand(Player, UseType.Released) },
+      }
     );
 
     LevelManager.Initialize();
