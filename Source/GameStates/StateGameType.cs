@@ -1,6 +1,7 @@
 ﻿using GameProject.Controllers;
 using GameProject.Enemies;
 using GameProject.Factories;
+using GameProject.Globals;
 using GameProject.Interfaces;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
@@ -18,7 +19,6 @@ public class StateGameType : IGameState {
   private IController gamePadController;
 
   private readonly CollisionManager collisionManager = new();
-  private Texture2D healthBarTexture;
 
   public Player Player { get; private set; }
 
@@ -38,14 +38,13 @@ public class StateGameType : IGameState {
     collisionManager.AddCollider(Player);
   }
 
-  public void LoadContent(ContentManager content) {
-    Player.LoadContent(content);
+  public void LoadContent(ContentManager contentManager) {
+    Player.LoadContent(contentManager);
 
     Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateShotgun(0f, 0f, game));
     Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateRifle(0f, 0f, game));
 
-    LevelManager.LoadContent(content);
-    healthBarTexture = content.Load<Texture2D>("Misc/blood_red_bar");
+    LevelManager.LoadContent(contentManager);
   }
 
   public void Update(GameTime gameTime) {
@@ -95,42 +94,6 @@ public class StateGameType : IGameState {
     LevelManager.Draw(spriteBatch);
     Player.Draw(spriteBatch);
 
-    if (LevelManager.CurrentLevel != null) {
-      foreach (var enemy in LevelManager.CurrentLevel.Enemies) { // Move this to Level.cs (For Eric)
-        if (enemy is BaseEnemy baseEnemy && baseEnemy.Health > 0) {
-          float enemyHealthPercent = MathHelper.Clamp((float) baseEnemy.Health / baseEnemy.MaxHealth, 0f, 1f);
-          float scaleWidth = healthBarTexture.Width * 0.15f;
-          Vector2 enemyHealthPositions = new(
-            baseEnemy.Position.X - (scaleWidth / 2f),
-            baseEnemy.Position.Y - baseEnemy.Collider.Height);
-          spriteBatch.Draw(texture: healthBarTexture,
-            position: enemyHealthPositions,
-            sourceRectangle: null,
-            color: Color.DarkSlateGray,
-            rotation: 0f,
-            origin: Vector2.Zero,
-            scale: 0.15f,
-            effects: SpriteEffects.None,
-            layerDepth: 0f
-            );
-          int enemyHealthVisible = (int) (healthBarTexture.Width * enemyHealthPercent);
-          Rectangle enemyHpSource = new(0, 0, enemyHealthVisible, healthBarTexture.Height);
-
-          spriteBatch.Draw(
-            texture: healthBarTexture,
-            position: enemyHealthPositions,
-            sourceRectangle: enemyHpSource,
-            color: Color.White,
-            rotation: 0f,
-            origin: Vector2.Zero,
-            scale: 0.15f,
-            effects: SpriteEffects.None,
-            layerDepth: 0f
-          );
-        }
-      }
-    }
-
     spriteBatch.End();
 
     graphicsDevice.Viewport = game.HudViewport;
@@ -146,7 +109,7 @@ public class StateGameType : IGameState {
     var healthBarPosition = new Vector2(20, 20);
     float healthPercent = MathHelper.Clamp(Player.Health / 100f, 0f, 1f);
     spriteBatch.Draw(
-      texture: healthBarTexture,
+      texture: TextureStore.Instance.HealthBar,
       position: healthBarPosition,
       sourceRectangle: null,
       color: Color.DarkSlateGray,
@@ -158,10 +121,10 @@ public class StateGameType : IGameState {
     );
 
 
-    int visibleWidth = (int) (healthBarTexture.Width * healthPercent);
-    Rectangle sourceRectangle = new(0, 0, visibleWidth, healthBarTexture.Height);
+    int visibleWidth = (int) (TextureStore.Instance.HealthBar.Width * healthPercent);
+    Rectangle sourceRectangle = new(0, 0, visibleWidth, TextureStore.Instance.HealthBar.Height);
     spriteBatch.Draw(
-      texture: healthBarTexture,
+      texture: TextureStore.Instance.HealthBar,
       position: healthBarPosition,
       sourceRectangle: sourceRectangle,
       color: Color.White,

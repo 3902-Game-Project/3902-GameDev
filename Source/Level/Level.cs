@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using GameProject.Enemies;
+using GameProject.Globals;
 using GameProject.Interfaces;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
@@ -63,6 +65,40 @@ public class Level(
     }
 
     ProjectileManager.Draw(spriteBatch);
+
+    foreach (var enemy in enemies) {
+      if (enemy is BaseEnemy baseEnemy && baseEnemy.Health > 0) {
+        float enemyHealthPercent = MathHelper.Clamp((float) baseEnemy.Health / baseEnemy.MaxHealth, 0f, 1f);
+        float scaleWidth = TextureStore.Instance.HealthBar.Width * 0.15f;
+        Vector2 enemyHealthPositions = new(
+          baseEnemy.Position.X - (scaleWidth / 2f),
+          baseEnemy.Position.Y - baseEnemy.Collider.Height);
+        spriteBatch.Draw(texture: TextureStore.Instance.HealthBar,
+          position: enemyHealthPositions,
+          sourceRectangle: null,
+          color: Color.DarkSlateGray,
+          rotation: 0f,
+          origin: Vector2.Zero,
+          scale: 0.15f,
+          effects: SpriteEffects.None,
+          layerDepth: 0f
+          );
+        int enemyHealthVisible = (int) (TextureStore.Instance.HealthBar.Width * enemyHealthPercent);
+        Rectangle enemyHpSource = new(0, 0, enemyHealthVisible, TextureStore.Instance.HealthBar.Height);
+
+        spriteBatch.Draw(
+          texture: TextureStore.Instance.HealthBar,
+          position: enemyHealthPositions,
+          sourceRectangle: enemyHpSource,
+          color: Color.White,
+          rotation: 0f,
+          origin: Vector2.Zero,
+          scale: 0.15f,
+          effects: SpriteEffects.None,
+          layerDepth: 0f
+        );
+      }
+    }
   }
 
   public void AddPickup(IWorldPickup pickup) {

@@ -15,7 +15,10 @@ public class Game1 : Game {
 
   private readonly GraphicsDeviceManager graphics;
   public SpriteBatch SpriteBatch { get; private set; }
-  public AssetStore Assets { get; private set; }
+  public Viewport DefaultViewport { get; private set; }
+  public Viewport HudViewport { get; private set; }
+  public Viewport GameViewport { get; private set; }
+
   private StateTransitionType StateTransition;
   public IGameState StateMenu { get; private set; }
   public IGameState StateLoss { get; private set; }
@@ -23,9 +26,6 @@ public class Game1 : Game {
   public IGameState StatePause { get; private set; }
   public IGameState StateItemScreen { get; private set; }
   public StateGameType StateGame { get; private set; }
-  public Viewport DefaultViewport { get; private set; }
-  public Viewport HudViewport { get; private set; }
-  public Viewport GameViewport { get; private set; }
 
   private IGameState currentState;
 
@@ -33,8 +33,6 @@ public class Game1 : Game {
     graphics = new GraphicsDeviceManager(this);
     Content.RootDirectory = "Content";
     IsMouseVisible = true;
-
-    Assets = new AssetStore(this);
   }
 
   public void ChangeState(IGameState newState) {
@@ -63,19 +61,14 @@ public class Game1 : Game {
     HudViewport = new Viewport(0, 0, graphics.PreferredBackBufferWidth, HUD_HEIGHT);
     GameViewport = new Viewport(0, HUD_HEIGHT, graphics.PreferredBackBufferWidth, GAME_HEIGHT);
 
+    MiscAssetStore.Instance.Initialize();
+    TextureStore.Instance.Initialize();
+
     base.Initialize();
   }
 
   protected override void LoadContent() {
     SpriteBatch = new SpriteBatch(GraphicsDevice);
-
-    Assets.LoadContent();
-
-    BlockSpriteFactory.Instance.LoadAllTextures(Content);
-    EnemySpriteFactory.Instance.LoadAllTextures(Content);
-    SoundManager.Instance.LoadAllContent(Content);
-    ItemSpriteFactory.Instance.LoadAllTextures(Content);
-    ProjectileFactory.Instance.LoadAllTextures(Content);
 
     StateTransition = new StateTransitionType(this);
     StateMenu = new StateMenuType(this);
@@ -86,7 +79,6 @@ public class Game1 : Game {
     StateGame = new StateGameType(this);
     currentState = StateMenu;
 
-    Assets.Initialize();
     StateTransition.Initialize();
     StateMenu.Initialize();
     StateLoss.Initialize();
@@ -94,6 +86,15 @@ public class Game1 : Game {
     StatePause.Initialize();
     StateItemScreen.Initialize();
     StateGame.Initialize();
+
+    MiscAssetStore.Instance.LoadContent(Content);
+    TextureStore.Instance.LoadContent(Content);
+
+    BlockSpriteFactory.Instance.LoadAllTextures(Content);
+    EnemySpriteFactory.Instance.LoadAllTextures(Content);
+    SoundManager.Instance.LoadAllContent(Content);
+    ItemSpriteFactory.Instance.LoadAllTextures(Content);
+    ProjectileFactory.Instance.LoadAllTextures(Content);
 
     StateTransition.LoadContent(Content);
     StateMenu.LoadContent(Content);
