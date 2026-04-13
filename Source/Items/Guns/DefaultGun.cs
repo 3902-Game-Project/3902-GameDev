@@ -1,0 +1,73 @@
+using GameProject.Enums;
+using GameProject.Interfaces;
+using GameProject.Managers;
+using GameProject.PlayerSpace;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace GameProject.Items;
+
+public abstract class DefaultGun : IItem {
+  public FacingDirection Direction { get; set; } = FacingDirection.Right;
+  public ItemCategory Category { get; protected set; }
+  public Vector2 Position { get; set; }
+
+  protected readonly Texture2D texture;
+  protected readonly float scale = 1f;
+  protected readonly Game1 game;
+  protected readonly GunStats stats;
+  protected IProjectilePattern projectilePattern;
+  protected IFireMode fireMode;
+
+  protected Rectangle sourceRectangle;
+  protected Vector2 origin;
+  protected Vector2 bulletSpawnOffset;
+
+  protected DefaultGun(Texture2D texture, Vector2 startPosition, Game1 game, GunStats stats) {
+    this.game = game;
+    this.texture = texture;
+    this.stats = stats;
+    Position = startPosition;
+
+    projectilePattern = new SingleShotPattern();
+  }
+
+  public virtual void Draw(SpriteBatch spriteBatch) {
+    origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
+
+    SpriteEffects effects = SpriteEffects.None;
+    if (Direction == FacingDirection.Left) {
+      effects = SpriteEffects.FlipHorizontally;
+    }
+
+    spriteBatch.Draw(
+      texture,
+      Position,
+      sourceRectangle,
+      Color.White,
+      0f,
+      origin,
+      scale,
+      effects,
+      0f
+    );
+  }
+
+  public virtual void Update(GameTime gameTime) {
+    fireMode?.Update(gameTime);
+  }
+
+  public virtual void OnPickup(Player player) { }
+
+  public virtual void Use(UseType useType) {
+    if (fireMode == null || !fireMode.CanFire(useType)) return;
+    
+    Vector2 bulletDirection = (Direction == FacingDirection.Left) ? new Vector2(-1, 0) : new Vector2(1, 0);
+    float offsetX = (Direction == FacingDirection.Left) ? -bulletSpawnOffset.X : bulletSpawnOffset.X;
+    Vector2 actualOffset = new(offsetX, bulletSpawnOffset.Y);
+    Vector2 bulletSpawnPosition = Position + actualOffset;
+
+    projectilePattern.SpawnProjectiles(game.StateGame.LevelManager.CurrentLevel.ProjectileManager, bulletSpawnPosition, bulletDirection, stats);
+    SoundManager.Instance.Play(stats.GunshotID);
+  }
+}

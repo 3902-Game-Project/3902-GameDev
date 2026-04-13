@@ -7,75 +7,17 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-public class RevolverItem : IItem {
-  public FacingDirection Direction { get; set; } = FacingDirection.Right;
-  private Rectangle sourceRectangle = new(0, 0, 16, 9);
-  private Vector2 origin;
-  private readonly Texture2D texture;
-  private readonly float scale = 1f;
-  public Vector2 Position { get; set; }
+public class RevolverItem : DefaultGun {
 
-  private readonly Game1 game;
-  private readonly GunStats stats;
-  private readonly IProjectilePattern projectilePattern = new SingleShotPattern();
-  private readonly IFireMode fireMode;
-  private Vector2 bulletSpawnOffset;
-  public ItemCategory Category { get; } = ItemCategory.Sidearm;
+  public RevolverItem(Texture2D texture, Vector2 startPosition, Game1 game, GunStats stats)
+    : base(texture, startPosition, game, stats) {
 
-  public RevolverItem(Texture2D texture, Vector2 startPosition, Game1 game, GunStats stats) {
-    this.game = game;
-    this.texture = texture;
-    this.stats = stats;
-    fireMode = new SemiAutoFire(stats);
-    Position = startPosition;
+    this.sourceRectangle = new(0, 0, 16, 9);
+    Category = ItemCategory.Sidearm;
+
     bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2, -1 * (sourceRectangle.Height / 2 - 3)) * scale;
-  }
 
-  public void Draw(SpriteBatch spriteBatch) {
-    origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
-
-    SpriteEffects effects = SpriteEffects.None;
-    if (Direction == FacingDirection.Left) {
-      effects = SpriteEffects.FlipHorizontally;
-    }
-
-    spriteBatch.Draw(
-      texture,
-      Position,
-      sourceRectangle,
-      Color.White,
-      0f,
-      origin,
-      scale,
-      effects,
-      0f
-    );
-  }
-
-  public void Update(GameTime gameTime) {
-    fireMode.Update(gameTime);
-  }
-
-  public void OnPickup(Player player) { }
-
-  public void Use(UseType useType) {
-    Vector2 bulletDirection;
-    if (Direction == FacingDirection.Left) {
-      bulletDirection = new Vector2(-1, 0);
-    } else {
-      bulletDirection = new Vector2(1, 0);
-    }
-    float offsetX;
-    if (Direction == FacingDirection.Left) {
-      offsetX = -bulletSpawnOffset.X;
-    } else {
-      offsetX = bulletSpawnOffset.X;
-    }
-    Vector2 actualOffset = new(offsetX, bulletSpawnOffset.Y);
-    Vector2 bulletSpawnPosition = Position + actualOffset;
-    if (fireMode.CanFire(useType)) {
-      projectilePattern.SpawnProjectiles(game.StateGame.LevelManager.CurrentLevel.ProjectileManager, bulletSpawnPosition, bulletDirection, stats);
-      SoundManager.Instance.Play(stats.GunshotID);
-    }
+    fireMode = new SemiAutoFire(stats);
+    projectilePattern = new SingleShotPattern();
   }
 }
