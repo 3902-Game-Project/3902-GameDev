@@ -61,8 +61,8 @@ public class Game1 : Game {
     HudViewport = new Viewport(0, 0, graphics.PreferredBackBufferWidth, HUD_HEIGHT);
     GameViewport = new Viewport(0, HUD_HEIGHT, graphics.PreferredBackBufferWidth, GAME_HEIGHT);
 
-    MiscAssetStore.Initialize();
-    TextureStore.Initialize();
+    MiscAssetStore.Instance.Initialize();
+    TextureStore.Instance.Initialize();
 
     base.Initialize();
   }
@@ -87,8 +87,8 @@ public class Game1 : Game {
     StateItemScreen.Initialize();
     StateGame.Initialize();
 
-    MiscAssetStore.LoadContent(Content);
-    TextureStore.LoadContent(Content);
+    MiscAssetStore.Instance.LoadContent(Content);
+    TextureStore.Instance.LoadContent(Content);
 
     BlockSpriteFactory.Instance.LoadAllTextures(Content);
     EnemySpriteFactory.Instance.LoadAllTextures(Content);

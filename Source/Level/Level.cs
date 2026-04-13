@@ -69,11 +69,11 @@ public class Level(
     foreach (var enemy in enemies) {
       if (enemy is BaseEnemy baseEnemy && baseEnemy.Health > 0) {
         float enemyHealthPercent = MathHelper.Clamp((float) baseEnemy.Health / baseEnemy.MaxHealth, 0f, 1f);
-        float scaleWidth = TextureStore.HealthBar.Width * 0.15f;
+        float scaleWidth = TextureStore.Instance.HealthBar.Width * 0.15f;
         Vector2 enemyHealthPositions = new(
           baseEnemy.Position.X - (scaleWidth / 2f),
           baseEnemy.Position.Y - baseEnemy.Collider.Height);
-        spriteBatch.Draw(texture: TextureStore.HealthBar,
+        spriteBatch.Draw(texture: TextureStore.Instance.HealthBar,
           position: enemyHealthPositions,
           sourceRectangle: null,
           color: Color.DarkSlateGray,
@@ -83,11 +83,11 @@ public class Level(
           effects: SpriteEffects.None,
           layerDepth: 0f
           );
-        int enemyHealthVisible = (int) (TextureStore.HealthBar.Width * enemyHealthPercent);
-        Rectangle enemyHpSource = new(0, 0, enemyHealthVisible, TextureStore.HealthBar.Height);
+        int enemyHealthVisible = (int) (TextureStore.Instance.HealthBar.Width * enemyHealthPercent);
+        Rectangle enemyHpSource = new(0, 0, enemyHealthVisible, TextureStore.Instance.HealthBar.Height);
 
         spriteBatch.Draw(
-          texture: TextureStore.HealthBar,
+          texture: TextureStore.Instance.HealthBar,
           position: enemyHealthPositions,
           sourceRectangle: enemyHpSource,
           color: Color.White,

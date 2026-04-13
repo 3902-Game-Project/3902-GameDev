@@ -16,7 +16,7 @@ internal class ScreenFader(SpriteBatch spriteBatch, GameWindow gameWindow) : IGP
 
   private void DrawFadeRectangle(double darkeningIntensity) {
     spriteBatch.Draw(
-      texture: TextureStore.WhitePixel,
+      texture: TextureStore.Instance.WhitePixel,
       destinationRectangle: new(0, 0, gameWindow.ClientBounds.Width, gameWindow.ClientBounds.Height),
       color: Color.Black * (float) darkeningIntensity
     );

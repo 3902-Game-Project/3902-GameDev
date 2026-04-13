@@ -109,7 +109,7 @@ public class StateGameType : IGameState {
     var healthBarPosition = new Vector2(20, 20);
     float healthPercent = MathHelper.Clamp(Player.Health / 100f, 0f, 1f);
     spriteBatch.Draw(
-      texture: TextureStore.HealthBar,
+      texture: TextureStore.Instance.HealthBar,
       position: healthBarPosition,
       sourceRectangle: null,
       color: Color.DarkSlateGray,
@@ -121,10 +121,10 @@ public class StateGameType : IGameState {
     );
 
 
-    int visibleWidth = (int) (TextureStore.HealthBar.Width * healthPercent);
-    Rectangle sourceRectangle = new(0, 0, visibleWidth, TextureStore.HealthBar.Height);
+    int visibleWidth = (int) (TextureStore.Instance.HealthBar.Width * healthPercent);
+    Rectangle sourceRectangle = new(0, 0, visibleWidth, TextureStore.Instance.HealthBar.Height);
     spriteBatch.Draw(
-      texture: TextureStore.HealthBar,
+      texture: TextureStore.Instance.HealthBar,
       position: healthBarPosition,
       sourceRectangle: sourceRectangle,
       color: Color.White,

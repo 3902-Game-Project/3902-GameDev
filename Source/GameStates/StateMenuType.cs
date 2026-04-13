@@ -30,7 +30,7 @@ public class StateMenuType(Game1 game) : IGameState {
 
     spriteBatch.Begin();
     spriteBatch.DrawString(
-      spriteFont: MiscAssetStore.MainFont,
+      spriteFont: MiscAssetStore.Instance.MainFont,
       text: START_TEXT,
       position:
         new Vector2(
@@ -38,14 +38,14 @@ public class StateMenuType(Game1 game) : IGameState {
           game.Window.ClientBounds.Height
         ) * 0.5f + new Vector2(0.0f, -10.0f),
       color: Color.White,
-      origin: MiscAssetStore.MainFont.MeasureString(START_TEXT) * 0.5f,
+      origin: MiscAssetStore.Instance.MainFont.MeasureString(START_TEXT) * 0.5f,
       rotation: 0.0f,
       scale: 1.0f,
       effects: SpriteEffects.None,
       layerDepth: 0.0f
     );
     spriteBatch.DrawString(
-      spriteFont: MiscAssetStore.MainFont,
+      spriteFont: MiscAssetStore.Instance.MainFont,
       text: QUIT_TEXT,
       position:
         new Vector2(
@@ -53,7 +53,7 @@ public class StateMenuType(Game1 game) : IGameState {
           game.Window.ClientBounds.Height
         ) * 0.5f + new Vector2(0.0f, 10.0f),
       color: Color.White,
-      origin: MiscAssetStore.MainFont.MeasureString(QUIT_TEXT) * 0.5f,
+      origin: MiscAssetStore.Instance.MainFont.MeasureString(QUIT_TEXT) * 0.5f,
       rotation: 0.0f,
       scale: 1.0f,
       effects: SpriteEffects.None,
