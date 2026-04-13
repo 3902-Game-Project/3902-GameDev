@@ -1,11 +1,12 @@
 ﻿using System;
+using GameProject.Globals;
 using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Misc;
 
-internal class ScreenFader(SpriteBatch spriteBatch, Texture2D whitePixelTexture, GameWindow gameWindow) : IGPUpdatable, ILowLevelDrawable {
+internal class ScreenFader(SpriteBatch spriteBatch, GameWindow gameWindow) : IGPUpdatable, ILowLevelDrawable {
   public enum FadingState {
     FadeIn,
     FadeOut,
@@ -15,7 +16,7 @@ internal class ScreenFader(SpriteBatch spriteBatch, Texture2D whitePixelTexture,
 
   private void DrawFadeRectangle(double darkeningIntensity) {
     spriteBatch.Draw(
-      texture: whitePixelTexture,
+      texture: TextureStore.WhitePixel,
       destinationRectangle: new(0, 0, gameWindow.ClientBounds.Width, gameWindow.ClientBounds.Height),
       color: Color.Black * (float) darkeningIntensity
     );

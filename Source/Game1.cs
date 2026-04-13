@@ -61,19 +61,14 @@ public class Game1 : Game {
     HudViewport = new Viewport(0, 0, graphics.PreferredBackBufferWidth, HUD_HEIGHT);
     GameViewport = new Viewport(0, HUD_HEIGHT, graphics.PreferredBackBufferWidth, GAME_HEIGHT);
 
+    MiscAssetStore.Initialize();
+    TextureStore.Initialize();
+
     base.Initialize();
   }
 
   protected override void LoadContent() {
     SpriteBatch = new SpriteBatch(GraphicsDevice);
-
-    MiscAssetStore.LoadContent(Content);
-
-    BlockSpriteFactory.Instance.LoadAllTextures(Content);
-    EnemySpriteFactory.Instance.LoadAllTextures(Content);
-    SoundManager.Instance.LoadAllContent(Content);
-    ItemSpriteFactory.Instance.LoadAllTextures(Content);
-    ProjectileFactory.Instance.LoadAllTextures(Content);
 
     StateTransition = new StateTransitionType(this);
     StateMenu = new StateMenuType(this);
@@ -84,7 +79,6 @@ public class Game1 : Game {
     StateGame = new StateGameType(this);
     currentState = StateMenu;
 
-    MiscAssetStore.Initialize();
     StateTransition.Initialize();
     StateMenu.Initialize();
     StateLoss.Initialize();
@@ -92,6 +86,15 @@ public class Game1 : Game {
     StatePause.Initialize();
     StateItemScreen.Initialize();
     StateGame.Initialize();
+
+    MiscAssetStore.LoadContent(Content);
+    TextureStore.LoadContent(Content);
+
+    BlockSpriteFactory.Instance.LoadAllTextures(Content);
+    EnemySpriteFactory.Instance.LoadAllTextures(Content);
+    SoundManager.Instance.LoadAllContent(Content);
+    ItemSpriteFactory.Instance.LoadAllTextures(Content);
+    ProjectileFactory.Instance.LoadAllTextures(Content);
 
     StateTransition.LoadContent(Content);
     StateMenu.LoadContent(Content);
