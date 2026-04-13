@@ -67,7 +67,7 @@ public class Game1 : Game {
   protected override void LoadContent() {
     SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-    AssetStore.LoadContent(Content);
+    MiscAssetStore.LoadContent(Content);
 
     BlockSpriteFactory.Instance.LoadAllTextures(Content);
     EnemySpriteFactory.Instance.LoadAllTextures(Content);
@@ -84,7 +84,7 @@ public class Game1 : Game {
     StateGame = new StateGameType(this);
     currentState = StateMenu;
 
-    Assets.Initialize();
+    MiscAssetStore.Initialize();
     StateTransition.Initialize();
     StateMenu.Initialize();
     StateLoss.Initialize();
