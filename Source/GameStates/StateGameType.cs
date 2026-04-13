@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using GameProject.ButtonDiffTrackers;
 using GameProject.Commands;
 using GameProject.Controllers;
@@ -62,7 +63,7 @@ internal class StateGameType : IGameState {
         { Keys.J, new PlayerUseItemCommand(Player, UseType.Held) },
       },
       releasedMappings: new Dictionary<Keys, ICommand> {
-          { Keys.J, new PlayerUseItemCommand(Player, UseType.Released) },
+        { Keys.J, new PlayerUseItemCommand(Player, UseType.Released) },
       }
     );
 
@@ -117,7 +118,6 @@ internal class StateGameType : IGameState {
 
     LevelManager.Update(gameTime);
     Player.Update(gameTime);
-    
   }
 
   public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
@@ -208,11 +208,10 @@ internal class StateGameType : IGameState {
       }
     }
 
-
     Rectangle[] keySourceRects = [
-        new Rectangle(0, 448, 8, 13),
-        new Rectangle(9, 448, 8, 13),
-        new Rectangle(17, 448, 8, 14)
+      new Rectangle(0, 448, 8, 13),
+      new Rectangle(9, 448, 8, 13),
+      new Rectangle(17, 448, 8, 14)
     ];
     Vector2 keysStartPosition = new Vector2(ammoPosition.X + 200, healthBarPosition.Y);
     float keyScale = 3f;
@@ -224,15 +223,15 @@ internal class StateGameType : IGameState {
       Vector2 keyPos = keysStartPosition + new Vector2(i * 35, 0);
 
       spriteBatch.Draw(
-          texture: TextureStore.Instance.MainBlockItemAtlas,
-          position: keyPos,
-          sourceRectangle: keySourceRects[i],
-          color: Color.White,
-          rotation: 0f,
-          origin: Vector2.Zero,
-          scale: keyScale,
-          effects: SpriteEffects.None,
-          layerDepth: 0f
+        texture: TextureStore.Instance.MainBlockItemAtlas,
+        position: keyPos,
+        sourceRectangle: keySourceRects[i],
+        color: Color.White,
+        rotation: 0f,
+        origin: Vector2.Zero,
+        scale: keyScale,
+        effects: SpriteEffects.None,
+        layerDepth: 0f
       );
     }
 
@@ -256,7 +255,9 @@ internal class StateGameType : IGameState {
   }
 
   public void OnStateEnter(bool nextStateIsCurrentState) {
-    SoundManager.Instance.PlayLoop(SoundID.Background);
+    if (!nextStateIsCurrentState) {
+      SoundManager.Instance.PlayLoop(SoundID.Background);
+    }
 
     if (LevelManager.CurrentLevel != null) {
       LevelManager.CurrentLevel.CollisionManager.Clear();
@@ -276,7 +277,9 @@ internal class StateGameType : IGameState {
   }
 
   public void OnStateLeave(bool nextStateIsCurrentState) {
-    SoundManager.Instance.StopAll();
+    if (!nextStateIsCurrentState) {
+      SoundManager.Instance.StopAll();
+    }
   }
 
   public void OnStateStartFadeIn(bool nextStateIsCurrentState) {
