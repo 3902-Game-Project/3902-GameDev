@@ -6,7 +6,7 @@ namespace GameProject.Blocks; // Note: Kept your specific namespace here!
 
 public class RockCornerBlock(Texture2D RockCornerTexture, Vector2 xyPos) : BaseBlock(xyPos) {
   private Rectangle sourceRect = new(384, 0, 64, 64);
-  private Boolean rotated = false;
+  private bool rotated = false;
   public float Rotation { get; private set; } = 0.0f;
 
   public void Rotate() {

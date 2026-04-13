@@ -6,7 +6,7 @@ namespace GameProject.Blocks;
 
 public class LogCornerBlock(Texture2D LogCornerTexture, Vector2 xyPos) : BaseBlock(xyPos) {
   private Rectangle sourceRect = new(192, 64, 64, 64);
-  private Boolean rotated = false;
+  private bool rotated = false;
   public float Rotation { get; private set; } = 0.0f;
 
   public void Rotate() {

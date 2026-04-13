@@ -14,7 +14,7 @@ public class SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, Locka
       new(192, 128, 64, 64),
       new(320, 128, 64, 64)
     ];
-  private Boolean rotated = false;
+  private bool rotated = false;
   public float Rotation { get; private set; } = 0.0f;
   public string PairedLevelName { get; private set; } = pairedLevelName;
   public LockableDoorBlockState State { get; private set; } = state;
