@@ -8,16 +8,30 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, LockableDoorBlockState state, string pairedLevelName, ILevelManager levelManager) : BaseBlock(xyPos) {
-  private int currentFrame = 0;
+public class SmallDoorBlock : BaseBlock {
   private readonly List<Rectangle> sourceRects = [
-      new(448, 256, 64, 64),
-      new(448, 448, 64, 64)
-    ];
-  public float Rotation { get; private set; } = 0.0f;
+    new(448, 256, 64, 64),
+    new(448, 448, 64, 64)
+  ];
+  private Texture2D smallDoorTexture;
+  private ILevelManager levelManager;
+  private int currentFrame = 0;
   private bool rotated = false;
-  public string PairedLevelName { get; private set; } = pairedLevelName;
-  public LockableDoorBlockState State { get; private set; } = state;
+  public float Rotation { get; private set; } = 0.0f;
+  public string PairedLevelName { get; private set; }
+  public LockableDoorBlockState State { get; private set; }
+
+  public SmallDoorBlock(Texture2D smallDoorTexture, Vector2 xyPos, LockableDoorBlockState state, string pairedLevelName, ILevelManager levelManager) : base(xyPos) {
+    this.smallDoorTexture = smallDoorTexture;
+    this.levelManager = levelManager;
+
+    PairedLevelName = pairedLevelName;
+    State = state;
+
+    if (State == LockableDoorBlockState.Open) {
+      currentFrame = 1;
+    }
+  }
 
   public void Rotate() {
     float x = Position.X, y = Position.Y;
@@ -33,17 +47,13 @@ public class SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, LockableD
     rotated = true;
   }
 
-  public override void Update(GameTime gameTime) {
-    if (State == LockableDoorBlockState.Open) {
-      currentFrame = 1;
-    }
-  }
+  public override void Update(GameTime gameTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
     if (!rotated) {
       Rotate();
     }
-    spriteBatch.Draw(SmallDoorTexture, Position, sourceRects[currentFrame], Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
+    spriteBatch.Draw(smallDoorTexture, Position, sourceRects[currentFrame], Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 
   public override void OnCollision(CollisionInfo info) {
@@ -55,5 +65,9 @@ public class SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, LockableD
 
   public void ChangeState(LockableDoorBlockState state) {
     State = state;
+
+    if (State == LockableDoorBlockState.Open) {
+      currentFrame = 1;
+    }
   }
 }
