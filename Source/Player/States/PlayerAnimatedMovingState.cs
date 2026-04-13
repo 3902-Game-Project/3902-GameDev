@@ -72,15 +72,15 @@ public class PlayerAnimatedMovingState(Player player) : IPlayerState {
     Vector2 origin = new(sourceRect.Width / 2, sourceRect.Height / 2);
 
     spriteBatch.Draw(
-        player.Texture,
-        player.Position,
-        sourceRect,
-        Color.White,
-        0f,
-        origin,
-        0.15f,
-        SpriteEffects.None,
-        0f
+      player.Texture,
+      player.Position,
+      sourceRect,
+      Color.White,
+      0f,
+      origin,
+      0.15f,
+      SpriteEffects.None,
+      0f
     );
   }
 }

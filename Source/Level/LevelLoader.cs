@@ -12,10 +12,19 @@ namespace GameProject.Misc;
 internal partial class LevelLoader {
   private static readonly int BLOCK_WIDTH = 64;
   private static readonly int BLOCK_HEIGHT = 64;
+  private static readonly int LEVEL_WIDTH_BLOCKS = 15;
+  private static readonly int LEVEL_HEIGHT_BLOCKS = 9;
   private static readonly Vector2 PLAYER_POSITION_OFFSET = new(BLOCK_WIDTH / 2.0f, BLOCK_HEIGHT / 2.0f);
 
   [GeneratedRegex(@"\r?\n")]
   private static partial Regex NewlineSplitRegex { get; }
+
+  public static readonly int LEVEL_WIDTH = LEVEL_WIDTH_BLOCKS * BLOCK_WIDTH;
+  public static readonly int LEVEL_HEIGHT = LEVEL_HEIGHT_BLOCKS * BLOCK_HEIGHT;
+  public static readonly int PLAYER_LEFT_BOUNDARY_THRESHOLD = BLOCK_WIDTH * 2;
+  public static readonly int PLAYER_TOP_BOUNDARY_THRESHOLD = BLOCK_WIDTH * 2;
+  public static readonly int PLAYER_RIGHT_BOUNDARY_THRESHOLD = LEVEL_WIDTH - BLOCK_WIDTH * 2;
+  public static readonly int PLAYER_BOTTOM_BOUNDARY_THRESHOLD = LEVEL_HEIGHT - BLOCK_WIDTH * 2;
 
   private static void AddCellEntry(
     Game1 game,

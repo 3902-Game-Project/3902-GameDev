@@ -13,7 +13,7 @@ namespace GameProject.PlayerSpace;
 
 public enum FacingDirection {
   Left,
-  Right
+  Right,
 }
 
 public class Player : IInitable, ICollidable {

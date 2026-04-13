@@ -47,6 +47,31 @@ public class LevelManager(Game1 game) : ILevelManager {
     SwitchLevel(LEVEL_NAMES[newLevelIndex]);
   }
 
+  private void LevelSwitchUpdatePlayerPosition() {
+    // Wrap player position around if player is at edge
+
+    if (
+      game.StateGame.Player.Position.X <= LevelLoader.PLAYER_LEFT_BOUNDARY_THRESHOLD ||
+      game.StateGame.Player.Position.X >= LevelLoader.PLAYER_RIGHT_BOUNDARY_THRESHOLD
+    ) {
+      game.StateGame.Player.Position = new(
+        LevelLoader.LEVEL_WIDTH - game.StateGame.Player.Position.X,
+        game.StateGame.Player.Position.Y
+      );
+    } else if (
+      game.StateGame.Player.Position.Y <= LevelLoader.PLAYER_TOP_BOUNDARY_THRESHOLD ||
+      game.StateGame.Player.Position.Y >= LevelLoader.PLAYER_BOTTOM_BOUNDARY_THRESHOLD
+    ) {
+      game.StateGame.Player.Position = new(
+        game.StateGame.Player.Position.X,
+        LevelLoader.LEVEL_HEIGHT - game.StateGame.Player.Position.Y
+      );
+    } else {
+      // No wrapping possible, use default position
+      game.StateGame.Player.Position = CurrentLevel.PlayerPosition;
+    }
+  }
+
   public ILevel CurrentLevel => levels[currentLevelName];
 
   public void Initialize() { }
@@ -93,8 +118,9 @@ public class LevelManager(Game1 game) : ILevelManager {
 
     currentLevelName = fadeToLevelName;
     fadeToLevelName = null;
-    game.StateGame.Player.Position = CurrentLevel.PlayerPosition;
     CurrentLevel.ProjectileManager.ClearProjectiles();
+
+    LevelSwitchUpdatePlayerPosition();
   }
 
   public void PreviousLevel() {
