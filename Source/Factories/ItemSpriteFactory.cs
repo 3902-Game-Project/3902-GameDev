@@ -1,3 +1,4 @@
+using GameProject.Globals;
 using GameProject.Interfaces;
 using GameProject.Items;
 using GameProject.Items.Utility;
@@ -51,7 +52,7 @@ public class ItemSpriteFactory {
     return new ShotgunItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
   }
 
-  public IItem CreateKey(float xPos, float yPos, ILevelManager levelManager) {
-    return new KeyItem(BlockSpriteFactory.blockTextures, new Vector2(xPos, yPos), levelManager);
+  public static IItem CreateKey(float xPos, float yPos, ILevelManager levelManager) {
+    return new KeyItem(TextureStore.Instance.MainBlockItemAtlas, new Vector2(xPos, yPos), levelManager);
   }
 }

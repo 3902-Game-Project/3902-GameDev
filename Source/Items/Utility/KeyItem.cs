@@ -1,22 +1,18 @@
-﻿using GameProject;
-using GameProject.Blocks;
+﻿using GameProject.Blocks;
 using GameProject.Enums;
-using GameProject.GameStates;
 using GameProject.Interfaces;
-using GameProject.Managers;
-using GameProject.Misc;
 using GameProject.PlayerSpace;
-using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items.Utility;
 
 public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager levelManager) : IItem {
-  public FacingDirection Direction { get; set; } = FacingDirection.Right;
   private Rectangle sourceRectangle = new(17, 448, 7, 13);
   private Vector2 origin;
-  private ILevelManager levelManagers = levelManager;
+  private readonly ILevelManager levelManagers = levelManager;
+
+  public FacingDirection Direction { get; set; } = FacingDirection.Right;
   public Vector2 Position { get; set; } = startPosition;
   public bool IsCollected { get; set; } = false;
   public ItemCategory Category { get; } = ItemCategory.Consumable;
@@ -45,13 +41,10 @@ public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager 
 
   public void Use(UseType useType) {
     foreach (var block in levelManagers.CurrentLevel.Doors) {
-      if (block is VaultDoorBlock) {
-        VaultDoorBlock temp = (VaultDoorBlock)block;
-        temp.ChangeState(BlockState.opening);
-      }  
-      else if (block is SlattedDoorBlock) {
-        SlattedDoorBlock temp = (SlattedDoorBlock)block;
-        temp.ChangeState(BlockState.open);
+      if (block is VaultDoorBlock vaultDoorBlock) {
+        vaultDoorBlock.ChangeState(BlockState.opening);
+      } else if (block is SlattedDoorBlock slattedDoorBlock) {
+        slattedDoorBlock.ChangeState(BlockState.open);
       }
     }
     // DELETE ITEM
