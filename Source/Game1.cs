@@ -1,4 +1,5 @@
-﻿using GameProject.Factories;
+﻿using System.Diagnostics;
+using GameProject.Factories;
 using GameProject.GameStates;
 using GameProject.Globals;
 using GameProject.Interfaces;
@@ -41,9 +42,17 @@ internal class Game1 : Game {
   }
 
   public void ChangeStateWithoutFading(IGameState newState) {
-    currentState.OnStateLeave();
+    bool nextStateIsCurrentState;
+
+    if (currentState == StateTransition || newState == StateTransition) {
+      nextStateIsCurrentState = StateTransition.NextStateIsCurrentState();
+    } else {
+      nextStateIsCurrentState = currentState == newState;
+    }
+
+    currentState.OnStateLeave(nextStateIsCurrentState);
     currentState = newState;
-    newState.OnStateEnter();
+    newState.OnStateEnter(nextStateIsCurrentState);
   }
 
   public void ResetGameState() {
