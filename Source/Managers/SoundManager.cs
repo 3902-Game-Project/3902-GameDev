@@ -12,6 +12,7 @@ public enum SoundID {
   Background,
   Door
 }
+
 internal class SoundManager {
   private readonly Dictionary<SoundID, SoundEffect> sounds = [];
   private readonly Dictionary<SoundID, LoopingSound> loops = [];
