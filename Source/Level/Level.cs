@@ -21,7 +21,7 @@ public class Level(
   public List<IBlock> CollidableBlocks => collidableBlocks;
   public List<IBlock> Doors => doors;
   public List<IEnemy> Enemies => enemies;
-  public List<IEnemy> DeadEnemies = new List<IEnemy>();
+  public List<IEnemy> DeadEnemies { get; private set; } = [];
 
   public List<IWorldPickup> Pickups => pickups;
   public Vector2 PlayerPosition { get; private set; } = playerPosition;
