@@ -8,19 +8,18 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Items.Utility;
 
 public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager levelManager) : IItem, IWorldPickup {
-  public FacingDirection Direction { get; set; } = FacingDirection.Right;
-  private Rectangle sourceRectangle = new(0, 1344, 21, 39); // CHANGE
-  private Vector2 origin;
+  private Rectangle sourceRectangle = new(0, 1344, 21, 39);
   private readonly ILevelManager levelManagers = levelManager;
 
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   public Vector2 Position { get; set; } = startPosition;
   public bool IsCollected { get; set; } = false;
+  private Vector2 origin;
   public ItemCategory Category { get; } = ItemCategory.Consumable;
 
   public void Draw(SpriteBatch spriteBatch) {
     if (!IsCollected) {
-      origin = new Vector2(sourceRectangle.Width, sourceRectangle.Height);  // removed " / 2"
+      origin = new Vector2(sourceRectangle.Width, sourceRectangle.Height);
 
       spriteBatch.Draw(
         keyTexture,
@@ -51,7 +50,6 @@ public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager 
   }
 
   public void Update(GameTime gameTime) {
-    // if key is picked up... currently held like weapon
   }
 
   public void Use(UseType useType) {
@@ -62,8 +60,8 @@ public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager 
         slattedDoorBlock.ChangeState(LockableDoorBlockState.Open);
       }
     }
-    // DELETE ITEM
   }
+
   public void OnPickup(Player player) {
     IsCollected = true;
   }

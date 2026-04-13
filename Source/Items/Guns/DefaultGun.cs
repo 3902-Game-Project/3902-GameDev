@@ -55,6 +55,20 @@ public abstract class DefaultGun : IItem {
     );
   }
 
+  public void DrawUI(SpriteBatch spriteBatch, Vector2 position, float scale, Color tint) {
+    spriteBatch.Draw(
+      texture: texture,
+      position: position, // This was the missing line!
+      sourceRectangle: sourceRectangle,
+      color: tint,
+      rotation: 0f,
+      origin: Vector2.Zero,
+      scale: scale,
+      effects: SpriteEffects.None,
+      layerDepth: 0f
+    );
+  }
+
   public virtual void Update(GameTime gameTime) {
     fireMode?.Update(gameTime);
   }
@@ -63,7 +77,7 @@ public abstract class DefaultGun : IItem {
 
   public virtual void Use(UseType useType) {
     if (fireMode == null || !fireMode.CanFire(useType)) return;
-    
+
     Vector2 bulletDirection = (Direction == FacingDirection.Left) ? new Vector2(-1, 0) : new Vector2(1, 0);
     float offsetX = (Direction == FacingDirection.Left) ? -bulletSpawnOffset.X : bulletSpawnOffset.X;
     Vector2 actualOffset = new(offsetX, bulletSpawnOffset.Y);

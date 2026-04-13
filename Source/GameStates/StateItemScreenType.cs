@@ -1,5 +1,4 @@
 ﻿using GameProject.Controllers;
-using GameProject.Globals;
 using GameProject.Interfaces;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
@@ -12,6 +11,9 @@ public class StateItemScreenType(Game1 game) : IGameState {
   private static readonly string RETURN_TEXT = "Press I/GamePadB to return to game, Q/GamePadY to quit.";
   private IController keyboardController;
   private IController gamePadController;
+
+  // NEW: A local variable to hold our font
+  private SpriteFont mainFont;
 
   public int SelectedWeaponIndex { get; private set; } = 0;
 
@@ -47,7 +49,10 @@ public class StateItemScreenType(Game1 game) : IGameState {
     }
   }
 
-  public void LoadContent(ContentManager content) { }
+  public void LoadContent(ContentManager content) {
+    // NEW: Load the font directly here!
+    mainFont = content.Load<SpriteFont>("MainFont");
+  }
 
   public void Update(GameTime gameTime) {
     keyboardController.Update(gameTime);
@@ -66,13 +71,14 @@ public class StateItemScreenType(Game1 game) : IGameState {
       RasterizerState.CullNone
     );
 
+    // NEW: Replaced game.Assets.MainFont with our local mainFont
     spriteBatch.DrawString(
-      game.Assets.MainFont,
+      mainFont,
       RETURN_TEXT,
       new Vector2(game.Window.ClientBounds.Width, game.Window.ClientBounds.Height) * 0.5f + new Vector2(0.0f, 50.0f),
       Color.White,
       0.0f,
-      game.Assets.MainFont.MeasureString(RETURN_TEXT) * 0.5f,
+      mainFont.MeasureString(RETURN_TEXT) * 0.5f,
       1.0f,
       SpriteEffects.None,
       0.0f
@@ -82,6 +88,7 @@ public class StateItemScreenType(Game1 game) : IGameState {
 
     if (player != null) {
 
+      // --- 1. DRAW WEAPONS (Top Row) ---
       if (player.Inventory.Weapons.Count > 0) {
         for (int i = 0; i < player.Inventory.Weapons.Count; i++) {
           IItem weapon = player.Inventory.Weapons[i];
@@ -90,13 +97,19 @@ public class StateItemScreenType(Game1 game) : IGameState {
           float uiY = (game.Window.ClientBounds.Height / 2f) - 100;
           Vector2 uiPosition = new Vector2(uiX, uiY);
 
-          //item.DrawUI(spriteBatch, uiPosition, 1f, Color.White);
+          float scale = (i == SelectedWeaponIndex) ? 1.2f : 1.0f;
+          Color tint = (i == SelectedWeaponIndex) ? Color.White : Color.Gray;
 
+          weapon.DrawUI(spriteBatch, uiPosition, scale, tint);
+
+          // NEW: Replaced game.Assets.MainFont with our local mainFont
           if (i == player.Inventory.ActiveWeaponIndex) {
-            spriteBatch.DrawString(game.Assets.MainFont, "Equipped", new Vector2(uiX - 30, uiY + 50), Color.Yellow);
+            spriteBatch.DrawString(mainFont, "Equipped", new Vector2(uiX - 30, uiY + 50), Color.Yellow);
           }
         }
       }
+
+      // --- 2. DRAW GENERAL ITEMS (Grid underneath) ---
       if (player.Inventory.GeneralItems.Count > 0) {
         int startX = (game.Window.ClientBounds.Width / 2) - 200;
         int startY = (game.Window.ClientBounds.Height / 2) + 50;
@@ -109,24 +122,23 @@ public class StateItemScreenType(Game1 game) : IGameState {
           float uiX = startX + (column * 80);
           float uiY = startY + (row * 80);
           Vector2 uiPosition = new Vector2(uiX, uiY);
+
+          item.DrawUI(spriteBatch, uiPosition, 1f, Color.White);
         }
       }
     }
 
-    for (int i = 0; i < player.Inventory.Weapons.Count; i++) {
-      IItem weapon = player.Inventory.Weapons[i];
+    // --- 3. DRAW KEYS ---
+    if (player.Inventory.Keys.Count > 0) {
+      int keyStartX = game.Window.ClientBounds.Width - 150;
+      int keyStartY = game.Window.ClientBounds.Height - 100;
 
-      float uiX = (game.Window.ClientBounds.Width / 2f) - 50 + (i * 100);
-      float uiY = (game.Window.ClientBounds.Height / 2f) - 100;
-      Vector2 uiPosition = new Vector2(uiX, uiY);
+      for (int i = 0; i < player.Inventory.Keys.Count; i++) {
+        IItem key = player.Inventory.Keys[i];
 
-      float scale = (i == SelectedWeaponIndex) ? 1.2f : 1.0f;
-      Color tint = (i == SelectedWeaponIndex) ? Color.White : Color.Gray;
-
-      weapon.DrawUI(spriteBatch, uiPosition, scale, tint);
-
-      if (i == player.Inventory.ActiveWeaponIndex) {
-        spriteBatch.DrawString(game.Assets.MainFont, "Equipped", new Vector2(uiX - 30, uiY + 50), Color.Yellow);
+        // Draw them in a little horizontal row
+        Vector2 keyUiPosition = new Vector2(keyStartX + (i * 30), keyStartY);
+        key.DrawUI(spriteBatch, keyUiPosition, 1f, Color.White);
       }
     }
 

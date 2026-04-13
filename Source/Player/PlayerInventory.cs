@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using GameProject.Enums;
 using GameProject.Interfaces;
-using GameProject.Items;
+using GameProject.Items.Utility; // Needed to identify KeyItems
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 
@@ -9,14 +10,28 @@ namespace GameProject.Misc;
 
 public class PlayerInventory(ILevelManager levelManager) {
   private readonly Random random = new();
+
+  // 1. Weapons List
   public List<IItem> Weapons { get; private set; } = [];
   public int ActiveWeaponIndex { get; private set; } = 0;
   public IItem ActiveItem => Weapons.Count > 0 ? Weapons[ActiveWeaponIndex] : null;
 
+  // 2. General Items List (Potions, Whiskey, etc.)
   public List<IItem> GeneralItems { get; private set; } = [];
 
+  // 3. NEW: Dedicated Keys List
+  public List<IItem> Keys { get; private set; } = [];
+
+  public void EquipWeapon(int index) {
+    if (index >= 0 && index < Weapons.Count) {
+      ActiveWeaponIndex = index;
+    }
+  }
+
   public void PickupItem(IItem newItem) {
-    if (newItem is RevolverItem || newItem is RifleItem || newItem is ShotgunItem) {
+    // Sort the item into the correct list based on its type or category
+
+    if (newItem.Category == ItemCategory.Primary || newItem.Category == ItemCategory.Sidearm) {
       if (Weapons.Count < 2) {
         Weapons.Add(newItem);
         ActiveWeaponIndex = Weapons.Count - 1;
@@ -24,7 +39,11 @@ public class PlayerInventory(ILevelManager levelManager) {
         DropItem(ActiveItem);
         Weapons[ActiveWeaponIndex] = newItem;
       }
+    } else if (newItem is KeyItem) {
+      // If it's a key, put it in the new Keys list!
+      Keys.Add(newItem);
     } else {
+      // Everything else goes in the general backpack
       GeneralItems.Add(newItem);
     }
   }
@@ -41,11 +60,6 @@ public class PlayerInventory(ILevelManager levelManager) {
   public void SwapActiveWeapon() {
     if (Weapons.Count > 1) {
       ActiveWeaponIndex = (ActiveWeaponIndex == 0) ? 1 : 0;
-    }
-  }
-  public void EquipWeapon(int index) {
-    if (index >= 0 && index < Weapons.Count) {
-      ActiveWeaponIndex = index;
     }
   }
 }
