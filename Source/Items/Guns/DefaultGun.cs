@@ -16,12 +16,14 @@ public abstract class DefaultGun : IItem {
   protected readonly float scale = 1f;
   protected readonly Game1 game;
   protected readonly GunStats stats;
+
   protected IProjectilePattern projectilePattern;
   protected IFireMode fireMode;
-
   protected Rectangle sourceRectangle;
   protected Vector2 origin;
   protected Vector2 bulletSpawnOffset;
+
+  public GunStats PublicStats => stats;
 
   protected DefaultGun(Texture2D texture, Vector2 startPosition, Game1 game, GunStats stats) {
     this.game = game;

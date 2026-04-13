@@ -33,9 +33,9 @@ public class ItemSpriteFactory {
   public IItem CreateRifle(float xPos, float yPos, Game1 game) {
     var stats = new GunStats {
       BulletVelocity = 1000f,
-      MaxAmmo = 1,
-      CurrentAmmo = 1,
-      ReloadTime = 1f
+      MaxAmmo = 10,
+      CurrentAmmo = 10,
+      ReloadTime = 3f
     };
     return new RifleItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
   }
