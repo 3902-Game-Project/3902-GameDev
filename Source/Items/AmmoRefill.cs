@@ -13,7 +13,6 @@ public class AmmoRefill(Texture2D texture, Vector2 startPosition) : IItem {
   public Vector2 Position { get; set; } = startPosition;
   public ItemCategory Category { get; } = ItemCategory.Consumable; // Just to prevent errors for now - want to eventually make ammo something you gather by walking over it
 
-
   public void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
 
@@ -27,6 +26,20 @@ public class AmmoRefill(Texture2D texture, Vector2 startPosition) : IItem {
       1f,
       SpriteEffects.None,
       0f
+    );
+  }
+
+  public void DrawUI(SpriteBatch spriteBatch, Vector2 position, float scale, Color tint) {
+    spriteBatch.Draw(
+      texture: texture,
+      position: position,
+      sourceRectangle: sourceRectangle,
+      color: tint,
+      rotation: 0f,
+      origin: Vector2.Zero,
+      scale: scale,
+      effects: SpriteEffects.None,
+      layerDepth: 0f
     );
   }
 

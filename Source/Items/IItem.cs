@@ -1,6 +1,7 @@
 using GameProject.Enums;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Interfaces;
 
@@ -10,4 +11,7 @@ public interface IItem : ISprite {
   Vector2 Position { get; set; }
   public void OnPickup(Player player);
   void Use(UseType useType);
+
+  // NEW: Dedicated method for drawing in menus
+  void DrawUI(SpriteBatch spriteBatch, Vector2 position, float scale, Color tint);
 }

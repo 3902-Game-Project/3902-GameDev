@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameProject.Interfaces;
+using GameProject.Items;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 
@@ -8,20 +9,23 @@ namespace GameProject.Misc;
 
 public class PlayerInventory(ILevelManager levelManager) {
   private readonly Random random = new();
-
   public List<IItem> Weapons { get; private set; } = [];
   public int ActiveWeaponIndex { get; private set; } = 0;
-  public int Keys { get; set; } = 3;
-
   public IItem ActiveItem => Weapons.Count > 0 ? Weapons[ActiveWeaponIndex] : null;
 
-  public void PickupItem(IItem newWeapon) {
-    if (Weapons.Count < 2) {
-      Weapons.Add(newWeapon);
-      ActiveWeaponIndex = Weapons.Count - 1;
+  public List<IItem> GeneralItems { get; private set; } = [];
+
+  public void PickupItem(IItem newItem) {
+    if (newItem is RevolverItem || newItem is RifleItem || newItem is ShotgunItem) {
+      if (Weapons.Count < 2) {
+        Weapons.Add(newItem);
+        ActiveWeaponIndex = Weapons.Count - 1;
+      } else {
+        DropItem(ActiveItem);
+        Weapons[ActiveWeaponIndex] = newItem;
+      }
     } else {
-      DropItem(ActiveItem);
-      Weapons[ActiveWeaponIndex] = newWeapon;
+      GeneralItems.Add(newItem);
     }
   }
 
@@ -37,6 +41,11 @@ public class PlayerInventory(ILevelManager levelManager) {
   public void SwapActiveWeapon() {
     if (Weapons.Count > 1) {
       ActiveWeaponIndex = (ActiveWeaponIndex == 0) ? 1 : 0;
+    }
+  }
+  public void EquipWeapon(int index) {
+    if (index >= 0 && index < Weapons.Count) {
+      ActiveWeaponIndex = index;
     }
   }
 }

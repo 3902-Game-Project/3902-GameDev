@@ -10,7 +10,6 @@ public class GameKeyboardController(Game1 game) : AKeyboardController {
     { Keys.R, new ReturnToMenuAndResetCommand(game) },
     { Keys.Q, new QuitCommand(game) },
     { Keys.P, new PauseCommand(game) },
-    { Keys.I, new ItemScreenCommand(game) },
     { Keys.J, new PlayerUseItemCommand(game.StateGame.Player, UseType.Pressed) },
     { Keys.E, new PlayerDieCommand(game.StateGame.Player) },
 
@@ -20,6 +19,7 @@ public class GameKeyboardController(Game1 game) : AKeyboardController {
     { Keys.F, new PlayerInteractCommand(game.StateGame.Player) },
     { Keys.Space, new SwapWeaponCommand(game.StateGame.Player) },
     { Keys.Tab, new ToggleMusicCommand() },
+    { Keys.I, new OpenItemScreenCommand(game) }
   };
 
   protected override Dictionary<Keys, ICommand> DownMappings { get; } = new() {
