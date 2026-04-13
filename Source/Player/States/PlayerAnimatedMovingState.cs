@@ -8,24 +8,24 @@ namespace GameProject.PlayerStates;
 
 internal class PlayerAnimatedMovingState(Player player) : IPlayerState {
   private readonly List<Rectangle> moveLeftFrames = [
-        new(1531, 420, 171, 323),
-        new(1854, 427, 171, 323)
-    ];
+    new(1531, 420, 171, 323),
+    new(1854, 427, 171, 323)
+  ];
 
   private readonly List<Rectangle> moveRightFrames = [
-      new(2161, 52, 171, 323),
-      new(2481, 54, 171, 323)
+    new(2161, 52, 171, 323),
+    new(2481, 54, 171, 323),
   ];
 
   //need to update below 2 later
   private readonly List<Rectangle> moveUpFrames = [
-      new(453, 425, 161, 322),
-      new(453, 425, 161, 322)
+    new(453, 425, 161, 322),
+    new(453, 425, 161, 322),
   ];
 
   private readonly List<Rectangle> moveDownFrames = [
-      new(455, 58, 161, 318),
-      new(455, 58, 161, 318)
+    new(455, 58, 161, 318),
+    new(455, 58, 161, 318),
   ];
 
   private int currentFrame = 0;
