@@ -17,7 +17,7 @@ internal class Level(
   List<IEnemy> enemies,
   List<IWorldPickup> pickups,
   Vector2 playerPosition
-  ) : ILevel {
+) : ILevel {
   private void CheckLevelClear() {
     if (Enemies.Count == 0) {
       foreach (var door in Doors) {

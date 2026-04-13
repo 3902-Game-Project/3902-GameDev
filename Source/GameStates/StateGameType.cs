@@ -23,9 +23,7 @@ internal class StateGameType : IGameState {
   private IController keyboardController;
   private IController mouseController;
   private IController gamePadController;
-
-  private readonly CollisionManager collisionManager = new();
-
+  
   public Player Player { get; private set; }
 
   public ILevelManager LevelManager { get; private set; }
@@ -33,7 +31,7 @@ internal class StateGameType : IGameState {
   public StateGameType(Game1 game) {
     this.game = game;
     LevelManager = new LevelManager(game);
-    Player = new Player(collisionManager, LevelManager, game);
+    Player = new Player(LevelManager, game);
   }
 
   public void Initialize() {
@@ -91,7 +89,6 @@ internal class StateGameType : IGameState {
     );
 
     LevelManager.Initialize();
-    collisionManager.Add(Player);
   }
 
   public void LoadContent(ContentManager contentManager) {

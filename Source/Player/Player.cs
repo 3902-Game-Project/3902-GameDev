@@ -21,9 +21,7 @@ internal enum FacingDirection {
 internal class Player : IInitable, ICollidable {
   private static readonly float PLAYER_WIDTH = 171.0f * 0.15f;
   private static readonly float PLAYER_HEIGHT = 323.0f * 0.15f;
-
-  private readonly CollisionManager collisionManager;
-
+  
   public IShape Shape => Collider;
   public ILevelManager LevelManager { get; private set; }
   public BoxCollider Collider { get; private set; }
@@ -59,8 +57,7 @@ internal class Player : IInitable, ICollidable {
   public IPlayerState UseItemState { get; private set; }
   public IPlayerState DeadState { get; private set; }
 
-  public Player(CollisionManager collisionManager, ILevelManager levelManager, Game1 game) {
-    this.collisionManager = collisionManager;
+  public Player(ILevelManager levelManager, Game1 game) {
     LevelManager = levelManager;
     Position = new Vector2(400, 300);
     Velocity = Vector2.Zero;
@@ -119,11 +116,11 @@ internal class Player : IInitable, ICollidable {
 
     Position = new Vector2(Position.X + xStep, Position.Y);
     if (Collider != null) Collider.Position = Position;
-    collisionManager.ResolveCollisionsFor(this, CollisionAxis.X, MathF.Abs(yStep) + 1f);
+    LevelManager.CollisionManager.ResolveCollisionsFor(this, CollisionAxis.X, MathF.Abs(yStep) + 1f);
 
     Position = new Vector2(Position.X, Position.Y + yStep);
     if (Collider != null) Collider.Position = Position;
-    collisionManager.ResolveCollisionsFor(this, CollisionAxis.Y, MathF.Abs(xStep) + 1f);
+    LevelManager.CollisionManager.ResolveCollisionsFor(this, CollisionAxis.Y, MathF.Abs(xStep) + 1f);
 
     State.Update(gameTime);
     Velocity = Vector2.Zero;
