@@ -16,9 +16,10 @@ public class GamePadController : IController {
   private readonly Dictionary<Buttons, ICommand> releasedMappings;
 
   public GamePadController(
-        Dictionary<Buttons, ICommand> pressedMappings = null,
-        Dictionary<Buttons, ICommand> downMappings = null,
-        Dictionary<Buttons, ICommand> releasedMappings = null) {
+    Dictionary<Buttons, ICommand> pressedMappings = null,
+    Dictionary<Buttons, ICommand> downMappings = null,
+    Dictionary<Buttons, ICommand> releasedMappings = null
+  ) {
     this.pressedMappings = pressedMappings ?? [];
     this.downMappings = downMappings ?? [];
     this.releasedMappings = releasedMappings ?? [];

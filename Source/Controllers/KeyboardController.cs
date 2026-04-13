@@ -14,9 +14,10 @@ public class KeyboardController : IController {
   private readonly Dictionary<Keys, ICommand> releasedMappings;
 
   public KeyboardController(
-        Dictionary<Keys, ICommand> pressedMappings = null,
-        Dictionary<Keys, ICommand> downMappings = null,
-        Dictionary<Keys, ICommand> releasedMappings = null) {
+    Dictionary<Keys, ICommand> pressedMappings = null,
+    Dictionary<Keys, ICommand> downMappings = null,
+    Dictionary<Keys, ICommand> releasedMappings = null
+  ) {
     this.pressedMappings = pressedMappings ?? [];
     this.downMappings = downMappings ?? [];
     this.releasedMappings = releasedMappings ?? [];

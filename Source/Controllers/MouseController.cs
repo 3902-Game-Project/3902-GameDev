@@ -14,9 +14,10 @@ public class MouseController : IController {
   private readonly Dictionary<MouseButtons, ICommand> releasedMappings;
 
   public MouseController(
-        Dictionary<MouseButtons, ICommand> pressedMappings = null,
-        Dictionary<MouseButtons, ICommand> downMappings = null,
-        Dictionary<MouseButtons, ICommand> releasedMappings = null) {
+    Dictionary<MouseButtons, ICommand> pressedMappings = null,
+    Dictionary<MouseButtons, ICommand> downMappings = null,
+    Dictionary<MouseButtons, ICommand> releasedMappings = null
+  ) {
     this.pressedMappings = pressedMappings ?? [];
     this.downMappings = downMappings ?? [];
     this.releasedMappings = releasedMappings ?? [];
