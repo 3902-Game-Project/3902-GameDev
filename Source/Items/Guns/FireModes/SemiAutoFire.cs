@@ -8,24 +8,26 @@ public class SemiAutoFire(GunStats stats) : IFireMode {
   private float countdown = 0;
 
   public bool CanFire(UseType useType) {
-    bool canFire = true;
-
     if (useType != UseType.Pressed) return false;
 
-    if (countdown > 0) return false;
+    if (countdown > 0 || stats.CurrentAmmo <= 0) return false;
 
     countdown = stats.FireRate;
     stats.CurrentAmmo--;
     if (stats.CurrentAmmo <= 0) {
       countdown = stats.ReloadTime;
-      stats.CurrentAmmo = stats.MaxAmmo;
       SoundManager.Instance.Play(stats.ReloadID);
     }
 
-    return canFire;
+    return true;
   }
 
   public void Update(GameTime gameTime) {
-    countdown -= (float) gameTime.ElapsedGameTime.TotalSeconds;
+    if (countdown > 0) {
+      countdown -= (float) gameTime.ElapsedGameTime.TotalSeconds;
+      if (countdown <= 0 && stats.CurrentAmmo <= 0) {
+        stats.CurrentAmmo = stats.MaxAmmo;
+      }
+    }
   }
 }
