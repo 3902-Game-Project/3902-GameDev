@@ -3,10 +3,17 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class LogCornerBlock(Texture2D LogCornerTexture, Vector2 xyPos) : BaseBlock(xyPos) {
+public class LogCornerBlock : BaseBlock {
   private static Rectangle sourceRect = new(192, 64, 64, 64);
-  private bool rotated = false;
+  private readonly Texture2D logCornerTexture;
+
   public float Rotation { get; private set; } = 0.0f;
+
+  public LogCornerBlock(Texture2D LogCornerTexture, Vector2 xyPos) : base(xyPos) {
+    logCornerTexture = LogCornerTexture;
+
+    Rotate();
+  }
 
   public void Rotate() {
     float x = Position.X, y = Position.Y;
@@ -22,13 +29,11 @@ public class LogCornerBlock(Texture2D LogCornerTexture, Vector2 xyPos) : BaseBlo
       x += 64;
     }
     Position = new(x, y);
-    rotated = true;
   }
 
   public override void Update(GameTime gameTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    if (!rotated) { Rotate(); }
-    spriteBatch.Draw(LogCornerTexture, Position, sourceRect, Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
+    spriteBatch.Draw(logCornerTexture, Position, sourceRect, Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 }

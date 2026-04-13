@@ -16,7 +16,6 @@ public class SmallDoorBlock : BaseBlock {
   private Texture2D smallDoorTexture;
   private ILevelManager levelManager;
   private int currentFrame = 0;
-  private bool rotated = false;
   public float Rotation { get; private set; } = 0.0f;
   public string PairedLevelName { get; private set; }
   public LockableDoorBlockState State { get; private set; }
@@ -31,6 +30,8 @@ public class SmallDoorBlock : BaseBlock {
     if (State == LockableDoorBlockState.Open) {
       currentFrame = 1;
     }
+
+    Rotate();
   }
 
   public void Rotate() {
@@ -44,15 +45,11 @@ public class SmallDoorBlock : BaseBlock {
     }
 
     Position = new(x, y);
-    rotated = true;
   }
 
   public override void Update(GameTime gameTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    if (!rotated) {
-      Rotate();
-    }
     spriteBatch.Draw(smallDoorTexture, Position, sourceRects[currentFrame], Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 

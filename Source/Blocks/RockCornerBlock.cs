@@ -3,10 +3,17 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks; // Note: Kept your specific namespace here!
 
-public class RockCornerBlock(Texture2D RockCornerTexture, Vector2 xyPos) : BaseBlock(xyPos) {
+public class RockCornerBlock : BaseBlock {
   private static Rectangle sourceRect = new(384, 0, 64, 64);
-  private bool rotated = false;
+  private readonly Texture2D rockCornerTexture;
+
   public float Rotation { get; private set; } = 0.0f;
+
+  public RockCornerBlock(Texture2D RockCornerTexture, Vector2 xyPos) : base(xyPos) {
+    rockCornerTexture = RockCornerTexture;
+
+    Rotate();
+  }
 
   public void Rotate() {
     float x = Position.X, y = Position.Y;
@@ -22,13 +29,11 @@ public class RockCornerBlock(Texture2D RockCornerTexture, Vector2 xyPos) : BaseB
       y += 64;
     }
     Position = new(x, y);
-    rotated = true;
   }
 
   public override void Update(GameTime gameTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    if (!rotated) { Rotate(); }
-    spriteBatch.Draw(RockCornerTexture, Position, sourceRect, Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
+    spriteBatch.Draw(rockCornerTexture, Position, sourceRect, Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 }

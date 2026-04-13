@@ -7,16 +7,27 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, LockableDoorBlockState state, string pairedLevelName, ILevelManager levelManager) : BaseBlock(xyPos) {
+public class SlattedDoorBlock : BaseBlock {
   private int currentFrame = 0;
   private static readonly List<Rectangle> sourceRects = [
       new(192, 128, 64, 64),
       new(320, 128, 64, 64)
     ];
-  private bool rotated = false;
+  private readonly Texture2D slattedDoorTexture;
+  private readonly ILevelManager levelManager;
+
   public float Rotation { get; private set; } = 0.0f;
-  public string PairedLevelName { get; private set; } = pairedLevelName;
-  public LockableDoorBlockState State { get; private set; } = state;
+  public string PairedLevelName { get; private set; }
+  public LockableDoorBlockState State { get; private set; }
+
+  public SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, LockableDoorBlockState state, string pairedLevelName, ILevelManager levelManager) : base(xyPos) {
+    slattedDoorTexture = SlattedDoorTexture;
+    this.levelManager = levelManager;
+    PairedLevelName = pairedLevelName;
+    State = state;
+
+    Rotate();
+  }
 
   public void Rotate() {
     float x = Position.X, y = Position.Y;
@@ -32,7 +43,6 @@ public class SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, Locka
       y += 64;
     }
     Position = new(x, y);
-    rotated = true;
   }
 
   public override void Update(GameTime gameTime) {
@@ -42,9 +52,8 @@ public class SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, Locka
   }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    if (!rotated) { Rotate(); }
     spriteBatch.Draw(
-      SlattedDoorTexture,
+      slattedDoorTexture,
       Position,
       sourceRects[currentFrame],
       Color.White,
