@@ -29,7 +29,7 @@ public class CollisionManager : IGPUpdatable {
     }
   }
 
-  public void RemoveCollider(ICollidable collider) {
+  public void Remove(ICollidable collider) {
     if (colliders.Contains(collider)) {
       colliders.Remove(collider);
     }
