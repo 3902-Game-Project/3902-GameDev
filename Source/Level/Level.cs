@@ -18,6 +18,16 @@ public class Level(
   List<IWorldPickup> pickups,
   Vector2 playerPosition
   ) : ILevel {
+  private void CheckLevelClear() {
+    if (Enemies.Count == 0) {
+      foreach (var door in Doors) {
+        if (door is SmallDoorBlock smallDoorBlock) {
+          smallDoorBlock.ChangeState(LockableDoorBlockState.Open);
+        }
+      }
+    }
+  }
+
   public List<IBlock> CollidableBlocks => collidableBlocks;
   public List<IBlock> Doors => doors;
   public List<IEnemy> Enemies => enemies;
@@ -26,7 +36,6 @@ public class Level(
   public List<IWorldPickup> Pickups => pickups;
   public Vector2 PlayerPosition { get; private set; } = playerPosition;
   public ProjectileManager ProjectileManager { get; private set; } = new ProjectileManager();
-  public int EnemyCount { get; set; } = enemies.Count;
 
   public void Initialize() { }
 
@@ -47,9 +56,14 @@ public class Level(
 
     foreach (var enemy in enemies) {
       enemy.Update(gameTime);
-      if (enemy.Health <= 0 && !DeadEnemies.Contains(enemy)) {
+      if (enemy.Health <= 0) {
         DeadEnemies.Add(enemy);
+        enemies.Remove(enemy);
       }
+    }
+
+    foreach (var deadEnemy in DeadEnemies) {
+      deadEnemy.Update(gameTime);
     }
 
     foreach (var pickup in pickups) {
@@ -57,7 +71,8 @@ public class Level(
     }
 
     ProjectileManager.Update(gameTime);
-    LevelClear();
+
+    CheckLevelClear();
   }
 
   public void Draw(SpriteBatch spriteBatch) {
@@ -79,6 +94,10 @@ public class Level(
 
     foreach (var enemy in enemies) {
       enemy.Draw(spriteBatch);
+    }
+
+    foreach (var deadEnemy in DeadEnemies) {
+      deadEnemy.Draw(spriteBatch);
     }
 
     ProjectileManager.Draw(spriteBatch);
@@ -124,15 +143,5 @@ public class Level(
 
   public void RemovePickup(IWorldPickup pickup) {
     pickups.Remove(pickup);
-  }
-
-  public void LevelClear() {
-    if (Enemies.Count == DeadEnemies.Count) {
-      foreach (var door in Doors) {
-        if (door is SmallDoorBlock smallDoorBlock) {
-          smallDoorBlock.ChangeState(LockableDoorBlockState.Open);
-        }
-      }
-    }
   }
 }
