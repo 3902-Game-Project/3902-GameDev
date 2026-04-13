@@ -54,8 +54,11 @@ public class Level(
       doorBlock.Update(gameTime);
     }
 
-    foreach (var enemy in enemies) {
+    for (int i = enemies.Count - 1; i >= 0; i--) {
+      var enemy = enemies[i];
+
       enemy.Update(gameTime);
+
       if (enemy.Health <= 0) {
         DeadEnemies.Add(enemy);
         enemies.Remove(enemy);
