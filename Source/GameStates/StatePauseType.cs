@@ -24,6 +24,9 @@ internal class StatePauseType(Game1 game) : IGameState {
         }
     );
 
+    // The gamepad bindings don't match the readme. this is intentional, because
+    // the readme is in Xbox controller layout, but testing with a
+    // nintendo pro controller seems to suggest it is pro controller layout.
     gamePadController = new GamePadController(
         pressedMappings: new Dictionary<Buttons, ICommand> {
             { Buttons.A, new ReturnToGameCommand(game) },
