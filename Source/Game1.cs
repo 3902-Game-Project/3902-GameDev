@@ -90,7 +90,6 @@ public class Game1 : Game {
     MiscAssetStore.Instance.LoadContent(Content);
     TextureStore.Instance.LoadContent(Content);
 
-    BlockSpriteFactory.Instance.LoadAllTextures(Content);
     EnemySpriteFactory.Instance.LoadAllTextures(Content);
     SoundManager.Instance.LoadAllContent(Content);
     ItemSpriteFactory.Instance.LoadAllTextures(Content);
