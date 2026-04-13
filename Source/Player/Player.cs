@@ -14,6 +14,8 @@ namespace GameProject.PlayerSpace;
 public enum FacingDirection {
   Left,
   Right,
+  Up,
+  Down
 }
 
 public class Player : IInitable, ICollidable {
@@ -175,9 +177,18 @@ public class Player : IInitable, ICollidable {
       float playerScale = 0.15f;
       Vector2 rightHandUnscaled = new(100f, 195f);
       Vector2 leftHandUnscaled = new(18f, 188f);
-      Vector2 rightHandOffset = (rightHandUnscaled - spriteCenter) * playerScale;
-      Vector2 leftHandOffset = (leftHandUnscaled - spriteCenter) * playerScale;
-      Vector2 currentOffset = (Direction == FacingDirection.Right) ? rightHandOffset : leftHandOffset;
+      Vector2 upHandUnscaled = new(120f, 150f);
+      Vector2 downHandUnscaled = new(40f, 190f);
+      Vector2 currentOffset;
+      if (Direction == FacingDirection.Right) {
+        currentOffset = (rightHandUnscaled - spriteCenter) * playerScale;
+      } else if (Direction == FacingDirection.Left) {
+        currentOffset = (leftHandUnscaled - spriteCenter) * playerScale;
+      } else if (Direction == FacingDirection.Up) {
+        currentOffset = (upHandUnscaled - spriteCenter) * playerScale;
+      } else { // Down
+        currentOffset = (downHandUnscaled - spriteCenter) * playerScale;
+      }
 
       Inventory.ActiveItem.Position = Position + currentOffset;
       Inventory.ActiveItem.Direction = Direction;

@@ -45,8 +45,13 @@ public abstract class DefaultGun : IItem {
     origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
 
     SpriteEffects effects = SpriteEffects.None;
+    float rotation = 0f;
     if (Direction == FacingDirection.Left) {
       effects = SpriteEffects.FlipHorizontally;
+    } else if (Direction == FacingDirection.Up) {
+      rotation = -MathHelper.PiOver2;
+    } else if (Direction == FacingDirection.Down) {
+      rotation = MathHelper.PiOver2;
     }
 
     spriteBatch.Draw(
@@ -85,9 +90,22 @@ public abstract class DefaultGun : IItem {
   public virtual void Use(UseType useType) {
     if (fireMode == null || !fireMode.CanFire(useType)) return;
 
-    Vector2 bulletDirection = (Direction == FacingDirection.Left) ? new Vector2(-1, 0) : new Vector2(1, 0);
-    float offsetX = (Direction == FacingDirection.Left) ? -bulletSpawnOffset.X : bulletSpawnOffset.X;
-    Vector2 actualOffset = new(offsetX, bulletSpawnOffset.Y);
+    Vector2 bulletDirection;
+    Vector2 actualOffset;
+    if (Direction == FacingDirection.Left) {
+      bulletDirection = new Vector2(-1, 0);
+      actualOffset = new Vector2(-bulletSpawnOffset.X, bulletSpawnOffset.Y);
+    } else if (Direction == FacingDirection.Right) {
+      bulletDirection = new Vector2(1, 0);
+      actualOffset = new Vector2(bulletSpawnOffset.X, bulletSpawnOffset.Y);
+    } else if (Direction == FacingDirection.Up) {
+      bulletDirection = new Vector2(0, -1);
+      actualOffset = new Vector2(bulletSpawnOffset.Y, -bulletSpawnOffset.X);
+    } else { // Down
+      bulletDirection = new Vector2(0, 1);
+      actualOffset = new Vector2(-bulletSpawnOffset.Y, bulletSpawnOffset.X);
+    }
+
     Vector2 bulletSpawnPosition = Position + actualOffset;
 
     projectilePattern.SpawnProjectiles(game.StateGame.LevelManager.CurrentLevel.ProjectileManager, bulletSpawnPosition, bulletDirection, stats);
