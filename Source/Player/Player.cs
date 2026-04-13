@@ -150,11 +150,6 @@ public class Player : IInitable, ICollidable {
     }
 
     if (info.Collider is IEnemy) {
-      Position += info.Direction * KNOCKBACK_DISTANCE;
-      if (Collider != null) {
-        Collider.Position = Position;
-      }
-      if (Collider != null) Collider.Position = Position;
       TakeDamage(50);
     }
   }
