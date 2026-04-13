@@ -2,6 +2,7 @@
 using GameProject.Factories;
 using GameProject.Globals;
 using GameProject.Interfaces;
+using GameProject.Items;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
@@ -138,6 +139,65 @@ public class StateGameType : IGameState {
     );
 
     //draw player's items, keys...
+    float visualHealthBarWidth = TextureStore.Instance.HealthBar.Width * 0.5f;
+    Vector2 ammoPosition = new Vector2(healthBarPosition.X + visualHealthBarWidth + 20, healthBarPosition.Y);
+    var activeWeapon = Player.Inventory.ActiveItem;
+    if (activeWeapon != null) {
+      GunStats activeStats = null;
+      if (activeWeapon is RevolverItem revolver) {
+        activeStats = revolver.PublicStats;
+      } else if (activeWeapon is RifleItem rifle) {
+        activeStats = rifle.PublicStats;
+      } else if (activeWeapon is ShotgunItem shotgun) {
+        activeStats = shotgun.PublicStats;
+      }
+
+      if (activeStats != null) {
+        string ammoText;
+        Color textColor;
+        if (activeStats.CurrentAmmo <= 0) {
+          ammoText = "RELOADING...";
+          textColor = Color.Red;
+        } else {
+          ammoText = $"Ammo: {activeStats.CurrentAmmo} / {activeStats.MaxAmmo}";
+          textColor = Color.White;
+        }
+
+        spriteBatch.DrawString(
+            spriteFont: MiscAssetStore.Instance.MainFont,
+            text: ammoText,
+            position: ammoPosition,
+            color: textColor
+        );
+      }
+    }
+
+
+    Rectangle[] keySourceRects = [
+        new Rectangle(0, 448, 8, 13),
+        new Rectangle(9, 448, 8, 13),
+        new Rectangle(17, 448, 8, 14)
+    ];
+    Vector2 keysStartPosition = new Vector2(ammoPosition.X + 200, healthBarPosition.Y);
+    float keyScale = 3f;
+    int keysToDraw = MathHelper.Clamp(Player.Inventory.Keys, 0, 3); // Need to update later
+
+    for (int i = 0; i < keysToDraw; i++) {
+      Vector2 keyPos = keysStartPosition + new Vector2(i * 35, 0);
+
+      spriteBatch.Draw(
+          texture: TextureStore.Instance.MainBlockItemAtlas,
+          position: keyPos,
+          sourceRectangle: keySourceRects[i],
+          color: Color.White,
+          rotation: 0f,
+          origin: Vector2.Zero,
+          scale: keyScale,
+          effects: SpriteEffects.None,
+          layerDepth: 0f
+      );
+    }
+
 
     // collisionManager.DebugDraw(spriteBatch, graphicsDevice);
 

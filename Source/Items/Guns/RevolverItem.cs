@@ -17,6 +17,7 @@ public class RevolverItem : IItem {
 
   private readonly Game1 game;
   private readonly GunStats stats;
+  public GunStats PublicStats => stats;
   private readonly IProjectilePattern projectilePattern = new SingleShotPattern();
   private readonly IFireMode fireMode;
   private Vector2 bulletSpawnOffset;

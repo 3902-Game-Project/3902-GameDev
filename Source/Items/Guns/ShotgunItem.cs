@@ -19,6 +19,7 @@ public class ShotgunItem : IItem {
   private readonly IProjectilePattern projectilePattern = new SpreadPattern();
   private Vector2 bulletSpawnOffset;
   private readonly GunStats stats;
+  public GunStats PublicStats => stats;
   private readonly IFireMode fireMode;
   public ItemCategory Category { get; } = ItemCategory.Primary;
 

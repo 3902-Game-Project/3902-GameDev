@@ -11,6 +11,7 @@ public class PlayerInventory(ILevelManager levelManager) {
 
   public List<IItem> Weapons { get; private set; } = [];
   public int ActiveWeaponIndex { get; private set; } = 0;
+  public int Keys { get; set; } = 3;
 
   public IItem ActiveItem => Weapons.Count > 0 ? Weapons[ActiveWeaponIndex] : null;
 
