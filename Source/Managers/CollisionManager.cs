@@ -12,7 +12,7 @@ namespace GameProject.Managers;
 internal enum CollisionAxis {
   Both,
   X,
-  Y
+  Y,
 }
 
 internal class CollisionManager : IGPUpdatable {
