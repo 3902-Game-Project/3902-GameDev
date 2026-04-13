@@ -1,0 +1,20 @@
+Author: Santosh
+Date: 2026-04-12
+Sprint: 4
+Class to review: Source/GameStates/StateGameType.cs (lines 99-133, lines 137-176)
+Author of class: Eric
+Note: They mainly edited shared classes, and don't have much explicit classes of their own this sprint.
+Minutes taken to review: 52
+
+Readability:
+  What is readable:
+  The SpriteBatch.Draw calls use named parameter arguments and have good vertical spacing, making them readable.
+
+  What is less readable:
+  While the function calls themselves have good vertical spacing, there is not enough space between the function calls and other variables, making the code hard to follow. The code at lines 137-176 appears to make 2 draw calls to draw the health bar, but it is unclear why 2 are needed. A comment might be helpful here.
+
+Code quality:
+  The healthBarPosition variable is a class field of StateGameType.cs, but its assignment and use occurs entirely within the method StateGameType.LowLevelDraw. Thus, healthBarPosition could be moved into the method as a local variable and the code would be slightly cleaner.
+
+Hypothetical code change and how well the code supports that change:
+  Hypothetically the health bar for each enemy could be drawn below the enemy instead of above it. The health bar drawing code relatively easily supports this change as one line in the creation of a Vector2 position would be updated.
