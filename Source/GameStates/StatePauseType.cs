@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.GameStates;
 
-public class StatePauseType(Game1 game) : IGameState {
+internal class StatePauseType(Game1 game) : IGameState {
   private static readonly string TITLE_TEXT = "Paused";
   private static readonly string RETURN_TEXT = "Press P/GamePadB to return to game, Q/GamePadY to quit.";
   private IController keyboardController;
@@ -18,17 +18,20 @@ public class StatePauseType(Game1 game) : IGameState {
 
   public void Initialize() {
     keyboardController = new KeyboardController(
-        pressedMappings: new Dictionary<Keys, ICommand> {
-            { Keys.P, new ReturnToGameCommand(game) },
-            { Keys.Q, new QuitCommand(game) },
-        }
+      pressedMappings: new Dictionary<Keys, ICommand> {
+        { Keys.P, new ReturnToGameCommand(game) },
+        { Keys.Q, new QuitCommand(game) },
+      }
     );
 
+    // The gamepad bindings don't match the readme. this is intentional, because
+    // the readme is in Xbox controller layout, but testing with a
+    // nintendo pro controller seems to suggest it is pro controller layout.
     gamePadController = new GamePadController(
-        pressedMappings: new Dictionary<Buttons, ICommand> {
-            { Buttons.A, new ReturnToGameCommand(game) },
-            { Buttons.X, new QuitCommand(game) },
-        }
+      pressedMappings: new Dictionary<Buttons, ICommand> {
+        { Buttons.A, new ReturnToGameCommand(game) },
+        { Buttons.X, new QuitCommand(game) },
+      }
     );
   }
 
@@ -76,11 +79,11 @@ public class StatePauseType(Game1 game) : IGameState {
     spriteBatch.End();
   }
 
-  public void OnStateEnter() { }
+  public void OnStateEnter(bool prevStateIsCurrentState) { }
 
-  public void OnStateLeave() { }
+  public void OnStateLeave(bool nextStateIsCurrentState) { }
 
-  public void OnStateStartFadeIn() { }
+  public void OnStateStartFadeIn(bool prevStateIsCurrentState) { }
 
-  public void OnStateEndFadeOut() { }
+  public void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
 }

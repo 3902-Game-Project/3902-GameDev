@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
-public class ShotgunnerDeathState : IShotgunnerState {
+internal class ShotgunnerDeathState : IShotgunnerState {
   private readonly ShotgunnerSprite shotgunner;
 
   private double animationTimer;

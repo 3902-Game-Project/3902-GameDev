@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
-public class RifleAttackState : IRiflemanState {
+internal class RifleAttackState : IRiflemanState {
   private readonly RiflemanSprite rifleMan;
   private readonly ILevelManager levelManager;
   private double stateTimer;

@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.WorldPickups;
 
-public class HeartWorldPickup(Texture2D texture, Vector2 position) : BaseWorldPickup(position), ICollidable {
+internal class HeartWorldPickup(Texture2D texture, Vector2 position) : BaseWorldPickup(position), ICollidable {
   private Rectangle sourceRectangle = new(9, 15, 12, 11);
   private Vector2 origin;
   private readonly float scale = 2f;

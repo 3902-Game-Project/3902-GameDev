@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-public class TumbleSprite : BaseEnemy {
+internal class TumbleSprite : BaseEnemy {
   private ITumbleState state;
 
   public TumbleSprite(Texture2D texture, Vector2 position) : base(texture, position, 48f, 48f) {

@@ -3,33 +3,33 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Interfaces;
 
-public enum BarrelBlockState {
+internal enum BarrelBlockState {
   Solid,
   Broken,
 }
 
-public enum FirePitBlockState {
+internal enum FirePitBlockState {
   Lit,
   Extinguished,
 }
 
-public enum CrateBlockState {
+internal enum CrateBlockState {
   Still,
   Moving,
 }
 
-public enum LockableDoorBlockState {
+internal enum LockableDoorBlockState {
   Locked,
   Open,
 }
 
-public enum VaultDoorBlockState {
+internal enum VaultDoorBlockState {
   Locked,
   Opening,
   Open,
 }
 
-public interface IBlock : ICollidable {
+internal interface IBlock : ICollidable {
   public void Update(GameTime gameTime);
   public void Draw(SpriteBatch spriteBatch);
 

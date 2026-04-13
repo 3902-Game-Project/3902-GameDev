@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Globals;
 
-public class TextureStore : IInitable {
+internal class TextureStore : IInitable {
   public static TextureStore Instance { get; } = new TextureStore();
 
   public Texture2D WhitePixel { get; private set; }

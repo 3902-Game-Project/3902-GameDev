@@ -1,5 +1,5 @@
 ﻿namespace GameProject.CollisionResponse;
-public enum CollisionSide {
+internal enum CollisionSide {
   Top,
   Bottom,
   Left,

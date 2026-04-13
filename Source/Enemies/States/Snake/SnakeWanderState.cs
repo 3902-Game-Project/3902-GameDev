@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
-public class SnakeWanderState : ISnakeState {
+internal class SnakeWanderState : ISnakeState {
   private readonly SnakeSprite snake;
   private readonly Random random;
   private double wanderTimer;

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Projectiles;
 
-public class BombProjectile : IProjectile {
+internal class BombProjectile : IProjectile {
   private readonly Texture2D texture;
   private Vector2 position;
   private readonly List<Rectangle> sourceRectangles = [

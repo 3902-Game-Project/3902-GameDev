@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using GameProject.ButtonDiffTrackers;
 using GameProject.Commands;
 using GameProject.Controllers;
@@ -16,7 +17,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.GameStates;
 
-public class StateGameType : IGameState {
+internal class StateGameType : IGameState {
   private readonly Game1 game;
 
   private IController keyboardController;
@@ -37,58 +38,60 @@ public class StateGameType : IGameState {
 
   public void Initialize() {
     keyboardController = new KeyboardController(
-        pressedMappings: new Dictionary<Keys, ICommand> {
-            { Keys.R, new ReturnToMenuAndResetCommand(game) },
-            { Keys.Q, new QuitCommand(game) },
-            { Keys.P, new PauseCommand(game) },
-            { Keys.I, new OpenItemScreenCommand(game) },
-            { Keys.J, new PlayerUseItemCommand(Player, UseType.Pressed) },
-            { Keys.E, new PlayerDieCommand(Player) },
-            { Keys.T, new PreviousLevelCommand(LevelManager) },
-            { Keys.Y, new NextLevelCommand(LevelManager) },
-            { Keys.F, new PlayerInteractCommand(Player) },
-            { Keys.Space, new SwapWeaponCommand(Player) },
-            { Keys.Tab, new ToggleMusicCommand() },
-        },
-        downMappings: new Dictionary<Keys, ICommand> {
-            { Keys.W, new PlayerMoveUpCommand(Player) },
-            { Keys.S, new PlayerMoveDownCommand(Player) },
-            { Keys.A, new PlayerMoveLeftCommand(Player) },
-            { Keys.D, new PlayerMoveRightCommand(Player) },
-            { Keys.Up, new PlayerMoveUpCommand(Player) },
-            { Keys.Down, new PlayerMoveDownCommand(Player) },
-            { Keys.Left, new PlayerMoveLeftCommand(Player) },
-            { Keys.Right, new PlayerMoveRightCommand(Player) },
-        }
-        
-    );
-
-    gamePadController = new GamePadController(
-        pressedMappings: new Dictionary<Buttons, ICommand> {
-            { Buttons.X, new QuitCommand(game) },
-            { Buttons.B, new ReturnToMenuAndResetCommand(game) },
-            { Buttons.A, new PlayerUseItemCommand(Player, UseType.Pressed) },
-            { Buttons.Y, new PlayerDieCommand(Player) },
-            { Buttons.LeftShoulder, new PreviousLevelCommand(LevelManager) },
-            { Buttons.RightShoulder, new NextLevelCommand(LevelManager) },
-        },
-        downMappings: new Dictionary<Buttons, ICommand> {
-            { Buttons.A, new PlayerUseItemCommand(Player, UseType.Held) },
-            { Buttons.DPadUp, new PlayerMoveUpCommand(Player) },
-            { Buttons.DPadDown, new PlayerMoveDownCommand(Player) },
-            { Buttons.DPadLeft, new PlayerMoveLeftCommand(Player) },
-            { Buttons.DPadRight, new PlayerMoveRightCommand(Player) },
-        },
-        releasedMappings: new Dictionary<Buttons, ICommand> {
-            { Buttons.A, new PlayerUseItemCommand(Player, UseType.Released) },
-        }
+      pressedMappings: new Dictionary<Keys, ICommand> {
+        { Keys.R, new ReturnToMenuAndResetCommand(game) },
+        { Keys.Q, new QuitCommand(game) },
+        { Keys.P, new PauseCommand(game) },
+        { Keys.I, new OpenItemScreenCommand(game) },
+        { Keys.J, new PlayerUseItemCommand(Player, UseType.Pressed) },
+        { Keys.E, new PlayerDieCommand(Player) },
+        { Keys.T, new PreviousLevelCommand(LevelManager) },
+        { Keys.Y, new NextLevelCommand(LevelManager) },
+        { Keys.F, new PlayerInteractCommand(Player) },
+        { Keys.Space, new SwapWeaponCommand(Player) },
+        { Keys.Tab, new ToggleMusicCommand() },
+      },
+      downMappings: new Dictionary<Keys, ICommand> {
+        { Keys.W, new PlayerMoveUpCommand(Player) },
+        { Keys.S, new PlayerMoveDownCommand(Player) },
+        { Keys.A, new PlayerMoveLeftCommand(Player) },
+        { Keys.D, new PlayerMoveRightCommand(Player) },
+        { Keys.Up, new PlayerMoveUpCommand(Player) },
+        { Keys.Down, new PlayerMoveDownCommand(Player) },
+        { Keys.Left, new PlayerMoveLeftCommand(Player) },
+        { Keys.Right, new PlayerMoveRightCommand(Player) },
+      }
     );
 
     mouseController = new MouseController(
-        pressedMappings: new Dictionary<MouseButtons, ICommand> {
-            { MouseButtons.Right, new PreviousLevelCommand(LevelManager) },
-            { MouseButtons.Left, new NextLevelCommand(LevelManager) },
-        }
+      pressedMappings: new Dictionary<MouseButtons, ICommand> {
+        { MouseButtons.Right, new PreviousLevelCommand(LevelManager) },
+        { MouseButtons.Left, new NextLevelCommand(LevelManager) },
+      }
+    );
+
+    // The gamepad bindings don't match the readme. this is intentional, because
+    // the readme is in Xbox controller layout, but testing with a
+    // nintendo pro controller seems to suggest it is pro controller layout.
+    gamePadController = new GamePadController(
+      pressedMappings: new Dictionary<Buttons, ICommand> {
+        { Buttons.X, new QuitCommand(game) },
+        { Buttons.B, new ReturnToMenuAndResetCommand(game) },
+        { Buttons.A, new PlayerUseItemCommand(Player, UseType.Pressed) },
+        { Buttons.Y, new PlayerDieCommand(Player) },
+        { Buttons.LeftShoulder, new PreviousLevelCommand(LevelManager) },
+        { Buttons.RightShoulder, new NextLevelCommand(LevelManager) },
+      },
+      downMappings: new Dictionary<Buttons, ICommand> {
+        { Buttons.A, new PlayerUseItemCommand(Player, UseType.Held) },
+        { Buttons.DPadUp, new PlayerMoveUpCommand(Player) },
+        { Buttons.DPadDown, new PlayerMoveDownCommand(Player) },
+        { Buttons.DPadLeft, new PlayerMoveLeftCommand(Player) },
+        { Buttons.DPadRight, new PlayerMoveRightCommand(Player) },
+      },
+      releasedMappings: new Dictionary<Buttons, ICommand> {
+        { Buttons.A, new PlayerUseItemCommand(Player, UseType.Released) },
+      }
     );
 
     LevelManager.Initialize();
@@ -111,7 +114,6 @@ public class StateGameType : IGameState {
 
     LevelManager.Update(gameTime);
     Player.Update(gameTime);
-    
   }
 
   public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
@@ -202,11 +204,10 @@ public class StateGameType : IGameState {
       }
     }
 
-
     Rectangle[] keySourceRects = [
-        new Rectangle(0, 448, 8, 13),
-        new Rectangle(9, 448, 8, 13),
-        new Rectangle(17, 448, 8, 14)
+      new Rectangle(0, 448, 8, 13),
+      new Rectangle(9, 448, 8, 13),
+      new Rectangle(17, 448, 8, 14)
     ];
     Vector2 keysStartPosition = new Vector2(ammoPosition.X + 200, healthBarPosition.Y);
     float keyScale = 3f;
@@ -218,15 +219,15 @@ public class StateGameType : IGameState {
       Vector2 keyPos = keysStartPosition + new Vector2(i * 35, 0);
 
       spriteBatch.Draw(
-          texture: TextureStore.Instance.MainBlockItemAtlas,
-          position: keyPos,
-          sourceRectangle: keySourceRects[i],
-          color: Color.White,
-          rotation: 0f,
-          origin: Vector2.Zero,
-          scale: keyScale,
-          effects: SpriteEffects.None,
-          layerDepth: 0f
+        texture: TextureStore.Instance.MainBlockItemAtlas,
+        position: keyPos,
+        sourceRectangle: keySourceRects[i],
+        color: Color.White,
+        rotation: 0f,
+        origin: Vector2.Zero,
+        scale: keyScale,
+        effects: SpriteEffects.None,
+        layerDepth: 0f
       );
     }
 
@@ -249,8 +250,10 @@ public class StateGameType : IGameState {
     graphicsDevice.Viewport = game.DefaultViewport;
   }
 
-  public void OnStateEnter() {
-    SoundManager.Instance.PlayLoop(SoundID.Background);
+  public void OnStateEnter(bool prevStateIsCurrentState) {
+    if (!prevStateIsCurrentState) {
+      SoundManager.Instance.PlayLoop(SoundID.Background);
+    }
 
     if (LevelManager.CurrentLevel != null) {
       LevelManager.CurrentLevel.CollisionManager.Clear();
@@ -269,13 +272,15 @@ public class StateGameType : IGameState {
     }
   }
 
-  public void OnStateLeave() {
-    SoundManager.Instance.StopAll();
+  public void OnStateLeave(bool nextStateIsCurrentState) {
+    if (!nextStateIsCurrentState) {
+      SoundManager.Instance.StopAll();
+    }
   }
 
-  public void OnStateStartFadeIn() {
+  public void OnStateStartFadeIn(bool prevStateIsCurrentState) {
     LevelManager.CompleteLevelSwitch();
   }
 
-  public void OnStateEndFadeOut() { }
+  public void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
 }

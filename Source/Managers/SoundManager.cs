@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameProject.Managers;
 
-public enum SoundID {
+internal enum SoundID {
   PlayerHurt,
   GunshotDefault,
   ReloadDefault,

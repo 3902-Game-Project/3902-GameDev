@@ -2,6 +2,6 @@
 
 namespace GameProject.Interfaces;
 
-public interface ITumbleState {
+internal interface ITumbleState {
   void Update(GameTime gameTime);
 }

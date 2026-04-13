@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Animations;
 
-public class Animation(List<Rectangle> frames, int fps) {
+internal class Animation(List<Rectangle> frames, int fps) {
   private readonly float frameDuration = 1f / fps;
   private int currentFrame = 0;
   private float timer = 0f;

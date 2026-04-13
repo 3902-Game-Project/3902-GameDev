@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-public abstract class DefaultGun : IItem {
+internal abstract class DefaultGun : IItem {
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   public ItemCategory Category { get; protected set; }
   public Vector2 Position { get; set; }

@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.GameStates;
 
 // StateTransitionType is never intended to be the target of game1.ChangeState; it manages fading between 2 states as a result of game1.ChangeState
-public class StateTransitionType(Game1 game) : IGameState {
+internal class StateTransitionType(Game1 game) : IGameState {
   private readonly ScreenFader screenFader = new(game.SpriteBatch, game.Window);
 
   private IGameState fromGameState;
@@ -26,11 +26,14 @@ public class StateTransitionType(Game1 game) : IGameState {
         /* do nothing */
         break;
 
-      case ScreenFader.FadingState.FadedOut:
-        fromGameState.OnStateEndFadeOut();
-        screenFader.FadeIn();
-        toGameState.OnStateStartFadeIn();
-        break;
+      case ScreenFader.FadingState.FadedOut: {
+          bool nextStateIsCurrentState = fromGameState == toGameState;
+
+          fromGameState.OnStateEndFadeOut(nextStateIsCurrentState);
+          screenFader.FadeIn();
+          toGameState.OnStateStartFadeIn(nextStateIsCurrentState);
+          break;
+        }
 
       case ScreenFader.FadingState.FadeIn:
         /* do nothing */
@@ -64,18 +67,22 @@ public class StateTransitionType(Game1 game) : IGameState {
     screenFader.LowLevelDraw(graphicsDevice, spriteBatch);
   }
 
-  public void OnStateEnter() {
+  public void OnStateEnter(bool nextStateIsCurrentState) {
     screenFader.FadeOut();
   }
 
-  public void OnStateLeave() { }
+  public void OnStateLeave(bool nextStateIsCurrentState) { }
 
   public void SetFadingStates(IGameState fromGameState, IGameState toGameState) {
     this.fromGameState = fromGameState;
     this.toGameState = toGameState;
   }
 
-  public void OnStateStartFadeIn() { }
+  public void OnStateStartFadeIn(bool nextStateIsCurrentState) { }
 
-  public void OnStateEndFadeOut() { }
+  public void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
+
+  public bool NextStateIsCurrentState() {
+    return fromGameState == toGameState;
+  }
 }

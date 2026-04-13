@@ -2,6 +2,6 @@
 
 namespace GameProject.Interfaces;
 
-public interface ICactusState {
+internal interface ICactusState {
   void Update(GameTime gameTime);
 }

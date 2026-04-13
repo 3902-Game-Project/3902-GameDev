@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Globals;
 
-public class MiscAssetStore : IInitable {
+internal class MiscAssetStore : IInitable {
   public static MiscAssetStore Instance { get; } = new MiscAssetStore();
 
   public SpriteFont MainFont { get; private set; }

@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
-public class TumbleDeathState : ITumbleState {
+internal class TumbleDeathState : ITumbleState {
   private readonly TumbleSprite tumbleweed;
 
   private double deadHoldTimer;

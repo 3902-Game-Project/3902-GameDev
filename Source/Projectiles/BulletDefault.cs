@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Projectiles;
 
-public class BulletDefault : IProjectile, ICollidable {
+internal class BulletDefault : IProjectile, ICollidable {
   private readonly Texture2D texture;
   private Rectangle sourceRectangle = new(8, 0, 7, 7);
   private Vector2 origin;

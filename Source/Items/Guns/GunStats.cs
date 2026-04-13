@@ -2,7 +2,7 @@ using GameProject.Managers;
 
 namespace GameProject.Items;
 
-public class GunStats {
+internal class GunStats {
   public float BulletVelocity { get; set; } = 200f;
   public float BulletLifetime { get; set; } = 5f;
   public float SpreadAngle { get; set; } = 0f;

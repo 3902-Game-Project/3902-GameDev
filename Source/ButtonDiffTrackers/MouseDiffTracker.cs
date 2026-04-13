@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.ButtonDiffTrackers;
 
-public enum MouseButtons {
+internal enum MouseButtons {
   Left,
   Middle,
   Right,

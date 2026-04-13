@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerStates;
 
-public class PlayerStaticState(Player player) : IPlayerState {
+internal class PlayerStaticState(Player player) : IPlayerState {
   // Same rectangles as moving state
   private Rectangle SpriteRight = new(773, 56, 171, 323);
   private Rectangle SpriteLeft = new(1531, 420, 171, 323);

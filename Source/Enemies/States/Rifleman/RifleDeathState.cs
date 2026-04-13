@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
-public class RifleDeathState : IRiflemanState {
+internal class RifleDeathState : IRiflemanState {
   private readonly RiflemanSprite rifleman;
 
   private double animationTimer;

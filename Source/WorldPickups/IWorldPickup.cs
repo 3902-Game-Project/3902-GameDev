@@ -1,6 +1,6 @@
 using GameProject.PlayerSpace;
 namespace GameProject.Interfaces;
 
-public interface IWorldPickup : ISprite {
+internal interface IWorldPickup : ISprite {
   void OnPickup(Player player);
 }

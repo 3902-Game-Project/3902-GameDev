@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
-public class BatMoveState : IBatState {
+internal class BatMoveState : IBatState {
   private readonly BatSprite bat;
   private readonly Random random;
   private double wanderTimer;

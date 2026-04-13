@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Items;
 
-public class AutomaticFire(GunStats stats) : IFireMode {
+internal class AutomaticFire(GunStats stats) : IFireMode {
   private float countdown = 0;
 
   public bool CanFire(UseType useType) {

@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Interfaces;
 
-public enum UseType { Pressed, Held, Released }
-public interface IController {
+internal enum UseType { Pressed, Held, Released }
+internal interface IController {
   void Update(GameTime gameTime);
 }

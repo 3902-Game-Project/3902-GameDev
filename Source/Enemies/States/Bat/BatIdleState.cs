@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
-public class BatIdleState : IBatState {
+internal class BatIdleState : IBatState {
   private readonly BatSprite bat;
   private double timer;
   private readonly System.Random random;

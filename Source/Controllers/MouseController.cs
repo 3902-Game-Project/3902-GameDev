@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Controllers;
 
-public class MouseController : IController {
+internal class MouseController : IController {
   // Tracking of presses / releases must be shared across GameStates
   private static readonly MouseDiffTracker mouseTracker = new();
 

@@ -2,7 +2,7 @@
 
 namespace GameProject.Interfaces;
 
-public interface IEnemy : ISprite, ICollidable {
+internal interface IEnemy : ISprite, ICollidable {
   void TakeDamage(int damage);
   int Health { get; }
   int MaxHealth { get; }

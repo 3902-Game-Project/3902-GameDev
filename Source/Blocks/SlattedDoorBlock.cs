@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class SlattedDoorBlock : BaseBlock {
+internal class SlattedDoorBlock : BaseBlock {
   private int currentFrame = 0;
   private static readonly List<Rectangle> sourceRects = [
       new(192, 128, 64, 64),

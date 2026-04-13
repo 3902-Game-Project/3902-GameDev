@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-public class CactusSprite : BaseEnemy {
+internal class CactusSprite : BaseEnemy {
   private ICactusState state;
 
   public CactusSprite(Texture2D texture, Vector2 position) : base(texture, position, 32f, 64f) {

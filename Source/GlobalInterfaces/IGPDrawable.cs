@@ -2,6 +2,6 @@
 
 namespace GameProject.Interfaces;
 
-public interface IGPDrawable {
+internal interface IGPDrawable {
   void Draw(SpriteBatch spriteBatch);
 }

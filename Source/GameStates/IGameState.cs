@@ -1,8 +1,8 @@
 ﻿namespace GameProject.Interfaces;
 
-public interface IGameState : IGPUpdatable, ILowLevelDrawable, IInitable {
-  void OnStateEnter();
-  void OnStateLeave();
-  void OnStateStartFadeIn();
-  void OnStateEndFadeOut();
+internal interface IGameState : IGPUpdatable, ILowLevelDrawable, IInitable {
+  void OnStateEnter(bool prevStateIsCurrentState);
+  void OnStateLeave(bool nextStateIsCurrentState);
+  void OnStateStartFadeIn(bool prevStateIsCurrentState);
+  void OnStateEndFadeOut(bool nextStateIsCurrentState);
 }

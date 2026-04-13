@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class RockBlock(Texture2D RockTexture, Vector2 xyPos) : BaseBlock(xyPos) {
+internal class RockBlock(Texture2D RockTexture, Vector2 xyPos) : BaseBlock(xyPos) {
   private static Rectangle sourceRect = new(320, 0, 64, 64);
   public float Rotation { get; private set; }
 

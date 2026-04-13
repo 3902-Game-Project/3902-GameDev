@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
-public class BatDeathState : IBatState {
+internal class BatDeathState : IBatState {
   private readonly BatSprite bat;
 
   private double animationTimer;

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Interfaces;
 
-public interface IPlayerState {
+internal interface IPlayerState {
   void Update(GameTime gameTime);
   void Draw(SpriteBatch spriteBatch);
   void UseItem(UseType useType);

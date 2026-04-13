@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
-public class CactusIdleState : ICactusState {
+internal class CactusIdleState : ICactusState {
   private readonly CactusSprite cactus;
 
   public CactusIdleState(CactusSprite cactus) {

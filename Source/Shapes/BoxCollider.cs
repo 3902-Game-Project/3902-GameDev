@@ -2,7 +2,7 @@ using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Collisions;
-public class BoxCollider(float width, float height, Vector2 position) : IShape {
+internal class BoxCollider(float width, float height, Vector2 position) : IShape {
   public ShapeType Type { get; } = ShapeType.Box;
   public float Width { get; } = width;
   public float Height { get; } = height;
