@@ -83,14 +83,10 @@ internal class StateGameType : IGameState {
         { Buttons.RightShoulder, new NextLevelCommand(LevelManager) },
       },
       downMappings: new Dictionary<Buttons, ICommand> {
-        { Buttons.A, new PlayerUseItemCommand(Player, UseType.Held) },
         { Buttons.DPadUp, new PlayerMoveUpCommand(Player) },
         { Buttons.DPadDown, new PlayerMoveDownCommand(Player) },
         { Buttons.DPadLeft, new PlayerMoveLeftCommand(Player) },
         { Buttons.DPadRight, new PlayerMoveRightCommand(Player) },
-      },
-      releasedMappings: new Dictionary<Buttons, ICommand> {
-        { Buttons.A, new PlayerUseItemCommand(Player, UseType.Released) },
       }
     );
 
