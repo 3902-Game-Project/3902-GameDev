@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Items.Utility;
 
 public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager levelManager) : IItem, IWorldPickup {
-  private Rectangle sourceRectangle = new(0, 1344, 21, 39);
+  private Rectangle sourceRectangle = new(17, 448, 7, 13);
   private readonly ILevelManager levelManagers = levelManager;
 
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
