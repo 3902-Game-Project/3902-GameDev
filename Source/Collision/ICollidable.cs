@@ -2,7 +2,7 @@ using System;
 using GameProject.Collisions;
 using Microsoft.Xna.Framework;
 
-namespace GameProject.Interfaces;
+namespace GameProject.Collisions;
 
 [Flags]
 internal enum Layer {

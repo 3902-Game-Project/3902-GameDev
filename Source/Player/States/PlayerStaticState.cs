@@ -1,9 +1,9 @@
-﻿using GameProject.Interfaces;
+﻿using GameProject.GlobalInterfaces;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.PlayerStates;
+namespace GameProject.PlayerSpace.States;
 
 internal class PlayerStaticState(Player player) : IPlayerState {
   // Same rectangles as moving state except that left state set to same as right state (but flipped) for consistency

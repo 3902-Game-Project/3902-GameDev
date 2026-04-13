@@ -1,8 +1,8 @@
 ﻿using GameProject.Enemies;
-using GameProject.Interfaces;
+using GameProject.GlobalInterfaces;
 using Microsoft.Xna.Framework;
 
-namespace GameProject.States;
+namespace GameProject.Enemies.BatStates;
 
 internal class BatIdleState : IBatState {
   private readonly BatSprite bat;

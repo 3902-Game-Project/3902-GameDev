@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using GameProject.Interfaces;
+using GameProject.GlobalInterfaces;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.PlayerStates;
+namespace GameProject.PlayerSpace.States;
 
 internal class PlayerAnimatedMovingState(Player player) : IPlayerState {
   private readonly List<Rectangle> moveLeftFrames = [

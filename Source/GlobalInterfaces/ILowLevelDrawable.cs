@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Interfaces;
+namespace GameProject.GlobalInterfaces;
 
 internal interface ILowLevelDrawable {
   void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch);

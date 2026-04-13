@@ -1,4 +1,4 @@
-﻿namespace GameProject.Interfaces;
+﻿namespace GameProject.GameStates;
 
 internal interface IGameState : IGPUpdatable, ILowLevelDrawable, IInitable {
   void OnStateEnter(bool prevStateIsCurrentState);

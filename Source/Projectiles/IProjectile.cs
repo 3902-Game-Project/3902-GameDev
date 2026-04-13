@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace GameProject.Interfaces;
+namespace GameProject.Projectiles;
 
 internal interface IProjectile : ISprite {
   bool IsExpired { get; }

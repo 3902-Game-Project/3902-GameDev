@@ -1,4 +1,4 @@
-using GameProject.Interfaces;
+using GameProject.GlobalInterfaces;
 using GameProject.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

@@ -2,7 +2,7 @@
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
 
-namespace GameProject.Interfaces;
+namespace GameProject.Level;
 
 internal interface ILevel : IInitable, IGPUpdatable, IGPDrawable {
   List<IBlock> Doors { get; }

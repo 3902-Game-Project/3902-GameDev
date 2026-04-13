@@ -1,8 +1,8 @@
 ﻿using GameProject.Enemies;
-using GameProject.Interfaces;
+using GameProject.GlobalInterfaces;
 using Microsoft.Xna.Framework;
 
-namespace GameProject.States;
+namespace GameProject.Enemies.ShotgunnerStates;
 
 internal class ShotgunnerIdleState : IShotgunnerState {
   private readonly ShotgunnerSprite shotgunner;

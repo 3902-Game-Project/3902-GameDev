@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Interfaces;
+namespace GameProject.GlobalInterfaces;
 
 internal interface ISprite {
   public void Update(GameTime gameTime);

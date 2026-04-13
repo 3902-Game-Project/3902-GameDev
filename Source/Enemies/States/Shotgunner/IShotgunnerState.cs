@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace GameProject.Interfaces;
+namespace GameProject.Enemies.ShotgunnerStates;
 
 internal interface IShotgunnerState {
   void Update(GameTime gameTime);

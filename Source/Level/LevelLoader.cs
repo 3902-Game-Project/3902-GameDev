@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using GameProject.Factories;
-using GameProject.Interfaces;
+using GameProject.GlobalInterfaces;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 
-namespace GameProject.Misc;
+namespace GameProject.Level;
 
 internal partial class LevelLoader {
   private static readonly int BLOCK_WIDTH = 64;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace GameProject.Interfaces;
+namespace GameProject.Enemies;
 
 internal interface IEnemy : ISprite, ICollidable {
   void TakeDamage(int damage);

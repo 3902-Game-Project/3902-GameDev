@@ -1,8 +1,8 @@
-using GameProject.Interfaces;
+using GameProject.GlobalInterfaces;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
 
-namespace GameProject.Items;
+namespace GameProject.FireModes;
 
 internal class AutomaticFire(GunStats stats) : IFireMode {
   private float countdown = 0;

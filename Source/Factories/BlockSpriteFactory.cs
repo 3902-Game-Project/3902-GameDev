@@ -1,6 +1,6 @@
 ﻿using GameProject.Blocks;
 using GameProject.Globals;
-using GameProject.Interfaces;
+using GameProject.GlobalInterfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Factories;

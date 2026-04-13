@@ -1,10 +1,11 @@
 using GameProject.Collisions;
-using GameProject.Interfaces;
+using GameProject.GlobalInterfaces;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.WorldPickups;
+
 internal class ItemWorldPickup(IItem item, Vector2 dropVelocity = default) : BaseWorldPickup(item.Position), ICollidable, IWorldPickup {
   public Vector2 Velocity { get; set; } = dropVelocity;
 

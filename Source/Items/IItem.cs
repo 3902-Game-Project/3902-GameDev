@@ -3,7 +3,7 @@ using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Interfaces;
+namespace GameProject.Items;
 
 internal interface IItem : ISprite {
   ItemCategory Category { get; }

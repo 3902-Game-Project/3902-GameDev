@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameProject.Enums;
-using GameProject.Interfaces;
+using GameProject.GlobalInterfaces;
 using GameProject.Items.Utility; // Needed to identify KeyItems
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 
-namespace GameProject.Misc;
+namespace GameProject.PlayerSpace;
 
 internal class PlayerInventory(ILevelManager levelManager) {
   private readonly Random random = new();

@@ -1,6 +1,6 @@
 ﻿using System;
 using GameProject.Collisions;
-using GameProject.Interfaces;
+using GameProject.GlobalInterfaces;
 using GameProject.Managers;
 using GameProject.Misc;
 using GameProject.PlayerStates;

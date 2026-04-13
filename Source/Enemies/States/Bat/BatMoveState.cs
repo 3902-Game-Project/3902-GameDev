@@ -1,9 +1,9 @@
 ﻿using System;
 using GameProject.Enemies;
-using GameProject.Interfaces;
+using GameProject.GlobalInterfaces;
 using Microsoft.Xna.Framework;
 
-namespace GameProject.States;
+namespace GameProject.Enemies.BatStates;
 
 internal class BatMoveState : IBatState {
   private readonly BatSprite bat;

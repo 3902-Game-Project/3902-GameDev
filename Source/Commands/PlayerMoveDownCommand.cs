@@ -1,4 +1,4 @@
-﻿using GameProject.Interfaces;
+﻿using GameProject.GlobalInterfaces;
 using GameProject.PlayerSpace;
 
 namespace GameProject.Commands;

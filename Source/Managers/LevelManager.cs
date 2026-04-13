@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using GameProject.Interfaces;
+using GameProject.GlobalInterfaces;
 using GameProject.Misc;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;

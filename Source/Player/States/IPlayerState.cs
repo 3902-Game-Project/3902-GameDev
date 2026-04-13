@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Interfaces;
+namespace GameProject.PlayerSpace.States;
 
 internal interface IPlayerState {
   void Update(GameTime gameTime);

@@ -5,7 +5,7 @@ using GameProject.Commands;
 using GameProject.Controllers;
 using GameProject.Factories;
 using GameProject.Globals;
-using GameProject.Interfaces;
+using GameProject.GlobalInterfaces;
 using GameProject.Items;
 using GameProject.Managers;
 using GameProject.Misc;

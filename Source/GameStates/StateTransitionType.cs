@@ -1,5 +1,5 @@
 ﻿using System;
-using GameProject.Interfaces;
+using GameProject.GlobalInterfaces;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
