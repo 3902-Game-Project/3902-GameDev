@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, BlockState state, string pairedLevelName, ILevelManager levelManager) : BaseBlock(xyPos) {
+public class SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, LockableDoorBlockState state, string pairedLevelName, ILevelManager levelManager) : BaseBlock(xyPos) {
   private int currentFrame = 0;
   private readonly List<Rectangle> sourceRects = [
       new(192, 128, 64, 64),
@@ -17,7 +17,7 @@ public class SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, Block
   private Boolean rotated = false;
   public float Rotation { get; private set; } = 0.0f;
   public string PairedLevelName { get; private set; } = pairedLevelName;
-  public BlockState State { get; private set; } = state;
+  public LockableDoorBlockState State { get; private set; } = state;
 
   public void Rotate() {
     float x = Position.X, y = Position.Y;
@@ -37,7 +37,7 @@ public class SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, Block
   }
 
   public override void Update(GameTime gameTime) {
-    if (State == BlockState.open) {
+    if (State == LockableDoorBlockState.Open) {
       currentFrame = sourceRects.Count - 1;
     }
   }
@@ -58,12 +58,12 @@ public class SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, Block
   }
 
   public override void OnCollision(CollisionInfo info) {
-    if (State == BlockState.open && info.Collider is Player) {
+    if (State == LockableDoorBlockState.Open && info.Collider is Player) {
       levelManager.SwitchLevel(PairedLevelName);
     }
   }
 
-  public void ChangeState(BlockState state) {
+  public void ChangeState(LockableDoorBlockState state) {
     State = state;
   }
 }

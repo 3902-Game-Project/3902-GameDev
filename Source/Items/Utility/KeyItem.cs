@@ -42,9 +42,9 @@ public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager 
   public void Use(UseType useType) {
     foreach (var block in levelManagers.CurrentLevel.Doors) {
       if (block is VaultDoorBlock vaultDoorBlock) {
-        vaultDoorBlock.ChangeState(BlockState.opening);
+        vaultDoorBlock.ChangeState(VaultDoorBlockState.Opening);
       } else if (block is SlattedDoorBlock slattedDoorBlock) {
-        slattedDoorBlock.ChangeState(BlockState.open);
+        slattedDoorBlock.ChangeState(LockableDoorBlockState.Open);
       }
     }
     // DELETE ITEM

@@ -42,13 +42,13 @@ public class BlockSpriteFactory {
   public static IBlock CreateRockHoleBlockSprite(float x, float y, string pairedLevelName, ILevelManager levelManager) {
     return new RockHoleBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y), pairedLevelName, levelManager);
   }
-  public static IBlock CreateSmallDoorBlockSprite(float x, float y, BlockState state, string pairedLevelName, ILevelManager levelManager) {
+  public static IBlock CreateSmallDoorBlockSprite(float x, float y, LockableDoorBlockState state, string pairedLevelName, ILevelManager levelManager) {
     return new SmallDoorBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y), state, pairedLevelName, levelManager);
   }
-  public static IBlock CreateVaultDoorBlockSprite(float x, float y, BlockState state, string pairedLevelName, ILevelManager levelManager) {
+  public static IBlock CreateVaultDoorBlockSprite(float x, float y, VaultDoorBlockState state, string pairedLevelName, ILevelManager levelManager) {
     return new VaultDoorBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y), state, pairedLevelName, levelManager);
   }
-  public static IBlock CreateSlattedDoorSprite(float x, float y, BlockState state, string pairedLevelName, ILevelManager levelManager) {
+  public static IBlock CreateSlattedDoorSprite(float x, float y, LockableDoorBlockState state, string pairedLevelName, ILevelManager levelManager) {
     return new SlattedDoorBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y), state, pairedLevelName, levelManager);
   }
 

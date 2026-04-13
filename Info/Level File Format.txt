@@ -90,7 +90,7 @@ Entry IDs:
     13 = cactus
 
   Gaps in the IDs:
-    32, 33
+    33
 
   Biggest ID:
     35

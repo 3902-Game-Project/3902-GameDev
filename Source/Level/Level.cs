@@ -130,9 +130,8 @@ public class Level(
   public void LevelClear() {
     if (Enemies.Count == DeadEnemies.Count) {
       foreach (var door in Doors) {
-        if (door is SmallDoorBlock) {
-          SmallDoorBlock temp = (SmallDoorBlock) door;
-          temp.ChangeState(BlockState.open);
+        if (door is SmallDoorBlock smallDoorBlock) {
+          smallDoorBlock.ChangeState(LockableDoorBlockState.Open);
         }
       }
     }

@@ -6,7 +6,7 @@ namespace GameProject.Blocks;
 
 public class FirePitBlock(Texture2D FirePitTexture, Vector2 xyPos) : BaseBlock(xyPos) {
   private Rectangle sourceRect = new(320, 64, 64, 64);
-  public BlockState State { get; set; } = BlockState.extinguished;
+  public FirePitBlockState State { get; set; } = FirePitBlockState.Extinguished;
 
   public override void Update(GameTime gameTime) { }
 

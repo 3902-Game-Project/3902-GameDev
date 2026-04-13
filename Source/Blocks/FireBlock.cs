@@ -13,7 +13,7 @@ public class FireBlock(Texture2D FireTexture, Vector2 xyPos) : BaseBlock(xyPos) 
   private int currentFrame = 0;
   private double animationTimer;
   private readonly double timePerFrame = 0.15;
-  public BlockState State { get; set; } = BlockState.lit;
+  public FirePitBlockState State { get; set; } = FirePitBlockState.Lit;
 
   public override void Update(GameTime gameTime) {
     float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;

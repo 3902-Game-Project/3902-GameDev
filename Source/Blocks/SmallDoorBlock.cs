@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, BlockState state, string pairedLevelName, ILevelManager levelManager) : BaseBlock(xyPos) {
+public class SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, LockableDoorBlockState state, string pairedLevelName, ILevelManager levelManager) : BaseBlock(xyPos) {
   private int currentFrame = 0;
   private readonly List<Rectangle> sourceRects = [
       new(448, 256, 64, 64),
@@ -17,7 +17,7 @@ public class SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, BlockStat
   public float Rotation { get; private set; } = 0.0f;
   private bool rotated = false;
   public string PairedLevelName { get; private set; } = pairedLevelName;
-  public BlockState State { get; private set; } = state;
+  public LockableDoorBlockState State { get; private set; } = state;
 
   public void Rotate() {
     float x = Position.X, y = Position.Y;
@@ -34,7 +34,7 @@ public class SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, BlockStat
   }
 
   public override void Update(GameTime gameTime) {
-    if (State == BlockState.open) {
+    if (State == LockableDoorBlockState.Open) {
       currentFrame = 1;
     }
   }
@@ -47,13 +47,13 @@ public class SmallDoorBlock(Texture2D SmallDoorTexture, Vector2 xyPos, BlockStat
   }
 
   public override void OnCollision(CollisionInfo info) {
-    if (State == BlockState.open && info.Collider is Player) {
+    if (State == LockableDoorBlockState.Open && info.Collider is Player) {
       levelManager.SwitchLevel(PairedLevelName);
       SoundManager.Instance.Play(SoundID.Door);
     }
   }
 
-  public void ChangeState(BlockState state) {
+  public void ChangeState(LockableDoorBlockState state) {
     State = state;
   }
 }

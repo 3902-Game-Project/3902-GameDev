@@ -6,7 +6,7 @@ namespace GameProject.Blocks;
 
 public class BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) : BaseBlock(xyPos) {
   private Rectangle sourceRect = new(64, 0, 64, 64);
-  public BlockState State { get; set; } = BlockState.solid;
+  public BarrelBlockState State { get; set; } = BarrelBlockState.Solid;
 
   public override void Update(GameTime gameTime) {
     // implement later
@@ -20,7 +20,7 @@ public class BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) : BaseBlock(xyP
                      SpriteEffects.None, 0.0f);
   }
 
-  public void ChangeState(BlockState state) {
+  public void ChangeState(BarrelBlockState state) {
     State = state;
   }
 }

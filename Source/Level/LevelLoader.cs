@@ -70,8 +70,8 @@ internal partial class LevelLoader {
           /* small door */
           var stateString = entrySplit[1];
           var state = stateString switch {
-            "0" => BlockState.locked,
-            "1" => BlockState.open,
+            "0" => LockableDoorBlockState.Locked,
+            "1" => LockableDoorBlockState.Open,
             _ => throw new FormatException($"unrecognized door state '{stateString}"),
           };
           var pairedLevelName = entrySplit[2];
@@ -217,9 +217,9 @@ internal partial class LevelLoader {
           /* vault door */
           var stateString = entrySplit[1];
           var state = stateString switch {
-            "0" => BlockState.locked,
-            "1" => BlockState.opening,
-            "2" => BlockState.open,
+            "0" => VaultDoorBlockState.Locked,
+            "1" => VaultDoorBlockState.Opening,
+            "2" => VaultDoorBlockState.Open,
             _ => throw new FormatException($"unrecognized door state '{stateString}"),
           };
           var pairedLevelName = entrySplit[2];
@@ -286,8 +286,8 @@ internal partial class LevelLoader {
           /* slatted door */
           var stateString = entrySplit[1];
           var state = stateString switch {
-            "0" => BlockState.locked,
-            "1" => BlockState.open,
+            "0" => LockableDoorBlockState.Locked,
+            "1" => LockableDoorBlockState.Open,
             _ => throw new FormatException($"unrecognized door state '{stateString}"),
           };
           var pairedLevelName = entrySplit[2];

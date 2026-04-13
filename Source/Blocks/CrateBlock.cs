@@ -10,13 +10,13 @@ public class CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : BaseBlock(xyPos
   private Rectangle sourceRect = new(128, 0, 64, 64);
   private const float velocity = 2f;
   private Vector2 direction;
-  public BlockState State { get; set; } = BlockState.still;
+  public CrateBlockState State { get; set; } = CrateBlockState.Still;
 
   public override void Update(GameTime gameTime) {
-    if (State == BlockState.moving) {
+    if (State == CrateBlockState.Moving) {
       Position += velocity * direction;
       UpdateCollider();
-      State = BlockState.still;
+      State = CrateBlockState.Still;
     }
   }
 
@@ -26,9 +26,9 @@ public class CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : BaseBlock(xyPos
 
   public override void OnCollision(CollisionInfo info) {
     if (info.Collider is IBlock || info.Collider is IEnemy) {
-      State = BlockState.still;
-    } else if (State == BlockState.still && info.Collider is Player) {
-      State = BlockState.moving;
+      State = CrateBlockState.Still;
+    } else if (State == CrateBlockState.Still && info.Collider is Player) {
+      State = CrateBlockState.Moving;
 
       switch (info.Side) {
         case CollisionResponse.CollisionSide.Top:
@@ -48,7 +48,7 @@ public class CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : BaseBlock(xyPos
           break;
 
         default:
-          State = BlockState.still;
+          State = CrateBlockState.Still;
           break;
       }
     }
@@ -60,7 +60,7 @@ public class CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : BaseBlock(xyPos
     }
   }
 
-  public void ChangeState(BlockState state) {
+  public void ChangeState(CrateBlockState state) {
     State = state;
   }
 }

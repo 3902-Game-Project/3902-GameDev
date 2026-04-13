@@ -15,15 +15,15 @@ public class VaultDoorBlock : BaseBlock {
   private readonly double timePerFrame = 0.3;
   private readonly ILevelManager levelManager;
   public string PairedLevelName { get; private set; }
-  public BlockState State { get; private set; }
+  public VaultDoorBlockState State { get; private set; }
 
-  public VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, BlockState state, string pairedLevelName, ILevelManager levelManager) : base(xyPos, 128f, 128f) {
+  public VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, VaultDoorBlockState state, string pairedLevelName, ILevelManager levelManager) : base(xyPos, 128f, 128f) {
     texture = VaultDoorTexture;
     PairedLevelName = pairedLevelName;
     State = state;
     currentFrame = state switch {
-      BlockState.opening => 1,
-      BlockState.open => sourceRects.Count - 1,
+      VaultDoorBlockState.Opening => 1,
+      VaultDoorBlockState.Open => sourceRects.Count - 1,
       _ => 0,
     };
     sourceRects = [
@@ -38,7 +38,7 @@ public class VaultDoorBlock : BaseBlock {
   }
 
   public override void Update(GameTime gameTime) {
-    if (State == BlockState.opening) {
+    if (State == VaultDoorBlockState.Opening) {
       float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
       animationTimer += dt;
       if (animationTimer >= timePerFrame) {
@@ -46,7 +46,7 @@ public class VaultDoorBlock : BaseBlock {
         animationTimer = 0;
       }
       if (currentFrame >= sourceRects.Count) {
-        State = BlockState.open;
+        State = VaultDoorBlockState.Open;
         currentFrame = sourceRects.Count - 1;
       }
     }
@@ -57,12 +57,12 @@ public class VaultDoorBlock : BaseBlock {
   }
 
   public override void OnCollision(CollisionInfo info) {
-    if (State == BlockState.open && info.Collider is Player) {
+    if (State == VaultDoorBlockState.Open && info.Collider is Player) {
       levelManager.SwitchLevel(PairedLevelName);
     }
   }
 
-  public void ChangeState(BlockState state) {
+  public void ChangeState(VaultDoorBlockState state) {
     State = state;
   }
 }
