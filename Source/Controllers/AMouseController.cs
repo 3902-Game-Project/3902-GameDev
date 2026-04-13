@@ -6,12 +6,21 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Controllers;
 
-public abstract class AMouseController : IController {
+public class MouseController : IController {
   private readonly MouseDiffTracker mouseTracker = new();
 
-  protected abstract Dictionary<MouseButtons, ICommand> PressedMappings { get; }
-  protected abstract Dictionary<MouseButtons, ICommand> DownMappings { get; }
-  protected abstract Dictionary<MouseButtons, ICommand> ReleasedMappings { get; }
+  private readonly Dictionary<MouseButtons, ICommand> pressedMappings;
+  private readonly Dictionary<MouseButtons, ICommand> downMappings;
+  private readonly Dictionary<MouseButtons, ICommand> releasedMappings;
+
+  public MouseController(
+        Dictionary<MouseButtons, ICommand> pressedMappings = null,
+        Dictionary<MouseButtons, ICommand> downMappings = null,
+        Dictionary<MouseButtons, ICommand> releasedMappings = null) {
+    this.pressedMappings = pressedMappings ?? [];
+    this.downMappings = downMappings ?? [];
+    this.releasedMappings = releasedMappings ?? [];
+  }
 
   public void Update(GameTime gameTime) {
     MouseState mouseState = Mouse.GetState();
@@ -19,19 +28,19 @@ public abstract class AMouseController : IController {
     mouseTracker.Update(mouseState);
 
     foreach (MouseButtons mouseButton in mouseTracker.GetPressed()) {
-      if (PressedMappings.TryGetValue(mouseButton, out ICommand command)) {
+      if (pressedMappings.TryGetValue(mouseButton, out ICommand command)) {
         command.Execute();
       }
     }
 
     foreach (MouseButtons mouseButton in mouseTracker.GetDown()) {
-      if (DownMappings.TryGetValue(mouseButton, out ICommand command)) {
+      if (downMappings.TryGetValue(mouseButton, out ICommand command)) {
         command.Execute();
       }
     }
 
     foreach (MouseButtons mouseButton in mouseTracker.GetReleased()) {
-      if (ReleasedMappings.TryGetValue(mouseButton, out ICommand command)) {
+      if (releasedMappings.TryGetValue(mouseButton, out ICommand command)) {
         command.Execute();
       }
     }
