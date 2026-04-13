@@ -19,7 +19,6 @@ public class StateGameType : IGameState {
 
   private readonly CollisionManager collisionManager = new();
   private Texture2D healthBarTexture;
-  private Vector2 healthBarPosition = new(0, 0);
 
   public Player Player { get; private set; }
 
@@ -144,7 +143,7 @@ public class StateGameType : IGameState {
       RasterizerState.CullNone
     );
 
-    healthBarPosition = new Vector2(20, 20);
+    var healthBarPosition = new Vector2(20, 20);
     float healthPercent = MathHelper.Clamp(Player.Health / 100f, 0f, 1f);
     spriteBatch.Draw(
       texture: healthBarTexture,
