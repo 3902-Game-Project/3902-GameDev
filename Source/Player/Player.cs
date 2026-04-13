@@ -79,12 +79,7 @@ internal class Player : IInitable, ICollidable {
   public void MoveLeft() => State.MoveLeft();
   public void MoveRight() => State.MoveRight();
   public void UseItem(UseType useType) {
-    if (Inventory.ActiveItem != null) {
-      Inventory.ActiveItem.Use(useType);
-      if (Inventory.ActiveItem.Category == Enums.ItemCategory.Consumable) {
-        State.UseItem(useType);
-      }
-    }
+    State.UseItem(useType);
   }
   public void Die() => State.Die();
 

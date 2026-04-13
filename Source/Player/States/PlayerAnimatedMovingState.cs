@@ -66,7 +66,12 @@ internal class PlayerAnimatedMovingState(Player player) : IPlayerState {
   }
 
   public void UseItem(UseType useType) {
-    player.State = player.UseItemState;
+    if (player.Inventory.ActiveItem != null) {
+      player.Inventory.ActiveItem.Use(useType);
+      if (player.Inventory.ActiveItem.Category == Enums.ItemCategory.Consumable) {
+        player.State = player.UseItemState;
+      }
+    }
   }
 
   public void Die() {
