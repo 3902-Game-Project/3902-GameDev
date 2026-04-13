@@ -10,7 +10,7 @@ public class SpreadPattern : IProjectilePattern {
     for (int i = 0; i < stats.PelletCount; i++) {
       float angle = -stats.SpreadAngle / 2 + stats.SpreadAngle / (stats.PelletCount - 1) * i;
       Vector2 rotatedDirection = Vector2.Transform(direction, Matrix.CreateRotationZ(MathHelper.ToRadians(angle)));
-      projectileManager.AddProjectile(ProjectileFactory.Instance.CreateBullet(spawnPosition, rotatedDirection, stats.BulletVelocity, stats.BulletLifetime));
+      projectileManager.Add(ProjectileFactory.Instance.CreateBullet(spawnPosition, rotatedDirection, stats.BulletVelocity, stats.BulletLifetime));
     }
   }
 }

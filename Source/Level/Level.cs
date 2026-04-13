@@ -75,6 +75,14 @@ public class Level(
       pickup.Update(gameTime);
     }
 
+    foreach (var projectile in ProjectileManager.Projectiles) {
+      if (projectile.IsExpired) {
+        if (projectile is ICollidable collidableProj) {
+          CollisionManager.Remove(collidableProj);
+        }
+      }
+    }
+
     ProjectileManager.Update(gameTime);
     CollisionManager.Update(gameTime);
 

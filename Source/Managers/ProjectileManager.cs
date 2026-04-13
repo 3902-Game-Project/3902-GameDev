@@ -13,8 +13,12 @@ public class ProjectileManager {
     projectiles = [];
   }
 
-  public void AddProjectile(IProjectile projectile) {
+  public void Add(IProjectile projectile) {
     projectiles.Add(projectile);
+  }
+
+  public void Remove(IProjectile projectile) {
+    projectiles.Remove(projectile);
   }
 
   public void ClearProjectiles() {
