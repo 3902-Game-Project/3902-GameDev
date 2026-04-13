@@ -43,4 +43,9 @@ public class PlayerInventory(ILevelManager levelManager) {
       ActiveWeaponIndex = (ActiveWeaponIndex == 0) ? 1 : 0;
     }
   }
+  public void EquipWeapon(int index) {
+    if (index >= 0 && index < Weapons.Count) {
+      ActiveWeaponIndex = index;
+    }
+  }
 }

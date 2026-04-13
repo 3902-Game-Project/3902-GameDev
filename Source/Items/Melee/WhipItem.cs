@@ -29,6 +29,20 @@ public class WhipItem(Texture2D texture, Vector2 startPosition) : IItem {
     );
   }
 
+  public void DrawUI(SpriteBatch spriteBatch, Vector2 position, float scale, Color tint) {
+    spriteBatch.Draw(
+      texture: texture,
+      position: position,
+      sourceRectangle: sourceRectangle,
+      color: tint,
+      rotation: 0f,
+      origin: Vector2.Zero,
+      scale: scale,
+      effects: SpriteEffects.None,
+      layerDepth: 0f
+    );
+  }
+
   public void Update(GameTime gameTime) { }
 
   public void OnPickup(Player player) { }

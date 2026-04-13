@@ -7,9 +7,6 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Items.Utility;
 
 public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager levelManager) : IItem, IWorldPickup {
-  // Removed parameter (CollisionManager collisionManager) to remove warning - Santosh
-
-  // add collision info
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   private Rectangle sourceRectangle = new(0, 1344, 21, 39); // CHANGE
   private Vector2 origin;
@@ -33,6 +30,20 @@ public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager 
         0f
       );
     }
+  }
+
+  public void DrawUI(SpriteBatch spriteBatch, Vector2 position, float scale, Color tint) {
+    spriteBatch.Draw(
+      texture: keyTexture,
+      position: position,
+      sourceRectangle: sourceRectangle,
+      color: tint,
+      rotation: 0f,
+      origin: Vector2.Zero,
+      scale: scale,
+      effects: SpriteEffects.None,
+      layerDepth: 0f
+    );
   }
 
   public void Update(GameTime gameTime) {
