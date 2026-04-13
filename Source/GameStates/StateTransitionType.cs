@@ -81,4 +81,8 @@ internal class StateTransitionType(Game1 game) : IGameState {
   public void OnStateStartFadeIn(bool nextStateIsCurrentState) { }
 
   public void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
+
+  public bool NextStateIsCurrentState() {
+    return fromGameState == toGameState;
+  }
 }

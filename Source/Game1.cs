@@ -42,7 +42,13 @@ internal class Game1 : Game {
   }
 
   public void ChangeStateWithoutFading(IGameState newState) {
-    bool nextStateIsCurrentState = currentState == newState;
+    bool nextStateIsCurrentState;
+
+    if (currentState == StateTransition || newState == StateTransition) {
+      nextStateIsCurrentState = StateTransition.NextStateIsCurrentState();
+    } else {
+      nextStateIsCurrentState = currentState == newState;
+    }
 
     currentState.OnStateLeave(nextStateIsCurrentState);
     currentState = newState;
