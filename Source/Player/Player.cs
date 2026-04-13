@@ -82,7 +82,9 @@ public class Player : IInitable, ICollidable {
   public void UseItem(UseType useType) {
     if (Inventory.ActiveItem != null) {
       Inventory.ActiveItem.Use(useType);
-      State.UseItem(useType);
+      if (Inventory.ActiveItem.Category == Enums.ItemCategory.Consumable) {
+        State.UseItem(useType);
+      }
     }
   }
   public void Die() => State.Die();
