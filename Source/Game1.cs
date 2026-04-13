@@ -41,11 +41,11 @@ internal class Game1 : Game {
   }
 
   public void ChangeStateWithoutFading(IGameState newState) {
-    bool nextStateIsSameState = currentState == newState;
+    bool nextStateIsCurrentState = currentState == newState;
 
-    currentState.OnStateLeave(nextStateIsSameState);
+    currentState.OnStateLeave(nextStateIsCurrentState);
     currentState = newState;
-    newState.OnStateEnter(nextStateIsSameState);
+    newState.OnStateEnter(nextStateIsCurrentState);
   }
 
   public void ResetGameState() {

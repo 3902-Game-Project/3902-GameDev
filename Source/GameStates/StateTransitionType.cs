@@ -27,11 +27,11 @@ internal class StateTransitionType(Game1 game) : IGameState {
         break;
 
       case ScreenFader.FadingState.FadedOut: {
-          bool nextStateIsSameState = fromGameState == toGameState;
+          bool nextStateIsCurrentState = fromGameState == toGameState;
 
-          fromGameState.OnStateEndFadeOut(nextStateIsSameState);
+          fromGameState.OnStateEndFadeOut(nextStateIsCurrentState);
           screenFader.FadeIn();
-          toGameState.OnStateStartFadeIn(nextStateIsSameState);
+          toGameState.OnStateStartFadeIn(nextStateIsCurrentState);
           break;
         }
 
@@ -67,18 +67,18 @@ internal class StateTransitionType(Game1 game) : IGameState {
     screenFader.LowLevelDraw(graphicsDevice, spriteBatch);
   }
 
-  public void OnStateEnter(bool nextStateIsSameState) {
+  public void OnStateEnter(bool nextStateIsCurrentState) {
     screenFader.FadeOut();
   }
 
-  public void OnStateLeave(bool nextStateIsSameState) { }
+  public void OnStateLeave(bool nextStateIsCurrentState) { }
 
   public void SetFadingStates(IGameState fromGameState, IGameState toGameState) {
     this.fromGameState = fromGameState;
     this.toGameState = toGameState;
   }
 
-  public void OnStateStartFadeIn(bool nextStateIsSameState) { }
+  public void OnStateStartFadeIn(bool nextStateIsCurrentState) { }
 
-  public void OnStateEndFadeOut(bool nextStateIsSameState) { }
+  public void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
 }
