@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace GameProject.GlobalInterfaces;
+namespace GameProject.FireModes;
 
 internal interface IFireMode {
   bool CanFire(UseType useType);
