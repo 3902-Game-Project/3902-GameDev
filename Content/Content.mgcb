@@ -130,6 +130,9 @@
 #begin Levels/00c_non_confinement.csv
 /copy:Levels/00c_non_confinement.csv
 
+#begin Levels/00d_single_enemy.csv
+/copy:Levels/00d_single_enemy.csv
+
 #begin Levels/01_level.csv
 /copy:Levels/01_level.csv
 
