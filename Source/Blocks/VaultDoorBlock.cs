@@ -7,8 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class VaultDoorBlock : BaseBlock {
-  private readonly Texture2D texture;
+public class VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, VaultDoorBlockState state, string pairedLevelName, ILevelManager levelManager) : BaseBlock(xyPos, 128f, 128f) {
   private static readonly List<Rectangle> sourceRects = [
     new(64, 128, 64, 64),
     new(64, 192, 64, 64),
@@ -17,24 +16,15 @@ public class VaultDoorBlock : BaseBlock {
     new(256, 192, 64, 64),
     new(320, 192, 64, 64)
   ];
-  private int currentFrame;
+  private int currentFrame = state switch {
+    VaultDoorBlockState.Opening => 1,
+    VaultDoorBlockState.Open => sourceRects.Count - 1,
+    _ => 0,
+  };
   private double animationTimer;
   private readonly double timePerFrame = 0.3;
-  private readonly ILevelManager levelManager;
-  public string PairedLevelName { get; private set; }
-  public VaultDoorBlockState State { get; private set; }
-
-  public VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, VaultDoorBlockState state, string pairedLevelName, ILevelManager levelManager) : base(xyPos, 128f, 128f) {
-    texture = VaultDoorTexture;
-    PairedLevelName = pairedLevelName;
-    State = state;
-    currentFrame = state switch {
-      VaultDoorBlockState.Opening => 1,
-      VaultDoorBlockState.Open => sourceRects.Count - 1,
-      _ => 0,
-    };
-    this.levelManager = levelManager;
-  }
+  public string PairedLevelName { get; private set; } = pairedLevelName;
+  public VaultDoorBlockState State { get; private set; } = state;
 
   public override void Update(GameTime gameTime) {
     if (State == VaultDoorBlockState.Opening) {
@@ -52,7 +42,7 @@ public class VaultDoorBlock : BaseBlock {
   }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(texture, Position, sourceRects[currentFrame], Color.White, 0.0f, Vector2.Zero, 2.0f, SpriteEffects.None, 0.0f);
+    spriteBatch.Draw(VaultDoorTexture, Position, sourceRects[currentFrame], Color.White, 0.0f, Vector2.Zero, 2.0f, SpriteEffects.None, 0.0f);
   }
 
   public override void OnCollision(CollisionInfo info) {
