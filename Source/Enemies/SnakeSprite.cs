@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-public class SnakeSprite : BaseEnemy {
+internal class SnakeSprite : BaseEnemy {
   private ISnakeState state;
 
   public SnakeSprite(Texture2D texture, Vector2 position) : base(texture, position, 64f, 32f) {

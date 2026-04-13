@@ -2,6 +2,6 @@
 
 namespace GameProject.Interfaces;
 
-public interface IShotgunnerState {
+internal interface IShotgunnerState {
   void Update(GameTime gameTime);
 }

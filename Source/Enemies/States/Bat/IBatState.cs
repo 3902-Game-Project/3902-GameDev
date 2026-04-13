@@ -2,6 +2,6 @@
 
 namespace GameProject.Interfaces;
 
-public interface IBatState {
+internal interface IBatState {
   void Update(GameTime gameTime);
 }

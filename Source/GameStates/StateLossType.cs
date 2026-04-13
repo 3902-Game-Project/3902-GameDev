@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.GameStates;
 
-public class StateLossType(Game1 game) : IGameState {
+internal class StateLossType(Game1 game) : IGameState {
   private static readonly string TITLE_TEXT = "Game Over";
   private static readonly string RETURN_TEXT = "Press R/GamePadA for main menu, Q/GamePadY to quit.";
   private IController keyboardController;

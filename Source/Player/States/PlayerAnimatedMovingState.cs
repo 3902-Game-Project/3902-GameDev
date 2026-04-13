@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerStates;
 
-public class PlayerAnimatedMovingState(Player player) : IPlayerState {
+internal class PlayerAnimatedMovingState(Player player) : IPlayerState {
   private readonly List<Rectangle> moveLeftFrames = [
         new(1531, 420, 171, 323),
         new(1854, 427, 171, 323)

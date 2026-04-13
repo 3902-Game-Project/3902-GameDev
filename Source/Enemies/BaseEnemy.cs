@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-public abstract class BaseEnemy(Texture2D texture, Vector2 position, float colliderWidth = 64f, float colliderHeight = 64f) : IEnemy {
+internal abstract class BaseEnemy(Texture2D texture, Vector2 position, float colliderWidth = 64f, float colliderHeight = 64f) : IEnemy {
   public Texture2D Texture { get; protected set; } = texture;
   public Vector2 Position { get; set; } = position;
   public Vector2 Velocity { get; set; }

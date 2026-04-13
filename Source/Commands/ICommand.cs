@@ -1,5 +1,5 @@
 namespace GameProject.Interfaces;
 
-public interface ICommand {
+internal interface ICommand {
   void Execute();
 }

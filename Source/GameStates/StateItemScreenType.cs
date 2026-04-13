@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.GameStates;
 
-public class StateItemScreenType(Game1 game) : IGameState {
+internal class StateItemScreenType(Game1 game) : IGameState {
   private static readonly string RETURN_TEXT = "Press I/GamePadB to return to game, Q/GamePadY to quit.";
   private IController keyboardController;
   private IController gamePadController;

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
-public class ShotgunnerWanderState : IShotgunnerState {
+internal class ShotgunnerWanderState : IShotgunnerState {
   private readonly ShotgunnerSprite shotgunner;
   private readonly ILevelManager levelManager;
   private readonly Random random;

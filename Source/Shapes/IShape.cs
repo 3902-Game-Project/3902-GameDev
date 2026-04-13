@@ -1,7 +1,7 @@
 namespace GameProject.Interfaces;
 
-public enum ShapeType { Circle, Box }
+internal enum ShapeType { Circle, Box }
 
-public interface IShape {
+internal interface IShape {
   ShapeType Type { get; }
 }

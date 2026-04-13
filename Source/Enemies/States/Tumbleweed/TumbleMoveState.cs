@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
-public class TumbleMoveState : ITumbleState {
+internal class TumbleMoveState : ITumbleState {
   private readonly TumbleSprite tumbleweed;
   private readonly Random random;
   private double wanderTimer;

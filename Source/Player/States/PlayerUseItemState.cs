@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerStates;
 
-public class PlayerUseItemState(Player player) : IPlayerState {
+internal class PlayerUseItemState(Player player) : IPlayerState {
   private int timer = 20;
 
   private Rectangle SpriteRight = new(773, 56, 171, 323);

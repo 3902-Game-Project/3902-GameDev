@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class TreasureBlock(Texture2D TreasureTexture, Vector2 xyPos) : BaseBlock(xyPos, 128f, 128f) {
+internal class TreasureBlock(Texture2D TreasureTexture, Vector2 xyPos) : BaseBlock(xyPos, 128f, 128f) {
   private static Rectangle sourceRect = new(256, 448, 64, 64);
 
   public override void Update(GameTime gameTime) { }

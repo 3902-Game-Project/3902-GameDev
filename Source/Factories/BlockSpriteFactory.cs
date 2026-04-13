@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Factories;
 
-public class BlockSpriteFactory {
+internal class BlockSpriteFactory {
   public static BlockSpriteFactory Instance { get; } = new();
 
   private BlockSpriteFactory() { }

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-public class RiflemanSprite : BaseEnemy {
+internal class RiflemanSprite : BaseEnemy {
   private IRiflemanState state;
 
   public RiflemanSprite(Texture2D texture, Vector2 position, ILevelManager levelManager) : base(texture, position, 48f, 96f) {

@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.GameStates;
 
-public class StateMenuType(Game1 game) : IGameState {
+internal class StateMenuType(Game1 game) : IGameState {
   private static readonly string START_TEXT = "Press Enter/GamePadB to start!";
   private static readonly string QUIT_TEXT = "Press Q/GamePadY to quit";
   private IController keyboardController;

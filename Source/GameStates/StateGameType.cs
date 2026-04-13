@@ -16,7 +16,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.GameStates;
 
-public class StateGameType : IGameState {
+internal class StateGameType : IGameState {
   private readonly Game1 game;
 
   private IController keyboardController;

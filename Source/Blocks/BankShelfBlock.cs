@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class BankShelfBlock(Texture2D BankShelfTexture, Vector2 xyPos) : BaseBlock(xyPos) {
+internal class BankShelfBlock(Texture2D BankShelfTexture, Vector2 xyPos) : BaseBlock(xyPos) {
   private static Rectangle sourceRect = new(64, 320, 64, 64);
 
   public override void Update(GameTime gameTime) { }

@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Factories;
 
-public class ItemSpriteFactory {
+internal class ItemSpriteFactory {
   private Texture2D basicGunsTexture;
 
   public static ItemSpriteFactory Instance { get; } = new();

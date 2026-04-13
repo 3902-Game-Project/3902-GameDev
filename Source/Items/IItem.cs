@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Interfaces;
 
-public interface IItem : ISprite {
+internal interface IItem : ISprite {
   ItemCategory Category { get; }
   FacingDirection Direction { get; set; }
   Vector2 Position { get; set; }

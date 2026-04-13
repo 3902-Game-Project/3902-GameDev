@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class FireBlock(Texture2D FireTexture, Vector2 xyPos) : BaseBlock(xyPos) {
+internal class FireBlock(Texture2D FireTexture, Vector2 xyPos) : BaseBlock(xyPos) {
   private static readonly List<Rectangle> sourceRects = [
       new(384, 64, 64, 64),
       new(448, 64, 64, 64)

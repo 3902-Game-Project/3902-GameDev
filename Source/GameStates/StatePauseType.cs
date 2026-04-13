@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.GameStates;
 
-public class StatePauseType(Game1 game) : IGameState {
+internal class StatePauseType(Game1 game) : IGameState {
   private static readonly string TITLE_TEXT = "Paused";
   private static readonly string RETURN_TEXT = "Press P/GamePadB to return to game, Q/GamePadY to quit.";
   private IController keyboardController;

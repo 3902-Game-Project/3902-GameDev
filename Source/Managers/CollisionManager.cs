@@ -9,13 +9,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Managers;
 
 // 1. Add an enum to force the resolution axis
-public enum CollisionAxis {
+internal enum CollisionAxis {
   Both,
   X,
   Y
 }
 
-public class CollisionManager : IGPUpdatable {
+internal class CollisionManager : IGPUpdatable {
   private readonly List<ICollidable> colliders;
   private Texture2D debugTexture;
 

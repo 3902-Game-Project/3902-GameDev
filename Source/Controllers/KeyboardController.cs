@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Controllers;
 
-public class KeyboardController : IController {
+internal class KeyboardController : IController {
   // Tracking of presses / releases must be shared across GameStates
   private static readonly KeyboardDiffTracker keyTracker = new();
 

@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject;
 
-public class Game1 : Game {
+internal class Game1 : Game {
   public static readonly int HUD_HEIGHT = 100;
   public static readonly int GAME_HEIGHT = 576;
   public static readonly int GAME_WIDTH = 960;

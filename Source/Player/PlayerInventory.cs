@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Misc;
 
-public class PlayerInventory(ILevelManager levelManager) {
+internal class PlayerInventory(ILevelManager levelManager) {
   private readonly Random random = new();
 
   // 1. Weapons List

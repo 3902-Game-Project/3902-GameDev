@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class StatueBlock(Texture2D StatueTexture, Vector2 xyPos) : BaseBlock(xyPos, 128f, 192f) {
+internal class StatueBlock(Texture2D StatueTexture, Vector2 xyPos) : BaseBlock(xyPos, 128f, 192f) {
   private static Rectangle sourceRect = new(0, 160, 64, 96);
 
   public override void Update(GameTime gameTime) { }

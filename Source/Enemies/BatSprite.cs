@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-public class BatSprite : BaseEnemy {
+internal class BatSprite : BaseEnemy {
   private IBatState state;
 
   public BatSprite(Texture2D texture, Vector2 position) : base(texture, position, 64f, 64f) {

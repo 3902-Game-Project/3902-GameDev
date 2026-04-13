@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
-public class ShotgunnerAttackState : IShotgunnerState {
+internal class ShotgunnerAttackState : IShotgunnerState {
   private readonly ShotgunnerSprite shotgunner;
   private readonly ILevelManager levelManager;
   private double stateTimer;

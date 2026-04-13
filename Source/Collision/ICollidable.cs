@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Interfaces;
 
 [Flags]
-public enum Layer {
+internal enum Layer {
   None = 0,
   Environment = 1,
   Player = 2,
@@ -14,7 +14,7 @@ public enum Layer {
   Pickups = 16,
 }
 
-public interface ICollidable {
+internal interface ICollidable {
   IShape Shape { get; }
   Vector2 Position { get; }
   Layer Layer { get; }

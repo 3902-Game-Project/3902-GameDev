@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
-public class ShotgunnerIdleState : IShotgunnerState {
+internal class ShotgunnerIdleState : IShotgunnerState {
   private readonly ShotgunnerSprite shotgunner;
   private readonly ILevelManager levelManager;
   private double timer;

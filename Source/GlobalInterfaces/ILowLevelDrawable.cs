@@ -2,6 +2,6 @@
 
 namespace GameProject.Interfaces;
 
-public interface ILowLevelDrawable {
+internal interface ILowLevelDrawable {
   void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch);
 }

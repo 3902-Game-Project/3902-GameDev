@@ -3,7 +3,7 @@ using GameProject.PlayerSpace;
 
 namespace GameProject.Commands;
 
-public class PlayerMoveRightCommand(Player player) : ICommand {
+internal class PlayerMoveRightCommand(Player player) : ICommand {
   public void Execute() {
     player.MoveRight();
   }

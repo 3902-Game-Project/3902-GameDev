@@ -2,6 +2,6 @@
 
 namespace GameProject.Interfaces;
 
-public interface ISnakeState {
+internal interface ISnakeState {
   void Update(GameTime gameTime);
 }

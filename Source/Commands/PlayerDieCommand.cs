@@ -3,7 +3,7 @@ using GameProject.PlayerSpace;
 
 namespace GameProject.Commands;
 
-public class PlayerDieCommand(Player player) : ICommand {
+internal class PlayerDieCommand(Player player) : ICommand {
   public void Execute() {
     player.Die();
   }

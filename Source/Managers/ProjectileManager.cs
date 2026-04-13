@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Managers;
 
-public class ProjectileManager {
+internal class ProjectileManager {
   private readonly List<IProjectile> projectiles;
   public List<IProjectile> Projectiles => projectiles;
 

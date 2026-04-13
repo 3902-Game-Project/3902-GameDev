@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Collisions;
 
-public class CollisionInfo {
+internal class CollisionInfo {
   public ICollidable Collider { get; set; } = null;
   public CollisionSide Side { get; set; } = CollisionSide.None;
   public Vector2 Direction { get; set; } = Vector2.Zero;

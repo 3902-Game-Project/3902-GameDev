@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Managers;
 
-public class LevelManager(Game1 game) : ILevelManager {
+internal class LevelManager(Game1 game) : ILevelManager {
   private static readonly string[] LEVEL_NAMES = [
     "00_everything",
     "00b_confinement",

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-public class BarShelfBlock(Texture2D BarShelfTexture, Vector2 xyPos) : BaseBlock(xyPos) {
+internal class BarShelfBlock(Texture2D BarShelfTexture, Vector2 xyPos) : BaseBlock(xyPos) {
   private static Rectangle sourceRect = new(256, 256, 64, 64);
 
   public override void Update(GameTime gameTime) { }

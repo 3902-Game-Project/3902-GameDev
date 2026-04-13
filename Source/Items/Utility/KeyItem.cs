@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items.Utility;
 
-public class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager levelManager) : IItem, IWorldPickup {
+internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager levelManager) : IItem, IWorldPickup {
   private Rectangle sourceRectangle = new(17, 448, 7, 13);
   private readonly ILevelManager levelManagers = levelManager;
 

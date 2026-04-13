@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Controllers;
 
-public class GamePadController : IController {
+internal class GamePadController : IController {
   private static readonly PlayerIndex PLAYER_INDEX = PlayerIndex.One;
 
   // Tracking of presses / releases must be shared across GameStates

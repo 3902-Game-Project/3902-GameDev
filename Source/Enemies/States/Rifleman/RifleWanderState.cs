@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.States;
 
-public class RifleWanderState : IRiflemanState {
+internal class RifleWanderState : IRiflemanState {
   private readonly RiflemanSprite rifle;
   private readonly ILevelManager levelManager;
   private readonly Random random;

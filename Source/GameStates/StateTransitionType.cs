@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.GameStates;
 
 // StateTransitionType is never intended to be the target of game1.ChangeState; it manages fading between 2 states as a result of game1.ChangeState
-public class StateTransitionType(Game1 game) : IGameState {
+internal class StateTransitionType(Game1 game) : IGameState {
   private readonly ScreenFader screenFader = new(game.SpriteBatch, game.Window);
 
   private IGameState fromGameState;
