@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.ButtonDiffTrackers;
 
-internal abstract class ButtonDiffTracker<ButtonsEnum> {
+internal abstract class ButtonDiffTracker<ButtonsEnum, ButtonStateReference> {
   private ButtonsEnum[] pastButtonState = [];
   private ButtonsEnum[] currentButtonState = [];
 
@@ -25,5 +25,5 @@ internal abstract class ButtonDiffTracker<ButtonsEnum> {
     return pastButtonState.Where(button => !currentButtonState.Contains(button));
   }
 
-  public abstract void Update(GamePadState gamePadState);
+  public abstract void Update(ButtonStateReference gamePadState);
 }

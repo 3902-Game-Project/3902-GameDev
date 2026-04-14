@@ -5,14 +5,14 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.ButtonDiffTrackers;
 
-internal class GamePadDiffTracker : ButtonDiffTracker<Buttons> {
+internal class GamePadDiffTracker : ButtonDiffTracker<Buttons, GamePadState> {
   private static readonly float TRIGGER_THRESHOLD = 0.9f;
   private static readonly float STICK_THRESHOLD_SQUARED = 0.9f * 0.9f;
   // Use MathF.PI * (5.0f / 16.0f) for perfectly sized octagonal stick regions (allowing diagonals)
   // Use MathF.PI * (1.0f / 4.0f) for cardinal directions only
   private static readonly float STICK_DIAGONAL_ANGLE_THRESHOLD = MathF.PI * (5.0f / 16.0f);
 
-  public void Update(GamePadState gamePadState) {
+  public override void Update(GamePadState gamePadState) {
     var pressedButtons = new List<Buttons>();
 
     // Add buttons (in order of Buttons Enum)

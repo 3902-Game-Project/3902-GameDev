@@ -11,8 +11,8 @@ internal enum MouseButtons {
   XButton2,
 };
 
-internal class MouseDiffTracker : ButtonDiffTracker<MouseButtons> {
-  public void Update(MouseState mouseState) {
+internal class MouseDiffTracker : ButtonDiffTracker<MouseButtons, MouseState> {
+  public override void Update(MouseState mouseState) {
     var pressedButtons = new List<MouseButtons>();
 
     if (mouseState.LeftButton == ButtonState.Pressed) {
