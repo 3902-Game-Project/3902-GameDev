@@ -7,7 +7,6 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.WorldPickups;
 
 internal abstract class BaseWorldPickup : IWorldPickup {
-
   public Vector2 Position { get; set; }
   public IShape Shape { get; }
   public Layer Layer { get; } = Layer.Pickups;
