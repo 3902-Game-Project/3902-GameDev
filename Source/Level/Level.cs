@@ -22,9 +22,9 @@ internal class Level(
   Vector2 playerPosition
 ) : ILevel {
   private void CheckLevelClear() {
-    var killableEnemies = Enemies.Where(e => e is not CactusSprite).ToList();
-    bool allEnemiesDead = killableEnemies.All(e => e.Health <= 0);
-    if (allEnemiesDead) {
+    var killableEnemies = Enemies.Where(e => e is not CactusSprite);
+
+    if (!killableEnemies.Any()) {
       foreach (var door in Doors) {
         if (door is SmallDoorBlock smallDoorBlock) {
           smallDoorBlock.ChangeState(LockableDoorBlockState.Open);
