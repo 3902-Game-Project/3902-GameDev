@@ -5,20 +5,20 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
 
-internal class PlayerDeadState(Player player, Game1 game) : IPlayerState {
+internal class PlayerDeadState(Player player, Game1 game) : APlayerState {
   private static readonly double LOSS_SCREEN_TIME = 3.0;
   private readonly GPTimer deadTimer = new();
 
   private Rectangle deadSprite = new(1470, 1060, 304, 97);
-  public void MoveUp() { }
-  public void MoveDown() { }
-  public void MoveLeft() { }
-  public void MoveRight() { }
-  public void UseItem(UseType useType) { }
-  public void UseKey(UseType useType) { }
-  public void Die() { }
+  public override void MoveUp() { }
+  public override void MoveDown() { }
+  public override void MoveLeft() { }
+  public override void MoveRight() { }
+  public override void UseItem(UseType useType) { }
+  public override void UseKey(UseType useType) { }
+  public override void Die() { }
 
-  public void Update(GameTime gameTime) {
+  public override void Update(GameTime gameTime) {
     player.Velocity = Vector2.Zero;
 
     deadTimer.Update(gameTime);
@@ -28,7 +28,7 @@ internal class PlayerDeadState(Player player, Game1 game) : IPlayerState {
     }
   }
 
-  public void Draw(SpriteBatch spriteBatch) {
+  public override void Draw(SpriteBatch spriteBatch) {
     Vector2 origin = new(deadSprite.Width / 2, deadSprite.Height / 2);
 
     spriteBatch.Draw(

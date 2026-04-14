@@ -4,25 +4,25 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
 
-internal class PlayerUseItemState(Player player) : IPlayerState {
+internal class PlayerUseItemState(Player player) : APlayerState {
   private int timer = 20;
 
   private Rectangle SpriteRight = new(773, 56, 171, 323);
   private Rectangle SpriteLeft = new(1531, 420, 171, 323);
   private Rectangle SpriteUp = new(453, 425, 161, 322);
   private Rectangle SpriteDown = new(455, 58, 161, 318);
-  public void MoveUp() { }
-  public void MoveDown() { }
-  public void MoveLeft() { }
-  public void MoveRight() { }
-  public void UseItem(UseType useType) { }
-  public void UseKey(UseType useType) { }
+  public override void MoveUp() { }
+  public override void MoveDown() { }
+  public override void MoveLeft() { }
+  public override void MoveRight() { }
+  public override void UseItem(UseType useType) { }
+  public override void UseKey(UseType useType) { }
 
-  public void Die() {
+  public override void Die() {
     player.State = player.DeadState;
   }
 
-  public void Update(GameTime gameTime) {
+  public override void Update(GameTime gameTime) {
     timer--;
     if (timer <= 0) {
       timer = 20;
@@ -30,7 +30,7 @@ internal class PlayerUseItemState(Player player) : IPlayerState {
     }
   }
 
-  public void Draw(SpriteBatch spriteBatch) {
+  public override void Draw(SpriteBatch spriteBatch) {
     Rectangle sourceRect;
 
     if (player.Direction == FacingDirection.Right) {
