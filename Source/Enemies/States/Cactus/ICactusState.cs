@@ -1,3 +1,5 @@
-﻿namespace GameProject.Enemies.CactusStates;
+﻿using GameProject.GlobalInterfaces;
 
-internal interface ICactusState { }
+namespace GameProject.Enemies.CactusStates;
+
+internal interface ICactusState : IGPUpdatable { }

@@ -1,3 +1,5 @@
-﻿namespace GameProject.Enemies.RiflemanStates;
+﻿using GameProject.GlobalInterfaces;
 
-internal interface IRiflemanState { }
+namespace GameProject.Enemies.RiflemanStates;
+
+internal interface IRiflemanState : IGPUpdatable { }

@@ -1,3 +1,5 @@
-﻿namespace GameProject.Enemies.ShotgunnerStates;
+﻿using GameProject.GlobalInterfaces;
 
-internal interface IShotgunnerState { }
+namespace GameProject.Enemies.ShotgunnerStates;
+
+internal interface IShotgunnerState : IGPUpdatable { }
