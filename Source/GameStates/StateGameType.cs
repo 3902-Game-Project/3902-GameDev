@@ -200,13 +200,16 @@ internal class StateGameType : IGameState {
 
         if (activeStats != null) {
           string ammoText;
-          Color textColor;
-          if (activeStats.CurrentAmmo <= 0) {
+          Color textColor = Color.White;
+
+          // Fetch the overarching reserve ammo for this gun's type
+          int reserveAmmo = Player.Inventory.Ammo[activeStats.AmmoType];
+
+          if (activeGun.IsReloading) {
             ammoText = "RELOADING...";
             textColor = Color.Red;
           } else {
-            ammoText = $"Ammo: {activeStats.CurrentAmmo} / {activeStats.MaxAmmo}";
-            textColor = Color.White;
+            ammoText = $"Ammo: {activeStats.CurrentAmmo} / {activeStats.MaxAmmo}  |  Reserve: {reserveAmmo} {activeStats.AmmoType}";
           }
 
           spriteBatch.DrawString(

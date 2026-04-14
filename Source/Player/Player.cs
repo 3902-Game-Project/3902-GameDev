@@ -59,6 +59,8 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
 
   private Texture2D ammoSpritesheet;
 
+  private Texture2D whitePixel;
+
   public Rectangle BoundingBox {
     get {
       int width = (int) PLAYER_WIDTH;
@@ -110,6 +112,7 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
   public void LoadContent(ContentManager contentManager) {
     Texture = contentManager.Load<Texture2D>("Misc/playerSpritesheet");
     ammoSpritesheet = contentManager.Load<Texture2D>("Items/basic_guns_spritesheet");
+    whitePixel = contentManager.Load<Texture2D>("Misc/WhitePixel");
   }
 
   public void TakeDamage(int amount) {
@@ -257,5 +260,17 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
     }
 
     Inventory.ActiveItem?.Draw(spriteBatch);
+
+    // Draw Overhead Reload Bar
+    if (Inventory.ActiveItem is Items.DefaultGun gun && gun.IsReloading && whitePixel != null) {
+      float barWidth = 60f;
+      float barHeight = 8f;
+      Vector2 barPos = Position + new Vector2(-barWidth / 2f, -80f);
+
+      float progress = 1f - (gun.ReloadTimer / gun.PublicStats.ReloadTime);
+
+      spriteBatch.Draw(whitePixel, new Rectangle((int) barPos.X, (int) barPos.Y, (int) barWidth, (int) barHeight), Color.DarkGray * 0.8f);
+      spriteBatch.Draw(whitePixel, new Rectangle((int) barPos.X, (int) barPos.Y, (int) (barWidth * progress), (int) barHeight), Color.White);
+    }
   }
 }
