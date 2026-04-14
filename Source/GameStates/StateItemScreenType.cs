@@ -110,7 +110,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
 
           float uiX = (game.Window.ClientBounds.Width / 2f) - 50 + (i * 100);
           float uiY = (game.Window.ClientBounds.Height / 2f) - 100;
-          Vector2 uiPosition = new Vector2(uiX, uiY);
+          Vector2 uiPosition = new(uiX, uiY);
 
           float scale = (i == SelectedWeaponIndex) ? 1.2f : 1.0f;
           Color tint = (i == SelectedWeaponIndex) ? Color.White : Color.Gray;
@@ -135,7 +135,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
 
           float uiX = startX + (column * 80);
           float uiY = startY + (row * 80);
-          Vector2 uiPosition = new Vector2(uiX, uiY);
+          Vector2 uiPosition = new(uiX, uiY);
 
           item.DrawUI(spriteBatch, uiPosition, 1f, Color.White);
         }
@@ -150,7 +150,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
       for (int i = 0; i < player.Inventory.Keys.Count; i++) {
         IItem key = player.Inventory.Keys[i];
 
-        Vector2 keyUiPosition = new Vector2(keyStartX + (i * 30), keyStartY);
+        Vector2 keyUiPosition = new(keyStartX + (i * 30), keyStartY);
         key.DrawUI(spriteBatch, keyUiPosition, 1f, Color.White);
       }
     }

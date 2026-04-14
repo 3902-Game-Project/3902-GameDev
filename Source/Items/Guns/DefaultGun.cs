@@ -8,32 +8,23 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-internal abstract class DefaultGun : IItem {
+internal abstract class DefaultGun(Texture2D texture, Vector2 startPosition, Game1 game, GunStats stats) : IItem {
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   public ItemCategory Category { get; protected set; }
-  public Vector2 Position { get; set; }
+  public Vector2 Position { get; set; } = startPosition;
 
-  protected readonly Texture2D texture;
+  protected readonly Texture2D texture = texture;
   protected readonly float scale = 1f;
-  protected readonly Game1 game;
-  protected readonly GunStats stats;
+  protected readonly Game1 game = game;
+  protected readonly GunStats stats = stats;
 
-  protected IProjectilePattern projectilePattern;
+  protected IProjectilePattern projectilePattern = new SingleShotPattern();
   protected IFireMode fireMode;
   protected Rectangle sourceRectangle;
   protected Vector2 origin;
   protected Vector2 bulletSpawnOffset;
 
   public GunStats PublicStats => stats;
-
-  protected DefaultGun(Texture2D texture, Vector2 startPosition, Game1 game, GunStats stats) {
-    this.game = game;
-    this.texture = texture;
-    this.stats = stats;
-    Position = startPosition;
-
-    projectilePattern = new SingleShotPattern();
-  }
 
   public virtual void OnEquip() {
     fireMode?.OnEquip();
