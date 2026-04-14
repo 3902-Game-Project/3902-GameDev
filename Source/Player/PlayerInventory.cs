@@ -4,6 +4,7 @@ using GameProject.Items;
 using GameProject.Managers;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
+using GameProject.Items;
 
 namespace GameProject.PlayerSpace;
 
@@ -18,8 +19,14 @@ internal class PlayerInventory(ILevelManager levelManager) {
   // 2. General Items List (Potions, Whiskey, etc.)
   public List<IItem> GeneralItems { get; private set; } = [];
 
-  // 3. NEW: Dedicated Keys List
   public List<IItem> Keys { get; private set; } = [];
+
+  // Overarching Ammo Stores
+  public Dictionary<AmmoType, int> Ammo { get; private set; } = new() {
+    { AmmoType.Light, 30 },
+    { AmmoType.Heavy, 10 },
+    { AmmoType.Shells, 10 }
+  };
 
   public void EquipWeapon(int index) {
     if (index >= 0 && index < Weapons.Count) {
