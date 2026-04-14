@@ -22,6 +22,7 @@ internal class StateGameType : IGameState {
   private IController keyboardController;
   private IController mouseController;
   private IController gamePadController;
+  private Texture2D ammoTexture;
 
   public Player Player { get; private set; }
 
@@ -102,8 +103,10 @@ internal class StateGameType : IGameState {
   public void LoadContent(ContentManager contentManager) {
     Player.LoadContent(contentManager);
 
-    Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateShotgun(0f, 0f, game));
+    Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateRevolver(0f, 0f, game));
     Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateRifle(0f, 0f, game));
+
+    ammoTexture = contentManager.Load<Texture2D>("Items/basic_guns_spritesheet");
 
     LevelManager.LoadContent(contentManager);
   }
@@ -199,25 +202,29 @@ internal class StateGameType : IGameState {
         GunStats activeStats = activeGun.PublicStats;
 
         if (activeStats != null) {
-          string ammoText;
-          Color textColor = Color.White;
+          // Draw Current Gun's Ammo
+          string ammoText = $"Ammo: {activeStats.CurrentAmmo} / {activeStats.MaxAmmo}";
+          spriteBatch.DrawString(MiscAssetStore.Instance.MainFont, ammoText, ammoPosition, Color.White);
 
-          // Fetch the overarching reserve ammo for this gun's type
-          int reserveAmmo = Player.Inventory.Ammo[activeStats.AmmoType];
+          // Draw the 3 Reserve Ammo Types with Sprites
+          if (ammoTexture != null) {
+            Rectangle ammoSourceRect = new Rectangle(9, 15, 12, 11);
+            Vector2 reserveStartPos = ammoPosition + new Vector2(0, 30); // Drop down a line
+            float iconScale = 2f;
+            float textOffset = 30f;
+            float spacing = 90f;
 
-          if (activeGun.IsReloading) {
-            ammoText = "RELOADING...";
-            textColor = Color.Red;
-          } else {
-            ammoText = $"Ammo: {activeStats.CurrentAmmo} / {activeStats.MaxAmmo}  |  Reserve: {reserveAmmo} {activeStats.AmmoType}";
+            spriteBatch.Draw(ammoTexture, reserveStartPos, ammoSourceRect, Color.Yellow, 0f, Vector2.Zero, iconScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(MiscAssetStore.Instance.MainFont, $"{Player.Inventory.Ammo[AmmoType.Light]}", reserveStartPos + new Vector2(textOffset, -5), Color.White);
+
+            Vector2 heavyPos = reserveStartPos + new Vector2(spacing, 0);
+            spriteBatch.Draw(ammoTexture, heavyPos, ammoSourceRect, Color.Gray, 0f, Vector2.Zero, iconScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(MiscAssetStore.Instance.MainFont, $"{Player.Inventory.Ammo[AmmoType.Heavy]}", heavyPos + new Vector2(textOffset, -5), Color.White);
+
+            Vector2 shellsPos = reserveStartPos + new Vector2(spacing * 2, 0);
+            spriteBatch.Draw(ammoTexture, shellsPos, ammoSourceRect, Color.Red, 0f, Vector2.Zero, iconScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(MiscAssetStore.Instance.MainFont, $"{Player.Inventory.Ammo[AmmoType.Shells]}", shellsPos + new Vector2(textOffset, -5), Color.White);
           }
-
-          spriteBatch.DrawString(
-              spriteFont: MiscAssetStore.Instance.MainFont,
-              text: ammoText,
-              position: ammoPosition,
-              color: textColor
-          );
         }
       }
     }
