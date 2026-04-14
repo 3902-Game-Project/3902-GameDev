@@ -100,7 +100,7 @@ internal class PlayerAnimatedMovingState(Player player) : APlayerState(player) {
       player.Texture,
       player.Position,
       sourceRect,
-      Color.White,
+      player.CurrentTintColor,
       0f,
       origin,
       0.15f,

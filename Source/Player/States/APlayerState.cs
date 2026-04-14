@@ -17,6 +17,7 @@ internal abstract class APlayerState(Player player) : IPlayerState {
     if (!player.IsInvincible) {
       player.Health -= amount;
       player.InvincibilityTimer = Player.INVINCIBILITY_DURATION;
+      player.DamageFlashTimer = Player.DAMAGE_FLASH_DURATION;
       if (player.Health <= 0) {
         player.Health = 0;
         Die();

@@ -85,7 +85,7 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
       texture: player.Texture,
       position: player.Position,
       sourceRectangle: sourceRect,
-      color: Color.White,
+      color: player.CurrentTintColor,
       rotation: 0f,
       origin: origin,
       scale: 0.15f,
