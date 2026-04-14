@@ -44,7 +44,7 @@ Code Metrics:
   Graph at "Info/Grader Info/Code Metrics/Sprint 4/2026-04-13.png"
 
 Code Reviews:
-  Found in the "Info/Grader Info/Code Review/Sprint 3" folder.
+  Found in the "Info/Grader Info/Code Review/Sprint 4" folder.
 
 Known bugs:
   -Cannot move to escape block if just barely collided into it.
