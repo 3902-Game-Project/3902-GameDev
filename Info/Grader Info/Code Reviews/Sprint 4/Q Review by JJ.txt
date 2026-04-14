@@ -1,0 +1,16 @@
+Author: JJ
+Date: 2026-04-13
+Sprint: 4
+Class to review: Source/GameStates/StateItemScreenType.cs (lines 40-65, 75-159)
+Author of class: Q
+Minutes taken to review: 20
+
+Readability:
+  What is readable:
+  The MoveCursorRight, MoveCursorLeft, and EquipSelecedWeapon methods are very easy to read.
+
+  What is less readable:
+   Some of the LowLevelDraw method is a bit confusing from an outside perspective, especially where there are lots of magic numbers used to position the sprites. 
+  
+Code quality:
+  Aside from lots of magic numbers, the code itself does not include anything particulary concerning in terms of coupling. The only change I would make is to make the SelectedWeaponIndex private as it is never referenced outside this file.
