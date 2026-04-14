@@ -38,6 +38,7 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
   public Vector2 Position { get; set; }
   public Vector2 Velocity { get; set; }
   public float Speed { get; set; } = 200f;
+
   public int Health { get; set; } = 100;
   private bool inputLeftThisFrame, inputRightThisFrame, inputUpThisFrame, inputDownThisFrame;
   private bool inputLeftLastFrame, inputRightLastFrame, inputUpLastFrame, inputDownLastFrame;
@@ -55,6 +56,8 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
 
   public PlayerInventory Inventory { get; private set; }
   public Texture2D Texture { get; private set; }
+
+  private Texture2D ammoSpritesheet;
 
   public Rectangle BoundingBox {
     get {
@@ -87,6 +90,7 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
     UseItemState = new PlayerUseItemState(this);
     DeadState = new PlayerDeadState(this, game);
     State = StaticState;
+    BaseEnemy.OnDeath += HandleEnemyDeath;
   }
 
   public void MoveUp() => inputUpThisFrame = true;
@@ -105,6 +109,7 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
 
   public void LoadContent(ContentManager contentManager) {
     Texture = contentManager.Load<Texture2D>("Misc/playerSpritesheet");
+    ammoSpritesheet = contentManager.Load<Texture2D>("Items/basic_guns_spritesheet");
   }
 
   public void TakeDamage(int amount) {
@@ -214,6 +219,16 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
     }
   }
 
+  private void HandleEnemyDeath(BaseEnemy enemy) {
+    if (LevelManager?.CurrentLevel == null || ammoSpritesheet == null) return;
+
+    // Ammo dropping system
+    Items.AmmoType dropType = Items.AmmoType.Light;
+    if (enemy is RiflemanSprite) dropType = Items.AmmoType.Heavy;
+    if (enemy is ShotgunnerSprite) dropType = Items.AmmoType.Shells;
+
+    LevelManager.CurrentLevel.AddPickup(new WorldPickups.AmmoWorldPickup(ammoSpritesheet, enemy.Position, dropType, 5));
+  }
   public void Draw(SpriteBatch spriteBatch) {
     State.Draw(spriteBatch);
 
