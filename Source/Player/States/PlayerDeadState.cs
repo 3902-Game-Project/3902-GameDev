@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
 
-internal class PlayerDeadState(Player player, Game1 game) : APlayerState {
+internal class PlayerDeadState(Player player, Game1 game) : APlayerState(player) {
   private static readonly double LOSS_SCREEN_TIME = 3.0;
   private readonly GPTimer deadTimer = new();
 

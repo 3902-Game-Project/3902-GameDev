@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
 
-internal class PlayerStaticState(Player player) : APlayerState {
+internal class PlayerStaticState(Player player) : APlayerState(player) {
   // Same rectangles as moving state except that left state set to same as right state (but flipped) for consistency
   private Rectangle SpriteRight = new(773, 56, 171, 323);
   private Rectangle SpriteLeft = new(773, 56, 171, 323);
@@ -56,10 +56,6 @@ internal class PlayerStaticState(Player player) : APlayerState {
       }
       player.Inventory.Keys.RemoveAt(0);
     }
-  }
-
-  public override void Die() {
-    player.State = player.DeadState;
   }
 
   public override void Draw(SpriteBatch spriteBatch) {

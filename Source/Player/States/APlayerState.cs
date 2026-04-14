@@ -4,8 +4,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
 
-internal abstract class APlayerState : IPlayerState {
-  public abstract void Die();
+internal abstract class APlayerState(Player player) : IPlayerState {
+  public virtual void Die() {
+    player.State = player.DeadState;
+  }
+
   public abstract void Draw(SpriteBatch spriteBatch);
   public abstract void MoveDown();
   public abstract void MoveLeft();

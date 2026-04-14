@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
 
-internal class PlayerUseItemState(Player player) : APlayerState {
+internal class PlayerUseItemState(Player player) : APlayerState(player) {
   private int timer = 20;
 
   private Rectangle SpriteRight = new(773, 56, 171, 323);
@@ -17,10 +17,6 @@ internal class PlayerUseItemState(Player player) : APlayerState {
   public override void MoveRight() { }
   public override void UseItem(UseType useType) { }
   public override void UseKey(UseType useType) { }
-
-  public override void Die() {
-    player.State = player.DeadState;
-  }
 
   public override void Update(GameTime gameTime) {
     timer--;

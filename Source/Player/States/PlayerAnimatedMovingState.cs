@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
 
-internal class PlayerAnimatedMovingState(Player player) : APlayerState {
+internal class PlayerAnimatedMovingState(Player player) : APlayerState(player) {
   private readonly List<Rectangle> moveLeftFrames = [
     new(1531, 420, 171, 323),
     new(1854, 427, 171, 323)
@@ -62,10 +62,6 @@ internal class PlayerAnimatedMovingState(Player player) : APlayerState {
       }
       player.Inventory.Keys.RemoveAt(0);
     }
-  }
-
-  public override void Die() {
-    player.State = player.DeadState;
   }
 
   public override void Update(GameTime gameTime) {
