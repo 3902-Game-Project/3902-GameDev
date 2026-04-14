@@ -11,7 +11,7 @@ internal class GunStats {
   public float ReloadTime { get; set; } = 1f;
   public int MaxAmmo { get; set; } = 1;
   public int CurrentAmmo { get; set; } = 1;
-  public float BaseDamage { get; set; } = 0f;
+  public int BaseDamage { get; set; } = 50;
   public SoundID GunshotID { get; set; } = SoundID.GunshotDefault;
   public SoundID ReloadID { get; set; } = SoundID.ReloadDefault;
 

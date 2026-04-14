@@ -29,12 +29,13 @@ internal class BulletDefault : IProjectile, ICollidable {
   public Layer Mask { get; } = Layer.Environment | Layer.Enemies;
 
   public BulletDefault(Texture2D texture, Vector2 startPosition,
-    Vector2 direction, float velocity, float bulletLifetime) {
+    Vector2 direction, float velocity, float bulletLifetime, int damage) {
     this.texture = texture;
     Position = startPosition;
     this.direction = direction;
     this.velocity = velocity;
     this.bulletLifetime = bulletLifetime;
+    this.damage = damage;
     Collider = new BoxCollider(sourceRectangle.Width * scale, sourceRectangle.Height * scale, Position);
   }
 

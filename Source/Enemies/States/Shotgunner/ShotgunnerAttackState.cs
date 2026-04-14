@@ -11,6 +11,7 @@ internal class ShotgunnerAttackState : IShotgunnerState {
   private double stateTimer;
   private double animationTimer;
   private readonly double timePerFrame = 0.15;
+  private readonly int damage = 50;
 
   private bool hasFired = false;
 
@@ -66,9 +67,9 @@ internal class ShotgunnerAttackState : IShotgunnerState {
     float bulletSpeed = 400f;
     float bulletLifetime = 0.6f;
 
-    IProjectile bullet1 = ProjectileFactory.Instance.CreateBullet(spawnPosition, dirStraight, bulletSpeed, bulletLifetime);
-    IProjectile bullet2 = ProjectileFactory.Instance.CreateBullet(spawnPosition, dirUp, bulletSpeed, bulletLifetime);
-    IProjectile bullet3 = ProjectileFactory.Instance.CreateBullet(spawnPosition, dirDown, bulletSpeed, bulletLifetime);
+    IProjectile bullet1 = ProjectileFactory.Instance.CreateBullet(spawnPosition, dirStraight, bulletSpeed, bulletLifetime, damage);
+    IProjectile bullet2 = ProjectileFactory.Instance.CreateBullet(spawnPosition, dirUp, bulletSpeed, bulletLifetime, damage);
+    IProjectile bullet3 = ProjectileFactory.Instance.CreateBullet(spawnPosition, dirDown, bulletSpeed, bulletLifetime, damage);
 
     if (bullet1 is BulletDefault b1) {
       b1.IsPlayerShot = false;
