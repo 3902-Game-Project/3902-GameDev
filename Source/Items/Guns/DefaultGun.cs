@@ -116,9 +116,6 @@ internal abstract class DefaultGun(Texture2D texture, Vector2 startPosition, Gam
 
     if (fireMode == null || !fireMode.CanFire(useType)) return;
 
-    // Decrement ammo in the gun
-    stats.CurrentAmmo--;
-
     Vector2 bulletDirection;
     Vector2 actualOffset;
     if (Direction == FacingDirection.Left) {
