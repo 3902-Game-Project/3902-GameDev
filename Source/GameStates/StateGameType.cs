@@ -37,7 +37,8 @@ internal class StateGameType : IGameState {
     keyboardController = new KeyboardController(
       pressedMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.Q, new QuitCommand(game) },
-        { Keys.R, new ReturnToMenuAndResetCommand(game) },
+        { Keys.Back, new ReturnToMenuAndResetCommand(game) }, // Moved from R to Backspace
+        { Keys.R, new ReloadWeaponCommand(Player) },          // Reload mapping
         { Keys.P, new PauseCommand(game) },
         { Keys.I, new OpenItemScreenCommand(game) },
         { Keys.J, new PlayerUseItemCommand(Player, UseType.Pressed) },
