@@ -21,8 +21,8 @@ internal class StateItemScreenType(Game1 game) : IGameState {
   public void Initialize() {
     keyboardController = new KeyboardController(
       pressedMappings: new Dictionary<Keys, IGPCommand> {
-        { Keys.I, new ReturnToGameNoFadeCommand(game) },
         { Keys.Q, new QuitCommand(game) },
+        { Keys.I, new ReturnToGameNoFadeCommand(game) },
       }
     );
 
@@ -31,8 +31,8 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     // nintendo pro controller seems to suggest it is pro controller layout.
     gamePadController = new GamePadController(
       pressedMappings: new Dictionary<Buttons, IGPCommand> {
-        { Buttons.A, new ReturnToGameNoFadeCommand(game) },
         { Buttons.X, new QuitCommand(game) },
+        { Buttons.A, new ReturnToGameNoFadeCommand(game) },
       }
     );
   }

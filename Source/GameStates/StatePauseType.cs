@@ -18,8 +18,8 @@ internal class StatePauseType(Game1 game) : IGameState {
   public void Initialize() {
     keyboardController = new KeyboardController(
       pressedMappings: new Dictionary<Keys, IGPCommand> {
-        { Keys.P, new ReturnToGameCommand(game) },
         { Keys.Q, new QuitCommand(game) },
+        { Keys.P, new ReturnToGameCommand(game) },
       }
     );
 
@@ -28,8 +28,8 @@ internal class StatePauseType(Game1 game) : IGameState {
     // nintendo pro controller seems to suggest it is pro controller layout.
     gamePadController = new GamePadController(
       pressedMappings: new Dictionary<Buttons, IGPCommand> {
-        { Buttons.A, new ReturnToGameCommand(game) },
         { Buttons.X, new QuitCommand(game) },
+        { Buttons.A, new ReturnToGameCommand(game) },
       }
     );
   }

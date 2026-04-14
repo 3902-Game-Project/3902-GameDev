@@ -1,10 +1,10 @@
 Controls:
   Main Menu:
     Key                      Action
-    Enter/GamePadB           Go from main menu to game.
     Q/GamePadY               Quit the game.
+    Enter/GamePadB           Go from main menu to game.
 
-  Game:
+  Main Game Screen:
     Key                      Action
     Q/GamePadY               Quit the game.
     R/GamePadA               Reset to main menu.
@@ -26,10 +26,18 @@ Controls:
     T/MouseRight/LeftBumper  Debug: switch to previous level.
     H/GamePad--              Debug: toggle halt game (disable almost all Update methods).
 
+  Pause Screen:
+    Q/GamePadY               Quit the game.
+    P/GamePadB               Return to game.
+
+  Item Selection Screen:
+    Q/GamePadY               Quit the game.
+    I/GamePadB               Return to game.
+
   Win/Loss Screen:
     Key                      Action
-    R/GamePadA               Reset to main menu.
     Q/GamePadY               Quit the game.
+    R/GamePadA               Reset to main menu.
 
 Code Metrics:
   Raw data stored at "Info/Grader Info/Code Metrics/Code Metrics.txt"

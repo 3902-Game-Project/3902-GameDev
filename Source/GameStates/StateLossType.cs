@@ -18,8 +18,8 @@ internal class StateLossType(Game1 game) : IGameState {
   public void Initialize() {
     keyboardController = new KeyboardController(
       pressedMappings: new Dictionary<Keys, IGPCommand> {
-        { Keys.R, new ReturnToMenuAndResetCommand(game) },
         { Keys.Q, new QuitCommand(game) },
+        { Keys.R, new ReturnToMenuAndResetCommand(game) },
       }
     );
 
@@ -28,8 +28,8 @@ internal class StateLossType(Game1 game) : IGameState {
     // nintendo pro controller seems to suggest it is pro controller layout.
     gamePadController = new GamePadController(
       pressedMappings: new Dictionary<Buttons, IGPCommand> {
-        { Buttons.B, new ReturnToMenuAndResetCommand(game) },
         { Buttons.X, new QuitCommand(game) },
+        { Buttons.B, new ReturnToMenuAndResetCommand(game) },
       }
     );
   }
