@@ -1,7 +1,9 @@
 ﻿using System;
+using GameProject.Blocks;
 using GameProject.Collisions;
 using GameProject.Collisions.Shapes;
 using GameProject.Controllers;
+using GameProject.Enemies;
 using GameProject.GlobalInterfaces;
 using GameProject.Managers;
 using GameProject.PlayerSpace.States;

@@ -1,4 +1,5 @@
 ﻿using GameProject.Collisions;
+using GameProject.Enemies;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -30,19 +31,19 @@ internal class CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : BaseBlock(xyP
       State = CrateBlockState.Moving;
 
       switch (info.Side) {
-        case CollisionResponse.CollisionSide.Top:
+        case CollisionSide.Top:
           direction = new Vector2(0, 1);
           break;
 
-        case CollisionResponse.CollisionSide.Bottom:
+        case CollisionSide.Bottom:
           direction = new Vector2(0, -1);
           break;
 
-        case CollisionResponse.CollisionSide.Left:
+        case CollisionSide.Left:
           direction = new Vector2(1, 0);
           break;
 
-        case CollisionResponse.CollisionSide.Right:
+        case CollisionSide.Right:
           direction = new Vector2(-1, 0);
           break;
 

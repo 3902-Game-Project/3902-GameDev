@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GameProject.Blocks;
+using GameProject.Collisions;
 using GameProject.Enemies;
 using GameProject.Globals;
 using GameProject.Managers;

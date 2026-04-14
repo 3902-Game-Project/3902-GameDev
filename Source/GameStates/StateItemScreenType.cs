@@ -2,6 +2,7 @@
 using GameProject.Commands;
 using GameProject.Controllers;
 using GameProject.Globals; // Needed for MiscAssetStore
+using GameProject.Items;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
