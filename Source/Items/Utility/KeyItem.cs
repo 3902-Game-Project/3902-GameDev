@@ -63,6 +63,7 @@ internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManage
         slattedDoorBlock.ChangeState(LockableDoorBlockState.Open);
       }
     }
+    
   }
 
   public void OnPickup(Player player) {

@@ -26,8 +26,8 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
   private static readonly float PLAYER_HEIGHT = 323.0f * 0.15f;
 
   public IShape Shape => Collider;
-  public ILevelManager LevelManager { get; private set; }
-  public BoxCollider Collider { get; private set; }
+  private ILevelManager LevelManager { get;  set; }
+  private BoxCollider Collider { get;  set; }
   public Layer Mask { get; } = Layer.Environment;
   public Layer Layer { get; } = Layer.Player;
   public IPlayerState State { get; set; }
@@ -84,6 +84,9 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
   public void MoveRight() => State.MoveRight();
   public void UseItem(UseType useType) {
     State.UseItem(useType);
+  }
+  public void UseKey(UseType useType) {
+    State.UseKey(useType);
   }
   public void Die() => State.Die();
 

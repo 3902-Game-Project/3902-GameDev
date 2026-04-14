@@ -15,6 +15,7 @@ internal class PlayerDeadState(Player player, Game1 game) : IPlayerState {
   public void MoveLeft() { }
   public void MoveRight() { }
   public void UseItem(UseType useType) { }
+  public void UseKey(UseType useType) { }
   public void Die() { }
 
   public void Update(GameTime gameTime) {

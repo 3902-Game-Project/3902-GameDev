@@ -39,6 +39,7 @@ internal class StateGameType : IGameState {
         { Keys.P, new PauseCommand(game) },
         { Keys.I, new OpenItemScreenCommand(game) },
         { Keys.J, new PlayerUseItemCommand(Player, UseType.Pressed) },
+        { Keys.K, new PlayerUseKeyCommand(Player, UseType.Pressed)  },
         { Keys.E, new PlayerDieCommand(Player) },
         { Keys.T, new PreviousLevelCommand(LevelManager) },
         { Keys.Y, new NextLevelCommand(LevelManager) },
@@ -73,6 +74,7 @@ internal class StateGameType : IGameState {
         { Buttons.X, new QuitCommand(game) },
         { Buttons.B, new ReturnToMenuAndResetCommand(game) },
         { Buttons.A, new PlayerUseItemCommand(Player, UseType.Pressed) },
+        { Buttons.DPadLeft, new PlayerUseKeyCommand(Player, UseType.Pressed) },
         { Buttons.Y, new PlayerDieCommand(Player) },
         { Buttons.LeftShoulder, new PreviousLevelCommand(LevelManager) },
         { Buttons.RightShoulder, new NextLevelCommand(LevelManager) },
@@ -167,7 +169,7 @@ internal class StateGameType : IGameState {
 
     //draw player's items, keys...
     float visualHealthBarWidth = TextureStore.Instance.HealthBar.Width * 0.5f;
-    Vector2 ammoPosition = new Vector2(healthBarPosition.X + visualHealthBarWidth + 20, healthBarPosition.Y);
+    Vector2 ammoPosition = new(healthBarPosition.X + visualHealthBarWidth + 20, healthBarPosition.Y);
     var activeWeapon = Player.Inventory.ActiveItem;
 
     if (activeWeapon != null) {
@@ -201,7 +203,7 @@ internal class StateGameType : IGameState {
       new Rectangle(9, 448, 8, 13),
       new Rectangle(17, 448, 8, 14)
     ];
-    Vector2 keysStartPosition = new Vector2(ammoPosition.X + 200, healthBarPosition.Y);
+    Vector2 keysStartPosition = new(ammoPosition.X + 200, healthBarPosition.Y);
     float keyScale = 3f;
 
     // FIX: Changed .Keys to .Keys.Count
@@ -223,7 +225,7 @@ internal class StateGameType : IGameState {
       );
     }
 
-    Vector2 mapPosition = new Vector2(keysStartPosition.X + 100, keysStartPosition.Y);
+    Vector2 mapPosition = new(keysStartPosition.X + 100, keysStartPosition.Y);
     spriteBatch.Draw(
       texture: TextureStore.Instance.MainBlockItemAtlas,
       position: mapPosition,

@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Level;
 
 internal class Level(
-  List<IBlock> nonCollidableBlocks, // for non-collidable collidableBlocks -Aaron
+  List<IBlock> nonCollidableBlocks, 
   List<IBlock> collidableBlocks,
   List<IBlock> doors,
   List<IEnemy> enemies,
