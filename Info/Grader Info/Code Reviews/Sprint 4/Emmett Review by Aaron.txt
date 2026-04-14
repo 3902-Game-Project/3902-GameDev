@@ -1,0 +1,22 @@
+Readability:
+	Author: Aaron Vanderbilt
+	Date: 4/13/2026
+	Sprint: 4
+	File: CollisionHelper.cs
+	File Author: Emmett
+	Time: < 1 minutes
+	Comments: The code is very short and simple. There is only one method that returns a position correction for collision. 
+    Overall it is highly readable.
+
+
+Code Quality:
+	Author: Aaron Vanderbilt
+	Date: 4/13/2026
+	Sprint: 4
+	File: ItemWorldPickup.cs
+	File Author: Emmett
+	Time: ~ 2 minutes
+	Comments: The class is specialized for the data for items that are dropped on the ground. There is only one public 
+    field for velocity, and 3 methods, Draw, Update, and OnPickup. 2 methods are only 1 line. There is not much that could 
+    be changed, but in the Update method, there is an adjustment for Position and an assignment for the changed position on 
+    2 seperate lines which I think could be consolidated to one line. Other than that, maybe changing out the magic numbers. 
