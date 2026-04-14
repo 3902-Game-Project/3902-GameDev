@@ -16,6 +16,7 @@ internal partial class LevelLoader {
   private static readonly int LEVEL_WIDTH_BLOCKS = 15;
   private static readonly int LEVEL_HEIGHT_BLOCKS = 9;
   private static readonly Vector2 PLAYER_POSITION_OFFSET = new(BLOCK_WIDTH / 2.0f, BLOCK_HEIGHT / 2.0f);
+  private static readonly Vector2 ENEMY_POSITION_OFFSET = new(BLOCK_WIDTH / 2.0f, BLOCK_HEIGHT);
 
   [GeneratedRegex(@"\r?\n")]
   private static partial Regex NewlineSplitRegex { get; }
@@ -108,7 +109,7 @@ internal partial class LevelLoader {
 
       case "4":
         /* snake */
-        enemies.Add(EnemySpriteFactory.Instance.CreateSnakeSprite(xPos, yPos));
+        enemies.Add(EnemySpriteFactory.Instance.CreateSnakeSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
         break;
 
       case "5":
@@ -172,27 +173,27 @@ internal partial class LevelLoader {
 
       case "9":
         /* shotgunner */
-        enemies.Add(EnemySpriteFactory.Instance.CreateShotgunnerSprite(xPos, yPos, game.StateGame.LevelManager));
+        enemies.Add(EnemySpriteFactory.Instance.CreateShotgunnerSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, game.StateGame.LevelManager));
         break;
 
       case "10":
         /* bat */
-        enemies.Add(EnemySpriteFactory.Instance.CreateBatSprite(xPos, yPos));
+        enemies.Add(EnemySpriteFactory.Instance.CreateBatSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
         break;
 
       case "11":
         /* rifleman */
-        enemies.Add(EnemySpriteFactory.Instance.CreateRiflemanSprite(xPos, yPos, game.StateGame.LevelManager));
+        enemies.Add(EnemySpriteFactory.Instance.CreateRiflemanSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, game.StateGame.LevelManager));
         break;
 
       case "12":
         /* tumbleweed */
-        enemies.Add(EnemySpriteFactory.Instance.CreateTumbleweedSprite(xPos, yPos));
+        enemies.Add(EnemySpriteFactory.Instance.CreateTumbleweedSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
         break;
 
       case "13":
         /* cactus */
-        enemies.Add(EnemySpriteFactory.Instance.CreateCactusSprite(xPos, yPos));
+        enemies.Add(EnemySpriteFactory.Instance.CreateCactusSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
         break;
 
       case "14":
