@@ -1,4 +1,6 @@
 Controls:
+  (GamePad-- means gamepad support not currently present but should be added.)
+  
   Main Menu:
     Key                      Action
     Q/GamePadY               Quit the game.
