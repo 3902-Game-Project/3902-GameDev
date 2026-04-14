@@ -11,6 +11,7 @@ internal class RifleAttackState : IRiflemanState {
   private double stateTimer;
   private double animationTimer;
   private readonly double timePerFrame = 0.15;
+  private readonly int damage = 80;
 
   private bool hasFired = false;
 
@@ -58,7 +59,7 @@ internal class RifleAttackState : IRiflemanState {
     Vector2 spawnPosition = rifleMan.Position + spawnOffset;
 
     // Create the bullet (Velocity: 300f, Lifetime: 2 seconds)
-    IProjectile bullet = ProjectileFactory.Instance.CreateBullet(spawnPosition, bulletDirection, 300f, 2f);
+    IProjectile bullet = ProjectileFactory.Instance.CreateBullet(spawnPosition, bulletDirection, 300f, 2f, damage);
     if (bullet is BulletDefault defaultBullet) {
       defaultBullet.IsPlayerShot = false;
     }
