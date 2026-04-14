@@ -191,7 +191,7 @@
 /processorParam:TextureFormat=Compressed
 /build:Misc/CreditsFont.spritefont
 
-#begin Misc/desert-atlas-v8.png
+#begin Misc/desert-atlas-v9.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -201,7 +201,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Misc/desert-atlas-v8.png
+/build:Misc/desert-atlas-v9.png
 
 #begin Misc/HUD Background.png
 /importer:TextureImporter
