@@ -5,6 +5,7 @@ using GameProject.Collisions;
 using GameProject.Enemies;
 using GameProject.Globals;
 using GameProject.Managers;
+using GameProject.PlayerSpace;
 using GameProject.Projectiles;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
@@ -172,5 +173,23 @@ internal class Level(
 
   public void RemovePickup(IWorldPickup pickup) {
     pickups.Remove(pickup);
+  }
+
+  public void LevelSwitchUpdateColliders(Player player) {
+    CollisionManager.Clear();
+
+    CollisionManager.Add(player);
+    
+    foreach (var block in CollidableBlocks) {
+      CollisionManager.Add(block);
+    }
+    
+    foreach (var doorBlock in Doors) {
+      CollisionManager.Add(doorBlock);
+    }
+    
+    foreach (var enemy in Enemies) {
+      CollisionManager.Add(enemy);
+    }
   }
 }

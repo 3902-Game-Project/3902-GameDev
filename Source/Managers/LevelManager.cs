@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using GameProject.Level;
+using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -132,17 +133,15 @@ internal class LevelManager(Game1 game) : ILevelManager {
 
   // Called by StateGameType.cs when beginning to fade in stategame
   // If there is a level switch queued, process it now
-  public void CompleteLevelSwitch() {
-    if (fadeToLevelName == null) {
-      // No level switch queued
-      return;
+  public void InitializeLevel() {
+    if (fadeToLevelName != null) {
+      currentLevelName = fadeToLevelName;
+      fadeToLevelName = null;
+      LevelSwitchUpdatePlayerPosition();
     }
 
-    currentLevelName = fadeToLevelName;
-    fadeToLevelName = null;
     CurrentLevel.ProjectileManager.ClearProjectiles();
-
-    LevelSwitchUpdatePlayerPosition();
+    CurrentLevel.LevelSwitchUpdateColliders(game.StateGame.Player);
   }
 
   public void PreviousLevel() {

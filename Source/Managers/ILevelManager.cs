@@ -9,5 +9,5 @@ internal interface ILevelManager : IInitable, IGPUpdatable, IGPDrawable {
   public void SwitchLevel(string newLevelName);
   public void PreviousLevel();
   public void NextLevel();
-  public void CompleteLevelSwitch();
+  public void InitializeLevel();
 }
