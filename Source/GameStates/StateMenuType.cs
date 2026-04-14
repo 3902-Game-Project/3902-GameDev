@@ -17,7 +17,7 @@ internal class StateMenuType(Game1 game) : IGameState {
 
   public void Initialize() {
     keyboardController = new KeyboardController(
-      pressedMappings: new Dictionary<Keys, ICommand> {
+      pressedMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.Q, new QuitCommand(game) },
         { Keys.Enter, new StartGameCommand(game) },
       }
@@ -27,7 +27,7 @@ internal class StateMenuType(Game1 game) : IGameState {
     // the readme is in Xbox controller layout, but testing with a
     // nintendo pro controller seems to suggest it is pro controller layout.
     gamePadController = new GamePadController(
-      pressedMappings: new Dictionary<Buttons, ICommand> {
+      pressedMappings: new Dictionary<Buttons, IGPCommand> {
         { Buttons.X, new QuitCommand(game) },
         { Buttons.A, new StartGameCommand(game) },
       }

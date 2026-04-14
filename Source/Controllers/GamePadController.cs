@@ -12,14 +12,14 @@ internal class GamePadController : IController {
   // Tracking of presses / releases must be shared across GameStates
   private static readonly GamePadDiffTracker gamePadTracker = new();
 
-  private readonly Dictionary<Buttons, ICommand> pressedMappings;
-  private readonly Dictionary<Buttons, ICommand> downMappings;
-  private readonly Dictionary<Buttons, ICommand> releasedMappings;
+  private readonly Dictionary<Buttons, IGPCommand> pressedMappings;
+  private readonly Dictionary<Buttons, IGPCommand> downMappings;
+  private readonly Dictionary<Buttons, IGPCommand> releasedMappings;
 
   public GamePadController(
-    Dictionary<Buttons, ICommand> pressedMappings = null,
-    Dictionary<Buttons, ICommand> downMappings = null,
-    Dictionary<Buttons, ICommand> releasedMappings = null
+    Dictionary<Buttons, IGPCommand> pressedMappings = null,
+    Dictionary<Buttons, IGPCommand> downMappings = null,
+    Dictionary<Buttons, IGPCommand> releasedMappings = null
   ) {
     this.pressedMappings = pressedMappings ?? [];
     this.downMappings = downMappings ?? [];
@@ -32,19 +32,19 @@ internal class GamePadController : IController {
     gamePadTracker.Update(gamePadState);
 
     foreach (Buttons button in gamePadTracker.GetPressed()) {
-      if (pressedMappings.TryGetValue(button, out ICommand command)) {
+      if (pressedMappings.TryGetValue(button, out IGPCommand command)) {
         command.Execute();
       }
     }
 
     foreach (Buttons button in gamePadTracker.GetDown()) {
-      if (downMappings.TryGetValue(button, out ICommand command)) {
+      if (downMappings.TryGetValue(button, out IGPCommand command)) {
         command.Execute();
       }
     }
 
     foreach (Buttons button in gamePadTracker.GetReleased()) {
-      if (releasedMappings.TryGetValue(button, out ICommand command)) {
+      if (releasedMappings.TryGetValue(button, out IGPCommand command)) {
         command.Execute();
       }
     }
