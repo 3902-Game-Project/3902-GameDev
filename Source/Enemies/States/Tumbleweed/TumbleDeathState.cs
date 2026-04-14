@@ -2,7 +2,7 @@
 
 namespace GameProject.Enemies.TumbleweedStates;
 
-internal class TumbleDeathState : ITumbleState {
+internal class TumbleDeathState : ITumbleweedState {
   private readonly TumbleweedSprite tumbleweed;
 
   private double deadHoldTimer;

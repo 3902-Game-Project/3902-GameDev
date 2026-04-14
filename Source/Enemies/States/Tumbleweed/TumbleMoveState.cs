@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies.TumbleweedStates;
 
-internal class TumbleMoveState : ITumbleState {
+internal class TumbleMoveState : ITumbleweedState {
   private readonly TumbleweedSprite tumbleweed;
   private readonly Random random;
   private double wanderTimer;

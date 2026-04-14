@@ -2,6 +2,6 @@
 
 namespace GameProject.Enemies.TumbleweedStates;
 
-internal interface ITumbleState {
+internal interface ITumbleweedState {
   void Update(GameTime gameTime);
 }

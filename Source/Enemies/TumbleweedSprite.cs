@@ -5,13 +5,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Enemies;
 
 internal class TumbleweedSprite : BaseEnemy {
-  private ITumbleState state;
+  private ITumbleweedState state;
 
   public TumbleweedSprite(Texture2D texture, Vector2 position) : base(texture, position, 48f, 48f) {
     state = new TumbleIdleState(this);
   }
 
-  public void ChangeState(ITumbleState newState) {
+  public void ChangeState(ITumbleweedState newState) {
     state = newState;
   }
 
