@@ -1,6 +1,8 @@
 using GameProject.Controllers;
+using GameProject.FireModes;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
+using GameProject.ProjectilePatterns;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
