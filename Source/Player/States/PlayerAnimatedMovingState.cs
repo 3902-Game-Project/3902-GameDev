@@ -76,6 +76,7 @@ internal class PlayerAnimatedMovingState(Player player) : IPlayerState {
       if (player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
         player.State = player.UseItemState;
       }
+      player.Inventory.Keys.RemoveAt(0);
     }
   }
 
