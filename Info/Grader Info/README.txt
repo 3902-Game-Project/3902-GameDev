@@ -10,7 +10,8 @@ Controls:
     S/Down/DPadDown          Moves player downwards.
     A/Left/DPadLeft          Moves player leftwards.
     D/Right/DPadRight        Moves player rightwards.
-    J/GamePadB               Cause the player to use item / attack.
+    J/GamePadA               Cause the player to use item / attack.
+    K/LeftTrigger            Use key item.
     D0                       Switch to sidearm item.
     D1                       Switch to primary item.
     D2                       Switch to consumable item.
@@ -34,6 +35,10 @@ Code Reviews:
   Found in the "Info/Grader Info/Code Review/Sprint 3" folder.
 
 Known bugs:
+  -Cannot move to escape block if just barely collided into it.
+  -Gamepad support not currently complete. We ran out of time.
+  -CrateBlock can get stuck on the perimeter.
+  -Enemies sometimes can walk off screen.
   Cannot move to escape block if just barely collided into it.
   Can push crates through walls and enemies forced to move along with crate.
   Gamepad support not currently complete. We ran out of time.
