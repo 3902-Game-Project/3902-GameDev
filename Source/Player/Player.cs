@@ -26,6 +26,8 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
   private static readonly float PLAYER_WIDTH = 171.0f * 0.15f;
   private static readonly float PLAYER_HEIGHT = 323.0f * 0.15f;
 
+  public static readonly float INVINCIBILITY_DURATION = 1.5f;
+
   public IShape Shape => Collider;
   private ILevelManager LevelManager { get; set; }
   private BoxCollider Collider { get; set; }
@@ -35,11 +37,11 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
   public Vector2 Position { get; set; }
   public Vector2 Velocity { get; set; }
   public float Speed { get; set; } = 200f;
-  public int Health { get; private set; } = 100;
+  public int Health { get; set; } = 100;
 
-  private float invincibilityTimer = 0f;
-  private readonly float invincibilityDuration = 1.5f;
-  public bool IsInvincible => invincibilityTimer > 0;
+  public float InvincibilityTimer { get; set; } = 0f;
+
+  public bool IsInvincible => InvincibilityTimer > 0;
 
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   private Vector2 lastInputVelocity = Vector2.Zero;
@@ -98,15 +100,7 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
   }
 
   public void TakeDamage(int amount) {
-    if (!IsInvincible) {
-      Health -= amount;
-      invincibilityTimer = invincibilityDuration;
-      if (Health <= 0) {
-        Health = 0;
-        Die();
-      }
-      SoundManager.Instance.Play(SoundID.PlayerHurt);
-    }
+    State.TakeDamage(amount);
   }
 
   public void Update(GameTime gameTime) {
@@ -125,7 +119,7 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
     }
     lastInputVelocity = Velocity;
 
-    if (invincibilityTimer > 0) invincibilityTimer -= dt;
+    if (InvincibilityTimer > 0) InvincibilityTimer -= dt;
     if (Velocity != Vector2.Zero) Velocity = Vector2.Normalize(Velocity) * Speed;
     float xStep = Velocity.X * dt;
     float yStep = Velocity.Y * dt;

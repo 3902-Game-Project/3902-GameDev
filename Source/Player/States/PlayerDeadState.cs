@@ -16,6 +16,7 @@ internal class PlayerDeadState(Player player, Game1 game) : APlayerState(player)
   public override void MoveRight() { }
   public override void UseItem(UseType useType) { }
   public override void UseKey(UseType useType) { }
+  public override void TakeDamage(int amount) { }
   public override void Die() { }
 
   public override void Update(GameTime gameTime) {

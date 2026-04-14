@@ -10,5 +10,6 @@ internal interface IPlayerState : IGPUpdatable, IGPDrawable {
   void MoveRight();
   void UseItem(UseType useType);
   void UseKey(UseType useType);
+  void TakeDamage(int amount);
   void Die();
 }
