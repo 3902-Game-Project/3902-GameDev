@@ -1,5 +1,5 @@
 ﻿namespace GameProject.Globals;
 
 internal static class Flags {
-  public static bool HALT_ALL_UPDATES = false;
+  public static bool HaltAllUpdates { get; set; } = false;
 }

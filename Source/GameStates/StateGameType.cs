@@ -45,6 +45,7 @@ internal class StateGameType : IGameState {
         { Keys.F, new PlayerInteractCommand(Player) },
         { Keys.Space, new SwapWeaponCommand(Player) },
         { Keys.Tab, new ToggleMusicCommand() },
+        { Keys.H, new ToggleUpdatesCommand() },
       },
       downMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.W, new PlayerMoveUpCommand(Player) },
@@ -102,7 +103,7 @@ internal class StateGameType : IGameState {
     mouseController.Update(gameTime);
     gamePadController.Update(gameTime);
 
-    if (!Flags.HALT_ALL_UPDATES) {
+    if (!Flags.HaltAllUpdates) {
       LevelManager.Update(gameTime);
       Player.Update(gameTime);
     }
