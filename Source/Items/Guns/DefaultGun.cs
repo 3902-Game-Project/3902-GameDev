@@ -1,3 +1,4 @@
+using System;
 using GameProject.Controllers;
 using GameProject.FireModes;
 using GameProject.Managers;
@@ -24,16 +25,59 @@ internal abstract class DefaultGun(Texture2D texture, Vector2 startPosition, Gam
   protected Vector2 origin;
   protected Vector2 bulletSpawnOffset;
 
+  // Ammo and reload state
+  public float EquipTimer { get; private set; } = 0f;
+  public float ReloadTimer { get; private set; } = 0f;
+  public bool IsReloading { get; private set; } = false;
+
   public GunStats PublicStats => stats;
 
   public virtual void OnEquip() {
+    EquipTimer = stats.EquipTime; // Prevent double-pumping
+    IsReloading = false;
     fireMode?.OnEquip();
   }
+
   public virtual void OnUnequip() {
+    IsReloading = false;
     fireMode?.OnUnequip();
   }
 
+  public void StartReload() {
+    if (stats.CurrentAmmo < stats.MaxAmmo && game.StateGame.Player.Inventory.Ammo[stats.AmmoType] > 0) {
+      IsReloading = true;
+      ReloadTimer = stats.ReloadTime;
+    }
+  }
+
   public virtual void Update(GameTime gameTime) {
+    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
+
+    if (EquipTimer > 0) {
+      EquipTimer -= dt;
+    } else if (IsReloading) {
+      ReloadTimer -= dt;
+      if (ReloadTimer <= 0) {
+        int ammoNeeded = stats.MaxAmmo - stats.CurrentAmmo;
+        int ammoAvailable = game.StateGame.Player.Inventory.Ammo[stats.AmmoType];
+
+        if (ammoAvailable > 0 && ammoNeeded > 0) {
+          int toLoad = stats.ReloadsOneByOne ? 1 : Math.Min(ammoNeeded, ammoAvailable);
+          stats.CurrentAmmo += toLoad;
+          game.StateGame.Player.Inventory.Ammo[stats.AmmoType] -= toLoad;
+
+          // Loop the reload if more still needed
+          if (stats.CurrentAmmo < stats.MaxAmmo && game.StateGame.Player.Inventory.Ammo[stats.AmmoType] > 0) {
+            ReloadTimer = stats.ReloadTime;
+          } else {
+            IsReloading = false;
+          }
+        } else {
+          IsReloading = false;
+        }
+      }
+    }
+
     fireMode?.Update(gameTime);
   }
 
@@ -50,37 +94,30 @@ internal abstract class DefaultGun(Texture2D texture, Vector2 startPosition, Gam
       rotation = MathHelper.PiOver2;
     }
 
-    spriteBatch.Draw(
-      texture,
-      Position,
-      sourceRectangle,
-      Color.White,
-      rotation,
-      origin,
-      scale,
-      effects,
-      0f
-    );
+    spriteBatch.Draw(texture, Position, sourceRectangle, Color.White, rotation, origin, scale, effects, 0f);
   }
 
   public void DrawUI(SpriteBatch spriteBatch, Vector2 position, float scale, Color tint) {
-    spriteBatch.Draw(
-      texture: texture,
-      position: position, // This was the missing line!
-      sourceRectangle: sourceRectangle,
-      color: tint,
-      rotation: 0f,
-      origin: Vector2.Zero,
-      scale: scale,
-      effects: SpriteEffects.None,
-      layerDepth: 0f
-    );
+    spriteBatch.Draw(texture, position, sourceRectangle, tint, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
   }
 
   public virtual void OnPickup(Player player) { }
 
   public virtual void Use(UseType useType) {
+    // Check for Reload Interruption
+    if (IsReloading) {
+      IsReloading = false;
+      EquipTimer = stats.EquipTime; // Applying the interrupt penalty
+      return;
+    }
+
+    // Prevent firing if equipping or empty
+    if (EquipTimer > 0 || stats.CurrentAmmo <= 0) return;
+
     if (fireMode == null || !fireMode.CanFire(useType)) return;
+
+    // Decrement ammo in the gun
+    stats.CurrentAmmo--;
 
     Vector2 bulletDirection;
     Vector2 actualOffset;
@@ -99,7 +136,6 @@ internal abstract class DefaultGun(Texture2D texture, Vector2 startPosition, Gam
     }
 
     Vector2 bulletSpawnPosition = Position + actualOffset;
-
     projectilePattern.SpawnProjectiles(game.StateGame.LevelManager.CurrentLevel.ProjectileManager, bulletSpawnPosition, bulletDirection, stats);
     SoundManager.Instance.Play(stats.GunshotID);
   }
