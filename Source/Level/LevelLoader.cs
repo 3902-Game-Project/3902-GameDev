@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using GameProject.Blocks;
+using GameProject.Enemies;
 using GameProject.Factories;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;

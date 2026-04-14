@@ -1,4 +1,5 @@
 ﻿using System;
+using GameProject.Managers;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies.RiflemanStates;

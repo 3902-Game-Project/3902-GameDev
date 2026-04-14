@@ -1,4 +1,6 @@
-﻿namespace GameProject.Managers;
+﻿using GameProject.GlobalInterfaces;
+
+namespace GameProject.Managers;
 
 internal interface ILevelManager : IInitable, IGPUpdatable, IGPDrawable {
   ILevel CurrentLevel { get; }

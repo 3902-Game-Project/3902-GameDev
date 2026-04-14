@@ -1,4 +1,5 @@
 ﻿using GameProject.Collisions;
+using GameProject.Managers;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

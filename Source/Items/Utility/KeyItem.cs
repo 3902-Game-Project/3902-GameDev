@@ -1,5 +1,8 @@
 ﻿using GameProject.Blocks;
+using GameProject.Controllers;
+using GameProject.Managers;
 using GameProject.PlayerSpace;
+using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

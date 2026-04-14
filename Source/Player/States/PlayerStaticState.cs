@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameProject.Controllers;
+using GameProject.Items;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
@@ -40,7 +42,7 @@ internal class PlayerStaticState(Player player) : IPlayerState {
   public void UseItem(UseType useType) {
     if (player.Inventory.ActiveItem != null) {
       player.Inventory.ActiveItem.Use(useType);
-      if (player.Inventory.ActiveItem.Category == Enums.ItemCategory.Consumable) {
+      if (player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
         player.State = player.UseItemState;
       }
     }

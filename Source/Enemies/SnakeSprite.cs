@@ -1,3 +1,4 @@
+using GameProject.Enemies.SnakeStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

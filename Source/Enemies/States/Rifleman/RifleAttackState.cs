@@ -1,4 +1,5 @@
 ﻿using GameProject.Factories;
+using GameProject.Managers;
 using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
 

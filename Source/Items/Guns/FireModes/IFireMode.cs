@@ -1,3 +1,4 @@
+using GameProject.Controllers;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.FireModes;

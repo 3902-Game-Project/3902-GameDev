@@ -1,3 +1,4 @@
+using GameProject.GlobalInterfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Projectiles;

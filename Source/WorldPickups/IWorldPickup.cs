@@ -1,3 +1,4 @@
+using GameProject.GlobalInterfaces;
 using GameProject.PlayerSpace;
 
 namespace GameProject.WorldPickups;

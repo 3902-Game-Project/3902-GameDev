@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameProject.Managers;
+using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies.ShotgunnerStates;
 

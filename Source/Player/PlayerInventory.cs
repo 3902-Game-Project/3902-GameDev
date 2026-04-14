@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using GameProject.Items;
+using GameProject.Managers;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 

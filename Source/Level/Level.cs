@@ -3,6 +3,7 @@ using GameProject.Blocks;
 using GameProject.Enemies;
 using GameProject.Globals;
 using GameProject.Managers;
+using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;

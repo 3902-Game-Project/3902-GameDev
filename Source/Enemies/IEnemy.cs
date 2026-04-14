@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameProject.Collisions;
+using GameProject.GlobalInterfaces;
+using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies;
 

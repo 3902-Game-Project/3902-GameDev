@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using GameProject.Blocks;
 using GameProject.Collisions;
+using GameProject.Collisions.Shapes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

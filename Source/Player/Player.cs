@@ -1,7 +1,10 @@
 ﻿using System;
 using GameProject.Collisions;
+using GameProject.Collisions.Shapes;
+using GameProject.Controllers;
 using GameProject.GlobalInterfaces;
 using GameProject.Managers;
+using GameProject.PlayerSpace.States;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;

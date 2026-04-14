@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameProject.Enemies.ShotgunnerStates;
+using GameProject.Managers;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
