@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.ButtonDiffTrackers;
 
-internal abstract class ButtonDiffTracker<ButtonsEnum, ButtonStateReference> {
+internal abstract class AButtonDiffTracker<ButtonsEnum, ButtonStateReference> {
   private ButtonsEnum[] pastButtonState = [];
   private ButtonsEnum[] currentButtonState = [];
 

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.ButtonDiffTrackers;
 
-internal class GamePadDiffTracker : ButtonDiffTracker<Buttons, GamePadState> {
+internal class GamePadDiffTracker : AButtonDiffTracker<Buttons, GamePadState> {
   private static readonly float TRIGGER_THRESHOLD = 0.9f;
   private static readonly float STICK_THRESHOLD_SQUARED = 0.9f * 0.9f;
   // Use MathF.PI * (5.0f / 16.0f) for perfectly sized octagonal stick regions (allowing diagonals)

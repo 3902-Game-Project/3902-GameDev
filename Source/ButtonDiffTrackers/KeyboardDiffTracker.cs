@@ -2,7 +2,7 @@
 
 namespace GameProject.ButtonDiffTrackers;
 
-internal class KeyboardDiffTracker : ButtonDiffTracker<Keys, KeyboardState> {
+internal class KeyboardDiffTracker : AButtonDiffTracker<Keys, KeyboardState> {
   public override void Update(KeyboardState keyboardState) {
     UpdateButtonState(keyboardState.GetPressedKeys());
   }
