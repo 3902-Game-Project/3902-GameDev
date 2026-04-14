@@ -36,18 +36,19 @@ internal class StateGameType : IGameState {
   public void Initialize() {
     keyboardController = new KeyboardController(
       pressedMappings: new Dictionary<Keys, IGPCommand> {
-        { Keys.R, new ReturnToMenuAndResetCommand(game) },
         { Keys.Q, new QuitCommand(game) },
+        { Keys.R, new ReturnToMenuAndResetCommand(game) },
         { Keys.P, new PauseCommand(game) },
         { Keys.I, new OpenItemScreenCommand(game) },
         { Keys.J, new PlayerUseItemCommand(Player, UseType.Pressed) },
-        { Keys.K, new PlayerUseKeyCommand(Player, UseType.Pressed)  },
+        { Keys.K, new PlayerUseKeyCommand(Player, UseType.Pressed) },
         { Keys.E, new PlayerDieCommand(Player) },
-        { Keys.T, new PreviousLevelCommand(LevelManager) },
-        { Keys.Y, new NextLevelCommand(LevelManager) },
         { Keys.F, new PlayerInteractCommand(Player) },
         { Keys.Space, new SwapWeaponCommand(Player) },
         { Keys.Tab, new ToggleMusicCommand() },
+
+        { Keys.T, new PreviousLevelCommand(LevelManager) },
+        { Keys.Y, new NextLevelCommand(LevelManager) },
         { Keys.H, new ToggleUpdatesCommand() },
       },
       downMappings: new Dictionary<Keys, IGPCommand> {

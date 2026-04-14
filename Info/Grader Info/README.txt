@@ -6,21 +6,25 @@ Controls:
 
   Game:
     Key                      Action
+    Q/GamePadY               Quit the game.
+    R/GamePadA               Reset to main menu.
+    P/GamePad--              Pause the game.
+    I/GamePad--              Open item screen.
+    J/GamePadB               Cause the player to use item / attack.
+    K/LeftTrigger            Use key item.
+    E/GamePadX               Instantly kills the player.
+    F/GamePad--              Pick up a nearby item (interact).
+    Space/GamePad--          Swap to other weapon.
+    Tab/GamePad--            Toggle music.
+
     W/Up/DPadUp              Moves player upwards.
     S/Down/DPadDown          Moves player downwards.
     A/Left/DPadLeft          Moves player leftwards.
     D/Right/DPadRight        Moves player rightwards.
-    J/GamePadA               Cause the player to use item / attack.
-    K/LeftTrigger            Use key item.
-    D0                       Switch to sidearm item.
-    D1                       Switch to primary item.
-    D2                       Switch to consumable item.
-    D3                       Switch to melee item.
-    E/GamePadX               Instantly kills the player.
-    R/GamePadA               Reset to main menu.
-    Q/GamePadY               Quit the game.
+
     Y/MouseLeft/RightBumper  Debug: switch to next level.
     T/MouseRight/LeftBumper  Debug: switch to previous level.
+    H/GamePad-- Debug: toggle halt game (disable almost all Update methods).
 
   Win/Loss Screen:
     Key                      Action
@@ -36,9 +40,9 @@ Code Reviews:
 
 Known bugs:
   -Cannot move to escape block if just barely collided into it.
-  -Gamepad support not currently complete. We ran out of time.
   -Can push crates through walls and enemies forced to move along with crate.
   -Enemies sometimes can walk off screen.
+  -Gamepad support not currently complete. We ran out of time.
 
 Sprint 2 Report:
 The burndown chart shows almost zero progress being made on the sprint since the start of the sprint. However, this is because the tasks on Jira do not properly correspond to the work being done on the project and because Jira was not updated to reflect the work on the project. In terms of actual functionality, by the afternoon of 2026-02-22 most of the functionality of the sprint was present. The only things missing were player and enemy weapon firing, and the ability to switch between the enemies to render. Additionally, functionality was still being added after week 2 of the sprint. This made code reviews less complete and provided less time for refactoring. In the future, it would be preferable to complete the sprint early to give time for code reviews, but this might not be feasable.
