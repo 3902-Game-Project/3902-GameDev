@@ -34,19 +34,15 @@ internal class PlayerAnimatedMovingState(Player player) : IPlayerState {
 
   public void MoveUp() {
     player.Velocity = new Vector2(player.Velocity.X, -player.Speed);
-    player.Direction = FacingDirection.Up;
   }
   public void MoveDown() {
     player.Velocity = new Vector2(player.Velocity.X, player.Speed);
-    player.Direction = FacingDirection.Down;
   }
   public void MoveLeft() {
     player.Velocity = new Vector2(-player.Speed, player.Velocity.Y);
-    player.Direction = FacingDirection.Left;
   }
   public void MoveRight() {
     player.Velocity = new Vector2(player.Speed, player.Velocity.Y);
-    player.Direction = FacingDirection.Right;
   }
 
   public void Update(GameTime gameTime) {

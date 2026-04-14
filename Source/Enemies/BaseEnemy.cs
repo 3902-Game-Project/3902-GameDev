@@ -40,7 +40,7 @@ internal abstract class BaseEnemy(Texture2D texture, Vector2 position, float col
       } else if (info.Side == CollisionSide.Top || info.Side == CollisionSide.Bottom) {
         Velocity = new Vector2(Velocity.X, 0);
       }
-      Position += info.Direction * 2f;
+      Position = CollisionHelper.GetNudgedPosition(info, Position, 2f);
       UpdateCollider();
     }
   }
