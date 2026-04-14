@@ -134,9 +134,7 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
     State.Update(gameTime);
     Velocity = Vector2.Zero;
 
-    if (Inventory.ActiveItem != null) {
-      Inventory.ActiveItem.Update(gameTime);
-    }
+    Inventory.ActiveItem?.Update(gameTime);
   }
 
   public void OnCollision(CollisionInfo info) {

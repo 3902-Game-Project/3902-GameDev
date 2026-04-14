@@ -59,9 +59,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
 
   public void EquipSelectedWeapon() {
     Player player = game.StateGame.Player;
-    if (player != null) {
-      player.Inventory.EquipWeapon(SelectedWeaponIndex);
-    }
+    player?.Inventory.EquipWeapon(SelectedWeaponIndex);
   }
 
   // We can leave this empty now because MiscAssetStore handles the loading!

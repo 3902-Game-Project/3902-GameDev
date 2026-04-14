@@ -30,9 +30,7 @@ internal class CollisionManager : IGPUpdatable {
   }
 
   public void Remove(ICollidable collider) {
-    if (colliders.Contains(collider)) {
-      colliders.Remove(collider);
-    }
+    colliders.Remove(collider);
   }
 
   public void Clear() {
