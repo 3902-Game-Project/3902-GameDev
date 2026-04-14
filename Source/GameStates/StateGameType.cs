@@ -77,7 +77,7 @@ internal class StateGameType : IGameState {
         { Buttons.X, new QuitCommand(game) },
         { Buttons.B, new ReturnToMenuAndResetCommand(game) },
         { Buttons.A, new PlayerUseItemCommand(Player, UseType.Pressed) },
-        { Buttons.DPadLeft, new PlayerUseKeyCommand(Player, UseType.Pressed) },
+        { Buttons.LeftTrigger, new PlayerUseKeyCommand(Player, UseType.Pressed) },
         { Buttons.Y, new PlayerDieCommand(Player) },
         { Buttons.LeftShoulder, new PreviousLevelCommand(LevelManager) },
         { Buttons.RightShoulder, new NextLevelCommand(LevelManager) },
