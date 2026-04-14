@@ -15,6 +15,8 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.GameStates;
 
 internal class StateGameType : IGameState {
+  private static Color BACKGROUND_COLOR = new(20, 20, 120);
+
   private readonly Game1 game;
 
   private IController keyboardController;
@@ -112,7 +114,7 @@ internal class StateGameType : IGameState {
   }
 
   public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
-    graphicsDevice.Clear(Color.CornflowerBlue);
+    graphicsDevice.Clear(BACKGROUND_COLOR);
 
     graphicsDevice.Viewport = game.GameViewport;
 
@@ -137,6 +139,18 @@ internal class StateGameType : IGameState {
       SamplerState.PointClamp,
       DepthStencilState.None,
       RasterizerState.CullNone
+    );
+
+    spriteBatch.Draw(
+      texture: TextureStore.Instance.HUDBackground,
+      position: Vector2.Zero,
+      sourceRectangle: null,
+      color: Color.DarkSlateGray,
+      rotation: 0f,
+      origin: Vector2.Zero,
+      scale: 1.0f,
+      effects: SpriteEffects.None,
+      layerDepth: 0f
     );
 
     var healthBarPosition = new Vector2(20, 20);

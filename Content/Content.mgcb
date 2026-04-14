@@ -203,6 +203,18 @@
 /processorParam:TextureFormat=Color
 /build:Misc/desert-atlas-v8.png
 
+#begin Misc/HUD Background.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Misc/HUD Background.png
+
 #begin Misc/playerSpritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
