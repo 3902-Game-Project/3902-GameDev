@@ -20,11 +20,12 @@ internal class ItemSpriteFactory {
 
   public IItem CreateRevolver(float xPos, float yPos, Game1 game) {
     GunStats stats = new() {
+      AmmoType = AmmoType.Light,
       BulletVelocity = 500f,
       FireRate = .2f,
       MaxAmmo = 6,
       CurrentAmmo = 6,
-      ReloadTime = 1.5f,
+      ReloadTime = 0.2f,
       BaseDamage = 30
     };
     return new RevolverItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
@@ -32,10 +33,11 @@ internal class ItemSpriteFactory {
 
   public IItem CreateRifle(float xPos, float yPos, Game1 game) {
     var stats = new GunStats {
+      AmmoType = AmmoType.Heavy,
       BulletVelocity = 1000f,
       MaxAmmo = 10,
       CurrentAmmo = 10,
-      ReloadTime = 3f,
+      ReloadTime = 0.4f,
       BaseDamage = 70
     };
     return new RifleItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
@@ -43,12 +45,13 @@ internal class ItemSpriteFactory {
 
   public IItem CreateShotgun(float xPos, float yPos, Game1 game) {
     var stats = new GunStats {
+      AmmoType = AmmoType.Shells,
       BulletVelocity = 400f,
       SpreadAngle = 15f,
       PelletCount = 5,
       MaxAmmo = 2,
       CurrentAmmo = 2,
-      ReloadTime = 2f,
+      ReloadTime = 0.6f,
       BaseDamage = 20
     };
     return new ShotgunItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
