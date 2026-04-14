@@ -48,6 +48,9 @@ Code Metrics:
 Code Reviews:
   Found in the "Info/Grader Info/Code Review/Sprint 4" folder.
 
+Burndown Charts:
+  Found in the "Info/Grader Info/Burndown Charts" folder.
+
 Known bugs:
   -Cannot move to escape block if just barely collided into it.
   -Can push crates through walls and enemies forced to move along with crate.
