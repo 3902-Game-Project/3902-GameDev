@@ -16,11 +16,12 @@ internal abstract class APlayerState(Player player) : IPlayerState {
   public abstract void UseKey(UseType useType);
 
   public virtual void TakeDamage(int amount) {
-    if (!Player.IsInvincible) {
-      Player.Health -= amount;
-      Player.InvincibilityTimer = Player.INVINCIBILITY_DURATION;
-      if (Player.Health <= 0) {
-        Player.Health = 0;
+    if (!player.IsInvincible) {
+      player.Health -= amount;
+      player.InvincibilityTimer = Player.INVINCIBILITY_DURATION;
+      player.DamageFlashTimer = Player.DAMAGE_FLASH_DURATION;
+      if (player.Health <= 0) {
+        player.Health = 0;
         Die();
       }
       SoundManager.Instance.Play(SoundID.PlayerHurt);

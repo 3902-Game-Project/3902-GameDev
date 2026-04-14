@@ -45,7 +45,7 @@ internal class PlayerUseItemState(Player player) : APlayerState(player) {
       Player.Texture,
       Player.Position,
       sourceRect,
-      Color.White,
+      player.CurrentTintColor,
       0f,
       origin,
       0.15f, // Keeps the scale consistent with other states

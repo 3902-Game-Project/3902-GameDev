@@ -26,6 +26,7 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
   private static readonly float PLAYER_HEIGHT = 323.0f * 0.15f;
 
   public static readonly float INVINCIBILITY_DURATION = 1.5f;
+  public static readonly float DAMAGE_FLASH_DURATION = 0.3f;
 
   public IShape Shape => Collider;
   private ILevelManager LevelManager { get; set; }
@@ -44,6 +45,7 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
   private int activeDirY = 0;
 
   public float InvincibilityTimer { get; set; } = 0f;
+  public float DamageFlashTimer { get; set; } = 0f;
 
   public bool IsInvincible => InvincibilityTimer > 0;
 
@@ -67,6 +69,7 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
   public IPlayerState MovingState { get; private set; }
   public IPlayerState UseItemState { get; private set; }
   public IPlayerState DeadState { get; private set; }
+  public Color CurrentTintColor => DamageFlashTimer > 0 ? Color.Red : Color.White;
 
   public Player(ILevelManager levelManager, Game1 game) {
     LevelManager = levelManager;
@@ -146,6 +149,7 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
     lastInputVelocity = Velocity;
 
     if (InvincibilityTimer > 0) InvincibilityTimer -= dt;
+    if (DamageFlashTimer > 0) DamageFlashTimer -= dt;
     if (Velocity != Vector2.Zero) Velocity = Vector2.Normalize(Velocity) * Speed;
     float xStep = Velocity.X * dt;
     float yStep = Velocity.Y * dt;
