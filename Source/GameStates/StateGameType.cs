@@ -106,8 +106,8 @@ internal class StateGameType : IGameState {
     gamePadController.Update(gameTime);
 
     if (!Flags.HaltAllUpdates) {
-      LevelManager.Update(gameTime);
       Player.Update(gameTime);
+      LevelManager.Update(gameTime);
     }
   }
 

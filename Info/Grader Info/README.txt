@@ -35,7 +35,7 @@ Code Reviews:
 
 Known bugs:
   Cannot move to escape block if just barely collided into it.
-  
+  Can push crates through walls and enemies forced to move along with crate.
   Gamepad support not currently complete. We ran out of time.
 
 Sprint 2 Report:
