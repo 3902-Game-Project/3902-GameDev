@@ -97,7 +97,7 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
     Texture = contentManager.Load<Texture2D>("Misc/playerSpritesheet");
   }
 
-  public void TakeDamage(int amount = 10) {
+  public void TakeDamage(int amount) {
     if (!IsInvincible) {
       Health -= amount;
       invincibilityTimer = invincibilityDuration;
