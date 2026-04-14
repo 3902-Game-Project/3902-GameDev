@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using GameProject.Blocks;
 using GameProject.Collisions;
 using GameProject.Enemies;
@@ -21,10 +22,15 @@ internal class Level(
   Vector2 playerPosition
 ) : ILevel {
   private void CheckLevelClear() {
-    if (Enemies.Count == 0) {
+    var killableEnemies = Enemies.Where(e => e is not CactusSprite).ToList();
+    bool allEnemiesDead = killableEnemies.All(e => e.Health <= 0);
+    if (allEnemiesDead) {
       foreach (var door in Doors) {
         if (door is SmallDoorBlock smallDoorBlock) {
           smallDoorBlock.ChangeState(LockableDoorBlockState.Open);
+        }
+        if (door is SlattedDoorBlock slattedDoorBlock) {
+          slattedDoorBlock.ChangeState(LockableDoorBlockState.Open);
         }
       }
     }
