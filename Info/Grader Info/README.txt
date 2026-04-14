@@ -24,7 +24,7 @@ Controls:
 
     Y/MouseLeft/RightBumper  Debug: switch to next level.
     T/MouseRight/LeftBumper  Debug: switch to previous level.
-    H/GamePad-- Debug: toggle halt game (disable almost all Update methods).
+    H/GamePad--              Debug: toggle halt game (disable almost all Update methods).
 
   Win/Loss Screen:
     Key                      Action
