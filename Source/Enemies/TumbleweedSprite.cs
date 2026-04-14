@@ -8,7 +8,7 @@ internal class TumbleweedSprite : BaseEnemy {
   private ITumbleweedState state;
 
   public TumbleweedSprite(Texture2D texture, Vector2 position) : base(texture, position, 48f, 48f) {
-    state = new TumbleIdleState(this);
+    state = new TumbleweedIdleState(this);
   }
 
   public void ChangeState(ITumbleweedState newState) {
@@ -42,7 +42,7 @@ internal class TumbleweedSprite : BaseEnemy {
     base.TakeDamage(damage);
 
     if (wasAlive && Health <= 0) {
-      ChangeState(new TumbleDeathState(this));
+      ChangeState(new TumbleweedDeathState(this));
     }
   }
 }

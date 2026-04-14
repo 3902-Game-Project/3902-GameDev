@@ -2,13 +2,13 @@
 
 namespace GameProject.Enemies.TumbleweedStates;
 
-internal class TumbleDeathState : ITumbleweedState {
+internal class TumbleweedDeathState : ITumbleweedState {
   private readonly TumbleweedSprite tumbleweed;
 
   private double deadHoldTimer;
   private readonly double timeToHoldLastFrame = 1.0;
 
-  public TumbleDeathState(TumbleweedSprite tumbleweed) {
+  public TumbleweedDeathState(TumbleweedSprite tumbleweed) {
     this.tumbleweed = tumbleweed;
 
     this.tumbleweed.Velocity = Vector2.Zero;
