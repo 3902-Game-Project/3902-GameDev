@@ -2,7 +2,7 @@
 
 namespace GameProject.GameStates;
 
-internal interface IGameState : IGPUpdatable, ILowLevelDrawable, IInitable {
+internal interface IGameState : IInitable, IGPUpdatable, ILowLevelDrawable {
   void OnStateEnter(bool prevStateIsCurrentState);
   void OnStateLeave(bool nextStateIsCurrentState);
   void OnStateStartFadeIn(bool prevStateIsCurrentState);
