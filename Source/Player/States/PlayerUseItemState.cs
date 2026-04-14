@@ -16,6 +16,7 @@ internal class PlayerUseItemState(Player player) : IPlayerState {
   public void MoveLeft() { }
   public void MoveRight() { }
   public void UseItem(UseType useType) { }
+  public void UseKey(UseType useType) { }
 
   public void Die() {
     player.State = player.DeadState;

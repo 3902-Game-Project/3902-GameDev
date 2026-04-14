@@ -70,6 +70,15 @@ internal class PlayerAnimatedMovingState(Player player) : IPlayerState {
     }
   }
 
+  public void UseKey(UseType useType) {
+    if (player.Inventory.Keys.Count > 0) {
+      player.Inventory.Keys[0].Use(useType);
+      if (player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
+        player.State = player.UseItemState;
+      }
+    }
+  }
+
   public void Die() {
     player.State = player.DeadState;
   }
