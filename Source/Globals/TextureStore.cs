@@ -16,7 +16,7 @@ internal class TextureStore : IInitable {
 
   public void LoadContent(ContentManager contentManager) {
     WhitePixel = contentManager.Load<Texture2D>("Misc/WhitePixel");
-    MainBlockItemAtlas = contentManager.Load<Texture2D>("Misc/desert-atlas-v8");
+    MainBlockItemAtlas = contentManager.Load<Texture2D>("Misc/desert-atlas-v9");
     HealthBar = contentManager.Load<Texture2D>("Misc/blood_red_bar");
     HUDBackground = contentManager.Load<Texture2D>("Misc/HUD Background");
   }
