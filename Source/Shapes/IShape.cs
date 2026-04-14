@@ -1,4 +1,4 @@
-namespace GameProject.Interfaces;
+namespace GameProject.Collisions.Shapes;
 
 internal enum ShapeType { Circle, Box }
 

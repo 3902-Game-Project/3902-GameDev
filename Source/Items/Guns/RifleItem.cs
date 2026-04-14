@@ -1,6 +1,4 @@
-using GameProject.Enums;
-using GameProject.Interfaces;
-using GameProject.Managers;
+using GameProject.FireModes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

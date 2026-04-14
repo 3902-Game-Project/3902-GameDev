@@ -1,9 +1,8 @@
 ﻿using System;
-using GameProject.Enemies;
-using GameProject.Interfaces;
+using GameProject.Managers;
 using Microsoft.Xna.Framework;
 
-namespace GameProject.States;
+namespace GameProject.Enemies.RiflemanStates;
 
 internal class RifleWanderState : IRiflemanState {
   private readonly RiflemanSprite rifle;

@@ -1,8 +1,6 @@
-﻿using GameProject.Enemies;
-using GameProject.Interfaces;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
-namespace GameProject.States;
+namespace GameProject.Enemies.SnakeStates;
 
 internal class SnakeAttackState : ISnakeState {
   private readonly SnakeSprite snake;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Content;
 
-namespace GameProject.Interfaces;
+namespace GameProject.GlobalInterfaces;
 
 internal interface IInitable {
   void Initialize();

@@ -1,8 +1,6 @@
-﻿using GameProject.Enemies;
-using GameProject.Interfaces;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
-namespace GameProject.States;
+namespace GameProject.Enemies.CactusStates;
 
 internal class CactusIdleState : ICactusState {
   private readonly CactusSprite cactus;

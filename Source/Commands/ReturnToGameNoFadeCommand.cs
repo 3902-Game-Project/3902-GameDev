@@ -1,6 +1,4 @@
-﻿using GameProject.Interfaces;
-
-namespace GameProject.Commands;
+﻿namespace GameProject.Commands;
 
 internal class ReturnToGameNoFadeCommand(Game1 game) : ICommand {
   public void Execute() {

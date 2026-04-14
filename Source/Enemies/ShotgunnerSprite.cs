@@ -1,5 +1,5 @@
-﻿using GameProject.Interfaces;
-using GameProject.States;
+﻿using GameProject.Enemies.ShotgunnerStates;
+using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
+using GameProject.Blocks;
+using GameProject.Enemies;
+using GameProject.GlobalInterfaces;
 using GameProject.Managers;
+using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 
-namespace GameProject.Interfaces;
+namespace GameProject.Level;
 
 internal interface ILevel : IInitable, IGPUpdatable, IGPDrawable {
   List<IBlock> Doors { get; }

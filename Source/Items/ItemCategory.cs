@@ -1,4 +1,5 @@
-﻿namespace GameProject.Enums;
+﻿namespace GameProject.Items;
+
 internal enum ItemCategory {
   Melee,       // Whip, machete maybe, etc.
   Sidearm,     // Small guns (Revolver)

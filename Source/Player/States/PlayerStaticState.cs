@@ -1,15 +1,15 @@
-﻿using GameProject.Interfaces;
-using GameProject.PlayerSpace;
+﻿using GameProject.Controllers;
+using GameProject.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.PlayerStates;
+namespace GameProject.PlayerSpace.States;
 
 internal class PlayerStaticState(Player player) : IPlayerState {
   // Same rectangles as moving state except that left state set to same as right state (but flipped) for consistency
   private Rectangle SpriteRight = new(773, 56, 171, 323);
   private Rectangle SpriteLeft = new(773, 56, 171, 323);
-  private Rectangle SpriteUp = new(453, 425, 161, 322); 
+  private Rectangle SpriteUp = new(453, 425, 161, 322);
   private Rectangle SpriteDown = new(455, 58, 161, 318);
 
   public void MoveUp() {
@@ -42,7 +42,7 @@ internal class PlayerStaticState(Player player) : IPlayerState {
   public void UseItem(UseType useType) {
     if (player.Inventory.ActiveItem != null) {
       player.Inventory.ActiveItem.Use(useType);
-      if (player.Inventory.ActiveItem.Category == Enums.ItemCategory.Consumable) {
+      if (player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
         player.State = player.UseItemState;
       }
     }

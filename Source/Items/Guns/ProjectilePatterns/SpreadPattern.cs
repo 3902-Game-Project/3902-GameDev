@@ -1,9 +1,9 @@
 using GameProject.Factories;
-using GameProject.Interfaces;
+using GameProject.Items;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
 
-namespace GameProject.Items;
+namespace GameProject.ProjectilePatterns;
 
 internal class SpreadPattern : IProjectilePattern {
   public void SpawnProjectiles(ProjectileManager projectileManager, Vector2 spawnPosition, Vector2 direction, GunStats stats) {

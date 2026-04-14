@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace GameProject.Interfaces;
+namespace GameProject.Enemies.CactusStates;
 
 internal interface ICactusState {
   void Update(GameTime gameTime);

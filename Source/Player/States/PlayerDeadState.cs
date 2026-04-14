@@ -1,10 +1,9 @@
-﻿using GameProject.Interfaces;
+﻿using GameProject.Controllers;
 using GameProject.Misc;
-using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.PlayerStates;
+namespace GameProject.PlayerSpace.States;
 
 internal class PlayerDeadState(Player player, Game1 game) : IPlayerState {
   private static readonly double LOSS_SCREEN_TIME = 3.0;

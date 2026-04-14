@@ -1,8 +1,6 @@
-﻿using GameProject.Enemies;
-using GameProject.Interfaces;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
-namespace GameProject.States;
+namespace GameProject.Enemies.RiflemanStates;
 
 internal class RifleDeathState : IRiflemanState {
   private readonly RiflemanSprite rifleman;

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using GameProject.Interfaces;
-using GameProject.PlayerSpace;
+using GameProject.Controllers;
+using GameProject.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.PlayerStates;
+namespace GameProject.PlayerSpace.States;
 
 internal class PlayerAnimatedMovingState(Player player) : IPlayerState {
   private readonly List<Rectangle> moveLeftFrames = [
@@ -64,7 +64,7 @@ internal class PlayerAnimatedMovingState(Player player) : IPlayerState {
   public void UseItem(UseType useType) {
     if (player.Inventory.ActiveItem != null) {
       player.Inventory.ActiveItem.Use(useType);
-      if (player.Inventory.ActiveItem.Category == Enums.ItemCategory.Consumable) {
+      if (player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
         player.State = player.UseItemState;
       }
     }

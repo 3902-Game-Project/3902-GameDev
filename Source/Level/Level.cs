@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using GameProject.Blocks;
+using GameProject.Collisions;
 using GameProject.Enemies;
 using GameProject.Globals;
-using GameProject.Interfaces;
 using GameProject.Managers;
+using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Misc;
+namespace GameProject.Level;
 
 internal class Level(
   List<IBlock> nonCollidableBlocks, // for non-collidable collidableBlocks -Aaron

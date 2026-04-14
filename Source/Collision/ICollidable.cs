@@ -1,8 +1,8 @@
 using System;
-using GameProject.Collisions;
+using GameProject.Collisions.Shapes;
 using Microsoft.Xna.Framework;
 
-namespace GameProject.Interfaces;
+namespace GameProject.Collisions;
 
 [Flags]
 internal enum Layer {

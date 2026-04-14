@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace GameProject.Interfaces;
+namespace GameProject.Enemies.SnakeStates;
 
 internal interface ISnakeState {
   void Update(GameTime gameTime);

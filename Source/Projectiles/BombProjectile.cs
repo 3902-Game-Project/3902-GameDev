@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using GameProject.Animations;
-using GameProject.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

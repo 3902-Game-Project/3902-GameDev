@@ -1,7 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameProject.Collisions;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Interfaces;
+namespace GameProject.Blocks;
 
 internal enum BarrelBlockState {
   Solid,

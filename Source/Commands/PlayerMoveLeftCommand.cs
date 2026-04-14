@@ -1,5 +1,5 @@
-﻿using GameProject.Interfaces;
-using GameProject.PlayerSpace;
+﻿using GameProject.PlayerSpace;
+
 namespace GameProject.Commands;
 
 internal class PlayerMoveLeftCommand(Player player) : ICommand {
