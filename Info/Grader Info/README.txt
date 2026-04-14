@@ -51,6 +51,9 @@ Code Reviews:
 Burndown Charts:
   Found in the "Info/Grader Info/Burndown Charts" folder.
 
+Jira task screenshots:
+  Found in the "Info/Grader Info/Jira Sprint Reports" folder.
+
 Known bugs:
   -Cannot move to escape block if just barely collided into it.
   -Can push crates through walls and enemies forced to move along with crate.
