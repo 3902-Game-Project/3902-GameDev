@@ -12,9 +12,7 @@ internal interface IItem : ISprite {
   Vector2 Position { get; set; }
   public void OnPickup(Player player);
   void Use(UseType useType);
-
-
-  // NEW: Dedicated method for drawing in menus
+  // NEW: Dedicated method for drawing in menus:
   void DrawUI(SpriteBatch spriteBatch, Vector2 position, float scale, Color tint);
   void OnEquip();
   void OnUnequip();

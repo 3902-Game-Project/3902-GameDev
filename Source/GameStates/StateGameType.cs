@@ -268,22 +268,6 @@ internal class StateGameType : IGameState {
     if (!prevStateIsCurrentState) {
       SoundManager.Instance.PlayLoop(SoundID.Background);
     }
-
-    if (LevelManager.CurrentLevel != null) {
-      LevelManager.CurrentLevel.CollisionManager.Clear();
-      LevelManager.CurrentLevel.CollisionManager.Add(Player);
-      foreach (var block in LevelManager.CurrentLevel.CollidableBlocks) {
-        LevelManager.CurrentLevel.CollisionManager.Add(block);
-      }
-      foreach (var doorBlock in LevelManager.CurrentLevel.Doors) {
-        LevelManager.CurrentLevel.CollisionManager.Add(doorBlock);
-      }
-      foreach (var enemy in LevelManager.CurrentLevel.Enemies) {
-        if (enemy.Health > 0) {
-          LevelManager.CurrentLevel.CollisionManager.Add(enemy);
-        }
-      }
-    }
   }
 
   public void OnStateLeave(bool nextStateIsCurrentState) {
@@ -293,7 +277,7 @@ internal class StateGameType : IGameState {
   }
 
   public void OnStateStartFadeIn(bool prevStateIsCurrentState) {
-    LevelManager.CompleteLevelSwitch();
+    LevelManager.InitializeLevel();
   }
 
   public void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
