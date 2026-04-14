@@ -47,6 +47,7 @@ internal class StateGameType : IGameState {
         { Keys.Space, new SwapWeaponCommand(Player) },
         { Keys.Tab, new ToggleMusicCommand() },
 
+        // Debug button binds:
         { Keys.T, new PreviousLevelCommand(LevelManager) },
         { Keys.Y, new NextLevelCommand(LevelManager) },
         { Keys.H, new ToggleUpdatesCommand() },
@@ -65,6 +66,7 @@ internal class StateGameType : IGameState {
 
     mouseController = new MouseController(
       pressedMappings: new Dictionary<MouseButtons, IGPCommand> {
+        // Debug button binds:
         { MouseButtons.Right, new PreviousLevelCommand(LevelManager) },
         { MouseButtons.Left, new NextLevelCommand(LevelManager) },
       }
@@ -80,6 +82,8 @@ internal class StateGameType : IGameState {
         { Buttons.A, new PlayerUseItemCommand(Player, UseType.Pressed) },
         { Buttons.LeftTrigger, new PlayerUseKeyCommand(Player, UseType.Pressed) },
         { Buttons.Y, new PlayerDieCommand(Player) },
+
+        // Debug button binds:
         { Buttons.LeftShoulder, new PreviousLevelCommand(LevelManager) },
         { Buttons.RightShoulder, new NextLevelCommand(LevelManager) },
       },
