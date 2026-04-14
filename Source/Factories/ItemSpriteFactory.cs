@@ -43,13 +43,13 @@ internal class ItemSpriteFactory {
 
   public IItem CreateShotgun(float xPos, float yPos, Game1 game) {
     var stats = new GunStats {
-      BulletVelocity = 200f,
-      SpreadAngle = 10f,
+      BulletVelocity = 400f,
+      SpreadAngle = 15f,
       PelletCount = 5,
       MaxAmmo = 2,
       CurrentAmmo = 2,
       ReloadTime = 2f,
-      BaseDamage = 15
+      BaseDamage = 20
     };
     return new ShotgunItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
   }
