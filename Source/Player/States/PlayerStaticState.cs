@@ -13,48 +13,48 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
   private Rectangle SpriteDown = new(455, 58, 161, 318);
 
   public override void MoveUp() {
-    player.Velocity = new Vector2(player.Velocity.X, -player.Speed);
-    player.Direction = FacingDirection.Up;
+    Player.Velocity = new Vector2(Player.Velocity.X, -Player.Speed);
+    Player.Direction = FacingDirection.Up;
   }
 
   public override void MoveDown() {
-    player.Velocity = new Vector2(player.Velocity.X, player.Speed);
-    player.Direction = FacingDirection.Down;
+    Player.Velocity = new Vector2(Player.Velocity.X, Player.Speed);
+    Player.Direction = FacingDirection.Down;
   }
 
   public override void MoveLeft() {
-    player.Velocity = new Vector2(-player.Speed, player.Velocity.Y);
-    player.Direction = FacingDirection.Left;
+    Player.Velocity = new Vector2(-Player.Speed, Player.Velocity.Y);
+    Player.Direction = FacingDirection.Left;
   }
 
   public override void MoveRight() {
-    player.Velocity = new Vector2(player.Speed, player.Velocity.Y);
-    player.Direction = FacingDirection.Right;
+    Player.Velocity = new Vector2(Player.Speed, Player.Velocity.Y);
+    Player.Direction = FacingDirection.Right;
   }
 
   public override void Update(GameTime gameTime) {
     // If we start moving, switch state
-    if (player.Velocity != Vector2.Zero) {
-      player.State = player.MovingState;
+    if (Player.Velocity != Vector2.Zero) {
+      Player.State = Player.MovingState;
     }
   }
 
   public override void UseItem(UseType useType) {
-    if (player.Inventory.ActiveItem != null) {
-      player.Inventory.ActiveItem.Use(useType);
-      if (player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
-        player.State = player.UseItemState;
+    if (Player.Inventory.ActiveItem != null) {
+      Player.Inventory.ActiveItem.Use(useType);
+      if (Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
+        Player.State = Player.UseItemState;
       }
     }
   }
 
   public override void UseKey(UseType useType) {
-    if (player.Inventory.Keys.Count > 0) {
-      player.Inventory.Keys[0].Use(useType);
-      if (player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
-        player.State = player.UseItemState;
+    if (Player.Inventory.Keys.Count > 0) {
+      Player.Inventory.Keys[0].Use(useType);
+      if (Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
+        Player.State = Player.UseItemState;
       }
-      player.Inventory.Keys.RemoveAt(0);
+      Player.Inventory.Keys.RemoveAt(0);
     }
   }
 
@@ -65,13 +65,13 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
     // Check direction even when standing still
     SpriteEffects flipStatus;
 
-    if (player.Direction == FacingDirection.Right) {
+    if (Player.Direction == FacingDirection.Right) {
       sourceRect = SpriteRight;
       flipStatus = SpriteEffects.None;
-    } else if (player.Direction == FacingDirection.Left) {
+    } else if (Player.Direction == FacingDirection.Left) {
       sourceRect = SpriteLeft;
       flipStatus = SpriteEffects.FlipHorizontally;
-    } else if (player.Direction == FacingDirection.Up) {
+    } else if (Player.Direction == FacingDirection.Up) {
       sourceRect = SpriteUp;
       flipStatus = SpriteEffects.None;
     } else {
@@ -82,8 +82,8 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
     origin = new Vector2(sourceRect.Width / 2, sourceRect.Height / 2);
 
     spriteBatch.Draw(
-      texture: player.Texture,
-      position: player.Position,
+      texture: Player.Texture,
+      position: Player.Position,
       sourceRectangle: sourceRect,
       color: player.CurrentTintColor,
       rotation: 0f,

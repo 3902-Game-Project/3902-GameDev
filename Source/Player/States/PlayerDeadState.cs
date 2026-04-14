@@ -20,7 +20,7 @@ internal class PlayerDeadState(Player player, Game1 game) : APlayerState(player)
   public override void Die() { }
 
   public override void Update(GameTime gameTime) {
-    player.Velocity = Vector2.Zero;
+    Player.Velocity = Vector2.Zero;
 
     deadTimer.Update(gameTime);
 
@@ -33,8 +33,8 @@ internal class PlayerDeadState(Player player, Game1 game) : APlayerState(player)
     Vector2 origin = new(deadSprite.Width / 2, deadSprite.Height / 2);
 
     spriteBatch.Draw(
-      player.Texture,
-      player.Position,
+      Player.Texture,
+      Player.Position,
       deadSprite,
       Color.White,
       0f,

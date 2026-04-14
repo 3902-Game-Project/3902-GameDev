@@ -38,6 +38,11 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
   public Vector2 Velocity { get; set; }
   public float Speed { get; set; } = 200f;
   public int Health { get; set; } = 100;
+  private bool inputLeftThisFrame, inputRightThisFrame, inputUpThisFrame, inputDownThisFrame;
+  private bool inputLeftLastFrame, inputRightLastFrame, inputUpLastFrame, inputDownLastFrame;
+
+  private int activeDirX = 0;
+  private int activeDirY = 0;
 
   public float InvincibilityTimer { get; set; } = 0f;
   public float DamageFlashTimer { get; set; } = 0f;
@@ -83,10 +88,10 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
     State = StaticState;
   }
 
-  public void MoveUp() => State.MoveUp();
-  public void MoveDown() => State.MoveDown();
-  public void MoveLeft() => State.MoveLeft();
-  public void MoveRight() => State.MoveRight();
+  public void MoveUp() => inputUpThisFrame = true;
+  public void MoveDown() => inputDownThisFrame = true;
+  public void MoveLeft() => inputLeftThisFrame = true;
+  public void MoveRight() => inputRightThisFrame = true;
   public void UseItem(UseType useType) {
     State.UseItem(useType);
   }
@@ -106,11 +111,33 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
   }
 
   public void Update(GameTime gameTime) {
+    bool justPressedLeft = inputLeftThisFrame && !inputLeftLastFrame;
+    bool justPressedRight = inputRightThisFrame && !inputRightLastFrame;
+    bool justPressedUp = inputUpThisFrame && !inputUpLastFrame;
+    bool justPressedDown = inputDownThisFrame && !inputDownLastFrame;
+
+    if (justPressedLeft) activeDirX = -1;
+    else if (justPressedRight) activeDirX = 1;
+    else if (!inputLeftThisFrame && !inputRightThisFrame) activeDirX = 0;
+    else if (!inputLeftThisFrame && inputRightThisFrame) activeDirX = 1;
+    else if (inputLeftThisFrame && !inputRightThisFrame) activeDirX = -1;
+
+    if (justPressedUp) activeDirY = -1;
+    else if (justPressedDown) activeDirY = 1;
+    else if (!inputUpThisFrame && !inputDownThisFrame) activeDirY = 0;
+    else if (!inputUpThisFrame && inputDownThisFrame) activeDirY = 1;
+    else if (inputUpThisFrame && !inputDownThisFrame) activeDirY = -1;
+
+    if (activeDirX == -1) State.MoveLeft();
+    if (activeDirX == 1) State.MoveRight();
+    if (activeDirY == -1) State.MoveUp();
+    if (activeDirY == 1) State.MoveDown();
+
     float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
-    if (Velocity.X != 0 && lastInputVelocity.X == 0) {
+    if (Velocity.X != 0 && MathF.Sign(Velocity.X) != MathF.Sign(lastInputVelocity.X)) {
       Direction = (Velocity.X > 0) ? FacingDirection.Right : FacingDirection.Left;
     }
-    if (Velocity.Y != 0 && lastInputVelocity.Y == 0) {
+    if (Velocity.Y != 0 && MathF.Sign(Velocity.Y) != MathF.Sign(lastInputVelocity.Y)) {
       Direction = (Velocity.Y > 0) ? FacingDirection.Down : FacingDirection.Up;
     }
     if (Velocity.X != 0 && Velocity.Y == 0) {
@@ -139,6 +166,14 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
     Velocity = Vector2.Zero;
 
     Inventory.ActiveItem?.Update(gameTime);
+    inputLeftLastFrame = inputLeftThisFrame;
+    inputRightLastFrame = inputRightThisFrame;
+    inputUpLastFrame = inputUpThisFrame;
+    inputDownLastFrame = inputDownThisFrame;
+    inputLeftThisFrame = false;
+    inputRightThisFrame = false;
+    inputUpThisFrame = false;
+    inputDownThisFrame = false;
   }
 
   public void OnCollision(CollisionInfo info) {

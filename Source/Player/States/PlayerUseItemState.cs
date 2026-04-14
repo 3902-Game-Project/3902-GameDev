@@ -22,18 +22,18 @@ internal class PlayerUseItemState(Player player) : APlayerState(player) {
     timer--;
     if (timer <= 0) {
       timer = 20;
-      player.State = player.StaticState;
+      Player.State = Player.StaticState;
     }
   }
 
   public override void Draw(SpriteBatch spriteBatch) {
     Rectangle sourceRect;
 
-    if (player.Direction == FacingDirection.Right) {
+    if (Player.Direction == FacingDirection.Right) {
       sourceRect = SpriteRight;
-    } else if (player.Direction == FacingDirection.Left) {
+    } else if (Player.Direction == FacingDirection.Left) {
       sourceRect = SpriteLeft;
-    } else if (player.Direction == FacingDirection.Up) {
+    } else if (Player.Direction == FacingDirection.Up) {
       sourceRect = SpriteUp;
     } else {
       sourceRect = SpriteDown;
@@ -42,8 +42,8 @@ internal class PlayerUseItemState(Player player) : APlayerState(player) {
     Vector2 origin = new(sourceRect.Width / 2, sourceRect.Height / 2);
 
     spriteBatch.Draw(
-      player.Texture,
-      player.Position,
+      Player.Texture,
+      Player.Position,
       sourceRect,
       player.CurrentTintColor,
       0f,

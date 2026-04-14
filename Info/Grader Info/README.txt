@@ -1,4 +1,6 @@
 Controls:
+  (GamePad-- means gamepad support not currently present but should be added.)
+  
   Main Menu:
     Key                      Action
     Q/GamePadY               Quit the game.
@@ -41,10 +43,16 @@ Controls:
 
 Code Metrics:
   Raw data stored at "Info/Grader Info/Code Metrics/Code Metrics.txt"
-  Graph at "Info/Grader Info/Code Metrics/Sprint 3/2026-03-13.png"
+  Graph at "Info/Grader Info/Code Metrics/Sprint 4/2026-04-13.png"
 
 Code Reviews:
-  Found in the "Info/Grader Info/Code Review/Sprint 3" folder.
+  Found in the "Info/Grader Info/Code Review/Sprint 4" folder.
+
+Burndown Charts:
+  Found in the "Info/Grader Info/Burndown Charts" folder.
+
+Jira task screenshots:
+  Found in the "Info/Grader Info/Jira Sprint Reports" folder.
 
 Known bugs:
   -Cannot move to escape block if just barely collided into it.
@@ -67,7 +75,7 @@ Sprint 3 Report:
       At the end of the sprint I feel I maybe tried to do too much in this shorter sprint as I wasn't able to finish everything (gamepad support) in time. I could try to do less next sprint but I think I can do the same amount of work next sprint as next sprint will be longer.
 
 Sprint 4 Report:
-  The burndown chart doesn't show much progress until the end of the sprint, but even then, less than half of the Jira tasks are completed. This is in part due to many of the team members prioritizing more immediate schoolwork in other classes over this project, and additionaly is due to our attempt to address refactoring suggestions of sprint 3. The refactoring suggestions ended up taking a lot of time and cut into time we would have been working on game features. Additionally the amount of Jira task items in general is huge this sprint, partly from refactoring, partly from backlog from previous sprints, partly from bugs, and partly from adding many tasks to "get the game to actually feel like a game." So completing all Jira tasks might be very difficult unless each of us had 20-30 hours more time to work on the sprint.
+  The burndown chart doesn't show much progress until the end of the sprint, but even then, less than half of the Jira tasks are completed. This is in part due to many of the team members prioritizing more immediate schoolwork in other classes over this project, and additionaly is due to our attempt to address refactoring suggestions of sprint 3. The refactoring suggestions ended up taking a lot of time and cut into time we would have been working on game features. Additionally the amount of Jira task items in general is huge this sprint, partly from refactoring, partly from backlog from previous sprints, partly from bugs, and partly from adding many tasks to "get the game to actually feel like a game." So completing all Jira tasks might be very difficult unless each of us had 20-30 hours more time to work on the sprint. Like sprint 2, not all code reviews were completed.
 
   In terms of features:
     We added sound effects and toggleable background music.

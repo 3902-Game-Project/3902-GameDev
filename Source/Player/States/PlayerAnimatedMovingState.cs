@@ -33,40 +33,40 @@ internal class PlayerAnimatedMovingState(Player player) : APlayerState(player) {
   private readonly double frameInterval = 0.2;
 
   public override void MoveUp() {
-    player.Velocity = new Vector2(player.Velocity.X, -player.Speed);
+    Player.Velocity = new Vector2(Player.Velocity.X, -Player.Speed);
   }
   public override void MoveDown() {
-    player.Velocity = new Vector2(player.Velocity.X, player.Speed);
+    Player.Velocity = new Vector2(Player.Velocity.X, Player.Speed);
   }
   public override void MoveLeft() {
-    player.Velocity = new Vector2(-player.Speed, player.Velocity.Y);
+    Player.Velocity = new Vector2(-Player.Speed, Player.Velocity.Y);
   }
   public override void MoveRight() {
-    player.Velocity = new Vector2(player.Speed, player.Velocity.Y);
+    Player.Velocity = new Vector2(Player.Speed, Player.Velocity.Y);
   }
 
   public override void UseItem(UseType useType) {
-    if (player.Inventory.ActiveItem != null) {
-      player.Inventory.ActiveItem.Use(useType);
-      if (player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
-        player.State = player.UseItemState;
+    if (Player.Inventory.ActiveItem != null) {
+      Player.Inventory.ActiveItem.Use(useType);
+      if (Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
+        Player.State = Player.UseItemState;
       }
     }
   }
 
   public override void UseKey(UseType useType) {
-    if (player.Inventory.Keys.Count > 0) {
-      player.Inventory.Keys[0].Use(useType);
-      if (player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
-        player.State = player.UseItemState;
+    if (Player.Inventory.Keys.Count > 0) {
+      Player.Inventory.Keys[0].Use(useType);
+      if (Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
+        Player.State = Player.UseItemState;
       }
-      player.Inventory.Keys.RemoveAt(0);
+      Player.Inventory.Keys.RemoveAt(0);
     }
   }
 
   public override void Update(GameTime gameTime) {
-    if (player.Velocity == Vector2.Zero) {
-      player.State = player.StaticState;
+    if (Player.Velocity == Vector2.Zero) {
+      Player.State = Player.StaticState;
       currentFrame = 0;
       return;
     }
@@ -83,11 +83,11 @@ internal class PlayerAnimatedMovingState(Player player) : APlayerState(player) {
   public override void Draw(SpriteBatch spriteBatch) {
     List<Rectangle> activeFrames;
 
-    if (player.Direction == FacingDirection.Right) {
+    if (Player.Direction == FacingDirection.Right) {
       activeFrames = moveRightFrames;
-    } else if (player.Direction == FacingDirection.Left) {
+    } else if (Player.Direction == FacingDirection.Left) {
       activeFrames = moveLeftFrames;
-    } else if (player.Direction == FacingDirection.Up) {
+    } else if (Player.Direction == FacingDirection.Up) {
       activeFrames = moveUpFrames;
     } else {
       activeFrames = moveDownFrames;
@@ -97,8 +97,8 @@ internal class PlayerAnimatedMovingState(Player player) : APlayerState(player) {
     Vector2 origin = new(sourceRect.Width / 2, sourceRect.Height / 2);
 
     spriteBatch.Draw(
-      player.Texture,
-      player.Position,
+      Player.Texture,
+      Player.Position,
       sourceRect,
       player.CurrentTintColor,
       0f,
