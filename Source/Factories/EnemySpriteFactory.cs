@@ -36,7 +36,7 @@ internal class EnemySpriteFactory {
   }
 
   public IEnemy CreateTumbleweedSprite(float xPos, float yPos) {
-    return new TumbleSprite(tumbleweedTexture, new Vector2(xPos, yPos));
+    return new TumbleweedSprite(tumbleweedTexture, new Vector2(xPos, yPos));
   }
 
   public IEnemy CreateRiflemanSprite(float xPos, float yPos, ILevelManager levelManager) {
