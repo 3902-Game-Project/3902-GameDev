@@ -15,7 +15,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Level;
 
 internal class Level(
-  List<IBlock> nonCollidableBlocks, 
+  List<IBlock> nonCollidableBlocks,
   List<IBlock> collidableBlocks,
   List<IBlock> doors,
   List<IEnemy> enemies,
@@ -179,15 +179,15 @@ internal class Level(
     CollisionManager.Clear();
 
     CollisionManager.Add(player);
-    
+
     foreach (var block in CollidableBlocks) {
       CollisionManager.Add(block);
     }
-    
+
     foreach (var doorBlock in Doors) {
       CollisionManager.Add(doorBlock);
     }
-    
+
     foreach (var enemy in Enemies) {
       CollisionManager.Add(enemy);
     }
