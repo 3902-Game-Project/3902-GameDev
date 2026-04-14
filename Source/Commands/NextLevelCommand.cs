@@ -2,7 +2,7 @@
 
 namespace GameProject.Commands;
 
-internal class NextLevelCommand(ILevelManager levelManager) : ICommand {
+internal class NextLevelCommand(ILevelManager levelManager) : IGPCommand {
   public void Execute() {
     levelManager.NextLevel();
   }

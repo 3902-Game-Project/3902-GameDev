@@ -2,7 +2,7 @@
 
 namespace GameProject.Commands;
 
-internal class PlayerMoveDownCommand(Player player) : ICommand {
+internal class PlayerMoveDownCommand(Player player) : IGPCommand {
   public void Execute() {
     player.MoveDown();
   }

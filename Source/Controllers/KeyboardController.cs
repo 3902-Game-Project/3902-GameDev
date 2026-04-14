@@ -10,14 +10,14 @@ internal class KeyboardController : IController {
   // Tracking of presses / releases must be shared across GameStates
   private static readonly KeyboardDiffTracker keyTracker = new();
 
-  private readonly Dictionary<Keys, ICommand> pressedMappings;
-  private readonly Dictionary<Keys, ICommand> downMappings;
-  private readonly Dictionary<Keys, ICommand> releasedMappings;
+  private readonly Dictionary<Keys, IGPCommand> pressedMappings;
+  private readonly Dictionary<Keys, IGPCommand> downMappings;
+  private readonly Dictionary<Keys, IGPCommand> releasedMappings;
 
   public KeyboardController(
-    Dictionary<Keys, ICommand> pressedMappings = null,
-    Dictionary<Keys, ICommand> downMappings = null,
-    Dictionary<Keys, ICommand> releasedMappings = null
+    Dictionary<Keys, IGPCommand> pressedMappings = null,
+    Dictionary<Keys, IGPCommand> downMappings = null,
+    Dictionary<Keys, IGPCommand> releasedMappings = null
   ) {
     this.pressedMappings = pressedMappings ?? [];
     this.downMappings = downMappings ?? [];
@@ -30,19 +30,19 @@ internal class KeyboardController : IController {
     keyTracker.Update(keyboardState);
 
     foreach (Keys key in keyTracker.GetPressed()) {
-      if (pressedMappings.TryGetValue(key, out ICommand command)) {
+      if (pressedMappings.TryGetValue(key, out IGPCommand command)) {
         command.Execute();
       }
     }
 
     foreach (Keys key in keyTracker.GetDown()) {
-      if (downMappings.TryGetValue(key, out ICommand command)) {
+      if (downMappings.TryGetValue(key, out IGPCommand command)) {
         command.Execute();
       }
     }
 
     foreach (Keys key in keyTracker.GetReleased()) {
-      if (releasedMappings.TryGetValue(key, out ICommand command)) {
+      if (releasedMappings.TryGetValue(key, out IGPCommand command)) {
         command.Execute();
       }
     }

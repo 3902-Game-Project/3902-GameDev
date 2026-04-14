@@ -33,7 +33,7 @@ internal class StateGameType : IGameState {
 
   public void Initialize() {
     keyboardController = new KeyboardController(
-      pressedMappings: new Dictionary<Keys, ICommand> {
+      pressedMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.R, new ReturnToMenuAndResetCommand(game) },
         { Keys.Q, new QuitCommand(game) },
         { Keys.P, new PauseCommand(game) },
@@ -46,7 +46,7 @@ internal class StateGameType : IGameState {
         { Keys.Space, new SwapWeaponCommand(Player) },
         { Keys.Tab, new ToggleMusicCommand() },
       },
-      downMappings: new Dictionary<Keys, ICommand> {
+      downMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.W, new PlayerMoveUpCommand(Player) },
         { Keys.S, new PlayerMoveDownCommand(Player) },
         { Keys.A, new PlayerMoveLeftCommand(Player) },
@@ -59,7 +59,7 @@ internal class StateGameType : IGameState {
     );
 
     mouseController = new MouseController(
-      pressedMappings: new Dictionary<MouseButtons, ICommand> {
+      pressedMappings: new Dictionary<MouseButtons, IGPCommand> {
         { MouseButtons.Right, new PreviousLevelCommand(LevelManager) },
         { MouseButtons.Left, new NextLevelCommand(LevelManager) },
       }
@@ -69,7 +69,7 @@ internal class StateGameType : IGameState {
     // the readme is in Xbox controller layout, but testing with a
     // nintendo pro controller seems to suggest it is pro controller layout.
     gamePadController = new GamePadController(
-      pressedMappings: new Dictionary<Buttons, ICommand> {
+      pressedMappings: new Dictionary<Buttons, IGPCommand> {
         { Buttons.X, new QuitCommand(game) },
         { Buttons.B, new ReturnToMenuAndResetCommand(game) },
         { Buttons.A, new PlayerUseItemCommand(Player, UseType.Pressed) },
@@ -77,7 +77,7 @@ internal class StateGameType : IGameState {
         { Buttons.LeftShoulder, new PreviousLevelCommand(LevelManager) },
         { Buttons.RightShoulder, new NextLevelCommand(LevelManager) },
       },
-      downMappings: new Dictionary<Buttons, ICommand> {
+      downMappings: new Dictionary<Buttons, IGPCommand> {
         { Buttons.DPadUp, new PlayerMoveUpCommand(Player) },
         { Buttons.DPadDown, new PlayerMoveDownCommand(Player) },
         { Buttons.DPadLeft, new PlayerMoveLeftCommand(Player) },

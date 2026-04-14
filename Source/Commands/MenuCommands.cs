@@ -2,14 +2,14 @@
 
 namespace GameProject.Commands;
 
-internal class MenuMoveLeftCommand(StateItemScreenType screen) : ICommand {
+internal class MenuMoveLeftCommand(StateItemScreenType screen) : IGPCommand {
   public void Execute() => screen.MoveCursorLeft();
 }
 
-internal class MenuMoveRightCommand(StateItemScreenType screen) : ICommand {
+internal class MenuMoveRightCommand(StateItemScreenType screen) : IGPCommand {
   public void Execute() => screen.MoveCursorRight();
 }
 
-internal class MenuEquipCommand(StateItemScreenType screen) : ICommand {
+internal class MenuEquipCommand(StateItemScreenType screen) : IGPCommand {
   public void Execute() => screen.EquipSelectedWeapon();
 }
