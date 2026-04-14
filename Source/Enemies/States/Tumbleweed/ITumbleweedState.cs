@@ -1,7 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameProject.GlobalInterfaces;
 
 namespace GameProject.Enemies.TumbleweedStates;
 
-internal interface ITumbleweedState {
-  void Update(GameTime gameTime);
-}
+internal interface ITumbleweedState : IGPUpdatable { }

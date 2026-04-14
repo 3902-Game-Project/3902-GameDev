@@ -19,6 +19,7 @@ internal class BulletDefault : IProjectile, ICollidable {
   private float lifetimeCounter = 0f;
   private readonly int damage = 50; //damage from bullet, can be changed
   private readonly int enemyDamage = 20;
+
   public bool IsExpired { get; private set; }
   public bool IsPlayerShot { get; set; } = true;
   public Vector2 Position { get; private set; }
@@ -26,6 +27,7 @@ internal class BulletDefault : IProjectile, ICollidable {
   public IShape Shape => Collider;
   public Layer Layer { get; } = Layer.Projectiles;
   public Layer Mask { get; } = Layer.Environment | Layer.Enemies;
+
   public BulletDefault(Texture2D texture, Vector2 startPosition,
     Vector2 direction, float velocity, float bulletLifetime) {
     this.texture = texture;
@@ -35,6 +37,7 @@ internal class BulletDefault : IProjectile, ICollidable {
     this.bulletLifetime = bulletLifetime;
     Collider = new BoxCollider(sourceRectangle.Width * scale, sourceRectangle.Height * scale, Position);
   }
+
   public void Expire() {
     IsExpired = true;
   }

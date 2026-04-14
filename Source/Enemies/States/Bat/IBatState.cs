@@ -1,7 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameProject.GlobalInterfaces;
 
 namespace GameProject.Enemies.BatStates;
 
-internal interface IBatState {
-  void Update(GameTime gameTime);
-}
+internal interface IBatState : IGPUpdatable { }

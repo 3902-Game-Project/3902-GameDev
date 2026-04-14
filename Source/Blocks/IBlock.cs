@@ -1,4 +1,5 @@
 ﻿using GameProject.Collisions;
+using GameProject.GlobalInterfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -30,9 +31,6 @@ internal enum VaultDoorBlockState {
   Open,
 }
 
-internal interface IBlock : ICollidable {
-  public void Update(GameTime gameTime);
-  public void Draw(SpriteBatch spriteBatch);
-
+internal interface IBlock : IGPUpdatable, IGPDrawable, ICollidable {
   Rectangle BoundingBox { get; }
 }

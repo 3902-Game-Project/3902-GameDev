@@ -42,6 +42,10 @@ internal abstract class DefaultGun : IItem {
     fireMode?.OnUnequip();
   }
 
+  public virtual void Update(GameTime gameTime) {
+    fireMode?.Update(gameTime);
+  }
+
   public virtual void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
 
@@ -80,10 +84,6 @@ internal abstract class DefaultGun : IItem {
       effects: SpriteEffects.None,
       layerDepth: 0f
     );
-  }
-
-  public virtual void Update(GameTime gameTime) {
-    fireMode?.Update(gameTime);
   }
 
   public virtual void OnPickup(Player player) { }

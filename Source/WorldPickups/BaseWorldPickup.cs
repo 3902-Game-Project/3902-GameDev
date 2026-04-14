@@ -18,8 +18,9 @@ internal abstract class BaseWorldPickup : IWorldPickup {
     Shape = new CircleCollider(10, Position);
   }
 
-  public abstract void Draw(SpriteBatch spriteBatch);
   public abstract void Update(GameTime gameTime);
+
+  public abstract void Draw(SpriteBatch spriteBatch);
 
   public virtual void OnPickup(Player player) { }
 

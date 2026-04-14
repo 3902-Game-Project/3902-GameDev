@@ -8,5 +8,4 @@ internal interface IProjectile : ISprite {
 
   void Expire();
   Rectangle BoundingBox { get; }
-
 }

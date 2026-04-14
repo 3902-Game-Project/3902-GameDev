@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using GameProject.GlobalInterfaces;
 using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Managers;
 
-internal class ProjectileManager {
+internal class ProjectileManager : IGPUpdatable, IGPDrawable {
   private readonly List<IProjectile> projectiles;
   public List<IProjectile> Projectiles => projectiles;
 

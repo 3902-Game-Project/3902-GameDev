@@ -1,12 +1,9 @@
 ﻿using GameProject.Controllers;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using GameProject.GlobalInterfaces;
 
 namespace GameProject.PlayerSpace.States;
 
-internal interface IPlayerState {
-  void Update(GameTime gameTime);
-  void Draw(SpriteBatch spriteBatch);
+internal interface IPlayerState : IGPUpdatable, IGPDrawable {
   void UseItem(UseType useType);
   void MoveUp();
   void MoveDown();

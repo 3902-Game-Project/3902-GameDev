@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using GameProject.GlobalInterfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Animations;
 
-internal class Animation(List<Rectangle> frames, int fps) {
+internal class Animation(List<Rectangle> frames, int fps) : IGPUpdatable {
   private readonly float frameDuration = 1f / fps;
   private int currentFrame = 0;
   private float timer = 0f;

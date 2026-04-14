@@ -25,6 +25,5 @@ internal class AmmoWorldPickup(Texture2D texture, Vector2 position) : BaseWorldP
     );
   }
 
-  public override void Update(GameTime gameTime) {
-  }
+  public override void Update(GameTime gameTime) { }
 }

@@ -1,11 +1,10 @@
 using GameProject.Controllers;
-using Microsoft.Xna.Framework;
+using GameProject.GlobalInterfaces;
 
 namespace GameProject.FireModes;
 
-internal interface IFireMode {
+internal interface IFireMode : IGPUpdatable {
   bool CanFire(UseType useType);
-  void Update(GameTime gameTime);
   void OnEquip();
   void OnUnequip();
 }

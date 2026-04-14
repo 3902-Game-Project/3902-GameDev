@@ -16,6 +16,12 @@ internal class BombProjectile : IProjectile {
   private Rectangle currentSourceRect;
   private readonly Animation bombAnimation;
   private Vector2 origin;
+
+  private Vector2 direction;
+  private readonly float velocity;
+  private readonly double lifetime;
+  private double lifetimeCounter;
+
   public bool IsExpired { get; private set; } = false;
 
   public void Expire() {
@@ -29,12 +35,6 @@ internal class BombProjectile : IProjectile {
       return new Rectangle((int) position.X - (width / 2), (int) position.Y - (height / 2), width, height);
     }
   }
-
-  private Vector2 direction;
-  private readonly float velocity;
-  private readonly double lifetime;
-  private double lifetimeCounter;
-
 
   public void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(currentSourceRect.Width / 2, currentSourceRect.Height / 2);

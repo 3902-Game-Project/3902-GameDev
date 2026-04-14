@@ -1,7 +1,3 @@
-﻿using Microsoft.Xna.Framework;
+﻿namespace GameProject.Enemies.RiflemanStates;
 
-namespace GameProject.Enemies.RiflemanStates;
-
-internal interface IRiflemanState {
-  void Update(GameTime gameTime);
-}
+internal interface IRiflemanState { }
