@@ -102,8 +102,10 @@ internal class StateGameType : IGameState {
     mouseController.Update(gameTime);
     gamePadController.Update(gameTime);
 
-    LevelManager.Update(gameTime);
-    Player.Update(gameTime);
+    if (!Flags.HALT_ALL_UPDATES) {
+      LevelManager.Update(gameTime);
+      Player.Update(gameTime);
+    }
   }
 
   public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
