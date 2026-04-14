@@ -11,6 +11,7 @@ using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using GameProject.Items;
 
 namespace GameProject.PlayerSpace;
 
@@ -180,6 +181,10 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
     if (info.Collider is IBlock) {
       Position = CollisionHelper.GetNudgedPosition(info, Position, info.Overlap + 0.01f);
       if (Collider != null) Collider.Position = Position;
+    }
+    if (info.Collider is AmmoWorldPickup ammoPickup) {
+      ammoPickup.OnPickup(this);
+      LevelManager.CurrentLevel.RemovePickup(ammoPickup);
     }
 
     if (info.Collider is IEnemy) {
