@@ -24,7 +24,8 @@ internal class ItemSpriteFactory {
       FireRate = .2f,
       MaxAmmo = 6,
       CurrentAmmo = 6,
-      ReloadTime = 1.5f
+      ReloadTime = 1.5f,
+      BaseDamage = 30
     };
     return new RevolverItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
   }
@@ -34,7 +35,8 @@ internal class ItemSpriteFactory {
       BulletVelocity = 1000f,
       MaxAmmo = 10,
       CurrentAmmo = 10,
-      ReloadTime = 3f
+      ReloadTime = 3f,
+      BaseDamage = 70
     };
     return new RifleItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
   }
@@ -46,7 +48,8 @@ internal class ItemSpriteFactory {
       PelletCount = 5,
       MaxAmmo = 2,
       CurrentAmmo = 2,
-      ReloadTime = 2f
+      ReloadTime = 2f,
+      BaseDamage = 15
     };
     return new ShotgunItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
   }
