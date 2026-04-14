@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using GameProject.Collisions;
-using GameProject.CollisionResponse;
 
 namespace GameProject.Collisions;
 

@@ -4,6 +4,7 @@ using GameProject.Collisions;
 using GameProject.Enemies;
 using GameProject.Globals;
 using GameProject.Managers;
+using GameProject.Projectiles;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
