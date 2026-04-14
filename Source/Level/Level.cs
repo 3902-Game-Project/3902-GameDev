@@ -77,7 +77,7 @@ internal class Level(
       pickup.Update(gameTime);
     }
 
-    for (int i = 0; i < ProjectileManager.Projectiles.Count; i ++) {
+    for (int i = 0; i < ProjectileManager.Projectiles.Count; i++) {
       IProjectile projectile = ProjectileManager.Projectiles[i];
       if (projectile is ICollidable collidableProj) {
         CollisionManager.Add(collidableProj);

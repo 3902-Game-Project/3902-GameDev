@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using GameProject.Collisions;
 
 namespace GameProject.Collisions;
 
