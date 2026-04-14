@@ -106,6 +106,8 @@ internal class LevelManager(Game1 game) : ILevelManager {
 
       levels.Add(name, level);
     }
+
+    game.StateGame.Player.Position = CurrentLevel.PlayerPosition;
   }
 
   public void Update(GameTime gameTime) {

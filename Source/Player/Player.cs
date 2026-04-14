@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using GameProject.Blocks;
 using GameProject.Collisions;
 using GameProject.Collisions.Shapes;
@@ -18,7 +19,7 @@ internal enum FacingDirection {
   Left,
   Right,
   Up,
-  Down
+  Down,
 }
 
 internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
@@ -26,8 +27,8 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
   private static readonly float PLAYER_HEIGHT = 323.0f * 0.15f;
 
   public IShape Shape => Collider;
-  private ILevelManager LevelManager { get;  set; }
-  private BoxCollider Collider { get;  set; }
+  private ILevelManager LevelManager { get; set; }
+  private BoxCollider Collider { get; set; }
   public Layer Mask { get; } = Layer.Environment;
   public Layer Layer { get; } = Layer.Player;
   public IPlayerState State { get; set; }
@@ -63,7 +64,7 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
 
   public Player(ILevelManager levelManager, Game1 game) {
     LevelManager = levelManager;
-    Position = new Vector2(400, 300);
+    Position = Vector2.Zero;
     Velocity = Vector2.Zero;
     Inventory = new PlayerInventory(levelManager);
 
