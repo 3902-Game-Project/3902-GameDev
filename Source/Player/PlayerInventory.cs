@@ -99,6 +99,9 @@ internal class PlayerInventory(ILevelManager levelManager) {
       ActiveItem.Direction = Direction;
       ActiveItem.Update(gameTime);
     }
+    if (ActiveItem is Items.DefaultGun gun && gun.PublicStats.CurrentAmmo <= 0 && !gun.IsReloading) {
+      gun.StartReload();
+    }
   }
 
   public void Draw(SpriteBatch spriteBatch, Vector2 Position, Texture2D whitePixel) {
