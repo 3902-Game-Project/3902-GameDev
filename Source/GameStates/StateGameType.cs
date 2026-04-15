@@ -63,6 +63,9 @@ internal class StateGameType : IGameState {
         { Keys.Down, new PlayerMoveDownCommand(Player) },
         { Keys.Left, new PlayerMoveLeftCommand(Player) },
         { Keys.Right, new PlayerMoveRightCommand(Player) },
+      },
+      releasedMappings: new Dictionary<Keys, IGPCommand> {
+        { Keys.J, new PlayerUseItemCommand(Player, UseType.Released) }
       }
     );
 
@@ -94,6 +97,9 @@ internal class StateGameType : IGameState {
         { Buttons.DPadDown, new PlayerMoveDownCommand(Player) },
         { Buttons.DPadLeft, new PlayerMoveLeftCommand(Player) },
         { Buttons.DPadRight, new PlayerMoveRightCommand(Player) },
+      },
+      releasedMappings: new Dictionary<Buttons, IGPCommand> {
+        { Buttons.A, new PlayerUseItemCommand(Player, UseType.Released) }
       }
     );
 
