@@ -10,7 +10,6 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Level;
 
 internal interface ILevel : IInitable, IGPUpdatable, IGPDrawable {
-  List<IBlock> Doors { get; }
   List<IEnemy> Enemies { get; }
   Vector2 PlayerPosition { get; }
   public ProjectileManager ProjectileManager { get; }
@@ -20,4 +19,5 @@ internal interface ILevel : IInitable, IGPUpdatable, IGPDrawable {
   void AddPickup(IWorldPickup pickup);
   void RemovePickup(IWorldPickup pickup);
   void LevelSwitchUpdateColliders(Player player);
+  IEnumerable<IBlock> GetOpenableDoors();
 }

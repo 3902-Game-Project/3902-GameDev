@@ -26,7 +26,7 @@ internal class Level(
     var killableEnemies = Enemies.Where(e => e is not CactusSprite);
 
     if (!killableEnemies.Any()) {
-      foreach (var door in Doors) {
+      foreach (var door in doors) {
         if (door is SmallDoorBlock smallDoorBlock) {
           smallDoorBlock.ChangeState(LockableDoorBlockState.Open);
         }
@@ -37,7 +37,6 @@ internal class Level(
     }
   }
 
-  public List<IBlock> Doors => doors;
   public List<IEnemy> Enemies => enemies;
   public List<IEnemy> DeadEnemies { get; private set; } = [];
 
@@ -59,7 +58,7 @@ internal class Level(
       collidableBlock.Update(gameTime);
     }
 
-    foreach (var doorBlock in Doors) {
+    foreach (var doorBlock in doors) {
       doorBlock.Update(gameTime);
     }
 
@@ -117,7 +116,7 @@ internal class Level(
       collidableBlock.Draw(spriteBatch);
     }
 
-    foreach (var doorBlock in Doors) {
+    foreach (var doorBlock in doors) {
       doorBlock.Draw(spriteBatch);
     }
 
@@ -183,12 +182,16 @@ internal class Level(
       CollisionManager.Add(block);
     }
 
-    foreach (var doorBlock in Doors) {
+    foreach (var doorBlock in doors) {
       CollisionManager.Add(doorBlock);
     }
 
     foreach (var enemy in Enemies) {
       CollisionManager.Add(enemy);
     }
+  }
+
+  public IEnumerable<IBlock> GetOpenableDoors() {
+    return doors.Where(door => door is VaultDoorBlock || door is SlattedDoorBlock);
   }
 }
