@@ -137,7 +137,6 @@ internal class LevelManager(Game1 game) : ILevelManager {
     }
 
     CurrentLevel.ProjectileManager.ClearProjectiles();
-    CurrentLevel.LevelSwitchUpdateColliders(game.StateGame.Player);
   }
 
   public void PreviousLevel() {

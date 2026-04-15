@@ -16,7 +16,6 @@ internal interface ILevel : IInitable, IGPUpdatable, IGPDrawable {
   Vector2 GetDefaultPlayerPosition();
   void AddPickup(IWorldPickup pickup);
   void RemovePickup(IWorldPickup pickup);
-  void LevelSwitchUpdateColliders(Player player);
   IEnumerable<IBlock> GetOpenableDoors();
   void PlayerResolveCollisions(ICollidable movingEntity, CollisionAxis axis = CollisionAxis.Both, float cornerTolerance = 3.0f);
 }
