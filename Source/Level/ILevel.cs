@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using GameProject.Blocks;
-using GameProject.Enemies;
 using GameProject.GlobalInterfaces;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
@@ -10,11 +9,10 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Level;
 
 internal interface ILevel : IInitable, IGPUpdatable, IGPDrawable {
-  List<IEnemy> Enemies { get; }
+  List<IWorldPickup> Pickups { get; }
   Vector2 PlayerPosition { get; }
   public ProjectileManager ProjectileManager { get; }
   public CollisionManager CollisionManager { get; }
-  List<IWorldPickup> Pickups { get; }
 
   void AddPickup(IWorldPickup pickup);
   void RemovePickup(IWorldPickup pickup);

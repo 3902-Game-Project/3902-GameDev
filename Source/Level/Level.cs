@@ -22,8 +22,10 @@ internal class Level(
   List<IWorldPickup> pickups,
   Vector2 playerPosition
 ) : ILevel {
+  private List<IEnemy> DeadEnemies = [];
+
   private void CheckLevelClear() {
-    var killableEnemies = Enemies.Where(e => e is not CactusSprite);
+    var killableEnemies = enemies.Where(e => e is not CactusSprite);
 
     if (!killableEnemies.Any()) {
       foreach (var door in doors) {
@@ -36,9 +38,6 @@ internal class Level(
       }
     }
   }
-
-  public List<IEnemy> Enemies => enemies;
-  public List<IEnemy> DeadEnemies { get; private set; } = [];
 
   public List<IWorldPickup> Pickups => pickups;
   public Vector2 PlayerPosition { get; private set; } = playerPosition;
@@ -186,7 +185,7 @@ internal class Level(
       CollisionManager.Add(doorBlock);
     }
 
-    foreach (var enemy in Enemies) {
+    foreach (var enemy in enemies) {
       CollisionManager.Add(enemy);
     }
   }
