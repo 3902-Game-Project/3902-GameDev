@@ -15,10 +15,12 @@ internal class AmmoWorldPickup(Texture2D texture, Vector2 position, AmmoType typ
   private readonly float scale = 2f;
 
   public override void Draw(SpriteBatch spriteBatch) {
-    origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
-    // Dynamic tinting using existing sprites
-    Color tintColor = Type == AmmoType.Light ? Color.Yellow : (Type == AmmoType.Heavy ? Color.Gray : Color.Red);
-    spriteBatch.Draw(texture, Position, sourceRectangle, tintColor, 0f, origin, scale, SpriteEffects.None, 0f);
+    int xOffset = Type == AmmoType.Light ? 0 : (Type == AmmoType.Heavy ? 16 : 32);
+    Rectangle trueSourceRect = new Rectangle(xOffset, 0, 16, 16);
+
+    origin = new Vector2(8, 8);
+
+    spriteBatch.Draw(texture, Position, trueSourceRect, Color.White, 0f, origin, scale, SpriteEffects.None, 0f);
   }
 
   public override void Update(GameTime gameTime) { }
