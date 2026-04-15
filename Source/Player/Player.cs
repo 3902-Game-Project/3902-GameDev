@@ -183,16 +183,26 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
     inputRightThisFrame = false;
     inputUpThisFrame = false;
     inputDownThisFrame = false;
+
+    // Auto-Collect for Ammo
+    if (LevelManager?.CurrentLevel != null) {
+      for (int i = LevelManager.CurrentLevel.Pickups.Count - 1; i >= 0; i--) {
+        var pickup = LevelManager.CurrentLevel.Pickups[i];
+        if (pickup is WorldPickups.AmmoWorldPickup ammoPickup) {
+          // If player is within 30 pixels, pick it up
+          if (Vector2.Distance(Position, ammoPickup.Position) < 30f) {
+            ammoPickup.OnPickup(this);
+            LevelManager.CurrentLevel.RemovePickup(ammoPickup);
+          }
+        }
+      }
+    }
   }
 
   public void OnCollision(CollisionInfo info) {
     if (info.Collider is IBlock) {
       Position = CollisionHelper.GetNudgedPosition(info, Position, info.Overlap + 0.01f);
       if (Collider != null) Collider.Position = Position;
-    }
-    if (info.Collider is AmmoWorldPickup ammoPickup) {
-      ammoPickup.OnPickup(this);
-      LevelManager.CurrentLevel.RemovePickup(ammoPickup);
     }
 
     if (info.Collider is IEnemy) {
