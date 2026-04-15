@@ -1,0 +1,9 @@
+Cheat codes: can make the halt all updates thing into a halt only player thing and add cheat code for it
+Console for changing game constants: can change rifle fire time, insta reload, etc.
+Fog of war effect: could use a shader and zooming in, tracking player
+Portals: portal gun?
+Shaders: can make weird distortion effect instead of fading in to level?
+Alter gameplay for adults with slow reaction time: slow game to 0.5x speed (lol)
+Mobile device port?
+Support resizing the window
+Quicksave / quickreload support
