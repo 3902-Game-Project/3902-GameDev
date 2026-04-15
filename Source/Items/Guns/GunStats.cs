@@ -14,6 +14,9 @@ internal class GunStats {
   public int BaseDamage { get; set; } = 50;
   public SoundID GunshotID { get; set; } = SoundID.GunshotDefault;
   public SoundID ReloadID { get; set; } = SoundID.ReloadDefault;
+  public AmmoType AmmoType { get; set; } = AmmoType.Light;
+  public bool ReloadsOneByOne { get; set; } = true;
+  public float EquipTime { get; set; } = 0.5f;
 
   public GunStats() { }
 }

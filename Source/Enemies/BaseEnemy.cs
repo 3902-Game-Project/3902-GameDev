@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GameProject.Blocks;
 using GameProject.Collisions;
 using GameProject.Collisions.Shapes;
@@ -12,6 +13,8 @@ internal abstract class BaseEnemy(Texture2D texture, Vector2 position, float col
   public Vector2 Position { get; set; } = position;
   public Vector2 Velocity { get; set; }
   public int FacingDirection { get; set; } = 1;
+
+  public static event Action<BaseEnemy> OnDeath;
 
   public List<Rectangle> CurrentSourceRectangles { get; set; }
   public int CurrentFrame { get; set; }
@@ -55,8 +58,13 @@ internal abstract class BaseEnemy(Texture2D texture, Vector2 position, float col
 
   public virtual void TakeDamage(int damage) {
     if (Health <= 0) return;
+    bool wasAlive = Health > 0;
 
     Health -= damage;
     DamageFlashTimer = DamageFlashDuration;
+
+    if (wasAlive && Health <= 0) {
+      OnDeath?.Invoke(this);
+    }
   }
 }

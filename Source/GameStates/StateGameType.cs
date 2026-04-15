@@ -22,6 +22,7 @@ internal class StateGameType : IGameState {
   private IController keyboardController;
   private IController mouseController;
   private IController gamePadController;
+  private Texture2D ammoTexture;
 
   public Player Player { get; private set; }
 
@@ -37,7 +38,8 @@ internal class StateGameType : IGameState {
     keyboardController = new KeyboardController(
       pressedMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.Q, new QuitCommand(game) },
-        { Keys.R, new ReturnToMenuAndResetCommand(game) },
+        { Keys.Back, new ReturnToMenuAndResetCommand(game) }, // Moved from R to Backspace
+        { Keys.R, new ReloadWeaponCommand(Player) },          // Reload mapping
         { Keys.P, new PauseCommand(game) },
         { Keys.I, new OpenItemScreenCommand(game) },
         { Keys.J, new PlayerUseItemCommand(Player, UseType.Pressed) },
@@ -61,6 +63,9 @@ internal class StateGameType : IGameState {
         { Keys.Down, new PlayerMoveDownCommand(Player) },
         { Keys.Left, new PlayerMoveLeftCommand(Player) },
         { Keys.Right, new PlayerMoveRightCommand(Player) },
+      },
+      releasedMappings: new Dictionary<Keys, IGPCommand> {
+        { Keys.J, new PlayerUseItemCommand(Player, UseType.Released) }
       }
     );
 
@@ -92,6 +97,9 @@ internal class StateGameType : IGameState {
         { Buttons.DPadDown, new PlayerMoveDownCommand(Player) },
         { Buttons.DPadLeft, new PlayerMoveLeftCommand(Player) },
         { Buttons.DPadRight, new PlayerMoveRightCommand(Player) },
+      },
+      releasedMappings: new Dictionary<Buttons, IGPCommand> {
+        { Buttons.A, new PlayerUseItemCommand(Player, UseType.Released) }
       }
     );
 
@@ -101,8 +109,10 @@ internal class StateGameType : IGameState {
   public void LoadContent(ContentManager contentManager) {
     Player.LoadContent(contentManager);
 
-    Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateShotgun(0f, 0f, game));
+    Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateRevolver(0f, 0f, game));
     Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateRifle(0f, 0f, game));
+
+    ammoTexture = contentManager.Load<Texture2D>("Items/ammo_drops");
 
     LevelManager.LoadContent(contentManager);
   }
@@ -198,22 +208,31 @@ internal class StateGameType : IGameState {
         GunStats activeStats = activeGun.PublicStats;
 
         if (activeStats != null) {
-          string ammoText;
-          Color textColor;
-          if (activeStats.CurrentAmmo <= 0) {
-            ammoText = "RELOADING...";
-            textColor = Color.Red;
-          } else {
-            ammoText = $"Ammo: {activeStats.CurrentAmmo} / {activeStats.MaxAmmo}";
-            textColor = Color.White;
-          }
+          // Draw Current Gun's Ammo
+          string ammoText = $"Ammo: {activeStats.CurrentAmmo} / {activeStats.MaxAmmo}";
+          spriteBatch.DrawString(MiscAssetStore.Instance.MainFont, ammoText, ammoPosition, Color.White);
 
-          spriteBatch.DrawString(
-              spriteFont: MiscAssetStore.Instance.MainFont,
-              text: ammoText,
-              position: ammoPosition,
-              color: textColor
-          );
+          // Draw the 3 ammo types
+          if (ammoTexture != null) {
+            float iconScale = 2f;
+            float textOffset = 35f;
+            float spacing = 90f;
+            Vector2 reserveStartPos = ammoPosition + new Vector2(0, 30);
+
+            // Light Ammo
+            spriteBatch.Draw(ammoTexture, reserveStartPos, new Rectangle(0, 0, 16, 16), Color.White, 0f, Vector2.Zero, iconScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(MiscAssetStore.Instance.MainFont, $"{Player.Inventory.Ammo[AmmoType.Light]}", reserveStartPos + new Vector2(textOffset, 5), Color.White);
+
+            // Heavy Ammo
+            Vector2 heavyPos = reserveStartPos + new Vector2(spacing, 0);
+            spriteBatch.Draw(ammoTexture, heavyPos, new Rectangle(16, 0, 16, 16), Color.White, 0f, Vector2.Zero, iconScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(MiscAssetStore.Instance.MainFont, $"{Player.Inventory.Ammo[AmmoType.Heavy]}", heavyPos + new Vector2(textOffset, 5), Color.White);
+
+            // Shells
+            Vector2 shellsPos = reserveStartPos + new Vector2(spacing * 2, 0);
+            spriteBatch.Draw(ammoTexture, shellsPos, new Rectangle(32, 0, 16, 16), Color.White, 0f, Vector2.Zero, iconScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(MiscAssetStore.Instance.MainFont, $"{Player.Inventory.Ammo[AmmoType.Shells]}", shellsPos + new Vector2(textOffset, 5), Color.White);
+          }
         }
       }
     }
@@ -278,6 +297,14 @@ internal class StateGameType : IGameState {
 
   public void OnStateStartFadeIn(bool prevStateIsCurrentState) {
     LevelManager.InitializeLevel();
+
+    // Spawn test ammo right near the player so we can test the auto-collect
+    if (LevelManager.CurrentLevel != null && ammoTexture != null) {
+      Vector2 spawnPos = Player.Position + new Vector2(100, 0);
+      LevelManager.CurrentLevel.AddPickup(new GameProject.WorldPickups.AmmoWorldPickup(ammoTexture, spawnPos, AmmoType.Light, 15));
+      LevelManager.CurrentLevel.AddPickup(new GameProject.WorldPickups.AmmoWorldPickup(ammoTexture, spawnPos + new Vector2(50, 0), AmmoType.Heavy, 5));
+      LevelManager.CurrentLevel.AddPickup(new GameProject.WorldPickups.AmmoWorldPickup(ammoTexture, spawnPos + new Vector2(100, 0), AmmoType.Shells, 5));
+    }
   }
 
   public void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
