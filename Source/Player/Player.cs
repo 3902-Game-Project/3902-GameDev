@@ -111,8 +111,8 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
 
   public void LoadContent(ContentManager contentManager) {
     Texture = contentManager.Load<Texture2D>("Misc/playerSpritesheet");
-    ammoSpritesheet = contentManager.Load<Texture2D>("Items/basic_guns_spritesheet");
     whitePixel = contentManager.Load<Texture2D>("Misc/WhitePixel");
+    ammoSpritesheet = contentManager.Load<Texture2D>("Items/ammo_drops");
   }
 
   public void TakeDamage(int amount) {
