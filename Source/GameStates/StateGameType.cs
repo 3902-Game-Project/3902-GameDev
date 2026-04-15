@@ -289,6 +289,14 @@ internal class StateGameType : IGameState {
 
   public void OnStateStartFadeIn(bool prevStateIsCurrentState) {
     LevelManager.InitializeLevel();
+
+    // Spawn test ammo right near the player so we can test the auto-collect
+    if (LevelManager.CurrentLevel != null && ammoTexture != null) {
+      Vector2 spawnPos = Player.Position + new Vector2(100, 0);
+      LevelManager.CurrentLevel.AddPickup(new GameProject.WorldPickups.AmmoWorldPickup(ammoTexture, spawnPos, AmmoType.Light, 15));
+      LevelManager.CurrentLevel.AddPickup(new GameProject.WorldPickups.AmmoWorldPickup(ammoTexture, spawnPos + new Vector2(50, 0), AmmoType.Heavy, 5));
+      LevelManager.CurrentLevel.AddPickup(new GameProject.WorldPickups.AmmoWorldPickup(ammoTexture, spawnPos + new Vector2(100, 0), AmmoType.Shells, 5));
+    }
   }
 
   public void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
