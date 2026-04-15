@@ -59,7 +59,7 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
 
   private Texture2D ammoSpritesheet;
 
-  private Texture2D whitePixel;
+  public Texture2D whitePixel;
 
   public Rectangle BoundingBox {
     get {
@@ -174,7 +174,8 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
     State.Update(gameTime);
     Velocity = Vector2.Zero;
 
-    Inventory.ActiveItem?.Update(gameTime);
+    Inventory.Update(gameTime, Position, Direction);
+
     inputLeftLastFrame = inputLeftThisFrame;
     inputRightLastFrame = inputRightThisFrame;
     inputUpLastFrame = inputUpThisFrame;
@@ -244,43 +245,6 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
   }
   public void Draw(SpriteBatch spriteBatch) {
     State.Draw(spriteBatch);
-
-    if (Inventory.ActiveItem != null) {
-      float unscaledWidth = 171f;
-      float unscaledHeight = 323f;
-      Vector2 spriteCenter = new(unscaledWidth / 2f, unscaledHeight / 2f);
-      float playerScale = 0.15f;
-      Vector2 rightHandUnscaled = new(100f, 195f);
-      Vector2 leftHandUnscaled = new(18f, 188f);
-      Vector2 upHandUnscaled = new(120f, 150f);
-      Vector2 downHandUnscaled = new(40f, 190f);
-      Vector2 currentOffset;
-      if (Direction == FacingDirection.Right) {
-        currentOffset = (rightHandUnscaled - spriteCenter) * playerScale;
-      } else if (Direction == FacingDirection.Left) {
-        currentOffset = (leftHandUnscaled - spriteCenter) * playerScale;
-      } else if (Direction == FacingDirection.Up) {
-        currentOffset = (upHandUnscaled - spriteCenter) * playerScale;
-      } else { // Down
-        currentOffset = (downHandUnscaled - spriteCenter) * playerScale;
-      }
-
-      Inventory.ActiveItem.Position = Position + currentOffset;
-      Inventory.ActiveItem.Direction = Direction;
-    }
-
-    Inventory.ActiveItem?.Draw(spriteBatch);
-
-    // Draw Overhead Reload Bar
-    if (Inventory.ActiveItem is Items.DefaultGun gun && gun.IsReloading && whitePixel != null) {
-      float barWidth = 60f;
-      float barHeight = 8f;
-      Vector2 barPos = Position + new Vector2(-barWidth / 2f, -80f);
-
-      float progress = 1f - (gun.ReloadTimer / gun.PublicStats.ReloadTime);
-
-      spriteBatch.Draw(whitePixel, new Rectangle((int) barPos.X, (int) barPos.Y, (int) barWidth, (int) barHeight), Color.DarkGray * 0.8f);
-      spriteBatch.Draw(whitePixel, new Rectangle((int) barPos.X, (int) barPos.Y, (int) (barWidth * progress), (int) barHeight), Color.White);
-    }
+    Inventory.Draw(spriteBatch, Position, whitePixel);
   }
 }
