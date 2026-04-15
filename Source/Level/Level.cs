@@ -37,7 +37,6 @@ internal class Level(
     }
   }
 
-  public List<IBlock> CollidableBlocks => collidableBlocks;
   public List<IBlock> Doors => doors;
   public List<IEnemy> Enemies => enemies;
   public List<IEnemy> DeadEnemies { get; private set; } = [];
@@ -56,7 +55,7 @@ internal class Level(
       nonCollidableBlocks.Update(gameTime);
     }
 
-    foreach (var collidableBlock in CollidableBlocks) {
+    foreach (var collidableBlock in collidableBlocks) {
       collidableBlock.Update(gameTime);
     }
 
@@ -180,7 +179,7 @@ internal class Level(
 
     CollisionManager.Add(player);
 
-    foreach (var block in CollidableBlocks) {
+    foreach (var block in collidableBlocks) {
       CollisionManager.Add(block);
     }
 

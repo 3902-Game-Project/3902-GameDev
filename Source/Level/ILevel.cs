@@ -11,7 +11,6 @@ namespace GameProject.Level;
 
 internal interface ILevel : IInitable, IGPUpdatable, IGPDrawable {
   List<IBlock> Doors { get; }
-  List<IBlock> CollidableBlocks { get; }
   List<IEnemy> Enemies { get; }
   Vector2 PlayerPosition { get; }
   public ProjectileManager ProjectileManager { get; }
