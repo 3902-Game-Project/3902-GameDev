@@ -22,4 +22,4 @@ Eric: player facing/firing up/down; holding on to keys; reset level on player de
 Aaron: player using keys to open door
 Emmett: ability to pick up / drop items; more items than just guns
 JJ: sound effects, background music
-Q: ?
+Q: item selection page
