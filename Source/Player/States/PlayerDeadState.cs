@@ -1,4 +1,5 @@
-﻿using GameProject.Controllers;
+﻿using System.Collections.Generic;
+using GameProject.Controllers;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,7 +10,15 @@ internal class PlayerDeadState(Player player, Game1 game) : APlayerState(player)
   private static readonly double LOSS_SCREEN_TIME = 3.0;
   private readonly GPTimer deadTimer = new();
 
-  private Rectangle deadSprite = new(1470, 1060, 304, 97);
+  private readonly List<Rectangle> deathFrames = [
+    new(2116, 1032, 282, 129),
+    new(1807, 1034, 277, 127),
+    new(1473, 1053, 298, 108)
+  ];
+
+  private int currentFrame = 0;
+  private double animationTimer = 0;
+  private readonly double frameInterval = 0.5;
   public override void MoveUp() { }
   public override void MoveDown() { }
   public override void MoveLeft() { }
@@ -22,20 +31,27 @@ internal class PlayerDeadState(Player player, Game1 game) : APlayerState(player)
   public override void Update(GameTime gameTime) {
     Player.Velocity = Vector2.Zero;
 
+    if (currentFrame < deathFrames.Count - 1) {
+      animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
+      if (animationTimer > frameInterval) {
+        currentFrame++;
+        animationTimer = 0;
+      }
+    }
     deadTimer.Update(gameTime);
-
     if (deadTimer.Time >= LOSS_SCREEN_TIME) {
       game.ChangeState(game.StateLoss);
     }
   }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    Vector2 origin = new(deadSprite.Width / 2, deadSprite.Height / 2);
+    Rectangle sourceRect = deathFrames[currentFrame];
+    Vector2 origin = new(sourceRect.Width / 2f, sourceRect.Height / 2f);
 
     spriteBatch.Draw(
       Player.Texture,
       Player.Position,
-      deadSprite,
+      sourceRect,
       Color.White,
       0f,
       origin,
@@ -45,3 +61,4 @@ internal class PlayerDeadState(Player player, Game1 game) : APlayerState(player)
     );
   }
 }
+
