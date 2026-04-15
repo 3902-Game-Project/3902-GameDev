@@ -79,7 +79,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
       );
     } else {
       // No wrapping possible, use default position
-      game.StateGame.Player.Position = CurrentLevel.PlayerPosition;
+      game.StateGame.Player.Position = CurrentLevel.GetDefaultPlayerPosition();
     }
   }
 
@@ -107,7 +107,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
       levels.Add(name, level);
     }
 
-    game.StateGame.Player.Position = CurrentLevel.PlayerPosition;
+    game.StateGame.Player.Position = CurrentLevel.GetDefaultPlayerPosition();
   }
 
   public void Update(GameTime gameTime) {

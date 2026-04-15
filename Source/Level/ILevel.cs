@@ -10,10 +10,10 @@ namespace GameProject.Level;
 
 internal interface ILevel : IInitable, IGPUpdatable, IGPDrawable {
   List<IWorldPickup> Pickups { get; }
-  Vector2 PlayerPosition { get; }
   public ProjectileManager ProjectileManager { get; }
   public CollisionManager CollisionManager { get; }
 
+  Vector2 GetDefaultPlayerPosition();
   void AddPickup(IWorldPickup pickup);
   void RemovePickup(IWorldPickup pickup);
   void LevelSwitchUpdateColliders(Player player);

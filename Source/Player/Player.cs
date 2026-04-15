@@ -189,7 +189,7 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
     if (LevelManager?.CurrentLevel != null) {
       for (int i = LevelManager.CurrentLevel.Pickups.Count - 1; i >= 0; i--) {
         var pickup = LevelManager.CurrentLevel.Pickups[i];
-        if (pickup is WorldPickups.AmmoWorldPickup ammoPickup) {
+        if (pickup is AmmoWorldPickup ammoPickup) {
           // If player is within 30 pixels, pick it up
           if (Vector2.Distance(Position, ammoPickup.Position) < 30f) {
             ammoPickup.OnPickup(this);

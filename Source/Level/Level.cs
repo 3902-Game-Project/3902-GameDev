@@ -22,7 +22,7 @@ internal class Level(
   List<IWorldPickup> pickups,
   Vector2 playerPosition
 ) : ILevel {
-  private List<IEnemy> DeadEnemies = [];
+  private readonly List<IEnemy> deadEnemies = [];
 
   private void CheckLevelClear() {
     var killableEnemies = enemies.Where(e => e is not CactusSprite);
@@ -40,7 +40,6 @@ internal class Level(
   }
 
   public List<IWorldPickup> Pickups => pickups;
-  public Vector2 PlayerPosition { get; private set; } = playerPosition;
   public ProjectileManager ProjectileManager { get; private set; } = new ProjectileManager();
   public CollisionManager CollisionManager { get; private set; } = new CollisionManager();
 
@@ -67,13 +66,13 @@ internal class Level(
       enemy.Update(gameTime);
 
       if (enemy.Health <= 0) {
-        DeadEnemies.Add(enemy);
+        deadEnemies.Add(enemy);
         enemies.Remove(enemy);
         CollisionManager.Remove(enemy);
       }
     }
 
-    foreach (var deadEnemy in DeadEnemies) {
+    foreach (var deadEnemy in deadEnemies) {
       deadEnemy.Update(gameTime);
     }
 
@@ -123,7 +122,7 @@ internal class Level(
       enemy.Draw(spriteBatch);
     }
 
-    foreach (var deadEnemy in DeadEnemies) {
+    foreach (var deadEnemy in deadEnemies) {
       deadEnemy.Draw(spriteBatch);
     }
 
@@ -162,6 +161,10 @@ internal class Level(
         );
       }
     }
+  }
+
+  public Vector2 GetDefaultPlayerPosition() {
+    return playerPosition;
   }
 
   public void AddPickup(IWorldPickup pickup) {
