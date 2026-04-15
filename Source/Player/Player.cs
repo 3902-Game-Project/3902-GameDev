@@ -165,11 +165,11 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
 
     Position = new Vector2(Position.X + xStep, Position.Y);
     if (Collider != null) Collider.Position = Position;
-    LevelManager.CollisionManager.ResolveCollisionsFor(this, CollisionAxis.X, MathF.Abs(yStep) + 1f);
+    LevelManager.CurrentLevel.PlayerResolveCollisions(this, CollisionAxis.X, MathF.Abs(yStep) + 1f);
 
     Position = new Vector2(Position.X, Position.Y + yStep);
     if (Collider != null) Collider.Position = Position;
-    LevelManager.CollisionManager.ResolveCollisionsFor(this, CollisionAxis.Y, MathF.Abs(xStep) + 1f);
+    LevelManager.CurrentLevel.PlayerResolveCollisions(this, CollisionAxis.Y, MathF.Abs(xStep) + 1f);
 
     State.Update(gameTime);
     Velocity = Vector2.Zero;
