@@ -115,6 +115,7 @@ internal abstract class DefaultGun(Texture2D texture, Vector2 startPosition, Gam
     if (EquipTimer > 0 || stats.CurrentAmmo <= 0) return;
 
     if (fireMode == null || !fireMode.CanFire(useType)) return;
+    stats.CurrentAmmo--;
 
     Vector2 bulletDirection;
     Vector2 actualOffset;
