@@ -1,4 +1,6 @@
 using GameProject.FireModes;
+using GameProject.Managers;
+using GameProject.PlayerSpace;
 using GameProject.ProjectilePatterns;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -6,8 +8,8 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Items;
 
 internal class ShotgunItem : DefaultGun {
-  public ShotgunItem(Texture2D texture, Vector2 position, Game1 game, GunStats stats)
-    : base(texture, position, game, stats) {
+  public ShotgunItem(Texture2D texture, Vector2 position, Player player, ILevelManager levelManager, GunStats stats)
+    : base(texture, position, player, levelManager, stats) {
 
     Category = ItemCategory.Primary;
     sourceRectangle = new Rectangle(0, 10, 27, 9);

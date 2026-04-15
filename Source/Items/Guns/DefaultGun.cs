@@ -9,14 +9,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-internal abstract class DefaultGun(Texture2D texture, Vector2 startPosition, Game1 game, GunStats stats) : IItem {
+internal abstract class DefaultGun(Texture2D texture, Vector2 startPosition, Player player, ILevelManager levelManager, GunStats stats) : IItem {
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   public ItemCategory Category { get; protected set; }
   public Vector2 Position { get; set; } = startPosition;
 
   protected readonly Texture2D texture = texture;
   protected readonly float scale = 1f;
-  protected readonly Game1 game = game;
   protected readonly GunStats stats = stats;
 
   protected IProjectilePattern projectilePattern = new SingleShotPattern();
@@ -44,7 +43,7 @@ internal abstract class DefaultGun(Texture2D texture, Vector2 startPosition, Gam
   }
 
   public void StartReload() {
-    if (stats.CurrentAmmo < stats.MaxAmmo && game.StateGame.Player.Inventory.Ammo[stats.AmmoType] > 0) {
+    if (stats.CurrentAmmo < stats.MaxAmmo && player.Inventory.Ammo[stats.AmmoType] > 0) {
       IsReloading = true;
       ReloadTimer = stats.ReloadTime;
     }
@@ -59,15 +58,15 @@ internal abstract class DefaultGun(Texture2D texture, Vector2 startPosition, Gam
       ReloadTimer -= dt;
       if (ReloadTimer <= 0) {
         int ammoNeeded = stats.MaxAmmo - stats.CurrentAmmo;
-        int ammoAvailable = game.StateGame.Player.Inventory.Ammo[stats.AmmoType];
+        int ammoAvailable = player.Inventory.Ammo[stats.AmmoType];
 
         if (ammoAvailable > 0 && ammoNeeded > 0) {
           int toLoad = stats.ReloadsOneByOne ? 1 : Math.Min(ammoNeeded, ammoAvailable);
           stats.CurrentAmmo += toLoad;
-          game.StateGame.Player.Inventory.Ammo[stats.AmmoType] -= toLoad;
+          player.Inventory.Ammo[stats.AmmoType] -= toLoad;
 
           // Loop the reload if more still needed
-          if (stats.CurrentAmmo < stats.MaxAmmo && game.StateGame.Player.Inventory.Ammo[stats.AmmoType] > 0) {
+          if (stats.CurrentAmmo < stats.MaxAmmo && player.Inventory.Ammo[stats.AmmoType] > 0) {
             ReloadTimer = stats.ReloadTime;
           } else {
             IsReloading = false;
@@ -134,7 +133,7 @@ internal abstract class DefaultGun(Texture2D texture, Vector2 startPosition, Gam
     }
 
     Vector2 bulletSpawnPosition = Position + actualOffset;
-    projectilePattern.SpawnProjectiles(game.StateGame.LevelManager.CurrentLevel.ProjectileManager, bulletSpawnPosition, bulletDirection, stats);
+    projectilePattern.SpawnProjectiles(levelManager.CurrentLevel.ProjectileManager, bulletSpawnPosition, bulletDirection, stats);
     SoundManager.Instance.Play(stats.GunshotID);
   }
 }

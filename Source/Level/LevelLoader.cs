@@ -5,6 +5,8 @@ using System.Text.RegularExpressions;
 using GameProject.Blocks;
 using GameProject.Enemies;
 using GameProject.Factories;
+using GameProject.Managers;
+using GameProject.PlayerSpace;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 
@@ -33,7 +35,8 @@ internal partial class LevelLoader {
   public static readonly float PLAYER_BOTTOM_POS_AFTER_TELEPORT = LEVEL_HEIGHT - BLOCK_WIDTH * 1.5f;
 
   private static void AddCellEntry(
-    Game1 game,
+    Player player,
+    ILevelManager levelManager,
     ISet<string> levelNames,
 
     string type,
@@ -94,7 +97,7 @@ internal partial class LevelLoader {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
           }
 
-          doors.Add(BlockSpriteFactory.CreateSmallDoorBlockSprite(xPos, yPos, state, pairedLevelName, game.StateGame.LevelManager));
+          doors.Add(BlockSpriteFactory.CreateSmallDoorBlockSprite(xPos, yPos, state, pairedLevelName, levelManager));
           break;
         }
 
@@ -161,7 +164,7 @@ internal partial class LevelLoader {
                   throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
                 }
 
-                doors.Add(BlockSpriteFactory.CreateRockHoleBlockSprite(xPos, yPos, pairedLevelName, game.StateGame.LevelManager));
+                doors.Add(BlockSpriteFactory.CreateRockHoleBlockSprite(xPos, yPos, pairedLevelName, levelManager));
                 break;
               }
 
@@ -173,7 +176,7 @@ internal partial class LevelLoader {
 
       case "9":
         /* shotgunner */
-        enemies.Add(EnemySpriteFactory.Instance.CreateShotgunnerSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, game.StateGame.LevelManager));
+        enemies.Add(EnemySpriteFactory.Instance.CreateShotgunnerSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, levelManager));
         break;
 
       case "10":
@@ -183,7 +186,7 @@ internal partial class LevelLoader {
 
       case "11":
         /* rifleman */
-        enemies.Add(EnemySpriteFactory.Instance.CreateRiflemanSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, game.StateGame.LevelManager));
+        enemies.Add(EnemySpriteFactory.Instance.CreateRiflemanSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, levelManager));
         break;
 
       case "12":
@@ -198,17 +201,17 @@ internal partial class LevelLoader {
 
       case "14":
         /* revolver */
-        pickups.Add(new ItemWorldPickup(ItemSpriteFactory.Instance.CreateRevolver(xPos, yPos, game)));
+        pickups.Add(new ItemWorldPickup(ItemSpriteFactory.Instance.CreateRevolver(xPos, yPos, player, levelManager)));
         break;
 
       case "15":
         /* rifle */
-        pickups.Add(new ItemWorldPickup(ItemSpriteFactory.Instance.CreateRifle(xPos, yPos, game)));
+        pickups.Add(new ItemWorldPickup(ItemSpriteFactory.Instance.CreateRifle(xPos, yPos, player, levelManager)));
         break;
 
       case "16":
         /* shotgun */
-        pickups.Add(new ItemWorldPickup(ItemSpriteFactory.Instance.CreateShotgun(xPos, yPos, game)));
+        pickups.Add(new ItemWorldPickup(ItemSpriteFactory.Instance.CreateShotgun(xPos, yPos, player, levelManager)));
         break;
 
       case "17":
@@ -241,13 +244,13 @@ internal partial class LevelLoader {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
           }
 
-          doors.Add(BlockSpriteFactory.CreateVaultDoorBlockSprite(xPos, yPos, state, pairedLevelName, game.StateGame.LevelManager));
+          doors.Add(BlockSpriteFactory.CreateVaultDoorBlockSprite(xPos, yPos, state, pairedLevelName, levelManager));
           break;
         }
 
       case "21":
         /* key item */
-        pickups.Add(new ItemWorldPickup(ItemSpriteFactory.CreateKey(xPos, yPos, game.StateGame.LevelManager)));
+        pickups.Add(new ItemWorldPickup(ItemSpriteFactory.CreateKey(xPos, yPos, levelManager)));
         break;
 
       case "22":
@@ -309,7 +312,7 @@ internal partial class LevelLoader {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
           }
 
-          doors.Add(BlockSpriteFactory.CreateSlattedDoorSprite(xPos, yPos, state, pairedLevelName, game.StateGame.LevelManager));
+          doors.Add(BlockSpriteFactory.CreateSlattedDoorSprite(xPos, yPos, state, pairedLevelName, levelManager));
           break;
         }
 
@@ -335,7 +338,7 @@ internal partial class LevelLoader {
     }
   }
 
-  public static Level FromString(Game1 game, ISet<string> levelNames, string levelDataString) {
+  public static Level FromString(Player player, ILevelManager levelManager, ISet<string> levelNames, string levelDataString) {
     List<IBlock> nonCollidableBlocks = [];
     List<IBlock> collidableBlocks = [];
     List<IBlock> doors = [];
@@ -367,7 +370,8 @@ internal partial class LevelLoader {
             var type = entrySplit[0];
 
             AddCellEntry(
-              game,
+              player,
+              levelManager,
               levelNames,
 
               type,

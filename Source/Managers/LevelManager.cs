@@ -100,7 +100,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
     var levelNamesSet = new HashSet<string>(LEVEL_NAMES);
 
     foreach (var name in LEVEL_NAMES) {
-      var level = LevelLoader.FromString(game, levelNamesSet, File.ReadAllText(content.RootDirectory + "/Levels/" + name + ".csv"));
+      var level = LevelLoader.FromString(game.StateGame.Player, game.StateGame.LevelManager, levelNamesSet, File.ReadAllText(content.RootDirectory + "/Levels/" + name + ".csv"));
 
       level.CollisionManager.Add(game.StateGame.Player);
 

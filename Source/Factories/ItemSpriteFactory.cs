@@ -1,6 +1,7 @@
 using GameProject.Globals;
 using GameProject.Items;
 using GameProject.Managers;
+using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -18,7 +19,7 @@ internal class ItemSpriteFactory {
     basicGunsTexture = content.Load<Texture2D>("Items/basic_guns_spritesheet");
   }
 
-  public IItem CreateRevolver(float xPos, float yPos, Game1 game) {
+  public IItem CreateRevolver(float xPos, float yPos, Player player, ILevelManager levelManager) {
     GunStats stats = new() {
       AmmoType = AmmoType.Light,
       BulletVelocity = 500f,
@@ -28,10 +29,10 @@ internal class ItemSpriteFactory {
       ReloadTime = 0.2f,
       BaseDamage = 30
     };
-    return new RevolverItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
+    return new RevolverItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
   }
 
-  public IItem CreateRifle(float xPos, float yPos, Game1 game) {
+  public IItem CreateRifle(float xPos, float yPos, Player player, ILevelManager levelManager) {
     var stats = new GunStats {
       AmmoType = AmmoType.Heavy,
       BulletVelocity = 1000f,
@@ -40,10 +41,10 @@ internal class ItemSpriteFactory {
       ReloadTime = 0.4f,
       BaseDamage = 70
     };
-    return new RifleItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
+    return new RifleItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
   }
 
-  public IItem CreateShotgun(float xPos, float yPos, Game1 game) {
+  public IItem CreateShotgun(float xPos, float yPos, Player player, ILevelManager levelManager) {
     var stats = new GunStats {
       AmmoType = AmmoType.Shells,
       BulletVelocity = 400f,
@@ -54,7 +55,7 @@ internal class ItemSpriteFactory {
       ReloadTime = 0.6f,
       BaseDamage = 20
     };
-    return new ShotgunItem(basicGunsTexture, new Vector2(xPos, yPos), game, stats);
+    return new ShotgunItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
   }
 
   public static IItem CreateKey(float xPos, float yPos, ILevelManager levelManager) {
