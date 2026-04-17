@@ -7,3 +7,4 @@ Alter gameplay for adults with slow reaction time: slow game to 0.5x speed (lol)
 Mobile device port?
 Support resizing the window
 Quicksave / quickreload support
+Boss level

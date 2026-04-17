@@ -7,3 +7,5 @@ internal static class CollisionHelper {
     return currentPosition + (info.Direction * nudgeAmount);
   }
 }
+
+// TODO: POSSBILY: Add more logic depending on rectangles or circles

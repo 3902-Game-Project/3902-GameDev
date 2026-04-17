@@ -23,3 +23,12 @@ Aaron: player using keys to open door
 Emmett: ability to pick up / drop items; more items than just guns
 JJ: sound effects, background music
 Q: item selection page
+
+Sprint 5:
+Q: add powerup items like alcohol; add boss room between vault 
+JJ: give enemies actually reasonable AI like going toward player; enemies can also fire up/down
+Aaron: cheat codes
+  At minimum more than a single character
+Santosh: shader, resizing window, slow reaction time mode
+Emmett: more weapons
+Eric: ?
