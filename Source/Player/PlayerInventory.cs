@@ -4,7 +4,6 @@ using GameProject.Items;
 using GameProject.Managers;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
-using System.Diagnostics.Contracts;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace;

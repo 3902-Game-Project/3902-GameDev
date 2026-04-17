@@ -3,7 +3,6 @@ using GameProject.Blocks;
 using GameProject.Collisions;
 using GameProject.GlobalInterfaces;
 using GameProject.Managers;
-using GameProject.PlayerSpace;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 
