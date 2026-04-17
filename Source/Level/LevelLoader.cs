@@ -69,12 +69,12 @@ internal partial class LevelLoader {
           switch (variation) {
             case "0":
               /* wall */
-              collidableBlocks.Add(BlockSpriteFactory.CreateLogBlockSprite(xPos, yPos));
+              collidableBlocks.Add(BlockFactory.CreateLogBlockSprite(xPos, yPos));
               break;
 
             case "1":
               /* corner */
-              collidableBlocks.Add(BlockSpriteFactory.CreateLogCornerBlockSprite(xPos, yPos));
+              collidableBlocks.Add(BlockFactory.CreateLogCornerBlockSprite(xPos, yPos));
               break;
 
             default:
@@ -97,7 +97,7 @@ internal partial class LevelLoader {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
           }
 
-          doors.Add(BlockSpriteFactory.CreateSmallDoorBlockSprite(xPos, yPos, state, pairedLevelName, levelManager));
+          doors.Add(BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos, state, pairedLevelName, levelManager));
           break;
         }
 
@@ -112,22 +112,22 @@ internal partial class LevelLoader {
 
       case "4":
         /* snake */
-        enemies.Add(EnemySpriteFactory.Instance.CreateSnakeSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
+        enemies.Add(EnemyFactory.Instance.CreateSnakeSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
         break;
 
       case "5":
         /* sand */
-        nonCollidableBlocks.Add(BlockSpriteFactory.CreateSandBlockSprite(xPos, yPos));
+        nonCollidableBlocks.Add(BlockFactory.CreateSandBlockSprite(xPos, yPos));
         break;
 
       case "6":
         /* red sand */
-        nonCollidableBlocks.Add(BlockSpriteFactory.CreateRedSandBlockSprite(xPos, yPos));
+        nonCollidableBlocks.Add(BlockFactory.CreateRedSandBlockSprite(xPos, yPos));
         break;
 
       case "7":
         /* wood plank */
-        nonCollidableBlocks.Add(BlockSpriteFactory.CreateWoodPlankBlockSprite(xPos, yPos));
+        nonCollidableBlocks.Add(BlockFactory.CreateWoodPlankBlockSprite(xPos, yPos));
         break;
 
       case "8": {
@@ -142,18 +142,18 @@ internal partial class LevelLoader {
           switch (variation) {
             case "0":
               /* wall */
-              collidableBlocks.Add(BlockSpriteFactory.CreateRockBlockSprite(xPos, yPos));
+              collidableBlocks.Add(BlockFactory.CreateRockBlockSprite(xPos, yPos));
               break;
 
             case "1":
               /* corner */
-              collidableBlocks.Add(BlockSpriteFactory.CreateRockCornerBlockSprite(xPos, yPos));
+              collidableBlocks.Add(BlockFactory.CreateRockCornerBlockSprite(xPos, yPos));
               break;
 
 
             case "2":
               /* red X */
-              collidableBlocks.Add(BlockSpriteFactory.CreateRockRedXBlockSprite(xPos, yPos));
+              collidableBlocks.Add(BlockFactory.CreateRockRedXBlockSprite(xPos, yPos));
               break;
 
             case "3": {
@@ -164,7 +164,7 @@ internal partial class LevelLoader {
                   throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
                 }
 
-                doors.Add(BlockSpriteFactory.CreateRockHoleBlockSprite(xPos, yPos, pairedLevelName, levelManager));
+                doors.Add(BlockFactory.CreateRockHoleBlockSprite(xPos, yPos, pairedLevelName, levelManager));
                 break;
               }
 
@@ -176,57 +176,57 @@ internal partial class LevelLoader {
 
       case "9":
         /* shotgunner */
-        enemies.Add(EnemySpriteFactory.Instance.CreateShotgunnerSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, levelManager));
+        enemies.Add(EnemyFactory.Instance.CreateShotgunnerSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, levelManager));
         break;
 
       case "10":
         /* bat */
-        enemies.Add(EnemySpriteFactory.Instance.CreateBatSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
+        enemies.Add(EnemyFactory.Instance.CreateBatSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
         break;
 
       case "11":
         /* rifleman */
-        enemies.Add(EnemySpriteFactory.Instance.CreateRiflemanSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, levelManager));
+        enemies.Add(EnemyFactory.Instance.CreateRiflemanSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, levelManager));
         break;
 
       case "12":
         /* tumbleweed */
-        enemies.Add(EnemySpriteFactory.Instance.CreateTumbleweedSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
+        enemies.Add(EnemyFactory.Instance.CreateTumbleweedSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
         break;
 
       case "13":
         /* cactus */
-        enemies.Add(EnemySpriteFactory.Instance.CreateCactusSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
+        enemies.Add(EnemyFactory.Instance.CreateCactusSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
         break;
 
       case "14":
         /* revolver */
-        pickups.Add(new ItemWorldPickup(ItemSpriteFactory.Instance.CreateRevolver(xPos, yPos, player, levelManager)));
+        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateRevolver(xPos, yPos, player, levelManager)));
         break;
 
       case "15":
         /* rifle */
-        pickups.Add(new ItemWorldPickup(ItemSpriteFactory.Instance.CreateRifle(xPos, yPos, player, levelManager)));
+        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateRifle(xPos, yPos, player, levelManager)));
         break;
 
       case "16":
         /* shotgun */
-        pickups.Add(new ItemWorldPickup(ItemSpriteFactory.Instance.CreateShotgun(xPos, yPos, player, levelManager)));
+        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateShotgun(xPos, yPos, player, levelManager)));
         break;
 
       case "17":
         /* barrel */
-        collidableBlocks.Add(BlockSpriteFactory.CreateBarrelBlockSprite(xPos, yPos));
+        collidableBlocks.Add(BlockFactory.CreateBarrelBlockSprite(xPos, yPos));
         break;
 
       case "18":
         /* bar shelf */
-        collidableBlocks.Add(BlockSpriteFactory.CreateBarShelfBlockSprite(xPos, yPos));
+        collidableBlocks.Add(BlockFactory.CreateBarShelfBlockSprite(xPos, yPos));
         break;
 
       case "19":
         /* shelf */
-        collidableBlocks.Add(BlockSpriteFactory.CreateShelfBlockSprite(xPos, yPos));
+        collidableBlocks.Add(BlockFactory.CreateShelfBlockSprite(xPos, yPos));
         break;
 
       case "20": {
@@ -244,58 +244,58 @@ internal partial class LevelLoader {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
           }
 
-          doors.Add(BlockSpriteFactory.CreateVaultDoorBlockSprite(xPos, yPos, state, pairedLevelName, levelManager));
+          doors.Add(BlockFactory.CreateVaultDoorBlockSprite(xPos, yPos, state, pairedLevelName, levelManager));
           break;
         }
 
       case "21":
         /* key item */
-        pickups.Add(new ItemWorldPickup(ItemSpriteFactory.CreateKey(xPos, yPos, levelManager)));
+        pickups.Add(new ItemWorldPickup(ItemFactory.CreateKey(xPos, yPos, levelManager)));
         break;
 
       case "22":
         /* fire pit */
-        collidableBlocks.Add(BlockSpriteFactory.CreateFirePitBlockSprite(xPos, yPos));
+        collidableBlocks.Add(BlockFactory.CreateFirePitBlockSprite(xPos, yPos));
         break;
 
       case "23":
         /* fire */
-        collidableBlocks.Add(BlockSpriteFactory.CreateFireBlockSprite(xPos, yPos));
+        collidableBlocks.Add(BlockFactory.CreateFireBlockSprite(xPos, yPos));
         break;
 
       case "24":
         /* ladder */
-        collidableBlocks.Add(BlockSpriteFactory.CreateLadderBlockSprite(xPos, yPos));
+        collidableBlocks.Add(BlockFactory.CreateLadderBlockSprite(xPos, yPos));
         break;
 
       case "25":
         /* mud */
-        collidableBlocks.Add(BlockSpriteFactory.CreateMudBlockSprite(xPos, yPos));
+        collidableBlocks.Add(BlockFactory.CreateMudBlockSprite(xPos, yPos));
         break;
 
       case "26":
         /* crate */
-        collidableBlocks.Add(BlockSpriteFactory.CreateCrateBlockSprite(xPos, yPos));
+        collidableBlocks.Add(BlockFactory.CreateCrateBlockSprite(xPos, yPos));
         break;
 
       case "27":
         /* stool */
-        collidableBlocks.Add(BlockSpriteFactory.CreateStoolBlockSprite(xPos, yPos));
+        collidableBlocks.Add(BlockFactory.CreateStoolBlockSprite(xPos, yPos));
         break;
 
       case "28":
         /* table */
-        collidableBlocks.Add(BlockSpriteFactory.CreateTableBlockSprite(xPos, yPos));
+        collidableBlocks.Add(BlockFactory.CreateTableBlockSprite(xPos, yPos));
         break;
 
       case "29":
         /* statue */
-        collidableBlocks.Add(BlockSpriteFactory.CreateStatueBlockSprite(xPos, yPos));
+        collidableBlocks.Add(BlockFactory.CreateStatueBlockSprite(xPos, yPos));
         break;
 
       case "30":
         /* window */
-        collidableBlocks.Add(BlockSpriteFactory.CreateWindowBlockSprite(xPos, yPos));
+        collidableBlocks.Add(BlockFactory.CreateWindowBlockSprite(xPos, yPos));
         break;
 
       case "31": {
@@ -312,25 +312,25 @@ internal partial class LevelLoader {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
           }
 
-          doors.Add(BlockSpriteFactory.CreateSlattedDoorSprite(xPos, yPos, state, pairedLevelName, levelManager));
+          doors.Add(BlockFactory.CreateSlattedDoorSprite(xPos, yPos, state, pairedLevelName, levelManager));
           break;
         }
 
       case "32":
         /* treasure block */
-        collidableBlocks.Add(BlockSpriteFactory.CreateTreasureBlockSprite(xPos, yPos));
+        collidableBlocks.Add(BlockFactory.CreateTreasureBlockSprite(xPos, yPos));
         break;
 
       /* case 33 -- empty */
 
       case "34":
         /* bank shelf */
-        collidableBlocks.Add(BlockSpriteFactory.CreateBankShelfBlockSprite(xPos, yPos));
+        collidableBlocks.Add(BlockFactory.CreateBankShelfBlockSprite(xPos, yPos));
         break;
 
       case "35":
         /* tellers desk */
-        collidableBlocks.Add(BlockSpriteFactory.CreateTellersDeskBlockSprite(xPos, yPos));
+        collidableBlocks.Add(BlockFactory.CreateTellersDeskBlockSprite(xPos, yPos));
         break;
 
       default:

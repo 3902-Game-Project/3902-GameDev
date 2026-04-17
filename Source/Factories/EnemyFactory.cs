@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Factories;
 
-internal class EnemySpriteFactory {
+internal class EnemyFactory {
   private Texture2D snakeTexture;
   private Texture2D batTexture;
   private Texture2D shotgunnerTexture;
@@ -14,9 +14,9 @@ internal class EnemySpriteFactory {
   private Texture2D tumbleweedTexture;
   private Texture2D cactusTexture;
 
-  public static EnemySpriteFactory Instance { get; } = new();
+  public static EnemyFactory Instance { get; } = new();
 
-  private EnemySpriteFactory() { }
+  private EnemyFactory() { }
 
   public void LoadAllTextures(ContentManager content) {
     snakeTexture = content.Load<Texture2D>("Enemies/snakeSpritesheet");

@@ -8,12 +8,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Factories;
 
-internal class ItemSpriteFactory {
+internal class ItemFactory {
   private Texture2D basicGunsTexture;
 
-  public static ItemSpriteFactory Instance { get; } = new();
+  public static ItemFactory Instance { get; } = new();
 
-  private ItemSpriteFactory() { }
+  private ItemFactory() { }
 
   public void LoadAllTextures(ContentManager contentManager) {
     basicGunsTexture = contentManager.Load<Texture2D>("Items/basic_guns_spritesheet");

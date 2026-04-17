@@ -107,8 +107,8 @@ internal class StateGameType : IGameState {
   }
 
   public void LoadContent(ContentManager contentManager) {
-    Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateRevolver(0f, 0f, game.StateGame.Player, game.StateGame.LevelManager));
-    Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateRifle(0f, 0f, game.StateGame.Player, game.StateGame.LevelManager));
+    Player.Inventory.PickupItem(ItemFactory.Instance.CreateRevolver(0f, 0f, game.StateGame.Player, game.StateGame.LevelManager));
+    Player.Inventory.PickupItem(ItemFactory.Instance.CreateRifle(0f, 0f, game.StateGame.Player, game.StateGame.LevelManager));
 
     ammoTexture = contentManager.Load<Texture2D>("Items/ammo_drops");
 
