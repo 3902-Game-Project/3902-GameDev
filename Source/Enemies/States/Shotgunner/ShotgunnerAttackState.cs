@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Enemies.ShotgunnerStates;
 
 internal class ShotgunnerAttackState : IShotgunnerState {
-  private readonly ShotgunnerSprite shotgunner;
+  private readonly Shotgunner shotgunner;
   private readonly ILevelManager levelManager;
   private double stateTimer;
   private double animationTimer;
@@ -15,7 +15,7 @@ internal class ShotgunnerAttackState : IShotgunnerState {
 
   private bool hasFired = false;
 
-  public ShotgunnerAttackState(ShotgunnerSprite shotgunner, ILevelManager levelManager) {
+  public ShotgunnerAttackState(Shotgunner shotgunner, ILevelManager levelManager) {
     this.shotgunner = shotgunner;
     this.levelManager = levelManager;
 

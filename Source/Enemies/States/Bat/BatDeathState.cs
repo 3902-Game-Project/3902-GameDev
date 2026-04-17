@@ -3,7 +3,7 @@
 namespace GameProject.Enemies.BatStates;
 
 internal class BatDeathState : IBatState {
-  private readonly BatSprite bat;
+  private readonly Bat bat;
 
   private double animationTimer;
   private readonly double timePerFrame = 0.15;
@@ -13,7 +13,7 @@ internal class BatDeathState : IBatState {
 
   private bool isAnimationFinished = false;
 
-  public BatDeathState(BatSprite bat) {
+  public BatDeathState(Bat bat) {
     this.bat = bat;
 
     this.bat.Velocity = Vector2.Zero;

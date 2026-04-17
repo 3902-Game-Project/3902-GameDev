@@ -3,12 +3,12 @@
 namespace GameProject.Enemies.BatStates;
 
 internal class BatIdleState : IBatState {
-  private readonly BatSprite bat;
+  private readonly Bat bat;
   private double timer;
   private readonly System.Random random;
   private double animationTimer;
 
-  public BatIdleState(BatSprite bat) {
+  public BatIdleState(Bat bat) {
     this.bat = bat;
     random = new System.Random();
 

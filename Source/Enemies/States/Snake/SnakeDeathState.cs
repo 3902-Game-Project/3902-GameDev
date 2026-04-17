@@ -3,7 +3,7 @@
 namespace GameProject.Enemies.SnakeStates;
 
 internal class SnakeDeathState : ISnakeState {
-  private readonly SnakeSprite snake;
+  private readonly Snake snake;
 
   private double animationTimer;
   private readonly double timePerFrame = 0.15;
@@ -13,7 +13,7 @@ internal class SnakeDeathState : ISnakeState {
 
   private bool isAnimationFinished = false;
 
-  public SnakeDeathState(SnakeSprite snake) {
+  public SnakeDeathState(Snake snake) {
     this.snake = snake;
     this.snake.Velocity = Vector2.Zero;
 

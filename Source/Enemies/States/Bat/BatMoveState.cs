@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Enemies.BatStates;
 
 internal class BatMoveState : IBatState {
-  private readonly BatSprite bat;
+  private readonly Bat bat;
   private readonly Random random;
   private double wanderTimer;
   private readonly double wanderDuration;
@@ -12,7 +12,7 @@ internal class BatMoveState : IBatState {
   private double animationTimer;
   private int currentFrameIndex;
 
-  public BatMoveState(BatSprite bat) {
+  public BatMoveState(Bat bat) {
     this.bat = bat;
     random = new Random();
     this.bat.CurrentSourceRectangles = [

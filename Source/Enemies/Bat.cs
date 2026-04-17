@@ -1,17 +1,17 @@
-using GameProject.Enemies.SnakeStates;
+﻿using GameProject.Enemies.BatStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-internal class SnakeSprite : BaseEnemy {
-  private ISnakeState state;
+internal class Bat : BaseEnemy {
+  private IBatState state;
 
-  public SnakeSprite(Texture2D texture, Vector2 position) : base(texture, position, 64f, 32f) {
-    state = new SnakeWanderState(this);
+  public Bat(Texture2D texture, Vector2 position) : base(texture, position, 64f, 64f) {
+    state = new BatIdleState(this);
   }
 
-  public void ChangeState(ISnakeState newState) {
+  public void ChangeState(IBatState newState) {
     state = newState;
   }
 
@@ -42,7 +42,7 @@ internal class SnakeSprite : BaseEnemy {
     base.TakeDamage(damage);
 
     if (wasAlive && Health <= 0) {
-      ChangeState(new SnakeDeathState(this));
+      ChangeState(new BatDeathState(this));
     }
   }
 }

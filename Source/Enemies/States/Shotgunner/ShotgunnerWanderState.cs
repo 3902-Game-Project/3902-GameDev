@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Enemies.ShotgunnerStates;
 
 internal class ShotgunnerWanderState : IShotgunnerState {
-  private readonly ShotgunnerSprite shotgunner;
+  private readonly Shotgunner shotgunner;
   private readonly ILevelManager levelManager;
   private readonly Random random;
   private double wanderTimer;
@@ -14,7 +14,7 @@ internal class ShotgunnerWanderState : IShotgunnerState {
   private double animationTimer;
   private int currentFrameIndex;
 
-  public ShotgunnerWanderState(ShotgunnerSprite shotgunner, ILevelManager levelManager) {
+  public ShotgunnerWanderState(Shotgunner shotgunner, ILevelManager levelManager) {
     this.shotgunner = shotgunner;
     this.levelManager = levelManager;
     random = new Random();

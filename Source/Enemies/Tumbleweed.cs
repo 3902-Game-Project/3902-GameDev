@@ -4,10 +4,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-internal class TumbleweedSprite : BaseEnemy {
+internal class Tumbleweed : BaseEnemy {
   private ITumbleweedState state;
 
-  public TumbleweedSprite(Texture2D texture, Vector2 position) : base(texture, position, 48f, 48f) {
+  public Tumbleweed(Texture2D texture, Vector2 position) : base(texture, position, 48f, 48f) {
     state = new TumbleweedIdleState(this);
   }
 

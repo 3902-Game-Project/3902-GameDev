@@ -3,9 +3,9 @@
 namespace GameProject.Enemies.CactusStates;
 
 internal class CactusIdleState : ICactusState {
-  private readonly CactusSprite cactus;
+  private readonly Cactus cactus;
 
-  public CactusIdleState(CactusSprite cactus) {
+  public CactusIdleState(Cactus cactus) {
     this.cactus = cactus;
 
     this.cactus.Velocity = Vector2.Zero;

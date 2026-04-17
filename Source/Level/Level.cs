@@ -37,7 +37,7 @@ internal class Level : ILevel {
   }
 
   private void CheckLevelClear() {
-    var killableEnemies = aliveEnemies.Where(e => e is not CactusSprite);
+    var killableEnemies = aliveEnemies.Where(e => e is not Cactus);
 
     if (!killableEnemies.Any()) {
       foreach (var door in doors) {

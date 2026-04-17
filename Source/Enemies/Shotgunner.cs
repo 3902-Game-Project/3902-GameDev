@@ -1,17 +1,18 @@
-﻿using GameProject.Enemies.BatStates;
+﻿using GameProject.Enemies.ShotgunnerStates;
+using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-internal class BatSprite : BaseEnemy {
-  private IBatState state;
+internal class Shotgunner : BaseEnemy {
+  private IShotgunnerState state;
 
-  public BatSprite(Texture2D texture, Vector2 position) : base(texture, position, 64f, 64f) {
-    state = new BatIdleState(this);
+  public Shotgunner(Texture2D texture, Vector2 position, ILevelManager levelManager) : base(texture, position, 48f, 96f) {
+    state = new ShotgunnerWanderState(this, levelManager);
   }
 
-  public void ChangeState(IBatState newState) {
+  public void ChangeState(IShotgunnerState newState) {
     state = newState;
   }
 
@@ -28,12 +29,12 @@ internal class BatSprite : BaseEnemy {
     if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return;
 
     Rectangle source = CurrentSourceRectangles[CurrentFrame];
-    SpriteEffects effect = FacingDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+    SpriteEffects effect = FacingDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
     Vector2 origin = new(source.Width / 2f, source.Height);
 
     Color tintColor = DamageFlashTimer > 0 ? Color.Red : Color.White;
 
-    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, 2f, effect, 0f);
+    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, 1.6f, effect, 0f);
   }
 
   public override void TakeDamage(int damage) {
@@ -42,7 +43,7 @@ internal class BatSprite : BaseEnemy {
     base.TakeDamage(damage);
 
     if (wasAlive && Health <= 0) {
-      ChangeState(new BatDeathState(this));
+      ChangeState(new ShotgunnerDeathState(this));
     }
   }
 }

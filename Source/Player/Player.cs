@@ -226,8 +226,8 @@ internal class Player : IGPUpdatable, IGPDrawable, ICollidable {
 
     // Ammo dropping system
     Items.AmmoType dropType = Items.AmmoType.Light;
-    if (enemy is RiflemanSprite) dropType = Items.AmmoType.Heavy;
-    if (enemy is ShotgunnerSprite) dropType = Items.AmmoType.Shells;
+    if (enemy is Rifleman) dropType = Items.AmmoType.Heavy;
+    if (enemy is Shotgunner) dropType = Items.AmmoType.Shells;
 
     LevelManager.CurrentLevel.AddPickup(WorldPickupFactory.Instance.CreateAmmo(enemy.Position, dropType, 5));
   }

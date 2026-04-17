@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Enemies.TumbleweedStates;
 
 internal class TumbleweedIdleState : ITumbleweedState {
-  private readonly TumbleweedSprite tumbleweed;
+  private readonly Tumbleweed tumbleweed;
   private readonly Random random;
   private double idleTimer;
   private readonly double idleDuration;
@@ -12,7 +12,7 @@ internal class TumbleweedIdleState : ITumbleweedState {
   private double animationTimer;
   private int currentFrameIndex;
 
-  public TumbleweedIdleState(TumbleweedSprite tumbleweed) {
+  public TumbleweedIdleState(Tumbleweed tumbleweed) {
     this.tumbleweed = tumbleweed;
     random = new Random();
 

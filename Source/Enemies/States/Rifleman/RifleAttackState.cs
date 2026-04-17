@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Enemies.RiflemanStates;
 
 internal class RifleAttackState : IRiflemanState {
-  private readonly RiflemanSprite rifleMan;
+  private readonly Rifleman rifleMan;
   private readonly ILevelManager levelManager;
   private double stateTimer;
   private double animationTimer;
@@ -15,7 +15,7 @@ internal class RifleAttackState : IRiflemanState {
 
   private bool hasFired = false;
 
-  public RifleAttackState(RiflemanSprite rifleMan, ILevelManager levelManager) {
+  public RifleAttackState(Rifleman rifleMan, ILevelManager levelManager) {
     this.rifleMan = rifleMan;
     this.levelManager = levelManager;
 

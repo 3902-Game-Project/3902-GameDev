@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Enemies.SnakeStates;
 
 internal class SnakeWanderState : ISnakeState {
-  private readonly SnakeSprite snake;
+  private readonly Snake snake;
   private readonly Random random;
   private double wanderTimer;
   private readonly double wanderDuration;
@@ -12,7 +12,7 @@ internal class SnakeWanderState : ISnakeState {
   private double animationTimer;
   private int currentFrameIndex;
 
-  public SnakeWanderState(SnakeSprite snake) {
+  public SnakeWanderState(Snake snake) {
     this.snake = snake;
     random = new Random();
     this.snake.CurrentSourceRectangles = [
