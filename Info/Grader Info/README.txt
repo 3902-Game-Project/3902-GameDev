@@ -58,10 +58,10 @@ Jira task screenshots:
   Found in the "Info/Grader Info/Jira Sprint Reports" folder.
 
 Known bugs:
-  -Cannot move to escape block if just barely collided into it.
   -Can push crates through walls and enemies forced to move along with crate.
   -Enemies sometimes can walk off screen.
   -Ammo not reloading
+  -Confusion in codebase between gunstats, ammostats, etc.
   -Gamepad support not currently complete. We ran out of time.
 
 Sprint 2 Report:
