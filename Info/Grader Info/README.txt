@@ -34,7 +34,10 @@ Controls:
 
   Item Selection Screen:
     Q/GamePadY               Quit the game.
-    I/GamePadB               Return to game.
+    I/GamePadA               Return to game.
+    A/Left/DPadLeft          Move leftward in the menu.
+    D/Right/DPadRight        Move rightward in the menu.
+    Enter/Space/GamePadB     Equip the selected item.
 
   Win/Loss Screen:
     Key                      Action

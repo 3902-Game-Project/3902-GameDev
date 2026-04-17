@@ -28,10 +28,8 @@ internal class StateItemScreenType(Game1 game) : IGameState {
 
         { Keys.A, new MenuMoveLeftCommand(this) },
         { Keys.Left, new MenuMoveLeftCommand(this) },
-
         { Keys.D, new MenuMoveRightCommand(this) },
         { Keys.Right, new MenuMoveRightCommand(this) },
-
         { Keys.Enter, new MenuEquipCommand(this) },
         { Keys.Space, new MenuEquipCommand(this) },
       }
@@ -43,7 +41,13 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     gamePadController = new GamePadController(
       pressedMappings: new Dictionary<Buttons, IGPCommand> {
         { Buttons.X, new QuitCommand(game) },
-        { Buttons.A, new ReturnToGameNoFadeCommand(game) },
+        { Buttons.B, new ReturnToGameNoFadeCommand(game) },
+
+        // Navigation bindings:
+
+        { Buttons.DPadLeft, new MenuMoveLeftCommand(this) },
+        { Buttons.DPadRight, new MenuMoveRightCommand(this) },
+        { Buttons.A, new MenuEquipCommand(this) },
       }
     );
   }
