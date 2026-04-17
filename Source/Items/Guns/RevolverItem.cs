@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-internal class RevolverItem : DefaultGun {
+internal class RevolverItem : ABaseGun {
   public RevolverItem(Texture2D texture, Vector2 startPosition, Player player, ILevelManager levelManager, GunStats stats)
     : base(texture, startPosition, player, levelManager, stats) {
 

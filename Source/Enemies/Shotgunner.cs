@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-internal class Shotgunner : BaseEnemy {
+internal class Shotgunner : ABaseEnemy {
   private IShotgunnerState state;
 
   public Shotgunner(Texture2D texture, Vector2 position, ILevelManager levelManager) : base(texture, position, 48f, 96f) {

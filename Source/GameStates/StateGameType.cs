@@ -202,7 +202,7 @@ internal class StateGameType : IGameState {
 
     if (activeWeapon != null) {
       // Much cleaner! If it's any gun inheriting from DefaultGun, it will grab the stats.
-      if (activeWeapon is DefaultGun activeGun) {
+      if (activeWeapon is ABaseGun activeGun) {
         GunStats activeStats = activeGun.PublicStats;
 
         if (activeStats != null) {

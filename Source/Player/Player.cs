@@ -87,7 +87,7 @@ internal class Player : IGPUpdatable, IGPDrawable, ICollidable {
     UseItemState = new PlayerUseItemState(this);
     DeadState = new PlayerDeadState(this, game);
     State = StaticState;
-    BaseEnemy.OnDeath += HandleEnemyDeath;
+    ABaseEnemy.OnDeath += HandleEnemyDeath;
   }
 
   public void MoveUp() => inputUpThisFrame = true;
@@ -206,7 +206,7 @@ internal class Player : IGPUpdatable, IGPDrawable, ICollidable {
     float closestDistance = float.MaxValue;
 
     foreach (var pickup in LevelManager.CurrentLevel.Pickups) {
-      if (pickup is BaseWorldPickup basePickup) {
+      if (pickup is ABaseWorldPickup basePickup) {
         float distance = Vector2.Distance(Position, basePickup.Position);
         if (distance < grabRange && distance < closestDistance) {
           closestDistance = distance;
@@ -221,7 +221,7 @@ internal class Player : IGPUpdatable, IGPDrawable, ICollidable {
     }
   }
 
-  private void HandleEnemyDeath(BaseEnemy enemy) {
+  private void HandleEnemyDeath(ABaseEnemy enemy) {
     if (LevelManager?.CurrentLevel == null) return;
 
     // Ammo dropping system

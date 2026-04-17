@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-internal class StoolBlock(Texture2D StoolTexture, Vector2 xyPos) : BaseBlock(xyPos) {
+internal class StoolBlock(Texture2D StoolTexture, Vector2 xyPos) : ABaseBlock(xyPos) {
   private static Rectangle sourceRect = new(448, 192, 64, 64);
 
   public override void Update(GameTime gameTime) { }

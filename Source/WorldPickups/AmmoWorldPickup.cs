@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.WorldPickups;
 
-internal class AmmoWorldPickup(Texture2D texture, Vector2 position, AmmoType type, int amount) : BaseWorldPickup(position), ICollidable {
+internal class AmmoWorldPickup(Texture2D texture, Vector2 position, AmmoType type, int amount) : ABaseWorldPickup(position), ICollidable {
   public AmmoType Type { get; } = type;
   public int Amount { get; } = amount;
 

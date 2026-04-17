@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-internal class ShotgunItem : DefaultGun {
+internal class ShotgunItem : ABaseGun {
   public ShotgunItem(Texture2D texture, Vector2 position, Player player, ILevelManager levelManager, GunStats stats)
     : base(texture, position, player, levelManager, stats) {
 

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-internal class TableBlock(Texture2D TableTexture, Vector2 xyPos) : BaseBlock(xyPos) {
+internal class TableBlock(Texture2D TableTexture, Vector2 xyPos) : ABaseBlock(xyPos) {
   private static Rectangle sourceRect = new(384, 192, 64, 64);
 
   public override void Update(GameTime gameTime) { }

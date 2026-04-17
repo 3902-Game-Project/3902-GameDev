@@ -5,7 +5,7 @@ namespace GameProject.Commands;
 
 internal class ReloadWeaponCommand(Player player) : IGPCommand {
   public void Execute() {
-    if (player.Inventory.ActiveItem is DefaultGun gun) {
+    if (player.Inventory.ActiveItem is ABaseGun gun) {
       gun.StartReload();
     }
   }

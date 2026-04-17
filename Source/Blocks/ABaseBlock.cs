@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-internal abstract class BaseBlock : IBlock, ICollidable {
+internal abstract class ABaseBlock : IBlock, ICollidable {
   public IShape Shape => Collider;
   public BoxCollider Collider { get; private set; }
   public Vector2 Position { get; set; }
@@ -15,7 +15,7 @@ internal abstract class BaseBlock : IBlock, ICollidable {
 
   public Rectangle BoundingBox => throw new System.NotImplementedException();
 
-  protected BaseBlock(Vector2 position, float width = 64f, float height = 64f) {
+  protected ABaseBlock(Vector2 position, float width = 64f, float height = 64f) {
     Position = position;
     Vector2 centerOffset = new(width / 2f, height / 2f);
 

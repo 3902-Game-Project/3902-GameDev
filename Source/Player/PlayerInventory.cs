@@ -98,7 +98,7 @@ internal class PlayerInventory(ILevelManager levelManager) {
       ActiveItem.Direction = Direction;
       ActiveItem.Update(gameTime);
     }
-    if (ActiveItem is Items.DefaultGun gun && gun.PublicStats.CurrentAmmo <= 0 && !gun.IsReloading) {
+    if (ActiveItem is Items.ABaseGun gun && gun.PublicStats.CurrentAmmo <= 0 && !gun.IsReloading) {
       gun.StartReload();
     }
   }
@@ -107,7 +107,7 @@ internal class PlayerInventory(ILevelManager levelManager) {
     ActiveItem?.Draw(spriteBatch);
 
     // Draw Overhead Reload Bar
-    if (ActiveItem is Items.DefaultGun gun && gun.IsReloading && whitePixel != null) {
+    if (ActiveItem is Items.ABaseGun gun && gun.IsReloading && whitePixel != null) {
       float barWidth = 60f;
       float barHeight = 8f;
       Vector2 barPos = Position + new Vector2(-barWidth / 2f, -80f);

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-internal class RifleItem : DefaultGun {
+internal class RifleItem : ABaseGun {
   public RifleItem(Texture2D texture, Vector2 startPosition, Player player, ILevelManager levelManager, GunStats stats)
     : base(texture, startPosition, player, levelManager, stats) {
 

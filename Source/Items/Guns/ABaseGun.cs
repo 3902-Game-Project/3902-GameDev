@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-internal abstract class DefaultGun(Texture2D texture, Vector2 startPosition, Player player, ILevelManager levelManager, GunStats stats) : IItem {
+internal abstract class ABaseGun(Texture2D texture, Vector2 startPosition, Player player, ILevelManager levelManager, GunStats stats) : IItem {
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   public ItemCategory Category { get; protected set; }
   public Vector2 Position { get; set; } = startPosition;

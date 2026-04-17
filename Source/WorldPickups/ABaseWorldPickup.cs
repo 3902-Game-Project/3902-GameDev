@@ -6,13 +6,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.WorldPickups;
 
-internal abstract class BaseWorldPickup : IWorldPickup {
+internal abstract class ABaseWorldPickup : IWorldPickup {
   public Vector2 Position { get; set; }
   public IShape Shape { get; }
   public Layer Layer { get; } = Layer.Pickups;
   public Layer Mask { get; } = Layer.Player;
 
-  protected BaseWorldPickup(Vector2 position) {
+  protected ABaseWorldPickup(Vector2 position) {
     Position = position;
     Shape = new CircleCollider(10, Position);
   }
