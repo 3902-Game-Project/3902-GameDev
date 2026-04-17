@@ -43,6 +43,9 @@ internal abstract class DefaultGun(Texture2D texture, Vector2 startPosition, Pla
   }
 
   public void StartReload() {
+    if (IsReloading) {
+      return;
+    }
     if (stats.CurrentAmmo < stats.MaxAmmo && player.Inventory.Ammo[stats.AmmoType] > 0) {
       IsReloading = true;
       ReloadTimer = stats.ReloadTime;
@@ -106,8 +109,8 @@ internal abstract class DefaultGun(Texture2D texture, Vector2 startPosition, Pla
     // Check for Reload Interruption
     if (IsReloading) {
       IsReloading = false;
-      EquipTimer = stats.EquipTime; // Applying the interrupt penalty
-      return;
+      //EquipTimer = stats.EquipTime; // Applying the interrupt penalty
+      //return;
     }
 
     // Prevent firing if equipping or empty
