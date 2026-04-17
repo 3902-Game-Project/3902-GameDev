@@ -5,5 +5,5 @@ internal enum CollisionSide {
   Bottom,
   Left,
   Right,
-  None
+  None,
 }

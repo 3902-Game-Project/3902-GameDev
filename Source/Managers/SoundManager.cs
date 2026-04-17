@@ -10,7 +10,7 @@ internal enum SoundID {
   GunshotDefault,
   ReloadDefault,
   Background,
-  Door
+  Door,
 }
 
 internal class SoundManager {

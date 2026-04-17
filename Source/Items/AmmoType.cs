@@ -3,5 +3,5 @@
 internal enum AmmoType {
   Light,
   Heavy,
-  Shells
+  Shells,
 }

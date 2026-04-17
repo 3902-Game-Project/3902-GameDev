@@ -9,10 +9,9 @@ internal class BombProjectile : IProjectile {
   private readonly Texture2D texture;
   private Vector2 position;
   private readonly List<Rectangle> sourceRectangles = [
-        new Rectangle(16, 0, 5, 16),
-        new Rectangle(22, 0, 5, 16),
-
-    ];
+    new Rectangle(16, 0, 5, 16),
+    new Rectangle(22, 0, 5, 16),
+  ];
   private Rectangle currentSourceRect;
   private readonly Animation bombAnimation;
   private Vector2 origin;
