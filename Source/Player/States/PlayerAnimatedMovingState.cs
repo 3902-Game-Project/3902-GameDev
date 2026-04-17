@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GameProject.Controllers;
+using GameProject.Globals;
 using GameProject.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -100,15 +101,15 @@ internal class PlayerAnimatedMovingState(Player player) : APlayerState(player) {
     Vector2 origin = new(sourceRect.Width / 2, sourceRect.Height / 2);
 
     spriteBatch.Draw(
-      Player.Texture,
-      Player.Position,
-      sourceRect,
-      Player.CurrentTintColor,
-      0f,
-      origin,
-      0.15f,
-      SpriteEffects.None,
-      0f
+      texture: TextureStore.Instance.Player,
+      position: Player.Position,
+      sourceRectangle: sourceRect,
+      color: Player.CurrentTintColor,
+      rotation: 0f,
+      origin: origin,
+      scale: 0.15f,
+      effects: SpriteEffects.None,
+      layerDepth: 0f
     );
   }
 }

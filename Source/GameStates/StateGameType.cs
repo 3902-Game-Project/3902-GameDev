@@ -107,8 +107,6 @@ internal class StateGameType : IGameState {
   }
 
   public void LoadContent(ContentManager contentManager) {
-    Player.LoadContent(contentManager);
-
     Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateRevolver(0f, 0f, game.StateGame.Player, game.StateGame.LevelManager));
     Player.Inventory.PickupItem(ItemSpriteFactory.Instance.CreateRifle(0f, 0f, game.StateGame.Player, game.StateGame.LevelManager));
 
@@ -299,6 +297,7 @@ internal class StateGameType : IGameState {
     LevelManager.InitializeLevel();
 
     // Spawn test ammo right near the player so we can test the auto-collect
+    // TODO: remove this
     if (LevelManager.CurrentLevel != null && ammoTexture != null) {
       Vector2 spawnPos = Player.Position + new Vector2(100, 0);
       LevelManager.CurrentLevel.AddPickup(new GameProject.WorldPickups.AmmoWorldPickup(ammoTexture, spawnPos, AmmoType.Light, 15));

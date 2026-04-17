@@ -4,14 +4,14 @@ using GameProject.Collisions;
 using GameProject.Collisions.Shapes;
 using GameProject.Controllers;
 using GameProject.Enemies;
+using GameProject.Factories;
 using GameProject.GlobalInterfaces;
+using GameProject.Globals;
 using GameProject.Managers;
 using GameProject.PlayerSpace.States;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using GameProject.Items;
 
 namespace GameProject.PlayerSpace;
 
@@ -22,7 +22,7 @@ internal enum FacingDirection {
   Down,
 }
 
-internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
+internal class Player : IGPUpdatable, IGPDrawable, ICollidable {
   private static readonly float PLAYER_WIDTH = 171.0f * 0.15f;
   private static readonly float PLAYER_HEIGHT = 323.0f * 0.15f;
 
@@ -55,11 +55,6 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
   private Vector2 lastInputVelocity = Vector2.Zero;
 
   public PlayerInventory Inventory { get; private set; }
-  public Texture2D Texture { get; private set; }
-
-  private Texture2D ammoSpritesheet;
-
-  public Texture2D whitePixel;
 
   public Rectangle BoundingBox {
     get {
@@ -106,14 +101,6 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
     State.UseKey(useType);
   }
   public void Die() => State.Die();
-
-  public void Initialize() { }
-
-  public void LoadContent(ContentManager contentManager) {
-    Texture = contentManager.Load<Texture2D>("Misc/playerSpritesheet");
-    whitePixel = contentManager.Load<Texture2D>("Misc/WhitePixel");
-    ammoSpritesheet = contentManager.Load<Texture2D>("Items/ammo_drops");
-  }
 
   public void TakeDamage(int amount) {
     State.TakeDamage(amount);
@@ -210,6 +197,7 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
       TakeDamage(50);
     }
   }
+
   public void Interact() {
     if (LevelManager?.CurrentLevel == null) return;
 
@@ -234,17 +222,18 @@ internal class Player : IInitable, IGPUpdatable, IGPDrawable, ICollidable {
   }
 
   private void HandleEnemyDeath(BaseEnemy enemy) {
-    if (LevelManager?.CurrentLevel == null || ammoSpritesheet == null) return;
+    if (LevelManager?.CurrentLevel == null) return;
 
     // Ammo dropping system
     Items.AmmoType dropType = Items.AmmoType.Light;
     if (enemy is RiflemanSprite) dropType = Items.AmmoType.Heavy;
     if (enemy is ShotgunnerSprite) dropType = Items.AmmoType.Shells;
 
-    LevelManager.CurrentLevel.AddPickup(new WorldPickups.AmmoWorldPickup(ammoSpritesheet, enemy.Position, dropType, 5));
+    LevelManager.CurrentLevel.AddPickup(WorldPickupFactory.Instance.CreateAmmo(enemy.Position, dropType, 5));
   }
+
   public void Draw(SpriteBatch spriteBatch) {
     State.Draw(spriteBatch);
-    Inventory.Draw(spriteBatch, Position, whitePixel);
+    Inventory.Draw(spriteBatch, Position, TextureStore.Instance.WhitePixel);
   }
 }

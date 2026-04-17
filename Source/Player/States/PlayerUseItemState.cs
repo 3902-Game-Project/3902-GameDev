@@ -1,4 +1,5 @@
 ﻿using GameProject.Controllers;
+using GameProject.Globals;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -42,15 +43,15 @@ internal class PlayerUseItemState(Player player) : APlayerState(player) {
     Vector2 origin = new(sourceRect.Width / 2, sourceRect.Height / 2);
 
     spriteBatch.Draw(
-      Player.Texture,
-      Player.Position,
-      sourceRect,
-      Player.CurrentTintColor,
-      0f,
-      origin,
-      0.15f, // Keeps the scale consistent with other states
-      SpriteEffects.None,
-      0f
+      texture: TextureStore.Instance.Player,
+      position: Player.Position,
+      sourceRectangle: sourceRect,
+      color: Player.CurrentTintColor,
+      rotation: 0f,
+      origin: origin,
+      scale: 0.15f, // Keeps the scale consistent with other states
+      effects: SpriteEffects.None,
+      layerDepth: 0f
     );
   }
 }

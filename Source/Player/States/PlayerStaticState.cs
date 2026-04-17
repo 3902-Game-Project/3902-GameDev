@@ -1,4 +1,5 @@
 ﻿using GameProject.Controllers;
+using GameProject.Globals;
 using GameProject.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -82,7 +83,7 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
     origin = new Vector2(sourceRect.Width / 2, sourceRect.Height / 2);
 
     spriteBatch.Draw(
-      texture: Player.Texture,
+      texture: TextureStore.Instance.Player,
       position: Player.Position,
       sourceRectangle: sourceRect,
       color: Player.CurrentTintColor,

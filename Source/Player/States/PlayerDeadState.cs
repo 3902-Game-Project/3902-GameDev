@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GameProject.Controllers;
+using GameProject.Globals;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -49,16 +50,15 @@ internal class PlayerDeadState(Player player, Game1 game) : APlayerState(player)
     Vector2 origin = new(sourceRect.Width / 2f, sourceRect.Height / 2f);
 
     spriteBatch.Draw(
-      Player.Texture,
-      Player.Position,
-      sourceRect,
-      Color.White,
-      0f,
-      origin,
-      0.15f,
-      SpriteEffects.None,
-      0f
+      texture: TextureStore.Instance.Player,
+      position: Player.Position,
+      sourceRectangle: sourceRect,
+      color: Color.White,
+      rotation: 0f,
+      origin: origin,
+      scale: 0.15f,
+      effects: SpriteEffects.None,
+      layerDepth: 0f
     );
   }
 }
-
