@@ -19,13 +19,16 @@ internal class PlayerAnimatedMovingState(Player player) : APlayerState(player) {
 
   //need to update below 2 later
   private readonly List<Rectangle> moveUpFrames = [
-    new(453, 425, 161, 322),
-    new(453, 425, 161, 322),
+    new (130, 813, 159, 335),
+    new (453, 813, 161, 335),
+    new (1083, 813, 164, 335)
   ];
 
   private readonly List<Rectangle> moveDownFrames = [
-    new(455, 58, 161, 318),
-    new(455, 58, 161, 318),
+    new (448, 1181, 177, 313),
+    new (1256, 1181, 175, 320),
+    new (991, 1181, 176, 313),
+    new (727, 1181, 178, 320)
   ];
 
   private int currentFrame = 0;
