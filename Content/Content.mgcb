@@ -13,18 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin E:/CSE 3902/playerSpritesheet.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:E:/CSE 3902/playerSpritesheet.png;Misc/playerSpritesheet.png
-
 #begin Enemies/batSpritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -238,6 +226,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Misc/HUD Background.png
+
+#begin Misc/playerSpritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Misc/playerSpritesheet.png
 
 #begin Misc/projectile_spritesheet.png
 /importer:TextureImporter
