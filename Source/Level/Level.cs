@@ -63,7 +63,7 @@ internal class Level : ILevel {
     this.nonCollidableBlocks = nonCollidableBlocks;
     this.collidableBlocks = collidableBlocks;
     this.doors = doors;
-    this.aliveEnemies = enemies;
+    aliveEnemies = enemies;
     this.pickups = pickups;
     this.playerPosition = playerPosition;
 
