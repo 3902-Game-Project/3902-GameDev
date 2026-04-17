@@ -23,6 +23,17 @@ internal class StateItemScreenType(Game1 game) : IGameState {
       pressedMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.Q, new QuitCommand(game) },
         { Keys.I, new ReturnToGameNoFadeCommand(game) },
+
+        // Navigation bindings:
+
+        { Keys.A, new MenuMoveLeftCommand(this) },
+        { Keys.Left, new MenuMoveLeftCommand(this) },
+
+        { Keys.D, new MenuMoveRightCommand(this) },
+        { Keys.Right, new MenuMoveRightCommand(this) },
+
+        { Keys.Enter, new MenuEquipCommand(this) },
+        { Keys.Space, new MenuEquipCommand(this) },
       }
     );
 
