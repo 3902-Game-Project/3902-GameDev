@@ -10,13 +10,12 @@ internal class AmmoWorldPickup(Texture2D texture, Vector2 position, AmmoType typ
   public AmmoType Type { get; } = type;
   public int Amount { get; } = amount;
 
-  private Rectangle sourceRectangle = new(9, 15, 12, 11);
   private Vector2 origin;
   private readonly float scale = 2f;
 
   public override void Draw(SpriteBatch spriteBatch) {
     int xOffset = Type == AmmoType.Light ? 0 : (Type == AmmoType.Heavy ? 16 : 32);
-    Rectangle trueSourceRect = new Rectangle(xOffset, 0, 16, 16);
+    Rectangle trueSourceRect = new(xOffset, 0, 16, 16);
 
     origin = new Vector2(8, 8);
 
