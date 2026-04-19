@@ -36,8 +36,8 @@ internal class ItemFactory {
     var stats = new GunStats {
       AmmoType = AmmoType.Heavy,
       BulletVelocity = 1000f,
-      MaxAmmo = 10,
-      CurrentAmmo = 10,
+      MaxAmmo = 1,
+      CurrentAmmo = 1,
       ReloadTime = 0.4f,
       BaseDamage = 70
     };
