@@ -35,9 +35,6 @@
     <EditorConfigFiles Remove=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Info\Grader Info\Code Reviews\Sprint 4\Santosh Review by Quintin.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
