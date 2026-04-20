@@ -107,7 +107,7 @@ internal abstract class ABaseGun(Texture2D texture, Vector2 startPosition, Playe
 
   public virtual void Use(UseType useType) {
     // Check for Reload Interruption
-    if (IsReloading) {
+    if (IsReloading && stats.CurrentAmmo > 0) {
       IsReloading = false;
       //EquipTimer = stats.EquipTime; // Applying the interrupt penalty
       //return;
