@@ -10,6 +10,7 @@ internal class HealthItem(Texture2D texture, Vector2 startPosition) : IItem, IWo
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   public Vector2 Position { get; set; } = startPosition;
   public bool IsCollected { get; set; } = false;
+  public bool IsAutoCollect { get; } = true;
 
   // Adjust your source rectangle based on your specific PNG spritesheet
   private Rectangle sourceRectangle = new(0, 0, 16, 16);
