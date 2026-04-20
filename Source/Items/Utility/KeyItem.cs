@@ -65,6 +65,9 @@ internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManage
   }
 
   public void OnPickup(Player player) {
-    IsCollected = true;
+    if (!IsCollected) {
+      IsCollected = true;
+      player.Inventory.PickupItem(this);
+    }
   }
 }

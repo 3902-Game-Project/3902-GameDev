@@ -10,6 +10,9 @@ namespace GameProject.Factories;
 
 internal class ItemFactory {
   private Texture2D basicGunsTexture;
+  private Texture2D healthItemTexture;
+  private Texture2D invincibilityItemTexture;
+  private Texture2D infiniteAmmoItemTexture;
 
   public static ItemFactory Instance { get; } = new();
 
@@ -17,6 +20,9 @@ internal class ItemFactory {
 
   public void LoadAllTextures(ContentManager contentManager) {
     basicGunsTexture = contentManager.Load<Texture2D>("Items/basic_guns_spritesheet");
+    invincibilityItemTexture = contentManager.Load<Texture2D>("Items/InvincibilityPotion");
+    healthItemTexture = contentManager.Load<Texture2D>("Items/HealthPotion");
+    infiniteAmmoItemTexture = contentManager.Load<Texture2D>("Items/AmmoPotion");
   }
 
   public IItem CreateRevolver(float xPos, float yPos, Player player, ILevelManager levelManager) {
@@ -60,5 +66,17 @@ internal class ItemFactory {
 
   public static IItem CreateKey(float xPos, float yPos, ILevelManager levelManager) {
     return new KeyItem(TextureStore.Instance.MainBlockItemAtlas, new Vector2(xPos, yPos), levelManager);
+  }
+
+  public IItem CreateHealthItem(float xPos, float yPos) {
+    return new HealthItem(healthItemTexture, new Vector2(xPos, yPos));
+  }
+
+  public IItem CreateInvincibilityItem(float xPos, float yPos) {
+    return new InvincibilityItem(invincibilityItemTexture, new Vector2(xPos, yPos));
+  }
+
+  public IItem CreateInfiniteAmmoItem(float xPos, float yPos) {
+    return new InfiniteAmmoItem(infiniteAmmoItemTexture, new Vector2(xPos, yPos));
   }
 }
