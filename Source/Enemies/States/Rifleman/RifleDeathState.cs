@@ -3,7 +3,7 @@
 namespace GameProject.Enemies.RiflemanStates;
 
 internal class RifleDeathState : IRiflemanState {
-  private readonly RiflemanSprite rifleman;
+  private readonly Rifleman rifleman;
 
   private double animationTimer;
   private readonly double timePerFrame = 0.15;
@@ -13,7 +13,7 @@ internal class RifleDeathState : IRiflemanState {
 
   private bool isAnimationFinished = false;
 
-  public RifleDeathState(RiflemanSprite rifleman) {
+  public RifleDeathState(Rifleman rifleman) {
     this.rifleman = rifleman;
 
 

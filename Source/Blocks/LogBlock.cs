@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-internal class LogBlock : BaseBlock {
+internal class LogBlock : ABaseBlock {
   private static Rectangle sourceRect = new(256, 64, 64, 64);
   private readonly Texture2D logTexture;
 

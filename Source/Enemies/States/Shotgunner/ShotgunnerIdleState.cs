@@ -4,13 +4,13 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Enemies.ShotgunnerStates;
 
 internal class ShotgunnerIdleState : IShotgunnerState {
-  private readonly ShotgunnerSprite shotgunner;
+  private readonly Shotgunner shotgunner;
   private readonly ILevelManager levelManager;
   private double timer;
   private double animationTimer;
   private readonly System.Random random;
 
-  public ShotgunnerIdleState(ShotgunnerSprite shotgunner, ILevelManager levelManager) {
+  public ShotgunnerIdleState(Shotgunner shotgunner, ILevelManager levelManager) {
     this.shotgunner = shotgunner;
     this.levelManager = levelManager;
     random = new System.Random();

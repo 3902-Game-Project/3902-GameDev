@@ -1,17 +1,17 @@
-﻿using GameProject.Enemies.TumbleweedStates;
+﻿using GameProject.Enemies.BatStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-internal class TumbleweedSprite : BaseEnemy {
-  private ITumbleweedState state;
+internal class Bat : ABaseEnemy {
+  private IBatState state;
 
-  public TumbleweedSprite(Texture2D texture, Vector2 position) : base(texture, position, 48f, 48f) {
-    state = new TumbleweedIdleState(this);
+  public Bat(Texture2D texture, Vector2 position) : base(texture, position, 64f, 64f) {
+    state = new BatIdleState(this);
   }
 
-  public void ChangeState(ITumbleweedState newState) {
+  public void ChangeState(IBatState newState) {
     state = newState;
   }
 
@@ -33,7 +33,7 @@ internal class TumbleweedSprite : BaseEnemy {
 
     Color tintColor = DamageFlashTimer > 0 ? Color.Red : Color.White;
 
-    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, 0.4f, effect, 0f);
+    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, 2f, effect, 0f);
   }
 
   public override void TakeDamage(int damage) {
@@ -42,7 +42,7 @@ internal class TumbleweedSprite : BaseEnemy {
     base.TakeDamage(damage);
 
     if (wasAlive && Health <= 0) {
-      ChangeState(new TumbleweedDeathState(this));
+      ChangeState(new BatDeathState(this));
     }
   }
 }

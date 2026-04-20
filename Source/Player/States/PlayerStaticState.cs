@@ -1,81 +1,78 @@
 ﻿using GameProject.Controllers;
+using GameProject.Globals;
 using GameProject.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
 
-internal class PlayerStaticState(Player player) : IPlayerState {
+internal class PlayerStaticState(Player player) : APlayerState(player) {
   // Same rectangles as moving state except that left state set to same as right state (but flipped) for consistency
   private Rectangle SpriteRight = new(773, 56, 171, 323);
   private Rectangle SpriteLeft = new(773, 56, 171, 323);
   private Rectangle SpriteUp = new(453, 425, 161, 322);
   private Rectangle SpriteDown = new(455, 58, 161, 318);
 
-  public void MoveUp() {
-    player.Velocity = new Vector2(player.Velocity.X, -player.Speed);
-    player.Direction = FacingDirection.Up;
+  public override void MoveUp() {
+    Player.Velocity = new Vector2(Player.Velocity.X, -Player.Speed);
+    Player.Direction = FacingDirection.Up;
   }
 
-  public void MoveDown() {
-    player.Velocity = new Vector2(player.Velocity.X, player.Speed);
-    player.Direction = FacingDirection.Down;
+  public override void MoveDown() {
+    Player.Velocity = new Vector2(Player.Velocity.X, Player.Speed);
+    Player.Direction = FacingDirection.Down;
   }
 
-  public void MoveLeft() {
-    player.Velocity = new Vector2(-player.Speed, player.Velocity.Y);
-    player.Direction = FacingDirection.Left;
+  public override void MoveLeft() {
+    Player.Velocity = new Vector2(-Player.Speed, Player.Velocity.Y);
+    Player.Direction = FacingDirection.Left;
   }
 
-  public void MoveRight() {
-    player.Velocity = new Vector2(player.Speed, player.Velocity.Y);
-    player.Direction = FacingDirection.Right;
+  public override void MoveRight() {
+    Player.Velocity = new Vector2(Player.Speed, Player.Velocity.Y);
+    Player.Direction = FacingDirection.Right;
   }
 
-  public void Update(GameTime gameTime) {
+  public override void Update(GameTime gameTime) {
     // If we start moving, switch state
-    if (player.Velocity != Vector2.Zero) {
-      player.State = player.MovingState;
+    if (Player.Velocity != Vector2.Zero) {
+      Player.State = Player.MovingState;
     }
   }
 
-  public void UseItem(UseType useType) {
-    if (player.Inventory.ActiveItem != null) {
-      player.Inventory.ActiveItem.Use(useType);
-      if (player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
-        player.State = player.UseItemState;
+  public override void UseItem(UseType useType) {
+    if (Player.Inventory.ActiveItem != null) {
+      Player.Inventory.ActiveItem.Use(useType);
+      if (Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
+        Player.State = Player.UseItemState;
       }
     }
   }
 
-  public void UseKey(UseType useType) {
-    if (player.Inventory.Keys.Count > 0) {
-      player.Inventory.Keys[0].Use(useType);
-      if (player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
-        player.State = player.UseItemState;
+  public override void UseKey(UseType useType) {
+    if (Player.Inventory.Keys.Count > 0) {
+      Player.Inventory.Keys[0].Use(useType);
+      if (Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
+        Player.State = Player.UseItemState;
       }
-      player.Inventory.Keys.RemoveAt(0);
+      Player.Inventory.Keys.RemoveAt(0);
     }
   }
 
-  public void Die() {
-    player.State = player.DeadState;
-  }
-
-  public void Draw(SpriteBatch spriteBatch) {
+  public override void Draw(SpriteBatch spriteBatch) {
     Rectangle sourceRect;
     Vector2 origin;
 
     // Check direction even when standing still
     SpriteEffects flipStatus;
 
-    if (player.Direction == FacingDirection.Right) {
+    if (Player.Direction == FacingDirection.Right) {
       sourceRect = SpriteRight;
       flipStatus = SpriteEffects.None;
-    } else if (player.Direction == FacingDirection.Left) {
+    } else if (Player.Direction == FacingDirection.Left) {
       sourceRect = SpriteLeft;
       flipStatus = SpriteEffects.FlipHorizontally;
-    } else if (player.Direction == FacingDirection.Up) {
+    } else if (Player.Direction == FacingDirection.Up) {
       sourceRect = SpriteUp;
       flipStatus = SpriteEffects.None;
     } else {
@@ -86,10 +83,10 @@ internal class PlayerStaticState(Player player) : IPlayerState {
     origin = new Vector2(sourceRect.Width / 2, sourceRect.Height / 2);
 
     spriteBatch.Draw(
-      texture: player.Texture,
-      position: player.Position,
+      texture: TextureStore.Instance.Player,
+      position: Player.Position,
       sourceRectangle: sourceRect,
-      color: Color.White,
+      color: Player.CurrentTintColor,
       rotation: 0f,
       origin: origin,
       scale: 0.15f,

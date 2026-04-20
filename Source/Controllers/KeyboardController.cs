@@ -6,23 +6,17 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Controllers;
 
-internal class KeyboardController : IController {
+internal class KeyboardController(
+  Dictionary<Keys, IGPCommand> pressedMappings = null,
+  Dictionary<Keys, IGPCommand> downMappings = null,
+  Dictionary<Keys, IGPCommand> releasedMappings = null
+) : IController {
   // Tracking of presses / releases must be shared across GameStates
   private static readonly KeyboardDiffTracker keyTracker = new();
 
-  private readonly Dictionary<Keys, IGPCommand> pressedMappings;
-  private readonly Dictionary<Keys, IGPCommand> downMappings;
-  private readonly Dictionary<Keys, IGPCommand> releasedMappings;
-
-  public KeyboardController(
-    Dictionary<Keys, IGPCommand> pressedMappings = null,
-    Dictionary<Keys, IGPCommand> downMappings = null,
-    Dictionary<Keys, IGPCommand> releasedMappings = null
-  ) {
-    this.pressedMappings = pressedMappings ?? [];
-    this.downMappings = downMappings ?? [];
-    this.releasedMappings = releasedMappings ?? [];
-  }
+  private readonly Dictionary<Keys, IGPCommand> pressedMappings = pressedMappings ?? [];
+  private readonly Dictionary<Keys, IGPCommand> downMappings = downMappings ?? [];
+  private readonly Dictionary<Keys, IGPCommand> releasedMappings = releasedMappings ?? [];
 
   public void Update(GameTime gameTime) {
     KeyboardState keyboardState = Keyboard.GetState();

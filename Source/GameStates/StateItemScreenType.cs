@@ -23,6 +23,15 @@ internal class StateItemScreenType(Game1 game) : IGameState {
       pressedMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.Q, new QuitCommand(game) },
         { Keys.I, new ReturnToGameNoFadeCommand(game) },
+
+        // Navigation bindings:
+
+        { Keys.A, new MenuMoveLeftCommand(this) },
+        { Keys.Left, new MenuMoveLeftCommand(this) },
+        { Keys.D, new MenuMoveRightCommand(this) },
+        { Keys.Right, new MenuMoveRightCommand(this) },
+        { Keys.Enter, new MenuEquipCommand(this) },
+        { Keys.Space, new MenuEquipCommand(this) },
       }
     );
 
@@ -32,7 +41,13 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     gamePadController = new GamePadController(
       pressedMappings: new Dictionary<Buttons, IGPCommand> {
         { Buttons.X, new QuitCommand(game) },
-        { Buttons.A, new ReturnToGameNoFadeCommand(game) },
+        { Buttons.B, new ReturnToGameNoFadeCommand(game) },
+
+        // Navigation bindings:
+
+        { Buttons.DPadLeft, new MenuMoveLeftCommand(this) },
+        { Buttons.DPadRight, new MenuMoveRightCommand(this) },
+        { Buttons.A, new MenuEquipCommand(this) },
       }
     );
   }
@@ -59,9 +74,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
 
   public void EquipSelectedWeapon() {
     Player player = game.StateGame.Player;
-    if (player != null) {
-      player.Inventory.EquipWeapon(SelectedWeaponIndex);
-    }
+    player?.Inventory.EquipWeapon(SelectedWeaponIndex);
   }
 
   // We can leave this empty now because MiscAssetStore handles the loading!
@@ -110,7 +123,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
 
           float uiX = (game.Window.ClientBounds.Width / 2f) - 50 + (i * 100);
           float uiY = (game.Window.ClientBounds.Height / 2f) - 100;
-          Vector2 uiPosition = new Vector2(uiX, uiY);
+          Vector2 uiPosition = new(uiX, uiY);
 
           float scale = (i == SelectedWeaponIndex) ? 1.2f : 1.0f;
           Color tint = (i == SelectedWeaponIndex) ? Color.White : Color.Gray;
@@ -135,7 +148,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
 
           float uiX = startX + (column * 80);
           float uiY = startY + (row * 80);
-          Vector2 uiPosition = new Vector2(uiX, uiY);
+          Vector2 uiPosition = new(uiX, uiY);
 
           item.DrawUI(spriteBatch, uiPosition, 1f, Color.White);
         }
@@ -150,7 +163,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
       for (int i = 0; i < player.Inventory.Keys.Count; i++) {
         IItem key = player.Inventory.Keys[i];
 
-        Vector2 keyUiPosition = new Vector2(keyStartX + (i * 30), keyStartY);
+        Vector2 keyUiPosition = new(keyStartX + (i * 30), keyStartY);
         key.DrawUI(spriteBatch, keyUiPosition, 1f, Color.White);
       }
     }

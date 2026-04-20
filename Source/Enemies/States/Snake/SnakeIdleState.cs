@@ -3,12 +3,12 @@
 namespace GameProject.Enemies.SnakeStates;
 
 internal class SnakeIdleState : ISnakeState {
-  private readonly SnakeSprite snake;
+  private readonly Snake snake;
   private double timer;
   private double animationTimer;
   private readonly System.Random random;
 
-  public SnakeIdleState(SnakeSprite snake) {
+  public SnakeIdleState(Snake snake) {
     this.snake = snake;
     random = new System.Random();
 

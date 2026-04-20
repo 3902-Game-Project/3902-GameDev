@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-internal class BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) : BaseBlock(xyPos) {
+internal class BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) : ABaseBlock(xyPos) {
   private static Rectangle sourceRect = new(64, 0, 64, 64);
   public BarrelBlockState State { get; set; } = BarrelBlockState.Solid;
 

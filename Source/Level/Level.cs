@@ -14,19 +14,33 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Level;
 
-internal class Level(
-  List<IBlock> nonCollidableBlocks, 
-  List<IBlock> collidableBlocks,
-  List<IBlock> doors,
-  List<IEnemy> enemies,
-  List<IWorldPickup> pickups,
-  Vector2 playerPosition
-) : ILevel {
+internal class Level : ILevel {
+  private readonly List<IBlock> nonCollidableBlocks;
+  private readonly List<IBlock> collidableBlocks;
+  private readonly List<IBlock> doors;
+  private readonly List<IEnemy> aliveEnemies;
+  private readonly List<IEnemy> deadEnemies = [];
+  private readonly List<IWorldPickup> pickups;
+  private readonly Vector2 playerPosition;
+  private readonly CollisionManager collisionManager = new();
+
+  private void CategorizeDeadEnemies() {
+    for (int i = aliveEnemies.Count - 1; i >= 0; i--) {
+      var enemy = aliveEnemies[i];
+
+      if (enemy.Health <= 0) {
+        deadEnemies.Add(enemy);
+        aliveEnemies.Remove(enemy);
+        collisionManager.Remove(enemy);
+      }
+    }
+  }
+
   private void CheckLevelClear() {
-    var killableEnemies = Enemies.Where(e => e is not CactusSprite);
+    var killableEnemies = aliveEnemies.Where(e => e is not Cactus);
 
     if (!killableEnemies.Any()) {
-      foreach (var door in Doors) {
+      foreach (var door in doors) {
         if (door is SmallDoorBlock smallDoorBlock) {
           smallDoorBlock.ChangeState(LockableDoorBlockState.Open);
         }
@@ -37,15 +51,41 @@ internal class Level(
     }
   }
 
-  public List<IBlock> CollidableBlocks => collidableBlocks;
-  public List<IBlock> Doors => doors;
-  public List<IEnemy> Enemies => enemies;
-  public List<IEnemy> DeadEnemies { get; private set; } = [];
+  public Level(
+    List<IBlock> nonCollidableBlocks,
+    List<IBlock> collidableBlocks,
+    List<IBlock> doors,
+    List<IEnemy> enemies,
+    List<IWorldPickup> pickups,
+    Vector2 playerPosition,
+    Player player
+) {
+    this.nonCollidableBlocks = nonCollidableBlocks;
+    this.collidableBlocks = collidableBlocks;
+    this.doors = doors;
+    aliveEnemies = enemies;
+    this.pickups = pickups;
+    this.playerPosition = playerPosition;
+
+    CategorizeDeadEnemies();
+
+    collisionManager.Add(player);
+
+    foreach (var block in collidableBlocks) {
+      collisionManager.Add(block);
+    }
+
+    foreach (var doorBlock in doors) {
+      collisionManager.Add(doorBlock);
+    }
+
+    foreach (var enemy in aliveEnemies) {
+      collisionManager.Add(enemy);
+    }
+  }
 
   public List<IWorldPickup> Pickups => pickups;
-  public Vector2 PlayerPosition { get; private set; } = playerPosition;
   public ProjectileManager ProjectileManager { get; private set; } = new ProjectileManager();
-  public CollisionManager CollisionManager { get; private set; } = new CollisionManager();
 
   public void Initialize() { }
 
@@ -56,29 +96,23 @@ internal class Level(
       nonCollidableBlocks.Update(gameTime);
     }
 
-    foreach (var collidableBlock in CollidableBlocks) {
+    foreach (var collidableBlock in collidableBlocks) {
       collidableBlock.Update(gameTime);
     }
 
-    foreach (var doorBlock in Doors) {
+    foreach (var doorBlock in doors) {
       doorBlock.Update(gameTime);
     }
 
-    for (int i = enemies.Count - 1; i >= 0; i--) {
-      var enemy = enemies[i];
-
-      enemy.Update(gameTime);
-
-      if (enemy.Health <= 0) {
-        DeadEnemies.Add(enemy);
-        enemies.Remove(enemy);
-        CollisionManager.Remove(enemy);
-      }
-    }
-
-    foreach (var deadEnemy in DeadEnemies) {
+    foreach (var deadEnemy in deadEnemies) {
       deadEnemy.Update(gameTime);
     }
+
+    foreach (var aliveEnemy in aliveEnemies) {
+      aliveEnemy.Update(gameTime);
+    }
+
+    CategorizeDeadEnemies();
 
     foreach (var pickup in pickups) {
       pickup.Update(gameTime);
@@ -87,12 +121,12 @@ internal class Level(
     for (int i = 0; i < ProjectileManager.Projectiles.Count; i++) {
       IProjectile projectile = ProjectileManager.Projectiles[i];
       if (projectile is ICollidable collidableProj) {
-        CollisionManager.Add(collidableProj);
+        collisionManager.Add(collidableProj);
       }
 
       if (projectile.IsExpired) {
         if (projectile is ICollidable expiredProj) {
-          CollisionManager.Remove(expiredProj);
+          collisionManager.Remove(expiredProj);
         }
         ProjectileManager.Remove(projectile);
         i--;
@@ -100,7 +134,7 @@ internal class Level(
     }
 
     ProjectileManager.Update(gameTime);
-    CollisionManager.Update(gameTime);
+    collisionManager.Update(gameTime);
 
     CheckLevelClear();
   }
@@ -118,22 +152,22 @@ internal class Level(
       collidableBlock.Draw(spriteBatch);
     }
 
-    foreach (var doorBlock in Doors) {
+    foreach (var doorBlock in doors) {
       doorBlock.Draw(spriteBatch);
     }
 
-    foreach (var enemy in enemies) {
+    foreach (var enemy in aliveEnemies) {
       enemy.Draw(spriteBatch);
     }
 
-    foreach (var deadEnemy in DeadEnemies) {
+    foreach (var deadEnemy in deadEnemies) {
       deadEnemy.Draw(spriteBatch);
     }
 
     ProjectileManager.Draw(spriteBatch);
 
-    foreach (var enemy in enemies) {
-      if (enemy is BaseEnemy baseEnemy && baseEnemy.Health > 0) {
+    foreach (var enemy in aliveEnemies) {
+      if (enemy is ABaseEnemy baseEnemy && baseEnemy.Health > 0) {
         float enemyHealthPercent = MathHelper.Clamp((float) baseEnemy.Health / baseEnemy.MaxHealth, 0f, 1f);
         float scaleWidth = TextureStore.Instance.HealthBar.Width * 0.15f;
         Vector2 enemyHealthPositions = new(
@@ -167,6 +201,10 @@ internal class Level(
     }
   }
 
+  public Vector2 GetDefaultPlayerPosition() {
+    return playerPosition;
+  }
+
   public void AddPickup(IWorldPickup pickup) {
     pickups.Add(pickup);
   }
@@ -175,21 +213,11 @@ internal class Level(
     pickups.Remove(pickup);
   }
 
-  public void LevelSwitchUpdateColliders(Player player) {
-    CollisionManager.Clear();
+  public IEnumerable<IBlock> GetOpenableDoors() {
+    return doors.Where(door => door is VaultDoorBlock || door is SlattedDoorBlock);
+  }
 
-    CollisionManager.Add(player);
-    
-    foreach (var block in CollidableBlocks) {
-      CollisionManager.Add(block);
-    }
-    
-    foreach (var doorBlock in Doors) {
-      CollisionManager.Add(doorBlock);
-    }
-    
-    foreach (var enemy in Enemies) {
-      CollisionManager.Add(enemy);
-    }
+  public void PlayerResolveCollisions(ICollidable movingEntity, CollisionAxis axis = CollisionAxis.Both, float cornerTolerance = 3.0f) {
+    collisionManager.ResolveCollisionsFor(movingEntity, axis, cornerTolerance);
   }
 }

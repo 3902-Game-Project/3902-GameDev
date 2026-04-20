@@ -1,18 +1,17 @@
-﻿using GameProject.Enemies.RiflemanStates;
-using GameProject.Managers;
+﻿using GameProject.Enemies.TumbleweedStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-internal class RiflemanSprite : BaseEnemy {
-  private IRiflemanState state;
+internal class Tumbleweed : ABaseEnemy {
+  private ITumbleweedState state;
 
-  public RiflemanSprite(Texture2D texture, Vector2 position, ILevelManager levelManager) : base(texture, position, 48f, 96f) {
-    state = new RifleWanderState(this, levelManager);
+  public Tumbleweed(Texture2D texture, Vector2 position) : base(texture, position, 48f, 48f) {
+    state = new TumbleweedIdleState(this);
   }
 
-  public void ChangeState(IRiflemanState newState) {
+  public void ChangeState(ITumbleweedState newState) {
     state = newState;
   }
 
@@ -29,12 +28,12 @@ internal class RiflemanSprite : BaseEnemy {
     if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return;
 
     Rectangle source = CurrentSourceRectangles[CurrentFrame];
-    SpriteEffects effect = FacingDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+    SpriteEffects effect = FacingDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
     Vector2 origin = new(source.Width / 2f, source.Height);
 
     Color tintColor = DamageFlashTimer > 0 ? Color.Red : Color.White;
 
-    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, 2f, effect, 0f);
+    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, 0.4f, effect, 0f);
   }
 
   public override void TakeDamage(int damage) {
@@ -43,7 +42,7 @@ internal class RiflemanSprite : BaseEnemy {
     base.TakeDamage(damage);
 
     if (wasAlive && Health <= 0) {
-      ChangeState(new RifleDeathState(this));
+      ChangeState(new TumbleweedDeathState(this));
     }
   }
 }

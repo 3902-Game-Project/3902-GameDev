@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Enemies.RiflemanStates;
 
 internal class RifleWanderState : IRiflemanState {
-  private readonly RiflemanSprite rifle;
+  private readonly Rifleman rifle;
   private readonly ILevelManager levelManager;
   private readonly Random random;
   private double wanderTimer;
@@ -14,7 +14,7 @@ internal class RifleWanderState : IRiflemanState {
   private double animationTimer;
   private int currentFrameIndex;
 
-  public RifleWanderState(RiflemanSprite rifle, ILevelManager levelManager) {
+  public RifleWanderState(Rifleman rifle, ILevelManager levelManager) {
     this.rifle = rifle;
     this.levelManager = levelManager;
     random = new Random();

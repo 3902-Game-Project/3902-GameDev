@@ -97,10 +97,11 @@ internal class Game1 : Game {
     MiscAssetStore.Instance.LoadContent(Content);
     TextureStore.Instance.LoadContent(Content);
 
-    EnemySpriteFactory.Instance.LoadAllTextures(Content);
+    EnemyFactory.Instance.LoadAllTextures(Content);
     SoundManager.Instance.LoadAllContent(Content);
-    ItemSpriteFactory.Instance.LoadAllTextures(Content);
+    ItemFactory.Instance.LoadAllTextures(Content);
     ProjectileFactory.Instance.LoadAllTextures(Content);
+    WorldPickupFactory.Instance.LoadAllTextures(Content);
 
     StateTransition.LoadContent(Content);
     StateMenu.LoadContent(Content);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GameProject.Blocks;
 using GameProject.Collisions;
 using GameProject.Collisions.Shapes;
@@ -7,11 +8,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-internal abstract class BaseEnemy(Texture2D texture, Vector2 position, float colliderWidth = 64f, float colliderHeight = 64f) : IEnemy {
+internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float colliderWidth = 64f, float colliderHeight = 64f) : IEnemy {
   public Texture2D Texture { get; protected set; } = texture;
   public Vector2 Position { get; set; } = position;
   public Vector2 Velocity { get; set; }
   public int FacingDirection { get; set; } = 1;
+
+  public static event Action<ABaseEnemy> OnDeath;
 
   public List<Rectangle> CurrentSourceRectangles { get; set; }
   public int CurrentFrame { get; set; }
@@ -55,8 +58,13 @@ internal abstract class BaseEnemy(Texture2D texture, Vector2 position, float col
 
   public virtual void TakeDamage(int damage) {
     if (Health <= 0) return;
+    bool wasAlive = Health > 0;
 
     Health -= damage;
     DamageFlashTimer = DamageFlashDuration;
+
+    if (wasAlive && Health <= 0) {
+      OnDeath?.Invoke(this);
+    }
   }
 }

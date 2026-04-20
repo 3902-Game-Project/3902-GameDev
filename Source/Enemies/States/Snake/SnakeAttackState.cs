@@ -3,11 +3,11 @@
 namespace GameProject.Enemies.SnakeStates;
 
 internal class SnakeAttackState : ISnakeState {
-  private readonly SnakeSprite snake;
+  private readonly Snake snake;
   private double timer;
   private double animationTimer;
 
-  public SnakeAttackState(SnakeSprite snake) {
+  public SnakeAttackState(Snake snake) {
     this.snake = snake;
     float lungeSpeed = 300f;
 

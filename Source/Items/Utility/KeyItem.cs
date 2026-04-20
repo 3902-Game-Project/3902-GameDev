@@ -52,18 +52,16 @@ internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManage
     );
   }
 
-  public void Update(GameTime gameTime) {
-  }
+  public void Update(GameTime gameTime) { }
 
   public void Use(UseType useType) {
-    foreach (var block in levelManagers.CurrentLevel.Doors) {
+    foreach (var block in levelManagers.CurrentLevel.GetOpenableDoors()) {
       if (block is VaultDoorBlock vaultDoorBlock) {
         vaultDoorBlock.ChangeState(VaultDoorBlockState.Opening);
       } else if (block is SlattedDoorBlock slattedDoorBlock) {
         slattedDoorBlock.ChangeState(LockableDoorBlockState.Open);
       }
     }
-    
   }
 
   public void OnPickup(Player player) {

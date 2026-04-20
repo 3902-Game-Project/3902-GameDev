@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using GameProject.Level;
-using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -80,12 +79,11 @@ internal class LevelManager(Game1 game) : ILevelManager {
       );
     } else {
       // No wrapping possible, use default position
-      game.StateGame.Player.Position = CurrentLevel.PlayerPosition;
+      game.StateGame.Player.Position = CurrentLevel.GetDefaultPlayerPosition();
     }
   }
 
   public ILevel CurrentLevel => levels[currentLevelName];
-  public CollisionManager CollisionManager => CurrentLevel.CollisionManager;
 
   public void Initialize() { }
 
@@ -101,14 +99,12 @@ internal class LevelManager(Game1 game) : ILevelManager {
     var levelNamesSet = new HashSet<string>(LEVEL_NAMES);
 
     foreach (var name in LEVEL_NAMES) {
-      var level = LevelLoader.FromString(game, levelNamesSet, File.ReadAllText(content.RootDirectory + "/Levels/" + name + ".csv"));
-
-      level.CollisionManager.Add(game.StateGame.Player);
+      var level = LevelLoader.FromString(game.StateGame.Player, game.StateGame.LevelManager, levelNamesSet, File.ReadAllText(content.RootDirectory + "/Levels/" + name + ".csv"));
 
       levels.Add(name, level);
     }
 
-    game.StateGame.Player.Position = CurrentLevel.PlayerPosition;
+    game.StateGame.Player.Position = CurrentLevel.GetDefaultPlayerPosition();
   }
 
   public void Update(GameTime gameTime) {
@@ -141,7 +137,6 @@ internal class LevelManager(Game1 game) : ILevelManager {
     }
 
     CurrentLevel.ProjectileManager.ClearProjectiles();
-    CurrentLevel.LevelSwitchUpdateColliders(game.StateGame.Player);
   }
 
   public void PreviousLevel() {

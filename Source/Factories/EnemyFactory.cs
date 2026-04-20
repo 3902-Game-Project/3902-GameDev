@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Factories;
 
-internal class EnemySpriteFactory {
+internal class EnemyFactory {
   private Texture2D snakeTexture;
   private Texture2D batTexture;
   private Texture2D shotgunnerTexture;
@@ -14,9 +14,9 @@ internal class EnemySpriteFactory {
   private Texture2D tumbleweedTexture;
   private Texture2D cactusTexture;
 
-  public static EnemySpriteFactory Instance { get; } = new();
+  public static EnemyFactory Instance { get; } = new();
 
-  private EnemySpriteFactory() { }
+  private EnemyFactory() { }
 
   public void LoadAllTextures(ContentManager content) {
     snakeTexture = content.Load<Texture2D>("Enemies/snakeSpritesheet");
@@ -28,24 +28,24 @@ internal class EnemySpriteFactory {
   }
 
   public IEnemy CreateSnakeSprite(float xPos, float yPos) {
-    return new SnakeSprite(snakeTexture, new Vector2(xPos, yPos));
+    return new Snake(snakeTexture, new Vector2(xPos, yPos));
   }
 
   public IEnemy CreateCactusSprite(float xPos, float yPos) {
-    return new CactusSprite(cactusTexture, new Vector2(xPos, yPos));
+    return new Cactus(cactusTexture, new Vector2(xPos, yPos));
   }
 
   public IEnemy CreateTumbleweedSprite(float xPos, float yPos) {
-    return new TumbleweedSprite(tumbleweedTexture, new Vector2(xPos, yPos));
+    return new Tumbleweed(tumbleweedTexture, new Vector2(xPos, yPos));
   }
 
   public IEnemy CreateRiflemanSprite(float xPos, float yPos, ILevelManager levelManager) {
-    return new RiflemanSprite(riflemanTexture, new Vector2(xPos, yPos), levelManager);
+    return new Rifleman(riflemanTexture, new Vector2(xPos, yPos), levelManager);
   }
   public IEnemy CreateBatSprite(float xPos, float yPos) {
-    return new BatSprite(batTexture, new Vector2(xPos, yPos));
+    return new Bat(batTexture, new Vector2(xPos, yPos));
   }
   public IEnemy CreateShotgunnerSprite(float xPos, float yPos, ILevelManager levelManager) {
-    return new ShotgunnerSprite(shotgunnerTexture, new Vector2(xPos, yPos), levelManager);
+    return new Shotgunner(shotgunnerTexture, new Vector2(xPos, yPos), levelManager);
   }
 }

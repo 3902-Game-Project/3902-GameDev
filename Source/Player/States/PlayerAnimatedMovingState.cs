@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using GameProject.Controllers;
+using GameProject.Globals;
 using GameProject.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
 
-internal class PlayerAnimatedMovingState(Player player) : IPlayerState {
+internal class PlayerAnimatedMovingState(Player player) : APlayerState(player) {
   private readonly List<Rectangle> moveLeftFrames = [
     new(1531, 420, 171, 323),
     new(1854, 427, 171, 323)
@@ -19,35 +20,57 @@ internal class PlayerAnimatedMovingState(Player player) : IPlayerState {
 
   //need to update below 2 later
   private readonly List<Rectangle> moveUpFrames = [
-    new(453, 425, 161, 322),
-    new(453, 425, 161, 322),
+    new (130, 813, 159, 335),
+    new (453, 813, 161, 335),
+    new (1083, 813, 164, 335)
   ];
 
   private readonly List<Rectangle> moveDownFrames = [
-    new(455, 58, 161, 318),
-    new(455, 58, 161, 318),
+    new (448, 1181, 177, 313),
+    new (1256, 1181, 175, 320),
+    new (991, 1181, 176, 313),
+    new (727, 1181, 178, 320)
   ];
 
   private int currentFrame = 0;
   private double timer = 0;
   private readonly double frameInterval = 0.2;
 
-  public void MoveUp() {
-    player.Velocity = new Vector2(player.Velocity.X, -player.Speed);
+  public override void MoveUp() {
+    Player.Velocity = new Vector2(Player.Velocity.X, -Player.Speed);
   }
-  public void MoveDown() {
-    player.Velocity = new Vector2(player.Velocity.X, player.Speed);
+  public override void MoveDown() {
+    Player.Velocity = new Vector2(Player.Velocity.X, Player.Speed);
   }
-  public void MoveLeft() {
-    player.Velocity = new Vector2(-player.Speed, player.Velocity.Y);
+  public override void MoveLeft() {
+    Player.Velocity = new Vector2(-Player.Speed, Player.Velocity.Y);
   }
-  public void MoveRight() {
-    player.Velocity = new Vector2(player.Speed, player.Velocity.Y);
+  public override void MoveRight() {
+    Player.Velocity = new Vector2(Player.Speed, Player.Velocity.Y);
   }
 
-  public void Update(GameTime gameTime) {
-    if (player.Velocity == Vector2.Zero) {
-      player.State = player.StaticState;
+  public override void UseItem(UseType useType) {
+    if (Player.Inventory.ActiveItem != null) {
+      Player.Inventory.ActiveItem.Use(useType);
+      if (Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
+        Player.State = Player.UseItemState;
+      }
+    }
+  }
+
+  public override void UseKey(UseType useType) {
+    if (Player.Inventory.Keys.Count > 0) {
+      Player.Inventory.Keys[0].Use(useType);
+      if (Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
+        Player.State = Player.UseItemState;
+      }
+      Player.Inventory.Keys.RemoveAt(0);
+    }
+  }
+
+  public override void Update(GameTime gameTime) {
+    if (Player.Velocity == Vector2.Zero) {
+      Player.State = Player.StaticState;
       currentFrame = 0;
       return;
     }
@@ -61,37 +84,14 @@ internal class PlayerAnimatedMovingState(Player player) : IPlayerState {
     }
   }
 
-  public void UseItem(UseType useType) {
-    if (player.Inventory.ActiveItem != null) {
-      player.Inventory.ActiveItem.Use(useType);
-      if (player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
-        player.State = player.UseItemState;
-      }
-    }
-  }
-
-  public void UseKey(UseType useType) {
-    if (player.Inventory.Keys.Count > 0) {
-      player.Inventory.Keys[0].Use(useType);
-      if (player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
-        player.State = player.UseItemState;
-      }
-      player.Inventory.Keys.RemoveAt(0);
-    }
-  }
-
-  public void Die() {
-    player.State = player.DeadState;
-  }
-
-  public void Draw(SpriteBatch spriteBatch) {
+  public override void Draw(SpriteBatch spriteBatch) {
     List<Rectangle> activeFrames;
 
-    if (player.Direction == FacingDirection.Right) {
+    if (Player.Direction == FacingDirection.Right) {
       activeFrames = moveRightFrames;
-    } else if (player.Direction == FacingDirection.Left) {
+    } else if (Player.Direction == FacingDirection.Left) {
       activeFrames = moveLeftFrames;
-    } else if (player.Direction == FacingDirection.Up) {
+    } else if (Player.Direction == FacingDirection.Up) {
       activeFrames = moveUpFrames;
     } else {
       activeFrames = moveDownFrames;
@@ -101,15 +101,15 @@ internal class PlayerAnimatedMovingState(Player player) : IPlayerState {
     Vector2 origin = new(sourceRect.Width / 2, sourceRect.Height / 2);
 
     spriteBatch.Draw(
-      player.Texture,
-      player.Position,
-      sourceRect,
-      Color.White,
-      0f,
-      origin,
-      0.15f,
-      SpriteEffects.None,
-      0f
+      texture: TextureStore.Instance.Player,
+      position: Player.Position,
+      sourceRectangle: sourceRect,
+      color: Player.CurrentTintColor,
+      rotation: 0f,
+      origin: origin,
+      scale: 0.15f,
+      effects: SpriteEffects.None,
+      layerDepth: 0f
     );
   }
 }

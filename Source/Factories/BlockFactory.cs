@@ -5,10 +5,10 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Factories;
 
-internal class BlockSpriteFactory {
-  public static BlockSpriteFactory Instance { get; } = new();
+internal class BlockFactory {
+  public static BlockFactory Instance { get; } = new();
 
-  private BlockSpriteFactory() { }
+  private BlockFactory() { }
 
   /* Floor Blocks */
   public static IBlock CreateSandBlockSprite(float x, float y) {

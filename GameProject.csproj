@@ -12,11 +12,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Info\Code Review\**" />
-    <Compile Remove="Source\Enums\**" />
     <EmbeddedResource Remove="Info\Code Review\**" />
-    <EmbeddedResource Remove="Source\Enums\**" />
     <None Remove="Info\Code Review\**" />
-    <None Remove="Source\Enums\**" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Icon.ico" />

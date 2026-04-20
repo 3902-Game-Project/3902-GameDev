@@ -1,17 +1,18 @@
-﻿using GameProject.Enemies.CactusStates;
+﻿using GameProject.Enemies.RiflemanStates;
+using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-internal class CactusSprite : BaseEnemy {
-  private ICactusState state;
+internal class Rifleman : ABaseEnemy {
+  private IRiflemanState state;
 
-  public CactusSprite(Texture2D texture, Vector2 position) : base(texture, position, 32f, 64f) {
-    state = new CactusIdleState(this);
+  public Rifleman(Texture2D texture, Vector2 position, ILevelManager levelManager) : base(texture, position, 48f, 96f) {
+    state = new RifleWanderState(this, levelManager);
   }
 
-  public void ChangeState(ICactusState newState) {
+  public void ChangeState(IRiflemanState newState) {
     state = newState;
   }
 
@@ -33,14 +34,16 @@ internal class CactusSprite : BaseEnemy {
 
     Color tintColor = DamageFlashTimer > 0 ? Color.Red : Color.White;
 
-    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, 0.2f, effect, 0f);
+    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, 2f, effect, 0f);
   }
 
   public override void TakeDamage(int damage) {
-    if (Health <= 0) {
-      return;
+    bool wasAlive = Health > 0;
+
+    base.TakeDamage(damage);
+
+    if (wasAlive && Health <= 0) {
+      ChangeState(new RifleDeathState(this));
     }
-    //Now cactus is unkillable
-    //Health -= damage;
   }
 }

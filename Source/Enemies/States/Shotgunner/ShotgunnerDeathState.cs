@@ -3,7 +3,7 @@
 namespace GameProject.Enemies.ShotgunnerStates;
 
 internal class ShotgunnerDeathState : IShotgunnerState {
-  private readonly ShotgunnerSprite shotgunner;
+  private readonly Shotgunner shotgunner;
 
   private double animationTimer;
   private readonly double timePerFrame = 0.15;
@@ -13,7 +13,7 @@ internal class ShotgunnerDeathState : IShotgunnerState {
 
   private bool isAnimationFinished = false;
 
-  public ShotgunnerDeathState(ShotgunnerSprite shotgunner) {
+  public ShotgunnerDeathState(Shotgunner shotgunner) {
     this.shotgunner = shotgunner;
     this.shotgunner.Velocity = Vector2.Zero;
 

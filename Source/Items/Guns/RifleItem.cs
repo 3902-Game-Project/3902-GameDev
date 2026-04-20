@@ -1,12 +1,14 @@
 using GameProject.FireModes;
+using GameProject.Managers;
+using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-internal class RifleItem : DefaultGun {
-  public RifleItem(Texture2D texture, Vector2 startPosition, Game1 game, GunStats stats)
-    : base(texture, startPosition, game, stats) {
+internal class RifleItem : ABaseGun {
+  public RifleItem(Texture2D texture, Vector2 startPosition, Player player, ILevelManager levelManager, GunStats stats)
+    : base(texture, startPosition, player, levelManager, stats) {
 
     Category = ItemCategory.Primary;
     sourceRectangle = new Rectangle(0, 19, 37, 10);

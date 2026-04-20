@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.WorldPickups;
 
-internal class ItemWorldPickup(IItem item, Vector2 dropVelocity = default) : BaseWorldPickup(item.Position), ICollidable {
+internal class ItemWorldPickup(IItem item, Vector2 dropVelocity = default) : ABaseWorldPickup(item.Position), ICollidable {
   public Vector2 Velocity { get; set; } = dropVelocity;
 
   public override void Draw(SpriteBatch spriteBatch) {

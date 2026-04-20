@@ -1,18 +1,17 @@
-﻿using GameProject.Enemies.ShotgunnerStates;
-using GameProject.Managers;
+﻿using GameProject.Enemies.CactusStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-internal class ShotgunnerSprite : BaseEnemy {
-  private IShotgunnerState state;
+internal class Cactus : ABaseEnemy {
+  private ICactusState state;
 
-  public ShotgunnerSprite(Texture2D texture, Vector2 position, ILevelManager levelManager) : base(texture, position, 48f, 96f) {
-    state = new ShotgunnerWanderState(this, levelManager);
+  public Cactus(Texture2D texture, Vector2 position) : base(texture, position, 32f, 64f) {
+    state = new CactusIdleState(this);
   }
 
-  public void ChangeState(IShotgunnerState newState) {
+  public void ChangeState(ICactusState newState) {
     state = newState;
   }
 
@@ -34,16 +33,14 @@ internal class ShotgunnerSprite : BaseEnemy {
 
     Color tintColor = DamageFlashTimer > 0 ? Color.Red : Color.White;
 
-    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, 1.6f, effect, 0f);
+    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, 0.2f, effect, 0f);
   }
 
   public override void TakeDamage(int damage) {
-    bool wasAlive = Health > 0;
-
-    base.TakeDamage(damage);
-
-    if (wasAlive && Health <= 0) {
-      ChangeState(new ShotgunnerDeathState(this));
+    if (Health <= 0) {
+      return;
     }
+    //Now cactus is unkillable
+    //Health -= damage;
   }
 }

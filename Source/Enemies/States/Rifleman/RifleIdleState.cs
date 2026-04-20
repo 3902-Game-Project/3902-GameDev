@@ -4,13 +4,13 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Enemies.RiflemanStates;
 
 internal class RifleIdleState : IRiflemanState {
-  private readonly RiflemanSprite rifle;
+  private readonly Rifleman rifle;
   private readonly ILevelManager levelManager;
   private double timer;
   private double animationTimer;
   private readonly System.Random random;
 
-  public RifleIdleState(RiflemanSprite rifle, ILevelManager levelManager) {
+  public RifleIdleState(Rifleman rifle, ILevelManager levelManager) {
     this.rifle = rifle;
     this.levelManager = levelManager;
     random = new System.Random();
