@@ -10,12 +10,13 @@ namespace GameProject.Items;
 
 internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager levelManager) : IItem, IWorldPickup {
   private Rectangle sourceRectangle = new(0, 448, 7, 13);
-  private readonly ILevelManager levelManagers = levelManager;
+  private readonly ILevelManager levelManager = levelManager;
 
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   public Vector2 Position { get; set; } = startPosition;
   public bool IsCollected { get; set; } = false;
   private Vector2 origin;
+  public bool IsAutoCollect => false;
   public ItemCategory Category { get; } = ItemCategory.Consumable;
   public void OnEquip() { }
   public void OnUnequip() { }
@@ -55,11 +56,9 @@ internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManage
   public void Update(GameTime gameTime) { }
 
   public void Use(UseType useType) {
-    foreach (var block in levelManagers.CurrentLevel.GetOpenableDoors()) {
-      if (block is VaultDoorBlock vaultDoorBlock) {
-        vaultDoorBlock.ChangeState(VaultDoorBlockState.Opening);
-      } else if (block is SlattedDoorBlock slattedDoorBlock) {
-        slattedDoorBlock.ChangeState(LockableDoorBlockState.Open);
+    foreach (var block in levelManager.CurrentLevel.GetOpenableDoors()) {
+      if (block is IOpenableDoor door) {
+        door.Unlock();
       }
     }
   }

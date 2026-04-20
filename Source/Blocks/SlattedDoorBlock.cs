@@ -74,4 +74,8 @@ internal class SlattedDoorBlock : ABaseBlock {
   public void ChangeState(LockableDoorBlockState state) {
     State = state;
   }
+
+  public void Unlock() {
+    ChangeState(LockableDoorBlockState.Open);
+  }
 }

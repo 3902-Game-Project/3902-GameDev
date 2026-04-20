@@ -3,49 +3,29 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies.TumbleweedStates;
 
-internal class TumbleweedIdleState : ITumbleweedState {
+internal class TumbleweedIdleState : IEnemyState {
   private readonly Tumbleweed tumbleweed;
-  private readonly Random random;
-  private double idleTimer;
+  private readonly Random random = new();
+  private double idleTimer, animationTimer;
   private readonly double idleDuration;
-
-  private double animationTimer;
-  private int currentFrameIndex;
 
   public TumbleweedIdleState(Tumbleweed tumbleweed) {
     this.tumbleweed = tumbleweed;
-    random = new Random();
-
     this.tumbleweed.Velocity = Vector2.Zero;
-
-    this.tumbleweed.CurrentSourceRectangles = [
-      new(159, 217, 121, 110)
-      //new(383, 227, 137, 106) death frames
-    ];
+    this.tumbleweed.CurrentSourceRectangles = [new(159, 217, 121, 110)];
     this.tumbleweed.CurrentFrame = 0;
-
-    idleTimer = 0;
     idleDuration = 0.5 + random.NextDouble();
   }
 
   public void Update(GameTime gameTime) {
     float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
-
     animationTimer += dt;
     if (animationTimer >= 0.2) {
-      currentFrameIndex++;
-      if (currentFrameIndex >= tumbleweed.CurrentSourceRectangles.Count) {
-        currentFrameIndex = 0;
-      }
-
-      tumbleweed.CurrentFrame = currentFrameIndex;
+      tumbleweed.CurrentFrame = (tumbleweed.CurrentFrame + 1) % tumbleweed.CurrentSourceRectangles.Count;
       animationTimer = 0;
     }
 
     idleTimer += dt;
-
-    if (idleTimer > idleDuration) {
-      tumbleweed.ChangeState(new TumbleweedMoveState(tumbleweed));
-    }
+    if (idleTimer > idleDuration) tumbleweed.CurrentState = new TumbleweedWanderState(tumbleweed);
   }
 }

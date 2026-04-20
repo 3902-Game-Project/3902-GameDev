@@ -8,6 +8,7 @@ namespace GameProject.WorldPickups;
 
 internal abstract class ABaseWorldPickup : IWorldPickup {
   public Vector2 Position { get; set; }
+  public virtual bool IsAutoCollect => false;
   public IShape Shape { get; }
   public Layer Layer { get; } = Layer.Pickups;
   public Layer Mask { get; } = Layer.Player;

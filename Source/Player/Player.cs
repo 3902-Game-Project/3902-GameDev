@@ -85,9 +85,8 @@ internal class Player : IGPUpdatable, IGPDrawable, ICollidable {
     MovingState = new PlayerAnimatedMovingState(this);
     StaticState = new PlayerStaticState(this);
     UseItemState = new PlayerUseItemState(this);
-    DeadState = new PlayerDeadState(this, game);
+    DeadState = new PlayerDeadState(this, () => game.ChangeState(game.StateLoss));
     State = StaticState;
-    ABaseEnemy.OnDeath += HandleEnemyDeath;
   }
 
   public void MoveUp() => inputUpThisFrame = true;
@@ -176,11 +175,10 @@ internal class Player : IGPUpdatable, IGPDrawable, ICollidable {
     if (LevelManager?.CurrentLevel != null) {
       for (int i = LevelManager.CurrentLevel.Pickups.Count - 1; i >= 0; i--) {
         var pickup = LevelManager.CurrentLevel.Pickups[i];
-        if (pickup is AmmoWorldPickup ammoPickup) {
-          // If player is within 30 pixels, pick it up
-          if (Vector2.Distance(Position, ammoPickup.Position) < 30f) {
-            ammoPickup.OnPickup(this);
-            LevelManager.CurrentLevel.RemovePickup(ammoPickup);
+        if (pickup.IsAutoCollect) {
+          if (Vector2.Distance(Position, pickup.Position) < 30f) {
+            pickup.OnPickup(this);
+            LevelManager.CurrentLevel.RemovePickup(pickup);
           }
         }
       }
@@ -206,12 +204,10 @@ internal class Player : IGPUpdatable, IGPDrawable, ICollidable {
     float closestDistance = float.MaxValue;
 
     foreach (var pickup in LevelManager.CurrentLevel.Pickups) {
-      if (pickup is ABaseWorldPickup basePickup) {
-        float distance = Vector2.Distance(Position, basePickup.Position);
-        if (distance < grabRange && distance < closestDistance) {
-          closestDistance = distance;
-          closestPickup = pickup;
-        }
+      float distance = Vector2.Distance(Position, pickup.Position);
+      if (distance < grabRange && distance < closestDistance) {
+        closestDistance = distance;
+        closestPickup = pickup;
       }
     }
 
@@ -219,17 +215,6 @@ internal class Player : IGPUpdatable, IGPDrawable, ICollidable {
       closestPickup.OnPickup(this);
       LevelManager.CurrentLevel.RemovePickup(closestPickup);
     }
-  }
-
-  private void HandleEnemyDeath(ABaseEnemy enemy) {
-    if (LevelManager?.CurrentLevel == null) return;
-
-    // Ammo dropping system
-    Items.AmmoType dropType = Items.AmmoType.Light;
-    if (enemy is Rifleman) dropType = Items.AmmoType.Heavy;
-    if (enemy is Shotgunner) dropType = Items.AmmoType.Shells;
-
-    LevelManager.CurrentLevel.AddPickup(WorldPickupFactory.Instance.CreateAmmo(enemy.Position, dropType, 5));
   }
 
   public void Draw(SpriteBatch spriteBatch) {

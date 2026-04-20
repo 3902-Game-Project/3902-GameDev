@@ -1,49 +1,40 @@
 ﻿using GameProject.Enemies.ShotgunnerStates;
+using GameProject.Enemies.States;
+using GameProject.Factories;
 using GameProject.Managers;
+using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
 internal class Shotgunner : ABaseEnemy {
-  private IShotgunnerState state;
+  public ILevelManager LevelManager { get; }
 
   public Shotgunner(Texture2D texture, Vector2 position, ILevelManager levelManager) : base(texture, position, 48f, 96f) {
-    state = new ShotgunnerWanderState(this, levelManager);
+    LevelManager = levelManager;
+    DrawScale = 1.6f;
+    FlipOnRightDir = false;
+    CurrentState = new ShotgunnerWanderState(this);
   }
 
-  public void ChangeState(IShotgunnerState newState) {
-    state = newState;
-  }
+  public void FireSpread(int damage) {
+    Vector2 spawnPosition = Position + new Vector2(FacingDirection * 15f, -30f);
 
-  public override void Update(GameTime gameTime) {
-    base.Update(gameTime);
-
-    state.Update(gameTime);
-    if (Position.X < 0) {
-      Position = new Vector2(0, Position.Y);
+    foreach (float spreadY in new[] { 0f, -0.25f, 0.25f }) {
+      Vector2 dir = new(FacingDirection, spreadY);
+      dir.Normalize();
+      IProjectile bullet = ProjectileFactory.Instance.CreateBullet(spawnPosition, dir, 400f, 0.6f, damage);
+      if (bullet is BulletDefault b) b.IsPlayerShot = false;
+      LevelManager.CurrentLevel.ProjectileManager.Add(bullet);
     }
   }
 
-  public override void Draw(SpriteBatch spriteBatch) {
-    if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return;
-
-    Rectangle source = CurrentSourceRectangles[CurrentFrame];
-    SpriteEffects effect = FacingDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
-    Vector2 origin = new(source.Width / 2f, source.Height);
-
-    Color tintColor = DamageFlashTimer > 0 ? Color.Red : Color.White;
-
-    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, 1.6f, effect, 0f);
+  protected override void DropLoot() {
+    LevelManager.CurrentLevel.AddPickup(WorldPickupFactory.Instance.CreateAmmo(Position, Items.AmmoType.Shells, 5));
   }
 
-  public override void TakeDamage(int damage) {
-    bool wasAlive = Health > 0;
-
-    base.TakeDamage(damage);
-
-    if (wasAlive && Health <= 0) {
-      ChangeState(new ShotgunnerDeathState(this));
-    }
+  protected override void TransitionToDeathState() {
+    CurrentState = new GenericDeathState(this, [new(14, 568, 39, 40), new(100, 573, 37, 35), new(174, 576, 42, 32), new(246, 585, 51, 23)]);
   }
 }

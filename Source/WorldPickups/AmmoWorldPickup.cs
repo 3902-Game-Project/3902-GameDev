@@ -9,6 +9,7 @@ namespace GameProject.WorldPickups;
 internal class AmmoWorldPickup(Texture2D texture, Vector2 position, AmmoType type, int amount) : ABaseWorldPickup(position), ICollidable {
   public AmmoType Type { get; } = type;
   public int Amount { get; } = amount;
+  public override bool IsAutoCollect => true;
 
   private Vector2 origin;
   private readonly float scale = 2f;

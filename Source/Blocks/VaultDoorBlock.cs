@@ -54,4 +54,8 @@ internal class VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, VaultDo
   public void ChangeState(VaultDoorBlockState state) {
     State = state;
   }
+
+  public void Unlock() {
+    ChangeState(VaultDoorBlockState.Opening);
+  }
 }
