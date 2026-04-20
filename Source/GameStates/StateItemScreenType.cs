@@ -153,18 +153,18 @@ internal class StateItemScreenType(Game1 game) : IGameState {
           item.DrawUI(spriteBatch, uiPosition, 1f, Color.White);
         }
       }
-    }
 
-    // --- 3. DRAW KEYS ---
-    if (player.Inventory.Keys.Count > 0) {
-      int keyStartX = game.Window.ClientBounds.Width - 150;
-      int keyStartY = game.Window.ClientBounds.Height - 100;
+      // --- 3. DRAW KEYS ---
+      if (player.Inventory.Keys.Count > 0) {
+        int keyStartX = game.Window.ClientBounds.Width - 150;
+        int keyStartY = game.Window.ClientBounds.Height - 100;
 
-      for (int i = 0; i < player.Inventory.Keys.Count; i++) {
-        IItem key = player.Inventory.Keys[i];
+        for (int i = 0; i < player.Inventory.Keys.Count; i++) {
+          IItem key = player.Inventory.Keys[i];
 
-        Vector2 keyUiPosition = new(keyStartX + (i * 30), keyStartY);
-        key.DrawUI(spriteBatch, keyUiPosition, 1f, Color.White);
+          Vector2 keyUiPosition = new(keyStartX + (i * 30), keyStartY);
+          key.DrawUI(spriteBatch, keyUiPosition, 1f, Color.White);
+        }
       }
     }
 

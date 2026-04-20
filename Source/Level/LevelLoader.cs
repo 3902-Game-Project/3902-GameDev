@@ -333,6 +333,21 @@ internal partial class LevelLoader {
         collidableBlocks.Add(BlockFactory.CreateTellersDeskBlockSprite(xPos, yPos));
         break;
 
+      case "36":
+        /* health item */
+        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateHealthItem(xPos, yPos)));
+        break;
+
+      case "37":
+        /* invincibility item */
+        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateInvincibilityItem(xPos, yPos)));
+        break;
+
+      case "38":
+        /* infinite ammo item */
+        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateInfiniteAmmoItem(xPos, yPos)));
+        break;
+
       default:
         throw new FormatException($"unrecognized level block/entity type '{type}'");
     }
