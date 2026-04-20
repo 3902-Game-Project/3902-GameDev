@@ -67,4 +67,9 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
       OnDeath?.Invoke(this);
     }
   }
+
+  protected void FollowEntity(Vector2 destination, float speed) {
+    Vector2 direction = Vector2.Normalize(destination - Position);
+    Velocity = direction * speed;
+  }
 }
