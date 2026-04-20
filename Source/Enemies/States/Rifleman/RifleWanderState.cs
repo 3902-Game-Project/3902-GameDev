@@ -1,86 +1,11 @@
 ﻿using System;
-using GameProject.Managers;
+using GameProject.Enemies.States;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies.RiflemanStates;
 
-internal class RifleWanderState : IRiflemanState {
-  private readonly Rifleman rifle;
-  private readonly ILevelManager levelManager;
-  private readonly Random random;
-  private double wanderTimer;
-  private readonly double wanderDuration;
-
-  private double animationTimer;
-  private int currentFrameIndex;
-
-  public RifleWanderState(Rifleman rifle, ILevelManager levelManager) {
-    this.rifle = rifle;
-    this.levelManager = levelManager;
-    random = new Random();
-
-    this.rifle.CurrentSourceRectangles = [
-      new(71, 130, 23, 28),
-      new(134, 130, 23, 28),
-      new(196, 130, 23, 28),
-      new(259, 130, 23, 28),
-    ];
-    this.rifle.CurrentFrame = 0;
-
-    ChangeDirection();
-    wanderTimer = 0;
-    wanderDuration = 1.0 + (random.NextDouble() * 2.0);
-  }
-
-  public void Update(GameTime gameTime) {
-    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
-
-    animationTimer += dt;
-    if (animationTimer >= 0.2) {
-      currentFrameIndex++;
-      if (currentFrameIndex >= rifle.CurrentSourceRectangles.Count) {
-        currentFrameIndex = 0;
-      }
-
-      rifle.CurrentFrame = currentFrameIndex;
-      animationTimer = 0;
-    }
-
-    rifle.Position += rifle.Velocity * dt;
-
-    if (rifle.Position.X < 0 || rifle.Position.X > 800) {
-      rifle.Velocity = new Vector2(-rifle.Velocity.X, rifle.Velocity.Y);
-      if (rifle.Velocity.X > 0) rifle.FacingDirection = 1;
-      else if (rifle.Velocity.X < 0) rifle.FacingDirection = -1;
-    }
-    if (rifle.Position.Y < 0 || rifle.Position.Y > 480) {
-      rifle.Velocity = new Vector2(rifle.Velocity.X, -rifle.Velocity.Y);
-    }
-
-    wanderTimer += dt;
-    if (wanderTimer >= wanderDuration) {
-      rifle.ChangeState(new RifleIdleState(rifle, levelManager));
-    }
-  }
-
-  private void ChangeDirection() {
-    float speed = 100f;
-    float randomX = (float) (random.NextDouble() * 2 - 1);
-    float randomY = (float) (random.NextDouble() * 2 - 1);
-    Vector2 direction = new(randomX, randomY);
-
-    if (direction != Vector2.Zero) {
-      direction.Normalize();
-    }
-
-    rifle.Velocity = direction * speed;
-
-    if (rifle.Velocity.X > 0) {
-      rifle.FacingDirection = 1;
-    }
-
-    if (rifle.Velocity.X < 0) {
-      rifle.FacingDirection = -1;
-    }
+internal class RifleWanderState(Rifleman rifle) : AEnemyMoveState(rifle, [new(71, 130, 23, 28), new(134, 130, 23, 28), new(196, 130, 23, 28), new(259, 130, 23, 28)], 100f) {
+  protected override void TransitionToNextState() {
+    enemy.CurrentState = new RifleIdleState((Rifleman) enemy);
   }
 }

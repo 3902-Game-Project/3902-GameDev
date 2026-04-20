@@ -1,82 +1,11 @@
 ﻿using System;
+using GameProject.Enemies.States;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies.TumbleweedStates;
 
-internal class TumbleweedMoveState : ITumbleweedState {
-  private readonly Tumbleweed tumbleweed;
-  private readonly Random random;
-  private double wanderTimer;
-  private readonly double wanderDuration;
-
-  private double animationTimer;
-  private int currentFrameIndex;
-
-  public TumbleweedMoveState(Tumbleweed tumbleweed) {
-    this.tumbleweed = tumbleweed;
-    random = new Random();
-
-    this.tumbleweed.CurrentSourceRectangles = [
-      new(36, 41, 108, 106),
-      new(202, 42, 109, 105),
-      new(366, 42, 109, 105),
-      new(533, 41, 107, 106)
-    ];
-    this.tumbleweed.CurrentFrame = 0;
-
-    ChangeDirection();
-    wanderTimer = 0;
-    wanderDuration = 1.0 + (random.NextDouble() * 2.0);
-  }
-
-  public void Update(GameTime gameTime) {
-    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
-
-    animationTimer += dt;
-    if (animationTimer >= 0.2) {
-      currentFrameIndex++;
-      if (currentFrameIndex >= tumbleweed.CurrentSourceRectangles.Count) {
-        currentFrameIndex = 0;
-      }
-
-      tumbleweed.CurrentFrame = currentFrameIndex;
-      animationTimer = 0;
-    }
-
-    tumbleweed.Position += tumbleweed.Velocity * dt;
-
-    if (tumbleweed.Position.X < 0 || tumbleweed.Position.X > 800) {
-      tumbleweed.Velocity = new Vector2(-tumbleweed.Velocity.X, tumbleweed.Velocity.Y);
-      if (tumbleweed.Velocity.X > 0) tumbleweed.FacingDirection = 1;
-      else if (tumbleweed.Velocity.X < 0) tumbleweed.FacingDirection = -1;
-    }
-    if (tumbleweed.Position.Y < 0 || tumbleweed.Position.Y > 480) {
-      tumbleweed.Velocity = new Vector2(tumbleweed.Velocity.X, -tumbleweed.Velocity.Y);
-    }
-
-    wanderTimer += dt;
-    if (wanderTimer >= wanderDuration) {
-      tumbleweed.ChangeState(new TumbleweedIdleState(tumbleweed));
-    }
-  }
-
-  private void ChangeDirection() {
-    float speed = 75f;
-    float randomX = (float) (random.NextDouble() * 2 - 1);
-
-    Vector2 direction = new(randomX, 0f);
-
-    if (direction != Vector2.Zero) {
-      direction.Normalize();
-    }
-
-    tumbleweed.Velocity = direction * speed;
-
-    if (tumbleweed.Velocity.X > 0) {
-      tumbleweed.FacingDirection = 1;
-    }
-    if (tumbleweed.Velocity.X < 0) {
-      tumbleweed.FacingDirection = -1;
-    }
+internal class TumbleweedWanderState(Tumbleweed tumbleweed) : AEnemyMoveState(tumbleweed, [new(36, 41, 108, 106), new(202, 42, 109, 105), new(366, 42, 109, 105), new(533, 41, 107, 106)], 75f, true) { // Notice the `true` parameter! This locks the Y-axis so it only rolls left/right.
+  protected override void TransitionToNextState() {
+    enemy.CurrentState = new TumbleweedIdleState((Tumbleweed) enemy);
   }
 }

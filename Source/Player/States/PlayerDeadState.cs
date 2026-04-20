@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using GameProject.Controllers;
 using GameProject.Globals;
 using GameProject.Misc;
@@ -7,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
 
-internal class PlayerDeadState(Player player, Game1 game) : APlayerState(player) {
+internal class PlayerDeadState(Player player, Action onLoss) : APlayerState(player) {
   private static readonly double LOSS_SCREEN_TIME = 3.0;
   private readonly GPTimer deadTimer = new();
 
@@ -41,7 +43,7 @@ internal class PlayerDeadState(Player player, Game1 game) : APlayerState(player)
     }
     deadTimer.Update(gameTime);
     if (deadTimer.Time >= LOSS_SCREEN_TIME) {
-      game.ChangeState(game.StateLoss);
+      onLoss?.Invoke();
     }
   }
 

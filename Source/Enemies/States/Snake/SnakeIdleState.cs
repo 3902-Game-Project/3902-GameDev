@@ -1,51 +1,28 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies.SnakeStates;
 
-internal class SnakeIdleState : ISnakeState {
+internal class SnakeIdleState : IEnemyState {
   private readonly Snake snake;
-  private double timer;
-  private double animationTimer;
-  private readonly System.Random random;
+  private double timer, animationTimer;
+  private readonly Random random = new();
 
   public SnakeIdleState(Snake snake) {
     this.snake = snake;
-    random = new System.Random();
-
     this.snake.Velocity = Vector2.Zero;
-    this.snake.CurrentSourceRectangles = [
-      new(11, 20, 10, 12),
-      new(43, 21, 10, 11),
-      new(75, 22, 10, 10),
-      new(106, 22, 11, 10),
-      new(138, 22, 11, 10),
-      new(170, 22, 11, 10),
-      new(203, 22, 10, 10),
-      new(235, 21, 10, 11),
-      new(267, 20, 10, 12),
-      new(299, 20, 10, 12),
-    ];
+    this.snake.CurrentSourceRectangles = [new(11, 20, 10, 12), new(43, 21, 10, 11), new(75, 22, 10, 10), new(106, 22, 11, 10), new(138, 22, 11, 10), new(170, 22, 11, 10), new(203, 22, 10, 10), new(235, 21, 10, 11), new(267, 20, 10, 12), new(299, 20, 10, 12)];
     this.snake.CurrentFrame = 0;
   }
 
   public void Update(GameTime gameTime) {
     animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
     if (animationTimer > 0.1) {
-      snake.CurrentFrame++;
-      if (snake.CurrentFrame >= snake.CurrentSourceRectangles.Count) {
-        snake.CurrentFrame = 0;
-      }
+      snake.CurrentFrame = (snake.CurrentFrame + 1) % snake.CurrentSourceRectangles.Count;
       animationTimer = 0;
     }
-    timer += gameTime.ElapsedGameTime.TotalSeconds;
 
-    if (timer > 1.0) {
-      int choice = random.Next(0, 2);
-      if (choice == 0) {
-        snake.ChangeState(new SnakeAttackState(snake));
-      } else {
-        snake.ChangeState(new SnakeWanderState(snake));
-      }
-    }
+    timer += gameTime.ElapsedGameTime.TotalSeconds;
+    if (timer > 1.0) snake.CurrentState = random.Next(0, 2) == 0 ? new SnakeAttackState(snake) : new SnakeWanderState(snake);
   }
 }
