@@ -36,8 +36,6 @@ internal class PlayerInventory(ILevelManager levelManager) {
   }
 
   public void PickupItem(IItem newItem) {
-    // Sort the item into the correct list based on its type or category
-
     if (newItem.Category == ItemCategory.Primary || newItem.Category == ItemCategory.Sidearm) {
       if (Weapons.Count < 2) {
         Weapons.Add(newItem);
@@ -47,12 +45,13 @@ internal class PlayerInventory(ILevelManager levelManager) {
         Weapons[ActiveWeaponIndex] = newItem;
       }
       ActiveItem?.OnEquip();
-    } else if (newItem is KeyItem) {
-      // If it's a key, put it in the new Keys list!
-      Keys.Add(newItem);
     } else {
-      // Everything else goes in the general backpack
       GeneralItems.Add(newItem);
+    }
+  }
+  public void RemoveGeneralItem(IItem itemToRemove) {
+    if (GeneralItems.Contains(itemToRemove)) {
+      GeneralItems.Remove(itemToRemove);
     }
   }
 
