@@ -1,19 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
+using GameProject.Enemies.States;
+using GameProject.Enemies;
 
 namespace GameProject.Enemies.BatStates;
 
-internal class BatIdleState : IBatState {
+internal class BatIdleState : IEnemyState {
   private readonly Bat bat;
   private double timer;
-  private readonly System.Random random;
   private double animationTimer;
 
   public BatIdleState(Bat bat) {
     this.bat = bat;
-    random = new System.Random();
-
     this.bat.Velocity = Vector2.Zero;
-
     this.bat.CurrentSourceRectangles = [
       //new Rectangle(3, 20, 25, 11),
       new(35, 5, 27, 22),
@@ -34,7 +32,7 @@ internal class BatIdleState : IBatState {
     }
     timer += gameTime.ElapsedGameTime.TotalSeconds;
     if (timer > 2.0) {
-      bat.ChangeState(new BatMoveState(bat));
+      bat.CurrentState = new BatMoveState(bat);
     }
   }
 }

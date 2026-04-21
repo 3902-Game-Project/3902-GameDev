@@ -243,8 +243,11 @@ internal class StateGameType : IGameState {
     Vector2 keysStartPosition = new(ammoPosition.X + 200, healthBarPosition.Y);
     float keyScale = 3f;
 
-    // FIX: Changed .Keys to .Keys.Count
-    int keysToDraw = MathHelper.Clamp(Player.Inventory.Keys.Count, 0, 3);
+    int keyCount = 0;
+    foreach (var item in Player.Inventory.GeneralItems) {
+      if (item is KeyItem) keyCount++;
+    }
+    int keysToDraw = MathHelper.Clamp(keyCount, 0, 3);
 
     for (int i = 0; i < keysToDraw; i++) {
       Vector2 keyPos = keysStartPosition + new Vector2(i * 35, 0);

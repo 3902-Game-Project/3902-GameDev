@@ -22,7 +22,7 @@ internal class VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, VaultDo
     _ => 0,
   };
   private double animationTimer;
-  private readonly double timePerFrame = 0.3;
+  private readonly double timePerFrame = 0.1;
   public string PairedLevelName { get; private set; } = pairedLevelName;
   public VaultDoorBlockState State { get; private set; } = state;
 
@@ -53,5 +53,9 @@ internal class VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, VaultDo
 
   public void ChangeState(VaultDoorBlockState state) {
     State = state;
+  }
+
+  public void Unlock() {
+    ChangeState(VaultDoorBlockState.Opening);
   }
 }

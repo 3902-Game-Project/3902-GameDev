@@ -1,0 +1,63 @@
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+
+namespace GameProject.Enemies.States;
+
+internal abstract class AEnemyMoveState : IEnemyState {
+  protected readonly ABaseEnemy enemy;
+  protected readonly Random random = new();
+  private double wanderTimer;
+  private readonly double wanderDuration;
+  private double animationTimer;
+  private readonly float speed;
+  private readonly bool lockYAxis;
+
+  public AEnemyMoveState(ABaseEnemy enemy, List<Rectangle> frames, float speed, bool lockYAxis = false) {
+    this.enemy = enemy;
+    this.speed = speed;
+    this.lockYAxis = lockYAxis;
+    this.enemy.CurrentSourceRectangles = frames;
+    this.enemy.CurrentFrame = 0;
+
+    ChangeDirection();
+    wanderTimer = 0;
+    wanderDuration = 1.0 + (random.NextDouble() * 2.0);
+  }
+
+  public virtual void Update(GameTime gameTime) {
+    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
+
+    animationTimer += dt;
+    if (animationTimer >= 0.2) {
+      enemy.CurrentFrame = (enemy.CurrentFrame + 1) % enemy.CurrentSourceRectangles.Count;
+      animationTimer = 0;
+    }
+
+    enemy.Position += enemy.Velocity * dt;
+
+    if (enemy.Position.X < 0 || enemy.Position.X > 800) {
+      enemy.Velocity = new Vector2(-enemy.Velocity.X, enemy.Velocity.Y);
+      enemy.FacingDirection = enemy.Velocity.X > 0 ? 1 : -1;
+    }
+    if (!lockYAxis && (enemy.Position.Y < 0 || enemy.Position.Y > 480)) {
+      enemy.Velocity = new Vector2(enemy.Velocity.X, -enemy.Velocity.Y);
+    }
+
+    wanderTimer += dt;
+    if (wanderTimer >= wanderDuration) TransitionToNextState();
+  }
+
+  private void ChangeDirection() {
+    float randomX = (float) (random.NextDouble() * 2 - 1);
+    float randomY = lockYAxis ? 0f : (float) (random.NextDouble() * 2 - 1);
+    Vector2 direction = new(randomX, randomY);
+
+    if (direction != Vector2.Zero) direction.Normalize();
+
+    enemy.Velocity = direction * speed;
+    if (enemy.Velocity.X != 0) enemy.FacingDirection = enemy.Velocity.X > 0 ? 1 : -1;
+  }
+
+  protected abstract void TransitionToNextState();
+}

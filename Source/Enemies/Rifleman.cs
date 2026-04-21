@@ -1,49 +1,35 @@
 ﻿using GameProject.Enemies.RiflemanStates;
+using GameProject.Enemies.States;
+using GameProject.Factories;
 using GameProject.Managers;
+using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
 internal class Rifleman : ABaseEnemy {
-  private IRiflemanState state;
+  public ILevelManager LevelManager { get; }
 
   public Rifleman(Texture2D texture, Vector2 position, ILevelManager levelManager) : base(texture, position, 48f, 96f) {
-    state = new RifleWanderState(this, levelManager);
+    LevelManager = levelManager;
+    DrawScale = 2f;
+    FlipOnRightDir = false;
+    CurrentState = new RifleWanderState(this);
   }
 
-  public void ChangeState(IRiflemanState newState) {
-    state = newState;
+  public void FireProjectile(int damage) {
+    Vector2 spawnPosition = Position + new Vector2(FacingDirection * 15f, -33f);
+    IProjectile bullet = ProjectileFactory.Instance.CreateBullet(spawnPosition, new Vector2(FacingDirection, 0f), 300f, 2f, damage);
+    if (bullet is BulletDefault b) b.IsPlayerShot = false;
+    LevelManager.CurrentLevel.ProjectileManager.Add(bullet);
   }
 
-  public override void Update(GameTime gameTime) {
-    base.Update(gameTime);
-
-    state.Update(gameTime);
-    if (Position.X < 0) {
-      Position = new Vector2(0, Position.Y);
-    }
+  protected override void DropLoot() {
+    LevelManager.CurrentLevel.AddPickup(WorldPickupFactory.Instance.CreateAmmo(Position, Items.AmmoType.Heavy, 5));
   }
 
-  public override void Draw(SpriteBatch spriteBatch) {
-    if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return;
-
-    Rectangle source = CurrentSourceRectangles[CurrentFrame];
-    SpriteEffects effect = FacingDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
-    Vector2 origin = new(source.Width / 2f, source.Height);
-
-    Color tintColor = DamageFlashTimer > 0 ? Color.Red : Color.White;
-
-    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, 2f, effect, 0f);
-  }
-
-  public override void TakeDamage(int damage) {
-    bool wasAlive = Health > 0;
-
-    base.TakeDamage(damage);
-
-    if (wasAlive && Health <= 0) {
-      ChangeState(new RifleDeathState(this));
-    }
+  protected override void TransitionToDeathState() {
+    CurrentState = new GenericDeathState(this, [new(11, 9, 21, 28), new(73, 11, 23, 26), new(135, 16, 33, 21), new(198, 20, 40, 17), new(260, 22, 40, 15), new(323, 23, 39, 14), new(385, 25, 40, 12)]);
   }
 }
