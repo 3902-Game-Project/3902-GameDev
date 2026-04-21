@@ -214,7 +214,7 @@ internal class Level : ILevel {
   }
 
   public IEnumerable<IBlock> GetOpenableDoors() {
-    return doors.Where(door => door is VaultDoorBlock || door is SlattedDoorBlock);
+    return doors;
   }
 
   public void PlayerResolveCollisions(ICollidable movingEntity, CollisionAxis axis = CollisionAxis.Both, float cornerTolerance = 3.0f) {

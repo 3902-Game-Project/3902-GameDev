@@ -50,12 +50,21 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
   }
 
   public override void UseKey(UseType useType) {
-    if (Player.Inventory.Keys.Count > 0) {
-      Player.Inventory.Keys[0].Use(useType);
-      if (Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
+    IItem keyToUse = null;
+    foreach (var item in Player.Inventory.GeneralItems) {
+      if (item is KeyItem) {
+        keyToUse = item;
+        break; 
+      }
+    }
+    if (keyToUse != null) {
+      keyToUse.Use(useType);
+
+      if (Player.Inventory.ActiveItem != null && Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
         Player.State = Player.UseItemState;
       }
-      Player.Inventory.Keys.RemoveAt(0);
+
+      Player.Inventory.RemoveGeneralItem(keyToUse);
     }
   }
 

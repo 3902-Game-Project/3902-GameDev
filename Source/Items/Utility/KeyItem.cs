@@ -57,8 +57,11 @@ internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManage
 
   public void Use(UseType useType) {
     foreach (var block in levelManager.CurrentLevel.GetOpenableDoors()) {
-      if (block is IOpenableDoor door) {
-        door.Unlock();
+      // Safely check if the block is a Vault Door
+      if (block is VaultDoorBlock vaultDoor) {
+        vaultDoor.Unlock(); // Explicitly trigger the door's built-in unlock method!
+      } else if (block is SlattedDoorBlock slattedDoor) {
+        slattedDoor.ChangeState(LockableDoorBlockState.Open);
       }
     }
   }

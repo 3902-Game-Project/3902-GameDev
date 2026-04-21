@@ -123,13 +123,16 @@ internal class StateItemScreenType(Game1 game) : IGameState {
       if (player.Inventory.GeneralItems.Count > 0 && SelectedBackpackIndex < player.Inventory.GeneralItems.Count) {
         IItem selectedItem = player.Inventory.GeneralItems[SelectedBackpackIndex];
 
-        selectedItem.Use(default);
-
-        player.Inventory.RemoveGeneralItem(selectedItem);
-
+        if (selectedItem is KeyItem) {
+          new PlayerUseKeyCommand(player, default).Execute();
+        } else {
+          selectedItem.Use(default);
+          player.Inventory.RemoveGeneralItem(selectedItem);
+        }
         if (SelectedBackpackIndex >= player.Inventory.GeneralItems.Count && SelectedBackpackIndex > 0) {
           SelectedBackpackIndex--;
         }
+        new ReturnToGameNoFadeCommand(game).Execute();
       }
     }
   }
