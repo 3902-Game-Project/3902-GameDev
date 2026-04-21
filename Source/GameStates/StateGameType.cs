@@ -7,6 +7,7 @@ using GameProject.Globals;
 using GameProject.Items;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
+using GameProject.Source.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -119,6 +120,8 @@ internal class StateGameType : IGameState {
     keyboardController.Update(gameTime);
     mouseController.Update(gameTime);
     gamePadController.Update(gameTime);
+
+    CheatCodes.Instance.UpdateCheats(Player);
 
     if (!Flags.HaltAllUpdates) {
       Player.Update(gameTime);

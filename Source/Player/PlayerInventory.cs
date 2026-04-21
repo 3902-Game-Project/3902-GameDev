@@ -17,12 +17,12 @@ internal class PlayerInventory(ILevelManager levelManager) {
   public IItem ActiveItem => Weapons.Count > 0 ? Weapons[ActiveWeaponIndex] : null;
 
   // 2. General Items List (Potions, Whiskey, etc.)
-  public List<IItem> GeneralItems { get; private set; } = [];
+  public List<IItem> GeneralItems { get; set; } = [];
 
-  public List<IItem> Keys { get; private set; } = [];
+  public List<IItem> Keys { get; set; } = [];
 
   // Overarching Ammo Stores
-  public Dictionary<AmmoType, int> Ammo { get; private set; } = new() {
+  public Dictionary<AmmoType, int> Ammo { get; set; } = new() {
     { AmmoType.Light, 30 },
     { AmmoType.Heavy, 10 },
     { AmmoType.Shells, 10 }
