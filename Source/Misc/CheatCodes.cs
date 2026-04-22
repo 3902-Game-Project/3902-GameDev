@@ -13,31 +13,31 @@ internal class CheatCodes {
   private bool ammoOn = false;
   private bool itemsOn = false;
   private readonly int buffer = 8;
-  public List<Keys> lastPressed = new List<Keys>();
+  public List<Keys> lastPressed = [];
 
   // Unlimited Health Mappings
-  private List<Keys> unlimitedHealthWASD = new List<Keys>{
+  private readonly List<Keys> unlimitedHealthWASD = [
     Keys.W, Keys.W, Keys.S, Keys.S, Keys.A, Keys.D, Keys.A, Keys.D
-  };
-  private List<Keys> unlimitedHealthArrows = new List<Keys>{
+  ];
+  private readonly List<Keys> unlimitedHealthArrows = [
     Keys.Up, Keys.Up, Keys.Down, Keys.Down, Keys.Left, Keys.Right, Keys.Left, Keys.Right
-  };
+  ];
 
   // Unlimited Ammo Mappings
-  private List<Keys> unlimitedAmmoWASD = new List<Keys>{
+  private readonly List<Keys> unlimitedAmmoWASD = [
     Keys.W, Keys.A, Keys.S, Keys.D, Keys.W, Keys.A, Keys.S, Keys.D
-  };
-  private List<Keys> unlimitedAmmoArrows = new List<Keys>{
+  ];
+  private readonly List<Keys> unlimitedAmmoArrows = [
     Keys.Up, Keys.Left, Keys.Down, Keys.Right, Keys.Up, Keys.Left, Keys.Down, Keys.Right
-  };
+  ];
 
   // Unlimited Items Mappings
-  private List<Keys> unlimitedItemsWASD = new List<Keys>{
+  private readonly List<Keys> unlimitedItemsWASD = [
     Keys.W, Keys.W, Keys.A, Keys.A, Keys.D, Keys.D, Keys.S, Keys.S
-  };
-  private List<Keys> unlimitedItemsArrows = new List<Keys>{
+  ];
+  private readonly List<Keys> unlimitedItemsArrows = [
     Keys.Up, Keys.Up, Keys.Left, Keys.Left, Keys.Right, Keys.Right, Keys.Down, Keys.Down
-  };
+  ];
 
   public void UnliimitedHealth(Player player) {
     if (CodesMatch(unlimitedHealthWASD) || CodesMatch(unlimitedHealthArrows)) {

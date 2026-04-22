@@ -50,9 +50,7 @@ internal class PlayerInventory(ILevelManager levelManager) {
     }
   }
   public void RemoveGeneralItem(IItem itemToRemove) {
-    if (GeneralItems.Contains(itemToRemove)) {
-      GeneralItems.Remove(itemToRemove);
-    }
+    GeneralItems.Remove(itemToRemove);
   }
 
   private void DropItem(IItem itemToDrop) {

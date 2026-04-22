@@ -139,7 +139,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
 
   public void LoadContent(ContentManager content) {
     blankTexture = new Texture2D(game.GraphicsDevice, 1, 1);
-    blankTexture.SetData(new[] { Color.White });
+    blankTexture.SetData([Color.White]);
   }
 
   public void Update(GameTime gameTime) {
