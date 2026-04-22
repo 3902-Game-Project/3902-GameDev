@@ -54,7 +54,7 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
     foreach (var item in Player.Inventory.GeneralItems) {
       if (item is KeyItem) {
         keyToUse = item;
-        break; 
+        break;
       }
     }
     if (keyToUse != null) {

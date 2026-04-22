@@ -2,7 +2,6 @@
 using GameProject.Enemies.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using GameProject.Enemies;
 
 namespace GameProject.Enemies;
 

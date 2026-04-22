@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameProject.Globals;
 using GameProject.Items;
-using GameProject.Managers;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework.Input;
 
@@ -81,8 +74,7 @@ internal class CheatCodes {
 
     if (lastPressed.Count != code.Count) {
       valid = false;
-    }
-    else {
+    } else {
       for (int i = 0; i < buffer; i++) {
         if (lastPressed[i] != code[i]) return false;
       }
@@ -100,7 +92,7 @@ internal class CheatCodes {
 
   public void UpdateCheats(Player player) {
     if (!healthOn) Instance.UnliimitedHealth(player);
-    if (!ammoOn) Instance.UnlimitedAmmo(player);  
+    if (!ammoOn) Instance.UnlimitedAmmo(player);
     if (!itemsOn) Instance.UnliimitedItems(player);
   }
 }
