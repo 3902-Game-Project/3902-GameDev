@@ -14,7 +14,7 @@ internal class GenericDeathState : IEnemyState {
   public GenericDeathState(ABaseEnemy enemy, List<Rectangle> frames, double timePerFrame = 0.15, double holdTime = 1.5) {
     this.enemy = enemy;
     this.timePerFrame = timePerFrame;
-    this.timeToHoldLastFrame = holdTime;
+    timeToHoldLastFrame = holdTime;
 
     this.enemy.Velocity = Vector2.Zero;
     this.enemy.CurrentSourceRectangles = frames;

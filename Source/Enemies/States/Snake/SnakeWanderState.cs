@@ -1,6 +1,4 @@
-﻿using System;
-using GameProject.Enemies.States;
-using Microsoft.Xna.Framework;
+﻿using GameProject.Enemies.States;
 
 namespace GameProject.Enemies.SnakeStates;
 
