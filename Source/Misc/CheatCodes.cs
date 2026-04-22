@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using GameProject.Factories;
 using GameProject.Items;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework.Input;
@@ -8,6 +10,7 @@ namespace GameProject.Source.Misc;
 
 internal class CheatCodes {
   public static CheatCodes Instance { get; } = new CheatCodes();
+  public ILevelManager LevelManager { get; set; }
 
   private bool healthOn = false;
   private bool ammoOn = false;
@@ -60,12 +63,29 @@ internal class CheatCodes {
   }
 
   public void UnliimitedItems(Player player) {
-    if (CodesMatch(unlimitedItemsWASD) || CodesMatch(unlimitedItemsArrows)) {
-      // handle items
-
-      lastPressed.Clear();
-      itemsOn = true;
-      Debug.WriteLine("unlimited items");
+    if (CodesMatch(unlimitedItemsWASD) || CodesMatch(unlimitedItemsArrows) || itemsOn) {
+      if (!player.Inventory.GeneralItems.OfType<KeyItem>().Any()) {
+        IItem key = ItemFactory.CreateKey(-1f, -1f, LevelManager);
+        player.Inventory.PickupItem(key);
+      }
+      if (player.Inventory.GeneralItems.OfType<HealthItem>().Any()) {
+        IItem health = ItemFactory.Instance.CreateHealthItem(-1f, -1f);
+        player.Inventory.PickupItem(health);
+      }
+      if (player.Inventory.GeneralItems.OfType<InfiniteAmmoItem>().Any()) {
+        IItem ammo = ItemFactory.Instance.CreateInfiniteAmmoItem(-1f, -1f);
+        player.Inventory.PickupItem(ammo);
+      }
+      if (player.Inventory.GeneralItems.OfType<InvincibilityItem>().Any()) {
+        IItem invincible = ItemFactory.Instance.CreateInvincibilityItem(-1f, -1f);
+        player.Inventory.PickupItem(invincible);
+      }
+      if (!itemsOn) {
+        lastPressed.Clear();
+        itemsOn = true;
+        Debug.WriteLine("unlimited items");
+      }
+      
     }
   }
 
@@ -92,7 +112,7 @@ internal class CheatCodes {
 
   public void UpdateCheats(Player player) {
     if (!healthOn) Instance.UnliimitedHealth(player);
-    if (!ammoOn) Instance.UnlimitedAmmo(player);
+    if (!ammoOn) Instance.UnlimitedAmmo(player);  
     if (!itemsOn) Instance.UnliimitedItems(player);
   }
 }
