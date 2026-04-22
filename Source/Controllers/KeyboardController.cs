@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GameProject.ButtonDiffTrackers;
 using GameProject.Commands;
+using GameProject.Source.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -24,6 +25,7 @@ internal class KeyboardController(
     keyTracker.Update(keyboardState);
 
     foreach (Keys key in keyTracker.GetPressed()) {
+      CheatCodes.Instance.AddKey(key);
       if (pressedMappings.TryGetValue(key, out IGPCommand command)) {
         command.Execute();
       }
