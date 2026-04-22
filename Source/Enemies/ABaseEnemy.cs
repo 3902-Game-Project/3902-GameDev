@@ -5,6 +5,8 @@ using GameProject.Collisions;
 using GameProject.Collisions.Shapes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using GameProject.Enemies.States;
+using GameProject.PlayerSpace;
 
 namespace GameProject.Enemies;
 
@@ -13,6 +15,8 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
   public Vector2 Position { get; set; } = position;
   public Vector2 Velocity { get; set; }
   public int FacingDirection { get; set; } = 1;
+
+  public Vector2 Target { get; set; } = position;
 
   public static event Action<ABaseEnemy> OnDeath;
 
@@ -84,6 +88,18 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
 
     if (wasAlive && Health <= 0) {
       Die();
+    }
+  }
+
+  public virtual void FollowTarget(float speed) {
+    Vector2 direction = Target - Position;
+    if (direction != Vector2.Zero) 
+      direction = Vector2.Normalize(direction);
+    Velocity = direction * speed;
+    if (direction.X > 0) {
+      FacingDirection = 1;
+    } else {
+      FacingDirection = 0;
     }
   }
   public virtual void Die() {

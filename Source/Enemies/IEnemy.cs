@@ -11,5 +11,6 @@ internal interface IEnemy : ISprite, ICollidable {
 
   Rectangle BoundingBox { get; }
   Vector2 Velocity { get; set; }
+  Vector2 Target { get; set; }
   int FacingDirection { get; set; }
 }
