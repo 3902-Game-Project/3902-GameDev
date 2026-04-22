@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies.States;
@@ -20,7 +21,7 @@ internal abstract class AEnemyMoveState : IEnemyState {
     this.enemy.CurrentSourceRectangles = frames;
     this.enemy.CurrentFrame = 0;
 
-    ChangeDirection();
+    enemy.FollowTarget(speed);
     wanderTimer = 0;
     wanderDuration = 1.0 + (random.NextDouble() * 2.0);
   }

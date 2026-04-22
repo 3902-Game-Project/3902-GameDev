@@ -23,6 +23,7 @@ internal class Level : ILevel {
   private readonly List<IWorldPickup> pickups;
   private readonly Vector2 playerPosition;
   private readonly CollisionManager collisionManager = new();
+  private readonly Player player;
 
   private void CategorizeDeadEnemies() {
     for (int i = aliveEnemies.Count - 1; i >= 0; i--) {
@@ -66,6 +67,7 @@ internal class Level : ILevel {
     aliveEnemies = enemies;
     this.pickups = pickups;
     this.playerPosition = playerPosition;
+    this.player = player;
 
     CategorizeDeadEnemies();
 
@@ -110,6 +112,7 @@ internal class Level : ILevel {
 
     foreach (var aliveEnemy in aliveEnemies) {
       aliveEnemy.Update(gameTime);
+      aliveEnemy.Target = player.Position;
     }
 
     CategorizeDeadEnemies();
