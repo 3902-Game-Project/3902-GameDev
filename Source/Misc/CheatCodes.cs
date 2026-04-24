@@ -6,6 +6,7 @@ using GameProject.Items;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework.Input;
 using GameProject.Managers;
+using GameProject.Source.Commands;
 
 namespace GameProject.Source.Misc;
 
@@ -43,7 +44,7 @@ internal class CheatCodes {
     Keys.Up, Keys.Up, Keys.Left, Keys.Left, Keys.Right, Keys.Right, Keys.Down, Keys.Down
   ];
 
-  public void UnliimitedHealth(Player player) {
+  public void UnlimitedHealth(Player player) {
     if (CodesMatch(unlimitedHealthWASD) || CodesMatch(unlimitedHealthArrows)) {
       player.Health = 999999;
       lastPressed.Clear();
@@ -63,7 +64,7 @@ internal class CheatCodes {
     }
   }
 
-  public void UnliimitedItems(Player player) {
+  public void UnlimitedItems(Player player) {
     if (CodesMatch(unlimitedItemsWASD) || CodesMatch(unlimitedItemsArrows) || itemsOn) {
       if (!player.Inventory.GeneralItems.OfType<KeyItem>().Any()) {
         IItem key = ItemFactory.CreateKey(-1f, -1f, LevelManager);
@@ -112,8 +113,8 @@ internal class CheatCodes {
   }
 
   public void UpdateCheats(Player player) {
-    if (!healthOn) Instance.UnliimitedHealth(player);
+    if (!healthOn) new PlayerUnlimitedHealthCommand(player).Execute();
     if (!ammoOn) Instance.UnlimitedAmmo(player);  
-    if (!itemsOn) Instance.UnliimitedItems(player);
+    if (!itemsOn) Instance.UnlimitedItems(player);
   }
 }
