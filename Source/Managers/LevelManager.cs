@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using GameProject.Globals;
 using GameProject.Level;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -30,7 +31,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
     "12_level",
     "13_level",
   ];
-  private static readonly string STARTING_LEVEL = "01_level";
+  private static readonly string STARTING_LEVEL = Flags.StartInDebugLevel ? "00_everything" : "01_level";
 
   private readonly Dictionary<string, ILevel> levels = [];
   private string currentLevelName = STARTING_LEVEL;
