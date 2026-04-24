@@ -21,7 +21,6 @@ internal abstract class AEnemyMoveState : IEnemyState {
     this.enemy.CurrentSourceRectangles = frames;
     this.enemy.CurrentFrame = 0;
 
-    enemy.FollowTarget(speed);
     wanderTimer = 0;
     wanderDuration = 1.0 + (random.NextDouble() * 2.0);
   }
@@ -34,8 +33,10 @@ internal abstract class AEnemyMoveState : IEnemyState {
       enemy.CurrentFrame = (enemy.CurrentFrame + 1) % enemy.CurrentSourceRectangles.Count;
       animationTimer = 0;
     }
-
+    
     enemy.Position += enemy.Velocity * dt;
+
+    enemy.FollowTarget(speed);
 
     if (enemy.Position.X < 0 || enemy.Position.X > 800) {
       enemy.Velocity = new Vector2(-enemy.Velocity.X, enemy.Velocity.Y);
