@@ -47,6 +47,8 @@ internal class Player : IGPUpdatable, IGPDrawable, ICollidable {
 
   public float InvincibilityTimer { get; set; } = 0f;
   public float DamageFlashTimer { get; set; } = 0f;
+  public float InfiniteAmmoTimer { get; set; } = 0f;
+  public bool HasInfiniteAmmo => InfiniteAmmoTimer > 0;
 
   public bool IsInvincible => InvincibilityTimer > 0;
 
