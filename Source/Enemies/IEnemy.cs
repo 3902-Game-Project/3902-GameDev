@@ -4,6 +4,13 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies;
 
+internal enum FacingDirection {
+  Left,
+  Right,
+  Up,
+  Down,
+}
+
 internal interface IEnemy : ISprite, ICollidable {
   void TakeDamage(int damage);
   int Health { get; }
@@ -12,5 +19,5 @@ internal interface IEnemy : ISprite, ICollidable {
   Rectangle BoundingBox { get; }
   Vector2 Velocity { get; set; }
   Vector2 Target { get; set; }
-  int FacingDirection { get; set; }
+  FacingDirection Direction { get; set; }
 }

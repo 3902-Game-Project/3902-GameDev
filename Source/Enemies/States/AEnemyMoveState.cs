@@ -21,7 +21,6 @@ internal abstract class AEnemyMoveState : IEnemyState {
     this.enemy.CurrentSourceRectangles = frames;
     this.enemy.CurrentFrame = 0;
 
-    enemy.FollowTarget(speed);
     wanderTimer = 0;
     wanderDuration = 1.0 + (random.NextDouble() * 2.0);
   }
@@ -37,9 +36,11 @@ internal abstract class AEnemyMoveState : IEnemyState {
 
     enemy.Position += enemy.Velocity * dt;
 
+    enemy.FollowTarget(speed);
+
     if (enemy.Position.X < 0 || enemy.Position.X > 800) {
       enemy.Velocity = new Vector2(-enemy.Velocity.X, enemy.Velocity.Y);
-      enemy.FacingDirection = enemy.Velocity.X > 0 ? 1 : -1;
+      enemy.Direction = enemy.Velocity.X > 0 ? FacingDirection.Right : FacingDirection.Left;
     }
     if (!lockYAxis && (enemy.Position.Y < 0 || enemy.Position.Y > 480)) {
       enemy.Velocity = new Vector2(enemy.Velocity.X, -enemy.Velocity.Y);
@@ -57,7 +58,7 @@ internal abstract class AEnemyMoveState : IEnemyState {
     if (direction != Vector2.Zero) direction.Normalize();
 
     enemy.Velocity = direction * speed;
-    if (enemy.Velocity.X != 0) enemy.FacingDirection = enemy.Velocity.X > 0 ? 1 : -1;
+    if (enemy.Velocity.X != 0) enemy.Direction = enemy.Direction = enemy.Velocity.X > 0 ? FacingDirection.Right : FacingDirection.Left;;
   }
 
   protected abstract void TransitionToNextState();

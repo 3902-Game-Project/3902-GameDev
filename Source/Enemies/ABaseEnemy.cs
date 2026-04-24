@@ -14,7 +14,7 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
   public Texture2D Texture { get; protected set; } = texture;
   public Vector2 Position { get; set; } = position;
   public Vector2 Velocity { get; set; }
-  public int FacingDirection { get; set; } = 1;
+  public FacingDirection Direction { get; set; } = FacingDirection.Right;
 
   public Vector2 Target { get; set; } = position;
 
@@ -48,19 +48,19 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
     if (info.Collider is IBlock) {
       if (info.Side == CollisionSide.Left || info.Side == CollisionSide.Right) {
         Velocity = new Vector2(0, Velocity.Y);
-        FacingDirection *= -1;
+        Direction = (info.Side == CollisionSide.Left) ? FacingDirection.Left : FacingDirection.Right;
       } else if (info.Side == CollisionSide.Top || info.Side == CollisionSide.Bottom) {
         Velocity = new Vector2(Velocity.X, 0);
       }
       Position = CollisionHelper.GetNudgedPosition(info, Position, 2f);
       UpdateCollider();
     }
-  }
+  } 
   public virtual void Draw(SpriteBatch spriteBatch) {
     if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return;
 
     Rectangle source = CurrentSourceRectangles[CurrentFrame];
-    bool shouldFlip = FlipOnRightDir ? FacingDirection > 0 : FacingDirection <= 0;
+    bool shouldFlip = FlipOnRightDir ? Direction > 0 : Direction <= 0;
     SpriteEffects effect = shouldFlip ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
     Vector2 origin = new(source.Width / 2f, source.Height);
@@ -96,12 +96,9 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
     if (direction != Vector2.Zero) 
       direction = Vector2.Normalize(direction);
     Velocity = direction * speed;
-    if (direction.X > 0) {
-      FacingDirection = 1;
-    } else {
-      FacingDirection = 0;
-    }
+    Direction = (direction.X > 0) ? FacingDirection.Right : FacingDirection.Left;
   }
+
   public virtual void Die() {
     DropLoot();
     OnDeath?.Invoke(this);
