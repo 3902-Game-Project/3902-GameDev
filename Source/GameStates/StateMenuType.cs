@@ -50,8 +50,8 @@ internal class StateMenuType(Game1 game) : IGameState {
       text: START_TEXT,
       position:
         new Vector2(
-          game.Window.ClientBounds.Width,
-          game.Window.ClientBounds.Height
+          game.DefaultViewport.Width,
+          game.DefaultViewport.Height
         ) * 0.5f + new Vector2(0.0f, -10.0f),
       color: Color.White,
       origin: MiscAssetStore.Instance.MainFont.MeasureString(START_TEXT) * 0.5f,
@@ -65,8 +65,8 @@ internal class StateMenuType(Game1 game) : IGameState {
       text: QUIT_TEXT,
       position:
         new Vector2(
-          game.Window.ClientBounds.Width,
-          game.Window.ClientBounds.Height
+          game.DefaultViewport.Width,
+          game.DefaultViewport.Height
         ) * 0.5f + new Vector2(0.0f, 10.0f),
       color: Color.White,
       origin: MiscAssetStore.Instance.MainFont.MeasureString(QUIT_TEXT) * 0.5f,
