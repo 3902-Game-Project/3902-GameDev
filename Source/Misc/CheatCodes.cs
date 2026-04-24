@@ -114,7 +114,7 @@ internal class CheatCodes {
 
   public void UpdateCheats(Player player) {
     if (!healthOn) new PlayerUnlimitedHealthCommand(player).Execute();
-    if (!ammoOn) Instance.UnlimitedAmmo(player);  
-    if (!itemsOn) Instance.UnlimitedItems(player);
+    if (!ammoOn) new PlayerUnlimitedAmmoCommand(player).Execute();  
+    Instance.UnlimitedItems(player);
   }
 }
