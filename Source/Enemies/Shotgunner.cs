@@ -19,10 +19,11 @@ internal class Shotgunner : ABaseEnemy {
   }
 
   public void FireSpread(int damage) {
-    Vector2 spawnPosition = Position + new Vector2(FacingDirection * 15f, -30f);
+    int bulletDirection = (Direction == FacingDirection.Right) ? 1 : -1;
+    Vector2 spawnPosition = Position + new Vector2(bulletDirection * 15f, -30f);
 
     foreach (float spreadY in new[] { 0f, -0.25f, 0.25f }) {
-      Vector2 dir = new(FacingDirection, spreadY);
+      Vector2 dir = new(bulletDirection, spreadY);
       dir.Normalize();
       IProjectile bullet = ProjectileFactory.Instance.CreateBullet(spawnPosition, dir, 400f, 0.6f, damage);
       if (bullet is BulletDefault b) b.IsPlayerShot = false;
