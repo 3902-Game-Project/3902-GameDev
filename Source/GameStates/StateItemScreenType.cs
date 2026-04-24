@@ -160,8 +160,10 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     );
 
     SpriteFont font = MiscAssetStore.Instance.MainFont;
-    int screenWidth = game.Window.ClientBounds.Width;
-    int screenHeight = game.Window.ClientBounds.Height;
+    //int screenWidth = game.Window.ClientBounds.Width;
+    //int screenHeight = game.Window.ClientBounds.Height;
+    int screenWidth = game.DefaultViewport.Width;
+    int screenHeight = game.DefaultViewport.Height;
     int centerX = screenWidth / 2;
 
     spriteBatch.DrawString(font, "- INVENTORY -", new Vector2(centerX - (font.MeasureString("- INVENTORY -").X / 2), 40), Color.Gold);

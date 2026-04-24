@@ -4,6 +4,7 @@ using GameProject.Globals;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace GameProject;
 
@@ -17,6 +18,8 @@ internal class Game1 : Game {
   public Viewport DefaultViewport { get; private set; }
   public Viewport HudViewport { get; private set; }
   public Viewport GameViewport { get; private set; }
+  private RenderTarget2D renderTarget;
+  private Rectangle renderScaleRectangle;
 
   private StateTransitionType StateTransition;
   public IGameState StateMenu { get; private set; }
@@ -64,6 +67,12 @@ internal class Game1 : Game {
     graphics.PreferredBackBufferWidth = GAME_WIDTH;
     graphics.ApplyChanges();
 
+    Window.AllowUserResizing = true;
+    Window.ClientSizeChanged += OnResize;
+    DefaultViewport = new Viewport(0, 0, GAME_WIDTH, GAME_HEIGHT + HUD_HEIGHT);
+    HudViewport = new Viewport(0, 0, GAME_WIDTH, HUD_HEIGHT);
+    GameViewport = new Viewport(0, HUD_HEIGHT, GAME_WIDTH, GAME_HEIGHT);
+
     DefaultViewport = GraphicsDevice.Viewport;
     HudViewport = new Viewport(0, 0, graphics.PreferredBackBufferWidth, HUD_HEIGHT);
     GameViewport = new Viewport(0, HUD_HEIGHT, graphics.PreferredBackBufferWidth, GAME_HEIGHT);
@@ -74,8 +83,36 @@ internal class Game1 : Game {
     base.Initialize();
   }
 
+  private void OnResize(Object sender, EventArgs e) {
+    UpdateRenderScaleRectangle();
+  }
+
+  private void UpdateRenderScaleRectangle() {
+    int screenWidth = Window.ClientBounds.Width;
+    int screenHeight = Window.ClientBounds.Height;
+
+    float outputAspect = (float) screenWidth / screenHeight;
+    float preferredAspect = (float) GAME_WIDTH / (GAME_HEIGHT + HUD_HEIGHT);
+
+    int width, height;
+    if (outputAspect <= preferredAspect) {
+      width = screenWidth;
+      height = (int) (screenWidth / preferredAspect);
+    } else {
+      width = (int) (screenHeight * preferredAspect);
+      height = screenHeight;
+    }
+
+    int x = (screenWidth - width) / 2;
+    int y = (screenHeight - height) / 2;
+
+    renderScaleRectangle = new Rectangle(x, y, width, height);
+  }
+
   protected override void LoadContent() {
     SpriteBatch = new SpriteBatch(GraphicsDevice);
+    renderTarget = new RenderTarget2D(GraphicsDevice, GAME_WIDTH, GAME_HEIGHT + HUD_HEIGHT);
+    UpdateRenderScaleRectangle();
 
     StateTransition = new StateTransitionType(this);
     StateMenu = new StateMenuType(this);
@@ -119,7 +156,14 @@ internal class Game1 : Game {
   }
 
   protected override void Draw(GameTime gameTime) {
+    GraphicsDevice.SetRenderTarget(renderTarget);
+    GraphicsDevice.Clear(Color.Black);
     currentState.LowLevelDraw(GraphicsDevice, SpriteBatch);
+    GraphicsDevice.SetRenderTarget(null);
+    GraphicsDevice.Clear(Color.Black);
+    SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Opaque, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone);
+    SpriteBatch.Draw(renderTarget, renderScaleRectangle, Color.White);
+    SpriteBatch.End();
 
     base.Draw(gameTime);
   }
