@@ -161,7 +161,7 @@ internal class Player : ITemporalUpdatable, IGPDrawable, ICollidable {
     State.Update(deltaTime);
     Velocity = Vector2.Zero;
 
-    Inventory.Update(gameTime);
+    Inventory.Update(deltaTime);
 
     inputLeftLastFrame = inputLeftThisFrame;
     inputRightLastFrame = inputRightThisFrame;
