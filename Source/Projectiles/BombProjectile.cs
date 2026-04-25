@@ -52,10 +52,10 @@ internal class BombProjectile : IProjectile {
   }
 
   public void Update(double deltaTime) {
-    bombAnimation.Update(gameTime);
+    bombAnimation.Update(deltaTime);
     currentSourceRect = bombAnimation.CurrentFrame;
 
-    lifetimeCounter += gameTime.ElapsedGameTime.TotalSeconds;
+    lifetimeCounter += deltaTime;
     if (lifetimeCounter >= lifetime) {
       IsExpired = true;
     }

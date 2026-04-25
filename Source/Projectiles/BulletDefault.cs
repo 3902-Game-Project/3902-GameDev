@@ -72,9 +72,9 @@ internal class BulletDefault : IProjectile, ICollidable {
 
   public void Update(double deltaTime) {
     // Logic for updating the bullet's position and state
-    Position += direction * velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
+    Position += direction * velocity * ((float) deltaTime);
     Collider.Position = Position;
-    lifetimeCounter += (float) gameTime.ElapsedGameTime.TotalSeconds;
+    lifetimeCounter += (float) deltaTime;
     if (lifetimeCounter >= bulletLifetime) {
       // Logic for destroying the bullet
       Expire();

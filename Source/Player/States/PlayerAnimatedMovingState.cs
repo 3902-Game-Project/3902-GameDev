@@ -81,13 +81,14 @@ internal class PlayerAnimatedMovingState(Player player) : APlayerState(player) {
       currentFrame = 0;
       return;
     }
-    timer += gameTime.ElapsedGameTime.TotalSeconds;
+
+    timer += deltaTime;
     if (timer > frameInterval) {
       currentFrame++;
       if (currentFrame >= 2) {
         currentFrame = 0;
       }
-      timer = 0;
+      timer -= frameInterval;
     }
   }
 

@@ -34,13 +34,14 @@ internal class PlayerDeadState(Player player, Action onLoss) : APlayerState(play
     Player.Velocity = Vector2.Zero;
 
     if (currentFrame < deathFrames.Count - 1) {
-      animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
+      animationTimer += deltaTime;
       if (animationTimer > frameInterval) {
         currentFrame++;
-        animationTimer = 0;
+        animationTimer -= frameInterval;
       }
     }
-    deadTimer.Update(gameTime);
+
+    deadTimer.Update(deltaTime);
     if (deadTimer.Time >= LOSS_SCREEN_TIME) {
       onLoss?.Invoke();
     }

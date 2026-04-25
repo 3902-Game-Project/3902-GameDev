@@ -71,7 +71,7 @@ internal class PlayerInventory(ILevelManager levelManager) {
 
   public void Update(double deltaTime) {
     if (ActiveItem != null) {
-      ActiveItem.Update(gameTime);
+      ActiveItem.Update(deltaTime);
 
       if (ActiveItem is ABaseGun gun && gun.PublicStats.CurrentAmmo <= 0 && !gun.IsReloading) {
         gun.StartReload();
