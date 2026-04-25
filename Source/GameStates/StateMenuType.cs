@@ -13,6 +13,7 @@ namespace GameProject.GameStates;
 internal class StateMenuType(Game1 game) : IGameState {
   private static readonly string START_TEXT = "Press Enter/GamePadB to start!";
   private static readonly string QUIT_TEXT = "Press Q/GamePadY to quit";
+  private static readonly string SLOWMODE_SECONDARY_TEXT = "(Press S/GamePadX to toggle)";
   private IController keyboardController;
   private IController gamePadController;
 
@@ -48,6 +49,7 @@ internal class StateMenuType(Game1 game) : IGameState {
     graphicsDevice.Clear(Color.CornflowerBlue);
 
     spriteBatch.Begin();
+
     spriteBatch.DrawString(
       spriteFont: MiscAssetStore.Instance.MainFont,
       text: START_TEXT,
@@ -63,6 +65,7 @@ internal class StateMenuType(Game1 game) : IGameState {
       effects: SpriteEffects.None,
       layerDepth: 0.0f
     );
+
     spriteBatch.DrawString(
       spriteFont: MiscAssetStore.Instance.MainFont,
       text: QUIT_TEXT,
@@ -78,6 +81,41 @@ internal class StateMenuType(Game1 game) : IGameState {
       effects: SpriteEffects.None,
       layerDepth: 0.0f
     );
+
+    string slowModeText = $"Slow Reaction Time Mode (0.5x Speed): {(Flags.SlowMode ? "Enabled" : "Disabled")}";
+
+    spriteBatch.DrawString(
+      spriteFont: MiscAssetStore.Instance.MainFont,
+      text: slowModeText,
+      position:
+        new Vector2(
+          game.DefaultViewport.Width,
+          game.DefaultViewport.Height
+        ) * 0.5f + new Vector2(0.0f, 50.0f),
+      color: Color.White,
+      origin: MiscAssetStore.Instance.MainFont.MeasureString(slowModeText) * 0.5f,
+      rotation: 0.0f,
+      scale: 1.0f,
+      effects: SpriteEffects.None,
+      layerDepth: 0.0f
+    );
+
+    spriteBatch.DrawString(
+      spriteFont: MiscAssetStore.Instance.MainFont,
+      text: SLOWMODE_SECONDARY_TEXT,
+      position:
+        new Vector2(
+          game.DefaultViewport.Width,
+          game.DefaultViewport.Height
+        ) * 0.5f + new Vector2(0.0f, 70.0f),
+      color: Color.White,
+      origin: MiscAssetStore.Instance.MainFont.MeasureString(SLOWMODE_SECONDARY_TEXT) * 0.5f,
+      rotation: 0.0f,
+      scale: 1.0f,
+      effects: SpriteEffects.None,
+      layerDepth: 0.0f
+    );
+
     spriteBatch.End();
   }
 
