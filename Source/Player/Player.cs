@@ -159,7 +159,7 @@ internal class Player : IGPUpdatable, IGPDrawable, ICollidable {
     State.Update(gameTime);
     Velocity = Vector2.Zero;
 
-    Inventory.Update(gameTime, Position, Direction);
+    Inventory.Update(gameTime);
 
     inputLeftLastFrame = inputLeftThisFrame;
     inputRightLastFrame = inputRightThisFrame;
@@ -218,6 +218,6 @@ internal class Player : IGPUpdatable, IGPDrawable, ICollidable {
 
   public void Draw(SpriteBatch spriteBatch) {
     State.Draw(spriteBatch);
-    Inventory.Draw(spriteBatch, Position, TextureStore.Instance.WhitePixel);
+    Inventory.Draw(spriteBatch, Position, Direction, TextureStore.Instance.WhitePixel);
   }
 }
