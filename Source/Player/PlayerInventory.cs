@@ -69,7 +69,17 @@ internal class PlayerInventory(ILevelManager levelManager) {
     }
   }
 
-  public void Update(GameTime gameTime, Vector2 Position, FacingDirection Direction) {
+  public void Update(GameTime gameTime) {
+    if (ActiveItem != null) {
+      ActiveItem.Update(gameTime);
+
+      if (ActiveItem is ABaseGun gun && gun.PublicStats.CurrentAmmo <= 0 && !gun.IsReloading) {
+        gun.StartReload();
+      }
+    }
+  }
+
+  public void Draw(SpriteBatch spriteBatch, Vector2 Position, FacingDirection Direction, Texture2D whitePixel) {
     if (ActiveItem != null) {
       float unscaledWidth = 171f;
       float unscaledHeight = 323f;
@@ -93,18 +103,12 @@ internal class PlayerInventory(ILevelManager levelManager) {
       }
       ActiveItem.Position = Position + currentOffset;
       ActiveItem.Direction = Direction;
-      ActiveItem.Update(gameTime);
     }
-    if (ActiveItem is Items.ABaseGun gun && gun.PublicStats.CurrentAmmo <= 0 && !gun.IsReloading) {
-      gun.StartReload();
-    }
-  }
 
-  public void Draw(SpriteBatch spriteBatch, Vector2 Position, Texture2D whitePixel) {
     ActiveItem?.Draw(spriteBatch);
 
     // Draw Overhead Reload Bar
-    if (ActiveItem is Items.ABaseGun gun && gun.IsReloading && whitePixel != null) {
+    if (ActiveItem is ABaseGun gun && gun.IsReloading && whitePixel != null) {
       float barWidth = 60f;
       float barHeight = 8f;
       Vector2 barPos = Position + new Vector2(-barWidth / 2f, -80f);

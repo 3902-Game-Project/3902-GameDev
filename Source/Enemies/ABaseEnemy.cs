@@ -5,8 +5,6 @@ using GameProject.Collisions;
 using GameProject.Collisions.Shapes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using GameProject.Enemies.States;
-using GameProject.PlayerSpace;
 
 namespace GameProject.Enemies;
 
@@ -55,7 +53,7 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
       Position = CollisionHelper.GetNudgedPosition(info, Position, 2f);
       UpdateCollider();
     }
-  } 
+  }
   public virtual void Draw(SpriteBatch spriteBatch) {
     if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return;
 
@@ -93,8 +91,9 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
 
   public virtual void FollowTarget(float speed) {
     Vector2 direction = Target - Position;
-    if (direction != Vector2.Zero) 
+    if (direction != Vector2.Zero) {
       direction = Vector2.Normalize(direction);
+    }
     Velocity = direction * speed;
     Direction = (direction.X > 0) ? FacingDirection.Right : FacingDirection.Left;
   }
@@ -104,5 +103,4 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
     OnDeath?.Invoke(this);
     TransitionToDeathState();
   }
-
 }

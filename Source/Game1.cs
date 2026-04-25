@@ -1,10 +1,11 @@
-﻿using GameProject.Factories;
+﻿using System;
+using GameProject.Factories;
 using GameProject.GameStates;
 using GameProject.Globals;
 using GameProject.Managers;
+using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace GameProject;
 
@@ -19,6 +20,7 @@ internal class Game1 : Game {
   public Viewport HudViewport { get; private set; }
   public Viewport GameViewport { get; private set; }
   private RenderTarget2D renderTarget;
+  private RenderTargetTracker renderTargetTracker;
   private Rectangle renderScaleRectangle;
 
   private StateTransitionType StateTransition;
@@ -33,8 +35,9 @@ internal class Game1 : Game {
 
   public Game1() {
     graphics = new GraphicsDeviceManager(this);
-    Content.RootDirectory = "Content";
     IsMouseVisible = true;
+
+    Content.RootDirectory = "Content";
   }
 
   public void ChangeState(IGameState newState) {
@@ -66,6 +69,8 @@ internal class Game1 : Game {
     graphics.PreferredBackBufferHeight = GAME_HEIGHT + HUD_HEIGHT;
     graphics.PreferredBackBufferWidth = GAME_WIDTH;
     graphics.ApplyChanges();
+
+    renderTargetTracker = new(GraphicsDevice);
 
     Window.AllowUserResizing = true;
     Window.ClientSizeChanged += OnResize;
@@ -156,12 +161,24 @@ internal class Game1 : Game {
   }
 
   protected override void Draw(GameTime gameTime) {
+    // Render everything that should be on screen to a texture
+
+    renderTargetTracker.Push(renderTarget);
     GraphicsDevice.SetRenderTarget(renderTarget);
     GraphicsDevice.Clear(Color.Black);
-    currentState.LowLevelDraw(GraphicsDevice, SpriteBatch);
-    GraphicsDevice.SetRenderTarget(null);
+    currentState.LowLevelDraw(GraphicsDevice, SpriteBatch, renderTargetTracker);
+    renderTargetTracker.Pop();
+
+    // Then render the texture to screen
+
     GraphicsDevice.Clear(Color.Black);
-    SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Opaque, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone);
+    SpriteBatch.Begin(
+      sortMode: SpriteSortMode.Deferred,
+      blendState: BlendState.Opaque,
+      samplerState: SamplerState.PointClamp,
+      depthStencilState: DepthStencilState.None,
+      rasterizerState: RasterizerState.CullNone
+    );
     SpriteBatch.Draw(renderTarget, renderScaleRectangle, Color.White);
     SpriteBatch.End();
 

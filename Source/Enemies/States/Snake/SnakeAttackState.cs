@@ -8,9 +8,20 @@ internal class SnakeAttackState : IEnemyState {
 
   public SnakeAttackState(Snake snake) {
     this.snake = snake;
-    int attackDirection = (snake.Direction == FacingDirection.Right) ? 1 : -1; 
+    int attackDirection = (snake.Direction == FacingDirection.Right) ? 1 : -1;
     this.snake.Velocity = new Vector2(attackDirection * 300f, 0);
-    this.snake.CurrentSourceRectangles = [new(10, 115, 12, 14), new(42, 116, 12, 13), new(75, 117, 12, 12), new(107, 118, 12, 11), new(137, 116, 15, 13), new(116, 118, 19, 10), new(195, 120, 20, 8), new(229, 121, 17, 8), new(263, 119, 15, 10), new(297, 117, 14, 12)];
+    this.snake.CurrentSourceRectangles = [
+      new(10, 115, 12, 14),
+      new(42, 116, 12, 13),
+      new(75, 117, 12, 12),
+      new(107, 118, 12, 11),
+      new(137, 116, 15, 13),
+      new(116, 118, 19, 10),
+      new(195, 120, 20, 8),
+      new(229, 121, 17, 8),
+      new(263, 119, 15, 10),
+      new(297, 117, 14, 12)
+    ];
     this.snake.CurrentFrame = 0;
   }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies.States;
@@ -58,7 +57,7 @@ internal abstract class AEnemyMoveState : IEnemyState {
     if (direction != Vector2.Zero) direction.Normalize();
 
     enemy.Velocity = direction * speed;
-    if (enemy.Velocity.X != 0) enemy.Direction = enemy.Direction = enemy.Velocity.X > 0 ? FacingDirection.Right : FacingDirection.Left;;
+    if (enemy.Velocity.X != 0) enemy.Direction = enemy.Direction = enemy.Velocity.X > 0 ? FacingDirection.Right : FacingDirection.Left;
   }
 
   protected abstract void TransitionToNextState();

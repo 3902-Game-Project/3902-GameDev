@@ -3,10 +3,10 @@ using System.Diagnostics;
 using System.Linq;
 using GameProject.Factories;
 using GameProject.Items;
-using GameProject.PlayerSpace;
-using Microsoft.Xna.Framework.Input;
 using GameProject.Managers;
+using GameProject.PlayerSpace;
 using GameProject.Source.Commands;
+using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Source.Misc;
 
@@ -117,7 +117,7 @@ internal class CheatCodes {
 
   public void UpdateCheats(Player player) {
     if (!healthOn) new PlayerUnlimitedHealthCommand(player).Execute();
-    if (!ammoOn) new PlayerUnlimitedAmmoCommand(player).Execute();  
+    if (!ammoOn) new PlayerUnlimitedAmmoCommand(player).Execute();
     Instance.UnlimitedItems(player);
   }
 }
