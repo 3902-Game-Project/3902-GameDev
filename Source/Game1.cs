@@ -166,7 +166,14 @@ internal class Game1 : Game {
 
     GraphicsDevice.SetRenderTarget(null);
     GraphicsDevice.Clear(Color.Black);
-    SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Opaque, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone);
+    SpriteBatch.Begin(
+      sortMode: SpriteSortMode.Deferred,
+      blendState: BlendState.Opaque,
+      samplerState: SamplerState.PointClamp,
+      depthStencilState: DepthStencilState.None,
+      rasterizerState: RasterizerState.CullNone,
+      effect: MiscAssetStore.Instance.Vignette
+    );
     SpriteBatch.Draw(renderTarget, renderScaleRectangle, Color.White);
     SpriteBatch.End();
 

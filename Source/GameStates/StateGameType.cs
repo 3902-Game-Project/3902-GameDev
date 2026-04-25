@@ -140,8 +140,7 @@ internal class StateGameType : IGameState {
       blendState: BlendState.AlphaBlend,
       samplerState: SamplerState.PointClamp,
       depthStencilState: DepthStencilState.None,
-      rasterizerState: RasterizerState.CullNone,
-      effect: MiscAssetStore.Instance.Vignette
+      rasterizerState: RasterizerState.CullNone
     );
 
     LevelManager.Draw(spriteBatch);

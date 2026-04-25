@@ -20,7 +20,8 @@ struct VertexShaderOutput {
 };
 
 float4 MainPS(VertexShaderOutput input) : COLOR {
-  return tex2D(SpriteTextureSampler, input.TextureCoordinates) * input.Color;
+  //return tex2D(SpriteTextureSampler, input.TextureCoordinates) * input.Color * float4(input.TextureCoordinates.xy, 0.0f, 1.0f);
+  return float4(input.TextureCoordinates.xy, 0.0f, 1.0f);
 }
 
 technique SpriteDrawing {
