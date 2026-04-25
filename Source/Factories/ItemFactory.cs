@@ -68,15 +68,15 @@ internal class ItemFactory {
     return new KeyItem(TextureStore.Instance.MainBlockItemAtlas, new Vector2(xPos, yPos), levelManager);
   }
 
-  public IItem CreateHealthItem(float xPos, float yPos) {
-    return new HealthItem(healthItemTexture, new Vector2(xPos, yPos));
+  public IItem CreateHealthItem(float xPos, float yPos, Player player) {
+    return new HealthItem(healthItemTexture, new Vector2(xPos, yPos), player);
   }
 
-  public IItem CreateInvincibilityItem(float xPos, float yPos) {
-    return new InvincibilityItem(invincibilityItemTexture, new Vector2(xPos, yPos));
+  public IItem CreateInvincibilityItem(float xPos, float yPos, Player player) {
+    return new InvincibilityItem(invincibilityItemTexture, new Vector2(xPos, yPos), player);
   }
 
-  public IItem CreateInfiniteAmmoItem(float xPos, float yPos) {
-    return new InfiniteAmmoItem(infiniteAmmoItemTexture, new Vector2(xPos, yPos));
+  public IItem CreateInfiniteAmmoItem(float xPos, float yPos, Player player) {
+    return new InfiniteAmmoItem(infiniteAmmoItemTexture, new Vector2(xPos, yPos), player);
   }
 }

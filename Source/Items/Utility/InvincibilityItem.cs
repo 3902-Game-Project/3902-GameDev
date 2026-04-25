@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-internal class InvincibilityItem(Texture2D texture, Vector2 startPosition) : IItem, IWorldPickup {
+internal class InvincibilityItem(Texture2D texture, Vector2 startPosition, Player player) : IItem, IWorldPickup {
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   public Vector2 Position { get; set; } = startPosition;
   public bool IsCollected { get; set; } = false;
@@ -56,6 +56,6 @@ internal class InvincibilityItem(Texture2D texture, Vector2 startPosition) : IIt
   }
 
   public void Use(UseType useType) {
-    // We will pass the Player instance here eventually to restore health
+    player.InvincibilityTimer += 10f;
   }
 }

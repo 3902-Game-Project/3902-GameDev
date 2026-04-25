@@ -146,6 +146,7 @@ internal class Player : IGPUpdatable, IGPDrawable, ICollidable {
 
     if (InvincibilityTimer > 0) InvincibilityTimer -= dt;
     if (DamageFlashTimer > 0) DamageFlashTimer -= dt;
+    if (InfiniteAmmoTimer > 0) InfiniteAmmoTimer -= dt;
     if (Velocity != Vector2.Zero) Velocity = Vector2.Normalize(Velocity) * Speed;
     float xStep = Velocity.X * dt;
     float yStep = Velocity.Y * dt;
