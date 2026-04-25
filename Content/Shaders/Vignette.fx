@@ -11,8 +11,8 @@ float2 VignetteCenter;
 float2 VignetteDimensions;
 float2 VignetteMaxTopLeft;
 float2 VignetteMaxBottomRight;
-float2 VignetteNoneDistSq;
-float2 VignetteFullDistSq;
+float VignetteNoneDistSq;
+float VignetteFullDistSq;
 float4 VignetteColor;
 
 Texture2D SpriteTexture;

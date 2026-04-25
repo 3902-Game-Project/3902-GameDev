@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using GameProject.Factories;
 using GameProject.GameStates;
 using GameProject.Globals;
@@ -164,6 +165,20 @@ internal class Game1 : Game {
 
     // Then render the texture to screen
 
+    Effect effect;
+    if (currentState == StateGame) {
+      MiscAssetStore.Instance.Vignette.Parameters["VignetteCenter"].SetValue(new Vector2(0.5f, 0.5f));
+      MiscAssetStore.Instance.Vignette.Parameters["VignetteDimensions"].SetValue(new Vector2(0.5f, 0.5f));
+      MiscAssetStore.Instance.Vignette.Parameters["VignetteMaxTopLeft"].SetValue(new Vector2(0.0f, 0.1f));
+      MiscAssetStore.Instance.Vignette.Parameters["VignetteMaxBottomRight"].SetValue(new Vector2(1.0f, 1.0f));
+      MiscAssetStore.Instance.Vignette.Parameters["VignetteNoneDistSq"].SetValue(0.8f);
+      MiscAssetStore.Instance.Vignette.Parameters["VignetteFullDistSq"].SetValue(1.0f);
+      MiscAssetStore.Instance.Vignette.Parameters["VignetteColor"].SetValue(new Vector4(0.5f, 0.5f, 0.5f, 1.0f));
+      effect = MiscAssetStore.Instance.Vignette;
+    } else {
+      effect = null;
+    }
+
     GraphicsDevice.SetRenderTarget(null);
     GraphicsDevice.Clear(Color.Black);
     SpriteBatch.Begin(
@@ -172,7 +187,7 @@ internal class Game1 : Game {
       samplerState: SamplerState.PointClamp,
       depthStencilState: DepthStencilState.None,
       rasterizerState: RasterizerState.CullNone,
-      effect: MiscAssetStore.Instance.Vignette
+      effect: effect
     );
     SpriteBatch.Draw(renderTarget, renderScaleRectangle, Color.White);
     SpriteBatch.End();
