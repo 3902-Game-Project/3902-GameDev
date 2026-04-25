@@ -48,6 +48,8 @@ internal class StateTransitionType(Game1 game) : IGameState {
   }
 
   public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
+    // NOTE: if editing, ensure switch-case stays synchronized with this.GetCurrentVisibleState
+
     switch (screenFader.FadeState) {
       case ScreenFader.FadingState.FadeOut:
         fromGameState.LowLevelDraw(graphicsDevice, spriteBatch);
@@ -83,5 +85,22 @@ internal class StateTransitionType(Game1 game) : IGameState {
 
   public bool NextStateIsCurrentState() {
     return fromGameState == toGameState;
+  }
+
+  public IGameState GetCurrentVisibleState() {
+    // NOTE: if editing, ensure switch-case stays synchronized with this.LowLevelDraw
+
+    switch (screenFader.FadeState) {
+      case ScreenFader.FadingState.FadeOut:
+        return fromGameState;
+
+      case ScreenFader.FadingState.FadedOut:
+      case ScreenFader.FadingState.FadeIn:
+      case ScreenFader.FadingState.FadedIn:
+        return toGameState;
+
+      default:
+        throw new Exception("Unknown fading state value");
+    }
   }
 }

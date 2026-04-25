@@ -140,7 +140,8 @@ internal class StateGameType : IGameState {
       blendState: BlendState.AlphaBlend,
       samplerState: SamplerState.PointClamp,
       depthStencilState: DepthStencilState.None,
-      rasterizerState: RasterizerState.CullNone
+      rasterizerState: RasterizerState.CullNone,
+      effect: 
     );
 
     LevelManager.Draw(spriteBatch);
@@ -273,7 +274,7 @@ internal class StateGameType : IGameState {
     spriteBatch.Draw(
       texture: TextureStore.Instance.MainBlockItemAtlas,
       position: mapPosition,
-      sourceRectangle: new Rectangle(128, 448, 97, 29),  // FIX
+      sourceRectangle: new Rectangle(128, 448, 97, 29), // FIX
       color: Color.White,
       rotation: 0f,
       origin: Vector2.Zero,
@@ -281,7 +282,6 @@ internal class StateGameType : IGameState {
       effects: SpriteEffects.None,
       layerDepth: 0f
     );
-
 
     spriteBatch.End();
 

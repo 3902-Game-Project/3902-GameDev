@@ -32,6 +32,14 @@ internal class Game1 : Game {
 
   private IGameState currentState;
 
+  private IGameState GetCurrentVisibleState() {
+    if (currentState != StateTransition) {
+      return currentState;
+    } else {
+      return StateTransition.GetCurrentVisibleState();
+    }
+  }
+
   public Game1() {
     graphics = new GraphicsDeviceManager(this);
     Content.RootDirectory = "Content";
@@ -166,7 +174,7 @@ internal class Game1 : Game {
     // Then render the texture to screen
 
     Effect effect;
-    if (currentState == StateGame) {
+    if (GetCurrentVisibleState() == StateGame) {
       MiscAssetStore.Instance.Vignette.Parameters["VignetteCenter"].SetValue(new Vector2(0.5f, 0.5f));
       MiscAssetStore.Instance.Vignette.Parameters["VignetteDimensions"].SetValue(new Vector2(0.5f, 0.5f));
       MiscAssetStore.Instance.Vignette.Parameters["VignetteMaxTopLeft"].SetValue(new Vector2(0.0f, 0.1f));
