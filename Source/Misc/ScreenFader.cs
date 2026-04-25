@@ -55,7 +55,7 @@ internal class ScreenFader(SpriteBatch spriteBatch, GameWindow gameWindow) : IGP
     }
   }
 
-  public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, RenderTargetTracker renderTargetTracker) {
+  public void LowLevelDraw(GraphicsDevice graphicsDevice, RenderTargetTracker renderTargetTracker, SpriteBatch spriteBatch) {
     var fadeProgress = fadeTime / FADE_DURATION;
 
     spriteBatch.Begin();

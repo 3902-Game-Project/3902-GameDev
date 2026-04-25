@@ -166,7 +166,7 @@ internal class Game1 : Game {
     renderTargetTracker.Push(renderTarget);
     GraphicsDevice.SetRenderTarget(renderTarget);
     GraphicsDevice.Clear(Color.Black);
-    currentState.LowLevelDraw(GraphicsDevice, SpriteBatch, renderTargetTracker);
+    currentState.LowLevelDraw(GraphicsDevice, renderTargetTracker, SpriteBatch);
     renderTargetTracker.Pop();
 
     // Then render the texture to screen

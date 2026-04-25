@@ -135,7 +135,7 @@ internal class StateGameType : IGameState {
     }
   }
 
-  public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, RenderTargetTracker renderTargetTracker) {
+  public void LowLevelDraw(GraphicsDevice graphicsDevice, RenderTargetTracker renderTargetTracker, SpriteBatch spriteBatch) {
     graphicsDevice.Clear(BACKGROUND_COLOR);
 
     renderTargetTracker.Push(nonHUDTarget);
