@@ -34,7 +34,7 @@ internal class BlockFactory {
   public static IBlock CreateRockCornerBlockSprite(float x, float y) {
     return new RockCornerBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y));
   }
-  
+
   /* Doors */
   public static IBlock CreateRockHoleBlockSprite(float x, float y, string pairedLevelName, ILevelManager levelManager) {
     return new RockHoleBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y), pairedLevelName, levelManager);

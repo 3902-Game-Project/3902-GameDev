@@ -1,10 +1,10 @@
-﻿using GameProject.Factories;
+﻿using System;
+using GameProject.Factories;
 using GameProject.GameStates;
 using GameProject.Globals;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace GameProject;
 
