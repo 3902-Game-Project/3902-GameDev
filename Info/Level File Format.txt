@@ -68,9 +68,9 @@ Entry IDs:
       Y = level name
     32 = Treasure
       Note: you might also need to specify a background block for this block!
-    34 = Tellers desk
+    34 = Bank shelf
       Note: you might also need to specify a background block for this block!
-    35 = Bank shelf
+    35 = Tellers desk
       Note: you might also need to specify a background block for this block!
 
   items:
@@ -79,6 +79,17 @@ Entry IDs:
     15 = rifle
     16 = shotgun
     21 = key item
+    33:X:Y = ammo refill
+      X = type:
+        0 = light
+        1 = heavy
+        2 = shells
+      Y = amount:
+        integer from 0 to 2,147,483,647
+    36 = health item
+    37 = invincibility item
+    38 = infinite ammo item
+
 
   enemies:
     Note: you must also specify a background block for enemies!
@@ -90,7 +101,7 @@ Entry IDs:
     13 = cactus
 
   Gaps in the IDs:
-    33
+    None
 
   Biggest ID:
-    35
+    38

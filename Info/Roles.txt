@@ -25,10 +25,10 @@ JJ: sound effects, background music
 Q: item selection page (inventory system)
 
 Sprint 5:
-Q: add powerup items like alcohol; add boss room between vault 
+Q: add powerup items like alcohol; add boss room between end of game and vault
 JJ: give enemies actually reasonable AI like going toward player; enemies can also fire up/down
 Aaron: cheat codes
   At minimum more than a single character
 Santosh: shader, resizing window, slow reaction time mode
 Emmett: more weapons
-Eric: ?
+Eric: save / load, resizing window

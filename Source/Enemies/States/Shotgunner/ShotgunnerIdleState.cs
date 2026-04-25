@@ -23,6 +23,15 @@ internal class ShotgunnerIdleState : IEnemyState {
     }
 
     timer += gameTime.ElapsedGameTime.TotalSeconds;
-    if (timer > 1.0) shotgunner.CurrentState = random.Next(0, 2) == 0 ? new ShotgunnerAttackState(shotgunner) : new ShotgunnerWanderState(shotgunner);
+    if (timer > 1.0) shotgunner.CurrentState = SelectState();
+  }
+
+  private IEnemyState SelectState() {
+    float xDistanceFromTarget = Math.Abs(shotgunner.Target.X - shotgunner.Position.X);
+    float yDistanceFromTarget = Math.Abs(shotgunner.Target.Y - shotgunner.Position.Y);
+    if (xDistanceFromTarget <= 250 && yDistanceFromTarget <= 100)
+      return new ShotgunnerAttackState(shotgunner);
+    
+    return new ShotgunnerWanderState(shotgunner);
   }
 }

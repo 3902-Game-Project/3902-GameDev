@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using GameProject.Blocks;
 using GameProject.Enemies;
 using GameProject.Factories;
+using GameProject.Items;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
 using GameProject.WorldPickups;
@@ -321,7 +322,32 @@ internal partial class LevelLoader {
         collidableBlocks.Add(BlockFactory.CreateTreasureBlockSprite(xPos, yPos));
         break;
 
-      /* case 33 -- empty */
+      case "33":
+        /* ammo item */
+
+        var ammoTypeString = entrySplit[1];
+
+        var ammoType = ammoTypeString switch {
+          "0" => AmmoType.Light,
+          "1" => AmmoType.Heavy,
+          "2" => AmmoType.Shells,
+          _ => throw new FormatException($"unrecognized ammo type '{ammoTypeString}"),
+        };
+
+        var countString = entrySplit[2];
+
+        int count;
+
+        if (!int.TryParse(countString, out count)) {
+          throw new FormatException($"ammo count not int: '{countString}");
+        }
+
+        if (count < 0) {
+          throw new FormatException($"ammo count out of bounds int: '{count}");
+        }
+
+        pickups.Add(WorldPickupFactory.Instance.CreateAmmo(new Vector2(xPos, yPos), ammoType, count));
+        break;
 
       case "34":
         /* bank shelf */
