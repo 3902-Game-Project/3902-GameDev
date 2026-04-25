@@ -140,20 +140,22 @@ internal class StateGameType : IGameState {
 
     renderTargetTracker.Push(nonHUDTarget);
 
-    spriteBatch.Begin(
-      sortMode: SpriteSortMode.Deferred,
-      blendState: BlendState.AlphaBlend,
-      samplerState: SamplerState.PointClamp,
-      depthStencilState: DepthStencilState.None,
-      rasterizerState: RasterizerState.CullNone
-    );
+    try {
+      spriteBatch.Begin(
+        sortMode: SpriteSortMode.Deferred,
+        blendState: BlendState.AlphaBlend,
+        samplerState: SamplerState.PointClamp,
+        depthStencilState: DepthStencilState.None,
+        rasterizerState: RasterizerState.CullNone
+      );
 
-    LevelManager.Draw(spriteBatch);
-    Player.Draw(spriteBatch);
+      LevelManager.Draw(spriteBatch);
+      Player.Draw(spriteBatch);
 
-    spriteBatch.End();
-
-    renderTargetTracker.Pop();
+      spriteBatch.End();
+    } finally {
+      renderTargetTracker.Pop();
+    }
 
     graphicsDevice.Viewport = game.GameViewport;
 
