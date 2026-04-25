@@ -45,7 +45,7 @@ float4 MainPS(VertexShaderOutput input) : COLOR {
         0.0f :
         (
           vignetteCenterDistSq < VignetteFullDistSq ?
-          1.0f - (vignetteCenterDistSq - VignetteNoneDistSq) / (VignetteFullDistSq - VignetteNoneDistSq) :
+          (vignetteCenterDistSq - VignetteNoneDistSq) / (VignetteFullDistSq - VignetteNoneDistSq) :
           1.0f
         )
       ) :
