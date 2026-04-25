@@ -12,7 +12,7 @@ internal class CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : ABaseBlock(xy
   private Vector2 direction;
   public CrateBlockState State { get; set; } = CrateBlockState.Still;
 
-  public override void Update(GameTime gameTime) {
+  public override void Update(double deltaTime) {
     if (State == CrateBlockState.Moving) {
       Position += velocity * direction;
       UpdateCollider();

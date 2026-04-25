@@ -122,16 +122,16 @@ internal class StateGameType : IGameState {
     LevelManager.LoadContent(contentManager);
   }
 
-  public void Update(GameTime gameTime) {
-    keyboardController.Update(gameTime);
-    mouseController.Update(gameTime);
-    gamePadController.Update(gameTime);
+  public void Update(double deltaTime) {
+    keyboardController.Update();
+    mouseController.Update();
+    gamePadController.Update();
 
     CheatCodes.Instance.UpdateCheats(Player);
 
     if (!Flags.HaltAllUpdates) {
-      Player.Update(gameTime);
-      LevelManager.Update(gameTime);
+      Player.Update(deltaTime);
+      LevelManager.Update(deltaTime);
     }
   }
 

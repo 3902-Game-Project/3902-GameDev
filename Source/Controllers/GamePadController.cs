@@ -20,7 +20,7 @@ internal class GamePadController(
   private readonly Dictionary<Buttons, IGPCommand> downMappings = downMappings ?? [];
   private readonly Dictionary<Buttons, IGPCommand> releasedMappings = releasedMappings ?? [];
 
-  public void Update(GameTime gameTime) {
+  public void Update() {
     GamePadState gamePadState = GamePad.GetState(PLAYER_INDEX);
 
     gamePadTracker.Update(gamePadState);

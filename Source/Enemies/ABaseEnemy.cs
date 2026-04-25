@@ -26,7 +26,7 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
   public Layer Mask { get; } = Layer.Player;
   public int Health { get; set; } = 100;
   public int MaxHealth { get; set; } = 100;
-  public float DamageFlashTimer { get; protected set; }
+  public double DamageFlashTimer { get; protected set; }
   protected const float DamageFlashDuration = 0.15f;
   protected virtual void DropLoot() { }
   protected virtual void TransitionToDeathState() { }
@@ -67,12 +67,12 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
     spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, DrawScale, effect, 0f);
   }
 
-  public virtual void Update(GameTime gameTime) {
+  public virtual void Update(double deltaTime) {
     if (DamageFlashTimer > 0) {
-      DamageFlashTimer -= (float) gameTime.ElapsedGameTime.TotalSeconds;
+      DamageFlashTimer -= deltaTime;
     }
     UpdateCollider();
-    CurrentState?.Update(gameTime);
+    CurrentState?.Update(deltaTime);
     if (Position.X < 0) {
       Position = new Vector2(0, Position.Y);
     }
