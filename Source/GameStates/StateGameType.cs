@@ -151,6 +151,8 @@ internal class StateGameType : IGameState {
     LevelManager.Draw(spriteBatch);
     Player.Draw(spriteBatch);
 
+    spriteBatch.End();
+
     renderTargetTracker.Pop();
 
     graphicsDevice.Viewport = game.GameViewport;

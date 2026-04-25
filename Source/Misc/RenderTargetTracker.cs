@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Misc;
 
 internal class RenderTargetTracker(GraphicsDevice graphicsDevice) {
-  private Stack<RenderTarget2D> renderTargets;
+  private readonly Stack<RenderTarget2D> renderTargets = new();
 
   public void Push(RenderTarget2D renderTarget) {
     graphicsDevice.SetRenderTarget(renderTarget);

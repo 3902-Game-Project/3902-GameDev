@@ -35,7 +35,6 @@ internal class Game1 : Game {
 
   public Game1() {
     graphics = new GraphicsDeviceManager(this);
-    renderTargetTracker = new(GraphicsDevice);
     IsMouseVisible = true;
 
     Content.RootDirectory = "Content";
@@ -70,6 +69,8 @@ internal class Game1 : Game {
     graphics.PreferredBackBufferHeight = GAME_HEIGHT + HUD_HEIGHT;
     graphics.PreferredBackBufferWidth = GAME_WIDTH;
     graphics.ApplyChanges();
+
+    renderTargetTracker = new(GraphicsDevice);
 
     Window.AllowUserResizing = true;
     Window.ClientSizeChanged += OnResize;
