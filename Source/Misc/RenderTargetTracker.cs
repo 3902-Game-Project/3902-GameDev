@@ -1,12 +1,18 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Misc;
 
 internal class RenderTargetTracker(GraphicsDevice graphicsDevice) {
-  public RenderTarget2D RenderTarget { get; private set; }
+  private Stack<RenderTarget2D> renderTargets;
 
-  void SetRenderTarget(RenderTarget2D renderTarget) {
+  public void Push(RenderTarget2D renderTarget) {
     graphicsDevice.SetRenderTarget(renderTarget);
-    RenderTarget = renderTarget;
+    renderTargets.Push(renderTarget);
+  }
+
+  public void Pop() {
+    renderTargets.Pop();
+    graphicsDevice.SetRenderTarget(renderTargets.Count > 0 ? renderTargets.Peek() : null);
   }
 }

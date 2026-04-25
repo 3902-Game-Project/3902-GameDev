@@ -20,7 +20,7 @@ internal class Game1 : Game {
   public Viewport HudViewport { get; private set; }
   public Viewport GameViewport { get; private set; }
   private RenderTarget2D renderTarget;
-  public RenderTargetTracker RenderTargetTracker { get; private set; }
+  public RenderTargetTracker renderTargetTracker;
   private Rectangle renderScaleRectangle;
 
   private StateTransitionType StateTransition;
