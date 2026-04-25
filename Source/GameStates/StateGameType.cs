@@ -6,6 +6,7 @@ using GameProject.Factories;
 using GameProject.Globals;
 using GameProject.Items;
 using GameProject.Managers;
+using GameProject.Misc;
 using GameProject.PlayerSpace;
 using GameProject.Source.Misc;
 using Microsoft.Xna.Framework;
@@ -133,6 +134,12 @@ internal class StateGameType : IGameState {
   public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
     graphicsDevice.Clear(BACKGROUND_COLOR);
 
+    RenderTargetTracker.Push(renderTarget);
+
+
+
+    RenderTargetTracker.Pop(renderTarget);
+
     graphicsDevice.Viewport = game.GameViewport;
 
     spriteBatch.Begin(
@@ -140,14 +147,21 @@ internal class StateGameType : IGameState {
       blendState: BlendState.AlphaBlend,
       samplerState: SamplerState.PointClamp,
       depthStencilState: DepthStencilState.None,
-      rasterizerState: RasterizerState.CullNone,
-      effect: 
+      rasterizerState: RasterizerState.CullNone
     );
 
     LevelManager.Draw(spriteBatch);
     Player.Draw(spriteBatch);
 
     spriteBatch.End();
+
+    MiscAssetStore.Instance.Vignette.Parameters["VignetteCenter"].SetValue(new Vector2(0.5f, 0.5f));
+    MiscAssetStore.Instance.Vignette.Parameters["VignetteDimensions"].SetValue(new Vector2(0.5f, 0.5f));
+    MiscAssetStore.Instance.Vignette.Parameters["VignetteMaxTopLeft"].SetValue(new Vector2(0.0f, 0.1f));
+    MiscAssetStore.Instance.Vignette.Parameters["VignetteMaxBottomRight"].SetValue(new Vector2(1.0f, 1.0f));
+    MiscAssetStore.Instance.Vignette.Parameters["VignetteNoneDistSq"].SetValue(0.8f);
+    MiscAssetStore.Instance.Vignette.Parameters["VignetteFullDistSq"].SetValue(1.0f);
+    MiscAssetStore.Instance.Vignette.Parameters["VignetteColor"].SetValue(new Vector4(0.5f, 0.5f, 0.5f, 1.0f));
 
     graphicsDevice.Viewport = game.HudViewport;
 

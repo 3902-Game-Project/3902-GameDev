@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using GameProject.Factories;
 using GameProject.GameStates;
 using GameProject.Globals;
 using GameProject.Managers;
+using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -20,6 +20,7 @@ internal class Game1 : Game {
   public Viewport HudViewport { get; private set; }
   public Viewport GameViewport { get; private set; }
   private RenderTarget2D renderTarget;
+  public RenderTargetTracker RenderTargetTracker { get; private set; }
   private Rectangle renderScaleRectangle;
 
   private StateTransitionType StateTransition;
@@ -32,18 +33,12 @@ internal class Game1 : Game {
 
   private IGameState currentState;
 
-  private IGameState GetCurrentVisibleState() {
-    if (currentState != StateTransition) {
-      return currentState;
-    } else {
-      return StateTransition.GetCurrentVisibleState();
-    }
-  }
-
   public Game1() {
     graphics = new GraphicsDeviceManager(this);
-    Content.RootDirectory = "Content";
+    RenderTargetTracker = new(GraphicsDevice);
     IsMouseVisible = true;
+
+    Content.RootDirectory = "Content";
   }
 
   public void ChangeState(IGameState newState) {
@@ -167,35 +162,21 @@ internal class Game1 : Game {
   protected override void Draw(GameTime gameTime) {
     // Render everything that should be on screen to a texture
 
+    RenderTargetTracker.Push(renderTarget);
     GraphicsDevice.SetRenderTarget(renderTarget);
     GraphicsDevice.Clear(Color.Black);
     currentState.LowLevelDraw(GraphicsDevice, SpriteBatch);
+    RenderTargetTracker.Pop();
 
     // Then render the texture to screen
 
-    Effect effect;
-    if (GetCurrentVisibleState() == StateGame) {
-      MiscAssetStore.Instance.Vignette.Parameters["VignetteCenter"].SetValue(new Vector2(0.5f, 0.5f));
-      MiscAssetStore.Instance.Vignette.Parameters["VignetteDimensions"].SetValue(new Vector2(0.5f, 0.5f));
-      MiscAssetStore.Instance.Vignette.Parameters["VignetteMaxTopLeft"].SetValue(new Vector2(0.0f, 0.1f));
-      MiscAssetStore.Instance.Vignette.Parameters["VignetteMaxBottomRight"].SetValue(new Vector2(1.0f, 1.0f));
-      MiscAssetStore.Instance.Vignette.Parameters["VignetteNoneDistSq"].SetValue(0.8f);
-      MiscAssetStore.Instance.Vignette.Parameters["VignetteFullDistSq"].SetValue(1.0f);
-      MiscAssetStore.Instance.Vignette.Parameters["VignetteColor"].SetValue(new Vector4(0.5f, 0.5f, 0.5f, 1.0f));
-      effect = MiscAssetStore.Instance.Vignette;
-    } else {
-      effect = null;
-    }
-
-    GraphicsDevice.SetRenderTarget(null);
     GraphicsDevice.Clear(Color.Black);
     SpriteBatch.Begin(
       sortMode: SpriteSortMode.Deferred,
       blendState: BlendState.Opaque,
       samplerState: SamplerState.PointClamp,
       depthStencilState: DepthStencilState.None,
-      rasterizerState: RasterizerState.CullNone,
-      effect: effect
+      rasterizerState: RasterizerState.CullNone
     );
     SpriteBatch.Draw(renderTarget, renderScaleRectangle, Color.White);
     SpriteBatch.End();
