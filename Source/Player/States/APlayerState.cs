@@ -1,6 +1,5 @@
 ﻿using GameProject.Controllers;
 using GameProject.Managers;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;

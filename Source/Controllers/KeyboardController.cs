@@ -2,7 +2,6 @@
 using GameProject.ButtonDiffTrackers;
 using GameProject.Commands;
 using GameProject.Source.Misc;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Controllers;

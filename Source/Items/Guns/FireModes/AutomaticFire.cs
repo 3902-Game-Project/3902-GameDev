@@ -1,7 +1,6 @@
 using GameProject.Controllers;
 using GameProject.Items;
 using GameProject.Managers;
-using Microsoft.Xna.Framework;
 
 namespace GameProject.FireModes;
 

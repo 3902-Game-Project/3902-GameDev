@@ -21,7 +21,7 @@ internal class VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, VaultDo
     VaultDoorBlockState.Open => sourceRects.Count - 1,
     _ => 0,
   };
-  
+
   private double animationTimer = 0.0f;
 
   private readonly double timePerFrame = 0.1;

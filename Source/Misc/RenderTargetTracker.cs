@@ -46,7 +46,7 @@ internal class RenderTargetTracker(GraphicsDevice graphicsDevice) {
       GC.SuppressFinalize(this);
     }
   }
-  
+
   private readonly Stack<RenderTarget2D> renderTargets = new();
 
   public IDisposable TempSetTarget(RenderTarget2D renderTarget) {

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using GameProject.Globals;
 using GameProject.Level;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
