@@ -8,4 +8,4 @@ internal enum UseType {
   Released,
 }
 
-internal interface IController : IGPUpdatable { }
+internal interface IController : IInstantaneousUpdatable { }

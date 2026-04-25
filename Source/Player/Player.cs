@@ -21,7 +21,7 @@ internal enum FacingDirection {
   Down,
 }
 
-internal class Player : IGPUpdatable, IGPDrawable, ICollidable {
+internal class Player : IInstantaneousUpdatable, IGPDrawable, ICollidable {
   private static readonly float PLAYER_WIDTH = 171.0f * 0.15f;
   private static readonly float PLAYER_HEIGHT = 323.0f * 0.15f;
 

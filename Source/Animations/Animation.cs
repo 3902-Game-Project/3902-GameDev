@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Animations;
 
-internal class Animation(List<Rectangle> frames, int fps) : IGPUpdatable {
+internal class Animation(List<Rectangle> frames, int fps) : IInstantaneousUpdatable {
   private readonly float frameDuration = 1f / fps;
   private int currentFrame = 0;
   private float timer = 0f;

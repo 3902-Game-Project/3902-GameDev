@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Level;
 
-internal interface ILevel : IInitable, IGPUpdatable, IGPDrawable {
+internal interface ILevel : IInitable, IInstantaneousUpdatable, IGPDrawable {
   List<IWorldPickup> Pickups { get; }
   public ProjectileManager ProjectileManager { get; }
 

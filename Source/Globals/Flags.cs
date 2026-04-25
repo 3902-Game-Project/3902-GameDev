@@ -5,4 +5,5 @@ internal static class Flags {
   public static bool EnableVignette { get; } = true;
 
   public static bool HaltAllUpdates { get; set; } = false;
+  public static bool SlowMode { get; set; } = false;
 }

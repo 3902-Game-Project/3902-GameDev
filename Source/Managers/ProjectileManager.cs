@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Managers;
 
-internal class ProjectileManager : IGPUpdatable, IGPDrawable {
+internal class ProjectileManager : IInstantaneousUpdatable, IGPDrawable {
   private readonly List<IProjectile> projectiles;
   public List<IProjectile> Projectiles => projectiles;
 

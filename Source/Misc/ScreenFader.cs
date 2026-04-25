@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Misc;
 
-internal class ScreenFader(SpriteBatch spriteBatch, GameWindow gameWindow) : IGPUpdatable, ILowLevelDrawable {
+internal class ScreenFader(SpriteBatch spriteBatch, GameWindow gameWindow) : IInstantaneousUpdatable, ILowLevelDrawable {
   internal enum FadingState {
     FadeIn,
     FadeOut,

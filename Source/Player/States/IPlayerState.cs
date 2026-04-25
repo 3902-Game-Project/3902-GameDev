@@ -3,7 +3,7 @@ using GameProject.GlobalInterfaces;
 
 namespace GameProject.PlayerSpace.States;
 
-internal interface IPlayerState : IGPUpdatable, IGPDrawable {
+internal interface IPlayerState : IInstantaneousUpdatable, IGPDrawable {
   void MoveUp();
   void MoveDown();
   void MoveLeft();
