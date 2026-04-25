@@ -21,7 +21,7 @@ internal class StateMenuType(Game1 game) : IGameState {
       pressedMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.Q, new QuitCommand(game) },
         { Keys.Enter, new StartGameCommand(game) },
-        { Keys.S, new ToggleSlowModeCommand(game) },
+        { Keys.S, new ToggleSlowModeCommand() },
       }
     );
 
@@ -32,7 +32,7 @@ internal class StateMenuType(Game1 game) : IGameState {
       pressedMappings: new Dictionary<Buttons, IGPCommand> {
         { Buttons.X, new QuitCommand(game) },
         { Buttons.A, new StartGameCommand(game) },
-        { Buttons.Y, new ToggleSlowModeCommand(game) },
+        { Buttons.Y, new ToggleSlowModeCommand() },
       }
     );
   }
