@@ -159,7 +159,7 @@ internal class StateGameType : IGameState {
 
     MiscAssetStore.Instance.Vignette.Parameters["VignetteCenter"].SetValue(new Vector2(0.5f, 0.5f));
     MiscAssetStore.Instance.Vignette.Parameters["VignetteDimensions"].SetValue(new Vector2(0.5f, 0.5f));
-    MiscAssetStore.Instance.Vignette.Parameters["VignetteMaxTopLeft"].SetValue(new Vector2(0.0f, 0.1f));
+    MiscAssetStore.Instance.Vignette.Parameters["VignetteMaxTopLeft"].SetValue(new Vector2(0.0f, 0.0f));
     MiscAssetStore.Instance.Vignette.Parameters["VignetteMaxBottomRight"].SetValue(new Vector2(1.0f, 1.0f));
     MiscAssetStore.Instance.Vignette.Parameters["VignetteNoneDistSq"].SetValue(0.8f);
     MiscAssetStore.Instance.Vignette.Parameters["VignetteFullDistSq"].SetValue(1.0f);
