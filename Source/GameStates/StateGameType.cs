@@ -123,6 +123,10 @@ internal class StateGameType : IGameState {
   }
 
   public void Update(double deltaTime) {
+    if (Flags.SlowMode) {
+      deltaTime *= 0.5;
+    }
+
     keyboardController.Update();
     mouseController.Update();
     gamePadController.Update();
