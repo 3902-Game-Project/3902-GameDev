@@ -143,9 +143,9 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     blankTexture.SetData([Color.White]);
   }
 
-  public void Update(GameTime gameTime) {
-    keyboardController.Update(gameTime);
-    gamePadController.Update(gameTime);
+  public void Update(double deltaTime) {
+    keyboardController.Update();
+    gamePadController.Update();
   }
 
   public void LowLevelDraw(GraphicsDevice graphicsDevice, RenderTargetTracker renderTargetTracker, SpriteBatch spriteBatch) {

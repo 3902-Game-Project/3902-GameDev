@@ -30,17 +30,18 @@ internal class PlayerDeadState(Player player, Action onLoss) : APlayerState(play
   public override void TakeDamage(int amount) { }
   public override void Die() { }
 
-  public override void Update(GameTime gameTime) {
+  public override void Update(double deltaTime) {
     Player.Velocity = Vector2.Zero;
 
     if (currentFrame < deathFrames.Count - 1) {
-      animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
+      animationTimer += deltaTime;
       if (animationTimer > frameInterval) {
         currentFrame++;
-        animationTimer = 0;
+        animationTimer -= frameInterval;
       }
     }
-    deadTimer.Update(gameTime);
+
+    deadTimer.Update(deltaTime);
     if (deadTimer.Time >= LOSS_SCREEN_TIME) {
       onLoss?.Invoke();
     }

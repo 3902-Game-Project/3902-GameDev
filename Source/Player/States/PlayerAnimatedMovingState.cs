@@ -75,19 +75,20 @@ internal class PlayerAnimatedMovingState(Player player) : APlayerState(player) {
     }
   }
 
-  public override void Update(GameTime gameTime) {
+  public override void Update(double deltaTime) {
     if (Player.Velocity == Vector2.Zero) {
       Player.State = Player.StaticState;
       currentFrame = 0;
       return;
     }
-    timer += gameTime.ElapsedGameTime.TotalSeconds;
+
+    timer += deltaTime;
     if (timer > frameInterval) {
       currentFrame++;
       if (currentFrame >= 2) {
         currentFrame = 0;
       }
-      timer = 0;
+      timer -= frameInterval;
     }
   }
 

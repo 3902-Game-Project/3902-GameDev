@@ -19,7 +19,7 @@ internal class KeyboardController(
   private readonly Dictionary<Keys, IGPCommand> downMappings = downMappings ?? [];
   private readonly Dictionary<Keys, IGPCommand> releasedMappings = releasedMappings ?? [];
 
-  public void Update(GameTime gameTime) {
+  public void Update() {
     KeyboardState keyboardState = Keyboard.GetState();
 
     keyTracker.Update(keyboardState);

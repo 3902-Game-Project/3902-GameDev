@@ -32,6 +32,6 @@ internal abstract class APlayerState(Player player) : IPlayerState {
     Player.State = Player.DeadState;
   }
 
-  public abstract void Update(GameTime gameTime);
+  public abstract void Update(double deltaTime);
   public abstract void Draw(SpriteBatch spriteBatch);
 }

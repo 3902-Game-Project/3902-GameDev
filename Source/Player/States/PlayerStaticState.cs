@@ -33,7 +33,7 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
     Player.Direction = FacingDirection.Right;
   }
 
-  public override void Update(GameTime gameTime) {
+  public override void Update(double deltaTime) {
     // If we start moving, switch state
     if (Player.Velocity != Vector2.Zero) {
       Player.State = Player.MovingState;

@@ -21,18 +21,19 @@ internal class VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, VaultDo
     VaultDoorBlockState.Open => sourceRects.Count - 1,
     _ => 0,
   };
-  private double animationTimer;
+  
+  private double animationTimer = 0.0f;
+
   private readonly double timePerFrame = 0.1;
   public string PairedLevelName { get; private set; } = pairedLevelName;
   public VaultDoorBlockState State { get; private set; } = state;
 
-  public override void Update(GameTime gameTime) {
+  public override void Update(double deltaTime) {
     if (State == VaultDoorBlockState.Opening) {
-      float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
-      animationTimer += dt;
+      animationTimer += deltaTime;
       if (animationTimer >= timePerFrame) {
         currentFrame++;
-        animationTimer = 0;
+        animationTimer -= timePerFrame;
       }
       if (currentFrame >= sourceRects.Count) {
         State = VaultDoorBlockState.Open;

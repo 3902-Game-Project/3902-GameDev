@@ -53,7 +53,7 @@ internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManage
     );
   }
 
-  public void Update(GameTime gameTime) { }
+  public void Update(double deltaTime) { }
 
   public void Use(UseType useType) {
     foreach (var block in levelManager.CurrentLevel.GetOpenableDoors()) {

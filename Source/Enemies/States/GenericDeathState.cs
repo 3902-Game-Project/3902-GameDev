@@ -7,8 +7,8 @@ internal class GenericDeathState : IEnemyState {
   private readonly ABaseEnemy enemy;
   private readonly double timePerFrame;
   private readonly double timeToHoldLastFrame;
-  private double animationTimer;
-  private double deadHoldTimer;
+  private double animationTimer = 0.0;
+  private double deadHoldTimer = 0.0;
   private bool isAnimationFinished = false;
 
   public GenericDeathState(ABaseEnemy enemy, List<Rectangle> frames, double timePerFrame = 0.15, double holdTime = 1.5) {
@@ -21,11 +21,9 @@ internal class GenericDeathState : IEnemyState {
     this.enemy.CurrentFrame = 0;
   }
 
-  public void Update(GameTime gameTime) {
-    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
-
+  public void Update(double deltaTime) {
     if (!isAnimationFinished) {
-      animationTimer += dt;
+      animationTimer += deltaTime;
       if (animationTimer >= timePerFrame) {
         if (enemy.CurrentFrame < enemy.CurrentSourceRectangles.Count - 1) {
           enemy.CurrentFrame++;
@@ -35,7 +33,7 @@ internal class GenericDeathState : IEnemyState {
         }
       }
     } else {
-      deadHoldTimer += dt;
+      deadHoldTimer += deltaTime;
       if (deadHoldTimer >= timeToHoldLastFrame) {
         enemy.CurrentSourceRectangles.Clear();
       }

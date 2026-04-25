@@ -1,3 +1,3 @@
 namespace GameProject.GlobalInterfaces;
 
-internal interface ISprite : IGPUpdatable, IGPDrawable { }
+internal interface ISprite : ITemporalUpdatable, IGPDrawable { }

@@ -31,7 +31,7 @@ internal class RockCornerBlock : ABaseBlock {
     Position = new(x, y);
   }
 
-  public override void Update(GameTime gameTime) { }
+  public override void Update(double deltaTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(rockCornerTexture, Position, sourceRect, Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);

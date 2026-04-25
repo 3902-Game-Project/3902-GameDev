@@ -18,7 +18,7 @@ internal class MouseController(
   private readonly Dictionary<MouseButtons, IGPCommand> downMappings = downMappings ?? [];
   private readonly Dictionary<MouseButtons, IGPCommand> releasedMappings = releasedMappings ?? [];
 
-  public void Update(GameTime gameTime) {
+  public void Update() {
     MouseState mouseState = Mouse.GetState();
 
     mouseTracker.Update(mouseState);

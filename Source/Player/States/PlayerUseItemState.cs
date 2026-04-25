@@ -19,7 +19,7 @@ internal class PlayerUseItemState(Player player) : APlayerState(player) {
   public override void UseItem(UseType useType) { }
   public override void UseKey(UseType useType) { }
 
-  public override void Update(GameTime gameTime) {
+  public override void Update(double deltaTime) {
     timer--;
     if (timer <= 0) {
       timer = 20;

@@ -4,7 +4,7 @@ namespace GameProject.Enemies.SnakeStates;
 
 internal class SnakeAttackState : IEnemyState {
   private readonly Snake snake;
-  private double timer, animationTimer;
+  private double timer = 0.0, animationTimer = 0.0;
 
   public SnakeAttackState(Snake snake) {
     this.snake = snake;
@@ -25,17 +25,16 @@ internal class SnakeAttackState : IEnemyState {
     this.snake.CurrentFrame = 0;
   }
 
-  public void Update(GameTime gameTime) {
-    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
-    timer += dt;
-    animationTimer += dt;
+  public void Update(double deltaTime) {
+    timer += deltaTime;
+    animationTimer += deltaTime;
 
     if (animationTimer >= 0.05) {
       snake.CurrentFrame = (snake.CurrentFrame + 1) % snake.CurrentSourceRectangles.Count;
       animationTimer = 0;
     }
 
-    snake.Position += snake.Velocity * dt;
+    snake.Position += snake.Velocity * ((float) deltaTime);
     if (timer > 0.5) snake.CurrentState = new SnakeIdleState(snake);
   }
 }

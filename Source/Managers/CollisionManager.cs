@@ -15,7 +15,7 @@ internal enum CollisionAxis {
   Y,
 }
 
-internal class CollisionManager : IGPUpdatable {
+internal class CollisionManager : IInstantaneousUpdatable {
   private readonly List<ICollidable> colliders;
   private Texture2D debugTexture;
 
@@ -51,7 +51,7 @@ internal class CollisionManager : IGPUpdatable {
     }
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update() {
     for (int i = 0; i < colliders.Count - 1; i++) {
       ICollidable c1 = colliders[i];
       for (int j = i + 1; j < colliders.Count; j++) {

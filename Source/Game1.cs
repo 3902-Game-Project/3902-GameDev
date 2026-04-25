@@ -155,7 +155,7 @@ internal class Game1 : Game {
   }
 
   protected override void Update(GameTime gameTime) {
-    currentState.Update(gameTime);
+    currentState.Update(gameTime.ElapsedGameTime.TotalSeconds);
 
     base.Update(gameTime);
   }

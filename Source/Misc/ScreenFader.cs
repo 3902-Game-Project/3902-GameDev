@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Misc;
 
-internal class ScreenFader(SpriteBatch spriteBatch, GameWindow gameWindow) : IGPUpdatable, ILowLevelDrawable {
+internal class ScreenFader(SpriteBatch spriteBatch, GameWindow gameWindow) : ITemporalUpdatable, ILowLevelDrawable {
   internal enum FadingState {
     FadeIn,
     FadeOut,
@@ -27,10 +27,10 @@ internal class ScreenFader(SpriteBatch spriteBatch, GameWindow gameWindow) : IGP
 
   public FadingState FadeState { get; private set; } = FadingState.FadedIn;
 
-  public void Update(GameTime gameTime) {
+  public void Update(double deltaTime) {
     switch (FadeState) {
       case FadingState.FadeIn:
-        fadeTime += gameTime.ElapsedGameTime.TotalSeconds;
+        fadeTime += deltaTime;
 
         if (fadeTime > FADE_DURATION) {
           FadeState = FadingState.FadedIn;
@@ -38,7 +38,7 @@ internal class ScreenFader(SpriteBatch spriteBatch, GameWindow gameWindow) : IGP
         break;
 
       case FadingState.FadeOut:
-        fadeTime += gameTime.ElapsedGameTime.TotalSeconds;
+        fadeTime += deltaTime;
 
         if (fadeTime > FADE_DURATION) {
           FadeState = FadingState.FadedOut;

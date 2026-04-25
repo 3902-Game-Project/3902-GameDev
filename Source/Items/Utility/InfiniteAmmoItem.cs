@@ -47,7 +47,7 @@ internal class InfiniteAmmoItem(Texture2D texture, Vector2 startPosition, Player
     );
   }
 
-  public void Update(GameTime gameTime) { }
+  public void Update(double deltaTime) { }
 
   public void OnPickup(Player pickupPlayer) {
     if (!IsCollected) {

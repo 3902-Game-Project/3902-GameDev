@@ -14,10 +14,8 @@ internal class ItemWorldPickup(IItem item, Vector2 dropVelocity = default) : ABa
     item.Draw(spriteBatch);
   }
 
-  public override void Update(GameTime gameTime) {
-    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
-
-    Position += Velocity * dt;
+  public override void Update(double deltaTime) {
+    Position += Velocity * ((float) deltaTime);
     item.Position = Position;
 
     if (Shape is CircleCollider circle) {

@@ -10,15 +10,14 @@ internal class FireBlock(Texture2D FireTexture, Vector2 xyPos) : ABaseBlock(xyPo
       new(448, 64, 64, 64)
     ];
   private int currentFrame = 0;
-  private double animationTimer;
+  private double animationTimer = 0.0f;
   private readonly double timePerFrame = 0.15;
 
-  public override void Update(GameTime gameTime) {
-    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
-    animationTimer += dt;
+  public override void Update(double deltaTime) {
+    animationTimer += deltaTime;
     if (animationTimer >= timePerFrame) {
       currentFrame = 1 - currentFrame;
-      animationTimer = 0;
+      animationTimer -= timePerFrame;
     }
   }
 

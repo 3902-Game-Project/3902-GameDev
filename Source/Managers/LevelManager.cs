@@ -108,8 +108,8 @@ internal class LevelManager(Game1 game) : ILevelManager {
     game.StateGame.Player.Position = CurrentLevel.GetDefaultPlayerPosition();
   }
 
-  public void Update(GameTime gameTime) {
-    CurrentLevel.Update(gameTime);
+  public void Update(double deltaTime) {
+    CurrentLevel.Update(deltaTime);
   }
 
   public void Draw(SpriteBatch spriteBatch) {
