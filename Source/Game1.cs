@@ -163,14 +163,10 @@ internal class Game1 : Game {
   protected override void Draw(GameTime gameTime) {
     // Render everything that should be on screen to a texture
 
-    renderTargetTracker.Push(renderTarget);
-
-    try {
+    using (renderTargetTracker.TempSetTarget(renderTarget)) {
       GraphicsDevice.SetRenderTarget(renderTarget);
       GraphicsDevice.Clear(Color.Black);
       currentState.LowLevelDraw(GraphicsDevice, renderTargetTracker, SpriteBatch);
-    } finally {
-      renderTargetTracker.Pop();
     }
 
     // Then render the texture to screen

@@ -138,9 +138,7 @@ internal class StateGameType : IGameState {
   public void LowLevelDraw(GraphicsDevice graphicsDevice, RenderTargetTracker renderTargetTracker, SpriteBatch spriteBatch) {
     graphicsDevice.Clear(BACKGROUND_COLOR);
 
-    renderTargetTracker.Push(nonHUDTarget);
-
-    try {
+    using (renderTargetTracker.TempSetTarget(nonHUDTarget)) {
       spriteBatch.Begin(
         sortMode: SpriteSortMode.Deferred,
         blendState: BlendState.AlphaBlend,
@@ -153,8 +151,6 @@ internal class StateGameType : IGameState {
       Player.Draw(spriteBatch);
 
       spriteBatch.End();
-    } finally {
-      renderTargetTracker.Pop();
     }
 
     graphicsDevice.Viewport = game.GameViewport;
