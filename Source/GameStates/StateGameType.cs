@@ -18,6 +18,7 @@ namespace GameProject.GameStates;
 
 internal class StateGameType : IGameState {
   private static Color BACKGROUND_COLOR = new(20, 20, 120);
+  private static Rectangle NON_HUD_RECTANGLE = new(0, 0, Game1.GAME_WIDTH, Game1.GAME_HEIGHT);
 
   private readonly Game1 game;
 
@@ -25,6 +26,7 @@ internal class StateGameType : IGameState {
   private IController mouseController;
   private IController gamePadController;
   private Texture2D ammoTexture;
+  private RenderTarget2D nonHUDTarget;
 
   public Player Player { get; private set; }
 
@@ -109,6 +111,8 @@ internal class StateGameType : IGameState {
   }
 
   public void LoadContent(ContentManager contentManager) {
+    nonHUDTarget = new RenderTarget2D(game.GraphicsDevice, Game1.GAME_WIDTH, Game1.GAME_HEIGHT);
+
     Player.Inventory.PickupItem(ItemFactory.Instance.CreateRevolver(0f, 0f, game.StateGame.Player, game.StateGame.LevelManager));
     Player.Inventory.PickupItem(ItemFactory.Instance.CreateRifle(0f, 0f, game.StateGame.Player, game.StateGame.LevelManager));
     CheatCodes.Instance.LevelManager = LevelManager;
@@ -131,16 +135,10 @@ internal class StateGameType : IGameState {
     }
   }
 
-  public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
+  public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, RenderTargetTracker renderTargetTracker) {
     graphicsDevice.Clear(BACKGROUND_COLOR);
 
-    RenderTargetTracker.Push(renderTarget);
-
-
-
-    RenderTargetTracker.Pop(renderTarget);
-
-    graphicsDevice.Viewport = game.GameViewport;
+    renderTargetTracker.Push(nonHUDTarget);
 
     spriteBatch.Begin(
       sortMode: SpriteSortMode.Deferred,
@@ -153,7 +151,9 @@ internal class StateGameType : IGameState {
     LevelManager.Draw(spriteBatch);
     Player.Draw(spriteBatch);
 
-    spriteBatch.End();
+    renderTargetTracker.Pop();
+
+    graphicsDevice.Viewport = game.GameViewport;
 
     MiscAssetStore.Instance.Vignette.Parameters["VignetteCenter"].SetValue(new Vector2(0.5f, 0.5f));
     MiscAssetStore.Instance.Vignette.Parameters["VignetteDimensions"].SetValue(new Vector2(0.5f, 0.5f));
@@ -162,6 +162,19 @@ internal class StateGameType : IGameState {
     MiscAssetStore.Instance.Vignette.Parameters["VignetteNoneDistSq"].SetValue(0.8f);
     MiscAssetStore.Instance.Vignette.Parameters["VignetteFullDistSq"].SetValue(1.0f);
     MiscAssetStore.Instance.Vignette.Parameters["VignetteColor"].SetValue(new Vector4(0.5f, 0.5f, 0.5f, 1.0f));
+
+    spriteBatch.Begin(
+      sortMode: SpriteSortMode.Deferred,
+      blendState: BlendState.AlphaBlend,
+      samplerState: SamplerState.PointClamp,
+      depthStencilState: DepthStencilState.None,
+      rasterizerState: RasterizerState.CullNone,
+      effect: MiscAssetStore.Instance.Vignette
+    );
+
+    spriteBatch.Draw(nonHUDTarget, NON_HUD_RECTANGLE, Color.White);
+
+    spriteBatch.End();
 
     graphicsDevice.Viewport = game.HudViewport;
 

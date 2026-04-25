@@ -20,7 +20,7 @@ internal class Game1 : Game {
   public Viewport HudViewport { get; private set; }
   public Viewport GameViewport { get; private set; }
   private RenderTarget2D renderTarget;
-  public RenderTargetTracker renderTargetTracker;
+  private RenderTargetTracker renderTargetTracker;
   private Rectangle renderScaleRectangle;
 
   private StateTransitionType StateTransition;
@@ -35,7 +35,7 @@ internal class Game1 : Game {
 
   public Game1() {
     graphics = new GraphicsDeviceManager(this);
-    RenderTargetTracker = new(GraphicsDevice);
+    renderTargetTracker = new(GraphicsDevice);
     IsMouseVisible = true;
 
     Content.RootDirectory = "Content";
@@ -162,11 +162,11 @@ internal class Game1 : Game {
   protected override void Draw(GameTime gameTime) {
     // Render everything that should be on screen to a texture
 
-    RenderTargetTracker.Push(renderTarget);
+    renderTargetTracker.Push(renderTarget);
     GraphicsDevice.SetRenderTarget(renderTarget);
     GraphicsDevice.Clear(Color.Black);
-    currentState.LowLevelDraw(GraphicsDevice, SpriteBatch);
-    RenderTargetTracker.Pop();
+    currentState.LowLevelDraw(GraphicsDevice, SpriteBatch, renderTargetTracker);
+    renderTargetTracker.Pop();
 
     // Then render the texture to screen
 

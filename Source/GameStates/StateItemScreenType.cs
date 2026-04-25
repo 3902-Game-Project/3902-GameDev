@@ -23,36 +23,36 @@ internal class StateItemScreenType(Game1 game) : IGameState {
 
   public void Initialize() {
     keyboardController = new KeyboardController(
-        pressedMappings: new Dictionary<Keys, IGPCommand> {
-                { Keys.Q, new QuitCommand(game) },
-                { Keys.I, new ReturnToGameNoFadeCommand(game) },
+      pressedMappings: new Dictionary<Keys, IGPCommand> {
+        { Keys.Q, new QuitCommand(game) },
+        { Keys.I, new ReturnToGameNoFadeCommand(game) },
                 
-                // Navigation bindings
-                { Keys.W, new MenuMoveUpCommand(this) },
-                { Keys.Up, new MenuMoveUpCommand(this) },
-                { Keys.S, new MenuMoveDownCommand(this) },
-                { Keys.Down, new MenuMoveDownCommand(this) },
-                { Keys.A, new MenuMoveLeftCommand(this) },
-                { Keys.Left, new MenuMoveLeftCommand(this) },
-                { Keys.D, new MenuMoveRightCommand(this) },
-                { Keys.Right, new MenuMoveRightCommand(this) },
+        // Navigation bindings
+        { Keys.W, new MenuMoveUpCommand(this) },
+        { Keys.Up, new MenuMoveUpCommand(this) },
+        { Keys.S, new MenuMoveDownCommand(this) },
+        { Keys.Down, new MenuMoveDownCommand(this) },
+        { Keys.A, new MenuMoveLeftCommand(this) },
+        { Keys.Left, new MenuMoveLeftCommand(this) },
+        { Keys.D, new MenuMoveRightCommand(this) },
+        { Keys.Right, new MenuMoveRightCommand(this) },
                 
-                // Action bindings
-                { Keys.Enter, new MenuEquipCommand(this) },
-                { Keys.Space, new MenuEquipCommand(this) },
-        }
+        // Action bindings
+        { Keys.Enter, new MenuEquipCommand(this) },
+        { Keys.Space, new MenuEquipCommand(this) },
+      }
     );
 
     gamePadController = new GamePadController(
-        pressedMappings: new Dictionary<Buttons, IGPCommand> {
-                { Buttons.X, new QuitCommand(game) },
-                { Buttons.B, new ReturnToGameNoFadeCommand(game) },
-                { Buttons.DPadUp, new MenuMoveUpCommand(this) },
-                { Buttons.DPadDown, new MenuMoveDownCommand(this) },
-                { Buttons.DPadLeft, new MenuMoveLeftCommand(this) },
-                { Buttons.DPadRight, new MenuMoveRightCommand(this) },
-                { Buttons.A, new MenuEquipCommand(this) },
-        }
+      pressedMappings: new Dictionary<Buttons, IGPCommand> {
+        { Buttons.X, new QuitCommand(game) },
+        { Buttons.B, new ReturnToGameNoFadeCommand(game) },
+        { Buttons.DPadUp, new MenuMoveUpCommand(this) },
+        { Buttons.DPadDown, new MenuMoveDownCommand(this) },
+        { Buttons.DPadLeft, new MenuMoveLeftCommand(this) },
+        { Buttons.DPadRight, new MenuMoveRightCommand(this) },
+        { Buttons.A, new MenuEquipCommand(this) },
+      }
     );
   }
 
