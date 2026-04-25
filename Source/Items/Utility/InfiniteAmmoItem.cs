@@ -6,14 +6,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-internal class InfiniteAmmoItem(Texture2D texture, Vector2 startPosition) : IItem, IWorldPickup {
+internal class InfiniteAmmoItem(Texture2D texture, Vector2 startPosition, Player player) : IItem, IWorldPickup {
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   public Vector2 Position { get; set; } = startPosition;
   public bool IsCollected { get; set; } = false;
   public bool IsAutoCollect { get; } = true;
 
-  // Adjust your source rectangle based on your specific PNG spritesheet
-  private Rectangle sourceRectangle = new(0, 0, 16, 16);
   public ItemCategory Category { get; } = ItemCategory.Consumable;
 
   public void OnEquip() { }
@@ -51,12 +49,16 @@ internal class InfiniteAmmoItem(Texture2D texture, Vector2 startPosition) : IIte
 
   public void Update(GameTime gameTime) { }
 
-  public void OnPickup(Player player) {
-    IsCollected = true;
-    // Logic to add to player's inventory goes here
+  public void OnPickup(Player pickupPlayer) {
+    if (!IsCollected) {
+      IsCollected = true;
+      // This actually puts it in the backpack!
+      pickupPlayer.Inventory.PickupItem(this);
+    }
   }
 
   public void Use(UseType useType) {
-    // We will pass the Player instance here eventually to restore health
+    // The primary constructor 'player' is used here!
+    player.InfiniteAmmoTimer += 10f;
   }
 }

@@ -151,7 +151,6 @@ internal partial class LevelLoader {
               collidableBlocks.Add(BlockFactory.CreateRockCornerBlockSprite(xPos, yPos));
               break;
 
-
             case "3": {
                 /* hole to other room */
                 var pairedLevelName = entrySplit[2];
@@ -350,18 +349,15 @@ internal partial class LevelLoader {
         break;
 
       case "36":
-        /* health item */
-        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateHealthItem(xPos, yPos)));
+        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateHealthItem(xPos, yPos, player)));
         break;
 
       case "37":
-        /* invincibility item */
-        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateInvincibilityItem(xPos, yPos)));
+        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateInvincibilityItem(xPos, yPos, player)));
         break;
 
       case "38":
-        /* infinite ammo item */
-        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateInfiniteAmmoItem(xPos, yPos)));
+        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateInfiniteAmmoItem(xPos, yPos, player)));
         break;
 
       default:
