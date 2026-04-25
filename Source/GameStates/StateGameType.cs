@@ -136,11 +136,12 @@ internal class StateGameType : IGameState {
     graphicsDevice.Viewport = game.GameViewport;
 
     spriteBatch.Begin(
-      SpriteSortMode.Deferred,
-      BlendState.AlphaBlend,
-      SamplerState.PointClamp,
-      DepthStencilState.None,
-      RasterizerState.CullNone
+      sortMode: SpriteSortMode.Deferred,
+      blendState: BlendState.AlphaBlend,
+      samplerState: SamplerState.PointClamp,
+      depthStencilState: DepthStencilState.None,
+      rasterizerState: RasterizerState.CullNone,
+      effect: MiscAssetStore.Instance.Vignette
     );
 
     LevelManager.Draw(spriteBatch);
@@ -151,11 +152,11 @@ internal class StateGameType : IGameState {
     graphicsDevice.Viewport = game.HudViewport;
 
     spriteBatch.Begin(
-      SpriteSortMode.Deferred,
-      BlendState.AlphaBlend,
-      SamplerState.PointClamp,
-      DepthStencilState.None,
-      RasterizerState.CullNone
+      sortMode: SpriteSortMode.Deferred,
+      blendState: BlendState.AlphaBlend,
+      samplerState: SamplerState.PointClamp,
+      depthStencilState: DepthStencilState.None,
+      rasterizerState: RasterizerState.CullNone
     );
 
     spriteBatch.Draw(

@@ -156,9 +156,14 @@ internal class Game1 : Game {
   }
 
   protected override void Draw(GameTime gameTime) {
+    // Render everything that should be on screen to a texture
+
     GraphicsDevice.SetRenderTarget(renderTarget);
     GraphicsDevice.Clear(Color.Black);
     currentState.LowLevelDraw(GraphicsDevice, SpriteBatch);
+
+    // Then render the texture to screen
+
     GraphicsDevice.SetRenderTarget(null);
     GraphicsDevice.Clear(Color.Black);
     SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Opaque, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone);
