@@ -48,8 +48,6 @@ Entry IDs:
       Note: you must also specify a background block for this block!
     23 = Fire (lit)
       Note: you must also specify a background block for this block!
-    24 = Ladder (how should we handle the collision?)
-      Note: you must also specify a background block for this block!
     25 = Mud
     26 = Crate
       Note: you must also specify a background block for this block!
@@ -101,7 +99,7 @@ Entry IDs:
     13 = cactus
 
   Gaps in the IDs:
-    None
+    8:2, 24
 
   Biggest ID:
     38

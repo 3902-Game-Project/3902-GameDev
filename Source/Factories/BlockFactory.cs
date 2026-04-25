@@ -34,10 +34,7 @@ internal class BlockFactory {
   public static IBlock CreateRockCornerBlockSprite(float x, float y) {
     return new RockCornerBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y));
   }
-  public static IBlock CreateRockRedXBlockSprite(float x, float y) {
-    return new RedXRockBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y));
-  }
-
+  
   /* Doors */
   public static IBlock CreateRockHoleBlockSprite(float x, float y, string pairedLevelName, ILevelManager levelManager) {
     return new RockHoleBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y), pairedLevelName, levelManager);
@@ -79,9 +76,6 @@ internal class BlockFactory {
   }
   public static IBlock CreateFireBlockSprite(float x, float y) {
     return new FireBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y));
-  }
-  public static IBlock CreateLadderBlockSprite(float x, float y) {
-    return new LadderBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y));
   }
   public static IBlock CreateMudBlockSprite(float x, float y) {
     return new MudBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y));

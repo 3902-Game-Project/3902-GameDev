@@ -152,11 +152,6 @@ internal partial class LevelLoader {
               break;
 
 
-            case "2":
-              /* red X */
-              collidableBlocks.Add(BlockFactory.CreateRockRedXBlockSprite(xPos, yPos));
-              break;
-
             case "3": {
                 /* hole to other room */
                 var pairedLevelName = entrySplit[2];
@@ -262,11 +257,6 @@ internal partial class LevelLoader {
       case "23":
         /* fire */
         collidableBlocks.Add(BlockFactory.CreateFireBlockSprite(xPos, yPos));
-        break;
-
-      case "24":
-        /* ladder */
-        collidableBlocks.Add(BlockFactory.CreateLadderBlockSprite(xPos, yPos));
         break;
 
       case "25":
