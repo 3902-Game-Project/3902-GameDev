@@ -27,7 +27,7 @@ internal class ScreenFader(SpriteBatch spriteBatch, GameWindow gameWindow) : IIn
 
   public FadingState FadeState { get; private set; } = FadingState.FadedIn;
 
-  public void Update(GameTime gameTime) {
+  public void Update(double deltaTime) {
     switch (FadeState) {
       case FadingState.FadeIn:
         fadeTime += gameTime.ElapsedGameTime.TotalSeconds;

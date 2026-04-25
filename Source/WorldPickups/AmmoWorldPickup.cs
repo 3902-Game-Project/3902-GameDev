@@ -23,7 +23,7 @@ internal class AmmoWorldPickup(Texture2D texture, Vector2 position, AmmoType typ
     spriteBatch.Draw(texture, Position, trueSourceRect, Color.White, 0f, origin, scale, SpriteEffects.None, 0f);
   }
 
-  public override void Update(GameTime gameTime) { }
+  public override void Update(double deltaTime) { }
 
   public override void OnPickup(Player player) {
     player.Inventory.Ammo[Type] += Amount;

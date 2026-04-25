@@ -14,7 +14,7 @@ internal class ShotgunnerAttackState : IEnemyState {
     this.shotgunner.CurrentFrame = 0;
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(double deltaTime) {
     float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
     animationTimer += dt;
     if (animationTimer >= 0.15 && shotgunner.CurrentFrame < shotgunner.CurrentSourceRectangles.Count - 1) {

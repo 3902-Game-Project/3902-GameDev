@@ -15,7 +15,7 @@ internal class ShotgunnerIdleState : IEnemyState {
     this.shotgunner.CurrentFrame = 0;
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(double deltaTime) {
     animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
     if (animationTimer > 0.2) {
       shotgunner.CurrentFrame = (shotgunner.CurrentFrame + 1) % shotgunner.CurrentSourceRectangles.Count;

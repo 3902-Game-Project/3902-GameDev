@@ -75,7 +75,7 @@ internal class PlayerAnimatedMovingState(Player player) : APlayerState(player) {
     }
   }
 
-  public override void Update(GameTime gameTime) {
+  public override void Update(double deltaTime) {
     if (Player.Velocity == Vector2.Zero) {
       Player.State = Player.StaticState;
       currentFrame = 0;

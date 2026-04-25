@@ -26,7 +26,7 @@ internal class ProjectileManager : IInstantaneousUpdatable, IGPDrawable {
     projectiles.Clear();
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(double deltaTime) {
     for (int i = projectiles.Count - 1; i >= 0; i--) {
       projectiles[i].Update(gameTime);
     }

@@ -69,7 +69,7 @@ internal class PlayerInventory(ILevelManager levelManager) {
     }
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(double deltaTime) {
     if (ActiveItem != null) {
       ActiveItem.Update(gameTime);
 

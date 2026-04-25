@@ -51,7 +51,7 @@ internal class CollisionManager : IInstantaneousUpdatable {
     }
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(double deltaTime) {
     for (int i = 0; i < colliders.Count - 1; i++) {
       ICollidable c1 = colliders[i];
       for (int j = i + 1; j < colliders.Count; j++) {

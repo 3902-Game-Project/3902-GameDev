@@ -25,5 +25,5 @@ internal class HeartWorldPickup(Texture2D texture, Vector2 position) : ABaseWorl
     );
   }
 
-  public override void Update(GameTime gameTime) { }
+  public override void Update(double deltaTime) { }
 }

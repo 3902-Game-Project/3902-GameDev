@@ -21,7 +21,7 @@ internal class GenericDeathState : IEnemyState {
     this.enemy.CurrentFrame = 0;
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(double deltaTime) {
     float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
     if (!isAnimationFinished) {

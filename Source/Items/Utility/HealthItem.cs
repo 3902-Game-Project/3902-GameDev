@@ -49,7 +49,7 @@ internal class HealthItem(Texture2D texture, Vector2 startPosition, Player playe
     );
   }
 
-  public void Update(GameTime gameTime) { }
+  public void Update(double deltaTime) { }
 
   public void OnPickup(Player player) {
     IsCollected = true;

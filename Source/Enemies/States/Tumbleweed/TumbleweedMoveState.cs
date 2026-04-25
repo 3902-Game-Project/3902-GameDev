@@ -8,7 +8,7 @@ internal class TumbleweedWanderState(Tumbleweed tumbleweed) : AEnemyMoveState(tu
     enemy.CurrentState = new TumbleweedIdleState((Tumbleweed) enemy);
   }
 
-  public override void Update(GameTime gameTime) {
+  public override void Update(double deltaTime) {
     base.Update(gameTime);
     enemy.Velocity = new Vector2(enemy.Velocity.X, 0);
   }

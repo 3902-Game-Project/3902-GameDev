@@ -45,7 +45,7 @@ internal class SlattedDoorBlock : ABaseBlock {
     Position = new(x, y);
   }
 
-  public override void Update(GameTime gameTime) {
+  public override void Update(double deltaTime) {
     if (State == LockableDoorBlockState.Open) {
       currentFrame = sourceRects.Count - 1;
     }

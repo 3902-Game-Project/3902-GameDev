@@ -52,7 +52,7 @@ internal abstract class ABaseGun(Texture2D texture, Vector2 startPosition, Playe
     }
   }
 
-  public virtual void Update(GameTime gameTime) {
+  public virtual void Update(double deltaTime) {
     float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
     if (EquipTimer > 0) {

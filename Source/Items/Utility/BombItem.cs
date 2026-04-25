@@ -44,7 +44,7 @@ internal class BombItem(Texture2D texture, Vector2 startPosition) : IItem {
     );
   }
 
-  public void Update(GameTime gameTime) { }
+  public void Update(double deltaTime) { }
 
   public void OnPickup(Player player) {
     // Logic for using the bomb item

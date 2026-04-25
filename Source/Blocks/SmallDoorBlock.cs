@@ -46,7 +46,7 @@ internal class SmallDoorBlock : ABaseBlock {
     Position = new(x, y);
   }
 
-  public override void Update(GameTime gameTime) { }
+  public override void Update(double deltaTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(smallDoorTexture, Position, sourceRects[currentFrame], Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);

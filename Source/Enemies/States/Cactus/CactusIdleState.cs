@@ -8,5 +8,5 @@ internal class CactusIdleState : IEnemyState {
     cactus.CurrentSourceRectangles = [new(228, 55, 222, 264)];
     cactus.CurrentFrame = 0;
   }
-  public void Update(GameTime gameTime) { }
+  public void Update(double deltaTime) { }
 }

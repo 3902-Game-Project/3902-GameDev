@@ -3,5 +3,5 @@
 namespace GameProject.Enemies;
 
 internal interface IEnemyState {
-  void Update(GameTime gameTime);
+  void Update(double deltaTime);
 }

@@ -24,7 +24,7 @@ internal abstract class AEnemyMoveState : IEnemyState {
     wanderDuration = 1.0 + (random.NextDouble() * 2.0);
   }
 
-  public virtual void Update(GameTime gameTime) {
+  public virtual void Update(double deltaTime) {
     float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
     animationTimer += dt;

@@ -14,7 +14,7 @@ internal class ItemWorldPickup(IItem item, Vector2 dropVelocity = default) : ABa
     item.Draw(spriteBatch);
   }
 
-  public override void Update(GameTime gameTime) {
+  public override void Update(double deltaTime) {
     float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
     Position += Velocity * dt;

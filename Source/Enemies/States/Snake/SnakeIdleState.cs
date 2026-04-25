@@ -15,7 +15,7 @@ internal class SnakeIdleState : IEnemyState {
     this.snake.CurrentFrame = 0;
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(double deltaTime) {
     animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
     if (animationTimer > 0.1) {
       snake.CurrentFrame = (snake.CurrentFrame + 1) % snake.CurrentSourceRectangles.Count;

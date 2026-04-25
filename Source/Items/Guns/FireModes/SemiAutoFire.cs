@@ -23,7 +23,7 @@ internal class SemiAutoFire(GunStats stats) : IFireMode {
     return false;
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(double deltaTime) {
     if (timer > 0) timer -= (float) gameTime.ElapsedGameTime.TotalSeconds;
   }
 

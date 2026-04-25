@@ -15,7 +15,7 @@ internal class RifleIdleState : IEnemyState {
     this.rifle.CurrentFrame = 0;
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(double deltaTime) {
     animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
     if (animationTimer > 0.2) {
       rifle.CurrentFrame = (rifle.CurrentFrame + 1) % rifle.CurrentSourceRectangles.Count;

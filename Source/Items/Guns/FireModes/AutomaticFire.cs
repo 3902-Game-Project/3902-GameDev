@@ -34,7 +34,7 @@ internal class AutomaticFire(GunStats stats) : IFireMode {
     countdown = 0f;
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(double deltaTime) {
     if (countdown > 0) {
       countdown -= (float) gameTime.ElapsedGameTime.TotalSeconds;
       if (countdown <= 0 && stats.CurrentAmmo <= 0) {

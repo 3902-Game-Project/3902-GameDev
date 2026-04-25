@@ -93,7 +93,7 @@ internal class Level : ILevel {
 
   public void LoadContent(ContentManager content) { }
 
-  public void Update(GameTime gameTime) {
+  public void Update(double deltaTime) {
     foreach (var nonCollidableBlocks in nonCollidableBlocks) {
       nonCollidableBlocks.Update(gameTime);
     }

@@ -19,7 +19,7 @@ internal class BatIdleState : IEnemyState {
     this.bat.CurrentFrame = 0;
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(double deltaTime) {
     animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
     if (animationTimer > 0.2) {
       bat.CurrentFrame++;

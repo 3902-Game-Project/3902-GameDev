@@ -70,7 +70,7 @@ internal class BulletDefault : IProjectile, ICollidable {
     );
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(double deltaTime) {
     // Logic for updating the bullet's position and state
     Position += direction * velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
     Collider.Position = Position;

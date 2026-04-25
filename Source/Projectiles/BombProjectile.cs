@@ -51,7 +51,7 @@ internal class BombProjectile : IProjectile {
     );
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(double deltaTime) {
     bombAnimation.Update(gameTime);
     currentSourceRect = bombAnimation.CurrentFrame;
 

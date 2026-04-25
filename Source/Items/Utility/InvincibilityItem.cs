@@ -48,7 +48,7 @@ internal class InvincibilityItem(Texture2D texture, Vector2 startPosition, Playe
         layerDepth: 0f
     );
   }
-  public void Update(GameTime gameTime) { }
+  public void Update(double deltaTime) { }
 
   public void OnPickup(Player player) {
     IsCollected = true;

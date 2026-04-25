@@ -106,7 +106,7 @@ internal class Player : IInstantaneousUpdatable, IGPDrawable, ICollidable {
     State.TakeDamage(amount);
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(double deltaTime) {
     bool justPressedLeft = inputLeftThisFrame && !inputLeftLastFrame;
     bool justPressedRight = inputRightThisFrame && !inputRightLastFrame;
     bool justPressedUp = inputUpThisFrame && !inputUpLastFrame;

@@ -25,7 +25,7 @@ internal class SnakeAttackState : IEnemyState {
     this.snake.CurrentFrame = 0;
   }
 
-  public void Update(GameTime gameTime) {
+  public void Update(double deltaTime) {
     float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
     timer += dt;
     animationTimer += dt;

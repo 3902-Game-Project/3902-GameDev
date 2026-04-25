@@ -16,7 +16,7 @@ internal class RockBlock(Texture2D RockTexture, Vector2 xyPos) : ABaseBlock(xyPo
     }
   }
 
-  public override void Update(GameTime gameTime) { }
+  public override void Update(double deltaTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(RockTexture, Position, sourceRect, Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
