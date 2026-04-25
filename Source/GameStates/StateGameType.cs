@@ -6,6 +6,7 @@ using GameProject.Factories;
 using GameProject.Globals;
 using GameProject.Items;
 using GameProject.Managers;
+using GameProject.Misc;
 using GameProject.PlayerSpace;
 using GameProject.Source.Misc;
 using Microsoft.Xna.Framework;
@@ -17,6 +18,7 @@ namespace GameProject.GameStates;
 
 internal class StateGameType : IGameState {
   private static Color BACKGROUND_COLOR = new(20, 20, 120);
+  private static Rectangle NON_HUD_RECTANGLE = new(0, 0, Game1.GAME_WIDTH, Game1.GAME_HEIGHT);
 
   private readonly Game1 game;
 
@@ -24,6 +26,7 @@ internal class StateGameType : IGameState {
   private IController mouseController;
   private IController gamePadController;
   private Texture2D ammoTexture;
+  private RenderTarget2D nonHUDTarget;
 
   public Player Player { get; private set; }
 
@@ -108,6 +111,8 @@ internal class StateGameType : IGameState {
   }
 
   public void LoadContent(ContentManager contentManager) {
+    nonHUDTarget = new RenderTarget2D(game.GraphicsDevice, Game1.GAME_WIDTH, Game1.GAME_HEIGHT);
+
     Player.Inventory.PickupItem(ItemFactory.Instance.CreateRevolver(0f, 0f, game.StateGame.Player, game.StateGame.LevelManager));
     Player.Inventory.PickupItem(ItemFactory.Instance.CreateRifle(0f, 0f, game.StateGame.Player, game.StateGame.LevelManager));
     CheatCodes.Instance.LevelManager = LevelManager;
@@ -130,17 +135,17 @@ internal class StateGameType : IGameState {
     }
   }
 
-  public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
+  public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, RenderTargetTracker renderTargetTracker) {
     graphicsDevice.Clear(BACKGROUND_COLOR);
 
-    graphicsDevice.Viewport = game.GameViewport;
+    renderTargetTracker.Push(nonHUDTarget);
 
     spriteBatch.Begin(
-      SpriteSortMode.Deferred,
-      BlendState.AlphaBlend,
-      SamplerState.PointClamp,
-      DepthStencilState.None,
-      RasterizerState.CullNone
+      sortMode: SpriteSortMode.Deferred,
+      blendState: BlendState.AlphaBlend,
+      samplerState: SamplerState.PointClamp,
+      depthStencilState: DepthStencilState.None,
+      rasterizerState: RasterizerState.CullNone
     );
 
     LevelManager.Draw(spriteBatch);
@@ -148,14 +153,39 @@ internal class StateGameType : IGameState {
 
     spriteBatch.End();
 
+    renderTargetTracker.Pop();
+
+    graphicsDevice.Viewport = game.GameViewport;
+
+    Effect effect;
+    if (Flags.EnableVignette) {
+      MiscAssetStore.Instance.Vignette.Parameters["VignetteCenter"].SetValue(Player.Position / new Vector2(Game1.GAME_WIDTH, Game1.GAME_HEIGHT));
+      effect = MiscAssetStore.Instance.Vignette;
+    } else {
+      effect = null;
+    }
+
+    spriteBatch.Begin(
+      sortMode: SpriteSortMode.Deferred,
+      blendState: BlendState.AlphaBlend,
+      samplerState: SamplerState.PointClamp,
+      depthStencilState: DepthStencilState.None,
+      rasterizerState: RasterizerState.CullNone,
+      effect: effect
+    );
+
+    spriteBatch.Draw(nonHUDTarget, NON_HUD_RECTANGLE, Color.White);
+
+    spriteBatch.End();
+
     graphicsDevice.Viewport = game.HudViewport;
 
     spriteBatch.Begin(
-      SpriteSortMode.Deferred,
-      BlendState.AlphaBlend,
-      SamplerState.PointClamp,
-      DepthStencilState.None,
-      RasterizerState.CullNone
+      sortMode: SpriteSortMode.Deferred,
+      blendState: BlendState.AlphaBlend,
+      samplerState: SamplerState.PointClamp,
+      depthStencilState: DepthStencilState.None,
+      rasterizerState: RasterizerState.CullNone
     );
 
     spriteBatch.Draw(
@@ -273,7 +303,7 @@ internal class StateGameType : IGameState {
     spriteBatch.Draw(
       texture: TextureStore.Instance.MainBlockItemAtlas,
       position: mapPosition,
-      sourceRectangle: new Rectangle(128, 448, 97, 29),  // FIX
+      sourceRectangle: new Rectangle(128, 448, 97, 29), // FIX
       color: Color.White,
       rotation: 0f,
       origin: Vector2.Zero,
@@ -281,7 +311,6 @@ internal class StateGameType : IGameState {
       effects: SpriteEffects.None,
       layerDepth: 0f
     );
-
 
     spriteBatch.End();
 

@@ -2,6 +2,7 @@
 using GameProject.Commands;
 using GameProject.Controllers;
 using GameProject.Globals;
+using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -41,7 +42,7 @@ internal class StatePauseType(Game1 game) : IGameState {
     gamePadController.Update(gameTime);
   }
 
-  public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
+  public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, RenderTargetTracker renderTargetTracker) {
     graphicsDevice.Clear(Color.CornflowerBlue);
 
     spriteBatch.Begin();
