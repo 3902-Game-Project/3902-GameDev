@@ -3,6 +3,7 @@ using GameProject.Commands;
 using GameProject.Controllers;
 using GameProject.Globals;
 using GameProject.Items;
+using GameProject.Misc;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -147,7 +148,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     gamePadController.Update(gameTime);
   }
 
-  public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
+  public void LowLevelDraw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, RenderTargetTracker renderTargetTracker) {
     graphicsDevice.Viewport = game.DefaultViewport;
     graphicsDevice.Clear(new Color(25, 28, 33));
 
