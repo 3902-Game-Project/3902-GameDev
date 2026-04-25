@@ -5,7 +5,7 @@ namespace GameProject.Enemies.ShotgunnerStates;
 
 internal class ShotgunnerIdleState : IEnemyState {
   private readonly Shotgunner shotgunner;
-  private double timer, animationTimer;
+  private double timer = 0.0, animationTimer = 0.0;
   private readonly Random random = new();
 
   public ShotgunnerIdleState(Shotgunner shotgunner) {
@@ -16,13 +16,13 @@ internal class ShotgunnerIdleState : IEnemyState {
   }
 
   public void Update(double deltaTime) {
-    animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
+    animationTimer += deltaTime;
     if (animationTimer > 0.2) {
       shotgunner.CurrentFrame = (shotgunner.CurrentFrame + 1) % shotgunner.CurrentSourceRectangles.Count;
       animationTimer = 0;
     }
 
-    timer += gameTime.ElapsedGameTime.TotalSeconds;
+    timer += deltaTime;
     if (timer > 1.0) shotgunner.CurrentState = SelectState();
   }
 

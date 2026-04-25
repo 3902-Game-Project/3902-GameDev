@@ -21,7 +21,7 @@ internal enum FacingDirection {
   Down,
 }
 
-internal class Player : IInstantaneousUpdatable, IGPDrawable, ICollidable {
+internal class Player : ITemporalUpdatable, IGPDrawable, ICollidable {
   private static readonly float PLAYER_WIDTH = 171.0f * 0.15f;
   private static readonly float PLAYER_HEIGHT = 323.0f * 0.15f;
 
@@ -45,9 +45,9 @@ internal class Player : IInstantaneousUpdatable, IGPDrawable, ICollidable {
   private int activeDirX = 0;
   private int activeDirY = 0;
 
-  public float InvincibilityTimer { get; set; } = 0f;
-  public float DamageFlashTimer { get; set; } = 0f;
-  public float InfiniteAmmoTimer { get; set; } = 0f;
+  public double InvincibilityTimer { get; set; } = 0.0;
+  public double DamageFlashTimer { get; set; } = 0.0;
+  public double InfiniteAmmoTimer { get; set; } = 0.0;
   public bool HasInfiniteAmmo => InfiniteAmmoTimer > 0;
 
   public bool IsInvincible => InvincibilityTimer > 0;
@@ -129,7 +129,6 @@ internal class Player : IInstantaneousUpdatable, IGPDrawable, ICollidable {
     if (activeDirY == -1) State.MoveUp();
     if (activeDirY == 1) State.MoveDown();
 
-    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
     if (Velocity.X != 0 && MathF.Sign(Velocity.X) != MathF.Sign(lastInputVelocity.X)) {
       Direction = (Velocity.X > 0) ? FacingDirection.Right : FacingDirection.Left;
     }
@@ -144,12 +143,12 @@ internal class Player : IInstantaneousUpdatable, IGPDrawable, ICollidable {
     }
     lastInputVelocity = Velocity;
 
-    if (InvincibilityTimer > 0) InvincibilityTimer -= dt;
-    if (DamageFlashTimer > 0) DamageFlashTimer -= dt;
-    if (InfiniteAmmoTimer > 0) InfiniteAmmoTimer -= dt;
+    if (InvincibilityTimer > 0) InvincibilityTimer -= deltaTime;
+    if (DamageFlashTimer > 0) DamageFlashTimer -= deltaTime;
+    if (InfiniteAmmoTimer > 0) InfiniteAmmoTimer -= deltaTime;
     if (Velocity != Vector2.Zero) Velocity = Vector2.Normalize(Velocity) * Speed;
-    float xStep = Velocity.X * dt;
-    float yStep = Velocity.Y * dt;
+    float xStep = Velocity.X * ((float) deltaTime);
+    float yStep = Velocity.Y * ((float) deltaTime);
 
     Position = new Vector2(Position.X + xStep, Position.Y);
     if (Collider != null) Collider.Position = Position;
@@ -159,7 +158,7 @@ internal class Player : IInstantaneousUpdatable, IGPDrawable, ICollidable {
     if (Collider != null) Collider.Position = Position;
     LevelManager.CurrentLevel.PlayerResolveCollisions(this, CollisionAxis.Y, MathF.Abs(xStep) + 1f);
 
-    State.Update(gameTime);
+    State.Update(deltaTime);
     Velocity = Vector2.Zero;
 
     Inventory.Update(gameTime);

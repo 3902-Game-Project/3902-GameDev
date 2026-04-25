@@ -25,8 +25,8 @@ internal abstract class ABaseGun(Texture2D texture, Vector2 startPosition, Playe
   protected Vector2 bulletSpawnOffset;
 
   // Ammo and reload state
-  public float EquipTimer { get; private set; } = 0f;
-  public float ReloadTimer { get; private set; } = 0f;
+  public double EquipTimer { get; private set; } = 0.0;
+  public double ReloadTimer { get; private set; } = 0.0;
   public bool IsReloading { get; private set; } = false;
 
   public GunStats PublicStats => stats;
@@ -53,12 +53,10 @@ internal abstract class ABaseGun(Texture2D texture, Vector2 startPosition, Playe
   }
 
   public virtual void Update(double deltaTime) {
-    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
-
     if (EquipTimer > 0) {
-      EquipTimer -= dt;
+      EquipTimer -= deltaTime;
     } else if (IsReloading) {
-      ReloadTimer -= dt;
+      ReloadTimer -= deltaTime;
       if (ReloadTimer <= 0) {
         int ammoNeeded = stats.MaxAmmo - stats.CurrentAmmo;
         int ammoAvailable = player.Inventory.Ammo[stats.AmmoType];
@@ -80,7 +78,7 @@ internal abstract class ABaseGun(Texture2D texture, Vector2 startPosition, Playe
       }
     }
 
-    fireMode?.Update(gameTime);
+    fireMode?.Update(deltaTime);
   }
 
   public virtual void Draw(SpriteBatch spriteBatch) {

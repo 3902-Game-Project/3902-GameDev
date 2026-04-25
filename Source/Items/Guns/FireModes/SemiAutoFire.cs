@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 namespace GameProject.FireModes;
 
 internal class SemiAutoFire(GunStats stats) : IFireMode {
-  private float timer = 0f;
+  private double timer = 0.0;
   private bool triggerReleased = true;
 
   public bool CanFire(UseType useType) {
@@ -20,11 +20,14 @@ internal class SemiAutoFire(GunStats stats) : IFireMode {
       timer = stats.FireRate;
       return true;
     }
+
     return false;
   }
 
   public void Update(double deltaTime) {
-    if (timer > 0) timer -= (float) gameTime.ElapsedGameTime.TotalSeconds;
+    if (timer > 0) {
+      timer -= deltaTime;
+    }
   }
 
   public void OnEquip() {

@@ -95,30 +95,30 @@ internal class Level : ILevel {
 
   public void Update(double deltaTime) {
     foreach (var nonCollidableBlocks in nonCollidableBlocks) {
-      nonCollidableBlocks.Update(gameTime);
+      nonCollidableBlocks.Update(deltaTime);
     }
 
     foreach (var collidableBlock in collidableBlocks) {
-      collidableBlock.Update(gameTime);
+      collidableBlock.Update(deltaTime);
     }
 
     foreach (var doorBlock in doors) {
-      doorBlock.Update(gameTime);
+      doorBlock.Update(deltaTime);
     }
 
     foreach (var deadEnemy in deadEnemies) {
-      deadEnemy.Update(gameTime);
+      deadEnemy.Update(deltaTime);
     }
 
     foreach (var aliveEnemy in aliveEnemies) {
-      aliveEnemy.Update(gameTime);
+      aliveEnemy.Update(deltaTime);
       aliveEnemy.Target = player.Position;
     }
 
     CategorizeDeadEnemies();
 
     foreach (var pickup in pickups) {
-      pickup.Update(gameTime);
+      pickup.Update(deltaTime);
     }
 
     for (int i = 0; i < ProjectileManager.Projectiles.Count; i++) {
@@ -136,8 +136,8 @@ internal class Level : ILevel {
       }
     }
 
-    ProjectileManager.Update(gameTime);
-    collisionManager.Update(gameTime);
+    ProjectileManager.Update(deltaTime);
+    collisionManager.Update();
 
     CheckLevelClear();
   }

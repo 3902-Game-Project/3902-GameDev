@@ -6,7 +6,7 @@ namespace GameProject.Enemies.TumbleweedStates;
 internal class TumbleweedIdleState : IEnemyState {
   private readonly Tumbleweed tumbleweed;
   private readonly Random random = new();
-  private double idleTimer, animationTimer;
+  private double idleTimer = 0.0, animationTimer = 0.0;
   private readonly double idleDuration;
 
   public TumbleweedIdleState(Tumbleweed tumbleweed) {
@@ -18,14 +18,13 @@ internal class TumbleweedIdleState : IEnemyState {
   }
 
   public void Update(double deltaTime) {
-    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
-    animationTimer += dt;
+    animationTimer += deltaTime;
     if (animationTimer >= 0.2) {
       tumbleweed.CurrentFrame = (tumbleweed.CurrentFrame + 1) % tumbleweed.CurrentSourceRectangles.Count;
       animationTimer = 0;
     }
 
-    idleTimer += dt;
+    idleTimer += deltaTime;
     if (idleTimer > idleDuration) tumbleweed.CurrentState = new TumbleweedWanderState(tumbleweed);
   }
 }

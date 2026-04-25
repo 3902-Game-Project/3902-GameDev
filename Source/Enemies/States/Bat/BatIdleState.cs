@@ -4,8 +4,8 @@ namespace GameProject.Enemies.BatStates;
 
 internal class BatIdleState : IEnemyState {
   private readonly Bat bat;
-  private double timer;
-  private double animationTimer;
+  private double timer = 0.0;
+  private double animationTimer = 0.0;
 
   public BatIdleState(Bat bat) {
     this.bat = bat;
@@ -20,7 +20,7 @@ internal class BatIdleState : IEnemyState {
   }
 
   public void Update(double deltaTime) {
-    animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
+    animationTimer += deltaTime;
     if (animationTimer > 0.2) {
       bat.CurrentFrame++;
       if (bat.CurrentFrame >= bat.CurrentSourceRectangles.Count) {
@@ -28,7 +28,7 @@ internal class BatIdleState : IEnemyState {
       }
       animationTimer = 0;
     }
-    timer += gameTime.ElapsedGameTime.TotalSeconds;
+    timer += deltaTime;
     if (timer > 2.0) {
       bat.CurrentState = new BatMoveState(bat);
     }

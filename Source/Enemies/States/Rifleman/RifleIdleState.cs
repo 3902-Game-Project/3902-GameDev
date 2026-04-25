@@ -16,13 +16,13 @@ internal class RifleIdleState : IEnemyState {
   }
 
   public void Update(double deltaTime) {
-    animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
+    animationTimer += deltaTime;
     if (animationTimer > 0.2) {
       rifle.CurrentFrame = (rifle.CurrentFrame + 1) % rifle.CurrentSourceRectangles.Count;
       animationTimer = 0;
     }
 
-    timer += gameTime.ElapsedGameTime.TotalSeconds;
+    timer += deltaTime;
     if (timer > 1.0) rifle.CurrentState = random.Next(0, 2) == 0 ? new RifleAttackState(rifle) : new RifleWanderState(rifle);
   }
 }

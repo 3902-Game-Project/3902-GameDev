@@ -9,7 +9,7 @@ internal abstract class AEnemyMoveState : IEnemyState {
   protected readonly Random random = new();
   private double wanderTimer;
   private readonly double wanderDuration;
-  private double animationTimer;
+  private double animationTimer = 0.0;
   private readonly float speed;
   private readonly bool lockYAxis;
 
@@ -20,20 +20,18 @@ internal abstract class AEnemyMoveState : IEnemyState {
     this.enemy.CurrentSourceRectangles = frames;
     this.enemy.CurrentFrame = 0;
 
-    wanderTimer = 0;
+    wanderTimer = 0.0;
     wanderDuration = 1.0 + (random.NextDouble() * 2.0);
   }
 
   public virtual void Update(double deltaTime) {
-    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
-
-    animationTimer += dt;
+    animationTimer += deltaTime;
     if (animationTimer >= 0.2) {
       enemy.CurrentFrame = (enemy.CurrentFrame + 1) % enemy.CurrentSourceRectangles.Count;
       animationTimer = 0;
     }
 
-    enemy.Position += enemy.Velocity * dt;
+    enemy.Position += enemy.Velocity * ((float) deltaTime);
 
     enemy.FollowTarget(speed);
 
@@ -45,7 +43,7 @@ internal abstract class AEnemyMoveState : IEnemyState {
       enemy.Velocity = new Vector2(enemy.Velocity.X, -enemy.Velocity.Y);
     }
 
-    wanderTimer += dt;
+    wanderTimer += deltaTime;
     if (wanderTimer >= wanderDuration) TransitionToNextState();
   }
 

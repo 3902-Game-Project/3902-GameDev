@@ -109,7 +109,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
   }
 
   public void Update(double deltaTime) {
-    CurrentLevel.Update(gameTime);
+    CurrentLevel.Update(deltaTime);
   }
 
   public void Draw(SpriteBatch spriteBatch) {

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 namespace GameProject.FireModes;
 
 internal class AutomaticFire(GunStats stats) : IFireMode {
-  private float countdown = 0;
+  private double countdown = 0.0;
 
   public bool CanFire(UseType useType) {
     if (countdown > 0 || stats.CurrentAmmo <= 0) {
@@ -36,7 +36,7 @@ internal class AutomaticFire(GunStats stats) : IFireMode {
 
   public void Update(double deltaTime) {
     if (countdown > 0) {
-      countdown -= (float) gameTime.ElapsedGameTime.TotalSeconds;
+      countdown -= deltaTime;
       if (countdown <= 0 && stats.CurrentAmmo <= 0) {
         stats.CurrentAmmo = stats.MaxAmmo;
       }

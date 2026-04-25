@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Managers;
 
-internal class ProjectileManager : IInstantaneousUpdatable, IGPDrawable {
+internal class ProjectileManager : ITemporalUpdatable, IGPDrawable {
   private readonly List<IProjectile> projectiles;
   public List<IProjectile> Projectiles => projectiles;
 
@@ -28,7 +28,7 @@ internal class ProjectileManager : IInstantaneousUpdatable, IGPDrawable {
 
   public void Update(double deltaTime) {
     for (int i = projectiles.Count - 1; i >= 0; i--) {
-      projectiles[i].Update(gameTime);
+      projectiles[i].Update(deltaTime);
     }
   }
 

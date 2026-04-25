@@ -4,7 +4,7 @@ namespace GameProject.Enemies.RiflemanStates;
 
 internal class RifleAttackState : IEnemyState {
   private readonly Rifleman rifleMan;
-  private double stateTimer, animationTimer;
+  private double stateTimer = 0.0, animationTimer = 0.0;
   private bool hasFired = false;
 
   public RifleAttackState(Rifleman rifleMan) {
@@ -15,8 +15,7 @@ internal class RifleAttackState : IEnemyState {
   }
 
   public void Update(double deltaTime) {
-    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
-    animationTimer += dt;
+    animationTimer += deltaTime;
     if (animationTimer >= 0.15 && rifleMan.CurrentFrame < rifleMan.CurrentSourceRectangles.Count - 1) {
       rifleMan.CurrentFrame++;
       animationTimer = 0;
@@ -27,7 +26,7 @@ internal class RifleAttackState : IEnemyState {
       hasFired = true;
     }
 
-    stateTimer += dt;
+    stateTimer += deltaTime;
     if (stateTimer > 1.0) rifleMan.CurrentState = new RifleIdleState(rifleMan);
   }
 }

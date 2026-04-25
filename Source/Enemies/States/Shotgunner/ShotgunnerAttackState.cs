@@ -4,7 +4,7 @@ namespace GameProject.Enemies.ShotgunnerStates;
 
 internal class ShotgunnerAttackState : IEnemyState {
   private readonly Shotgunner shotgunner;
-  private double stateTimer, animationTimer;
+  private double stateTimer = 0.0, animationTimer = 0.0;
   private bool hasFired = false;
 
   public ShotgunnerAttackState(Shotgunner shotgunner) {
@@ -15,8 +15,7 @@ internal class ShotgunnerAttackState : IEnemyState {
   }
 
   public void Update(double deltaTime) {
-    float dt = (float) gameTime.ElapsedGameTime.TotalSeconds;
-    animationTimer += dt;
+    animationTimer += deltaTime;
     if (animationTimer >= 0.15 && shotgunner.CurrentFrame < shotgunner.CurrentSourceRectangles.Count - 1) {
       shotgunner.CurrentFrame++;
       animationTimer = 0;
@@ -27,7 +26,7 @@ internal class ShotgunnerAttackState : IEnemyState {
       hasFired = true;
     }
 
-    stateTimer += dt;
+    stateTimer += deltaTime;
     if (stateTimer > 1.0) shotgunner.CurrentState = new ShotgunnerIdleState(shotgunner);
   }
 }
