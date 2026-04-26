@@ -46,7 +46,6 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
     if (info.Collider is IBlock) {
       if (info.Side == CollisionSide.Left || info.Side == CollisionSide.Right) {
         Velocity = new Vector2(0, Velocity.Y);
-        //Direction = (info.Side == CollisionSide.Left) ? FacingDirection.Left : FacingDirection.Right;
       } else if (info.Side == CollisionSide.Top || info.Side == CollisionSide.Bottom) {
         Velocity = new Vector2(Velocity.X, 0);
       }
@@ -90,12 +89,24 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
   }
 
   public virtual void Navigate(float speed) {
-    Vector2 direction = Target - Position;
-    if (direction != Vector2.Zero) {
-      direction = Vector2.Normalize(direction);
+    Vector2 delta = Target - Position;
+    if (delta == Vector2.Zero) {
+      Velocity = Vector2.Zero;
+      return;
     }
+
+    Vector2 direction = Vector2.Normalize(delta);
     Velocity = direction * speed;
-    Direction = (direction.X > 0) ? FacingDirection.Right : FacingDirection.Left;
+
+    float absX = Math.Abs(delta.X);
+    float absY = Math.Abs(delta.Y);
+
+    if (absX >= absY) {
+      Direction = delta.X >= 0 ? FacingDirection.Right : FacingDirection.Left;
+    } else {
+      Direction = delta.Y >= 0 ? FacingDirection.Down : FacingDirection.Up;
+    }
+    
   }
 
   public virtual void Die() {
