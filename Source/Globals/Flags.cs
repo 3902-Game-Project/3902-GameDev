@@ -1,4 +1,4 @@
-﻿namespace GameProject.Globals;
+namespace GameProject.Globals;
 
 internal static class Flags {
   /* compile-time tweakables */

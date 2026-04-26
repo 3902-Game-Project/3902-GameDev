@@ -1,4 +1,4 @@
-﻿using GameProject.Enemies;
+using GameProject.Enemies;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;

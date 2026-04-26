@@ -1,4 +1,4 @@
-﻿using GameProject.Misc;
+using GameProject.Misc;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.GlobalInterfaces;

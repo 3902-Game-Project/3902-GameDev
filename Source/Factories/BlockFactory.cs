@@ -1,4 +1,4 @@
-﻿using GameProject.Blocks;
+using GameProject.Blocks;
 using GameProject.Globals;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
