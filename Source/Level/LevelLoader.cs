@@ -381,43 +381,41 @@ internal partial class LevelLoader {
 
     var levelData = lines.Select((line) => line.Split(',')).ToArray();
 
-    if (levelData.Length > 0) {
-      for (int rowIndex = 0; rowIndex < levelData.Length; rowIndex++) {
-        var row = levelData[rowIndex];
+    for (int rowIndex = 0; rowIndex < levelData.Length; rowIndex++) {
+      var row = levelData[rowIndex];
 
-        if (row.Length != levelData[0].Length) {
-          throw new FormatException("line #" + (rowIndex + 1) + " length (" + row.Length + ") does not match first line length (" + levelData[0].Length + ")");
-        }
+      if (row.Length != levelData[0].Length) {
+        throw new FormatException("line #" + (rowIndex + 1) + " length (" + row.Length + ") does not match first line length (" + levelData[0].Length + ")");
+      }
 
-        for (int colIndex = 0; colIndex < levelData[0].Length; colIndex++) {
-          float xPos = BLOCK_WIDTH * colIndex;
-          float yPos = BLOCK_HEIGHT * rowIndex;
+      for (int colIndex = 0; colIndex < levelData[0].Length; colIndex++) {
+        float xPos = BLOCK_WIDTH * colIndex;
+        float yPos = BLOCK_HEIGHT * rowIndex;
 
-          var cell = row[colIndex];
-          var cellSplit = cell.Split(';');
+        var cell = row[colIndex];
+        var cellSplit = cell.Split(';');
 
-          foreach (var entry in cellSplit) {
-            var entrySplit = entry.Trim().Split(':');
-            var type = entrySplit[0];
+        foreach (var entry in cellSplit) {
+          var entrySplit = entry.Trim().Split(':');
+          var type = entrySplit[0];
 
-            AddCellEntry(
-              player,
-              levelManager,
-              levelNames,
+          AddCellEntry(
+            player,
+            levelManager,
+            levelNames,
 
-              type,
-              entrySplit,
-              xPos,
-              yPos,
+            type,
+            entrySplit,
+            xPos,
+            yPos,
 
-              nonCollidableBlocks,
-              collidableBlocks,
-              doors,
-              enemies,
-              pickups,
-              ref playerPositionNullable
-            );
-          }
+            nonCollidableBlocks,
+            collidableBlocks,
+            doors,
+            enemies,
+            pickups,
+            ref playerPositionNullable
+          );
         }
       }
     }
