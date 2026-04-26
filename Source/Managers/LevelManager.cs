@@ -29,6 +29,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
     "11_level",
     "12_level",
     "13_level",
+    "14_level",
   ];
   private static readonly string STARTING_LEVEL = Flags.StartInDebugLevel ? "00_everything" : "01_level";
 

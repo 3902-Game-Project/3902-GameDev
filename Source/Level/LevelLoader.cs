@@ -359,6 +359,10 @@ internal partial class LevelLoader {
       case "38":
         pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateInfiniteAmmoItem(xPos, yPos, player)));
         break;
+      case "39":
+        /* boss */
+        enemies.Add(EnemyFactory.Instance.CreateBossSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, levelManager));
+        break;
 
       default:
         throw new FormatException($"unrecognized level block/entity type '{type}'");

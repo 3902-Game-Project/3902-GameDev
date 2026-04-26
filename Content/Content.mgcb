@@ -25,6 +25,30 @@
 /processorParam:TextureFormat=Color
 /build:Enemies/batSpritesheet.png
 
+#begin Enemies/bombSprite.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Enemies/bombSprite.png
+
+#begin Enemies/bossSprite.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Enemies/bossSprite.png
+
 #begin Enemies/cactusSprite.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -219,6 +243,9 @@
 
 #begin Levels/13_level.csv
 /copy:Levels/13_level.csv
+
+#begin Levels/14_level.csv
+/copy:Levels/14_level.csv
 
 #begin Misc/blood_red_bar.png
 /importer:TextureImporter
