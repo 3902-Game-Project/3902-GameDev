@@ -1,3 +1,4 @@
+using System;
 using GameProject.Globals;
 using GameProject.Items;
 using GameProject.Managers;
@@ -9,10 +10,10 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Factories;
 
 internal class ItemFactory {
-  private Texture2D basicGunsTexture;
-  private Texture2D healthItemTexture;
-  private Texture2D invincibilityItemTexture;
-  private Texture2D infiniteAmmoItemTexture;
+  private Texture2D? basicGunsTexture;
+  private Texture2D? healthItemTexture;
+  private Texture2D? invincibilityItemTexture;
+  private Texture2D? infiniteAmmoItemTexture;
 
   public static ItemFactory Instance { get; } = new();
 
@@ -26,6 +27,10 @@ internal class ItemFactory {
   }
 
   public IItem CreateRevolver(float xPos, float yPos, Player player, ILevelManager levelManager) {
+    if (basicGunsTexture == null) {
+      throw new InvalidOperationException("LoadAllTextures not called");
+    }
+
     GunStats stats = new() {
       AmmoType = AmmoType.Light,
       BulletVelocity = 500f,
@@ -35,10 +40,15 @@ internal class ItemFactory {
       ReloadTime = 0.5f,
       BaseDamage = 30
     };
+
     return new RevolverItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
   }
 
   public IItem CreateRifle(float xPos, float yPos, Player player, ILevelManager levelManager) {
+    if (basicGunsTexture == null) {
+      throw new InvalidOperationException("LoadAllTextures not called");
+    }
+
     var stats = new GunStats {
       AmmoType = AmmoType.Heavy,
       BulletVelocity = 1000f,
@@ -47,10 +57,15 @@ internal class ItemFactory {
       ReloadTime = 1f,
       BaseDamage = 70
     };
+
     return new RifleItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
   }
 
   public IItem CreateShotgun(float xPos, float yPos, Player player, ILevelManager levelManager) {
+    if (basicGunsTexture == null) {
+      throw new InvalidOperationException("LoadAllTextures not called");
+    }
+
     var stats = new GunStats {
       AmmoType = AmmoType.Shells,
       BulletVelocity = 400f,
@@ -61,6 +76,7 @@ internal class ItemFactory {
       ReloadTime = 1f,
       BaseDamage = 20
     };
+
     return new ShotgunItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
   }
 
@@ -69,14 +85,26 @@ internal class ItemFactory {
   }
 
   public IItem CreateHealthItem(float xPos, float yPos, Player player) {
+    if (healthItemTexture == null) {
+      throw new InvalidOperationException("LoadAllTextures not called");
+    }
+
     return new HealthItem(healthItemTexture, new Vector2(xPos, yPos), player);
   }
 
   public IItem CreateInvincibilityItem(float xPos, float yPos, Player player) {
+    if (invincibilityItemTexture == null) {
+      throw new InvalidOperationException("LoadAllTextures not called");
+    }
+
     return new InvincibilityItem(invincibilityItemTexture, new Vector2(xPos, yPos), player);
   }
 
   public IItem CreateInfiniteAmmoItem(float xPos, float yPos, Player player) {
+    if (infiniteAmmoItemTexture == null) {
+      throw new InvalidOperationException("LoadAllTextures not called");
+    }
+
     return new InfiniteAmmoItem(infiniteAmmoItemTexture, new Vector2(xPos, yPos), player);
   }
 }

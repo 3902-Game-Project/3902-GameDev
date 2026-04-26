@@ -6,8 +6,8 @@ namespace GameProject.Misc;
 
 internal class RenderTargetTracker(GraphicsDevice graphicsDevice) {
   private class RenderTargetDisposer : IDisposable {
-    private GraphicsDevice graphicsDevice;
-    private Stack<RenderTarget2D> renderTargets;
+    private readonly GraphicsDevice graphicsDevice;
+    private readonly Stack<RenderTarget2D> renderTargets;
     private bool disposedValue;
 
     public RenderTargetDisposer(GraphicsDevice graphicsDevice, Stack<RenderTarget2D> renderTargets, RenderTarget2D renderTarget) {

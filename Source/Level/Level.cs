@@ -14,8 +14,6 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Level;
 
-#nullable enable
-
 internal class Level : ILevel {
   private readonly List<IBlock> nonCollidableBlocks;
   private readonly List<IBlock> collidableBlocks;
