@@ -25,7 +25,8 @@ internal class PlayerInventory(ILevelManager levelManager) {
   public Dictionary<AmmoType, int> Ammo { get; set; } = new() {
     { AmmoType.Light, 30 },
     { AmmoType.Heavy, 10 },
-    { AmmoType.Shells, 10 }
+    { AmmoType.Shells, 10 },
+    { AmmoType.BFG, 3 }
   };
 
   public void EquipWeapon(int index) {
@@ -107,8 +108,18 @@ internal class PlayerInventory(ILevelManager levelManager) {
 
     ActiveItem?.Draw(spriteBatch);
 
-    // Draw Overhead Reload Bar
-    if (ActiveItem is ABaseGun gun && gun.IsReloading && whitePixel != null) {
+    // Draw Overhead Reload Bar or BFG Bar
+    if (ActiveItem is BFGItem bfg && whitePixel != null) {
+      float segmentWidth = 20f;
+      float gap = 4f;
+      float totalWidth = (segmentWidth * 3) + (gap * 2);
+      Vector2 barPos = Position + new Vector2(-totalWidth / 2f, -80f);
+
+      for (int i = 0; i < 3; i++) {
+        Color c = (i < bfg.PublicStats.CurrentAmmo) ? Color.LimeGreen : Color.DarkGray * 0.5f;
+        spriteBatch.Draw(whitePixel, new Rectangle((int) (barPos.X + i * (segmentWidth + gap)), (int) barPos.Y, (int) segmentWidth, 8), c);
+      }
+    } else if (ActiveItem is ABaseGun gun && gun.IsReloading && whitePixel != null) {
       float barWidth = 60f;
       float barHeight = 8f;
       Vector2 barPos = Position + new Vector2(-barWidth / 2f, -80f);
