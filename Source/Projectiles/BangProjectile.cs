@@ -1,4 +1,4 @@
-﻿using GameProject.Collisions;
+using GameProject.Collisions;
 using GameProject.Collisions.Shapes;
 using GameProject.Items;
 using GameProject.PlayerSpace;
