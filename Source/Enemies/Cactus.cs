@@ -1,4 +1,4 @@
-﻿using GameProject.Enemies.CactusStates;
+using GameProject.Enemies.CactusStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

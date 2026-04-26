@@ -1,4 +1,4 @@
-﻿using GameProject.Enemies.BossStates;
+using GameProject.Enemies.BossStates;
 using GameProject.Enemies.States;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;

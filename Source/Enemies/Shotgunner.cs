@@ -1,4 +1,4 @@
-﻿using GameProject.Enemies.ShotgunnerStates;
+using GameProject.Enemies.ShotgunnerStates;
 using GameProject.Enemies.States;
 using GameProject.Factories;
 using GameProject.Managers;

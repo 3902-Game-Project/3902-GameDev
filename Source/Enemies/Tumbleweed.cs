@@ -1,4 +1,4 @@
-﻿using GameProject.Collisions;
+using GameProject.Collisions;
 using GameProject.Enemies.States;
 using GameProject.Enemies.TumbleweedStates;
 using Microsoft.Xna.Framework;

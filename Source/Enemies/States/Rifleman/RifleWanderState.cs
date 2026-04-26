@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using GameProject.Enemies.States;
 
 namespace GameProject.Enemies.RiflemanStates;

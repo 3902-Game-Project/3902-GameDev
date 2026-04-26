@@ -1,4 +1,4 @@
-﻿using GameProject.Enemies.RiflemanStates;
+using GameProject.Enemies.RiflemanStates;
 using GameProject.Enemies.States;
 using GameProject.Factories;
 using GameProject.Managers;

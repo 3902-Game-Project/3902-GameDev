@@ -1,4 +1,4 @@
-﻿using GameProject.Enemies.States;
+using GameProject.Enemies.States;
 
 namespace GameProject.Enemies.BossStates;
 

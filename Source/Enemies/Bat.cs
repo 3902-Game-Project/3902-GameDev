@@ -1,4 +1,4 @@
-﻿using GameProject.Enemies.BatStates;
+using GameProject.Enemies.BatStates;
 using GameProject.Enemies.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

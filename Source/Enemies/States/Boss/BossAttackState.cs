@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies.BossStates;
 
@@ -11,7 +11,11 @@ internal class BossAttackState : IEnemyState {
     this.boss = boss;
     this.boss.Velocity = Vector2.Zero;
     // Placeholder attack frames
-    this.boss.CurrentSourceRectangles = [new(0, 128, 64, 64), new(64, 128, 64, 64), new(128, 128, 64, 64)];
+    this.boss.CurrentSourceRectangles = [
+      new(0, 128, 64, 64),
+      new(64, 128, 64, 64),
+      new(128, 128, 64, 64),
+    ];
     this.boss.CurrentFrame = 0;
   }
 
