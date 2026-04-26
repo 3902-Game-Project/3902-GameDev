@@ -7,32 +7,18 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Projectiles;
 
-internal class BFGProjectile : IProjectile, ICollidable {
+internal class BFGProjectile(Texture2D texture, Vector2 position, Vector2 direction, float speed, int damage) : IProjectile, ICollidable {
   public bool IsExpired { get; private set; }
-  public Vector2 Position { get; set; }
+  public Vector2 Position { get; set; } = position;
 
   public Rectangle BoundingBox => new((int) Position.X - 8, (int) Position.Y - 8, 16, 16);
 
-  private readonly BoxCollider boxCollider;
+  private readonly BoxCollider boxCollider = new(16f, 16f, position);
   public IShape Shape => boxCollider;
   public Layer Layer { get; } = Layer.Projectiles;
   public Layer Mask { get; } = Layer.Environment | Layer.Enemies;
 
   private readonly Rectangle sourceRect = new(48, 0, 16, 16);
-  private readonly Vector2 direction;
-  private readonly float speed;
-  private readonly int damage;
-  private readonly Texture2D texture;
-
-  public BFGProjectile(Texture2D texture, Vector2 position, Vector2 direction, float speed, int damage) {
-    this.texture = texture;
-    Position = position;
-    this.direction = direction;
-    this.speed = speed;
-    this.damage = damage;
-
-    boxCollider = new BoxCollider(16f, 16f, position);
-  }
 
   public void Update(double deltaTime) {
     Position += direction * speed * (float) deltaTime;
