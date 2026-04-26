@@ -27,4 +27,7 @@ internal class ProjectileFactory {
   public IProjectile CreateBomb(Vector2 startPosition, Vector2 direction, float velocity, float lifetime) {
     return new BombProjectile(projectileTexture, startPosition, direction, velocity, lifetime);
   }
+  public IProjectile CreateBang(Vector2 startPosition) {
+    return new BangProjectile(startPosition);
+  }
 }
