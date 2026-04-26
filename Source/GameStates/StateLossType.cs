@@ -49,7 +49,7 @@ internal class StateLossType(Game1 game) : IGameState {
       position: new Vector2(
           game.DefaultViewport.Width,
           game.DefaultViewport.Height
-        ) * 0.5f + new Vector2(0.0f, -10.0f),
+        ) * 0.5f,
       text:
         "Game Over\n" +
         "Press R/GamePadA for main menu, Q/GamePadY to quit."
