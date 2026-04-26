@@ -14,6 +14,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Level;
 
+#nullable enable
+
 internal class Level : ILevel {
   private readonly List<IBlock> nonCollidableBlocks;
   private readonly List<IBlock> collidableBlocks;
@@ -86,7 +88,6 @@ internal class Level : ILevel {
     }
   }
 
-  public List<IWorldPickup> Pickups => pickups;
   public ProjectileManager ProjectileManager { get; private set; } = new ProjectileManager();
 
   public void Initialize() { }
@@ -218,6 +219,22 @@ internal class Level : ILevel {
 
   public IEnumerable<IBlock> GetOpenableDoors() {
     return doors;
+  }
+
+  public IWorldPickup? GetClosestPickupInRange(Vector2 position, float range) {
+    IWorldPickup? closestPickup = null;
+    float? closestDistance = null;
+
+    foreach (var pickup in pickups) {
+      float distance = Vector2.Distance(position, pickup.Position);
+
+      if (distance < range && (closestDistance == null || distance < closestDistance)) {
+        closestDistance = distance;
+        closestPickup = pickup;
+      }
+    }
+
+    return closestPickup;
   }
 
   public void PlayerResolveCollisions(ICollidable movingEntity, CollisionAxis axis = CollisionAxis.Both, float cornerTolerance = 3.0f) {

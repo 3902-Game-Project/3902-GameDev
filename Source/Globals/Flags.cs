@@ -2,8 +2,8 @@
 
 internal static class Flags {
   /* compile-time tweakables */
-  public static bool StartInDebugLevel { get; } = false;
-  public static bool EnableVignette { get; } = true;
+  public static readonly bool StartInDebugLevel = false;
+  public static readonly bool EnableVignette = true;
 
   /* runtime tweakables */
   public static bool HaltAllUpdates { get; set; } = false;

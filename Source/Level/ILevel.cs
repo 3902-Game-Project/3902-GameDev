@@ -9,12 +9,12 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Level;
 
 internal interface ILevel : IInitable, ITemporalUpdatable, IGPDrawable {
-  List<IWorldPickup> Pickups { get; }
   public ProjectileManager ProjectileManager { get; }
 
   Vector2 GetDefaultPlayerPosition();
   void AddPickup(IWorldPickup pickup);
   void RemovePickup(IWorldPickup pickup);
   IEnumerable<IBlock> GetOpenableDoors();
+  public IWorldPickup? GetClosestPickupInRange(Vector2 position, float range);
   void PlayerResolveCollisions(ICollidable movingEntity, CollisionAxis axis = CollisionAxis.Both, float cornerTolerance = 3.0f);
 }

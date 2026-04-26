@@ -201,16 +201,8 @@ internal class Player : ITemporalUpdatable, IGPDrawable, ICollidable {
     if (LevelManager?.CurrentLevel == null) return;
 
     float grabRange = 75f;
-    IWorldPickup closestPickup = null;
-    float closestDistance = float.MaxValue;
 
-    foreach (var pickup in LevelManager.CurrentLevel.Pickups) {
-      float distance = Vector2.Distance(Position, pickup.Position);
-      if (distance < grabRange && distance < closestDistance) {
-        closestDistance = distance;
-        closestPickup = pickup;
-      }
-    }
+    IWorldPickup? closestPickup = LevelManager.CurrentLevel.GetClosestPickupInRange(Position, grabRange);
 
     if (closestPickup != null) {
       closestPickup.OnPickup(this);
