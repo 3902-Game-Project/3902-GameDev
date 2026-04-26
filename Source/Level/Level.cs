@@ -129,16 +129,18 @@ internal class Level : ILevel {
       doorBlock.Update(deltaTime);
     }
 
-    foreach (var deadEnemy in deadEnemies) {
-      deadEnemy.Update(deltaTime);
-    }
+    if (!Flags.HaltEnemies) {
+      foreach (var deadEnemy in deadEnemies) {
+        deadEnemy.Update(deltaTime);
+      }
 
-    foreach (var aliveEnemy in aliveEnemies) {
-      aliveEnemy.Update(deltaTime);
-      aliveEnemy.Target = player.Position;
-    }
+      foreach (var aliveEnemy in aliveEnemies) {
+        aliveEnemy.Update(deltaTime);
+        aliveEnemy.Target = player.Position;
+      }
 
-    CategorizeDeadEnemies();
+      CategorizeDeadEnemies();
+    }
 
     foreach (var pickup in pickups) {
       pickup.Update(deltaTime);
@@ -146,6 +148,7 @@ internal class Level : ILevel {
 
     for (int i = 0; i < ProjectileManager.Projectiles.Count; i++) {
       IProjectile projectile = ProjectileManager.Projectiles[i];
+
       if (projectile is ICollidable collidableProj) {
         collisionManager.Add(collidableProj);
       }
