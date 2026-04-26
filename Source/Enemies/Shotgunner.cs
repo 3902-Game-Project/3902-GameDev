@@ -28,18 +28,17 @@ internal class Shotgunner : ABaseEnemy {
       case FacingDirection.Right:
         bulletDirection = new Vector2(1f, 0f);
         break;
-    
+
       case FacingDirection.Up:
         bulletDirection = new Vector2(0f, -1f);
         break;
-    
+
       case FacingDirection.Down:
         bulletDirection = new Vector2(0f, 1f);
         break;
 
       default:
         break;
-    
     }
     Vector2 spawnPosition = Position + new Vector2(0f, -30f) + (bulletDirection * 15f);
     Vector2 spreadPerpendicular = new(-bulletDirection.Y, bulletDirection.X);

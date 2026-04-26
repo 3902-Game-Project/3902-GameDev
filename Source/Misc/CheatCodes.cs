@@ -54,7 +54,7 @@ internal class CheatCodes {
     Debug.WriteLine("unlimited health");
   }
 
-  public void UnlimitedAmmo(Player player) {  
+  public void UnlimitedAmmo(Player player) {
     player.Inventory.Ammo[AmmoType.Heavy] += 9999;
     player.Inventory.Ammo[AmmoType.Shells] += 9999;
     player.Inventory.Ammo[AmmoType.Light] += 9999;
@@ -64,31 +64,31 @@ internal class CheatCodes {
   }
 
   public void UnlimitedItems(Player player) {
-      if (!player.Inventory.GeneralItems.OfType<KeyItem>().Any()) {
-        IItem key = ItemFactory.CreateKey(-1f, -1f, LevelManager);
-        player.Inventory.PickupItem(key);
-      }
+    if (!player.Inventory.GeneralItems.OfType<KeyItem>().Any()) {
+      IItem key = ItemFactory.CreateKey(-1f, -1f, LevelManager);
+      player.Inventory.PickupItem(key);
+    }
 
-      if (!player.Inventory.GeneralItems.OfType<HealthItem>().Any()) {
-        IItem health = ItemFactory.Instance.CreateHealthItem(-1f, -1f, player);
-        player.Inventory.PickupItem(health);
-      }
+    if (!player.Inventory.GeneralItems.OfType<HealthItem>().Any()) {
+      IItem health = ItemFactory.Instance.CreateHealthItem(-1f, -1f, player);
+      player.Inventory.PickupItem(health);
+    }
 
-      if (!player.Inventory.GeneralItems.OfType<InfiniteAmmoItem>().Any()) {
-        IItem ammo = ItemFactory.Instance.CreateInfiniteAmmoItem(-1f, -1f, player);
-        player.Inventory.PickupItem(ammo);
-      }
+    if (!player.Inventory.GeneralItems.OfType<InfiniteAmmoItem>().Any()) {
+      IItem ammo = ItemFactory.Instance.CreateInfiniteAmmoItem(-1f, -1f, player);
+      player.Inventory.PickupItem(ammo);
+    }
 
-      if (!player.Inventory.GeneralItems.OfType<InvincibilityItem>().Any()) {
-        IItem invincible = ItemFactory.Instance.CreateInvincibilityItem(-1f, -1f, player);
-        player.Inventory.PickupItem(invincible);
-      }
+    if (!player.Inventory.GeneralItems.OfType<InvincibilityItem>().Any()) {
+      IItem invincible = ItemFactory.Instance.CreateInvincibilityItem(-1f, -1f, player);
+      player.Inventory.PickupItem(invincible);
+    }
 
-      if (!itemsOn) {
-        lastPressed.Clear();
-        itemsOn = true;
-        Debug.WriteLine("unlimited items");
-      }
+    if (!itemsOn) {
+      lastPressed.Clear();
+      itemsOn = true;
+      Debug.WriteLine("unlimited items");
+    }
   }
 
   public bool CodesMatch(List<Keys> code) {

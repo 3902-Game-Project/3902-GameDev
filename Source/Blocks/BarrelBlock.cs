@@ -37,7 +37,7 @@ internal class BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) : ABaseBlock(
     if (info.Collider is IProjectile && State == BarrelBlockState.Solid) {
       ChangeState(BarrelBlockState.Broken);
       currentFrame = 1;
-      Collider = new BoxCollider(0, 0, new(0,0));
+      Collider = new BoxCollider(0, 0, new(0, 0));
     }
   }
 

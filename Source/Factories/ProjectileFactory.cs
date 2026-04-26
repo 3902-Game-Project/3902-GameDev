@@ -1,7 +1,6 @@
 using GameProject.Items;
 using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
-using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 

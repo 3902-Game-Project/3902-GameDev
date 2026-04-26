@@ -31,12 +31,12 @@ internal class Rifleman : ABaseEnemy {
         bulletDirection = new Vector2(1f, 0f);
         spawnPosition = Position + new Vector2(15f, -33f);
         break;
-    
+
       case FacingDirection.Up:
         bulletDirection = new Vector2(0f, -1f);
         spawnPosition = Position + new Vector2(0f, -50f);
         break;
-    
+
       case FacingDirection.Down:
         bulletDirection = new Vector2(0f, 1f);
         spawnPosition = Position + new Vector2(0f, 0f);
@@ -44,7 +44,6 @@ internal class Rifleman : ABaseEnemy {
 
       default:
         break;
-    
     }
     IProjectile bullet = ProjectileFactory.Instance.CreateBullet(spawnPosition, bulletDirection, 300f, 2f, damage);
     if (bullet is BulletDefault b) b.IsPlayerShot = false;

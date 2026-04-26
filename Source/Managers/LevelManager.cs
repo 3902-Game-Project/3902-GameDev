@@ -4,9 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using GameProject.Globals;
-using GameProject.Items;
 using GameProject.Level;
-using GameProject.WorldPickups;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 

@@ -1,9 +1,9 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using GameProject.Collisions;
+﻿using GameProject.Collisions;
 using GameProject.Collisions.Shapes;
 using GameProject.Items;
 using GameProject.PlayerSpace;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Projectiles;
 

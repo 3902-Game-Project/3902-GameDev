@@ -30,7 +30,7 @@ internal class FireBlock(Texture2D FireTexture, Vector2 xyPos, Player player) : 
     spriteBatch.Draw(FireTexture, Position, sourceRects[currentFrame], Color.White, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 
-public override void OnCollision(CollisionInfo info) {
+  public override void OnCollision(CollisionInfo info) {
     if (info.Collider is Player) {
       player.TakeDamage(damage);
     }
