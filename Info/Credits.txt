@@ -24,5 +24,6 @@ Ammo: https://fightswithbears.itch.io/2d-health-and-ammo-pickups
 Uzi: https://hotlinemiami.fandom.com/wiki/Uzi
 BFG: https://doom.fandom.com/wiki/BFG9000
 BFG Ammo: https://steamcommunity.com/sharedfiles/filedetails/?l=spanish&id=2504362814
+Bang Flag: https://www.shutterstock.com/image-vector/shooting-toy-gun-pistol-bang-flag-683217688?trackingId=8e4e0704-ef4a-48f8-a1d9-f3f8a8fdedbb&listId=searchResults
 
 Made sprite sheets with Piskel

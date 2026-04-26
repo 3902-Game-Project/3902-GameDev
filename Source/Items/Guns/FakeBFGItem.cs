@@ -27,7 +27,7 @@ internal class FakeBFGItem : ABaseGun {
     if (fireMode != null && fireMode.CanFire(useType)) {
       Vector2 spawnPos = Position + (Direction == FacingDirection.Left ? new Vector2(-20, 0) : new Vector2(20, 0));
 
-      myLevelManager.CurrentLevel.ProjectileManager.Add(ProjectileFactory.Instance.CreateBang(spawnPos));
+      myLevelManager.CurrentLevel.ProjectileManager.Add(ProjectileFactory.CreateBang(spawnPos));
       SoundManager.Instance.Play(SoundID.GunshotDefault);
     }
   }

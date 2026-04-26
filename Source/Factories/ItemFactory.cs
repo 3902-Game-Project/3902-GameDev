@@ -24,7 +24,7 @@ internal class ItemFactory {
     invincibilityItemTexture = contentManager.Load<Texture2D>("Items/InvincibilityPotion");
     healthItemTexture = contentManager.Load<Texture2D>("Items/HealthPotion");
     infiniteAmmoItemTexture = contentManager.Load<Texture2D>("Items/AmmoPotion");
-    BFGTexture = contentManager.Load<Texture2D>("Items/special_weapons_sheet");
+    BFGTexture = contentManager.Load<Texture2D>("Items/new_guns");
   }
 
   public IItem CreateRevolver(float xPos, float yPos, Player player, ILevelManager levelManager) {
