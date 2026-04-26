@@ -351,16 +351,20 @@ internal partial class LevelLoader {
         break;
 
       case "36":
+        /* health item */
         pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateHealthItem(xPos, yPos, player)));
         break;
 
       case "37":
+        /* invincibility item */
         pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateInvincibilityItem(xPos, yPos, player)));
         break;
 
       case "38":
+        /* infinite ammo item */
         pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateInfiniteAmmoItem(xPos, yPos, player)));
         break;
+
       case "39":
         /* boss */
         enemies.Add(EnemyFactory.Instance.CreateBossSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, levelManager));

@@ -87,7 +87,6 @@ Entry IDs:
     37 = invincibility item
     38 = infinite ammo item
 
-
   enemies:
     Note: you must also specify a background block for enemies!
     4 = snake
@@ -96,9 +95,10 @@ Entry IDs:
     11 = rifleman
     12 = tumbleweed
     13 = cactus
+    39 = boss
 
   Gaps in the IDs:
     8:2, 24
 
   Biggest ID:
-    38
+    39
