@@ -67,6 +67,45 @@ internal class ItemFactory {
     return new ShotgunItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
   }
 
+  public IItem CreateSMG(float xPos, float yPos, Player player, ILevelManager levelManager) {
+    var stats = new GunStats {
+      AmmoType = AmmoType.Light,
+      BulletVelocity = 600f,
+      FireRate = 0.1f, // Fast fire
+      MaxAmmo = 30,
+      CurrentAmmo = 30,
+      ReloadTime = 1.5f,
+      BaseDamage = 15,
+      ReloadsOneByOne = false // Reloads entire clip at once
+    };
+    return new SMGItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
+  }
+
+  public IItem CreateBFG(float xPos, float yPos, Player player, ILevelManager levelManager) {
+    var stats = new GunStats {
+      AmmoType = AmmoType.BFG,
+      BulletVelocity = 800f,
+      FireRate = 1.0f,
+      MaxAmmo = 3,
+      CurrentAmmo = 3,
+      ReloadTime = 9999f, // Cannot reload
+      BaseDamage = 2000,
+      ReloadsOneByOne = false
+    };
+    // Replace this with actual BFG texture
+    return new BFGItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
+  }
+
+  public IItem CreateFakeBFG(float xPos, float yPos, Player player, ILevelManager levelManager) {
+    var stats = new GunStats {
+      AmmoType = AmmoType.BFG,
+      FireRate = 1.0f,
+      MaxAmmo = 999, // Doesn't matter
+      CurrentAmmo = 999
+    };
+    return new FakeBFGItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
+  }
+
   public static IItem CreateKey(float xPos, float yPos, ILevelManager levelManager) {
     return new KeyItem(TextureStore.Instance.MainBlockItemAtlas, new Vector2(xPos, yPos), levelManager);
   }
