@@ -75,6 +75,8 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
     if (Position.X < 0) {
       Position = new Vector2(0, Position.Y);
     }
+
+    ChangeDirection();
   }
 
   public virtual void TakeDamage(int damage) {
@@ -97,6 +99,15 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
 
     Vector2 direction = Vector2.Normalize(delta);
     Velocity = direction * speed;
+  }
+
+  protected virtual void ChangeDirection() {
+
+    Vector2 delta = Target - Position;
+    if (delta == Vector2.Zero) {
+      Velocity = Vector2.Zero;
+      return;
+    }
 
     float absX = Math.Abs(delta.X);
     float absY = Math.Abs(delta.Y);
@@ -106,7 +117,6 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
     } else {
       Direction = delta.Y >= 0 ? FacingDirection.Down : FacingDirection.Up;
     }
-    
   }
 
   public virtual void Die() {
