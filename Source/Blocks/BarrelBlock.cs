@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using GameProject.Collisions;
 using GameProject.Collisions.Shapes;
 using GameProject.Projectiles;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using GameProject.Misc;
 using Microsoft.Xna.Framework.Input;

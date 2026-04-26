@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using GameProject.Factories;
 using GameProject.GameStates;
 using GameProject.Globals;
