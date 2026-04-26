@@ -105,7 +105,13 @@ internal class LevelManager(Game1 game) : ILevelManager {
     var levelNamesSet = new HashSet<string>(LEVEL_NAMES);
 
     foreach (var name in LEVEL_NAMES) {
-      var level = LevelLoader.FromString(game.StateGame.Player, game.StateGame.LevelManager, levelNamesSet, File.ReadAllText(content.RootDirectory + "/Levels/" + name + ".csv"));
+      var level = LevelLoader.FromString(
+        player: game.StateGame.Player,
+        levelManager: game.StateGame.LevelManager,
+        levelNames: levelNamesSet,
+        levelDataString: File.ReadAllText(content.RootDirectory + "/Levels/" + name + ".csv"),
+        isBfgLevel: name == "13_level"
+      );
 
       levels.Add(name, level);
     }
@@ -127,11 +133,6 @@ internal class LevelManager(Game1 game) : ILevelManager {
     }
 
     if (newLevelName != currentLevelName) {
-      // Check if we are leaving a level with enemies still alive
-      if (CurrentLevel is GameProject.Level.Level lvl && lvl.HasKillableEnemiesRemaining) {
-        AllEnemiesCleared = false;
-      }
-
       fadeToLevelName = newLevelName;
       // reloading StateGame to trigger level change code in the future
       game.ChangeState(game.StateGame);
