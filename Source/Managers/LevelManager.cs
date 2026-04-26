@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using GameProject.Globals;
+using GameProject.Items;
 using GameProject.Level;
+using GameProject.WorldPickups;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -106,6 +108,26 @@ internal class LevelManager(Game1 game) : ILevelManager {
 
       levels.Add(name, level);
     }
+
+    // --- NEW DEBUG: SPAWN ON FLOOR IN STARTING LEVEL ---
+    var factory = GameProject.Factories.ItemFactory.Instance;
+    var player = game.StateGame.Player;
+
+    // We add these directly to the "Starting Level" dictionary entry
+    if (levels.TryGetValue(currentLevelName, out ILevel? startingLevel)) {
+      // Positioned roughly in the middle of a standard room
+      float testX = 200f;
+      float testY = 300f;
+
+      // Create the physical pickups you can walk over
+      startingLevel.AddPickup(new ItemWorldPickup(factory.CreateSMG(testX, testY, player, this)));
+      startingLevel.AddPickup(new ItemWorldPickup(factory.CreateBFG(testX + 60, testY, player, this)));
+
+      // Give the player ammo for the BFG so they can actually test it
+      player.Inventory.Ammo[AmmoType.BFG] = 10;
+      player.Inventory.Ammo[AmmoType.Light] = 100;
+    }
+    // --------------------------------------------------
 
     game.StateGame.Player.Position = CurrentLevel.GetDefaultPlayerPosition();
   }

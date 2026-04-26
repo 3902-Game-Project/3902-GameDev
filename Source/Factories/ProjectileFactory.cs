@@ -17,7 +17,7 @@ internal class ProjectileFactory {
 
   public void LoadAllTextures(ContentManager content) {
     projectileTexture = content.Load<Texture2D>("Misc/projectile_spritesheet");
-    specialWeaponsTexture = content.Load<Texture2D>("Items/special_weapons_sheet");
+    specialWeaponsTexture = content.Load<Texture2D>("Items/new_guns");
   }
 
   public IProjectile CreateBullet(Vector2 startPosition, Vector2 direction, float velocity, float lifetime, int damage) {

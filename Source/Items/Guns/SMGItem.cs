@@ -8,9 +8,11 @@ namespace GameProject.Items;
 
 internal class SMGItem : ABaseGun {
   public SMGItem(Texture2D texture, Vector2 startPosition, Player player, ILevelManager levelManager, GunStats stats)
-    : base(texture, startPosition, player, levelManager, stats) {
+      : base(texture, startPosition, player, levelManager, stats) {
+
     Category = ItemCategory.Primary;
-    sourceRectangle = new Rectangle(0, 20, 25, 10);
+
+    sourceRectangle = new Rectangle(0, 20, 25, 25);
     bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2f, 0) * scale;
     fireMode = new AutomaticFire(this.stats);
   }

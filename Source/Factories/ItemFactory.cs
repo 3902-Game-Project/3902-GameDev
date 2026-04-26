@@ -70,17 +70,17 @@ internal class ItemFactory {
   }
 
   public IItem CreateSMG(float xPos, float yPos, Player player, ILevelManager levelManager) {
-    var stats = new GunStats {
-      AmmoType = AmmoType.Light,
-      BulletVelocity = 600f,
-      FireRate = 0.1f, // Fast fire
+    GunStats smgStats = new GunStats {
       MaxAmmo = 30,
       CurrentAmmo = 30,
-      ReloadTime = 1.5f,
-      BaseDamage = 15,
-      ReloadsOneByOne = false // Reloads entire clip at once
+      BaseDamage = 1,
+      BulletVelocity = 700f,
+      FireRate = 0.1f,
+      ReloadTime = 1.2f,
+      AmmoType = AmmoType.Light,
+      ReloadsOneByOne = false
     };
-    return new SMGItem(BFGTexture, new Vector2(xPos, yPos), player, levelManager, stats);
+    return new SMGItem(BFGTexture, new Vector2(xPos, yPos), player, levelManager, smgStats);
   }
 
   public IItem CreateBFG(float xPos, float yPos, Player player, ILevelManager levelManager) {
@@ -90,7 +90,7 @@ internal class ItemFactory {
       FireRate = 1.0f,
       MaxAmmo = 3,
       CurrentAmmo = 3,
-      ReloadTime = 9999f, // Cannot reload
+      ReloadTime = 9999f,
       BaseDamage = 2000,
       ReloadsOneByOne = false
     };

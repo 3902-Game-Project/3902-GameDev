@@ -4,6 +4,7 @@ using GameProject.Blocks;
 using GameProject.Collisions;
 using GameProject.Enemies;
 using GameProject.Globals;
+using GameProject.Items;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
 using GameProject.Projectiles;
