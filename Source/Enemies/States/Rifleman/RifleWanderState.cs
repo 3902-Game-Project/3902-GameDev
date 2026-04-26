@@ -11,7 +11,8 @@ internal class RifleWanderState(Rifleman rifle) : AEnemyMoveState(rifle, [new(71
   public override void Update(double deltaTime) {
     base.Update(deltaTime);
     float yDistanceFromTarget = Math.Abs(enemy.Position.Y - enemy.Target.Y);
-    if (yDistanceFromTarget < 25) {
+    float xDistanceFromTarget = Math.Abs(enemy.Position.X - enemy.Target.X);
+    if (yDistanceFromTarget <= 25 || xDistanceFromTarget <= 25) {
       enemy.CurrentState = new RifleAttackState((Rifleman) enemy);
     }
   }

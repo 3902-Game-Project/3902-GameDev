@@ -39,7 +39,7 @@ internal class Rifleman : ABaseEnemy {
     
       case FacingDirection.Down:
         bulletDirection = new Vector2(0f, 1f);
-        spawnPosition = Position + new Vector2(0f, 50f);
+        spawnPosition = Position + new Vector2(0f, 0f);
         break;
 
       default:
