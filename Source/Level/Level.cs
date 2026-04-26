@@ -27,7 +27,7 @@ internal class Level : ILevel {
   private readonly CollisionManager collisionManager = new();
   private readonly Player player;
   public bool HasKillableEnemiesRemaining => aliveEnemies.Any(e => e is not Cactus);
-  private bool isBfgLevel;
+  private readonly bool isBfgLevel;
   private bool bfgSpawned = false;
   private readonly ILevelManager levelManager;
 

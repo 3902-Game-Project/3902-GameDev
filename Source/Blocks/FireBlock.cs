@@ -15,7 +15,7 @@ internal class FireBlock(Texture2D FireTexture, Vector2 xyPos, Player player) : 
   private double animationTimer = 0.0f;
   private readonly double timePerFrame = 0.15;
 
-  private Player player = player;
+  private readonly Player player = player;
   private readonly static int damage = 25;
 
   public override void Update(double deltaTime) {

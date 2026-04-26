@@ -18,15 +18,15 @@ internal class BarShelfBlock : ABaseBlock {
   public override void Update(double deltaTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(barShelfTexture, Position, sourceRect, Color.White, this.rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
+    spriteBatch.Draw(barShelfTexture, Position, sourceRect, Color.White, rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 
   public void Rotate() {
     float x = Position.X, y = Position.Y;
     if (Position.X >= 832) {
-      this.rotation = MathHelper.ToRadians(90);
+      rotation = MathHelper.ToRadians(90);
       x += 64;
-      this.rotated = true;
+      rotated = true;
     }
 
     Position = new(x, y);

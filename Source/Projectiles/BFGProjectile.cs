@@ -11,7 +11,7 @@ internal class BFGProjectile : IProjectile, ICollidable {
   public bool IsExpired { get; private set; }
   public Vector2 Position { get; set; }
 
-  public Rectangle BoundingBox => new Rectangle((int) Position.X - 8, (int) Position.Y - 8, 16, 16);
+  public Rectangle BoundingBox => new((int) Position.X - 8, (int) Position.Y - 8, 16, 16);
 
   private readonly BoxCollider boxCollider;
   public IShape Shape => boxCollider;
@@ -26,12 +26,12 @@ internal class BFGProjectile : IProjectile, ICollidable {
 
   public BFGProjectile(Texture2D texture, Vector2 position, Vector2 direction, float speed, int damage) {
     this.texture = texture;
-    this.Position = position;
+    Position = position;
     this.direction = direction;
     this.speed = speed;
     this.damage = damage;
 
-    this.boxCollider = new BoxCollider(16f, 16f, position);
+    boxCollider = new BoxCollider(16f, 16f, position);
   }
 
   public void Update(double deltaTime) {

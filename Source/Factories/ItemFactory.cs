@@ -70,7 +70,7 @@ internal class ItemFactory {
   }
 
   public IItem CreateSMG(float xPos, float yPos, Player player, ILevelManager levelManager) {
-    GunStats smgStats = new GunStats {
+    GunStats smgStats = new() {
       MaxAmmo = 30,
       CurrentAmmo = 30,
       BaseDamage = 15,

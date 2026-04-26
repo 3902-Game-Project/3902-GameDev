@@ -10,7 +10,7 @@ namespace GameProject.Projectiles;
 internal class BangProjectile : IProjectile, ICollidable {
   public bool IsExpired { get; private set; }
   public Vector2 Position { get; set; }
-  public Rectangle BoundingBox => new Rectangle((int) Position.X, (int) Position.Y, 1, 1);
+  public Rectangle BoundingBox => new((int) Position.X, (int) Position.Y, 1, 1);
 
   public IShape Shape { get; }
   public Layer Layer { get; } = Layer.Projectiles;
@@ -25,9 +25,9 @@ internal class BangProjectile : IProjectile, ICollidable {
   public BangProjectile(Texture2D texture, ABaseGun sourceGun) {
     this.texture = texture;
     this.sourceGun = sourceGun;
-    this.direction = sourceGun.Direction;
-    this.Position = sourceGun.Position;
-    this.Shape = new BoxCollider(1f, 1f, Position);
+    direction = sourceGun.Direction;
+    Position = sourceGun.Position;
+    Shape = new BoxCollider(1f, 1f, Position);
   }
 
   public void Update(double deltaTime) {
@@ -42,7 +42,7 @@ internal class BangProjectile : IProjectile, ICollidable {
     else if (direction == FacingDirection.Up) barrelOffset = new Vector2(0, -20);
     else if (direction == FacingDirection.Down) barrelOffset = new Vector2(0, 20);
 
-    Vector2 visualNudge = new Vector2(-4, 8);
+    Vector2 visualNudge = new(-4, 8);
 
     Position = sourceGun.Position + barrelOffset + visualNudge;
   }
