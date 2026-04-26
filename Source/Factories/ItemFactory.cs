@@ -13,6 +13,7 @@ internal class ItemFactory {
   private Texture2D healthItemTexture;
   private Texture2D invincibilityItemTexture;
   private Texture2D infiniteAmmoItemTexture;
+  private Texture2D BFGTexture;
 
   public static ItemFactory Instance { get; } = new();
 
@@ -23,6 +24,7 @@ internal class ItemFactory {
     invincibilityItemTexture = contentManager.Load<Texture2D>("Items/InvincibilityPotion");
     healthItemTexture = contentManager.Load<Texture2D>("Items/HealthPotion");
     infiniteAmmoItemTexture = contentManager.Load<Texture2D>("Items/AmmoPotion");
+    BFGTexture = contentManager.Load<Texture2D>("Items/new_guns");
   }
 
   public IItem CreateRevolver(float xPos, float yPos, Player player, ILevelManager levelManager) {
@@ -65,6 +67,44 @@ internal class ItemFactory {
     };
 
     return new ShotgunItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
+  }
+
+  public IItem CreateSMG(float xPos, float yPos, Player player, ILevelManager levelManager) {
+    GunStats smgStats = new GunStats {
+      MaxAmmo = 30,
+      CurrentAmmo = 30,
+      BaseDamage = 15,
+      BulletVelocity = 700f,
+      FireRate = 0.2f,
+      ReloadTime = 1.2f,
+      AmmoType = AmmoType.Light,
+      ReloadsOneByOne = false
+    };
+    return new SMGItem(BFGTexture, new Vector2(xPos, yPos), player, levelManager, smgStats);
+  }
+
+  public IItem CreateBFG(float xPos, float yPos, Player player, ILevelManager levelManager) {
+    var stats = new GunStats {
+      AmmoType = AmmoType.BFG,
+      BulletVelocity = 800f,
+      FireRate = 1.0f,
+      MaxAmmo = 3,
+      CurrentAmmo = 3,
+      ReloadTime = 9999f,
+      BaseDamage = 2000,
+      ReloadsOneByOne = false
+    };
+    return new BFGItem(BFGTexture, new Vector2(xPos, yPos), player, levelManager, stats);
+  }
+
+  public IItem CreateFakeBFG(float xPos, float yPos, Player player, ILevelManager levelManager) {
+    var stats = new GunStats {
+      AmmoType = AmmoType.BFG,
+      FireRate = 1.0f,
+      MaxAmmo = 999, // Doesn't matter
+      CurrentAmmo = 999
+    };
+    return new FakeBFGItem(BFGTexture, new Vector2(xPos, yPos), player, levelManager, stats);
   }
 
   public static IItem CreateKey(float xPos, float yPos, ILevelManager levelManager) {

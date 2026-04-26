@@ -16,7 +16,11 @@ internal class PlayerUseItemState(Player player) : APlayerState(player) {
   public override void MoveDown() { }
   public override void MoveLeft() { }
   public override void MoveRight() { }
-  public override void UseItem(UseType useType) { }
+  public override void UseItem(UseType useType) {
+    Player.Inventory.ActiveItem?.Use(useType);
+    timer = 20;
+  }
+
   public override void UseKey(UseType useType) { }
 
   public override void Update(double deltaTime) {

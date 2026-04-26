@@ -47,16 +47,5 @@ internal abstract class AEnemyMoveState : IEnemyState {
     if (wanderTimer >= wanderDuration) TransitionToNextState();
   }
 
-  private void ChangeDirection() {
-    float randomX = (float) (random.NextDouble() * 2 - 1);
-    float randomY = lockYAxis ? 0f : (float) (random.NextDouble() * 2 - 1);
-    Vector2 direction = new(randomX, randomY);
-
-    if (direction != Vector2.Zero) direction.Normalize();
-
-    enemy.Velocity = direction * speed;
-    if (enemy.Velocity.X != 0) enemy.Direction = enemy.Direction = enemy.Velocity.X > 0 ? FacingDirection.Right : FacingDirection.Left;
-  }
-
   protected abstract void TransitionToNextState();
 }

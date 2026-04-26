@@ -1,5 +1,7 @@
+using GameProject.Items;
 using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
+using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -7,17 +9,16 @@ namespace GameProject.Factories;
 
 internal class ProjectileFactory {
   private Texture2D projectileTexture;
+  private Texture2D specialWeaponsTexture;
   private static readonly ProjectileFactory instance = new();
 
-  public static ProjectileFactory Instance {
-    get { return instance; }
-  }
+  public static ProjectileFactory Instance => instance;
 
-  private ProjectileFactory() {
-  }
+  private ProjectileFactory() { }
 
   public void LoadAllTextures(ContentManager content) {
     projectileTexture = content.Load<Texture2D>("Misc/projectile_spritesheet");
+    specialWeaponsTexture = content.Load<Texture2D>("Items/new_guns");
   }
 
   public IProjectile CreateBullet(Vector2 startPosition, Vector2 direction, float velocity, float lifetime, int damage) {
@@ -26,5 +27,13 @@ internal class ProjectileFactory {
 
   public IProjectile CreateBomb(Vector2 startPosition, Vector2 direction, float velocity, float lifetime) {
     return new BombProjectile(projectileTexture, startPosition, direction, velocity, lifetime);
+  }
+
+  public IProjectile CreateBang(ABaseGun sourceGun) {
+    return new BangProjectile(specialWeaponsTexture, sourceGun);
+  }
+
+  public IProjectile CreateBFGShot(Vector2 position, Vector2 direction, GunStats stats) {
+    return new BFGProjectile(specialWeaponsTexture, position, direction, stats.BulletVelocity, stats.BaseDamage);
   }
 }

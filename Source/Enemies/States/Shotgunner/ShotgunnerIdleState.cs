@@ -29,7 +29,8 @@ internal class ShotgunnerIdleState : IEnemyState {
   private IEnemyState SelectState() {
     float xDistanceFromTarget = Math.Abs(shotgunner.Target.X - shotgunner.Position.X);
     float yDistanceFromTarget = Math.Abs(shotgunner.Target.Y - shotgunner.Position.Y);
-    if (xDistanceFromTarget <= 250 && yDistanceFromTarget <= 100)
+    if (xDistanceFromTarget <= 250 && yDistanceFromTarget <= 100
+      || yDistanceFromTarget <= 250 && xDistanceFromTarget <= 100)
       return new ShotgunnerAttackState(shotgunner);
 
     return new ShotgunnerWanderState(shotgunner);
