@@ -174,14 +174,8 @@ internal class Player : ITemporalUpdatable, IGPDrawable, ICollidable {
 
     // Auto-Collect for Ammo
     if (LevelManager?.CurrentLevel != null) {
-      for (int i = LevelManager.CurrentLevel.Pickups.Count - 1; i >= 0; i--) {
-        var pickup = LevelManager.CurrentLevel.Pickups[i];
-        if (pickup.IsAutoCollect) {
-          if (Vector2.Distance(Position, pickup.Position) < 30f) {
-            pickup.OnPickup(this);
-            LevelManager.CurrentLevel.RemovePickup(pickup);
-          }
-        }
+      foreach (var pickup in LevelManager.CurrentLevel.GetRemoveAmmoInRange(Position, 30.0f)) {
+        pickup.OnPickup(this);
       }
     }
   }

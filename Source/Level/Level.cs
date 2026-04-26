@@ -221,6 +221,19 @@ internal class Level : ILevel {
     return doors;
   }
 
+  public IEnumerable<IWorldPickup> GetRemoveAmmoInRange(Vector2 position, float range) {
+    for (int i = pickups.Count - 1; i >= 0; i--) {
+      var pickup = pickups[i];
+
+      if (pickup.IsAutoCollect) {
+        if (Vector2.Distance(position, pickup.Position) < range) {
+          yield return pickup;
+          RemovePickup(pickup);
+        }
+      }
+    }
+  }
+
   public IWorldPickup? GetClosestPickupInRange(Vector2 position, float range) {
     IWorldPickup? closestPickup = null;
     float? closestDistance = null;

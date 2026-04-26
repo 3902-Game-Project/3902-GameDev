@@ -15,6 +15,7 @@ internal interface ILevel : IInitable, ITemporalUpdatable, IGPDrawable {
   void AddPickup(IWorldPickup pickup);
   void RemovePickup(IWorldPickup pickup);
   IEnumerable<IBlock> GetOpenableDoors();
+  IEnumerable<IWorldPickup> GetRemoveAmmoInRange(Vector2 position, float range);
   public IWorldPickup? GetClosestPickupInRange(Vector2 position, float range);
   void PlayerResolveCollisions(ICollidable movingEntity, CollisionAxis axis = CollisionAxis.Both, float cornerTolerance = 3.0f);
 }
