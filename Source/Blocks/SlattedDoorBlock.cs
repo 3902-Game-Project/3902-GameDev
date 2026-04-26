@@ -27,6 +27,10 @@ internal class SlattedDoorBlock : ABaseBlock {
     State = state;
 
     Rotate();
+
+    if (State == LockableDoorBlockState.Open) {
+      currentFrame = sourceRects.Count - 1;
+    }
   }
 
   public void Rotate() {
@@ -45,11 +49,7 @@ internal class SlattedDoorBlock : ABaseBlock {
     Position = new(x, y);
   }
 
-  public override void Update(double deltaTime) {
-    if (State == LockableDoorBlockState.Open) {
-      currentFrame = sourceRects.Count - 1;
-    }
-  }
+  public override void Update(double deltaTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(
@@ -73,6 +73,10 @@ internal class SlattedDoorBlock : ABaseBlock {
 
   public void ChangeState(LockableDoorBlockState state) {
     State = state;
+
+    if (State == LockableDoorBlockState.Open) {
+      currentFrame = sourceRects.Count - 1;
+    }
   }
 
   public void Unlock() {
