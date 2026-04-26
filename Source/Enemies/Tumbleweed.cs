@@ -1,4 +1,5 @@
-﻿using GameProject.Enemies.States;
+﻿using GameProject.Collisions;
+using GameProject.Enemies.States;
 using GameProject.Enemies.TumbleweedStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,5 +15,12 @@ internal class Tumbleweed : ABaseEnemy {
 
   protected override void TransitionToDeathState() {
     CurrentState = new GenericDeathState(this, [new(383, 227, 137, 106)]);
+  }
+
+  public override void OnCollision(CollisionInfo info) {
+    base.OnCollision(info);
+    if (info.Collider.Layer == Layer.Environment) {
+      Velocity *= -1;
+    }
   }
 }

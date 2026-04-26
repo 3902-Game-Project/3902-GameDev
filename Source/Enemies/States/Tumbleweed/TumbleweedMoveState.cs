@@ -22,6 +22,9 @@ internal class TumbleweedWanderState(Tumbleweed tumbleweed) :
 
   public override void Update(double deltaTime) {
     base.Update(deltaTime);
-    enemy.Velocity = new Vector2(enemy.Velocity.X, 0);
+    Vector2 horizontalVelocity = new(enemy.Velocity.X, 0f);
+    enemy.Velocity = horizontalVelocity == Vector2.Zero
+      ? Vector2.Zero
+      : Vector2.Normalize(horizontalVelocity) * enemy.Velocity.Length();
   }
 }

@@ -89,7 +89,7 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
     }
   }
 
-  public virtual void FollowTarget(float speed) {
+  public virtual void Navigate(float speed) {
     Vector2 direction = Target - Position;
     if (direction != Vector2.Zero) {
       direction = Vector2.Normalize(direction);

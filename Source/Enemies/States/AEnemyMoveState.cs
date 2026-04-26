@@ -33,7 +33,7 @@ internal abstract class AEnemyMoveState : IEnemyState {
 
     enemy.Position += enemy.Velocity * ((float) deltaTime);
 
-    enemy.FollowTarget(speed);
+    enemy.Navigate(speed);
 
     if (enemy.Position.X < 0 || enemy.Position.X > 800) {
       enemy.Velocity = new Vector2(-enemy.Velocity.X, enemy.Velocity.Y);
