@@ -1,4 +1,4 @@
-﻿Author: Eric
+Author: Eric
 Date: 2026-03-13
 Sprint: 3
 Class to review: Source/Interfaces/Collisions/ICollidable.cs Source/Blocks/BaseBlock.cs
