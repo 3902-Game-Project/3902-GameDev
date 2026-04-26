@@ -7,9 +7,9 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.Controllers;
 
 internal class GamePadController(
-  Dictionary<Buttons, IGPCommand> pressedMappings = null,
-  Dictionary<Buttons, IGPCommand> downMappings = null,
-  Dictionary<Buttons, IGPCommand> releasedMappings = null
+  Dictionary<Buttons, IGPCommand>? pressedMappings = null,
+  Dictionary<Buttons, IGPCommand>? downMappings = null,
+  Dictionary<Buttons, IGPCommand>? releasedMappings = null
 ) : IController {
   private static readonly PlayerIndex PLAYER_INDEX = PlayerIndex.One;
 
@@ -26,19 +26,19 @@ internal class GamePadController(
     gamePadTracker.Update(gamePadState);
 
     foreach (Buttons button in gamePadTracker.GetPressed()) {
-      if (pressedMappings.TryGetValue(button, out IGPCommand command)) {
+      if (pressedMappings.TryGetValue(button, out var command)) {
         command.Execute();
       }
     }
 
     foreach (Buttons button in gamePadTracker.GetDown()) {
-      if (downMappings.TryGetValue(button, out IGPCommand command)) {
+      if (downMappings.TryGetValue(button, out var command)) {
         command.Execute();
       }
     }
 
     foreach (Buttons button in gamePadTracker.GetReleased()) {
-      if (releasedMappings.TryGetValue(button, out IGPCommand command)) {
+      if (releasedMappings.TryGetValue(button, out var command)) {
         command.Execute();
       }
     }

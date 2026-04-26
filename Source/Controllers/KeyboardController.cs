@@ -7,9 +7,9 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.Controllers;
 
 internal class KeyboardController(
-  Dictionary<Keys, IGPCommand> pressedMappings = null,
-  Dictionary<Keys, IGPCommand> downMappings = null,
-  Dictionary<Keys, IGPCommand> releasedMappings = null
+  Dictionary<Keys, IGPCommand>? pressedMappings = null,
+  Dictionary<Keys, IGPCommand>? downMappings = null,
+  Dictionary<Keys, IGPCommand>? releasedMappings = null
 ) : IController {
   // Tracking of presses / releases must be shared across GameStates
   private static readonly KeyboardDiffTracker keyTracker = new();
@@ -25,19 +25,19 @@ internal class KeyboardController(
 
     foreach (Keys key in keyTracker.GetPressed()) {
       CheatCodes.Instance.AddKey(key);
-      if (pressedMappings.TryGetValue(key, out IGPCommand command)) {
+      if (pressedMappings.TryGetValue(key, out var command)) {
         command.Execute();
       }
     }
 
     foreach (Keys key in keyTracker.GetDown()) {
-      if (downMappings.TryGetValue(key, out IGPCommand command)) {
+      if (downMappings.TryGetValue(key, out var command)) {
         command.Execute();
       }
     }
 
     foreach (Keys key in keyTracker.GetReleased()) {
-      if (releasedMappings.TryGetValue(key, out IGPCommand command)) {
+      if (releasedMappings.TryGetValue(key, out var command)) {
         command.Execute();
       }
     }

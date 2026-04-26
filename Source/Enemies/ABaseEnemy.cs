@@ -16,7 +16,7 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
 
   public Vector2 Target { get; set; } = position;
 
-  public static event Action<ABaseEnemy> OnDeath;
+  public static event Action<ABaseEnemy>? OnDeath;
 
   public List<Rectangle> CurrentSourceRectangles { get; set; } = [];
   public int CurrentFrame { get; set; }
@@ -32,7 +32,7 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
   protected virtual void TransitionToDeathState() { }
 
   public Rectangle BoundingBox => new((int) (Position.X - Collider.Width / 2), (int) (Position.Y - Collider.Height / 2), (int) Collider.Width, (int) Collider.Height);
-  public IEnemyState CurrentState { get; set; }
+  public IEnemyState? CurrentState { get; set; }
   protected float DrawScale { get; set; } = 1f;
   protected bool FlipOnRightDir { get; set; } = true;
 
