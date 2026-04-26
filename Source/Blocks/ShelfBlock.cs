@@ -3,8 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-internal class ShelfBlock(Texture2D ShelfTexture, Vector2 xyPos) : ABaseBlock(xyPos, 64f, 64f) {
-  private static Rectangle sourceRect = new(128, 256, 64, 64);
+internal class ShelfBlock(Texture2D ShelfTexture, Vector2 xyPos) : ABaseBlock(xyPos, 64f, 37f) {
+  private static Rectangle sourceRect = new(128, 283, 64, 37);
 
   public override void Update(double deltaTime) { }
 

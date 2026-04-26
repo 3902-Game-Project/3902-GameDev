@@ -1,6 +1,7 @@
 ﻿using GameProject.Blocks;
 using GameProject.Globals;
 using GameProject.Managers;
+using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Factories;
@@ -63,7 +64,7 @@ internal class BlockFactory {
     return new BarShelfBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y));
   }
   public static IBlock CreateShelfBlockSprite(float x, float y) {
-    return new ShelfBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y));
+    return new ShelfBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y + 27f));
   }
   public static IBlock CreateBankShelfBlockSprite(float x, float y) {
     return new BankShelfBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y));
@@ -74,17 +75,17 @@ internal class BlockFactory {
   public static IBlock CreateFirePitBlockSprite(float x, float y) {
     return new FirePitBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y));
   }
-  public static IBlock CreateFireBlockSprite(float x, float y) {
-    return new FireBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y));
+  public static IBlock CreateFireBlockSprite(float x, float y, Player player) {
+    return new FireBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y), player);
   }
   public static IBlock CreateMudBlockSprite(float x, float y) {
     return new MudBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y));
   }
   public static IBlock CreateStoolBlockSprite(float x, float y) {
-    return new StoolBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y));
+    return new StoolBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x + 21f, y + 28f));
   }
   public static IBlock CreateTableBlockSprite(float x, float y) {
-    return new TableBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y));
+    return new TableBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y + 16f));
   }
   public static IBlock CreateStatueBlockSprite(float x, float y) {
     return new StatueBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y));

@@ -131,7 +131,7 @@ internal class StateGameType : IGameState {
     mouseController.Update();
     gamePadController.Update();
 
-    CheatCodes.Instance.UpdateCheats(Player);
+    CheatCodes.Instance.UpdateCheats(Player, deltaTime);
 
     if (!Flags.HaltAllUpdates) {
       Player.Update(deltaTime);

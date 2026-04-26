@@ -255,7 +255,7 @@ internal partial class LevelLoader {
 
       case "23":
         /* fire */
-        collidableBlocks.Add(BlockFactory.CreateFireBlockSprite(xPos, yPos));
+        collidableBlocks.Add(BlockFactory.CreateFireBlockSprite(xPos, yPos, player));
         break;
 
       case "25":
