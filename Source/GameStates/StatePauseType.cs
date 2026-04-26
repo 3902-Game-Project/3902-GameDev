@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using GameProject.Commands;
 using GameProject.Controllers;
-using GameProject.Globals;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -11,8 +10,6 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.GameStates;
 
 internal class StatePauseType(Game1 game) : IGameState {
-  private static readonly string TITLE_TEXT = "Paused";
-  private static readonly string RETURN_TEXT = "Press P/GamePadB to return to game, Q/GamePadY to quit.";
   private IController keyboardController;
   private IController gamePadController;
 
@@ -46,36 +43,18 @@ internal class StatePauseType(Game1 game) : IGameState {
     graphicsDevice.Clear(Color.CornflowerBlue);
 
     spriteBatch.Begin();
-    spriteBatch.DrawString(
-      spriteFont: MiscAssetStore.Instance.MainFont,
-      text: TITLE_TEXT,
-      position:
-        new Vector2(
+
+    TextFuncs.DrawCenteredText(
+      spriteBatch: spriteBatch,
+      position: new Vector2(
           game.DefaultViewport.Width,
           game.DefaultViewport.Height
-        ) * 0.5f + new Vector2(0.0f, -10.0f),
-      color: Color.White,
-      origin: MiscAssetStore.Instance.MainFont.MeasureString(TITLE_TEXT) * 0.5f,
-      rotation: 0.0f,
-      scale: 1.0f,
-      effects: SpriteEffects.None,
-      layerDepth: 0.0f
+        ) * 0.5f,
+      text:
+        "Paused\n" +
+        "Press P/GamePadB to return to game, Q/GamePadY to quit."
     );
-    spriteBatch.DrawString(
-      spriteFont: MiscAssetStore.Instance.MainFont,
-      text: RETURN_TEXT,
-      position:
-        new Vector2(
-          game.DefaultViewport.Width,
-          game.DefaultViewport.Height
-        ) * 0.5f + new Vector2(0.0f, 10.0f),
-      color: Color.White,
-      origin: MiscAssetStore.Instance.MainFont.MeasureString(RETURN_TEXT) * 0.5f,
-      rotation: 0.0f,
-      scale: 1.0f,
-      effects: SpriteEffects.None,
-      layerDepth: 0.0f
-    );
+
     spriteBatch.End();
   }
 
