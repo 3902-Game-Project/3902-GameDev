@@ -31,6 +31,9 @@ internal class LevelManager(Game1 game) : ILevelManager {
     "13_level",
   ];
   private static readonly string STARTING_LEVEL = Flags.StartInDebugLevel ? "00_everything" : "01_level";
+  public bool AllEnemiesCleared { get; set; } = true;
+  public int PublicCurrentLevelIndex => CurrentLevelIndex;
+  public int TotalLevels => LEVEL_NAMES.Length;
 
   private readonly Dictionary<string, ILevel> levels = [];
   private string currentLevelName = STARTING_LEVEL;
@@ -121,6 +124,11 @@ internal class LevelManager(Game1 game) : ILevelManager {
     }
 
     if (newLevelName != currentLevelName) {
+      // Check if we are leaving a level with enemies still alive
+      if (CurrentLevel is GameProject.Level.Level lvl && lvl.HasKillableEnemiesRemaining) {
+        AllEnemiesCleared = false;
+      }
+
       fadeToLevelName = newLevelName;
       // reloading StateGame to trigger level change code in the future
       game.ChangeState(game.StateGame);

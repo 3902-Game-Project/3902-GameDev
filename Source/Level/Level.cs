@@ -26,6 +26,9 @@ internal class Level : ILevel {
   private readonly Vector2 playerPosition;
   private readonly CollisionManager collisionManager = new();
   private readonly Player player;
+  public bool HasKillableEnemiesRemaining => aliveEnemies.Any(e => e is not Cactus);
+  private bool bfgSpawned = false;
+  private ILevelManager levelManagerRef;
 
   private void CategorizeDeadEnemies() {
     for (int i = aliveEnemies.Count - 1; i >= 0; i--) {
@@ -51,6 +54,18 @@ internal class Level : ILevel {
           slattedDoorBlock.ChangeState(LockableDoorBlockState.Open);
         }
       }
+
+      // BFG Spawn Logic
+      if (!bfgSpawned && levelManagerRef is LevelManager lm) {
+        bfgSpawned = true; // prevent multi-spawns
+        if (lm.PublicCurrentLevelIndex == lm.TotalLevels - 2 && lm.AllEnemiesCleared) {
+          // Spawn 3 BFGs around the center of the room
+          var factory = GameProject.Factories.ItemFactory.Instance;
+          AddPickup(new ItemWorldPickup(factory.CreateBFG(480f, 280f, player, lm)));
+          AddPickup(new ItemWorldPickup(factory.CreateFakeBFG(380f, 280f, player, lm)));
+          AddPickup(new ItemWorldPickup(factory.CreateFakeBFG(580f, 280f, player, lm)));
+        }
+      }
     }
   }
 
@@ -61,7 +76,8 @@ internal class Level : ILevel {
     List<IEnemy> enemies,
     List<IWorldPickup> pickups,
     Vector2 playerPosition,
-    Player player
+    Player player,
+    ILevelManager levelManager
 ) {
     this.nonCollidableBlocks = nonCollidableBlocks;
     this.collidableBlocks = collidableBlocks;
@@ -70,6 +86,7 @@ internal class Level : ILevel {
     this.pickups = pickups;
     this.playerPosition = playerPosition;
     this.player = player;
+    this.levelManagerRef = levelManager;
 
     CategorizeDeadEnemies();
 

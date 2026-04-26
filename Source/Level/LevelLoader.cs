@@ -419,7 +419,7 @@ internal partial class LevelLoader {
     }
 
     if (playerPositionNullable is Vector2 playerPosition) {
-      var level = new Level(nonCollidableBlocks, collidableBlocks, doors, enemies, pickups, playerPosition, player);
+      var level = new Level(nonCollidableBlocks, collidableBlocks, doors, enemies, pickups, playerPosition, player, levelManager);
 
       return level;
     } else {
