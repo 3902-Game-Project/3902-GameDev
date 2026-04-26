@@ -1,4 +1,3 @@
-using System;
 using GameProject.Items;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
@@ -8,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Factories;
 
 internal class WorldPickupFactory {
-  private Texture2D? ammoSpritesheet;
+  private Texture2D ammoSpritesheet;
 
   public static WorldPickupFactory Instance { get; } = new();
 
@@ -19,10 +18,6 @@ internal class WorldPickupFactory {
   }
 
   public IWorldPickup CreateAmmo(Vector2 position, AmmoType type, int amount) {
-    if (ammoSpritesheet == null) {
-      throw new InvalidOperationException("LoadAllTextures not called");
-    }
-
     return new AmmoWorldPickup(ammoSpritesheet, position, type, amount);
   }
 }

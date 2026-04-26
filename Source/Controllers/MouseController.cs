@@ -6,9 +6,9 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.Controllers;
 
 internal class MouseController(
-  Dictionary<MouseButtons, IGPCommand>? pressedMappings = null,
-  Dictionary<MouseButtons, IGPCommand>? downMappings = null,
-  Dictionary<MouseButtons, IGPCommand>? releasedMappings = null
+  Dictionary<MouseButtons, IGPCommand> pressedMappings = null,
+  Dictionary<MouseButtons, IGPCommand> downMappings = null,
+  Dictionary<MouseButtons, IGPCommand> releasedMappings = null
 ) : IController {
   // Tracking of presses / releases must be shared across GameStates
   private static readonly MouseDiffTracker mouseTracker = new();

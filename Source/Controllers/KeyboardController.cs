@@ -7,9 +7,9 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.Controllers;
 
 internal class KeyboardController(
-  Dictionary<Keys, IGPCommand>? pressedMappings = null,
-  Dictionary<Keys, IGPCommand>? downMappings = null,
-  Dictionary<Keys, IGPCommand>? releasedMappings = null
+  Dictionary<Keys, IGPCommand> pressedMappings = null,
+  Dictionary<Keys, IGPCommand> downMappings = null,
+  Dictionary<Keys, IGPCommand> releasedMappings = null
 ) : IController {
   // Tracking of presses / releases must be shared across GameStates
   private static readonly KeyboardDiffTracker keyTracker = new();

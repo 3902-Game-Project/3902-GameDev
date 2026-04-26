@@ -15,23 +15,23 @@ internal class Game1 : Game {
   public static readonly int GAME_WIDTH = 960;
 
   private readonly GraphicsDeviceManager graphics;
-  public SpriteBatch? SpriteBatch { get; private set; }
+  public SpriteBatch SpriteBatch { get; private set; }
   public Viewport DefaultViewport { get; private set; }
   public Viewport HudViewport { get; private set; }
   public Viewport GameViewport { get; private set; }
-  private RenderTarget2D? renderTarget;
-  private RenderTargetTracker? renderTargetTracker;
+  private RenderTarget2D renderTarget;
+  private RenderTargetTracker renderTargetTracker;
   private Rectangle renderScaleRectangle;
 
-  private StateTransitionType? StateTransition;
-  public IGameState? StateMenu { get; private set; }
-  public IGameState? StateLoss { get; private set; }
-  public IGameState? StateWin { get; private set; }
-  public IGameState? StatePause { get; private set; }
-  public IGameState? StateItemScreen { get; private set; }
-  public StateGameType? StateGame { get; private set; }
+  private StateTransitionType StateTransition;
+  public IGameState StateMenu { get; private set; }
+  public IGameState StateLoss { get; private set; }
+  public IGameState StateWin { get; private set; }
+  public IGameState StatePause { get; private set; }
+  public IGameState StateItemScreen { get; private set; }
+  public StateGameType StateGame { get; private set; }
 
-  private IGameState? currentState;
+  private IGameState currentState;
 
   public Game1() {
     graphics = new GraphicsDeviceManager(this);
@@ -41,19 +41,11 @@ internal class Game1 : Game {
   }
 
   public void ChangeState(IGameState newState) {
-    if (StateTransition == null || currentState == null) {
-      throw new InvalidOperationException("LoadContent not called");
-    }
-
     StateTransition.SetFadingStates(currentState, newState);
     ChangeStateWithoutFading(StateTransition);
   }
 
   public void ChangeStateWithoutFading(IGameState newState) {
-    if (StateTransition == null || currentState == null) {
-      throw new InvalidOperationException("LoadContent not called");
-    }
-
     bool nextStateIsCurrentState;
 
     if (currentState == StateTransition || newState == StateTransition) {
@@ -96,7 +88,7 @@ internal class Game1 : Game {
     base.Initialize();
   }
 
-  private void OnResize(object? sender, EventArgs e) {
+  private void OnResize(Object sender, EventArgs e) {
     UpdateRenderScaleRectangle();
   }
 
@@ -163,20 +155,12 @@ internal class Game1 : Game {
   }
 
   protected override void Update(GameTime gameTime) {
-    if (currentState == null) {
-      throw new InvalidOperationException("LoadContent not called");
-    }
-
     currentState.Update(gameTime.ElapsedGameTime.TotalSeconds);
 
     base.Update(gameTime);
   }
 
   protected override void Draw(GameTime gameTime) {
-    if (currentState == null || renderTargetTracker == null || renderTarget == null || SpriteBatch == null) {
-      throw new InvalidOperationException("LoadContent not called");
-    }
-
     // Render everything that should be on screen to a texture
 
     using (renderTargetTracker.TempSetTarget(renderTarget)) {

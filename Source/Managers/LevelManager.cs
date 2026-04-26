@@ -47,10 +47,6 @@ internal class LevelManager(Game1 game) : ILevelManager {
   }
 
   private void LevelSwitchUpdatePlayerPosition() {
-    if (game.StateGame == null) {
-      throw new InvalidOperationException("Game1 not initialized");
-    }
-
     // Wrap player position around if player is at edge
 
     if (
@@ -92,10 +88,6 @@ internal class LevelManager(Game1 game) : ILevelManager {
   public void Initialize() { }
 
   public void LoadContent(ContentManager content) {
-    if (game.StateGame == null) {
-      throw new InvalidOperationException("Game1 not initialized");
-    }
-
     if (LEVEL_NAMES.Length == 0) {
       throw new ArgumentException("There must be at least one level to load");
     }
@@ -124,10 +116,6 @@ internal class LevelManager(Game1 game) : ILevelManager {
   }
 
   public void SwitchLevel(string newLevelName) {
-    if (game.StateGame == null) {
-      throw new InvalidOperationException("Game1 not initialized");
-    }
-
     if (!levels.ContainsKey(newLevelName)) {
       throw new ArgumentException($"level name unknown: '{newLevelName}'");
     }
