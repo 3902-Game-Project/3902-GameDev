@@ -40,8 +40,7 @@ internal partial class LevelLoader {
     ILevelManager levelManager,
     ISet<string> levelNames,
 
-    string type,
-    string[] entrySplit,
+    string entry,
     float xPos,
     float yPos,
 
@@ -52,6 +51,9 @@ internal partial class LevelLoader {
     List<IWorldPickup> pickups,
     ref Vector2? playerPositionNullable
   ) {
+    var entrySplit = entry.Trim().Split(':');
+    var type = entrySplit[0];
+
     switch (type) {
       case "":
       case "0":
@@ -369,6 +371,47 @@ internal partial class LevelLoader {
     }
   }
 
+  public static void FromStringCell(
+    Player player,
+    ILevelManager levelManager,
+    ISet<string> levelNames,
+
+    string cell,
+    int rowIndex,
+    int colIndex,
+
+    List<IBlock> nonCollidableBlocks,
+    List<IBlock> collidableBlocks,
+    List<IBlock> doors,
+    List<IEnemy> enemies,
+    List<IWorldPickup> pickups,
+    ref Vector2? playerPositionNullable
+  ) {
+    float xPos = BLOCK_WIDTH * colIndex;
+    float yPos = BLOCK_HEIGHT * rowIndex;
+
+    var cellSplit = cell.Split(';');
+
+    foreach (var entry in cellSplit) {
+      AddCellEntry(
+        player,
+        levelManager,
+        levelNames,
+
+        entry,
+        xPos,
+        yPos,
+
+        nonCollidableBlocks,
+        collidableBlocks,
+        doors,
+        enemies,
+        pickups,
+        ref playerPositionNullable
+      );
+    }
+  }
+
   public static Level FromString(Player player, ILevelManager levelManager, ISet<string> levelNames, string levelDataString) {
     List<IBlock> nonCollidableBlocks = [];
     List<IBlock> collidableBlocks = [];
@@ -389,34 +432,24 @@ internal partial class LevelLoader {
       }
 
       for (int colIndex = 0; colIndex < levelData[0].Length; colIndex++) {
-        float xPos = BLOCK_WIDTH * colIndex;
-        float yPos = BLOCK_HEIGHT * rowIndex;
-
         var cell = row[colIndex];
-        var cellSplit = cell.Split(';');
 
-        foreach (var entry in cellSplit) {
-          var entrySplit = entry.Trim().Split(':');
-          var type = entrySplit[0];
+        FromStringCell(
+          player,
+          levelManager,
+          levelNames,
 
-          AddCellEntry(
-            player,
-            levelManager,
-            levelNames,
+          cell,
+          rowIndex,
+          colIndex,
 
-            type,
-            entrySplit,
-            xPos,
-            yPos,
-
-            nonCollidableBlocks,
-            collidableBlocks,
-            doors,
-            enemies,
-            pickups,
-            ref playerPositionNullable
-          );
-        }
+          nonCollidableBlocks,
+          collidableBlocks,
+          doors,
+          enemies,
+          pickups,
+          ref playerPositionNullable
+        );
       }
     }
 
