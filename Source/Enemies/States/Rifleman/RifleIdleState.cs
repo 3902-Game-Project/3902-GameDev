@@ -23,6 +23,15 @@ internal class RifleIdleState : IEnemyState {
     }
 
     timer += deltaTime;
-    if (timer > 1.0) rifle.CurrentState = random.Next(0, 2) == 0 ? new RifleAttackState(rifle) : new RifleWanderState(rifle);
+    if (timer > 1.0) rifle.CurrentState = SelectState();
+  }
+
+  private IEnemyState SelectState() {
+    float xDistanceFromTarget = Math.Abs(rifle.Target.X - rifle.Position.X);
+    float yDistanceFromTarget = Math.Abs(rifle.Target.Y - rifle.Position.Y);
+    if (yDistanceFromTarget <= 25 || xDistanceFromTarget <= 25)
+      return new RifleAttackState(rifle);
+
+    return new RifleWanderState(rifle);
   }
 }

@@ -19,9 +19,34 @@ internal class Rifleman : ABaseEnemy {
   }
 
   public void FireProjectile(int damage) {
-    int bulletDirection = (Direction == FacingDirection.Right) ? 1 : -1;
-    Vector2 spawnPosition = Position + new Vector2(bulletDirection * 15f, -33f);
-    IProjectile bullet = ProjectileFactory.Instance.CreateBullet(spawnPosition, new Vector2(bulletDirection, 0f), 300f, 2f, damage);
+    Vector2 bulletDirection = Vector2.Zero;
+    Vector2 spawnPosition = Vector2.Zero;
+    switch (Direction) {
+      case FacingDirection.Left:
+        bulletDirection = new Vector2(-1f, 0f);
+        spawnPosition = Position + new Vector2(-15f, -33f);
+        break;
+
+      case FacingDirection.Right:
+        bulletDirection = new Vector2(1f, 0f);
+        spawnPosition = Position + new Vector2(15f, -33f);
+        break;
+    
+      case FacingDirection.Up:
+        bulletDirection = new Vector2(0f, -1f);
+        spawnPosition = Position + new Vector2(0f, -50f);
+        break;
+    
+      case FacingDirection.Down:
+        bulletDirection = new Vector2(0f, 1f);
+        spawnPosition = Position + new Vector2(0f, 0f);
+        break;
+
+      default:
+        break;
+    
+    }
+    IProjectile bullet = ProjectileFactory.Instance.CreateBullet(spawnPosition, bulletDirection, 300f, 2f, damage);
     if (bullet is BulletDefault b) b.IsPlayerShot = false;
     LevelManager.CurrentLevel.ProjectileManager.Add(bullet);
   }
