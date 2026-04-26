@@ -13,7 +13,6 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.GameStates;
 
 internal class StateItemScreenType(Game1 game) : IGameState {
-  private static readonly string RETURN_TEXT = "Press I / GamePad B to return to game";
   private IController keyboardController;
   private IController gamePadController;
   private Texture2D blankTexture;
@@ -153,11 +152,11 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     graphicsDevice.Clear(new Color(25, 28, 33));
 
     spriteBatch.Begin(
-        SpriteSortMode.Deferred,
-        BlendState.AlphaBlend,
-        SamplerState.PointClamp,
-        DepthStencilState.None,
-        RasterizerState.CullNone
+      SpriteSortMode.Deferred,
+      BlendState.AlphaBlend,
+      SamplerState.PointClamp,
+      DepthStencilState.None,
+      RasterizerState.CullNone
     );
 
     SpriteFont font = MiscAssetStore.Instance.MainFont;
@@ -167,13 +166,23 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     int screenHeight = game.DefaultViewport.Height;
     int centerX = screenWidth / 2;
 
-    spriteBatch.DrawString(font, "- INVENTORY -", new Vector2(centerX - (font.MeasureString("- INVENTORY -").X / 2), 40), Color.Gold);
+    TextFuncs.DrawCenteredText(
+      spriteBatch: spriteBatch,
+      position: new Vector2(centerX, 49.0f),
+      text: "- INVENTORY -",
+      color: Color.Gold
+    );
 
     Player player = game.StateGame.Player;
 
     if (player != null) {
       // --- DRAW WEAPONS ---
-      spriteBatch.DrawString(font, "WEAPONS", new Vector2(centerX - (font.MeasureString("WEAPONS").X / 2), 120), Color.LightGray);
+      TextFuncs.DrawCenteredText(
+        spriteBatch: spriteBatch,
+        position: new Vector2(centerX, 129.0f),
+        text: "WEAPONS",
+        color: Color.LightGray
+      );
 
       int weaponSlotSize = 120;
       int weaponSpacing = 160;
@@ -200,7 +209,12 @@ internal class StateItemScreenType(Game1 game) : IGameState {
       }
 
       // --- DRAW BACKPACK ---
-      spriteBatch.DrawString(font, "BACKPACK", new Vector2(centerX - (font.MeasureString("BACKPACK").X / 2), 350), Color.LightGray);
+      TextFuncs.DrawCenteredText(
+        spriteBatch: spriteBatch,
+        position: new Vector2(centerX, 359.0f),
+        text: "BACKPACK",
+        color: Color.LightGray
+      );
 
       int itemSlotSize = 80;
       int itemSpacing = 100;
@@ -232,8 +246,12 @@ internal class StateItemScreenType(Game1 game) : IGameState {
       }
     }
 
-    Vector2 returnSize = font.MeasureString(RETURN_TEXT);
-    spriteBatch.DrawString(font, RETURN_TEXT, new Vector2(centerX - (returnSize.X / 2), screenHeight - 60), Color.DarkGray);
+    TextFuncs.DrawCenteredText(
+      spriteBatch: spriteBatch,
+      position: new Vector2(centerX, screenHeight - 51.0f),
+      text: "Press I / GamePad B to return to game",
+      color: Color.DarkGray
+    );
 
     spriteBatch.End();
   }
