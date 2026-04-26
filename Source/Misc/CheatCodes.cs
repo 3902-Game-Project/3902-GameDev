@@ -14,6 +14,9 @@ internal class CheatCodes {
   public static CheatCodes Instance { get; } = new CheatCodes();
   public ILevelManager LevelManager { get; set; }
 
+  private readonly double maxWaitTime = 3f;
+  private double pressedDeltaTime = 0f;
+
   private bool healthOn = false;
   private bool ammoOn = false;
   private bool itemsOn = false;
@@ -71,6 +74,7 @@ internal class CheatCodes {
         IItem key = ItemFactory.CreateKey(-1f, -1f, LevelManager);
         player.Inventory.PickupItem(key);
       }
+
       if (!player.Inventory.GeneralItems.OfType<HealthItem>().Any()) {
         IItem health = ItemFactory.Instance.CreateHealthItem(-1f, -1f, player);
         player.Inventory.PickupItem(health);
@@ -115,9 +119,15 @@ internal class CheatCodes {
     lastPressed.Add(key);
   }
 
-  public void UpdateCheats(Player player) {
-    if (!healthOn) new PlayerUnlimitedHealthCommand(player).Execute();
-    if (!ammoOn) new PlayerUnlimitedAmmoCommand(player).Execute();
-    Instance.UnlimitedItems(player);
+  public void UpdateCheats(Player player, double deltaTime) {
+    if (pressedDeltaTime < maxWaitTime) {
+      if (!healthOn) new PlayerUnlimitedHealthCommand(player).Execute();
+      if (!ammoOn) new PlayerUnlimitedAmmoCommand(player).Execute();
+      Instance.UnlimitedItems(player);
+      pressedDeltaTime += deltaTime;
+    } else {
+      lastPressed.Clear();
+      pressedDeltaTime = 0;
+    }
   }
 }

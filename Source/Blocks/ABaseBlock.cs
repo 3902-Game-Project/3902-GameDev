@@ -7,7 +7,7 @@ namespace GameProject.Blocks;
 
 internal abstract class ABaseBlock : IBlock, ICollidable {
   public IShape Shape => Collider;
-  public BoxCollider Collider { get; private set; }
+  public BoxCollider Collider { get; set; }
   public Vector2 Position { get; set; }
 
   public Layer Layer { get; } = Layer.Environment;
