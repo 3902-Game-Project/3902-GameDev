@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using GameProject.GlobalInterfaces;
 using GameProject.Globals;
 using Microsoft.Xna.Framework;

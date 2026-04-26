@@ -1,4 +1,4 @@
-﻿using GameProject.Controllers;
+using GameProject.Controllers;
 using GameProject.Globals;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

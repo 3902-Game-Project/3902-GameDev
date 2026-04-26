@@ -1,4 +1,4 @@
-﻿using GameProject.Controllers;
+using GameProject.Controllers;
 using GameProject.PlayerSpace;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;

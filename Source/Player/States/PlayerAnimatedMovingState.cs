@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using GameProject.Controllers;
 using GameProject.Globals;
 using GameProject.Items;
@@ -18,18 +18,18 @@ internal class PlayerAnimatedMovingState(Player player) : APlayerState(player) {
     new(2481, 54, 171, 323),
   ];
 
-  //need to update below 2 later
+  // TODO: need to update below 2 later
   private readonly List<Rectangle> moveUpFrames = [
     new (130, 813, 159, 335),
     new (453, 813, 161, 335),
-    new (1083, 813, 164, 335)
+    new (1083, 813, 164, 335),
   ];
 
   private readonly List<Rectangle> moveDownFrames = [
     new (448, 1181, 177, 313),
     new (1256, 1181, 175, 320),
     new (991, 1181, 176, 313),
-    new (727, 1181, 178, 320)
+    new (727, 1181, 178, 320),
   ];
 
   private int currentFrame = 0;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using GameProject.Blocks;
 using GameProject.Collisions;
 using GameProject.Collisions.Shapes;

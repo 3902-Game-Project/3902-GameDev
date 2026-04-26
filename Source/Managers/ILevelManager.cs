@@ -1,4 +1,4 @@
-﻿using GameProject.GlobalInterfaces;
+using GameProject.GlobalInterfaces;
 using GameProject.Level;
 
 namespace GameProject.Managers;

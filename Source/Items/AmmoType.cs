@@ -1,4 +1,4 @@
-﻿namespace GameProject.Items;
+namespace GameProject.Items;
 
 internal enum AmmoType {
   Light,

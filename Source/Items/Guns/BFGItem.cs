@@ -1,4 +1,4 @@
-﻿using GameProject.FireModes;
+using GameProject.FireModes;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
 using GameProject.ProjectilePatterns;

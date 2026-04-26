@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using GameProject.Blocks;
 using GameProject.Collisions;
 using GameProject.GlobalInterfaces;

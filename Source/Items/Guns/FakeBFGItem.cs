@@ -1,4 +1,4 @@
-﻿using GameProject.Controllers;
+using GameProject.Controllers;
 using GameProject.Factories;
 using GameProject.FireModes;
 using GameProject.Managers;
