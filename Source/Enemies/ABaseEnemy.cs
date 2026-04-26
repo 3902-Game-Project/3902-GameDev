@@ -46,7 +46,7 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
     if (info.Collider is IBlock) {
       if (info.Side == CollisionSide.Left || info.Side == CollisionSide.Right) {
         Velocity = new Vector2(0, Velocity.Y);
-        Direction = (info.Side == CollisionSide.Left) ? FacingDirection.Left : FacingDirection.Right;
+        //Direction = (info.Side == CollisionSide.Left) ? FacingDirection.Left : FacingDirection.Right;
       } else if (info.Side == CollisionSide.Top || info.Side == CollisionSide.Bottom) {
         Velocity = new Vector2(Velocity.X, 0);
       }
