@@ -35,7 +35,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
   private static readonly string STARTING_LEVEL = Flags.StartInDebugLevel ? "00_everything" : "01_level";
   public bool AllEnemiesCleared { get; set; } = true;
   public int PublicCurrentLevelIndex => CurrentLevelIndex;
-  public int TotalLevels => LEVEL_NAMES.Length;
+  public static int TotalLevels => LEVEL_NAMES.Length;
 
   private readonly Dictionary<string, ILevel> levels = [];
   private string currentLevelName = STARTING_LEVEL;
@@ -121,7 +121,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
 
       // Create the physical pickups you can walk over
       startingLevel.AddPickup(new ItemWorldPickup(factory.CreateSMG(testX, testY, player, this)));
-      startingLevel.AddPickup(new ItemWorldPickup(factory.CreateBFG(testX + 60, testY, player, this)));
+      startingLevel.AddPickup(new ItemWorldPickup(factory.CreateFakeBFG(testX + 60, testY, player, this)));
 
       // Give the player ammo for the BFG so they can actually test it
       player.Inventory.Ammo[AmmoType.BFG] = 10;

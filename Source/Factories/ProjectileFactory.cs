@@ -1,6 +1,7 @@
 using GameProject.Items;
 using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
+using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -28,8 +29,8 @@ internal class ProjectileFactory {
     return new BombProjectile(projectileTexture, startPosition, direction, velocity, lifetime);
   }
 
-  public static IProjectile CreateBang(Vector2 startPosition) {
-    return new BangProjectile(startPosition);
+  public IProjectile CreateBang(ABaseGun sourceGun) {
+    return new BangProjectile(specialWeaponsTexture, sourceGun);
   }
 
   public IProjectile CreateBFGShot(Vector2 position, Vector2 direction, GunStats stats) {

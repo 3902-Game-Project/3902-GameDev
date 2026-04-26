@@ -59,7 +59,8 @@ internal class Level : ILevel {
       // BFG Spawn Logic
       if (!bfgSpawned && levelManagerRef is LevelManager lm) {
         bfgSpawned = true; // prevent multi-spawns
-        if (lm.PublicCurrentLevelIndex == lm.TotalLevels - 2 && lm.AllEnemiesCleared) {
+
+        if (lm.PublicCurrentLevelIndex == LevelManager.TotalLevels - 2 && lm.AllEnemiesCleared) {
           // Spawn 3 BFGs around the center of the room
           var factory = GameProject.Factories.ItemFactory.Instance;
           AddPickup(new ItemWorldPickup(factory.CreateBFG(480f, 280f, player, lm)));

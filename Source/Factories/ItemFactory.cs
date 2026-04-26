@@ -73,9 +73,9 @@ internal class ItemFactory {
     GunStats smgStats = new GunStats {
       MaxAmmo = 30,
       CurrentAmmo = 30,
-      BaseDamage = 1,
+      BaseDamage = 15,
       BulletVelocity = 700f,
-      FireRate = 0.1f,
+      FireRate = 0.2f,
       ReloadTime = 1.2f,
       AmmoType = AmmoType.Light,
       ReloadsOneByOne = false
