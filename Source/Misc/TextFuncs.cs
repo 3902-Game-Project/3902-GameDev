@@ -22,7 +22,7 @@ internal static class TextFuncs {
   public static void DrawCenteredText(SpriteBatch spriteBatch, Vector2 position, string text) {
     string[] lines = text.Split("\n");
 
-    var lineDelta = new Vector2(0.0f, MiscAssetStore.Instance.MainFont.LineSpacing);
+    var lineDelta = new Vector2(0.0f, MiscAssetStore.Instance.MainFont.LineSpacing * 1.2f);
     var startPosition = position - lineDelta * (lines.Length - 1) * 0.5f;
 
     for (int i = 0; i < lines.Length; i++) {
