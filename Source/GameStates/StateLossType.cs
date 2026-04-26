@@ -17,7 +17,7 @@ internal class StateLossType(Game1 game) : IGameState {
     keyboardController = new KeyboardController(
       pressedMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.Q, new QuitCommand(game) },
-        { Keys.R, new ReturnToMenuAndResetCommand(game) },
+        { Keys.Back, new ReturnToMenuAndResetCommand(game) },
       }
     );
 

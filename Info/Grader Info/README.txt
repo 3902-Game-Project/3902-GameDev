@@ -5,18 +5,20 @@ Controls:
     Key                      Action
     Q/GamePadY               Quit the game.
     Enter/GamePadB           Go from main menu to game.
+    S/GamePadX               Toggle slow reaction time mode (game runs at 0.5x speed).
 
   Main Game Screen:
     Key                      Action
     Q/GamePadY               Quit the game.
-    R/GamePadA               Reset to main menu.
+    Backspace/GamePadA       Reset to main menu.
     P/GamePad--              Pause the game.
     I/GamePad--              Open item screen.
     J/GamePadB               Cause the player to use item / attack.
     K/LeftTrigger            Use key item.
-    E/GamePadX               Instantly kills the player.
     F/GamePad--              Pick up a nearby item (interact).
     Space/GamePad--          Swap to other weapon.
+    R/GamePad--              Force reload weapon (auto reloads when empty anyways).
+    E/GamePadX               Instantly kills the player.
     Tab/GamePad--            Toggle music.
 
     W/Up/DPadUp              Moves player upwards.
@@ -35,6 +37,8 @@ Controls:
   Item Selection Screen:
     Q/GamePadY               Quit the game.
     I/GamePadA               Return to game.
+    W/Up/DPadUp              Move upward in the menu.
+    S/Down/DPadDown          Move downward in the menu.
     A/Left/DPadLeft          Move leftward in the menu.
     D/Right/DPadRight        Move rightward in the menu.
     Enter/Space/GamePadB     Equip the selected item.
@@ -42,7 +46,7 @@ Controls:
   Win/Loss Screen:
     Key                      Action
     Q/GamePadY               Quit the game.
-    R/GamePadA               Reset to main menu.
+    Backspace/GamePadA       Reset to main menu.
 
 Code Metrics:
   Raw data stored at "Info/Grader Info/Code Metrics/Code Metrics.txt"

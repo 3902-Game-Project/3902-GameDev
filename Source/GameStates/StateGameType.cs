@@ -42,15 +42,15 @@ internal class StateGameType : IGameState {
     keyboardController = new KeyboardController(
       pressedMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.Q, new QuitCommand(game) },
-        { Keys.Back, new ReturnToMenuAndResetCommand(game) }, // Moved from R to Backspace
-        { Keys.R, new ReloadWeaponCommand(Player) },          // Reload mapping
+        { Keys.Back, new ReturnToMenuAndResetCommand(game) },
         { Keys.P, new PauseCommand(game) },
         { Keys.I, new OpenItemScreenCommand(game) },
         { Keys.J, new PlayerUseItemCommand(Player, UseType.Pressed) },
         { Keys.K, new PlayerUseKeyCommand(Player, UseType.Pressed) },
-        { Keys.E, new PlayerDieCommand(Player) },
         { Keys.F, new PlayerInteractCommand(Player) },
         { Keys.Space, new SwapWeaponCommand(Player) },
+        { Keys.R, new ReloadWeaponCommand(Player) },
+        { Keys.E, new PlayerDieCommand(Player) },
         { Keys.Tab, new ToggleMusicCommand() },
 
         // Debug button binds:
@@ -68,10 +68,9 @@ internal class StateGameType : IGameState {
         { Keys.Left, new PlayerMoveLeftCommand(Player) },
         { Keys.Right, new PlayerMoveRightCommand(Player) },
         { Keys.J, new PlayerUseItemCommand(Player, UseType.Held) },
-
       },
       releasedMappings: new Dictionary<Keys, IGPCommand> {
-        { Keys.J, new PlayerUseItemCommand(Player, UseType.Released) }
+        { Keys.J, new PlayerUseItemCommand(Player, UseType.Released) },
       }
     );
 
@@ -104,10 +103,9 @@ internal class StateGameType : IGameState {
         { Buttons.DPadLeft, new PlayerMoveLeftCommand(Player) },
         { Buttons.DPadRight, new PlayerMoveRightCommand(Player) },
         { Buttons.A, new PlayerUseItemCommand(Player, UseType.Held) },
-
       },
       releasedMappings: new Dictionary<Buttons, IGPCommand> {
-        { Buttons.A, new PlayerUseItemCommand(Player, UseType.Released) }
+        { Buttons.A, new PlayerUseItemCommand(Player, UseType.Released) },
       }
     );
 

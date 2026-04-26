@@ -43,14 +43,21 @@ internal class StateItemScreenType(Game1 game) : IGameState {
       }
     );
 
+    // The gamepad bindings don't match the readme. this is intentional, because
+    // the readme is in Xbox controller layout, but testing with a
+    // nintendo pro controller seems to suggest it is pro controller layout.
     gamePadController = new GamePadController(
       pressedMappings: new Dictionary<Buttons, IGPCommand> {
         { Buttons.X, new QuitCommand(game) },
         { Buttons.B, new ReturnToGameNoFadeCommand(game) },
+                
+        // Navigation bindings
         { Buttons.DPadUp, new MenuMoveUpCommand(this) },
         { Buttons.DPadDown, new MenuMoveDownCommand(this) },
         { Buttons.DPadLeft, new MenuMoveLeftCommand(this) },
         { Buttons.DPadRight, new MenuMoveRightCommand(this) },
+                
+        // Action bindings
         { Buttons.A, new MenuEquipCommand(this) },
       }
     );
