@@ -20,3 +20,9 @@ Converted to pixelart with https://pixelartvillage.com/
 Potential Music: https://joshjameslim.itch.io/outlaw-loops
 
 Ammo: https://fightswithbears.itch.io/2d-health-and-ammo-pickups
+
+Uzi: https://hotlinemiami.fandom.com/wiki/Uzi
+BFG: https://doom.fandom.com/wiki/BFG9000
+BFG Ammo: https://steamcommunity.com/sharedfiles/filedetails/?l=spanish&id=2504362814
+
+Made sprite sheets with Piskel

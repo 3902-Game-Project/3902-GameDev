@@ -13,6 +13,7 @@ internal class ItemFactory {
   private Texture2D healthItemTexture;
   private Texture2D invincibilityItemTexture;
   private Texture2D infiniteAmmoItemTexture;
+  private Texture2D BFGTexture;
 
   public static ItemFactory Instance { get; } = new();
 
@@ -23,6 +24,7 @@ internal class ItemFactory {
     invincibilityItemTexture = contentManager.Load<Texture2D>("Items/InvincibilityPotion");
     healthItemTexture = contentManager.Load<Texture2D>("Items/HealthPotion");
     infiniteAmmoItemTexture = contentManager.Load<Texture2D>("Items/AmmoPotion");
+    BFGTexture = contentManager.Load<Texture2D>("Items/special_weapons_sheet");
   }
 
   public IItem CreateRevolver(float xPos, float yPos, Player player, ILevelManager levelManager) {
@@ -78,7 +80,7 @@ internal class ItemFactory {
       BaseDamage = 15,
       ReloadsOneByOne = false // Reloads entire clip at once
     };
-    return new SMGItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
+    return new SMGItem(BFGTexture, new Vector2(xPos, yPos), player, levelManager, stats);
   }
 
   public IItem CreateBFG(float xPos, float yPos, Player player, ILevelManager levelManager) {
@@ -92,8 +94,7 @@ internal class ItemFactory {
       BaseDamage = 2000,
       ReloadsOneByOne = false
     };
-    // Replace this with actual BFG texture
-    return new BFGItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
+    return new BFGItem(BFGTexture, new Vector2(xPos, yPos), player, levelManager, stats);
   }
 
   public IItem CreateFakeBFG(float xPos, float yPos, Player player, ILevelManager levelManager) {
@@ -103,7 +104,7 @@ internal class ItemFactory {
       MaxAmmo = 999, // Doesn't matter
       CurrentAmmo = 999
     };
-    return new FakeBFGItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
+    return new FakeBFGItem(BFGTexture, new Vector2(xPos, yPos), player, levelManager, stats);
   }
 
   public static IItem CreateKey(float xPos, float yPos, ILevelManager levelManager) {
