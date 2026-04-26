@@ -29,7 +29,7 @@ internal class RifleIdleState : IEnemyState {
   private IEnemyState SelectState() {
     float xDistanceFromTarget = Math.Abs(rifle.Target.X - rifle.Position.X);
     float yDistanceFromTarget = Math.Abs(rifle.Target.Y - rifle.Position.Y);
-    if (yDistanceFromTarget <= 25)
+    if (yDistanceFromTarget <= 25 || xDistanceFromTarget <= 25)
       return new RifleAttackState(rifle);
 
     return new RifleWanderState(rifle);
