@@ -13,6 +13,11 @@ internal class Bat : ABaseEnemy {
   }
 
   protected override void TransitionToDeathState() {
-    CurrentState = new GenericDeathState(this, [new(3, 20, 25, 11)]);
+    CurrentState = new GenericDeathState(
+      this,
+      [
+        new(3, 20, 25, 11),
+      ]
+    );
   }
 }

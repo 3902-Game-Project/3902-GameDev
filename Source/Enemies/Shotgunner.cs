@@ -57,6 +57,14 @@ internal class Shotgunner : ABaseEnemy {
   }
 
   protected override void TransitionToDeathState() {
-    CurrentState = new GenericDeathState(this, [new(14, 568, 39, 40), new(100, 573, 37, 35), new(174, 576, 42, 32), new(246, 585, 51, 23)]);
+    CurrentState = new GenericDeathState(
+      this,
+      [
+        new(14, 568, 39, 40),
+        new(100, 573, 37, 35),
+        new(174, 576, 42, 32),
+        new(246, 585, 51, 23),
+      ]
+    );
   }
 }

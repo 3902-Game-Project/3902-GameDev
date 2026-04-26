@@ -10,7 +10,11 @@ internal class ShotgunnerAttackState : IEnemyState {
   public ShotgunnerAttackState(Shotgunner shotgunner) {
     this.shotgunner = shotgunner;
     this.shotgunner.Velocity = Vector2.Zero;
-    this.shotgunner.CurrentSourceRectangles = [new(23, 418, 35, 37), new(100, 415, 32, 40), new(174, 415, 39, 40)];
+    this.shotgunner.CurrentSourceRectangles = [
+      new(23, 418, 35, 37),
+      new(100, 415, 32, 40),
+      new(174, 415, 39, 40),
+    ];
     this.shotgunner.CurrentFrame = 0;
   }
 

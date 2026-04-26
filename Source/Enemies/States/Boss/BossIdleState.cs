@@ -11,7 +11,10 @@ internal class BossIdleState : IEnemyState {
     this.boss = boss;
     this.boss.Velocity = Vector2.Zero;
     // Placeholder idle frames
-    this.boss.CurrentSourceRectangles = [new(0, 0, 64, 64), new(64, 0, 64, 64)];
+    this.boss.CurrentSourceRectangles = [
+      new(0, 0, 64, 64),
+      new(64, 0, 64, 64),
+    ];
     this.boss.CurrentFrame = 0;
   }
 

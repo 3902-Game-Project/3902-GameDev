@@ -11,7 +11,12 @@ internal class RifleIdleState : IEnemyState {
   public RifleIdleState(Rifleman rifle) {
     this.rifle = rifle;
     this.rifle.Velocity = Vector2.Zero;
-    this.rifle.CurrentSourceRectangles = [new(71, 130, 23, 28), new(134, 130, 23, 28), new(196, 130, 23, 28), new(259, 130, 23, 28)];
+    this.rifle.CurrentSourceRectangles = [
+      new(71, 130, 23, 28),
+      new(134, 130, 23, 28),
+      new(196, 130, 23, 28),
+      new(259, 130, 23, 28),
+    ];
     this.rifle.CurrentFrame = 0;
   }
 

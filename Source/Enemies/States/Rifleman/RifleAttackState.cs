@@ -10,7 +10,11 @@ internal class RifleAttackState : IEnemyState {
   public RifleAttackState(Rifleman rifleMan) {
     this.rifleMan = rifleMan;
     this.rifleMan.Velocity = Vector2.Zero;
-    this.rifleMan.CurrentSourceRectangles = [new(198, 91, 21, 27), new(260, 91, 22, 27), new(323, 89, 23, 29)];
+    this.rifleMan.CurrentSourceRectangles = [
+      new(198, 91, 21, 27),
+      new(260, 91, 22, 27),
+      new(323, 89, 23, 29),
+    ];
     this.rifleMan.CurrentFrame = 0;
   }
 

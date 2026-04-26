@@ -20,7 +20,7 @@ internal class SnakeAttackState : IEnemyState {
       new(195, 120, 20, 8),
       new(229, 121, 17, 8),
       new(263, 119, 15, 10),
-      new(297, 117, 14, 12)
+      new(297, 117, 14, 12),
     ];
     this.snake.CurrentFrame = 0;
   }

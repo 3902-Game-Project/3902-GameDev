@@ -10,5 +10,6 @@ internal class Cactus : ABaseEnemy {
     FlipOnRightDir = false;
     CurrentState = new CactusIdleState(this);
   }
+  
   public override void TakeDamage(int damage) { return; }
 }

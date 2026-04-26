@@ -14,7 +14,12 @@ internal class Tumbleweed : ABaseEnemy {
   }
 
   protected override void TransitionToDeathState() {
-    CurrentState = new GenericDeathState(this, [new(383, 227, 137, 106)]);
+    CurrentState = new GenericDeathState(
+      this,
+      [
+        new(383, 227, 137, 106),
+      ]
+    );
   }
 
   public override void OnCollision(CollisionInfo info) {

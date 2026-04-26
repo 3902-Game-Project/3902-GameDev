@@ -26,6 +26,12 @@ internal class Boss : ABaseEnemy {
 
   protected override void TransitionToDeathState() {
     // Placeholder death animation frames
-    CurrentState = new GenericDeathState(this, [new(0, 0, 64, 64), new(64, 0, 64, 64)]);
+    CurrentState = new GenericDeathState(
+      this,
+      [
+        new(0, 0, 64, 64),
+        new(64, 0, 64, 64),
+      ]
+    );
   }
 }

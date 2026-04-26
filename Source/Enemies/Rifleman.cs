@@ -55,6 +55,17 @@ internal class Rifleman : ABaseEnemy {
   }
 
   protected override void TransitionToDeathState() {
-    CurrentState = new GenericDeathState(this, [new(11, 9, 21, 28), new(73, 11, 23, 26), new(135, 16, 33, 21), new(198, 20, 40, 17), new(260, 22, 40, 15), new(323, 23, 39, 14), new(385, 25, 40, 12)]);
+    CurrentState = new GenericDeathState(
+      this,
+      [
+        new(11, 9, 21, 28),
+        new(73, 11, 23, 26),
+        new(135, 16, 33, 21),
+        new(198, 20, 40, 17),
+        new(260, 22, 40, 15),
+        new(323, 23, 39, 14),
+        new(385, 25, 40, 12),
+      ]
+    );
   }
 }

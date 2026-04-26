@@ -12,7 +12,9 @@ internal class TumbleweedIdleState : IEnemyState {
   public TumbleweedIdleState(Tumbleweed tumbleweed) {
     this.tumbleweed = tumbleweed;
     this.tumbleweed.Velocity = Vector2.Zero;
-    this.tumbleweed.CurrentSourceRectangles = [new(159, 217, 121, 110)];
+    this.tumbleweed.CurrentSourceRectangles = [
+      new(159, 217, 121, 110),
+    ];
     this.tumbleweed.CurrentFrame = 0;
     idleDuration = 0.5 + random.NextDouble();
   }

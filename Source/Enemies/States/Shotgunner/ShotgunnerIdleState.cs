@@ -11,7 +11,12 @@ internal class ShotgunnerIdleState : IEnemyState {
   public ShotgunnerIdleState(Shotgunner shotgunner) {
     this.shotgunner = shotgunner;
     this.shotgunner.Velocity = Vector2.Zero;
-    this.shotgunner.CurrentSourceRectangles = [new(21, 339, 32, 39), new(98, 337, 32, 41), new(174, 339, 32, 39), new(251, 341, 32, 37)];
+    this.shotgunner.CurrentSourceRectangles = [
+      new(21, 339, 32, 39),
+      new(98, 337, 32, 41),
+      new(174, 339, 32, 39),
+      new(251, 341, 32, 37),
+    ];
     this.shotgunner.CurrentFrame = 0;
   }
 
