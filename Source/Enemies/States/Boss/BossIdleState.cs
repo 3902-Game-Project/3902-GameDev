@@ -6,12 +6,15 @@ namespace GameProject.Enemies.BossStates;
 internal class BossIdleState : IEnemyState {
   private readonly Boss boss;
   private double timer = 0.0, animationTimer = 0.0;
+  private readonly Random random = new();
 
   public BossIdleState(Boss boss) {
     this.boss = boss;
     this.boss.Velocity = Vector2.Zero;
-    // Placeholder idle frames
-    this.boss.CurrentSourceRectangles = [new(0, 0, 64, 64), new(64, 0, 64, 64)];
+    this.boss.CurrentSourceRectangles = [
+      new(0, 38, 56, 48), new(56, 38, 56, 48), new(112, 38, 56, 48),
+      new(168, 38, 56, 48), new(224, 38, 56, 48), new(280, 38, 56, 48)
+    ];
     this.boss.CurrentFrame = 0;
   }
 
@@ -23,21 +26,29 @@ internal class BossIdleState : IEnemyState {
     }
 
     timer += deltaTime;
-    if (timer > 1.5) {
+    if (timer > 0.5) {
       boss.CurrentState = SelectState();
     }
   }
 
   private IEnemyState SelectState() {
-    // Simple placeholder logic: 
-    // If the player is close, attack. Otherwise, wander.
-    float xDistanceFromTarget = Math.Abs(boss.Target.X - boss.Position.X);
-    float yDistanceFromTarget = Math.Abs(boss.Target.Y - boss.Position.Y);
+    // Rely purely on the base enemy's Target property!
+    float xDist = Math.Abs(boss.Target.X - boss.Position.X);
+    float yDist = Math.Abs(boss.Target.Y - boss.Position.Y);
+    int roll = random.Next(100);
 
-    if (xDistanceFromTarget <= 300 && yDistanceFromTarget <= 150) {
-      return new BossAttackState(boss);
+    // Chance to use Special Attack if health is low
+    if (boss.Health < boss.MaxHealth / 2 && roll < 20) {
+      return new BossSpecialAttackState(boss);
     }
 
+    // RIFLEMAN LOGIC: If lined up, attack!
+    if (xDist <= 25 || yDist <= 25) {
+      if (roll < 50) return new BossAttackState(boss);
+      else return new BossAttack2State(boss);
+    }
+
+    // Otherwise, wander until he lines up
     return new BossWanderState(boss);
   }
 }

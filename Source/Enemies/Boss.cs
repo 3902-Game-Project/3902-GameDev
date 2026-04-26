@@ -1,6 +1,9 @@
-﻿using GameProject.Enemies.BossStates;
+﻿using GameProject.Blocks;
+using GameProject.Enemies.BossStates;
 using GameProject.Enemies.States;
+using GameProject.Factories;
 using GameProject.Managers;
+using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -31,5 +34,31 @@ internal class Boss : ABaseEnemy {
 
   protected override void TransitionToDeathState() {
     CurrentState = new BossDeathState(this);
+  }
+
+  public void FireBullet(int damage) {
+    Vector2 direction = Target - Position;
+    if (direction != Vector2.Zero) {
+      direction.Normalize();
+    } else {
+      direction = new Vector2((Direction == FacingDirection.Right) ? 1 : -1, 0);
+    }
+    Vector2 spawnPosition = Position + new Vector2(direction.X * 20f, -20f);
+    IProjectile bullet = ProjectileFactory.Instance.CreateBullet(spawnPosition, direction, 350f, 0.8f, damage);
+    if (bullet is BulletDefault b) b.IsPlayerShot = false;
+    LevelManager.CurrentLevel.ProjectileManager.Add(bullet);
+  }
+
+  public Vector2 VisualOffset { get; set; } = Vector2.Zero;
+  public override void Draw(SpriteBatch spriteBatch) {
+    if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return;
+
+    Rectangle source = CurrentSourceRectangles[CurrentFrame];
+    bool shouldFlip = FlipOnRightDir ? Direction > 0 : Direction <= 0;
+    SpriteEffects effect = shouldFlip ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+
+    Vector2 origin = new(source.Width / 2f, source.Height);
+    Color tintColor = DamageFlashTimer > 0 ? Color.Red : Color.White;
+    spriteBatch.Draw(Texture, Position + VisualOffset, source, tintColor, 0f, origin, DrawScale, effect, 0f);
   }
 }
