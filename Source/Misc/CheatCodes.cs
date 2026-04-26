@@ -14,7 +14,7 @@ internal class CheatCodes {
   public static CheatCodes Instance { get; } = new CheatCodes();
   public ILevelManager LevelManager { get; set; }
 
-  private readonly double maxWaitTime = 3f;
+  private readonly double maxWaitTime = 5f;
   private double pressedDeltaTime = 0f;
 
   private bool healthOn = false;
@@ -48,28 +48,22 @@ internal class CheatCodes {
   ];
 
   public void UnlimitedHealth(Player player) {
-    if (CodesMatch(unlimitedHealthWASD) || CodesMatch(unlimitedHealthArrows)) {
-      player.Health = 999999;
-      lastPressed.Clear();
-      healthOn = true;
-      Debug.WriteLine("unlimited health");
-    }
+    player.Health = 999999;
+    lastPressed.Clear();
+    healthOn = true;
+    Debug.WriteLine("unlimited health");
   }
 
-  public void UnlimitedAmmo(Player player) {
-    if (CodesMatch(unlimitedAmmoWASD) || CodesMatch(unlimitedAmmoArrows)) {
-      player.Inventory.Ammo[AmmoType.Heavy] += 9999;
-      player.Inventory.Ammo[AmmoType.Shells] += 9999;
-      player.Inventory.Ammo[AmmoType.Light] += 9999;
-      lastPressed.Clear();
-      ammoOn = true;
-      Debug.WriteLine("unlimited ammo");
-    }
+  public void UnlimitedAmmo(Player player) {  
+    player.Inventory.Ammo[AmmoType.Heavy] += 9999;
+    player.Inventory.Ammo[AmmoType.Shells] += 9999;
+    player.Inventory.Ammo[AmmoType.Light] += 9999;
+    lastPressed.Clear();
+    ammoOn = true;
+    Debug.WriteLine("unlimited ammo");
   }
 
   public void UnlimitedItems(Player player) {
-    if (CodesMatch(unlimitedItemsWASD) || CodesMatch(unlimitedItemsArrows) || itemsOn) {
-
       if (!player.Inventory.GeneralItems.OfType<KeyItem>().Any()) {
         IItem key = ItemFactory.CreateKey(-1f, -1f, LevelManager);
         player.Inventory.PickupItem(key);
@@ -95,7 +89,6 @@ internal class CheatCodes {
         itemsOn = true;
         Debug.WriteLine("unlimited items");
       }
-    }
   }
 
   public bool CodesMatch(List<Keys> code) {
@@ -120,10 +113,16 @@ internal class CheatCodes {
   }
 
   public void UpdateCheats(Player player, double deltaTime) {
-    if (pressedDeltaTime < maxWaitTime) {
-      if (!healthOn) new PlayerUnlimitedHealthCommand(player).Execute();
-      if (!ammoOn) new PlayerUnlimitedAmmoCommand(player).Execute();
-      Instance.UnlimitedItems(player);
+    if (pressedDeltaTime <= maxWaitTime) {
+      if (CodesMatch(unlimitedHealthWASD) || CodesMatch(unlimitedHealthArrows)) {
+        new PlayerUnlimitedHealthCommand(player).Execute();
+      }
+      if (CodesMatch(unlimitedAmmoWASD) || CodesMatch(unlimitedAmmoArrows)) {
+        new PlayerUnlimitedAmmoCommand(player).Execute();
+      }
+      if (CodesMatch(unlimitedItemsWASD) || CodesMatch(unlimitedItemsArrows) || itemsOn) {
+        new PlayerUnlimitedItemsCommand(player).Execute();
+      }
       pressedDeltaTime += deltaTime;
     } else {
       lastPressed.Clear();
