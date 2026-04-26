@@ -1,4 +1,4 @@
-﻿using GameProject.Globals;
+using GameProject.Globals;
 
 namespace GameProject.Commands;
 

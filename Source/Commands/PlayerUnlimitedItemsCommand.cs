@@ -1,4 +1,4 @@
-﻿using GameProject.Commands;
+using GameProject.Commands;
 using GameProject.PlayerSpace;
 using GameProject.Source.Misc;
 

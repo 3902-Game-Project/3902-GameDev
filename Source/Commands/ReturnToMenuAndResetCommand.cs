@@ -1,4 +1,4 @@
-﻿namespace GameProject.Commands;
+namespace GameProject.Commands;
 
 internal class ReturnToMenuAndResetCommand(Game1 game) : IGPCommand {
   public void Execute() {
