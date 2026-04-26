@@ -14,6 +14,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace;
 
+#nullable enable
+
 internal enum FacingDirection {
   Left,
   Right,

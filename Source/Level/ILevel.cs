@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Level;
 
+#nullable enable
+
 internal interface ILevel : IInitable, ITemporalUpdatable, IGPDrawable {
   public ProjectileManager ProjectileManager { get; }
 

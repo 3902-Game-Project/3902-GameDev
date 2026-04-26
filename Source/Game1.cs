@@ -88,7 +88,7 @@ internal class Game1 : Game {
     base.Initialize();
   }
 
-  private void OnResize(Object sender, EventArgs e) {
+  private void OnResize(object sender, EventArgs e) {
     UpdateRenderScaleRectangle();
   }
 
