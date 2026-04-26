@@ -8,7 +8,7 @@ namespace GameProject.Animations;
 internal class Animation(List<Rectangle> frames, int fps) : ITemporalUpdatable {
   private readonly double frameDuration = 1f / fps;
   private int currentFrame = 0;
-  private GPTimer timer = new();
+  private readonly GPTimer timer = new();
 
   public Rectangle CurrentFrame => frames[currentFrame];
 

@@ -9,7 +9,7 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
-    <Nullable>enable</Nullable>
+    <Nullable>annotations</Nullable>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Info\Code Review\**" />
