@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Misc;
 
-internal class ScreenFader(SpriteBatch spriteBatch, GameWindow gameWindow) : ITemporalUpdatable, ILowLevelDrawable {
+internal class ScreenFader(GameWindow gameWindow) : ITemporalUpdatable, ILowLevelDrawable {
   internal enum FadingState {
     FadeIn,
     FadeOut,
@@ -14,7 +14,7 @@ internal class ScreenFader(SpriteBatch spriteBatch, GameWindow gameWindow) : ITe
     FadedOut,
   };
 
-  private void DrawFadeRectangle(double darkeningIntensity) {
+  private void DrawFadeRectangle(SpriteBatch spriteBatch, double darkeningIntensity) {
     spriteBatch.Draw(
       texture: TextureStore.Instance.WhitePixel,
       destinationRectangle: new(0, 0, gameWindow.ClientBounds.Width, gameWindow.ClientBounds.Height),
@@ -62,11 +62,11 @@ internal class ScreenFader(SpriteBatch spriteBatch, GameWindow gameWindow) : ITe
 
     switch (FadeState) {
       case FadingState.FadeIn:
-        DrawFadeRectangle(1.0 - fadeProgress);
+        DrawFadeRectangle(spriteBatch, 1.0 - fadeProgress);
         break;
 
       case FadingState.FadeOut:
-        DrawFadeRectangle(fadeProgress);
+        DrawFadeRectangle(spriteBatch, fadeProgress);
         break;
 
       case FadingState.FadedIn:
@@ -74,7 +74,7 @@ internal class ScreenFader(SpriteBatch spriteBatch, GameWindow gameWindow) : ITe
         break;
 
       case FadingState.FadedOut:
-        DrawFadeRectangle(1.0);
+        DrawFadeRectangle(spriteBatch, 1.0);
         break;
 
       default:
