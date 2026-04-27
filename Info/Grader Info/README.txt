@@ -1,6 +1,4 @@
 Controls:
-  (GamePad-- means gamepad support not currently present but should be added.)
-  
   Main Menu:
     Key                      Action
     Q/GamePadY               Quit the game.
@@ -11,15 +9,15 @@ Controls:
     Key                      Action
     Q/GamePadY               Quit the game.
     Backspace/GamePadA       Reset to main menu.
-    P/GamePad--              Pause the game.
-    I/GamePad--              Open item screen.
+    P/GamePadX               Pause the game.
+    I/RightTrigger           Open item screen.
     J/GamePadB               Cause the player to use item / attack.
     K/LeftTrigger            Use key item.
-    F/GamePad--              Pick up a nearby item (interact).
-    Space/GamePad--          Swap to other weapon.
-    R/GamePad--              Force reload weapon (auto reloads when empty anyways).
-    E/GamePadX               Instantly kills the player.
-    Tab/GamePad--            Toggle music.
+    F/LeftStick              Pick up a nearby item (interact).
+    Space/RightStickUp       Swap to other weapon.
+    R/Start                  Force reload weapon (auto reloads when empty anyways).
+    L/RightStick             Instantly kills the player.
+    Tab/Back                 Toggle music.
 
     W/Up/DPadUp              Moves player upwards.
     S/Down/DPadDown          Moves player downwards.
@@ -28,7 +26,7 @@ Controls:
 
     Y/MouseLeft/RightBumper  Debug: switch to next level.
     T/MouseRight/LeftBumper  Debug: switch to previous level.
-    H/GamePad--              Debug: toggle halt game (disable almost all Update methods).
+    H/RightStickRight        Debug: toggle halt game (disable almost all Update methods).
 
   Pause Screen:
     Q/GamePadY               Quit the game.
@@ -66,7 +64,9 @@ Known bugs:
   -Enemies sometimes can walk off screen.
   -Ammo not reloading
   -Confusion in codebase between gunstats, ammostats, etc.
-  -Gamepad support not currently complete. We ran out of time.
+
+Hard limitations:
+  -Gamepad support uses really strange gamepad inputs like right stick up/down for single button keybinds. This is a physical limitation that cannot be fixed as gamepads have less buttons than keyboards.
 
 Sprint 2 Report:
   The burndown chart shows almost zero progress being made on the sprint since the start of the sprint. However, this is because the tasks on Jira do not properly correspond to the work being done on the project and because Jira was not updated to reflect the work on the project. In terms of actual functionality, by the afternoon of 2026-02-22 most of the functionality of the sprint was present. The only things missing were player and enemy weapon firing, and the ability to switch between the enemies to render. Additionally, functionality was still being added after week 2 of the sprint. This made code reviews less complete and provided less time for refactoring. In the future, it would be preferable to complete the sprint early to give time for code reviews, but this might not be feasable.

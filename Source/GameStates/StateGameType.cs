@@ -50,7 +50,7 @@ internal class StateGameType : IGameState {
         { Keys.F, new PlayerInteractCommand(Player) },
         { Keys.Space, new SwapWeaponCommand(Player) },
         { Keys.R, new ReloadWeaponCommand(Player) },
-        { Keys.E, new PlayerDieCommand(Player) },
+        { Keys.L, new PlayerDieCommand(Player) },
         { Keys.Tab, new ToggleMusicCommand() },
 
         // Debug button binds:
@@ -89,13 +89,20 @@ internal class StateGameType : IGameState {
       pressedMappings: new Dictionary<Buttons, IGPCommand> {
         { Buttons.X, new QuitCommand(game) },
         { Buttons.B, new ReturnToMenuAndResetCommand(game) },
+        { Buttons.Y, new PauseCommand(game) },
+        { Buttons.RightTrigger, new OpenItemScreenCommand(game) },
         { Buttons.A, new PlayerUseItemCommand(Player, UseType.Pressed) },
         { Buttons.LeftTrigger, new PlayerUseKeyCommand(Player, UseType.Pressed) },
-        { Buttons.Y, new PlayerDieCommand(Player) },
+        { Buttons.LeftStick, new PlayerInteractCommand(Player) },
+        { Buttons.RightThumbstickUp, new SwapWeaponCommand(Player) },
+        { Buttons.Start, new ReloadWeaponCommand(Player) },
+        { Buttons.RightStick, new PlayerDieCommand(Player) },
+        { Buttons.Back, new ToggleMusicCommand() },
 
         // Debug button binds:
         { Buttons.LeftShoulder, new PreviousLevelCommand(LevelManager) },
         { Buttons.RightShoulder, new NextLevelCommand(LevelManager) },
+        { Buttons.RightThumbstickRight, new ToggleUpdatesCommand() },
       },
       downMappings: new Dictionary<Buttons, IGPCommand> {
         { Buttons.DPadUp, new PlayerMoveUpCommand(Player) },
