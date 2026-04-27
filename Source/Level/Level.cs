@@ -34,6 +34,21 @@ internal class Level : ILevel {
   private readonly IGPCommand winScreenCommand;
   private double victoryTimer = 0.0;
 
+  public IEnumerable<IEnemy> GetAliveEnemies() {
+    return aliveEnemies;
+  }
+
+  public void RestoreEnemies(List<IEnemy> restoredEnemies) {
+    foreach (var enemy in aliveEnemies) collisionManager.Remove(enemy);
+    foreach (var enemy in deadEnemies) collisionManager.Remove(enemy);
+
+    aliveEnemies.Clear();
+    deadEnemies.Clear();
+
+    aliveEnemies.AddRange(restoredEnemies);
+    foreach (var enemy in aliveEnemies) collisionManager.Add(enemy);
+  }
+
   private void CategorizeDeadEnemies() {
     for (int i = aliveEnemies.Count - 1; i >= 0; i--) {
       var enemy = aliveEnemies[i];
