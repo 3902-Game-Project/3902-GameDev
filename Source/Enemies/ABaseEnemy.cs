@@ -26,7 +26,6 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
   }
 
   protected virtual void ChangeDirection() {
-
     Vector2 delta = Target - Position;
     if (delta == Vector2.Zero) {
       Velocity = Vector2.Zero;
@@ -41,6 +40,12 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
     } else {
       Direction = delta.Y >= 0 ? FacingDirection.Down : FacingDirection.Up;
     }
+  }
+
+  protected virtual void Die() {
+    DropLoot();
+    OnDeath?.Invoke(this);
+    TransitionToDeathState();
   }
 
   public Texture2D Texture { get; protected set; } = texture;
@@ -121,6 +126,10 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
     }
   }
 
+  public virtual void Kill() {
+    Die();
+  }
+
   public virtual void Navigate(float speed) {
     Vector2 delta = Target - Position;
     if (delta == Vector2.Zero) {
@@ -130,11 +139,5 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
 
     Vector2 direction = Vector2.Normalize(delta);
     Velocity = direction * speed;
-  }
-
-  public virtual void Die() {
-    DropLoot();
-    OnDeath?.Invoke(this);
-    TransitionToDeathState();
   }
 }

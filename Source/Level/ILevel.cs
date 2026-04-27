@@ -19,6 +19,7 @@ internal interface ILevel : IInitable, ITemporalUpdatable, IGPDrawable {
 
   Vector2 GetDefaultPlayerPosition();
   bool HasKillableEnemiesRemaining();
+  void KillAllEnemies();
   void AddPickup(IWorldPickup pickup);
   void RemovePickup(IWorldPickup pickup);
   IEnumerable<IBlock> GetOpenableDoors();

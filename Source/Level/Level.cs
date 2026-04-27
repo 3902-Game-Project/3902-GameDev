@@ -252,6 +252,12 @@ internal class Level : ILevel {
     return aliveEnemies.Where(enemy => !enemy.Invulnerable).Any();
   }
 
+  public void KillAllEnemies() {
+    foreach (var enemy in aliveEnemies) {
+      enemy.Kill();
+    }
+  }
+
   public void AddPickup(IWorldPickup pickup) {
     pickups.Add(pickup);
   }

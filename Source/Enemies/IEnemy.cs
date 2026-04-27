@@ -24,4 +24,5 @@ internal interface IEnemy : ISprite, ICollidable {
   bool Invulnerable { get; }
 
   void TakeDamage(int damage);
+  void Kill();
 }

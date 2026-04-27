@@ -63,6 +63,9 @@ internal class CheatCodes : ITemporalUpdatable {
 
       // Gameplay testing mode (Unlimited health, unlimited ammo)
       { [Keys.D3, Keys.D9, Keys.D0, Keys.D2], new GameplayTestModeCommand(player) },
+
+      // Kill all enemies on level
+      { [Keys.D1, Keys.D2, Keys.D3, Keys.D4, Keys.D5, Keys.D6], new KillAllLevelEnemiesCommand(LevelManager) },
     };
 
     maxBufferSize = GetMaxCheatCodeLength();
