@@ -53,8 +53,8 @@ internal class StateGameType : IGameState {
         { Keys.R, new ReloadWeaponCommand(Player) },
         { Keys.L, new PlayerDieCommand(Player) },
         { Keys.Tab, new ToggleMusicCommand() },
-        { Keys.N, new SaveGameCommand(game) },
-        { Keys.M, new LoadGameCommand(game) },
+        { Keys.N, new OpenSavePromptCommand(game) },
+        { Keys.M, new OpenLoadPromptCommand(game) },
       },
       downMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.W, new PlayerMoveUpCommand(Player) },
