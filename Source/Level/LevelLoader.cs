@@ -47,6 +47,10 @@ internal partial class LevelLoader {
         flags.Cave = true;
         break;
 
+      case "VictoryLevel":
+        flags.VictoryLevel = true;
+        break;
+
       default:
         throw new FormatException($"unrecognized level flag: {flag}");
     }
