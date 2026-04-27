@@ -60,6 +60,9 @@ internal class CheatCodes : ITemporalUpdatable {
 
       // Don't input this one (kill player)
       { [Keys.D6, Keys.D9], new PlayerDieCommand(player) },
+
+      // Gameplay testing mode (Unlimited health, unlimited ammo)
+      { [Keys.D3, Keys.D9, Keys.D0, Keys.D2], new GameplayTestModeCommand(player) },
     };
 
     maxBufferSize = GetMaxCheatCodeLength();

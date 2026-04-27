@@ -39,6 +39,7 @@ Controls:
       1212                            Toggle vignette
       67                              Toggle halt all enemies
       69                              Kill player
+      3902                            Gameplay testing mode: Unlimited health, unlimited ammo
 
   Pause Screen:
     Q/GamePadY                        Quit the game.
