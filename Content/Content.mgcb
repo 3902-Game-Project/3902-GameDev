@@ -181,18 +181,6 @@
 /processorParam:TextureFormat=Color
 /build:Items/new_guns.png
 
-#begin Items/new_guns.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Items/new_guns.png
-
 #begin Items/revolver.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -290,7 +278,7 @@
 /processorParam:TextureFormat=Compressed
 /build:Misc/CreditsFont.spritefont
 
-#begin Misc/desert-atlas-v9.png
+#begin Misc/desert-atlas-v10.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -300,7 +288,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Misc/desert-atlas-v9.png
+/build:Misc/desert-atlas-v10.png
 
 #begin Misc/HUD Background.png
 /importer:TextureImporter

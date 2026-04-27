@@ -321,11 +321,11 @@ internal class StateGameType : IGameState {
       );
     }
 
-    Vector2 mapPosition = new(keysStartPosition.X + 100, keysStartPosition.Y);
+    Vector2 mapPosition = new(keysStartPosition.X + 100, keysStartPosition.Y - 10);
     spriteBatch.Draw(
       texture: TextureStore.Instance.MainBlockItemAtlas,
       position: mapPosition,
-      sourceRectangle: new Rectangle(128, 448, 97, 29), // FIX
+      sourceRectangle: new Rectangle(128, 448, 97, 39), // FIX
       color: Color.White,
       rotation: 0f,
       origin: Vector2.Zero,
