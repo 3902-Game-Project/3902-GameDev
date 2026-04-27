@@ -33,11 +33,11 @@ float4 MainPS(VertexShaderOutput input) : COLOR {
     input.TextureCoordinates.x <= VignetteMaxBottomRight.x &&
     input.TextureCoordinates.y >= VignetteMaxTopLeft.y &&
     input.TextureCoordinates.y <= VignetteMaxBottomRight.y;
-  
+
   float2 vignetteRelCoords = (input.TextureCoordinates - VignetteCenter) / VignetteDimensions;
 
   float vignetteCenterDistSq = vignetteRelCoords.x * vignetteRelCoords.x + vignetteRelCoords.y * vignetteRelCoords.y;
-  
+
   float vignetteMultiplier =
     applyVignette ?
       (
