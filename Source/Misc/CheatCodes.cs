@@ -50,7 +50,6 @@ internal class CheatCodes : ITemporalUpdatable {
 
   public void UnlimitedHealth(Player player) {
     player.Health = 999999;
-    lastPressed.Clear();
     Debug.WriteLine("unlimited health");
   }
 
@@ -58,7 +57,6 @@ internal class CheatCodes : ITemporalUpdatable {
     player.Inventory.Ammo[AmmoType.Heavy] += 9999;
     player.Inventory.Ammo[AmmoType.Shells] += 9999;
     player.Inventory.Ammo[AmmoType.Light] += 9999;
-    lastPressed.Clear();
     Debug.WriteLine("unlimited ammo");
   }
 
@@ -85,7 +83,6 @@ internal class CheatCodes : ITemporalUpdatable {
     // add additional cases for other items
 
     if (!itemsOn) {
-      lastPressed.Clear();
       itemsOn = true;
       Debug.WriteLine("unlimited items");
     }
@@ -112,9 +109,20 @@ internal class CheatCodes : ITemporalUpdatable {
 
   public void Update(double deltaTime) {
     if (pressedDeltaTime <= maxWaitTime) {
+      var cheatCodeExecuted = false;
+
       foreach (var code in Instance.cheatCodes) {
-        if (CodesMatch(code.Key)) code.Value.Execute();
+        if (CodesMatch(code.Key)) {
+          code.Value.Execute();
+
+          cheatCodeExecuted = true;
+        }
       }
+
+      if (cheatCodeExecuted) {
+        lastPressed.Clear();
+      }
+
       pressedDeltaTime += deltaTime;
     } else {
       lastPressed.Clear();
