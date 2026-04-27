@@ -1,7 +1,8 @@
 Level files are *.csv files.
 
-There is a 2 line preamble to the file with content "Flags: <Flags>\n" to set level flags
-  Allowed values:
+There is a 2 line preamble to the file with content "Flags: <Flags>\n" to set level flags.
+Flags are comma-separated values.
+Allowed flags:
   None
   Cave
     Level is a cave level (and has a fog effect)
