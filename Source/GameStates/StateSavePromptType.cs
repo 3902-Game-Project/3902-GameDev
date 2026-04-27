@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.GameStates;
 
-internal class StateLoadPromptType(Game1 game) : IGameState {
+internal class StateSavePromptType(Game1 game) : IGameState {
   private IController<Keys> keyboardController;
   public bool IsShowingSuccess { get; set; } = false;
   private double successTimer = 0.0;
@@ -17,8 +17,8 @@ internal class StateLoadPromptType(Game1 game) : IGameState {
   public void Initialize() {
     keyboardController = new KeyboardController(
       pressedMappings: new Dictionary<Keys, IGPCommand> {
-        { Keys.A, new ExecuteLoadCommand(game, this) },
-        { Keys.N, new ReturnToGameNoFadeCommand(game) },
+        { Keys.A, new ExecuteSaveCommand(game, this) },
+        { Keys.D, new ReturnToGameNoFadeCommand(game) },
       }
     );
   }
@@ -28,22 +28,20 @@ internal class StateLoadPromptType(Game1 game) : IGameState {
   public void Update(double deltaTime) {
     if (IsShowingSuccess) {
       successTimer -= deltaTime;
-      if (successTimer <= 0) {
-        game.ChangeStateWithoutFading(game.StateGame);
-      }
+      if (successTimer <= 0) game.ChangeStateWithoutFading(game.StateGame);
     } else {
       keyboardController.Update();
     }
   }
 
   public void LowLevelDraw(GraphicsDevice graphicsDevice, RenderTargetTracker renderTargetTracker, SpriteBatch spriteBatch) {
-    graphicsDevice.Clear(new Color(25, 28, 33));
+    graphicsDevice.Clear(new Color(25, 28, 33)); // Dark gray background
 
     spriteBatch.Begin();
 
     string text = IsShowingSuccess
-        ? "Progress successfully loaded"
-        : "Would you like to load your last saved progress?\nPress A to confirm, N to cancel.";
+        ? "The game is successfully saved"
+        : "Would you like to save the game?\nPress A to confirm, D to cancel.";
 
     TextFuncs.DrawCenteredString(
       spriteBatch: spriteBatch,
@@ -57,7 +55,7 @@ internal class StateLoadPromptType(Game1 game) : IGameState {
 
   public void OnStateEnter(bool prevStateIsCurrentState) {
     IsShowingSuccess = false;
-    successTimer = 1.5;
+    successTimer = 1.5; // Displays the success text for 1.5 seconds
   }
   public void OnStateLeave(bool nextStateIsCurrentState) { }
   public void OnStateStartFadeIn(bool prevStateIsCurrentState) { }
