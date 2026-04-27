@@ -19,6 +19,8 @@ Controls:
     R/Start                           Force reload weapon (auto reloads when empty anyways).
     L/RightStick                      Instantly kills the player.
     Tab/Back                          Toggle music.
+    N                                 Save the game 
+    M                                 Load the game
 
     W/Up/DPadUp/LeftStickUp           Moves player upwards.
     S/Down/DPadDown/LeftStickDown     Moves player downwards.
