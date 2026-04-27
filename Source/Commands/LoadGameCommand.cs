@@ -1,4 +1,4 @@
-﻿using GameProject.SaveLoad;
+using GameProject.SaveLoad;
 
 namespace GameProject.Commands;
 

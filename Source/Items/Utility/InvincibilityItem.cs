@@ -22,32 +22,33 @@ internal class InvincibilityItem(Texture2D texture, Vector2 startPosition, Playe
   public void Draw(SpriteBatch spriteBatch) {
     if (!IsCollected) {
       spriteBatch.Draw(
-          texture,
-          Position,
-          null,
-          Color.White,
-          0f,
-          Vector2.Zero,
-          .15f,
-          SpriteEffects.None,
-          0f
+        texture,
+        Position,
+        null,
+        Color.White,
+        0f,
+        Vector2.Zero,
+        .15f,
+        SpriteEffects.None,
+        0f
       );
     }
   }
 
   public void DrawUI(SpriteBatch spriteBatch, Vector2 position, float scale, Color tint) {
     spriteBatch.Draw(
-        texture: texture,
-        position: position,
-        sourceRectangle: null,
-        color: tint,
-        rotation: 0f,
-        origin: Vector2.Zero,
-        scale: scale,
-        effects: SpriteEffects.None,
-        layerDepth: 0f
+      texture: texture,
+      position: position,
+      sourceRectangle: null,
+      color: tint,
+      rotation: 0f,
+      origin: Vector2.Zero,
+      scale: scale,
+      effects: SpriteEffects.None,
+      layerDepth: 0f
     );
   }
+
   public void Update(double deltaTime) { }
 
   public void OnPickup(Player player) {

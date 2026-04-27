@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using GameProject.Commands;
 using GameProject.Controllers;
 using GameProject.Misc;

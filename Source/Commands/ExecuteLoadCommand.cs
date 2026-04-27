@@ -1,5 +1,6 @@
-﻿using GameProject.GameStates;
+using GameProject.GameStates;
 using GameProject.SaveLoad;
+
 namespace GameProject.Commands;
 
 internal class ExecuteLoadCommand(Game1 game, StateLoadPromptType promptState) : IGPCommand {
