@@ -1,10 +1,9 @@
+using System.Collections.Generic;
+using GameProject.Collisions;
+using GameProject.Collisions.Shapes;
+using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using GameProject.Level;
-using System.Collections.Generic;
-using GameProject.Collisions;      
-using GameProject.Collisions.Shapes; 
-using GameProject.PlayerSpace;
 
 namespace GameProject.Projectiles;
 

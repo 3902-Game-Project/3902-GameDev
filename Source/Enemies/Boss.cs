@@ -1,12 +1,10 @@
+using System;
 using GameProject.Enemies.BossStates;
-using GameProject.Enemies.States;
+using GameProject.Factories;
 using GameProject.Managers;
 using GameProject.Projectiles;
-using GameProject.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using GameProject.Blocks;
-using System;
 
 namespace GameProject.Enemies;
 

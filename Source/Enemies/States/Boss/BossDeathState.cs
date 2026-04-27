@@ -1,5 +1,5 @@
-using Microsoft.Xna.Framework;
 using GameProject.Blocks;
+using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies.BossStates;
 

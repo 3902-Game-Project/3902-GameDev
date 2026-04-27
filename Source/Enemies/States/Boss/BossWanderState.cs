@@ -1,6 +1,5 @@
 using System;
 using GameProject.Enemies.States;
-using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies.BossStates;
 

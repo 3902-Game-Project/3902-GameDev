@@ -69,7 +69,7 @@ internal class PlayerInventory(ILevelManager levelManager) {
     }
 
     DropItem(ActiveItem);
-    
+
     Weapons.Remove(ActiveItem);
 
     if (ActiveWeaponIndex >= Weapons.Count && ActiveWeaponIndex > 0) {

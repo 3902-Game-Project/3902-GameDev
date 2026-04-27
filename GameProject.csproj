@@ -39,6 +39,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Info\Grader Info\Burndown Charts\Sprint 4\" />
-    <Folder Include="Info\Grader Info\Code Reviews\Sprint 5\" />
   </ItemGroup>
 </Project>
