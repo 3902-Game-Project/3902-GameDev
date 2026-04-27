@@ -15,6 +15,7 @@ Controls:
     K/LeftTrigger                     Use key item.
     F/LeftStick                       Pick up a nearby item (interact).
     Space/RightStickUp                Swap to other weapon.
+    C/RightStickDown                  Drop the current item.
     R/Start                           Force reload weapon (auto reloads when empty anyways).
     L/RightStick                      Instantly kills the player.
     Tab/Back                          Toggle music.
@@ -40,6 +41,7 @@ Controls:
     A/Left/DPadLeft                   Move leftward in the menu.
     D/Right/DPadRight                 Move rightward in the menu.
     Enter/Space/GamePadB              Equip the selected item.
+    C/GamePadX                        Drop the selected item.
 
   Win/Loss Screen:
     Key                               Action

@@ -41,6 +41,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
         // Action bindings
         { Keys.Enter, new MenuEquipCommand(this) },
         { Keys.Space, new MenuEquipCommand(this) },
+        { Keys.C, new PlayerDropItemCommand(game.StateGame.Player) },
       }
     );
 
@@ -60,6 +61,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
                 
         // Action bindings
         { Buttons.A, new MenuEquipCommand(this) },
+        { Buttons.Y, new PlayerDropItemCommand(game.StateGame.Player) },
       }
     );
   }

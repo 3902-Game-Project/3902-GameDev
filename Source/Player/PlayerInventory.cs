@@ -63,6 +63,14 @@ internal class PlayerInventory(ILevelManager levelManager) {
     levelManager.CurrentLevel.AddPickup(droppedItem);
   }
 
+  public void DropCurrentItem() {
+    DropItem(ActiveItem);
+    Weapons.Remove(ActiveItem);
+    if (ActiveWeaponIndex >= Weapons.Count && ActiveWeaponIndex > 0) {
+      ActiveWeaponIndex = Weapons.Count - 1;
+    }
+  }
+
   public void SwapActiveWeapon() {
     if (Weapons.Count > 1) {
       ActiveWeaponIndex = (ActiveWeaponIndex == 0) ? 1 : 0;
