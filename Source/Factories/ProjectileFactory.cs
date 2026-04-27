@@ -9,6 +9,8 @@ namespace GameProject.Factories;
 internal class ProjectileFactory {
   private Texture2D projectileTexture;
   private Texture2D specialWeaponsTexture;
+  private Texture2D bombFlyingTexture;
+  private Texture2D bombBlinkingTexture;
   private static readonly ProjectileFactory instance = new();
 
   public static ProjectileFactory Instance => instance;
@@ -18,6 +20,8 @@ internal class ProjectileFactory {
   public void LoadAllTextures(ContentManager content) {
     projectileTexture = content.Load<Texture2D>("Misc/projectile_spritesheet");
     specialWeaponsTexture = content.Load<Texture2D>("Items/new_guns");
+    bombFlyingTexture = content.Load<Texture2D>("Enemies/bossSprite");
+    bombBlinkingTexture = content.Load<Texture2D>("Enemies/bombSprite");
   }
 
   public IProjectile CreateBullet(Vector2 startPosition, Vector2 direction, float velocity, float lifetime, int damage) {
@@ -34,5 +38,9 @@ internal class ProjectileFactory {
 
   public IProjectile CreateBFGShot(Vector2 position, Vector2 direction, GunStats stats) {
     return new BFGProjectile(specialWeaponsTexture, position, direction, stats.BulletVelocity, stats.BaseDamage);
+  }
+
+  public IProjectile CreateBossBomb(Vector2 position, Vector2 direction, int damage) {
+    return new BossBomb(bombFlyingTexture, bombBlinkingTexture, position, direction, damage);
   }
 }
