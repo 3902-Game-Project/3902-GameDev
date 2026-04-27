@@ -29,6 +29,16 @@ Controls:
     T/MouseRight/LeftBumper           Debug: switch to previous level.
     H/RightStickRight                 Debug: toggle halt game (disable almost all Update methods).
 
+    Cheat Codes:
+      U = up; D = down; L = left; R = right
+
+      Sequence                        Action
+      WWSSADAD/UUDDLRLR               Unlimited health
+      WASDWASD/ULDRULDR               Unlimited ammo
+      WWAADDSS/UULLRRDD               Unlimited items
+      67                              Toggle halt all enemies
+      69                              Kill player
+
   Pause Screen:
     Q/GamePadY                        Quit the game.
     P/GamePadB                        Return to game.
