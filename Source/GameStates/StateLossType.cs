@@ -52,7 +52,7 @@ internal class StateLossType(Game1 game) : IGameState {
         ) * 0.5f,
       text:
         "Game Over\n" +
-        "Press R/GamePadA for main menu, Q/GamePadY to quit."
+        "Press Backspace/GamePadA for main menu, Q/GamePadY to quit."
     );
 
     spriteBatch.End();

@@ -52,7 +52,7 @@ internal class StateWinType(Game1 game) : IGameState {
         ) * 0.5f,
       text:
         "You've won!\n" +
-        "Press R/GamePadA for main menu, Q/GamePadY to quit."
+        "Press Backspace/GamePadA for main menu, Q/GamePadY to quit."
     );
 
     spriteBatch.End();

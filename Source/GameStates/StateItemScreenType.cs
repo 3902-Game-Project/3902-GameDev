@@ -257,8 +257,10 @@ internal class StateItemScreenType(Game1 game) : IGameState {
 
     TextFuncs.DrawCenteredString(
       spriteBatch: spriteBatch,
-      position: new Vector2(centerX, screenHeight - 51.0f),
-      text: "Press I / GamePad B to return to game",
+      position: new Vector2(centerX, screenHeight - 40.0f),
+      text:
+        "Press I / GamePadB to return to game\n" +
+        "Press Q / GamePadY to quit",
       color: Color.DarkGray
     );
 
