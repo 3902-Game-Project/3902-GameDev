@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float colliderWidth = 64f, float colliderHeight = 64f) : IEnemy {
+internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float colliderWidth = 64f, float colliderHeight = 64f, bool invulnerable = false) : IEnemy {
   protected const float DAMAGE_FLASH_DURATION = 0.15f;
   public static event Action<ABaseEnemy> OnDeath;
 
@@ -59,6 +59,7 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
   public int Health { get; set; } = 100;
   public int MaxHealth { get; set; } = 100;
   public double DamageFlashTimer { get; protected set; }
+  public bool Invulnerable { get; } = invulnerable;
 
   public IEnemyState CurrentState { get; set; }
 
@@ -103,7 +104,14 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
   }
 
   public virtual void TakeDamage(int damage) {
-    if (Health <= 0) return;
+    if (Invulnerable) {
+      return;
+    }
+
+    if (Health <= 0) {
+      return;
+    }
+
     bool wasAlive = Health > 0;
     Health -= damage;
     DamageFlashTimer = DAMAGE_FLASH_DURATION;
