@@ -28,8 +28,6 @@ internal class Level : ILevel {
   private readonly CollisionManager collisionManager = new();
   private readonly Player player;
   private readonly ILevelManager levelManager;
-  public bool HasKillableEnemiesRemaining => aliveEnemies.Any(e => e is not Cactus);
-  public LevelFlags LevelFlags { get; private set; }
 
   private void CategorizeDeadEnemies() {
     for (int i = aliveEnemies.Count - 1; i >= 0; i--) {
@@ -104,6 +102,7 @@ internal class Level : ILevel {
     }
   }
 
+  public LevelFlags LevelFlags { get; private set; }
   public ProjectileManager ProjectileManager { get; private set; } = new ProjectileManager();
 
   public void Initialize() { }
