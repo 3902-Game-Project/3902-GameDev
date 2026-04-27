@@ -10,7 +10,6 @@ namespace GameProject.Items;
 internal class BFGItem : ABaseGun {
   public BFGItem(Texture2D texture, Vector2 startPosition, Player player, ILevelManager levelManager, GunStats stats)
     : base(texture, startPosition, player, levelManager, stats) {
-
     Category = ItemCategory.Primary;
 
     sourceRectangle = new Rectangle(0, 0, 40, 20);

@@ -35,7 +35,7 @@ internal class ItemFactory {
       MaxAmmo = 6,
       CurrentAmmo = 6,
       ReloadTime = 0.5f,
-      BaseDamage = 30
+      BaseDamage = 30,
     };
 
     return new RevolverItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
@@ -48,7 +48,7 @@ internal class ItemFactory {
       MaxAmmo = 1,
       CurrentAmmo = 1,
       ReloadTime = 1f,
-      BaseDamage = 70
+      BaseDamage = 70,
     };
 
     return new RifleItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
@@ -63,7 +63,7 @@ internal class ItemFactory {
       MaxAmmo = 2,
       CurrentAmmo = 2,
       ReloadTime = 1f,
-      BaseDamage = 20
+      BaseDamage = 20,
     };
 
     return new ShotgunItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
@@ -78,7 +78,7 @@ internal class ItemFactory {
       FireRate = 0.2f,
       ReloadTime = 1.2f,
       AmmoType = AmmoType.Light,
-      ReloadsOneByOne = false
+      ReloadsOneByOne = false,
     };
     return new SMGItem(BFGTexture, new Vector2(xPos, yPos), player, levelManager, smgStats);
   }
@@ -91,8 +91,8 @@ internal class ItemFactory {
       MaxAmmo = 3,
       CurrentAmmo = 3,
       ReloadTime = 9999f,
-      BaseDamage = 2000,
-      ReloadsOneByOne = false
+      BaseDamage = 340,
+      ReloadsOneByOne = false,
     };
     return new BFGItem(BFGTexture, new Vector2(xPos, yPos), player, levelManager, stats);
   }
@@ -102,7 +102,7 @@ internal class ItemFactory {
       AmmoType = AmmoType.BFG,
       FireRate = 1.0f,
       MaxAmmo = 999, // Doesn't matter
-      CurrentAmmo = 999
+      CurrentAmmo = 999,
     };
     return new FakeBFGItem(BFGTexture, new Vector2(xPos, yPos), player, levelManager, stats);
   }
