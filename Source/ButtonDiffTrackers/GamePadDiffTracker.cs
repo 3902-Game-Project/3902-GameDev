@@ -12,7 +12,7 @@ internal class GamePadDiffTracker : AButtonDiffTracker<Buttons, GamePadState> {
   // Use MathF.PI * (1.0f / 4.0f) for cardinal directions only
   private static readonly float STICK_DIAGONAL_ANGLE_THRESHOLD = MathF.PI * (5.0f / 16.0f);
 
-  public override void Update(GamePadState gamePadState) {
+  public override Buttons[] ExtractPressedFromState(GamePadState gamePadState) {
     var pressedButtons = new List<Buttons>();
 
     // Add buttons (in order of Buttons Enum)
@@ -125,6 +125,6 @@ internal class GamePadDiffTracker : AButtonDiffTracker<Buttons, GamePadState> {
       pressedButtons.Add(Buttons.Y);
     }
 
-    UpdateButtonState([.. pressedButtons]);
+    return [.. pressedButtons];
   }
 }
