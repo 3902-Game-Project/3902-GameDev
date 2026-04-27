@@ -127,6 +127,7 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
   }
 
   public virtual void Kill() {
+    Health = 0;
     Die();
   }
 
