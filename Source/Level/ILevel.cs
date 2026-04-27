@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using GameProject.Blocks;
 using GameProject.Collisions;
+using GameProject.Enemies;
 using GameProject.GlobalInterfaces;
 using GameProject.Managers;
 using GameProject.WorldPickups;
@@ -13,6 +14,8 @@ namespace GameProject.Level;
 internal interface ILevel : IInitable, ITemporalUpdatable, IGPDrawable {
   LevelFlags LevelFlags { get; }
   ProjectileManager ProjectileManager { get; }
+  IEnumerable<IEnemy> GetAliveEnemies();
+  void RestoreEnemies(List<IEnemy> restoredEnemies);
 
   Vector2 GetDefaultPlayerPosition();
   bool HasKillableEnemiesRemaining();
