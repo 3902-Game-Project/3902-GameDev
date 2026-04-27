@@ -1,16 +1,19 @@
-﻿using GameProject.Blocks;
-using GameProject.Enemies.BossStates;
+﻿using GameProject.Enemies.BossStates;
 using GameProject.Enemies.States;
-using GameProject.Factories;
 using GameProject.Managers;
 using GameProject.Projectiles;
+using GameProject.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using GameProject.Blocks;
+using System;
 
 namespace GameProject.Enemies;
 
 internal class Boss : ABaseEnemy {
   public ILevelManager LevelManager { get; }
+
+  public bool PhaseTwoTriggered { get; set; } = false;
 
   public Boss(Texture2D texture, Vector2 position, ILevelManager levelManager) : base(texture, position, 64f, 128f) {
     LevelManager = levelManager;
@@ -22,22 +25,27 @@ internal class Boss : ABaseEnemy {
     CurrentState = new BossIdleState(this);
   }
 
-  // Override TakeDamage to trigger the Hurt animation
   public override void TakeDamage(int damage) {
     if (Health <= 0) return;
 
     base.TakeDamage(damage);
+
+    // --- PHASE TRANSITION LOGIC ---
+    if (Health <= MaxHealth / 2 && !PhaseTwoTriggered) {
+      PhaseTwoTriggered = true;
+      CurrentState = new BossSpecialAttackState(this);
+      return;
+    }
+
     if (Health > 0 && CurrentState is not BossHurtState && CurrentState is not BossSpecialAttackState) {
       CurrentState = new BossHurtState(this);
     }
   }
 
-  protected override void TransitionToDeathState() {
-    CurrentState = new BossDeathState(this);
-  }
-
   public void FireBullet(int damage) {
     Vector2 direction = Target - Position;
+
+    // Force the boss to turn and face the player right as he shoots
     if (direction.X > 0) {
       Direction = FacingDirection.Right;
     } else if (direction.X < 0) {
@@ -66,7 +74,48 @@ internal class Boss : ABaseEnemy {
 
     LevelManager.CurrentLevel.ProjectileManager.Add(bullet);
   }
-  public Vector2 VisualOffset { get; set; } = Vector2.Zero;
+
+  public void ThrowBomb(int damage) {
+    float offsetX = 40f;
+    float offsetY = -45f;
+
+    Vector2 spawnPosition = Position;
+    Vector2 tossDirection = Vector2.Zero;
+
+    if (Direction == FacingDirection.Right) {
+      spawnPosition += new Vector2(offsetX, offsetY);
+      tossDirection = new Vector2(1, 0);
+    } else {
+      spawnPosition += new Vector2(-offsetX, offsetY);
+      tossDirection = new Vector2(-1, 0);
+    }
+
+    IProjectile bomb = ProjectileFactory.Instance.CreateBossBomb(spawnPosition, tossDirection, damage);
+    LevelManager.CurrentLevel.ProjectileManager.Add(bomb);
+  }
+
+  public void SpawnArenaBombs() {
+    // Adjust these grid coordinates to fit your actual room size!
+    int[] xPositions = { 150, 400, 650 };
+    int[] yPositions = { 150, 300, 450 };
+
+    Random rand = new Random();
+    int safeCol = rand.Next(xPositions.Length);
+    int safeRow = rand.Next(yPositions.Length);
+
+    for (int x = 0; x < xPositions.Length; x++) {
+      for (int y = 0; y < yPositions.Length; y++) {
+
+        if (x == safeCol && y == safeRow) continue;
+
+        Vector2 spawnPos = new Vector2(xPositions[x], yPositions[y]);
+
+        IProjectile arenaBomb = ProjectileFactory.Instance.CreateBossBomb(spawnPos, Vector2.Zero, 25);
+        LevelManager.CurrentLevel.ProjectileManager.Add(arenaBomb);
+      }
+    }
+  }
+
   public override void Draw(SpriteBatch spriteBatch) {
     if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return;
 
@@ -74,8 +123,19 @@ internal class Boss : ABaseEnemy {
     bool shouldFlip = FlipOnRightDir ? Direction > 0 : Direction <= 0;
     SpriteEffects effect = shouldFlip ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
-    Vector2 origin = new(source.Width / 2f, source.Height);
+    // --- THE MAGIC MATH FIX FOR JITTER ---
+    int cellIndex = source.X / 56;
+    float trueCenterX = (cellIndex * 56) + 28;
+    float originX = trueCenterX - source.X;
+    Vector2 origin = new(originX, source.Height);
+    // -------------------------------------
+
     Color tintColor = DamageFlashTimer > 0 ? Color.Red : Color.White;
-    spriteBatch.Draw(Texture, Position + VisualOffset, source, tintColor, 0f, origin, DrawScale, effect, 0f);
+
+    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, DrawScale, effect, 0f);
+  }
+
+  protected override void TransitionToDeathState() {
+    CurrentState = new BossDeathState(this);
   }
 }

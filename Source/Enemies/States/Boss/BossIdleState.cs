@@ -37,8 +37,7 @@ internal class BossIdleState : IEnemyState {
     float yDist = Math.Abs(boss.Target.Y - boss.Position.Y);
     int roll = random.Next(100);
 
-    // Chance to use Special Attack if health is low
-    if (boss.Health < boss.MaxHealth / 2 && roll < 20) {
+    if (boss.PhaseTwoTriggered && roll < 15) {
       return new BossSpecialAttackState(boss);
     }
 

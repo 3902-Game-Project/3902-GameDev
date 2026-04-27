@@ -16,13 +16,13 @@ internal class BossAttackState : IEnemyState {
     this.boss = boss;
     this.boss.Velocity = Vector2.Zero;
     this.boss.CurrentSourceRectangles = [
-      new(0, 148, 48, 46),
-      new(56, 148, 48, 46),
-      new(112, 148, 48, 46),
-      new(168, 148, 48, 46),
-      new(224, 148, 48, 46),
-      new(280, 148, 48, 46)
-    ];
+      new(10, 148, 45, 46),
+      new(65, 148, 46, 46),
+      new(120, 148, 45, 46),
+      new(176, 148, 56, 46),
+      new(232, 148, 44, 46),
+      new(289, 148, 48, 46)
+        ];
     this.boss.CurrentFrame = 0;
     this.shotsToFire = random.Next(1, 4);
   }
