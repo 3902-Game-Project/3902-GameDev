@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -91,17 +92,15 @@ internal class CheatCodes : ITemporalUpdatable {
   }
 
   public bool CodesMatch(List<Keys> code) {
-    bool valid = true;
-
-    if (lastPressed.Count != code.Count) {
-      valid = false;
-    } else {
-      for (int i = 0; i < buffer; i++) {
-        if (lastPressed[i] != code[i]) return false;
-      }
+    if (lastPressed.Count < code.Count) {
+      return false;
     }
 
-    return valid;
+    for (int i = Math.Max(lastPressed.Count - code.Count, 0); i < lastPressed.Count; i++) {
+      if (lastPressed[i] != code[i - lastPressed.Count + code.Count]) return false;
+    }
+
+    return true;
   }
 
   public void AddKey(Keys key) {
