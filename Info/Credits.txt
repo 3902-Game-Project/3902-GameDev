@@ -26,4 +26,7 @@ BFG: https://doom.fandom.com/wiki/BFG9000
 BFG Ammo: https://steamcommunity.com/sharedfiles/filedetails/?l=spanish&id=2504362814
 Bang Flag: https://www.shutterstock.com/image-vector/shooting-toy-gun-pistol-bang-flag-683217688?trackingId=8e4e0704-ef4a-48f8-a1d9-f3f8a8fdedbb&listId=searchResults
 
-Made sprite sheets with Piskel
+Title menu photo: https://www.freepik.com/free-ai-image/8-bit-graphics-pixels-scene-with-desert_137496305.htm#fromView=keyword&page=1&position=0&uuid=9d119fa3-e481-4174-9c06-2e1975e31247&query=Desert+pixel+art 
+Title menu font: https://www.fontspace.com/serial-publication-font-f12336
+
+Made sprite sheets with Piskel and Pixquare
