@@ -1,0 +1,19 @@
+﻿Author: Eric
+Date: 2026-04-27
+Sprint: 5
+Class to review: Boss.cs/Boss state classes
+Author of class: Q
+Minutes taken to review: 16
+
+Readability:
+  What is readable:
+  The implementation of the state pattern is clear. He isolated distinct behaviors like idle, wander, attack into different classes. The logic of boss taking damage is straightforward.
+
+  What is less readable:
+  I would say in the "THE MAGIC MATH FIX FOR JITTER" part, some number comes from nowhere.
+
+Code quality:
+  There is logic for animation frames in like every state class, which is pretty redundent. It would be better if there is a dedicated animation class or a shared base state class. Otherwise, the code is pretty high-quility
+
+Hypothetical code change and how well the code supports that change:
+  If the size of the room is changed, some magic numbers would make it hard to relocation.
