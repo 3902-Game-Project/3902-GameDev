@@ -252,9 +252,11 @@ internal class Level : ILevel {
     return aliveEnemies.Where(enemy => !enemy.Invulnerable).Any();
   }
 
-  public void KillAllEnemies() {
+  public void KillAllDamageableEnemies() {
     foreach (var enemy in aliveEnemies) {
-      enemy.Kill();
+      if (!enemy.Invulnerable) {
+        enemy.Kill();
+      }
     }
   }
 
