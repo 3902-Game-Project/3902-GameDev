@@ -36,6 +36,7 @@ Controls:
       WWSSADAD/UUDDLRLR               Unlimited health
       WASDWASD/ULDRULDR               Unlimited ammo
       WWAADDSS/UULLRRDD               Unlimited items
+      1212                            Toggle vignette
       67                              Toggle halt all enemies
       69                              Kill player
 

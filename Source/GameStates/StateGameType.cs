@@ -180,7 +180,7 @@ internal class StateGameType : IGameState {
     graphicsDevice.Viewport = game.GameViewport;
 
     Effect effect;
-    if (Flags.EnableVignette) {
+    if (Flags.Vignette) {
       MiscAssetStore.Instance.Vignette.Parameters["VignetteCenter"].SetValue(Player.Position / new Vector2(Game1.GAME_WIDTH, Game1.GAME_HEIGHT));
       effect = MiscAssetStore.Instance.Vignette;
     } else {
