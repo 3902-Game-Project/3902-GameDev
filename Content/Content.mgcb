@@ -326,6 +326,18 @@
 /processorParam:TextureFormat=Color
 /build:Misc/projectile_spritesheet.png
 
+#begin Misc/Titlemenu.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Misc/Titlemenu.png
+
 #begin Misc/WhitePixel.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -12,10 +12,12 @@ internal class TextureStore : IInitable {
   public Texture2D MainBlockItemAtlas { get; private set; }
   public Texture2D HealthBar { get; private set; }
   public Texture2D HUDBackground { get; private set; }
+  public Texture2D TitleMenu { get; private set; }
 
   public void Initialize() { }
 
   public void LoadContent(ContentManager contentManager) {
+    TitleMenu = contentManager.Load<Texture2D>("Misc/Titlemenu");
     WhitePixel = contentManager.Load<Texture2D>("Misc/WhitePixel");
     Player = contentManager.Load<Texture2D>("Misc/playerSpritesheet");
     MainBlockItemAtlas = contentManager.Load<Texture2D>("Misc/desert-atlas-v10");
