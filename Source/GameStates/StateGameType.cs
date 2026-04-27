@@ -127,6 +127,7 @@ internal class StateGameType : IGameState {
     }
 
     LevelManager.Initialize();
+    CheatCodes.Instance.Initialize(Player);
   }
 
   public void LoadContent(ContentManager contentManager) {
