@@ -4,8 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using GameProject.Commands;
+using GameProject.Factories;
 using GameProject.Globals;
 using GameProject.Level;
+using GameProject.PlayerSpace;
+using GameProject.WorldPickups;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -88,6 +91,27 @@ internal class LevelManager(Game1 game) : ILevelManager {
     }
   }
 
+  private bool AllPreBfgLevelEnemiesKilled() {
+    for (int i = BFG_LEVEL_INDICES_START; i <= BFG_LEVEL_INDICES_END; i++) {
+      if (levels[LEVEL_NAMES[i]].HasKillableEnemiesRemaining()) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  private void SpawnBfgs() {
+    if (!BfgSpawned) {
+      BfgSpawned = true; // prevent multi-spawns
+
+      // Spawn 3 BFGs around the center of the room
+      BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateBFG(480.0f, 280.0f, game.StateGame.Player, this)));
+      BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateFakeBFG(380.0f, 280.0f, game.StateGame.Player, this)));
+      BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateFakeBFG(580.0f, 280.0f, game.StateGame.Player, this)));
+    }
+  }
+
   public ILevel CurrentLevel => levels[currentLevelName];
 
   public bool BfgSpawned { get; set; } = false;
@@ -122,6 +146,10 @@ internal class LevelManager(Game1 game) : ILevelManager {
     }
 
     game.StateGame.Player.Position = CurrentLevel.GetDefaultPlayerPosition();
+
+    if (Flags.SpawnBfgImmediately) {
+      SpawnBfgs();
+    }
   }
 
   public void Update(double deltaTime) {
@@ -164,13 +192,10 @@ internal class LevelManager(Game1 game) : ILevelManager {
     SwitchLevelByIndex(Math.Min(CurrentLevelIndex + 1, LEVEL_NAMES.Length - 1));
   }
 
-  public bool AllPreBfgLevelEnemiesKilled() {
-    for (int i = BFG_LEVEL_INDICES_START; i <= BFG_LEVEL_INDICES_END; i++) {
-      if (levels[LEVEL_NAMES[i]].HasKillableEnemiesRemaining()) {
-        return false;
-      }
+  // Called by Level.cs the instant all enemies on a level are killed
+  public void CheckBfgSpawnable() {
+    if (!BfgSpawned && AllPreBfgLevelEnemiesKilled()) {
+      SpawnBfgs();
     }
-
-    return true;
   }
 }

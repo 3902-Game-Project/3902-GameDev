@@ -4,6 +4,7 @@ internal static class Flags {
   /* compile-time tweakables */
   public static readonly bool StartInDebugLevel = false;
   public static readonly bool DebugButtonBinds = true;
+  public static readonly bool SpawnBfgImmediately = false;
 
   /* runtime tweakables */
   public static bool Vignette { get; set; } = true;

@@ -58,14 +58,7 @@ internal class Level : ILevel {
       }
 
       // BFG Spawn Logic
-      if (!levelManager.BfgSpawned && levelManager.AllPreBfgLevelEnemiesKilled()) {
-        levelManager.BfgSpawned = true; // prevent multi-spawns
-
-        // Spawn 3 BFGs around the center of the room
-        levelManager.BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateBFG(480f, 280f, player, levelManager)));
-        levelManager.BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateFakeBFG(380f, 280f, player, levelManager)));
-        levelManager.BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateFakeBFG(580f, 280f, player, levelManager)));
-      }
+      levelManager.CheckBfgSpawnable();
     }
   }
 
