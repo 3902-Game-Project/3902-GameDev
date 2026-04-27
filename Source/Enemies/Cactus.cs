@@ -11,5 +11,5 @@ internal class Cactus : ABaseEnemy {
     CurrentState = new CactusIdleState(this);
   }
 
-  public override void TakeDamage(int damage) { return; }
+  public override void TakeDamage(int damage) { }
 }

@@ -9,14 +9,28 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Enemies;
 
 internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float colliderWidth = 64f, float colliderHeight = 64f) : IEnemy {
+  protected const float DAMAGE_FLASH_DURATION = 0.15f;
+  public static event Action<ABaseEnemy> OnDeath;
+
+  protected float DrawScale { get; set; } = 1f;
+  protected bool FlipOnRightDir { get; set; } = true;
+
+  protected virtual void DropLoot() { }
+
+  protected virtual void TransitionToDeathState() { }
+
+  protected void UpdateCollider() {
+    if (Collider != null) {
+      Collider.Position = Position + new Vector2(0, -Collider.Height / 2f);
+    }
+  }
+
   public Texture2D Texture { get; protected set; } = texture;
   public Vector2 Position { get; set; } = position;
   public Vector2 Velocity { get; set; }
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
 
   public Vector2 Target { get; set; } = position;
-
-  public static event Action<ABaseEnemy> OnDeath;
 
   public List<Rectangle> CurrentSourceRectangles { get; set; } = [];
   public int CurrentFrame { get; set; }
@@ -27,20 +41,10 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
   public int Health { get; set; } = 100;
   public int MaxHealth { get; set; } = 100;
   public double DamageFlashTimer { get; protected set; }
-  protected const float DamageFlashDuration = 0.15f;
-  protected virtual void DropLoot() { }
-  protected virtual void TransitionToDeathState() { }
+
+  public IEnemyState CurrentState { get; set; }
 
   public Rectangle BoundingBox => new((int) (Position.X - Collider.Width / 2), (int) (Position.Y - Collider.Height / 2), (int) Collider.Width, (int) Collider.Height);
-  public IEnemyState CurrentState { get; set; }
-  protected float DrawScale { get; set; } = 1f;
-  protected bool FlipOnRightDir { get; set; } = true;
-
-  protected void UpdateCollider() {
-    if (Collider != null) {
-      Collider.Position = Position + new Vector2(0, -Collider.Height / 2f);
-    }
-  }
 
   public virtual void OnCollision(CollisionInfo info) {
     if (info.Collider is IBlock) {
@@ -83,7 +87,7 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
     if (Health <= 0) return;
     bool wasAlive = Health > 0;
     Health -= damage;
-    DamageFlashTimer = DamageFlashDuration;
+    DamageFlashTimer = DAMAGE_FLASH_DURATION;
 
     if (wasAlive && Health <= 0) {
       Die();
