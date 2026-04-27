@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GameProject.Blocks;
 using GameProject.Collisions;
+using GameProject.Commands;
 using GameProject.Enemies;
 using GameProject.Factories;
 using GameProject.Globals;
@@ -18,6 +19,8 @@ namespace GameProject.Level;
 #nullable enable
 
 internal class Level : ILevel {
+  private static readonly double WIN_SCREEN_DELAY = 10.0;
+
   private readonly List<IBlock> nonCollidableBlocks;
   private readonly List<IBlock> collidableBlocks;
   private readonly List<IBlock> doors;
@@ -28,6 +31,8 @@ internal class Level : ILevel {
   private readonly CollisionManager collisionManager = new();
   private readonly Player player;
   private readonly ILevelManager levelManager;
+  private readonly IGPCommand winScreenCommand;
+  private double victoryTimer = 0.0;
 
   private void CategorizeDeadEnemies() {
     for (int i = aliveEnemies.Count - 1; i >= 0; i--) {
@@ -73,7 +78,8 @@ internal class Level : ILevel {
     List<IWorldPickup> pickups,
     Vector2 playerPosition,
     Player player,
-    ILevelManager levelManager
+    ILevelManager levelManager,
+    IGPCommand winScreenCommand
 ) {
     LevelFlags = levelFlags;
     this.nonCollidableBlocks = nonCollidableBlocks;
@@ -84,6 +90,7 @@ internal class Level : ILevel {
     this.playerPosition = playerPosition;
     this.player = player;
     this.levelManager = levelManager;
+    this.winScreenCommand = winScreenCommand;
 
     CategorizeDeadEnemies();
 
@@ -159,6 +166,13 @@ internal class Level : ILevel {
     collisionManager.Update();
 
     CheckLevelClear();
+
+    if (LevelFlags.VictoryLevel) {
+      victoryTimer += deltaTime;
+      if (victoryTimer >= WIN_SCREEN_DELAY) {
+        winScreenCommand.Execute();
+      }
+    }
   }
 
   public void Draw(SpriteBatch spriteBatch) {

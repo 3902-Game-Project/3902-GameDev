@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using GameProject.Commands;
 using GameProject.Globals;
 using GameProject.Level;
 using Microsoft.Xna.Framework.Content;
@@ -106,9 +107,12 @@ internal class LevelManager(Game1 game) : ILevelManager {
 
     var levelNamesSet = new HashSet<string>(LEVEL_NAMES);
 
+    var winScreenCommand = new WinScreenCommand(game);
+
     foreach (var name in LEVEL_NAMES) {
       var level = LevelLoader.FromString(
         player: game.StateGame.Player,
+        winScreenCommand: winScreenCommand,
         levelManager: game.StateGame.LevelManager,
         levelNames: levelNamesSet,
         levelDataString: File.ReadAllText(content.RootDirectory + "/Levels/" + name + ".csv")

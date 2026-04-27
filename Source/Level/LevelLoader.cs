@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using GameProject.Blocks;
+using GameProject.Commands;
 using GameProject.Enemies;
 using GameProject.Factories;
 using GameProject.Items;
@@ -455,7 +456,7 @@ internal partial class LevelLoader {
     }
   }
 
-  public static Level FromString(Player player, ILevelManager levelManager, ISet<string> levelNames, string levelDataString) {
+  public static Level FromString(Player player, IGPCommand winScreenCommand, ILevelManager levelManager, ISet<string> levelNames, string levelDataString) {
     List<IBlock> nonCollidableBlocks = [];
     List<IBlock> collidableBlocks = [];
     List<IBlock> doors = [];
@@ -507,7 +508,18 @@ internal partial class LevelLoader {
     }
 
     if (playerPositionNullable is Vector2 playerPosition) {
-      var level = new Level(flags, nonCollidableBlocks, collidableBlocks, doors, enemies, pickups, playerPosition, player, levelManager);
+      var level = new Level(
+        levelFlags: flags,
+        nonCollidableBlocks: nonCollidableBlocks,
+        collidableBlocks: collidableBlocks,
+        doors: doors,
+        enemies: enemies,
+        pickups: pickups,
+        playerPosition: playerPosition,
+        player: player,
+        levelManager: levelManager,
+        winScreenCommand: winScreenCommand
+      );
 
       return level;
     } else {
