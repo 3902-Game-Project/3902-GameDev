@@ -1,5 +1,12 @@
 Level files are *.csv files.
-The file describes a grid of blocks / entities.
+
+There is a 1 line preamble to the file with content "Flags: <Flags>" to set level flags
+  Allowed values:
+  None
+  Cave
+    Level is a cave level (and has a fog effect)
+
+The rest of the file describes a grid of blocks / entities.
 Each line in the file is a row of blocks in the game.
 Each cell (specific row and column) in the game is separated by "," in the file.
 If there are multiple blocks in the same cell (for example, a background block and an enemy), they are separated by ";".
