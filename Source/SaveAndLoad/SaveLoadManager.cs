@@ -16,6 +16,7 @@ internal static class SaveLoadManager {
     var saveData = new GameSaveData();
     var player = stateGame.Player;
     var level = stateGame.LevelManager.CurrentLevel;
+    var levelManager = stateGame.LevelManager;
 
     //Save Player State
     saveData.Player.X = player.Position.X;
@@ -26,6 +27,9 @@ internal static class SaveLoadManager {
 
     //Save weapons by their class name
     saveData.Player.WeaponTypes = player.Inventory.Weapons.Select(w => w.GetType().Name).ToList();
+
+    //Save current level
+    saveData.Level.LevelName = levelManager.CurrentLevelName;
 
     //Save Enemies State
     foreach (var enemy in level.GetAliveEnemies()) {
@@ -52,15 +56,16 @@ internal static class SaveLoadManager {
 
     var player = stateGame.Player;
     var levelManager = stateGame.LevelManager;
+    levelManager.ChangeLevel(saveData.Level.LevelName);
 
-    //Restore Player
+    //Load Player
     player.Position = new Vector2(saveData.Player.X, saveData.Player.Y);
     if (player.Shape is Collisions.Shapes.BoxCollider box) box.Position = player.Position;
 
     player.Health = saveData.Player.Health;
     player.Inventory.Ammo = new Dictionary<Items.AmmoType, int>(saveData.Player.Ammo);
 
-    //Restore Weapons
+    //Load Weapons
     player.Inventory.Weapons.Clear();
     foreach (var weaponName in saveData.Player.WeaponTypes) {
       switch (weaponName) {
@@ -73,7 +78,7 @@ internal static class SaveLoadManager {
     }
     player.Inventory.EquipWeapon(saveData.Player.ActiveWeaponIndex);
 
-    //Restore Enemies
+    //Load Enemies
     var restoredEnemies = new List<IEnemy>();
     foreach (var enemyData in saveData.Level.Enemies) {
       IEnemy newEnemy = enemyData.TypeName switch {

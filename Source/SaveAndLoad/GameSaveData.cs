@@ -19,6 +19,7 @@ internal class PlayerSaveData {
 }
 
 internal class LevelSaveData {
+  public string LevelName { get; set; }
   public List<EnemySaveData> Enemies { get; set; } = [];
 }
 

@@ -45,6 +45,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
   private string? fadeToLevelName = null;
 
   private int CurrentLevelIndex => Array.IndexOf(LEVEL_NAMES, currentLevelName);
+  public string CurrentLevelName => currentLevelName;
 
   private void SwitchLevelByIndex(int newLevelIndex) {
     if (newLevelIndex < 0 || newLevelIndex >= LEVEL_NAMES.Length) {
@@ -190,6 +191,14 @@ internal class LevelManager(Game1 game) : ILevelManager {
 
   public void NextLevel() {
     SwitchLevelByIndex(Math.Min(CurrentLevelIndex + 1, LEVEL_NAMES.Length - 1));
+  }
+
+  public void ChangeLevel(string levelName) {
+    if (!levels.ContainsKey(levelName)) {
+      throw new ArgumentException($"Cannot load save: level name unknown '{levelName}'");
+    }
+    currentLevelName = levelName;
+    CurrentLevel.ProjectileManager.ClearProjectiles();
   }
 
   // Called by Level.cs the instant all enemies on a level are killed
