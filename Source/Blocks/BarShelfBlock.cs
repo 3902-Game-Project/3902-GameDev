@@ -7,7 +7,6 @@ internal class BarShelfBlock : ABaseBlock {
   private static Rectangle sourceRect = new(256, 256, 64, 64);
   private readonly Texture2D barShelfTexture;
   private float rotation = 0f;
-  private bool rotated = false;
 
   public BarShelfBlock(Texture2D BarShelfTexture, Vector2 xyPos) : base(xyPos) {
     barShelfTexture = BarShelfTexture;
@@ -26,7 +25,6 @@ internal class BarShelfBlock : ABaseBlock {
     if (Position.X >= 832) {
       rotation = MathHelper.ToRadians(90);
       x += 64;
-      rotated = true;
     }
 
     Position = new(x, y);

@@ -6,25 +6,19 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Controllers;
 
-internal class GamePadController : IController<Buttons> {
+internal class GamePadController(
+  Dictionary<Buttons, IGPCommand> pressedMappings = null,
+  Dictionary<Buttons, IGPCommand> downMappings = null,
+  Dictionary<Buttons, IGPCommand> releasedMappings = null
+) : IController<Buttons> {
   private static readonly PlayerIndex PLAYER_INDEX = PlayerIndex.One;
 
   // Tracking of presses / releases must be shared across GameStates
   private static readonly GamePadDiffTracker gamePadTracker = new();
 
-  public Dictionary<Buttons, IGPCommand> PressedMappings { get; }
-  public Dictionary<Buttons, IGPCommand> DownMappings { get; }
-  public Dictionary<Buttons, IGPCommand> ReleasedMappings { get; }
-
-  public GamePadController(
-    Dictionary<Buttons, IGPCommand> pressedMappings = null,
-    Dictionary<Buttons, IGPCommand> downMappings = null,
-    Dictionary<Buttons, IGPCommand> releasedMappings = null
-  ) {
-    PressedMappings = pressedMappings ?? [];
-    DownMappings = downMappings ?? [];
-    ReleasedMappings = releasedMappings ?? [];
-  }
+  public Dictionary<Buttons, IGPCommand> PressedMappings { get; } = pressedMappings ?? [];
+  public Dictionary<Buttons, IGPCommand> DownMappings { get; } = downMappings ?? [];
+  public Dictionary<Buttons, IGPCommand> ReleasedMappings { get; } = releasedMappings ?? [];
 
   public void Update() {
     GamePadState gamePadState = GamePad.GetState(PLAYER_INDEX);

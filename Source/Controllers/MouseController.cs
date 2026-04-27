@@ -5,23 +5,17 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Controllers;
 
-internal class MouseController : IController<MouseButtons> {
+internal class MouseController(
+  Dictionary<MouseButtons, IGPCommand> pressedMappings = null,
+  Dictionary<MouseButtons, IGPCommand> downMappings = null,
+  Dictionary<MouseButtons, IGPCommand> releasedMappings = null
+) : IController<MouseButtons> {
   // Tracking of presses / releases must be shared across GameStates
   private static readonly MouseDiffTracker mouseTracker = new();
 
-  public Dictionary<MouseButtons, IGPCommand> PressedMappings { get; }
-  public Dictionary<MouseButtons, IGPCommand> DownMappings { get; }
-  public Dictionary<MouseButtons, IGPCommand> ReleasedMappings { get; }
-
-  public MouseController(
-    Dictionary<MouseButtons, IGPCommand> pressedMappings = null,
-    Dictionary<MouseButtons, IGPCommand> downMappings = null,
-    Dictionary<MouseButtons, IGPCommand> releasedMappings = null
-  ) {
-    PressedMappings = pressedMappings ?? [];
-    DownMappings = downMappings ?? [];
-    ReleasedMappings = releasedMappings ?? [];
-  }
+  public Dictionary<MouseButtons, IGPCommand> PressedMappings { get; } = pressedMappings ?? [];
+  public Dictionary<MouseButtons, IGPCommand> DownMappings { get; } = downMappings ?? [];
+  public Dictionary<MouseButtons, IGPCommand> ReleasedMappings { get; } = releasedMappings ?? [];
 
   public void Update() {
     MouseState mouseState = Mouse.GetState();
