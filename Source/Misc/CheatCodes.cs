@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using GameProject.Commands;
 using GameProject.Factories;
-using GameProject.GameStates;
+using GameProject.GlobalInterfaces;
 using GameProject.Items;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Source.Misc;
 
-internal class CheatCodes {
+internal class CheatCodes : ITemporalUpdatable {
   public static CheatCodes Instance { get; } = new CheatCodes();
   public ILevelManager LevelManager { get; set; }
 
@@ -23,7 +23,7 @@ internal class CheatCodes {
   private readonly int buffer = 8;
   public List<Keys> lastPressed = [];
 
-  private Dictionary<List<Keys>, IGPCommand> cheatCodes = new();
+  private Dictionary<List<Keys>, IGPCommand> cheatCodes = [];
 
   public void Initialize(Player player) {
     Instance.cheatCodes = new Dictionary<List<Keys>, IGPCommand> {
@@ -38,7 +38,7 @@ internal class CheatCodes {
       // Unlimited Items Mappings
       { [Keys.W, Keys.W, Keys.A, Keys.A, Keys.D, Keys.D, Keys.S, Keys.S], new PlayerUnlimitedItemsCommand(player) },
       { [Keys.Up, Keys.Up, Keys.Left, Keys.Left, Keys.Right, Keys.Right, Keys.Down, Keys.Down], new PlayerUnlimitedItemsCommand(player) }
-    };  
+    };
   }
 
   public void UnlimitedHealth(Player player) {
@@ -105,10 +105,10 @@ internal class CheatCodes {
     lastPressed.Add(key);
   }
 
-  public void UpdateCheats(Player player, double deltaTime) {
+  public void Update(double deltaTime) {
     if (pressedDeltaTime <= maxWaitTime) {
       foreach (var code in Instance.cheatCodes) {
-        if (CodesMatch(code.Key)) code.Value.Execute(); 
+        if (CodesMatch(code.Key)) code.Value.Execute();
       }
       pressedDeltaTime += deltaTime;
     } else {
