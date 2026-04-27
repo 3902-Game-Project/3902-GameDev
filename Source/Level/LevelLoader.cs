@@ -337,7 +337,7 @@ internal partial class LevelLoader {
           throw new FormatException($"ammo count out of bounds int: '{count}");
         }
 
-        pickups.Add(WorldPickupFactory.Instance.CreateAmmo(new Vector2(xPos, yPos), ammoType, count));
+        pickups.Add(WorldPickupFactory.Instance.CreateAmmo(new Vector2(xPos + 32f, yPos + 32f), ammoType, count));
         break;
 
       case "34":
