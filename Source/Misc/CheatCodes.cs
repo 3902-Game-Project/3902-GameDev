@@ -36,8 +36,8 @@ internal class CheatCodes {
       { [Keys.Up, Keys.Left, Keys.Down, Keys.Right, Keys.Up, Keys.Left, Keys.Down, Keys.Right], new PlayerUnlimitedAmmoCommand(player) },
 
       // Unlimited Items Mappings
-      { [Keys.W, Keys.W, Keys.A, Keys.A, Keys.D, Keys.D, Keys.S, Keys.S],  new PlayerUnlimitedItemsCommand(player) },
-      { [Keys.Up, Keys.Up, Keys.Left, Keys.Left, Keys.Right, Keys.Right, Keys.Down, Keys.Down],  new PlayerUnlimitedItemsCommand(player) }
+      { [Keys.W, Keys.W, Keys.A, Keys.A, Keys.D, Keys.D, Keys.S, Keys.S], new PlayerUnlimitedItemsCommand(player) },
+      { [Keys.Up, Keys.Up, Keys.Left, Keys.Left, Keys.Right, Keys.Right, Keys.Down, Keys.Down], new PlayerUnlimitedItemsCommand(player) }
     };  
   }
 
