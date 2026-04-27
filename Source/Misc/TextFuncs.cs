@@ -19,7 +19,7 @@ internal static class TextFuncs {
     );
   }
 
-  public static void DrawCenteredText(SpriteBatch spriteBatch, Vector2 position, string text, Color? color = null) {
+  public static void DrawCenteredString(SpriteBatch spriteBatch, Vector2 position, string text, Color? color = null) {
     string[] lines = text.Split("\n");
 
     var lineDelta = new Vector2(0.0f, MiscAssetStore.Instance.MainFont.LineSpacing * 1.2f);

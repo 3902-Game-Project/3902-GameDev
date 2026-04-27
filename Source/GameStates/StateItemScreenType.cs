@@ -176,7 +176,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     int screenHeight = game.DefaultViewport.Height;
     int centerX = screenWidth / 2;
 
-    TextFuncs.DrawCenteredText(
+    TextFuncs.DrawCenteredString(
       spriteBatch: spriteBatch,
       position: new Vector2(centerX, 49.0f),
       text: "- INVENTORY -",
@@ -187,7 +187,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
 
     if (player != null) {
       // --- DRAW WEAPONS ---
-      TextFuncs.DrawCenteredText(
+      TextFuncs.DrawCenteredString(
         spriteBatch: spriteBatch,
         position: new Vector2(centerX, 129.0f),
         text: "WEAPONS",
@@ -219,7 +219,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
       }
 
       // --- DRAW BACKPACK ---
-      TextFuncs.DrawCenteredText(
+      TextFuncs.DrawCenteredString(
         spriteBatch: spriteBatch,
         position: new Vector2(centerX, 359.0f),
         text: "BACKPACK",
@@ -256,7 +256,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
       }
     }
 
-    TextFuncs.DrawCenteredText(
+    TextFuncs.DrawCenteredString(
       spriteBatch: spriteBatch,
       position: new Vector2(centerX, screenHeight - 51.0f),
       text: "Press I / GamePad B to return to game",

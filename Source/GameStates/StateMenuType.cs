@@ -47,7 +47,7 @@ internal class StateMenuType(Game1 game) : IGameState {
 
     spriteBatch.Begin();
 
-    TextFuncs.DrawCenteredText(
+    TextFuncs.DrawCenteredString(
       spriteBatch: spriteBatch,
       position: new Vector2(
           game.DefaultViewport.Width,
@@ -58,7 +58,7 @@ internal class StateMenuType(Game1 game) : IGameState {
         "Press Q/GamePadY to quit."
     );
 
-    TextFuncs.DrawCenteredText(
+    TextFuncs.DrawCenteredString(
       spriteBatch: spriteBatch,
       position: new Vector2(
           game.DefaultViewport.Width,

@@ -44,7 +44,7 @@ internal class StateWinType(Game1 game) : IGameState {
 
     spriteBatch.Begin();
 
-    TextFuncs.DrawCenteredText(
+    TextFuncs.DrawCenteredString(
       spriteBatch: spriteBatch,
       position: new Vector2(
           game.DefaultViewport.Width,
