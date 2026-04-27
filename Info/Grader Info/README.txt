@@ -42,7 +42,7 @@ Controls:
       67                              Toggle halt all enemies
       69                              Kill player
       3902                            Gameplay testing mode: Unlimited health, unlimited ammo
-      123456                          Debug: Kill all enemies on level
+      123                             Debug: Kill all enemies on level
 
   Pause Screen:
     Q/GamePadY                        Quit the game.
