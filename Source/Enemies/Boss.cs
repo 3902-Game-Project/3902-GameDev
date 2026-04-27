@@ -38,17 +38,34 @@ internal class Boss : ABaseEnemy {
 
   public void FireBullet(int damage) {
     Vector2 direction = Target - Position;
+    if (direction.X > 0) {
+      Direction = FacingDirection.Right;
+    } else if (direction.X < 0) {
+      Direction = FacingDirection.Left;
+    }
+
     if (direction != Vector2.Zero) {
       direction.Normalize();
     } else {
       direction = new Vector2((Direction == FacingDirection.Right) ? 1 : -1, 0);
     }
-    Vector2 spawnPosition = Position + new Vector2(direction.X * 20f, -20f);
+
+    float gunOffsetX = 35f;
+    float gunOffsetY = -25f;
+
+    Vector2 spawnPosition = Position;
+
+    if (Direction == FacingDirection.Right) {
+      spawnPosition += new Vector2(gunOffsetX, gunOffsetY);
+    } else {
+      spawnPosition += new Vector2(-gunOffsetX, gunOffsetY);
+    }
+
     IProjectile bullet = ProjectileFactory.Instance.CreateBullet(spawnPosition, direction, 350f, 0.8f, damage);
     if (bullet is BulletDefault b) b.IsPlayerShot = false;
+
     LevelManager.CurrentLevel.ProjectileManager.Add(bullet);
   }
-
   public Vector2 VisualOffset { get; set; } = Vector2.Zero;
   public override void Draw(SpriteBatch spriteBatch) {
     if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return;

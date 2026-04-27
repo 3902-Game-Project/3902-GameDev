@@ -15,15 +15,13 @@ internal class BossAttackState : IEnemyState {
   public BossAttackState(Boss boss) {
     this.boss = boss;
     this.boss.Velocity = Vector2.Zero;
-
-    // Exact 56-pixel grid frames
     this.boss.CurrentSourceRectangles = [
-      new(0, 148, 56, 46),
-      new(56, 148, 56, 46),
-      new(112, 148, 56, 46),
-      new(168, 148, 56, 46), // Loop Start (Frame 3)
-      new(224, 148, 56, 46), // Frame 4
-      new(280, 148, 56, 46)  // Loop End (Frame 5)
+      new(0, 148, 48, 46),
+      new(56, 148, 48, 46),
+      new(112, 148, 48, 46),
+      new(168, 148, 48, 46),
+      new(224, 148, 48, 46),
+      new(280, 148, 48, 46)
     ];
     this.boss.CurrentFrame = 0;
     this.shotsToFire = random.Next(1, 4);
