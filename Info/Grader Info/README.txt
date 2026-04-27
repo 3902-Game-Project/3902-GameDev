@@ -1,50 +1,50 @@
 Controls:
   Main Menu:
-    Key                      Action
-    Q/GamePadY               Quit the game.
-    Enter/GamePadB           Go from main menu to game.
-    S/GamePadX               Toggle slow reaction time mode (game runs at 0.5x speed).
+    Key                               Action
+    Q/GamePadY                        Quit the game.
+    Enter/GamePadB                    Go from main menu to game.
+    S/GamePadX                        Toggle slow reaction time mode (game runs at 0.5x speed).
 
   Main Game Screen:
-    Key                      Action
-    Q/GamePadY               Quit the game.
-    Backspace/GamePadA       Reset to main menu.
-    P/GamePadX               Pause the game.
-    I/RightTrigger           Open item screen.
-    J/GamePadB               Cause the player to use item / attack.
-    K/LeftTrigger            Use key item.
-    F/LeftStick              Pick up a nearby item (interact).
-    Space/RightStickUp       Swap to other weapon.
-    R/Start                  Force reload weapon (auto reloads when empty anyways).
-    L/RightStick             Instantly kills the player.
-    Tab/Back                 Toggle music.
+    Key                               Action
+    Q/GamePadY                        Quit the game.
+    Backspace/GamePadA                Reset to main menu.
+    P/GamePadX                        Pause the game.
+    I/RightTrigger                    Open item screen.
+    J/GamePadB                        Cause the player to use item / attack.
+    K/LeftTrigger                     Use key item.
+    F/LeftStick                       Pick up a nearby item (interact).
+    Space/RightStickUp                Swap to other weapon.
+    R/Start                           Force reload weapon (auto reloads when empty anyways).
+    L/RightStick                      Instantly kills the player.
+    Tab/Back                          Toggle music.
 
-    W/Up/DPadUp              Moves player upwards.
-    S/Down/DPadDown          Moves player downwards.
-    A/Left/DPadLeft          Moves player leftwards.
-    D/Right/DPadRight        Moves player rightwards.
+    W/Up/DPadUp/LeftStickUp           Moves player upwards.
+    S/Down/DPadDown/LeftStickDown     Moves player downwards.
+    A/Left/DPadLeft/LeftStickLeft     Moves player leftwards.
+    D/Right/DPadRight/LeftStickRight  Moves player rightwards.
 
-    Y/MouseLeft/RightBumper  Debug: switch to next level.
-    T/MouseRight/LeftBumper  Debug: switch to previous level.
-    H/RightStickRight        Debug: toggle halt game (disable almost all Update methods).
+    Y/MouseLeft/RightBumper           Debug: switch to next level.
+    T/MouseRight/LeftBumper           Debug: switch to previous level.
+    H/RightStickRight                 Debug: toggle halt game (disable almost all Update methods).
 
   Pause Screen:
-    Q/GamePadY               Quit the game.
-    P/GamePadB               Return to game.
+    Q/GamePadY                        Quit the game.
+    P/GamePadB                        Return to game.
 
   Item Selection Screen:
-    Q/GamePadY               Quit the game.
-    I/GamePadA               Return to game.
-    W/Up/DPadUp              Move upward in the menu.
-    S/Down/DPadDown          Move downward in the menu.
-    A/Left/DPadLeft          Move leftward in the menu.
-    D/Right/DPadRight        Move rightward in the menu.
-    Enter/Space/GamePadB     Equip the selected item.
+    Q/GamePadY                        Quit the game.
+    I/GamePadA                        Return to game.
+    W/Up/DPadUp                       Move upward in the menu.
+    S/Down/DPadDown                   Move downward in the menu.
+    A/Left/DPadLeft                   Move leftward in the menu.
+    D/Right/DPadRight                 Move rightward in the menu.
+    Enter/Space/GamePadB              Equip the selected item.
 
   Win/Loss Screen:
-    Key                      Action
-    Q/GamePadY               Quit the game.
-    Backspace/GamePadA       Reset to main menu.
+    Key                               Action
+    Q/GamePadY                        Quit the game.
+    Backspace/GamePadA                Reset to main menu.
 
 Code Metrics:
   Raw data stored at "Info/Grader Info/Code Metrics/Code Metrics.txt"

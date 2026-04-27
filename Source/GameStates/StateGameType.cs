@@ -106,9 +106,13 @@ internal class StateGameType : IGameState {
       },
       downMappings: new Dictionary<Buttons, IGPCommand> {
         { Buttons.DPadUp, new PlayerMoveUpCommand(Player) },
+        { Buttons.LeftThumbstickUp, new PlayerMoveUpCommand(Player) },
         { Buttons.DPadDown, new PlayerMoveDownCommand(Player) },
+        { Buttons.LeftThumbstickDown, new PlayerMoveDownCommand(Player) },
         { Buttons.DPadLeft, new PlayerMoveLeftCommand(Player) },
+        { Buttons.LeftThumbstickLeft, new PlayerMoveLeftCommand(Player) },
         { Buttons.DPadRight, new PlayerMoveRightCommand(Player) },
+        { Buttons.LeftThumbstickRight, new PlayerMoveRightCommand(Player) },
         { Buttons.A, new PlayerUseItemCommand(Player, UseType.Held) },
       },
       releasedMappings: new Dictionary<Buttons, IGPCommand> {
