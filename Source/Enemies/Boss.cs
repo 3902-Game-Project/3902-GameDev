@@ -32,14 +32,17 @@ internal class Boss : ABaseEnemy {
     base.TakeDamage(damage);
 
     // --- PHASE TRANSITION LOGIC ---
-    if (Health <= MaxHealth / 2 && !PhaseTwoTriggered) {
-      PhaseTwoTriggered = true;
-      CurrentState = new BossSpecialAttackState(this);
-      return;
-    }
-    if (Health > 0 && CurrentState is not BossHurtState && CurrentState is not BossSpecialAttackState) {
-      if (random.Next(100) < 20) {
-        CurrentState = new BossHurtState(this);
+    if (Health > 0) {
+      if (Health <= MaxHealth / 2 && !PhaseTwoTriggered) {
+        PhaseTwoTriggered = true;
+        CurrentState = new BossSpecialAttackState(this);
+        return;
+      }
+
+      if (CurrentState is not BossHurtState && CurrentState is not BossSpecialAttackState) {
+        if (random.Next(100) < 20) {
+          CurrentState = new BossHurtState(this);
+        }
       }
     }
   }
