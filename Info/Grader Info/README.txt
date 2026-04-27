@@ -75,6 +75,7 @@ Jira task screenshots:
 
 Known bugs:
   -Can push crates through walls and enemies forced to move along with crate.
+  -Mouse clicks are registered even if clicking outside the game window. This seems more to be a bug with MonoGame than the game itself.
   -Enemies sometimes can walk off screen.
   -Confusion in codebase between gunstats, ammostats, etc.
 
