@@ -1,4 +1,5 @@
 using GameProject.Collisions;
+using GameProject.Collisions.Shapes;
 using GameProject.GlobalInterfaces;
 using Microsoft.Xna.Framework;
 
@@ -19,6 +20,7 @@ internal interface IEnemy : ISprite, ICollidable {
   Vector2 Velocity { get; set; }
   Vector2 Target { get; set; }
   FacingDirection Direction { get; set; }
+  BoxCollider Collider { get; }
   bool Invulnerable { get; }
 
   void TakeDamage(int damage);

@@ -189,12 +189,12 @@ internal class Level : ILevel {
     ProjectileManager.Draw(spriteBatch);
 
     foreach (var enemy in aliveEnemies) {
-      if (enemy is ABaseEnemy baseEnemy && baseEnemy.Health > 0) {
-        float enemyHealthPercent = MathHelper.Clamp((float) baseEnemy.Health / baseEnemy.MaxHealth, 0f, 1f);
+      if (!enemy.Invulnerable && enemy.Health > 0) {
+        float enemyHealthPercent = MathHelper.Clamp((float) enemy.Health / enemy.MaxHealth, 0f, 1f);
         float scaleWidth = TextureStore.Instance.HealthBar.Width * 0.15f;
         Vector2 enemyHealthPositions = new(
-          baseEnemy.Position.X - (scaleWidth / 2f),
-          baseEnemy.Position.Y - baseEnemy.Collider.Height);
+          enemy.Position.X - (scaleWidth / 2f),
+          enemy.Position.Y - enemy.Collider.Height);
         spriteBatch.Draw(texture: TextureStore.Instance.HealthBar,
           position: enemyHealthPositions,
           sourceRectangle: null,
