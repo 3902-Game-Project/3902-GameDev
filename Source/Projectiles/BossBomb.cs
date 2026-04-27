@@ -110,7 +110,7 @@ internal class BossBomb : IProjectile, ICollidable {
       player.TakeDamage(damage);
     }
   }
-
+  
   public void Draw(SpriteBatch spriteBatch) {
     if (IsExpired) return;
 

@@ -33,6 +33,7 @@ internal class BossAttack2State : IEnemyState {
         hasThrownBomb = true;
       }
     }
+
     if (boss.CurrentFrame == boss.CurrentSourceRectangles.Count - 1 && animationTimer >= 0.2) {
       boss.CurrentState = new BossIdleState(boss);
     }
