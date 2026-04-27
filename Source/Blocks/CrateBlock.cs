@@ -25,8 +25,14 @@ internal class CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : ABaseBlock(xy
   }
 
   public override void OnCollision(CollisionInfo info) {
+    if (info.Collider is SandBlock || info.Collider is RedSandBlock) {
+      return;
+    }
+
     if (info.Collider is IBlock || info.Collider is IEnemy) {
       State = CrateBlockState.Still;
+      Position = CollisionHelper.GetNudgedPosition(info, Position, info.Overlap);
+      UpdateCollider();
     } else if (State == CrateBlockState.Still && info.Collider is Player) {
       State = CrateBlockState.Moving;
 
