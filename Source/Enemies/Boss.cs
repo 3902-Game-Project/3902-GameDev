@@ -99,10 +99,10 @@ internal class Boss : ABaseEnemy {
 
   public void SpawnArenaBombs() {
     // Adjust these grid coordinates to fit your actual room size!
-    int[] xPositions = { 150, 400, 650 };
-    int[] yPositions = { 150, 300, 450 };
+    int[] xPositions = [150, 400, 650];
+    int[] yPositions = [150, 300, 450];
 
-    Random rand = new Random();
+    Random rand = new();
     int safeCol = rand.Next(xPositions.Length);
     int safeRow = rand.Next(yPositions.Length);
 
@@ -111,7 +111,7 @@ internal class Boss : ABaseEnemy {
 
         if (x == safeCol && y == safeRow) continue;
 
-        Vector2 spawnPos = new Vector2(xPositions[x], yPositions[y]);
+        Vector2 spawnPos = new(xPositions[x], yPositions[y]);
 
         IProjectile arenaBomb = ProjectileFactory.Instance.CreateBossBomb(spawnPos, Vector2.Zero, 25);
         LevelManager.CurrentLevel.ProjectileManager.Add(arenaBomb);

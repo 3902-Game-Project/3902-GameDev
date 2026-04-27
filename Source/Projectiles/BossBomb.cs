@@ -11,22 +11,22 @@ internal class BossBomb : IProjectile, ICollidable {
   public Vector2 Position { get; set; }
   public Vector2 Velocity { get; set; }
 
-  private Texture2D flyingTexture;
-  private Texture2D blinkingTexture;
+  private readonly Texture2D flyingTexture;
+  private readonly Texture2D blinkingTexture;
   private int currentFrame = 0;
   private double animationTimer = 0;
 
-  private List<Rectangle> flyingRectangles;
-  private List<Rectangle> blinkingRectangles;
+  private readonly List<Rectangle> flyingRectangles;
+  private readonly List<Rectangle> blinkingRectangles;
 
   private bool isLanded = false;
   private bool isExploding = false;
   private double fuseTimer = 0;
-  private int damage;
+  private readonly int damage;
 
   public bool IsExpired { get; private set; } = false;
   public void Expire() { IsExpired = true; }
-  public Rectangle BoundingBox => new Rectangle((int) Position.X - 20, (int) Position.Y - 20, 40, 40);
+  public Rectangle BoundingBox => new((int) Position.X - 20, (int) Position.Y - 20, 40, 40);
 
   public BoxCollider Collider { get; private set; }
   public IShape Shape => Collider;
@@ -34,19 +34,19 @@ internal class BossBomb : IProjectile, ICollidable {
   public Layer Mask { get; } = Layer.Player;
 
   public BossBomb(Texture2D flyingTex, Texture2D blinkingTex, Vector2 startPos, Vector2 direction, int damage) {
-    this.flyingTexture = flyingTex;
-    this.blinkingTexture = blinkingTex;
-    this.Position = startPos;
+    flyingTexture = flyingTex;
+    blinkingTexture = blinkingTex;
+    Position = startPos;
     this.damage = damage;
-    this.Velocity = direction * 150f;
+    Velocity = direction * 150f;
     Collider = new BoxCollider(40, 40, Position);
 
-    this.flyingRectangles = [
+    flyingRectangles = [
         new(527, 324, 31, 19),
         new(566, 324, 50, 19)
     ];
 
-    this.blinkingRectangles = [
+    blinkingRectangles = [
         new(7, 39, 40, 52), new(65, 43, 40, 48), new(119, 41, 41, 50),
         new(175, 43, 41, 48), new(231, 41, 41, 50), new(287, 38, 41, 53),
         new(344, 37, 41, 54), new(401, 37, 40, 55), new(456, 43, 41, 48),
@@ -117,7 +117,7 @@ internal class BossBomb : IProjectile, ICollidable {
     Texture2D currentTexture = isLanded ? blinkingTexture : flyingTexture;
     Rectangle sourceRect = isLanded ? blinkingRectangles[currentFrame] : flyingRectangles[currentFrame];
 
-    Vector2 origin = new Vector2(sourceRect.Width / 2f, sourceRect.Height / 2f);
+    Vector2 origin = new(sourceRect.Width / 2f, sourceRect.Height / 2f);
 
     spriteBatch.Draw(currentTexture, Position, sourceRect, Color.White, 0f, origin, 1.0f, SpriteEffects.None, 0f);
   }

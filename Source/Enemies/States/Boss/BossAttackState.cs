@@ -7,7 +7,7 @@ internal class BossAttackState : IEnemyState {
   private readonly Boss boss;
   private double animationTimer = 0.0;
 
-  private int shotsToFire;
+  private readonly int shotsToFire;
   private int shotsFired = 0;
   private bool hasFiredThisLoop = false;
   private readonly Random random = new();
@@ -24,7 +24,7 @@ internal class BossAttackState : IEnemyState {
       new(289, 148, 48, 46),
     ];
     this.boss.CurrentFrame = 0;
-    this.shotsToFire = random.Next(1, 4);
+    shotsToFire = random.Next(1, 4);
   }
 
   public void Update(double deltaTime) {
