@@ -34,7 +34,12 @@ internal class LevelManager(Game1 game) : ILevelManager {
     "13_level",
     "14_level",
   ];
-  private static readonly string STARTING_LEVEL = Flags.StartInDebugLevel ? "00_everything" : "01_level";
+  private static readonly string STARTING_LEVEL =
+    Flags.StartInDebugLevel ?
+      "00_everything" :
+      (Flags.StartInBossLevel ?
+        "13_level" :
+        "01_level");
   private static readonly string BFG_LEVEL = "13_level";
   private static readonly int BFG_LEVEL_INDICES_START = Array.IndexOf(LEVEL_NAMES, "01_level");
   private static readonly int BFG_LEVEL_INDICES_END = Array.IndexOf(LEVEL_NAMES, "12_level");
