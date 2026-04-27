@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using GameProject.Commands;
 using GameProject.Factories;
+using GameProject.GameStates;
 using GameProject.Items;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
@@ -17,40 +19,31 @@ internal class CheatCodes {
   private readonly double maxWaitTime = 5f;
   private double pressedDeltaTime = 0f;
 
-  private bool healthOn = false;
-  private bool ammoOn = false;
   private bool itemsOn = false;
   private readonly int buffer = 8;
   public List<Keys> lastPressed = [];
 
-  // Unlimited Health Mappings
-  private readonly List<Keys> unlimitedHealthWASD = [
-    Keys.W, Keys.W, Keys.S, Keys.S, Keys.A, Keys.D, Keys.A, Keys.D
-  ];
-  private readonly List<Keys> unlimitedHealthArrows = [
-    Keys.Up, Keys.Up, Keys.Down, Keys.Down, Keys.Left, Keys.Right, Keys.Left, Keys.Right
-  ];
+  private Dictionary<List<Keys>, IGPCommand> cheatCodes = new();
 
-  // Unlimited Ammo Mappings
-  private readonly List<Keys> unlimitedAmmoWASD = [
-    Keys.W, Keys.A, Keys.S, Keys.D, Keys.W, Keys.A, Keys.S, Keys.D
-  ];
-  private readonly List<Keys> unlimitedAmmoArrows = [
-    Keys.Up, Keys.Left, Keys.Down, Keys.Right, Keys.Up, Keys.Left, Keys.Down, Keys.Right
-  ];
+  public void Initialize(Player player) {
+    Instance.cheatCodes = new Dictionary<List<Keys>, IGPCommand> {
+      // Unlimited Health Mappings
+      { [Keys.W, Keys.W, Keys.S, Keys.S, Keys.A, Keys.D, Keys.A, Keys.D], new PlayerUnlimitedHealthCommand(player) },
+      { [Keys.Up, Keys.Up, Keys.Down, Keys.Down, Keys.Left, Keys.Right, Keys.Left, Keys.Right], new PlayerUnlimitedHealthCommand(player) },
 
-  // Unlimited Items Mappings
-  private readonly List<Keys> unlimitedItemsWASD = [
-    Keys.W, Keys.W, Keys.A, Keys.A, Keys.D, Keys.D, Keys.S, Keys.S
-  ];
-  private readonly List<Keys> unlimitedItemsArrows = [
-    Keys.Up, Keys.Up, Keys.Left, Keys.Left, Keys.Right, Keys.Right, Keys.Down, Keys.Down
-  ];
+      // Unlimited Ammo Mappings
+      { [Keys.W, Keys.A, Keys.S, Keys.D, Keys.W, Keys.A, Keys.S, Keys.D], new PlayerUnlimitedAmmoCommand(player) },
+      { [Keys.Up, Keys.Left, Keys.Down, Keys.Right, Keys.Up, Keys.Left, Keys.Down, Keys.Right], new PlayerUnlimitedAmmoCommand(player) },
+
+      // Unlimited Items Mappings
+      { [Keys.W, Keys.W, Keys.A, Keys.A, Keys.D, Keys.D, Keys.S, Keys.S],  new PlayerUnlimitedItemsCommand(player) },
+      { [Keys.Up, Keys.Up, Keys.Left, Keys.Left, Keys.Right, Keys.Right, Keys.Down, Keys.Down],  new PlayerUnlimitedItemsCommand(player) }
+    };  
+  }
 
   public void UnlimitedHealth(Player player) {
     player.Health = 999999;
     lastPressed.Clear();
-    healthOn = true;
     Debug.WriteLine("unlimited health");
   }
 
@@ -59,7 +52,6 @@ internal class CheatCodes {
     player.Inventory.Ammo[AmmoType.Shells] += 9999;
     player.Inventory.Ammo[AmmoType.Light] += 9999;
     lastPressed.Clear();
-    ammoOn = true;
     Debug.WriteLine("unlimited ammo");
   }
 
@@ -83,6 +75,7 @@ internal class CheatCodes {
       IItem invincible = ItemFactory.Instance.CreateInvincibilityItem(-1f, -1f, player);
       player.Inventory.PickupItem(invincible);
     }
+    // add additional cases for other items
 
     if (!itemsOn) {
       lastPressed.Clear();
@@ -114,14 +107,8 @@ internal class CheatCodes {
 
   public void UpdateCheats(Player player, double deltaTime) {
     if (pressedDeltaTime <= maxWaitTime) {
-      if (CodesMatch(unlimitedHealthWASD) || CodesMatch(unlimitedHealthArrows)) {
-        new PlayerUnlimitedHealthCommand(player).Execute();
-      }
-      if (CodesMatch(unlimitedAmmoWASD) || CodesMatch(unlimitedAmmoArrows)) {
-        new PlayerUnlimitedAmmoCommand(player).Execute();
-      }
-      if (CodesMatch(unlimitedItemsWASD) || CodesMatch(unlimitedItemsArrows) || itemsOn) {
-        new PlayerUnlimitedItemsCommand(player).Execute();
+      foreach (var code in Instance.cheatCodes) {
+        if (CodesMatch(code.Key)) code.Value.Execute(); 
       }
       pressedDeltaTime += deltaTime;
     } else {
