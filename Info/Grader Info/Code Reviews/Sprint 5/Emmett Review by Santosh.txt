@@ -1,15 +1,19 @@
 Author: Santosh
 Date: 2026-04-27
 Sprint: 5
-Class to review: <TODO>
+Class to review: Source/Items/Guns/FakeBFGItem.cs (as it was at commit 07dbad2, "Emmett Review by Santosh: create framework", 2026 Apr 27 3:43 PM)
 Author of class: Emmett
-Minutes taken to review: 52
+Minutes taken to review: 22
 
 Readability:
   What is readable:
+  The class is very small so it doesn't do much. As a result it is easy to get a grasp on the entire class's functionality.
 
   What is less readable:
+  The code for creating bulletSpawnOffset is a bit confusing, as the position seems arbitrarily hard-coded.
 
 Code quality:
+  fireMode is set to a value in the constructor but is checked for non-null in Use. This check for non-null is unnecessary. Additionally, as a whole, the override of base.Use seems unnecessary, as all it does is create a custom projectile. This is functionality that could be placed in ABaseGun instead.
 
 Hypothetical code change and how well the code supports that change:
+  Hypothetically the BFG could be changed to play a different sound, perhaps one more humourous. This change could be easily accomodated by updating the SoundManager.Instance.Play call to reference a different value in the SoundID enum.
