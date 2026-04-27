@@ -30,6 +30,8 @@ internal class Game1 : Game {
   public IGameState StatePause { get; private set; }
   public IGameState StateItemScreen { get; private set; }
   public StateGameType StateGame { get; private set; }
+  public IGameState StateSavePrompt { get; private set; }
+  public IGameState StateLoadPrompt { get; private set; }
 
   private IGameState currentState;
 
@@ -125,6 +127,8 @@ internal class Game1 : Game {
     StateWin = new StateWinType(this);
     StatePause = new StatePauseType(this);
     StateItemScreen = new StateItemScreenType(this);
+    StateSavePrompt = new StateSavePromptType(this);
+    StateLoadPrompt = new StateLoadPromptType(this);
     StateGame = new StateGameType(this);
     currentState = StateMenu;
 
@@ -134,6 +138,8 @@ internal class Game1 : Game {
     StateWin.Initialize();
     StatePause.Initialize();
     StateItemScreen.Initialize();
+    StateSavePrompt.Initialize();
+    StateLoadPrompt.Initialize();
     StateGame.Initialize();
 
     MiscAssetStore.Instance.LoadContent(Content);
@@ -151,6 +157,8 @@ internal class Game1 : Game {
     StateWin.LoadContent(Content);
     StatePause.LoadContent(Content);
     StateItemScreen.LoadContent(Content);
+    StateSavePrompt.LoadContent(Content);
+    StateLoadPrompt.LoadContent(Content);
     StateGame.LoadContent(Content);
   }
 
