@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GameProject.ButtonDiffTrackers;
 using GameProject.Commands;
 using GameProject.Controllers;
 using GameProject.Globals;
@@ -13,8 +14,8 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.GameStates;
 
 internal class StateItemScreenType(Game1 game) : IGameState {
-  private IController keyboardController;
-  private IController gamePadController;
+  private IController<Keys> keyboardController;
+  private IController<Buttons> gamePadController;
   private Texture2D blankTexture;
   public bool InWeaponMenu { get; private set; } = true;
   public int SelectedWeaponIndex { get; private set; } = 0;

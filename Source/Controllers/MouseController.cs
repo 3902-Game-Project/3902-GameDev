@@ -5,17 +5,23 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Controllers;
 
-internal class MouseController(
-  Dictionary<MouseButtons, IGPCommand> pressedMappings = null,
-  Dictionary<MouseButtons, IGPCommand> downMappings = null,
-  Dictionary<MouseButtons, IGPCommand> releasedMappings = null
-) : IController {
+internal class MouseController : IController<MouseButtons> {
   // Tracking of presses / releases must be shared across GameStates
   private static readonly MouseDiffTracker mouseTracker = new();
 
-  private readonly Dictionary<MouseButtons, IGPCommand> pressedMappings = pressedMappings ?? [];
-  private readonly Dictionary<MouseButtons, IGPCommand> downMappings = downMappings ?? [];
-  private readonly Dictionary<MouseButtons, IGPCommand> releasedMappings = releasedMappings ?? [];
+  public Dictionary<MouseButtons, IGPCommand> PressedMappings { get; }
+  public Dictionary<MouseButtons, IGPCommand> DownMappings { get; }
+  public Dictionary<MouseButtons, IGPCommand> ReleasedMappings { get; }
+
+  public MouseController(
+    Dictionary<MouseButtons, IGPCommand> pressedMappings = null,
+    Dictionary<MouseButtons, IGPCommand> downMappings = null,
+    Dictionary<MouseButtons, IGPCommand> releasedMappings = null
+  ) {
+    PressedMappings = pressedMappings ?? [];
+    DownMappings = downMappings ?? [];
+    ReleasedMappings = releasedMappings ?? [];
+  }
 
   public void Update() {
     MouseState mouseState = Mouse.GetState();
@@ -23,19 +29,19 @@ internal class MouseController(
     mouseTracker.Update(mouseState);
 
     foreach (MouseButtons mouseButton in mouseTracker.GetPressed()) {
-      if (pressedMappings.TryGetValue(mouseButton, out var command)) {
+      if (PressedMappings.TryGetValue(mouseButton, out var command)) {
         command.Execute();
       }
     }
 
     foreach (MouseButtons mouseButton in mouseTracker.GetDown()) {
-      if (downMappings.TryGetValue(mouseButton, out var command)) {
+      if (DownMappings.TryGetValue(mouseButton, out var command)) {
         command.Execute();
       }
     }
 
     foreach (MouseButtons mouseButton in mouseTracker.GetReleased()) {
-      if (releasedMappings.TryGetValue(mouseButton, out var command)) {
+      if (ReleasedMappings.TryGetValue(mouseButton, out var command)) {
         command.Execute();
       }
     }

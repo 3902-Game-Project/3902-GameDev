@@ -22,9 +22,9 @@ internal class StateGameType : IGameState {
 
   private readonly Game1 game;
 
-  private IController keyboardController;
-  private IController mouseController;
-  private IController gamePadController;
+  private IController<Keys> keyboardController;
+  private IController<MouseButtons> mouseController;
+  private IController<Buttons> gamePadController;
   private Texture2D ammoTexture;
   private RenderTarget2D nonHUDTarget;
 
@@ -52,11 +52,6 @@ internal class StateGameType : IGameState {
         { Keys.R, new ReloadWeaponCommand(Player) },
         { Keys.L, new PlayerDieCommand(Player) },
         { Keys.Tab, new ToggleMusicCommand() },
-
-        // Debug button binds:
-        { Keys.T, new PreviousLevelCommand(LevelManager) },
-        { Keys.Y, new NextLevelCommand(LevelManager) },
-        { Keys.H, new ToggleUpdatesCommand() },
       },
       downMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.W, new PlayerMoveUpCommand(Player) },
@@ -74,13 +69,20 @@ internal class StateGameType : IGameState {
       }
     );
 
-    mouseController = new MouseController(
-      pressedMappings: new Dictionary<MouseButtons, IGPCommand> {
-        // Debug button binds:
-        { MouseButtons.Right, new PreviousLevelCommand(LevelManager) },
-        { MouseButtons.Left, new NextLevelCommand(LevelManager) },
-      }
-    );
+    // Debug button binds:
+    if (Flags.DebugButtonBinds) {
+      keyboardController.PressedMappings.Add(Keys.T, new PreviousLevelCommand(LevelManager));
+      keyboardController.PressedMappings.Add(Keys.Y, new NextLevelCommand(LevelManager));
+      keyboardController.PressedMappings.Add(Keys.H, new ToggleUpdatesCommand());
+    }
+
+    mouseController = new MouseController();
+
+    // Debug button binds:
+    if (Flags.DebugButtonBinds) {
+      mouseController.PressedMappings.Add(MouseButtons.Right, new PreviousLevelCommand(LevelManager));
+      mouseController.PressedMappings.Add(MouseButtons.Left, new NextLevelCommand(LevelManager));
+    }
 
     // The gamepad bindings don't match the readme. this is intentional, because
     // the readme is in Xbox controller layout, but testing with a
@@ -98,11 +100,6 @@ internal class StateGameType : IGameState {
         { Buttons.Start, new ReloadWeaponCommand(Player) },
         { Buttons.RightStick, new PlayerDieCommand(Player) },
         { Buttons.Back, new ToggleMusicCommand() },
-
-        // Debug button binds:
-        { Buttons.LeftShoulder, new PreviousLevelCommand(LevelManager) },
-        { Buttons.RightShoulder, new NextLevelCommand(LevelManager) },
-        { Buttons.RightThumbstickRight, new ToggleUpdatesCommand() },
       },
       downMappings: new Dictionary<Buttons, IGPCommand> {
         { Buttons.DPadUp, new PlayerMoveUpCommand(Player) },
@@ -119,6 +116,13 @@ internal class StateGameType : IGameState {
         { Buttons.A, new PlayerUseItemCommand(Player, UseType.Released) },
       }
     );
+
+    // Debug button binds:
+    if (Flags.DebugButtonBinds) {
+      gamePadController.PressedMappings.Add(Buttons.LeftShoulder, new PreviousLevelCommand(LevelManager));
+      gamePadController.PressedMappings.Add(Buttons.RightShoulder, new NextLevelCommand(LevelManager));
+      gamePadController.PressedMappings.Add(Buttons.RightThumbstickRight, new ToggleUpdatesCommand());
+    }
 
     LevelManager.Initialize();
   }

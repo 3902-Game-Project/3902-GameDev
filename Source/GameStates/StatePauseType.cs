@@ -10,8 +10,8 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.GameStates;
 
 internal class StatePauseType(Game1 game) : IGameState {
-  private IController keyboardController;
-  private IController gamePadController;
+  private IController<Keys> keyboardController;
+  private IController<Buttons> gamePadController;
 
   public void Initialize() {
     keyboardController = new KeyboardController(
