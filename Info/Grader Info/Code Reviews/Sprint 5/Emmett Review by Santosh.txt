@@ -1,0 +1,15 @@
+Author: Santosh
+Date: 2026-04-27
+Sprint: 5
+Class to review: <TODO>
+Author of class: Emmett
+Minutes taken to review: 52
+
+Readability:
+  What is readable:
+
+  What is less readable:
+
+Code quality:
+
+Hypothetical code change and how well the code supports that change:
