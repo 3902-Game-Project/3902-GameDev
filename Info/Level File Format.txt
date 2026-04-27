@@ -1,6 +1,6 @@
 Level files are *.csv files.
 
-There is a 1 line preamble to the file with content "Flags: <Flags>" to set level flags
+There is a 2 line preamble to the file with content "Flags: <Flags>\n" to set level flags
   Allowed values:
   None
   Cave
