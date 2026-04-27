@@ -75,7 +75,6 @@ Jira task screenshots:
 Known bugs:
   -Can push crates through walls and enemies forced to move along with crate.
   -Enemies sometimes can walk off screen.
-  -Ammo not reloading
   -Confusion in codebase between gunstats, ammostats, etc.
 
 Hard limitations:
