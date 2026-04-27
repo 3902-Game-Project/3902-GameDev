@@ -13,7 +13,7 @@ internal class BossIdleState : IEnemyState {
     this.boss.Velocity = Vector2.Zero;
     this.boss.CurrentSourceRectangles = [
       new(0, 38, 56, 48), new(56, 38, 56, 48), new(112, 38, 56, 48),
-      new(168, 38, 56, 48), new(224, 38, 56, 48), new(280, 38, 56, 48)
+      new(168, 38, 56, 48), new(224, 38, 56, 48), new(280, 38, 56, 48),
     ];
     this.boss.CurrentFrame = 0;
   }

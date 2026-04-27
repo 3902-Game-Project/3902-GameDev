@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies.BossStates;
 
@@ -14,7 +14,7 @@ internal class BossAttack2State : IEnemyState {
     this.boss.CurrentSourceRectangles = [
       new(56, 317, 56, 50), new(112, 317, 56, 50), new(168, 317, 56, 50),
       new(224, 317, 56, 50), new(280, 317, 56, 50), new(336, 317, 56, 50),
-      new(392, 317, 56, 50), new(448, 317, 56, 50)
+      new(392, 317, 56, 50), new(448, 317, 56, 50),
     ];
     this.boss.CurrentFrame = 0;
   }

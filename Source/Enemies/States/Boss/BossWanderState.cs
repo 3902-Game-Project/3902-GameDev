@@ -7,14 +7,19 @@ namespace GameProject.Enemies.BossStates;
 internal class BossWanderState : AEnemyMoveState {
   private readonly Boss boss;
 
-  public BossWanderState(Boss boss) : base(boss, [
-    new(0, 95, 56, 45),
-    new(56, 95, 56, 45),
-    new(112, 95, 56, 45),
-    new(168, 95, 56, 45),
-    new(224, 95, 56, 45),
-    new(280, 95, 56, 45)
-  ], 120f) {
+  public BossWanderState(Boss boss) :
+    base(
+      boss,
+      [
+        new(0, 95, 56, 45),
+        new(56, 95, 56, 45),
+        new(112, 95, 56, 45),
+        new(168, 95, 56, 45),
+        new(224, 95, 56, 45),
+        new(280, 95, 56, 45),
+      ],
+      120.0f
+    ) {
     this.boss = boss;
     this.boss.CurrentFrame = 0;
   }

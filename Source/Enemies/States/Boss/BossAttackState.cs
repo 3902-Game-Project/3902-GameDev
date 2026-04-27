@@ -21,8 +21,8 @@ internal class BossAttackState : IEnemyState {
       new(120, 148, 45, 46),
       new(176, 148, 56, 46),
       new(232, 148, 44, 46),
-      new(289, 148, 48, 46)
-        ];
+      new(289, 148, 48, 46),
+    ];
     this.boss.CurrentFrame = 0;
     this.shotsToFire = random.Next(1, 4);
   }

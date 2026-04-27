@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using GameProject.Blocks;
 
 namespace GameProject.Enemies.BossStates;
@@ -17,7 +17,7 @@ internal class BossDeathState : IEnemyState {
       new(392, 203, 56, 50),
       new(448, 203, 56, 50),
       new(504, 203, 56, 50),
-      new(560, 203, 56, 50)
+      new(560, 203, 56, 50),
     ];
     this.boss.CurrentFrame = 0;
   }
