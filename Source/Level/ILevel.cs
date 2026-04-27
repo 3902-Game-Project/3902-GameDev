@@ -14,6 +14,7 @@ internal interface ILevel : IInitable, ITemporalUpdatable, IGPDrawable {
   public ProjectileManager ProjectileManager { get; }
 
   Vector2 GetDefaultPlayerPosition();
+  bool AllKillableEnemiesKilled();
   void AddPickup(IWorldPickup pickup);
   void RemovePickup(IWorldPickup pickup);
   IEnumerable<IBlock> GetOpenableDoors();

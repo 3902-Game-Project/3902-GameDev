@@ -3,6 +3,7 @@ using System.Linq;
 using GameProject.Blocks;
 using GameProject.Collisions;
 using GameProject.Enemies;
+using GameProject.Factories;
 using GameProject.Globals;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
@@ -27,8 +28,6 @@ internal class Level : ILevel {
   private readonly CollisionManager collisionManager = new();
   private readonly Player player;
   public bool HasKillableEnemiesRemaining => aliveEnemies.Any(e => e is not Cactus);
-  private readonly bool isBfgLevel;
-  private bool bfgSpawned = false;
   private readonly ILevelManager levelManager;
 
   private void CategorizeDeadEnemies() {
@@ -44,9 +43,7 @@ internal class Level : ILevel {
   }
 
   private void CheckLevelClear() {
-    var killableEnemies = aliveEnemies.Where(e => e is not Cactus);
-
-    if (!killableEnemies.Any()) {
+    if (AllKillableEnemiesKilled()) {
       foreach (var door in doors) {
         if (door is SmallDoorBlock smallDoorBlock) {
           smallDoorBlock.ChangeState(LockableDoorBlockState.Open);
@@ -57,16 +54,13 @@ internal class Level : ILevel {
       }
 
       // BFG Spawn Logic
-      if (!bfgSpawned) {
-        bfgSpawned = true; // prevent multi-spawns
+      if (!levelManager.BfgSpawned && levelManager.AllPreBfgLevelEnemiesKilled()) {
+        levelManager.BfgSpawned = true; // prevent multi-spawns
 
-        if (isBfgLevel) {
-          // Spawn 3 BFGs around the center of the room
-          var factory = Factories.ItemFactory.Instance;
-          AddPickup(new ItemWorldPickup(factory.CreateBFG(480f, 280f, player, levelManager)));
-          AddPickup(new ItemWorldPickup(factory.CreateFakeBFG(380f, 280f, player, levelManager)));
-          AddPickup(new ItemWorldPickup(factory.CreateFakeBFG(580f, 280f, player, levelManager)));
-        }
+        // Spawn 3 BFGs around the center of the room
+        levelManager.BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateBFG(480f, 280f, player, levelManager)));
+        levelManager.BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateFakeBFG(380f, 280f, player, levelManager)));
+        levelManager.BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateFakeBFG(580f, 280f, player, levelManager)));
       }
     }
   }
@@ -79,8 +73,7 @@ internal class Level : ILevel {
     List<IWorldPickup> pickups,
     Vector2 playerPosition,
     Player player,
-    ILevelManager levelManager,
-    bool isBfgLevel
+    ILevelManager levelManager
 ) {
     this.nonCollidableBlocks = nonCollidableBlocks;
     this.collidableBlocks = collidableBlocks;
@@ -90,7 +83,6 @@ internal class Level : ILevel {
     this.playerPosition = playerPosition;
     this.player = player;
     this.levelManager = levelManager;
-    this.isBfgLevel = isBfgLevel;
 
     CategorizeDeadEnemies();
 
@@ -231,6 +223,10 @@ internal class Level : ILevel {
 
   public Vector2 GetDefaultPlayerPosition() {
     return playerPosition;
+  }
+
+  public bool AllKillableEnemiesKilled() {
+    return !aliveEnemies.Where(e => e is not Cactus).Any();
   }
 
   public void AddPickup(IWorldPickup pickup) {

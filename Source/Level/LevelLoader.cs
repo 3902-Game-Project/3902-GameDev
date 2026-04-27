@@ -416,7 +416,7 @@ internal partial class LevelLoader {
     }
   }
 
-  public static Level FromString(Player player, ILevelManager levelManager, ISet<string> levelNames, string levelDataString, bool isBfgLevel) {
+  public static Level FromString(Player player, ILevelManager levelManager, ISet<string> levelNames, string levelDataString) {
     List<IBlock> nonCollidableBlocks = [];
     List<IBlock> collidableBlocks = [];
     List<IBlock> doors = [];
@@ -458,7 +458,7 @@ internal partial class LevelLoader {
     }
 
     if (playerPositionNullable is Vector2 playerPosition) {
-      var level = new Level(nonCollidableBlocks, collidableBlocks, doors, enemies, pickups, playerPosition, player, levelManager, isBfgLevel);
+      var level = new Level(nonCollidableBlocks, collidableBlocks, doors, enemies, pickups, playerPosition, player, levelManager);
 
       return level;
     } else {

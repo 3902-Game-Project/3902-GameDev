@@ -32,9 +32,9 @@ internal class LevelManager(Game1 game) : ILevelManager {
     "14_level",
   ];
   private static readonly string STARTING_LEVEL = Flags.StartInDebugLevel ? "00_everything" : "01_level";
-  public bool AllEnemiesCleared { get; set; } = true;
-  public int PublicCurrentLevelIndex => CurrentLevelIndex;
-  public static int TotalLevels => LEVEL_NAMES.Length;
+  private static readonly string BFG_LEVEL = "13_level";
+  private static int BFG_LEVEL_INDICES_START = Array.IndexOf(LEVEL_NAMES, "01_level");
+  private static int BFG_LEVEL_INDICES_END = Array.IndexOf(LEVEL_NAMES, "12_level");
 
   private readonly Dictionary<string, ILevel> levels = [];
   private string currentLevelName = STARTING_LEVEL;
@@ -89,6 +89,10 @@ internal class LevelManager(Game1 game) : ILevelManager {
 
   public ILevel CurrentLevel => levels[currentLevelName];
 
+  public bool BfgSpawned { get; set; } = false;
+
+  public ILevel BfgLevel => levels[BFG_LEVEL];
+
   public void Initialize() { }
 
   public void LoadContent(ContentManager content) {
@@ -107,8 +111,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
         player: game.StateGame.Player,
         levelManager: game.StateGame.LevelManager,
         levelNames: levelNamesSet,
-        levelDataString: File.ReadAllText(content.RootDirectory + "/Levels/" + name + ".csv"),
-        isBfgLevel: name == "13_level"
+        levelDataString: File.ReadAllText(content.RootDirectory + "/Levels/" + name + ".csv")
       );
 
       levels.Add(name, level);
@@ -155,5 +158,15 @@ internal class LevelManager(Game1 game) : ILevelManager {
 
   public void NextLevel() {
     SwitchLevelByIndex(Math.Min(CurrentLevelIndex + 1, LEVEL_NAMES.Length - 1));
+  }
+
+  public bool AllPreBfgLevelEnemiesKilled() {
+    for (int i = BFG_LEVEL_INDICES_START; i <= BFG_LEVEL_INDICES_END; i++) {
+      if (!levels[LEVEL_NAMES[i]].AllKillableEnemiesKilled()) {
+        return false;
+      }
+    }
+
+    return true;
   }
 }
