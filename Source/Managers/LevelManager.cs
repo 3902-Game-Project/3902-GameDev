@@ -162,7 +162,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
 
   public bool AllPreBfgLevelEnemiesKilled() {
     for (int i = BFG_LEVEL_INDICES_START; i <= BFG_LEVEL_INDICES_END; i++) {
-      if (!levels[LEVEL_NAMES[i]].AllKillableEnemiesKilled()) {
+      if (levels[LEVEL_NAMES[i]].HasKillableEnemiesRemaining()) {
         return false;
       }
     }

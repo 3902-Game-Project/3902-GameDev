@@ -42,7 +42,7 @@ internal class Level : ILevel {
   }
 
   private void CheckLevelClear() {
-    if (AllKillableEnemiesKilled()) {
+    if (!HasKillableEnemiesRemaining()) {
       foreach (var door in doors) {
         if (door is SmallDoorBlock smallDoorBlock) {
           smallDoorBlock.ChangeState(LockableDoorBlockState.Open);
@@ -227,8 +227,8 @@ internal class Level : ILevel {
     return playerPosition;
   }
 
-  public bool AllKillableEnemiesKilled() {
-    return !aliveEnemies.Where(e => e is not Cactus).Any();
+  public bool HasKillableEnemiesRemaining() {
+    return aliveEnemies.Where(enemy => enemy is not Cactus).Any();
   }
 
   public void AddPickup(IWorldPickup pickup) {
