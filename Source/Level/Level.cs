@@ -228,7 +228,7 @@ internal class Level : ILevel {
   }
 
   public bool HasKillableEnemiesRemaining() {
-    return aliveEnemies.Where(enemy => enemy is not Cactus).Any();
+    return aliveEnemies.Where(enemy => !enemy.Invulnerable).Any();
   }
 
   public void AddPickup(IWorldPickup pickup) {
