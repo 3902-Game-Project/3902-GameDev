@@ -37,7 +37,13 @@ internal class CheatCodes : ITemporalUpdatable {
 
       // Unlimited Items Mappings
       { [Keys.W, Keys.W, Keys.A, Keys.A, Keys.D, Keys.D, Keys.S, Keys.S], new PlayerUnlimitedItemsCommand(player) },
-      { [Keys.Up, Keys.Up, Keys.Left, Keys.Left, Keys.Right, Keys.Right, Keys.Down, Keys.Down], new PlayerUnlimitedItemsCommand(player) }
+      { [Keys.Up, Keys.Up, Keys.Left, Keys.Left, Keys.Right, Keys.Right, Keys.Down, Keys.Down], new PlayerUnlimitedItemsCommand(player) },
+
+      // Toggle halt all enemies
+      { [Keys.D6, Keys.D7], new ToggleHaltEnemyCommand() },
+
+      // Don't input this one (kill player)
+      { [Keys.D6, Keys.D9], new PlayerDieCommand(player) },
     };
   }
 
