@@ -14,6 +14,7 @@ internal class Boss : ABaseEnemy {
   public ILevelManager LevelManager { get; }
 
   public bool PhaseTwoTriggered { get; set; } = false;
+  private readonly Random random = new();
 
   public Boss(Texture2D texture, Vector2 position, ILevelManager levelManager) : base(texture, position, 64f, 128f) {
     LevelManager = levelManager;
@@ -36,9 +37,10 @@ internal class Boss : ABaseEnemy {
       CurrentState = new BossSpecialAttackState(this);
       return;
     }
-
     if (Health > 0 && CurrentState is not BossHurtState && CurrentState is not BossSpecialAttackState) {
-      CurrentState = new BossHurtState(this);
+      if (random.Next(100) < 20) {
+        CurrentState = new BossHurtState(this);
+      }
     }
   }
 
