@@ -20,6 +20,7 @@ internal partial class LevelLoader {
   private static readonly int LEVEL_HEIGHT_BLOCKS = 9;
   private static readonly Vector2 PLAYER_POSITION_OFFSET = new(BLOCK_WIDTH / 2.0f, BLOCK_HEIGHT / 2.0f);
   private static readonly Vector2 ENEMY_POSITION_OFFSET = new(BLOCK_WIDTH / 2.0f, BLOCK_HEIGHT);
+  private static readonly string FLAGS_LINE_START = "Flags: ";
 
   [GeneratedRegex(@"\r?\n")]
   private static partial Regex NewlineSplitRegex { get; }
@@ -34,6 +35,40 @@ internal partial class LevelLoader {
   public static readonly float PLAYER_TOP_POS_AFTER_TELEPORT = BLOCK_WIDTH * 1.5f;
   public static readonly float PLAYER_RIGHT_POS_AFTER_TELEPORT = LEVEL_WIDTH - BLOCK_WIDTH * 1.5f;
   public static readonly float PLAYER_BOTTOM_POS_AFTER_TELEPORT = LEVEL_HEIGHT - BLOCK_WIDTH * 1.5f;
+
+  private static void ParseSingleFlag(LevelFlags flags, string flag) {
+    switch (flag) {
+      case "":
+      case "None":
+        /* do nothing */
+        break;
+
+      case "Cave":
+        flags.Cave = true;
+        break;
+
+      default:
+        throw new FormatException($"unrecognized level flag: {flag}");
+    }
+  }
+
+  private static LevelFlags ParseFlags(string flagString) {
+    if (!flagString.StartsWith(FLAGS_LINE_START)) {
+      throw new FormatException("level data flags entry invalid");
+    }
+
+    var flagSplit = flagString[FLAGS_LINE_START.Length..].Split(',');
+
+    LevelFlags flags = new();
+
+    foreach (var flagUntrimmed in flagSplit) {
+      var flag = flagUntrimmed.Trim();
+
+      ParseSingleFlag(flags, flag);
+    }
+
+    return flags;
+  }
 
   private static void AddCellEntry(
     Player player,
@@ -426,7 +461,17 @@ internal partial class LevelLoader {
 
     var lines = NewlineSplitRegex.Split(levelDataString.Trim());
 
-    var levelData = lines.Select((line) => line.Split(',')).ToArray();
+    if (lines.Length < 1) {
+      throw new FormatException("level data does not contain a flags entry");
+    }
+
+    // parse flags
+
+    var flags = ParseFlags(lines[0]);
+
+    // parse level data
+
+    var levelData = lines[2..].Select(line => line.Split(',')).ToArray();
 
     for (int rowIndex = 0; rowIndex < levelData.Length; rowIndex++) {
       var row = levelData[rowIndex];
@@ -458,7 +503,7 @@ internal partial class LevelLoader {
     }
 
     if (playerPositionNullable is Vector2 playerPosition) {
-      var level = new Level(nonCollidableBlocks, collidableBlocks, doors, enemies, pickups, playerPosition, player, levelManager);
+      var level = new Level(flags, nonCollidableBlocks, collidableBlocks, doors, enemies, pickups, playerPosition, player, levelManager);
 
       return level;
     } else {

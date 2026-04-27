@@ -27,7 +27,6 @@ internal class Level : ILevel {
   private readonly Vector2 playerPosition;
   private readonly CollisionManager collisionManager = new();
   private readonly Player player;
-  public bool HasKillableEnemiesRemaining => aliveEnemies.Any(e => e is not Cactus);
   private readonly ILevelManager levelManager;
 
   private void CategorizeDeadEnemies() {
@@ -66,6 +65,7 @@ internal class Level : ILevel {
   }
 
   public Level(
+    LevelFlags levelFlags,
     List<IBlock> nonCollidableBlocks,
     List<IBlock> collidableBlocks,
     List<IBlock> doors,
@@ -75,6 +75,7 @@ internal class Level : ILevel {
     Player player,
     ILevelManager levelManager
 ) {
+    LevelFlags = levelFlags;
     this.nonCollidableBlocks = nonCollidableBlocks;
     this.collidableBlocks = collidableBlocks;
     this.doors = doors;
@@ -101,6 +102,7 @@ internal class Level : ILevel {
     }
   }
 
+  public LevelFlags LevelFlags { get; private set; }
   public ProjectileManager ProjectileManager { get; private set; } = new ProjectileManager();
 
   public void Initialize() { }

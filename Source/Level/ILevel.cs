@@ -11,7 +11,8 @@ namespace GameProject.Level;
 #nullable enable
 
 internal interface ILevel : IInitable, ITemporalUpdatable, IGPDrawable {
-  public ProjectileManager ProjectileManager { get; }
+  LevelFlags LevelFlags { get; }
+  ProjectileManager ProjectileManager { get; }
 
   Vector2 GetDefaultPlayerPosition();
   bool AllKillableEnemiesKilled();
@@ -19,6 +20,6 @@ internal interface ILevel : IInitable, ITemporalUpdatable, IGPDrawable {
   void RemovePickup(IWorldPickup pickup);
   IEnumerable<IBlock> GetOpenableDoors();
   IEnumerable<IWorldPickup> GetRemoveAmmoInRange(Vector2 position, float range);
-  public IWorldPickup? GetClosestPickupInRange(Vector2 position, float range);
+  IWorldPickup? GetClosestPickupInRange(Vector2 position, float range);
   void PlayerResolveCollisions(ICollidable movingEntity, CollisionAxis axis = CollisionAxis.Both, float cornerTolerance = 3.0f);
 }
