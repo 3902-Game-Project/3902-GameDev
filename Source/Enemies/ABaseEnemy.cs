@@ -25,6 +25,24 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
     }
   }
 
+  protected virtual void ChangeDirection() {
+
+    Vector2 delta = Target - Position;
+    if (delta == Vector2.Zero) {
+      Velocity = Vector2.Zero;
+      return;
+    }
+
+    float absX = Math.Abs(delta.X);
+    float absY = Math.Abs(delta.Y);
+
+    if (absX >= absY) {
+      Direction = delta.X >= 0 ? FacingDirection.Right : FacingDirection.Left;
+    } else {
+      Direction = delta.Y >= 0 ? FacingDirection.Down : FacingDirection.Up;
+    }
+  }
+
   public Texture2D Texture { get; protected set; } = texture;
   public Vector2 Position { get; set; } = position;
   public Vector2 Velocity { get; set; }
@@ -57,6 +75,7 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
       UpdateCollider();
     }
   }
+
   public virtual void Draw(SpriteBatch spriteBatch) {
     if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return;
 
@@ -103,24 +122,6 @@ internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float co
 
     Vector2 direction = Vector2.Normalize(delta);
     Velocity = direction * speed;
-  }
-
-  protected virtual void ChangeDirection() {
-
-    Vector2 delta = Target - Position;
-    if (delta == Vector2.Zero) {
-      Velocity = Vector2.Zero;
-      return;
-    }
-
-    float absX = Math.Abs(delta.X);
-    float absY = Math.Abs(delta.Y);
-
-    if (absX >= absY) {
-      Direction = delta.X >= 0 ? FacingDirection.Right : FacingDirection.Left;
-    } else {
-      Direction = delta.Y >= 0 ? FacingDirection.Down : FacingDirection.Up;
-    }
   }
 
   public virtual void Die() {
