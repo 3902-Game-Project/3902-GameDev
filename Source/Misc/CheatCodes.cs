@@ -14,17 +14,29 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.Source.Misc;
 
 internal class CheatCodes : ITemporalUpdatable {
+  private static readonly double MAX_WAIT_TIME = 5f;
+
   public static CheatCodes Instance { get; } = new CheatCodes();
-  public ILevelManager LevelManager { get; set; }
 
-  private readonly double maxWaitTime = 5f;
   private double pressedDeltaTime = 0f;
-
   private bool itemsOn = false;
-  private readonly int buffer = 8;
-  public List<Keys> lastPressed = [];
-
   private Dictionary<List<Keys>, IGPCommand> cheatCodes = [];
+  private int maxBufferSize = 0;
+
+  int GetMaxCheatCodeLength() {
+    int maxLength = 0;
+
+    foreach (var code in Instance.cheatCodes) {
+      if (code.Key.Count > maxLength) {
+        maxLength = code.Key.Count;
+      }
+    }
+
+    return maxLength;
+  }
+
+  public ILevelManager LevelManager { get; set; }
+  public List<Keys> lastPressed = [];
 
   public void Initialize(Player player) {
     Instance.cheatCodes = new Dictionary<List<Keys>, IGPCommand> {
@@ -46,6 +58,8 @@ internal class CheatCodes : ITemporalUpdatable {
       // Don't input this one (kill player)
       { [Keys.D6, Keys.D9], new PlayerDieCommand(player) },
     };
+
+    maxBufferSize = GetMaxCheatCodeLength();
   }
 
   public void UnlimitedHealth(Player player) {
@@ -101,14 +115,14 @@ internal class CheatCodes : ITemporalUpdatable {
   }
 
   public void AddKey(Keys key) {
-    if (lastPressed.Count >= buffer) {
+    if (lastPressed.Count >= maxBufferSize) {
       lastPressed.RemoveAt(0);
     }
     lastPressed.Add(key);
   }
 
   public void Update(double deltaTime) {
-    if (pressedDeltaTime <= maxWaitTime) {
+    if (pressedDeltaTime <= MAX_WAIT_TIME) {
       var cheatCodeExecuted = false;
 
       foreach (var code in Instance.cheatCodes) {
