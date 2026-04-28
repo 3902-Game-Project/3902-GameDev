@@ -12,7 +12,7 @@ Controls:
 
   Main Game Screen:
     Key                               Action
-    Q/RightStickDown                  Quit the game.
+    Q/BigButton                       Quit the game.
     Backspace/Back                    Reset to main menu.
     P/Start                           Pause the game.
     I/RightTrigger                    Open item screen.

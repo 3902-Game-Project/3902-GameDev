@@ -92,7 +92,7 @@ internal class StateGameType : IGameState {
     // nintendo pro controller seems to suggest it is pro controller layout.
     gamePadController = new GamePadController(
       pressedMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
-        { GPGamePadButtons.RightThumbstickDownStrict, new QuitCommand(game) },
+        { GPGamePadButtons.BigButton, new QuitCommand(game) },
         { GPGamePadButtons.Back, new ReturnToMenuAndResetCommand(game) },
         { GPGamePadButtons.Start, new PauseCommand(game) },
         { GPGamePadButtons.RightTrigger, new OpenItemScreenCommand(game) },
