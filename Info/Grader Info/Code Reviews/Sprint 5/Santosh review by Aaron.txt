@@ -1,0 +1,22 @@
+Readability:
+	Author: Aaron Vanderbilt
+	Date: 4/27/2026
+	Sprint: 5
+	File: TextFunc.cs
+	File Author: Santosh
+	Time: < 1 minutes
+	Comments: This is a helper class for drawing strings of text centered in the screen. There are only 2 functions, one that draws the
+    strings and one that seperates and positions the strings. Both methods are short and overall the class is highly readable.
+
+
+Code Quality:
+	Author: Aaron Vanderbilt
+	Date: 4/27/2026
+	Sprint: 5
+	File: ScreenFader.cs
+	File Author: Santosh
+	Time: ~ 3 minutes
+	Comments: The file controls the fade in/out that occurs when the player leaves one room to go to another so there isn't a ton going on. 
+    There are only a few methods in the class, aside from update and draw, that are all short and simple. The class as a whole is barely 
+    over 100 lines, but if there is one thing that could be improved is seperating the logic within the update and draw methods from the
+    methods themselves, possibly in a new class.
