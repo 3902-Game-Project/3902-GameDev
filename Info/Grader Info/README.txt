@@ -1,3 +1,6 @@
+GitHub:
+  The repo is publicly available at https://github.com/WhileWestGameDev/HighNoonHangover.
+
 Controls:
   Main Menu:
     Key                               Action
@@ -116,6 +119,14 @@ Sprint 4 Report:
   Member specific:
     Santosh:
       I tried to do even more work than in the last sprint, due to the large swath of refactoring changes, fixing various bugs that appeared during the course of the sprint, and doing many, many small tasks that came to mind as I was coding that wasn't originally on Jira. Parts of the codebase are much cleaner and more organized as a result. I was able to implement all features assigned to me, but didn't have time to implement all refactoring changes assigned to me. This is the first sprint where I have uncompleted tasks.
+
+Sprint 5 Report:
+  The burndown chart slowly increases until Apr 25, at which point it starts sharply decreasing. At the end of the sprint most of the important tasks are finished. At this point the game has mostly come together, with a functional item screen, cheat codes, items other than just guns, a final boss, and visuals like cave fog. Additionally, enemies now travel towards the player and fire up/down as well as left/right. There is also save/load support.
+  Removal of magic numbers / strings was not accomplished (the person who it was assigned to still did not complete the task).
+
+  Member specific:
+    Santosh:
+      I made up for not finishing all my tasks last sprint by finishing all my tasks this sprint, including leftover tasks from last sprint. I also made sure every task that needed to get done was assigned to someone on Jira of their own volition, so that there are no unassigned tasks that the team as a whole can collectively forget to do.
 
 Credits:
   See "Info/Credits.txt" for attributions on this project.
