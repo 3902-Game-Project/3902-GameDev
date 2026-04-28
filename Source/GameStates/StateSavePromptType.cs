@@ -30,8 +30,8 @@ internal class StateSavePromptType(Game1 game) : IGameState {
     // nintendo pro controller seems to suggest it is pro controller layout.
     gamePadController = new GamePadController(
       pressedMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
-        { GPGamePadButtons.B, new ExecuteSaveCommand(game, this) },
-        { GPGamePadButtons.A, new ReturnToGameNoFadeCommand(game) },
+        { GPGamePadButtons.A, new ExecuteSaveCommand(game, this) },
+        { GPGamePadButtons.B, new ReturnToGameNoFadeCommand(game) },
       }
     );
   }
