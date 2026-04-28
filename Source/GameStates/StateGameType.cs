@@ -52,9 +52,9 @@ internal class StateGameType : IGameState {
         { Keys.C, new PlayerDropItemCommand(game.StateGame.Player) },
         { Keys.R, new ReloadWeaponCommand(Player) },
         { Keys.L, new PlayerDieCommand(Player) },
-        { Keys.Tab, new ToggleMusicCommand() },
         { Keys.N, new OpenSavePromptCommand(game) },
         { Keys.M, new OpenLoadPromptCommand(game) },
+        { Keys.Tab, new ToggleMusicCommand() },
       },
       downMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.W, new PlayerMoveUpCommand(Player) },
@@ -92,40 +92,38 @@ internal class StateGameType : IGameState {
     // nintendo pro controller seems to suggest it is pro controller layout.
     gamePadController = new GamePadController(
       pressedMappings: new Dictionary<Buttons, IGPCommand> {
-        { Buttons.X, new QuitCommand(game) },
-        { Buttons.B, new ReturnToMenuAndResetCommand(game) },
-        { Buttons.Y, new PauseCommand(game) },
+        { Buttons.RightThumbstickDown, new QuitCommand(game) },
+        { Buttons.Back, new ReturnToMenuAndResetCommand(game) },
+        { Buttons.Start, new PauseCommand(game) },
         { Buttons.RightTrigger, new OpenItemScreenCommand(game) },
-        { Buttons.A, new PlayerUseItemCommand(Player, UseType.Pressed) },
-        { Buttons.LeftTrigger, new PlayerUseKeyCommand(Player, UseType.Pressed) },
-        { Buttons.LeftStick, new PlayerInteractCommand(Player) },
-        { Buttons.RightThumbstickUp, new SwapWeaponCommand(Player) },
-        { Buttons.RightThumbstickDown, new PlayerDropItemCommand(game.StateGame.Player) },
-        { Buttons.Start, new ReloadWeaponCommand(Player) },
-        { Buttons.RightStick, new PlayerDieCommand(Player) },
-        { Buttons.Back, new ToggleMusicCommand() },
+        { Buttons.B, new PlayerUseItemCommand(Player, UseType.Pressed) },
+        { Buttons.A, new PlayerUseKeyCommand(Player, UseType.Pressed) },
+        { Buttons.Y, new PlayerInteractCommand(Player) },
+        { Buttons.LeftTrigger, new SwapWeaponCommand(Player) },
+        { Buttons.DPadDown, new PlayerDropItemCommand(game.StateGame.Player) },
+        { Buttons.X, new ReloadWeaponCommand(Player) },
+        { Buttons.RightThumbstickLeft, new PlayerDieCommand(Player) },
+        { Buttons.RightShoulder, new OpenSavePromptCommand(game) },
+        { Buttons.LeftShoulder, new OpenLoadPromptCommand(game) },
+        { Buttons.RightThumbstickUp, new ToggleMusicCommand() },
       },
       downMappings: new Dictionary<Buttons, IGPCommand> {
-        { Buttons.DPadUp, new PlayerMoveUpCommand(Player) },
+        { Buttons.B, new PlayerUseItemCommand(Player, UseType.Held) },
         { Buttons.LeftThumbstickUp, new PlayerMoveUpCommand(Player) },
-        { Buttons.DPadDown, new PlayerMoveDownCommand(Player) },
         { Buttons.LeftThumbstickDown, new PlayerMoveDownCommand(Player) },
-        { Buttons.DPadLeft, new PlayerMoveLeftCommand(Player) },
         { Buttons.LeftThumbstickLeft, new PlayerMoveLeftCommand(Player) },
-        { Buttons.DPadRight, new PlayerMoveRightCommand(Player) },
         { Buttons.LeftThumbstickRight, new PlayerMoveRightCommand(Player) },
-        { Buttons.A, new PlayerUseItemCommand(Player, UseType.Held) },
       },
       releasedMappings: new Dictionary<Buttons, IGPCommand> {
-        { Buttons.A, new PlayerUseItemCommand(Player, UseType.Released) },
+        { Buttons.B, new PlayerUseItemCommand(Player, UseType.Released) },
       }
     );
 
     // Debug button binds:
     if (Flags.DebugButtonBinds) {
-      gamePadController.PressedMappings.Add(Buttons.LeftShoulder, new PreviousLevelCommand(LevelManager));
-      gamePadController.PressedMappings.Add(Buttons.RightShoulder, new NextLevelCommand(LevelManager));
-      gamePadController.PressedMappings.Add(Buttons.RightThumbstickRight, new ToggleUpdatesCommand());
+      gamePadController.PressedMappings.Add(Buttons.DPadLeft, new PreviousLevelCommand(LevelManager));
+      gamePadController.PressedMappings.Add(Buttons.DPadRight, new NextLevelCommand(LevelManager));
+      gamePadController.PressedMappings.Add(Buttons.DPadUp, new ToggleUpdatesCommand());
     }
 
     LevelManager.Initialize();

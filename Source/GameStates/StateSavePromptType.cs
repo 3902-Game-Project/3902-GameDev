@@ -54,7 +54,7 @@ internal class StateSavePromptType(Game1 game) : IGameState {
 
     string text = IsShowingSuccess
         ? "The game is successfully saved"
-        : "Would you like to save the game?\nPress A to confirm, D to cancel.";
+        : "Would you like to save the game?\nPress A/GamePadB to confirm, D/GamePadA to cancel.";
 
     TextFuncs.DrawCenteredString(
       spriteBatch: spriteBatch,

@@ -20,7 +20,7 @@ internal class StateLoadPromptType(Game1 game) : IGameState {
     keyboardController = new KeyboardController(
       pressedMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.A, new ExecuteLoadCommand(game, this) },
-        { Keys.N, new ReturnToGameNoFadeCommand(game) },
+        { Keys.D, new ReturnToGameNoFadeCommand(game) },
       }
     );
 
@@ -54,7 +54,7 @@ internal class StateLoadPromptType(Game1 game) : IGameState {
 
     string text = IsShowingSuccess
         ? "Progress successfully loaded"
-        : "Would you like to load your last saved progress?\nPress A to confirm, N to cancel.";
+        : "Would you like to load your last saved progress?\nPress A/GamePadB to confirm, D?GamePadA to cancel.";
 
     TextFuncs.DrawCenteredString(
       spriteBatch: spriteBatch,

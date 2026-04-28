@@ -12,32 +12,32 @@ Controls:
 
   Main Game Screen:
     Key                               Action
-    Q/GamePadY                        Quit the game.
-    Backspace/GamePadA                Reset to main menu.
-    P/GamePadX                        Pause the game.
+    Q/RightStickDown                  Quit the game.
+    Backspace/Back                    Reset to main menu.
+    P/Start                           Pause the game.
     I/RightTrigger                    Open item screen.
     J/GamePadB                        Cause the player to use item / attack.
-    K/LeftTrigger                     Use key item.
-    F/LeftStick                       Pick up a nearby item (interact).
-    Space/RightStickUp                Swap to other weapon.
-    C/RightStickDown                  Drop the current item.
-    R/Start                           Force reload weapon (auto reloads when empty anyways).
-    L/RightStick                      Instantly kills the player.
-    Tab/Back                          Toggle music.
-    N                                 Save the game 
-    M                                 Load the game
+    K/GamePadA                        Use key item.
+    F/GamePadY                        Pick up a nearby item (interact).
+    Space/LeftTrigger                 Swap to other weapon.
+    C/DPadDown                        Drop the current item.
+    R/GamePadX                        Force reload weapon (auto reloads when empty anyways).
+    L/RightStickLeft                  Instantly kills the player.
+    N/RightBumper                     Save the game 
+    M/LeftBumper                      Load the game
+    Tab/RightStickUp                  Toggle music.
 
-    W/Up/DPadUp/LeftStickUp           Moves player upwards.
-    S/Down/DPadDown/LeftStickDown     Moves player downwards.
-    A/Left/DPadLeft/LeftStickLeft     Moves player leftwards.
-    D/Right/DPadRight/LeftStickRight  Moves player rightwards.
-
-    Y/MouseLeft/RightBumper           Debug: switch to next level.
-    T/MouseRight/LeftBumper           Debug: switch to previous level.
-    H/RightStickRight                 Debug: toggle halt game (disable almost all Update methods).
+    W/Up/LeftStickUp                  Moves player upwards.
+    S/Down/LeftStickDown              Moves player downwards.
+    A/Left/LeftStickLeft              Moves player leftwards.
+    D/Right/LeftStickRight            Moves player rightwards.
+    
+    T/MouseRight/DPadLeft             Debug: switch to previous level.
+    Y/MouseLeft/DPadRight             Debug: switch to next level.
+    H/DPadUp                          Debug: toggle halt game (disable almost all Update methods).
 
     Cheat Codes:
-      U = up; D = down; L = left; R = right
+      U = Up; D = Down; L = Left; R = Right
 
       Sequence                        Action
       WWSSADAD/UUDDLRLR               Unlimited health
@@ -68,7 +68,7 @@ Controls:
   Save/Load Confirmation Screen:
     Key                               Action
     A/GamePadB                        Confirm save/load.
-    N/GamePadA                        Cancel save/load.
+    D/GamePadA                        Cancel save/load.
 
   Win/Loss Screen:
     Key                               Action
