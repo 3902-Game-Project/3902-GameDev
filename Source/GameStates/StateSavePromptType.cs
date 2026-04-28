@@ -11,14 +11,26 @@ namespace GameProject.GameStates;
 
 internal class StateSavePromptType(Game1 game) : IGameState {
   private IController<Keys> keyboardController;
-  public bool IsShowingSuccess { get; set; } = false;
+  private IController<Buttons> gamePadController;
   private double successTimer = 0.0;
+
+  public bool IsShowingSuccess { get; set; } = false;
 
   public void Initialize() {
     keyboardController = new KeyboardController(
       pressedMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.A, new ExecuteSaveCommand(game, this) },
         { Keys.D, new ReturnToGameNoFadeCommand(game) },
+      }
+    );
+
+    // The gamepad bindings don't match the readme. this is intentional, because
+    // the readme is in Xbox controller layout, but testing with a
+    // nintendo pro controller seems to suggest it is pro controller layout.
+    gamePadController = new GamePadController(
+      pressedMappings: new Dictionary<Buttons, IGPCommand> {
+        { Buttons.B, new ExecuteSaveCommand(game, this) },
+        { Buttons.A, new ReturnToGameNoFadeCommand(game) },
       }
     );
   }
@@ -31,6 +43,7 @@ internal class StateSavePromptType(Game1 game) : IGameState {
       if (successTimer <= 0) game.ChangeStateWithoutFading(game.StateGame);
     } else {
       keyboardController.Update();
+      gamePadController.Update();
     }
   }
 

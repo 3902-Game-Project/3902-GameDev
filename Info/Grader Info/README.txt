@@ -2,6 +2,8 @@ GitHub:
   The repo is publicly available at https://github.com/WhileWestGameDev/HighNoonHangover.
 
 Controls:
+  Gamepad controls are in reference to Xbox controls.
+
   Main Menu:
     Key                               Action
     Q/GamePadY                        Quit the game.
@@ -48,10 +50,12 @@ Controls:
       123                             Debug: Kill all enemies on level
 
   Pause Screen:
+    Key                               Action
     Q/GamePadY                        Quit the game.
     P/GamePadB                        Return to game.
 
   Item Selection Screen:
+    Key                               Action
     Q/GamePadY                        Quit the game.
     I/GamePadA                        Return to game.
     W/Up/DPadUp                       Move upward in the menu.
@@ -60,6 +64,11 @@ Controls:
     D/Right/DPadRight                 Move rightward in the menu.
     Enter/Space/GamePadB              Equip the selected item.
     C/GamePadX                        Drop the selected item.
+
+  Save/Load Confirmation Screen:
+    Key                               Action
+    A/GamePadB                        Confirm save/load.
+    N/GamePadA                        Cancel save/load.
 
   Win/Loss Screen:
     Key                               Action
