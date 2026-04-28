@@ -24,7 +24,7 @@ internal class StateGameType : IGameState {
 
   private IController<Keys> keyboardController;
   private IController<MouseButtons> mouseController;
-  private IController<Buttons> gamePadController;
+  private IController<GPGamePadButtons> gamePadController;
   private Texture2D ammoTexture;
   private RenderTarget2D nonHUDTarget;
 
@@ -91,39 +91,39 @@ internal class StateGameType : IGameState {
     // the readme is in Xbox controller layout, but testing with a
     // nintendo pro controller seems to suggest it is pro controller layout.
     gamePadController = new GamePadController(
-      pressedMappings: new Dictionary<Buttons, IGPCommand> {
-        { Buttons.RightThumbstickDown, new QuitCommand(game) },
-        { Buttons.Back, new ReturnToMenuAndResetCommand(game) },
-        { Buttons.Start, new PauseCommand(game) },
-        { Buttons.RightTrigger, new OpenItemScreenCommand(game) },
-        { Buttons.B, new PlayerUseItemCommand(Player, UseType.Pressed) },
-        { Buttons.A, new PlayerUseKeyCommand(Player, UseType.Pressed) },
-        { Buttons.Y, new PlayerInteractCommand(Player) },
-        { Buttons.LeftTrigger, new SwapWeaponCommand(Player) },
-        { Buttons.DPadDown, new PlayerDropItemCommand(game.StateGame.Player) },
-        { Buttons.X, new ReloadWeaponCommand(Player) },
-        { Buttons.RightThumbstickLeft, new PlayerDieCommand(Player) },
-        { Buttons.RightShoulder, new OpenSavePromptCommand(game) },
-        { Buttons.LeftShoulder, new OpenLoadPromptCommand(game) },
-        { Buttons.RightThumbstickUp, new ToggleMusicCommand() },
+      pressedMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
+        { GPGamePadButtons.RightThumbstickDown, new QuitCommand(game) },
+        { GPGamePadButtons.Back, new ReturnToMenuAndResetCommand(game) },
+        { GPGamePadButtons.Start, new PauseCommand(game) },
+        { GPGamePadButtons.RightTrigger, new OpenItemScreenCommand(game) },
+        { GPGamePadButtons.B, new PlayerUseItemCommand(Player, UseType.Pressed) },
+        { GPGamePadButtons.A, new PlayerUseKeyCommand(Player, UseType.Pressed) },
+        { GPGamePadButtons.Y, new PlayerInteractCommand(Player) },
+        { GPGamePadButtons.LeftTrigger, new SwapWeaponCommand(Player) },
+        { GPGamePadButtons.DPadDown, new PlayerDropItemCommand(game.StateGame.Player) },
+        { GPGamePadButtons.X, new ReloadWeaponCommand(Player) },
+        { GPGamePadButtons.RightThumbstickLeft, new PlayerDieCommand(Player) },
+        { GPGamePadButtons.RightShoulder, new OpenSavePromptCommand(game) },
+        { GPGamePadButtons.LeftShoulder, new OpenLoadPromptCommand(game) },
+        { GPGamePadButtons.RightThumbstickUp, new ToggleMusicCommand() },
       },
-      downMappings: new Dictionary<Buttons, IGPCommand> {
-        { Buttons.B, new PlayerUseItemCommand(Player, UseType.Held) },
-        { Buttons.LeftThumbstickUp, new PlayerMoveUpCommand(Player) },
-        { Buttons.LeftThumbstickDown, new PlayerMoveDownCommand(Player) },
-        { Buttons.LeftThumbstickLeft, new PlayerMoveLeftCommand(Player) },
-        { Buttons.LeftThumbstickRight, new PlayerMoveRightCommand(Player) },
+      downMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
+        { GPGamePadButtons.B, new PlayerUseItemCommand(Player, UseType.Held) },
+        { GPGamePadButtons.LeftThumbstickUp, new PlayerMoveUpCommand(Player) },
+        { GPGamePadButtons.LeftThumbstickDown, new PlayerMoveDownCommand(Player) },
+        { GPGamePadButtons.LeftThumbstickLeft, new PlayerMoveLeftCommand(Player) },
+        { GPGamePadButtons.LeftThumbstickRight, new PlayerMoveRightCommand(Player) },
       },
-      releasedMappings: new Dictionary<Buttons, IGPCommand> {
-        { Buttons.B, new PlayerUseItemCommand(Player, UseType.Released) },
+      releasedMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
+        { GPGamePadButtons.B, new PlayerUseItemCommand(Player, UseType.Released) },
       }
     );
 
     // Debug button binds:
     if (Flags.DebugButtonBinds) {
-      gamePadController.PressedMappings.Add(Buttons.DPadLeft, new PreviousLevelCommand(LevelManager));
-      gamePadController.PressedMappings.Add(Buttons.DPadRight, new NextLevelCommand(LevelManager));
-      gamePadController.PressedMappings.Add(Buttons.DPadUp, new ToggleUpdatesCommand());
+      gamePadController.PressedMappings.Add(GPGamePadButtons.DPadLeft, new PreviousLevelCommand(LevelManager));
+      gamePadController.PressedMappings.Add(GPGamePadButtons.DPadRight, new NextLevelCommand(LevelManager));
+      gamePadController.PressedMappings.Add(GPGamePadButtons.DPadUp, new ToggleUpdatesCommand());
     }
 
     LevelManager.Initialize();
@@ -134,8 +134,8 @@ internal class StateGameType : IGameState {
   public void LoadContent(ContentManager contentManager) {
     nonHUDTarget = new RenderTarget2D(game.GraphicsDevice, Game1.GAME_WIDTH, Game1.GAME_HEIGHT);
 
-    Player.Inventory.PickupItem(ItemFactory.Instance.CreateRevolver(0f, 0f, game.StateGame.Player, game.StateGame.LevelManager));
-    Player.Inventory.PickupItem(ItemFactory.Instance.CreateRifle(0f, 0f, game.StateGame.Player, game.StateGame.LevelManager));
+    Player.Inventory.PickupItem(ItemFactory.Instance.CreateRevolver(0.0f, 0.0f, game.StateGame.Player, game.StateGame.LevelManager));
+    Player.Inventory.PickupItem(ItemFactory.Instance.CreateRifle(0.0f, 0.0f, game.StateGame.Player, game.StateGame.LevelManager));
 
     ammoTexture = contentManager.Load<Texture2D>("Items/ammo_drops");
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GameProject.ButtonDiffTrackers;
 using GameProject.Commands;
 using GameProject.Controllers;
 using GameProject.Misc;
@@ -11,7 +12,7 @@ namespace GameProject.GameStates;
 
 internal class StatePauseType(Game1 game) : IGameState {
   private IController<Keys> keyboardController;
-  private IController<Buttons> gamePadController;
+  private IController<GPGamePadButtons> gamePadController;
 
   public void Initialize() {
     keyboardController = new KeyboardController(
@@ -25,9 +26,9 @@ internal class StatePauseType(Game1 game) : IGameState {
     // the readme is in Xbox controller layout, but testing with a
     // nintendo pro controller seems to suggest it is pro controller layout.
     gamePadController = new GamePadController(
-      pressedMappings: new Dictionary<Buttons, IGPCommand> {
-        { Buttons.X, new QuitCommand(game) },
-        { Buttons.A, new ReturnToGameCommand(game) },
+      pressedMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
+        { GPGamePadButtons.X, new QuitCommand(game) },
+        { GPGamePadButtons.A, new ReturnToGameCommand(game) },
       }
     );
   }

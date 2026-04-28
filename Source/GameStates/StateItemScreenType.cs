@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GameProject.ButtonDiffTrackers;
 using GameProject.Commands;
 using GameProject.Controllers;
 using GameProject.Globals;
@@ -14,7 +15,7 @@ namespace GameProject.GameStates;
 
 internal class StateItemScreenType(Game1 game) : IGameState {
   private IController<Keys> keyboardController;
-  private IController<Buttons> gamePadController;
+  private IController<GPGamePadButtons> gamePadController;
   private Texture2D blankTexture;
   public bool InWeaponMenu { get; private set; } = true;
   public int SelectedWeaponIndex { get; private set; } = 0;
@@ -48,19 +49,19 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     // the readme is in Xbox controller layout, but testing with a
     // nintendo pro controller seems to suggest it is pro controller layout.
     gamePadController = new GamePadController(
-      pressedMappings: new Dictionary<Buttons, IGPCommand> {
-        { Buttons.X, new QuitCommand(game) },
-        { Buttons.B, new ReturnToGameNoFadeCommand(game) },
+      pressedMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
+        { GPGamePadButtons.X, new QuitCommand(game) },
+        { GPGamePadButtons.B, new ReturnToGameNoFadeCommand(game) },
                 
         // Navigation bindings
-        { Buttons.DPadUp, new MenuMoveUpCommand(this) },
-        { Buttons.DPadDown, new MenuMoveDownCommand(this) },
-        { Buttons.DPadLeft, new MenuMoveLeftCommand(this) },
-        { Buttons.DPadRight, new MenuMoveRightCommand(this) },
+        { GPGamePadButtons.DPadUp, new MenuMoveUpCommand(this) },
+        { GPGamePadButtons.DPadDown, new MenuMoveDownCommand(this) },
+        { GPGamePadButtons.DPadLeft, new MenuMoveLeftCommand(this) },
+        { GPGamePadButtons.DPadRight, new MenuMoveRightCommand(this) },
                 
         // Action bindings
-        { Buttons.A, new MenuEquipCommand(this) },
-        { Buttons.Y, new PlayerDropItemCommand(game.StateGame.Player) },
+        { GPGamePadButtons.A, new MenuEquipCommand(this) },
+        { GPGamePadButtons.Y, new PlayerDropItemCommand(game.StateGame.Player) },
       }
     );
   }

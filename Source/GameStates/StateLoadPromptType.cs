@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GameProject.ButtonDiffTrackers;
 using GameProject.Commands;
 using GameProject.Controllers;
 using GameProject.Misc;
@@ -11,7 +12,7 @@ namespace GameProject.GameStates;
 
 internal class StateLoadPromptType(Game1 game) : IGameState {
   private IController<Keys> keyboardController;
-  private IController<Buttons> gamePadController;
+  private IController<GPGamePadButtons> gamePadController;
   private double successTimer = 0.0;
 
   public bool IsShowingSuccess { get; set; } = false;
@@ -28,9 +29,9 @@ internal class StateLoadPromptType(Game1 game) : IGameState {
     // the readme is in Xbox controller layout, but testing with a
     // nintendo pro controller seems to suggest it is pro controller layout.
     gamePadController = new GamePadController(
-      pressedMappings: new Dictionary<Buttons, IGPCommand> {
-        { Buttons.B, new ExecuteLoadCommand(game, this) },
-        { Buttons.A, new ReturnToGameNoFadeCommand(game) },
+      pressedMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
+        { GPGamePadButtons.B, new ExecuteLoadCommand(game, this) },
+        { GPGamePadButtons.A, new ReturnToGameNoFadeCommand(game) },
       }
     );
   }
