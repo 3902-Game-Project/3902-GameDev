@@ -92,7 +92,7 @@ internal class StateGameType : IGameState {
     // nintendo pro controller seems to suggest it is pro controller layout.
     gamePadController = new GamePadController(
       pressedMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
-        { GPGamePadButtons.RightThumbstickDown, new QuitCommand(game) },
+        { GPGamePadButtons.RightThumbstickDownStrict, new QuitCommand(game) },
         { GPGamePadButtons.Back, new ReturnToMenuAndResetCommand(game) },
         { GPGamePadButtons.Start, new PauseCommand(game) },
         { GPGamePadButtons.RightTrigger, new OpenItemScreenCommand(game) },
@@ -102,10 +102,10 @@ internal class StateGameType : IGameState {
         { GPGamePadButtons.LeftTrigger, new SwapWeaponCommand(Player) },
         { GPGamePadButtons.DPadDown, new PlayerDropItemCommand(game.StateGame.Player) },
         { GPGamePadButtons.X, new ReloadWeaponCommand(Player) },
-        { GPGamePadButtons.RightThumbstickLeft, new PlayerDieCommand(Player) },
+        { GPGamePadButtons.RightThumbstickLeftStrict, new PlayerDieCommand(Player) },
         { GPGamePadButtons.RightShoulder, new OpenSavePromptCommand(game) },
         { GPGamePadButtons.LeftShoulder, new OpenLoadPromptCommand(game) },
-        { GPGamePadButtons.RightThumbstickUp, new ToggleMusicCommand() },
+        { GPGamePadButtons.RightThumbstickUpStrict, new ToggleMusicCommand() },
       },
       downMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
         { GPGamePadButtons.B, new PlayerUseItemCommand(Player, UseType.Held) },
