@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using GameProject.Commands;
 using GameProject.Factories;
@@ -73,14 +72,12 @@ internal class CheatCodes : ITemporalUpdatable {
 
   public void UnlimitedHealth(Player player) {
     player.Health = 999999;
-    Debug.WriteLine("unlimited health");
   }
 
   public void UnlimitedAmmo(Player player) {
     player.Inventory.Ammo[AmmoType.Heavy] += 9999;
     player.Inventory.Ammo[AmmoType.Shells] += 9999;
     player.Inventory.Ammo[AmmoType.Light] += 9999;
-    Debug.WriteLine("unlimited ammo");
   }
 
   public void UnlimitedItems(Player player) {
@@ -107,7 +104,6 @@ internal class CheatCodes : ITemporalUpdatable {
 
     if (!itemsOn) {
       itemsOn = true;
-      Debug.WriteLine("unlimited items");
     }
   }
 

@@ -108,14 +108,14 @@ internal class StateGameType : IGameState {
         { GPGamePadButtons.RightThumbstickUpStrict, new ToggleMusicCommand() },
       },
       downMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
-        { GPGamePadButtons.B, new PlayerUseItemCommand(Player, UseType.Held) },
+        { GPGamePadButtons.A, new PlayerUseItemCommand(Player, UseType.Held) },
         { GPGamePadButtons.LeftThumbstickUp, new PlayerMoveUpCommand(Player) },
         { GPGamePadButtons.LeftThumbstickDown, new PlayerMoveDownCommand(Player) },
         { GPGamePadButtons.LeftThumbstickLeft, new PlayerMoveLeftCommand(Player) },
         { GPGamePadButtons.LeftThumbstickRight, new PlayerMoveRightCommand(Player) },
       },
       releasedMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
-        { GPGamePadButtons.B, new PlayerUseItemCommand(Player, UseType.Released) },
+        { GPGamePadButtons.A, new PlayerUseItemCommand(Player, UseType.Released) },
       }
     );
 
