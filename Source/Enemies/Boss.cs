@@ -83,7 +83,7 @@ internal class Boss : ABaseEnemy {
     float offsetY = -45f;
 
     Vector2 spawnPosition = Position;
-    Vector2 tossDirection = Vector2.Zero;
+    Vector2 tossDirection; // implicitly assigned Vector2.Zero, reassured by IDE this is the case
 
     if (Direction == FacingDirection.Right) {
       spawnPosition += new Vector2(offsetX, offsetY);

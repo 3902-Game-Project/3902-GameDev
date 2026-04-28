@@ -26,7 +26,7 @@ internal static class SaveLoadManager {
     saveData.Player.ActiveWeaponIndex = player.Inventory.ActiveWeaponIndex;
 
     //Save weapons by their class name
-    saveData.Player.WeaponTypes = player.Inventory.Weapons.Select(w => w.GetType().Name).ToList();
+    saveData.Player.WeaponTypes = [.. player.Inventory.Weapons.Select(w => w.GetType().Name)];
 
     //Save current level
     saveData.Level.LevelName = levelManager.CurrentLevelName;

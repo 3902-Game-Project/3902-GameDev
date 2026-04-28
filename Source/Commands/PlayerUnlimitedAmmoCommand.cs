@@ -6,6 +6,6 @@ namespace GameProject.Source.Commands;
 
 internal class PlayerUnlimitedAmmoCommand(Player player) : IGPCommand {
   public void Execute() {
-    CheatCodes.Instance.UnlimitedAmmo(player);
+    CheatCodes.UnlimitedAmmo(player);
   }
 }

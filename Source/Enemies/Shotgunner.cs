@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Enemies;
 
 internal class Shotgunner : ABaseEnemy {
-  private Player player;
+  private readonly Player player;
 
   public ILevelManager LevelManager { get; }
 

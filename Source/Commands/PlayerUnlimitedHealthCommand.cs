@@ -6,6 +6,6 @@ namespace GameProject.Source.Commands;
 
 internal class PlayerUnlimitedHealthCommand(Player player) : IGPCommand {
   public void Execute() {
-    CheatCodes.Instance.UnlimitedHealth(player);
+    CheatCodes.UnlimitedHealth(player);
   }
 }

@@ -22,7 +22,7 @@ internal class CheatCodes : ITemporalUpdatable {
   private Dictionary<List<Keys>, IGPCommand> cheatCodes = [];
   private int maxBufferSize = 0;
 
-  int GetMaxCheatCodeLength() {
+  private static int GetMaxCheatCodeLength() {
     int maxLength = 0;
 
     foreach (var code in Instance.cheatCodes) {
@@ -70,11 +70,11 @@ internal class CheatCodes : ITemporalUpdatable {
     maxBufferSize = GetMaxCheatCodeLength();
   }
 
-  public void UnlimitedHealth(Player player) {
+  public static void UnlimitedHealth(Player player) {
     player.Health = 999999;
   }
 
-  public void UnlimitedAmmo(Player player) {
+  public static void UnlimitedAmmo(Player player) {
     player.Inventory.Ammo[AmmoType.Heavy] += 9999;
     player.Inventory.Ammo[AmmoType.Shells] += 9999;
     player.Inventory.Ammo[AmmoType.Light] += 9999;
