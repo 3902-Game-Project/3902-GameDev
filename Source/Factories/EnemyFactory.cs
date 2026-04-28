@@ -1,5 +1,6 @@
 using GameProject.Enemies;
 using GameProject.Managers;
+using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -41,14 +42,16 @@ internal class EnemyFactory {
     return new Tumbleweed(tumbleweedTexture, new Vector2(xPos, yPos));
   }
 
-  public IEnemy CreateRiflemanSprite(float xPos, float yPos, ILevelManager levelManager) {
-    return new Rifleman(riflemanTexture, new Vector2(xPos, yPos), levelManager);
+  public IEnemy CreateRiflemanSprite(float xPos, float yPos, ILevelManager levelManager, Player player) {
+    return new Rifleman(riflemanTexture, new Vector2(xPos, yPos), levelManager, player);
   }
+
   public IEnemy CreateBatSprite(float xPos, float yPos) {
     return new Bat(batTexture, new Vector2(xPos, yPos));
   }
-  public IEnemy CreateShotgunnerSprite(float xPos, float yPos, ILevelManager levelManager) {
-    return new Shotgunner(shotgunnerTexture, new Vector2(xPos, yPos), levelManager);
+
+  public IEnemy CreateShotgunnerSprite(float xPos, float yPos, ILevelManager levelManager, Player player) {
+    return new Shotgunner(shotgunnerTexture, new Vector2(xPos, yPos), levelManager, player);
   }
 
   public IEnemy CreateBossSprite(float x, float y, ILevelManager levelManager) {

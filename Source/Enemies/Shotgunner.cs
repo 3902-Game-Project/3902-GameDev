@@ -2,20 +2,25 @@ using GameProject.Enemies.ShotgunnerStates;
 using GameProject.Enemies.States;
 using GameProject.Factories;
 using GameProject.Managers;
+using GameProject.PlayerSpace;
 using GameProject.Projectiles;
+using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
 internal class Shotgunner : ABaseEnemy {
+  private Player player;
+
   public ILevelManager LevelManager { get; }
 
-  public Shotgunner(Texture2D texture, Vector2 position, ILevelManager levelManager) : base(texture, position, 48f, 96f) {
+  public Shotgunner(Texture2D texture, Vector2 position, ILevelManager levelManager, Player player) : base(texture, position, 48f, 96f) {
     LevelManager = levelManager;
     DrawScale = 1.6f;
     FlipOnRightDir = false;
     CurrentState = new ShotgunnerWanderState(this);
+    this.player = player;
   }
 
   public void FireSpread(int damage) {
@@ -54,6 +59,7 @@ internal class Shotgunner : ABaseEnemy {
 
   protected override void DropLoot() {
     LevelManager.CurrentLevel.AddPickup(WorldPickupFactory.Instance.CreateAmmo(Position, Items.AmmoType.Shells, 5));
+    LevelManager.CurrentLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateHealthItem(Position.X, Position.Y - 60.0f, player)));
   }
 
   protected override void TransitionToDeathState() {

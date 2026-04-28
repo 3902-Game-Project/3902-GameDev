@@ -2,20 +2,25 @@ using GameProject.Enemies.RiflemanStates;
 using GameProject.Enemies.States;
 using GameProject.Factories;
 using GameProject.Managers;
+using GameProject.PlayerSpace;
 using GameProject.Projectiles;
+using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
 internal class Rifleman : ABaseEnemy {
+  private Player player;
+
   public ILevelManager LevelManager { get; }
 
-  public Rifleman(Texture2D texture, Vector2 position, ILevelManager levelManager) : base(texture, position, 48f, 96f) {
+  public Rifleman(Texture2D texture, Vector2 position, ILevelManager levelManager, Player player) : base(texture, position, 48f, 96f) {
     LevelManager = levelManager;
     DrawScale = 2f;
     FlipOnRightDir = false;
     CurrentState = new RifleWanderState(this);
+    this.player = player;
   }
 
   public void FireProjectile(int damage) {
@@ -52,6 +57,7 @@ internal class Rifleman : ABaseEnemy {
 
   protected override void DropLoot() {
     LevelManager.CurrentLevel.AddPickup(WorldPickupFactory.Instance.CreateAmmo(Position, Items.AmmoType.Heavy, 5));
+    LevelManager.CurrentLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateHealthItem(Position.X, Position.Y - 60.0f, player)));
   }
 
   protected override void TransitionToDeathState() {

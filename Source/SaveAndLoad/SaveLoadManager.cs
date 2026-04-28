@@ -84,8 +84,8 @@ internal static class SaveLoadManager {
       IEnemy newEnemy = enemyData.TypeName switch {
         "Snake" => EnemyFactory.Instance.CreateSnakeSprite(enemyData.X, enemyData.Y),
         "Bat" => EnemyFactory.Instance.CreateBatSprite(enemyData.X, enemyData.Y),
-        "Shotgunner" => EnemyFactory.Instance.CreateShotgunnerSprite(enemyData.X, enemyData.Y, levelManager),
-        "Rifleman" => EnemyFactory.Instance.CreateRiflemanSprite(enemyData.X, enemyData.Y, levelManager),
+        "Shotgunner" => EnemyFactory.Instance.CreateShotgunnerSprite(enemyData.X, enemyData.Y, levelManager, player),
+        "Rifleman" => EnemyFactory.Instance.CreateRiflemanSprite(enemyData.X, enemyData.Y, levelManager, player),
         "Tumbleweed" => EnemyFactory.Instance.CreateTumbleweedSprite(enemyData.X, enemyData.Y),
         "Cactus" => EnemyFactory.Instance.CreateCactusSprite(enemyData.X, enemyData.Y),
         "Boss" => EnemyFactory.Instance.CreateBossSprite(enemyData.X, enemyData.Y, levelManager),
