@@ -77,10 +77,10 @@ Controls:
 
 Code Metrics:
   Raw data stored at "Info/Grader Info/Code Metrics/Code Metrics.txt"
-  Graph at "Info/Grader Info/Code Metrics/Sprint 4/2026-04-13.png"
+  Graph at "Info/Grader Info/Code Metrics/Sprint 5" folder
 
 Code Reviews:
-  Found in the "Info/Grader Info/Code Review/Sprint 4" folder.
+  Found in the "Info/Grader Info/Code Review/Sprint 5" folder.
 
 Burndown Charts:
   Found in the "Info/Grader Info/Burndown Charts" folder.
