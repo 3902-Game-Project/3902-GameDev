@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using GameProject.Misc;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.ButtonDiffTrackers;
@@ -44,11 +45,42 @@ internal enum GPGamePadButtons {
 
 internal class GamePadDiffTracker : AButtonDiffTracker<GPGamePadButtons, GamePadState> {
   private static readonly float TRIGGER_THRESHOLD = 0.9f;
-  private static readonly float STICK_THRESHOLD_SQUARED = 0.9f * 0.9f;
+  private static readonly float STICK_THRESHOLD = 0.6f;
+  private static readonly float STICK_THRESHOLD_SQUARED = STICK_THRESHOLD * STICK_THRESHOLD;
   // Used MathF.PI * (5.0f / 16.0f) for perfectly sized octagonal stick regions (allowing diagonals)
   private static readonly float STICK_DIAGONAL_ANGLE_THRESHOLD = MathF.PI * (5.0f / 16.0f);
   // Used MathF.PI * (1.0f / 4.0f) for cardinal directions only
   private static readonly float STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD = MathF.PI * (1.0f / 4.0f);
+
+  private static void AddStickDirectionButtons(
+    List<GPGamePadButtons> pressedButtons,
+    Vector2 stickPosition,
+    float angleThreshold,
+    GPGamePadButtons upEnum,
+    GPGamePadButtons downEnum,
+    GPGamePadButtons leftEnum,
+    GPGamePadButtons rightEnum
+  ) {
+    if (stickPosition.LengthSquared() > STICK_THRESHOLD_SQUARED) {
+      var angle = VectorFuncs.Angle(stickPosition);
+
+      if (angle >= -angleThreshold && angle <= angleThreshold) {
+        pressedButtons.Add(rightEnum);
+      }
+
+      if (angle >= MathF.PI * 0.5f - angleThreshold && angle <= MathF.PI * 0.5f + angleThreshold) {
+        pressedButtons.Add(upEnum);
+      }
+
+      if (angle >= MathF.PI - angleThreshold && angle <= MathF.PI || angle >= MathF.PI * -1.0f && angle <= MathF.PI * -1.0f + angleThreshold) {
+        pressedButtons.Add(leftEnum);
+      }
+
+      if (angle >= MathF.PI * -0.5f - angleThreshold && angle <= MathF.PI * -0.5f + angleThreshold) {
+        pressedButtons.Add(downEnum);
+      }
+    }
+  }
 
   public override GPGamePadButtons[] ExtractPressedFromState(GamePadState gamePadState) {
     var pressedButtons = new List<GPGamePadButtons>();
@@ -95,41 +127,25 @@ internal class GamePadDiffTracker : AButtonDiffTracker<GPGamePadButtons, GamePad
       pressedButtons.Add(GPGamePadButtons.LeftStick);
     }
 
-    if (gamePadState.ThumbSticks.Left.LengthSquared() > STICK_THRESHOLD_SQUARED) {
-      var angle = VectorFuncs.Angle(gamePadState.ThumbSticks.Left);
+    AddStickDirectionButtons(
+      pressedButtons: pressedButtons,
+      stickPosition: gamePadState.ThumbSticks.Left,
+      angleThreshold: STICK_DIAGONAL_ANGLE_THRESHOLD,
+      upEnum: GPGamePadButtons.LeftThumbstickUp,
+      downEnum: GPGamePadButtons.LeftThumbstickDown,
+      leftEnum: GPGamePadButtons.LeftThumbstickLeft,
+      rightEnum: GPGamePadButtons.LeftThumbstickRight
+    );
 
-      if (angle >= MathF.PI * 1.5f - STICK_DIAGONAL_ANGLE_THRESHOLD && angle <= MathF.PI * 1.5 + STICK_DIAGONAL_ANGLE_THRESHOLD) {
-        pressedButtons.Add(GPGamePadButtons.LeftThumbstickDown);
-      }
-
-      if (angle >= MathF.PI - STICK_DIAGONAL_ANGLE_THRESHOLD && angle <= MathF.PI + STICK_DIAGONAL_ANGLE_THRESHOLD) {
-        pressedButtons.Add(GPGamePadButtons.LeftThumbstickLeft);
-      }
-
-      if (angle >= 0.0f && angle <= STICK_DIAGONAL_ANGLE_THRESHOLD || angle >= MathF.PI * 2.0f - STICK_DIAGONAL_ANGLE_THRESHOLD && angle <= MathF.PI * 2.0f) {
-        pressedButtons.Add(GPGamePadButtons.LeftThumbstickRight);
-      }
-
-      if (angle >= MathF.PI * 0.5f - STICK_DIAGONAL_ANGLE_THRESHOLD && angle <= MathF.PI * 0.5 + STICK_DIAGONAL_ANGLE_THRESHOLD) {
-        pressedButtons.Add(GPGamePadButtons.LeftThumbstickUp);
-      }
-
-      if (angle >= MathF.PI * 1.5f - STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD && angle <= MathF.PI * 1.5 + STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD) {
-        pressedButtons.Add(GPGamePadButtons.LeftThumbstickDownStrict);
-      }
-
-      if (angle >= MathF.PI - STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD && angle <= MathF.PI + STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD) {
-        pressedButtons.Add(GPGamePadButtons.LeftThumbstickLeftStrict);
-      }
-
-      if (angle >= 0.0f && angle <= STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD || angle >= MathF.PI * 2.0f - STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD && angle <= MathF.PI * 2.0f) {
-        pressedButtons.Add(GPGamePadButtons.LeftThumbstickRightStrict);
-      }
-
-      if (angle >= MathF.PI * 0.5f - STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD && angle <= MathF.PI * 0.5 + STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD) {
-        pressedButtons.Add(GPGamePadButtons.LeftThumbstickUpStrict);
-      }
-    }
+    AddStickDirectionButtons(
+      pressedButtons: pressedButtons,
+      stickPosition: gamePadState.ThumbSticks.Left,
+      angleThreshold: STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD,
+      upEnum: GPGamePadButtons.LeftThumbstickUpStrict,
+      downEnum: GPGamePadButtons.LeftThumbstickDownStrict,
+      leftEnum: GPGamePadButtons.LeftThumbstickLeftStrict,
+      rightEnum: GPGamePadButtons.LeftThumbstickRightStrict
+    );
 
     if (gamePadState.Triggers.Left >= TRIGGER_THRESHOLD) {
       pressedButtons.Add(GPGamePadButtons.LeftTrigger);
@@ -143,41 +159,25 @@ internal class GamePadDiffTracker : AButtonDiffTracker<GPGamePadButtons, GamePad
       pressedButtons.Add(GPGamePadButtons.RightStick);
     }
 
-    if (gamePadState.ThumbSticks.Right.LengthSquared() > STICK_THRESHOLD_SQUARED) {
-      var angle = VectorFuncs.Angle(gamePadState.ThumbSticks.Right);
+    AddStickDirectionButtons(
+      pressedButtons: pressedButtons,
+      stickPosition: gamePadState.ThumbSticks.Right,
+      angleThreshold: STICK_DIAGONAL_ANGLE_THRESHOLD,
+      upEnum: GPGamePadButtons.RightThumbstickUp,
+      downEnum: GPGamePadButtons.RightThumbstickDown,
+      leftEnum: GPGamePadButtons.RightThumbstickLeft,
+      rightEnum: GPGamePadButtons.RightThumbstickRight
+    );
 
-      if (angle >= MathF.PI * 1.5f - STICK_DIAGONAL_ANGLE_THRESHOLD && angle <= MathF.PI * 1.5 + STICK_DIAGONAL_ANGLE_THRESHOLD) {
-        pressedButtons.Add(GPGamePadButtons.RightThumbstickDown);
-      }
-
-      if (angle >= MathF.PI - STICK_DIAGONAL_ANGLE_THRESHOLD && angle <= MathF.PI + STICK_DIAGONAL_ANGLE_THRESHOLD) {
-        pressedButtons.Add(GPGamePadButtons.RightThumbstickLeft);
-      }
-
-      if (angle >= 0.0f && angle <= STICK_DIAGONAL_ANGLE_THRESHOLD || angle >= MathF.PI * 2.0f - STICK_DIAGONAL_ANGLE_THRESHOLD && angle <= MathF.PI * 2.0f) {
-        pressedButtons.Add(GPGamePadButtons.RightThumbstickRight);
-      }
-
-      if (angle >= MathF.PI * 0.5f - STICK_DIAGONAL_ANGLE_THRESHOLD && angle <= MathF.PI * 0.5 + STICK_DIAGONAL_ANGLE_THRESHOLD) {
-        pressedButtons.Add(GPGamePadButtons.RightThumbstickUp);
-      }
-
-      if (angle >= MathF.PI * 1.5f - STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD && angle <= MathF.PI * 1.5 + STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD) {
-        pressedButtons.Add(GPGamePadButtons.RightThumbstickDownStrict);
-      }
-
-      if (angle >= MathF.PI - STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD && angle <= MathF.PI + STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD) {
-        pressedButtons.Add(GPGamePadButtons.RightThumbstickLeftStrict);
-      }
-
-      if (angle >= 0.0f && angle <= STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD || angle >= MathF.PI * 2.0f - STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD && angle <= MathF.PI * 2.0f) {
-        pressedButtons.Add(GPGamePadButtons.RightThumbstickRightStrict);
-      }
-
-      if (angle >= MathF.PI * 0.5f - STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD && angle <= MathF.PI * 0.5 + STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD) {
-        pressedButtons.Add(GPGamePadButtons.RightThumbstickUpStrict);
-      }
-    }
+    AddStickDirectionButtons(
+      pressedButtons: pressedButtons,
+      stickPosition: gamePadState.ThumbSticks.Right,
+      angleThreshold: STICK_DIAGONAL_ANGLE_STRICT_THRESHOLD,
+      upEnum: GPGamePadButtons.RightThumbstickUpStrict,
+      downEnum: GPGamePadButtons.RightThumbstickDownStrict,
+      leftEnum: GPGamePadButtons.RightThumbstickLeftStrict,
+      rightEnum: GPGamePadButtons.RightThumbstickRightStrict
+    );
 
     if (gamePadState.Triggers.Right >= TRIGGER_THRESHOLD) {
       pressedButtons.Add(GPGamePadButtons.RightTrigger);
