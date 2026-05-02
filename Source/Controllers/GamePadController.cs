@@ -14,7 +14,7 @@ internal class GamePadController(
   private static readonly PlayerIndex PLAYER_INDEX = PlayerIndex.One;
 
   // Tracking of presses / releases must be shared across GameStates
-  private static readonly GamePadDiffTracker gamePadTracker = new();
+  private static readonly IButtonDiffTracker<GPGamePadButtons, GamePadState> gamePadTracker = new GamePadDiffTracker();
 
   public Dictionary<GPGamePadButtons, IGPCommand> PressedMappings { get; } = pressedMappings ?? [];
   public Dictionary<GPGamePadButtons, IGPCommand> DownMappings { get; } = downMappings ?? [];

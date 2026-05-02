@@ -12,7 +12,7 @@ internal class KeyboardController(
   Dictionary<Keys, IGPCommand> releasedMappings = null
 ) : IController<Keys> {
   // Tracking of presses / releases must be shared across GameStates
-  private static readonly KeyboardDiffTracker keyTracker = new();
+  private static readonly IButtonDiffTracker<Keys, KeyboardState> keyTracker = new KeyboardDiffTracker();
 
   public Dictionary<Keys, IGPCommand> PressedMappings { get; } = pressedMappings ?? [];
   public Dictionary<Keys, IGPCommand> DownMappings { get; } = downMappings ?? [];

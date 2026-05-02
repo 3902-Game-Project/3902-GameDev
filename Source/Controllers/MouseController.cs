@@ -11,7 +11,7 @@ internal class MouseController(
   Dictionary<MouseButtons, IGPCommand> releasedMappings = null
 ) : IController<MouseButtons> {
   // Tracking of presses / releases must be shared across GameStates
-  private static readonly MouseDiffTracker mouseTracker = new();
+  private static readonly IButtonDiffTracker<MouseButtons, MouseState> mouseTracker = new MouseDiffTracker();
 
   public Dictionary<MouseButtons, IGPCommand> PressedMappings { get; } = pressedMappings ?? [];
   public Dictionary<MouseButtons, IGPCommand> DownMappings { get; } = downMappings ?? [];
