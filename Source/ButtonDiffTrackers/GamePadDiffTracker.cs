@@ -82,7 +82,7 @@ internal class GamePadDiffTracker : AButtonDiffTracker<GPGamePadButtons, GamePad
     }
   }
 
-  public override GPGamePadButtons[] ExtractPressedFromState(GamePadState gamePadState) {
+  protected override GPGamePadButtons[] ExtractPressedFromState(GamePadState gamePadState) {
     var pressedButtons = new List<GPGamePadButtons>();
 
     // Add buttons (in order of Buttons Enum)
