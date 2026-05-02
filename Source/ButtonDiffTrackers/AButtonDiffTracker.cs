@@ -7,6 +7,8 @@ internal abstract class AButtonDiffTracker<ButtonsEnum, ButtonStateReference> : 
   private ButtonsEnum[] pastButtonState = [];
   private ButtonsEnum[] currentButtonState = [];
 
+  protected abstract ButtonsEnum[] ExtractPressedFromState(ButtonStateReference gamePadState);
+
   public IEnumerable<ButtonsEnum> GetDown() {
     return currentButtonState;
   }
@@ -23,6 +25,4 @@ internal abstract class AButtonDiffTracker<ButtonsEnum, ButtonStateReference> : 
     pastButtonState = currentButtonState;
     currentButtonState = ExtractPressedFromState(buttonState);
   }
-
-  public abstract ButtonsEnum[] ExtractPressedFromState(ButtonStateReference gamePadState);
 }
