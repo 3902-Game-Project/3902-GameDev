@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace GameProject.ButtonDiffTrackers;
 
-internal abstract class AButtonDiffTracker<ButtonsEnum, ButtonStateReference> {
+internal abstract class AButtonDiffTracker<ButtonsEnum, ButtonStateReference> : IButtonDiffTracker<ButtonsEnum, ButtonStateReference> {
   private ButtonsEnum[] pastButtonState = [];
   private ButtonsEnum[] currentButtonState = [];
 
