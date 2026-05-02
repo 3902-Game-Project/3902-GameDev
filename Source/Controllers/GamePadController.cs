@@ -10,37 +10,13 @@ internal class GamePadController(
   Dictionary<GPGamePadButtons, IGPCommand> pressedMappings = null,
   Dictionary<GPGamePadButtons, IGPCommand> downMappings = null,
   Dictionary<GPGamePadButtons, IGPCommand> releasedMappings = null
-) : IController<GPGamePadButtons> {
+) : AController<GPGamePadButtons, GamePadState>(pressedMappings, downMappings, releasedMappings) {
   private static readonly PlayerIndex PLAYER_INDEX = PlayerIndex.One;
 
   // Tracking of presses / releases must be shared across GameStates
-  private static readonly IButtonDiffTracker<GPGamePadButtons, GamePadState> gamePadTracker = new GamePadDiffTracker();
+  private static readonly GamePadDiffTracker gamePadTracker = new();
 
-  public Dictionary<GPGamePadButtons, IGPCommand> PressedMappings { get; } = pressedMappings ?? [];
-  public Dictionary<GPGamePadButtons, IGPCommand> DownMappings { get; } = downMappings ?? [];
-  public Dictionary<GPGamePadButtons, IGPCommand> ReleasedMappings { get; } = releasedMappings ?? [];
+  protected override IButtonDiffTracker<GPGamePadButtons, GamePadState> ButtonTracker => gamePadTracker;
 
-  public void Update() {
-    GamePadState gamePadState = GamePad.GetState(PLAYER_INDEX);
-
-    gamePadTracker.Update(gamePadState);
-
-    foreach (GPGamePadButtons button in gamePadTracker.GetPressed()) {
-      if (PressedMappings.TryGetValue(button, out var command)) {
-        command.Execute();
-      }
-    }
-
-    foreach (GPGamePadButtons button in gamePadTracker.GetDown()) {
-      if (DownMappings.TryGetValue(button, out var command)) {
-        command.Execute();
-      }
-    }
-
-    foreach (GPGamePadButtons button in gamePadTracker.GetReleased()) {
-      if (ReleasedMappings.TryGetValue(button, out var command)) {
-        command.Execute();
-      }
-    }
-  }
+  protected override GamePadState GetButtonState() => GamePad.GetState(PLAYER_INDEX);
 }
