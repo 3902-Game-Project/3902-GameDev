@@ -2,6 +2,6 @@ using GameProject.PlayerSpace;
 
 namespace GameProject.Commands;
 
-internal class SwapWeaponCommand(Player player) : IGPCommand {
+internal class PlayerSwapWeaponCommand(Player player) : IGPCommand {
   public void Execute() => player.Inventory.SwapActiveWeapon();
 }
