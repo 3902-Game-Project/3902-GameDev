@@ -1,43 +1,40 @@
 using System.Collections.Generic;
 using GameProject.ButtonDiffTrackers;
 using GameProject.Commands;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.Controllers;
 
-internal class AController(
-  Dictionary<GPGamePadButtons, IGPCommand> pressedMappings = null,
-  Dictionary<GPGamePadButtons, IGPCommand> downMappings = null,
-  Dictionary<GPGamePadButtons, IGPCommand> releasedMappings = null
-) : IController<GPGamePadButtons> {
-  private static readonly PlayerIndex PLAYER_INDEX = PlayerIndex.One;
+internal abstract class AController<ButtonsEnum, ButtonStateReference>(
+  Dictionary<ButtonsEnum, IGPCommand> pressedMappings = null,
+  Dictionary<ButtonsEnum, IGPCommand> downMappings = null,
+  Dictionary<ButtonsEnum, IGPCommand> releasedMappings = null
+) : IController<ButtonsEnum> {
+  public Dictionary<ButtonsEnum, IGPCommand> PressedMappings { get; } = pressedMappings ?? [];
+  public Dictionary<ButtonsEnum, IGPCommand> DownMappings { get; } = downMappings ?? [];
+  public Dictionary<ButtonsEnum, IGPCommand> ReleasedMappings { get; } = releasedMappings ?? [];
 
-  // Tracking of presses / releases must be shared across GameStates
-  private static readonly GamePadDiffTracker gamePadTracker = new();
+  protected abstract IButtonDiffTracker<ButtonsEnum, ButtonStateReference> ButtonTracker { get; }
 
-  public Dictionary<GPGamePadButtons, IGPCommand> PressedMappings { get; } = pressedMappings ?? [];
-  public Dictionary<GPGamePadButtons, IGPCommand> DownMappings { get; } = downMappings ?? [];
-  public Dictionary<GPGamePadButtons, IGPCommand> ReleasedMappings { get; } = releasedMappings ?? [];
+  protected abstract ButtonStateReference GetButtonState();
 
   public void Update() {
-    GamePadState gamePadState = GamePad.GetState(PLAYER_INDEX);
+    ButtonStateReference buttonState = GetButtonState();
 
-    gamePadTracker.Update(gamePadState);
+    ButtonTracker.Update(buttonState);
 
-    foreach (GPGamePadButtons button in gamePadTracker.GetPressed()) {
+    foreach (ButtonsEnum button in ButtonTracker.GetPressed()) {
       if (PressedMappings.TryGetValue(button, out var command)) {
         command.Execute();
       }
     }
 
-    foreach (GPGamePadButtons button in gamePadTracker.GetDown()) {
+    foreach (ButtonsEnum button in ButtonTracker.GetDown()) {
       if (DownMappings.TryGetValue(button, out var command)) {
         command.Execute();
       }
     }
 
-    foreach (GPGamePadButtons button in gamePadTracker.GetReleased()) {
+    foreach (ButtonsEnum button in ButtonTracker.GetReleased()) {
       if (ReleasedMappings.TryGetValue(button, out var command)) {
         command.Execute();
       }
