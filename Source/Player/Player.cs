@@ -4,7 +4,6 @@ using GameProject.Collisions;
 using GameProject.Collisions.Shapes;
 using GameProject.Controllers;
 using GameProject.Enemies;
-using GameProject.Factories;
 using GameProject.GlobalInterfaces;
 using GameProject.Globals;
 using GameProject.Managers;
