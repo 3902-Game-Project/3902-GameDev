@@ -40,53 +40,8 @@ internal class StateGameType : IGameState {
 
   public void Initialize() {
     keyboardController = GameControllerFactory.CreateKeyboardController(game, Player, LevelManager);
-
-    mouseController = new MouseController();
-
-    // Debug button binds:
-    if (Flags.DebugButtonBinds) {
-      mouseController.PressedMappings.Add(MouseButtons.Right, new PreviousLevelCommand(LevelManager));
-      mouseController.PressedMappings.Add(MouseButtons.Left, new NextLevelCommand(LevelManager));
-    }
-
-    // The gamepad bindings don't match the readme. this is intentional, because
-    // the readme is in Xbox controller layout, but testing with a
-    // nintendo pro controller seems to suggest it is pro controller layout.
-    gamePadController = new GamePadController(
-      pressedMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
-        { GPGamePadButtons.BigButton, new QuitCommand(game) },
-        { GPGamePadButtons.Back, new ReturnToMenuAndResetCommand(game) },
-        { GPGamePadButtons.Start, new PauseCommand(game) },
-        { GPGamePadButtons.RightTrigger, new OpenItemScreenCommand(game) },
-        { GPGamePadButtons.A, new PlayerUseItemCommand(Player, UseType.Pressed) },
-        { GPGamePadButtons.B, new PlayerUseKeyCommand(Player, UseType.Pressed) },
-        { GPGamePadButtons.X, new PlayerInteractCommand(Player) },
-        { GPGamePadButtons.LeftTrigger, new PlayerSwapWeaponCommand(Player) },
-        { GPGamePadButtons.DPadDown, new PlayerDropItemCommand(game.StateGame.Player) },
-        { GPGamePadButtons.Y, new PlayerReloadWeaponCommand(Player) },
-        { GPGamePadButtons.RightThumbstickLeftStrict, new PlayerDieCommand(Player) },
-        { GPGamePadButtons.RightShoulder, new OpenSavePromptCommand(game) },
-        { GPGamePadButtons.LeftShoulder, new OpenLoadPromptCommand(game) },
-        { GPGamePadButtons.RightThumbstickUpStrict, new ToggleMusicCommand() },
-      },
-      downMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
-        { GPGamePadButtons.A, new PlayerUseItemCommand(Player, UseType.Held) },
-        { GPGamePadButtons.LeftThumbstickUp, new PlayerMoveUpCommand(Player) },
-        { GPGamePadButtons.LeftThumbstickDown, new PlayerMoveDownCommand(Player) },
-        { GPGamePadButtons.LeftThumbstickLeft, new PlayerMoveLeftCommand(Player) },
-        { GPGamePadButtons.LeftThumbstickRight, new PlayerMoveRightCommand(Player) },
-      },
-      releasedMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
-        { GPGamePadButtons.A, new PlayerUseItemCommand(Player, UseType.Released) },
-      }
-    );
-
-    // Debug button binds:
-    if (Flags.DebugButtonBinds) {
-      gamePadController.PressedMappings.Add(GPGamePadButtons.DPadLeft, new PreviousLevelCommand(LevelManager));
-      gamePadController.PressedMappings.Add(GPGamePadButtons.DPadRight, new NextLevelCommand(LevelManager));
-      gamePadController.PressedMappings.Add(GPGamePadButtons.DPadUp, new ToggleUpdatesCommand());
-    }
+    mouseController = GameControllerFactory.CreateMouseController(LevelManager);
+    gamePadController = GameControllerFactory.CreateGamePadController(game, Player, LevelManager);
 
     LevelManager.Initialize();
     CheatCodes.Instance.LevelManager = LevelManager;
