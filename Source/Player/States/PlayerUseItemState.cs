@@ -27,7 +27,7 @@ internal class PlayerUseItemState(Player player) : APlayerState(player) {
     timer--;
     if (timer <= 0) {
       timer = 20;
-      Player.State = Player.StaticState;
+      Player.ChangeState(Player.StaticState);
     }
   }
 

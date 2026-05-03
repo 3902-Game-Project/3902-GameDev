@@ -75,7 +75,7 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   public IPlayerState MovingState { get; private set; }
   public IPlayerState UseItemState { get; private set; }
   public IPlayerState DeadState { get; private set; }
-  public IPlayerState State { get; set; }
+  private IPlayerState currentState;
 
   public Player(ILevelManager levelManager, Game1 game) {
     this.levelManager = levelManager;
@@ -91,7 +91,11 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     StaticState = new PlayerStaticState(this);
     UseItemState = new PlayerUseItemState(this);
     DeadState = new PlayerDeadState(this, () => game.ChangeState(game.StateLoss));
-    State = StaticState;
+    currentState = StaticState;
+  }
+
+  public void ChangeState(IPlayerState newState) {
+    currentState = newState;
   }
 
   public void MoveUp() => inputUpThisFrame = true;
@@ -103,17 +107,19 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   public void MoveRight() => inputRightThisFrame = true;
   
   public void UseItem(UseType useType) {
-    State.UseItem(useType);
+    currentState.UseItem(useType);
   }
 
   public void UseKey(UseType useType) {
-    State.UseKey(useType);
+    currentState.UseKey(useType);
   }
 
-  public void Die() => State.Die();
+  public void Die() {
+    currentState.Die();
+  }
 
   public void TakeDamage(int amount) {
-    State.TakeDamage(amount);
+    currentState.TakeDamage(amount);
   }
 
   public void Initialize() {
@@ -142,10 +148,10 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     else if (!inputUpThisFrame && inputDownThisFrame) activeDirY = 1;
     else if (inputUpThisFrame && !inputDownThisFrame) activeDirY = -1;
 
-    if (activeDirX == -1) State.MoveLeft();
-    if (activeDirX == 1) State.MoveRight();
-    if (activeDirY == -1) State.MoveUp();
-    if (activeDirY == 1) State.MoveDown();
+    if (activeDirX == -1) currentState.MoveLeft();
+    if (activeDirX == 1) currentState.MoveRight();
+    if (activeDirY == -1) currentState.MoveUp();
+    if (activeDirY == 1) currentState.MoveDown();
 
     if (Velocity.X != 0 && MathF.Sign(Velocity.X) != MathF.Sign(lastInputVelocity.X)) {
       Direction = (Velocity.X > 0) ? FacingDirection.Right : FacingDirection.Left;
@@ -176,7 +182,7 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     if (collider != null) collider.Position = Position;
     levelManager.CurrentLevel.PlayerResolveCollisions(this, CollisionAxis.Y, MathF.Abs(xStep) + 1f);
 
-    State.Update(deltaTime);
+    currentState.Update(deltaTime);
     Velocity = Vector2.Zero;
 
     Inventory.Update(deltaTime);
@@ -199,7 +205,7 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   }
 
   public void Draw(SpriteBatch spriteBatch) {
-    State.Draw(spriteBatch);
+    currentState.Draw(spriteBatch);
     Inventory.Draw(spriteBatch, Position, Direction, TextureStore.Instance.WhitePixel);
   }
 

@@ -53,7 +53,7 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
     if (Player.Inventory.ActiveItem != null) {
       Player.Inventory.ActiveItem.Use(useType);
       if (Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
-        Player.State = Player.UseItemState;
+        Player.ChangeState(Player.UseItemState);
       }
     }
   }
@@ -69,7 +69,7 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
     if (keyToUse != null) {
       keyToUse.Use(useType);
       if (Player.Inventory.ActiveItem != null && Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
-        Player.State = Player.UseItemState;
+        Player.ChangeState(Player.UseItemState);
       }
       Player.Inventory.RemoveGeneralItem(keyToUse);
     }
@@ -77,7 +77,7 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
 
   public override void Update(double deltaTime) {
     if (Player.Velocity == Vector2.Zero) {
-      Player.State = Player.StaticState;
+      Player.ChangeState(Player.StaticState);
       currentFrame = 0;
       return;
     }

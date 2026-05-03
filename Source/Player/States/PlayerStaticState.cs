@@ -36,7 +36,7 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
   public override void Update(double deltaTime) {
     // If we start moving, switch state
     if (Player.Velocity != Vector2.Zero) {
-      Player.State = Player.MovingState;
+      Player.ChangeState(Player.MovingState);
     }
   }
 
@@ -44,7 +44,7 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
     if (Player.Inventory.ActiveItem != null) {
       Player.Inventory.ActiveItem.Use(useType);
       if (Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
-        Player.State = Player.UseItemState;
+        Player.ChangeState(Player.UseItemState);
       }
     }
   }
@@ -61,7 +61,7 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
       keyToUse.Use(useType);
 
       if (Player.Inventory.ActiveItem != null && Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
-        Player.State = Player.UseItemState;
+        Player.ChangeState(Player.UseItemState);
       }
 
       Player.Inventory.RemoveGeneralItem(keyToUse);
