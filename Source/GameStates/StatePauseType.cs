@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using GameProject.ButtonDiffTrackers;
-using GameProject.Commands;
 using GameProject.Controllers;
+using GameProject.Factories.Controller;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -15,22 +14,8 @@ internal class StatePauseType(Game1 game) : IGameState {
   private IController<GPGamePadButtons> gamePadController;
 
   public void Initialize() {
-    keyboardController = new KeyboardController(
-      pressedMappings: new Dictionary<Keys, IGPCommand> {
-        { Keys.Q, new QuitCommand(game) },
-        { Keys.P, new ReturnToGameCommand(game) },
-      }
-    );
-
-    // The gamepad bindings don't match the readme. this is intentional, because
-    // the readme is in Xbox controller layout, but testing with a
-    // nintendo pro controller seems to suggest it is pro controller layout.
-    gamePadController = new GamePadController(
-      pressedMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
-        { GPGamePadButtons.X, new QuitCommand(game) },
-        { GPGamePadButtons.A, new ReturnToGameCommand(game) },
-      }
-    );
+    keyboardController = PauseControllerFactory.CreateKeyboardController(game);
+    gamePadController = PauseControllerFactory.CreateGamePadController(game);
   }
 
   public void LoadContent(ContentManager content) { }
