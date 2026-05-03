@@ -24,7 +24,6 @@ internal class StateGameType : IGameState {
   private IController<Keys> keyboardController;
   private IController<MouseButtons> mouseController;
   private IController<GPGamePadButtons> gamePadController;
-  private Texture2D ammoTexture;
   private RenderTarget2D nonHUDTarget;
 
   public Player Player { get; private set; }
@@ -52,8 +51,6 @@ internal class StateGameType : IGameState {
 
     Player.Inventory.PickupItem(ItemFactory.Instance.CreateRevolver(0.0f, 0.0f, game.StateGame.Player, game.StateGame.LevelManager));
     Player.Inventory.PickupItem(ItemFactory.Instance.CreateRifle(0.0f, 0.0f, game.StateGame.Player, game.StateGame.LevelManager));
-
-    ammoTexture = contentManager.Load<Texture2D>("Items/ammo_drops");
 
     LevelManager.LoadContent(contentManager);
   }
@@ -183,24 +180,24 @@ internal class StateGameType : IGameState {
           spriteBatch.DrawString(MiscAssetStore.Instance.MainFont, ammoText, ammoPosition, Color.White);
 
           // Draw the 3 ammo types
-          if (ammoTexture != null) {
+          if (TextureStore.Instance.AmmoRefill != null) {
             float iconScale = 2f;
             float textOffset = 35f;
             float spacing = 90f;
             Vector2 reserveStartPos = ammoPosition + new Vector2(0, 30);
 
             // Light Ammo
-            spriteBatch.Draw(ammoTexture, reserveStartPos, new Rectangle(0, 0, 16, 16), Color.White, 0f, Vector2.Zero, iconScale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(TextureStore.Instance.AmmoRefill, reserveStartPos, new Rectangle(0, 0, 16, 16), Color.White, 0f, Vector2.Zero, iconScale, SpriteEffects.None, 0f);
             spriteBatch.DrawString(MiscAssetStore.Instance.MainFont, $"{Player.Inventory.Ammo[AmmoType.Light]}", reserveStartPos + new Vector2(textOffset, 5), Color.White);
 
             // Heavy Ammo
             Vector2 heavyPos = reserveStartPos + new Vector2(spacing, 0);
-            spriteBatch.Draw(ammoTexture, heavyPos, new Rectangle(16, 0, 16, 16), Color.White, 0f, Vector2.Zero, iconScale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(TextureStore.Instance.AmmoRefill, heavyPos, new Rectangle(16, 0, 16, 16), Color.White, 0f, Vector2.Zero, iconScale, SpriteEffects.None, 0f);
             spriteBatch.DrawString(MiscAssetStore.Instance.MainFont, $"{Player.Inventory.Ammo[AmmoType.Heavy]}", heavyPos + new Vector2(textOffset, 5), Color.White);
 
             // Shells
             Vector2 shellsPos = reserveStartPos + new Vector2(spacing * 2, 0);
-            spriteBatch.Draw(ammoTexture, shellsPos, new Rectangle(32, 0, 16, 16), Color.White, 0f, Vector2.Zero, iconScale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(TextureStore.Instance.AmmoRefill, shellsPos, new Rectangle(32, 0, 16, 16), Color.White, 0f, Vector2.Zero, iconScale, SpriteEffects.None, 0f);
             spriteBatch.DrawString(MiscAssetStore.Instance.MainFont, $"{Player.Inventory.Ammo[AmmoType.Shells]}", shellsPos + new Vector2(textOffset, 5), Color.White);
           }
         }

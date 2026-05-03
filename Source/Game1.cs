@@ -149,7 +149,6 @@ internal class Game1 : Game {
     SoundManager.Instance.LoadAllContent(Content);
     ItemFactory.Instance.LoadAllTextures(Content);
     ProjectileFactory.Instance.LoadAllTextures(Content);
-    WorldPickupFactory.Instance.LoadAllTextures(Content);
 
     StateTransition.LoadContent(Content);
     StateMenu.LoadContent(Content);

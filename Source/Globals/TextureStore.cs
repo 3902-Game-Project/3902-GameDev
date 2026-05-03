@@ -10,6 +10,7 @@ internal class TextureStore : IInitable {
   public Texture2D WhitePixel { get; private set; }
   public Texture2D Player { get; private set; }
   public Texture2D MainBlockItemAtlas { get; private set; }
+  public Texture2D AmmoRefill { get; private set; }
   public Texture2D HealthBar { get; private set; }
   public Texture2D HUDBackground { get; private set; }
   public Texture2D TitleMenu { get; private set; }
@@ -21,6 +22,7 @@ internal class TextureStore : IInitable {
     WhitePixel = contentManager.Load<Texture2D>("Misc/WhitePixel");
     Player = contentManager.Load<Texture2D>("Misc/playerSpritesheet");
     MainBlockItemAtlas = contentManager.Load<Texture2D>("Misc/desert-atlas-v10");
+    AmmoRefill = contentManager.Load<Texture2D>("Items/ammo_drops");
     HealthBar = contentManager.Load<Texture2D>("Misc/blood_red_bar");
     HUDBackground = contentManager.Load<Texture2D>("Misc/HUD Background");
   }
