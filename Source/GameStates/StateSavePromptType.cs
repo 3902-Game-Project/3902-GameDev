@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using GameProject.ButtonDiffTrackers;
-using GameProject.Commands;
 using GameProject.Controllers;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
@@ -18,22 +16,8 @@ internal class StateSavePromptType(Game1 game) : IGameState {
   public bool IsShowingSuccess { get; set; } = false;
 
   public void Initialize() {
-    keyboardController = new KeyboardController(
-      pressedMappings: new Dictionary<Keys, IGPCommand> {
-        { Keys.A, new ExecuteSaveCommand(game, this) },
-        { Keys.D, new ReturnToGameNoFadeCommand(game) },
-      }
-    );
-
-    // The gamepad bindings don't match the readme. this is intentional, because
-    // the readme is in Xbox controller layout, but testing with a
-    // nintendo pro controller seems to suggest it is pro controller layout.
-    gamePadController = new GamePadController(
-      pressedMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
-        { GPGamePadButtons.A, new ExecuteSaveCommand(game, this) },
-        { GPGamePadButtons.B, new ReturnToGameNoFadeCommand(game) },
-      }
-    );
+    keyboardController = SavePromptControllerFactory.CreateKeyboardController(game, this);
+    gamePadController = SavePromptControllerFactory.CreateGamePadController(game, this);
   }
 
   public void LoadContent(ContentManager content) { }
