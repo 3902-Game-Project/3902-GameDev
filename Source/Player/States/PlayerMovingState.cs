@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
 
-internal class PlayerAnimatedMovingState(Player player) : APlayerState(player) {
+internal class PlayerMovingState(Player player) : APlayerState(player) {
   private readonly List<Rectangle> moveLeftFrames = [
     new(1531, 420, 171, 323),
     new(1854, 427, 171, 323)

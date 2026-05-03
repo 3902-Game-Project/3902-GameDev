@@ -85,7 +85,7 @@ internal class Player : ITemporalUpdatable, IGPDrawable, ICollidable {
     float height = 323 * 0.15f;
     Collider = new BoxCollider(width, height, Position);
 
-    MovingState = new PlayerAnimatedMovingState(this);
+    MovingState = new PlayerMovingState(this);
     StaticState = new PlayerStaticState(this);
     UseItemState = new PlayerUseItemState(this);
     DeadState = new PlayerDeadState(this, () => game.ChangeState(game.StateLoss));
