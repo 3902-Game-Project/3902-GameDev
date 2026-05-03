@@ -392,17 +392,17 @@ internal partial class LevelLoader {
 
       case "36":
         /* health item */
-        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateHealthItem(xPos, yPos, player)));
+        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateHealthPotion(xPos, yPos, player)));
         break;
 
       case "37":
         /* invincibility item */
-        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateInvincibilityItem(xPos, yPos, player)));
+        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateInvincibilityPotion(xPos, yPos, player)));
         break;
 
       case "38":
         /* infinite ammo item */
-        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateInfiniteAmmoItem(xPos, yPos, player)));
+        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateInfiniteAmmo(xPos, yPos, player)));
         break;
 
       case "39":

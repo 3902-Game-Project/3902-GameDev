@@ -10,21 +10,21 @@ namespace GameProject.Factories;
 
 internal class ItemFactory {
   private Texture2D basicGunsTexture;
-  private Texture2D healthItemTexture;
-  private Texture2D invincibilityItemTexture;
-  private Texture2D infiniteAmmoItemTexture;
-  private Texture2D BFGTexture;
+  private Texture2D newGunsTexture;
+  private Texture2D healthPotionTexture;
+  private Texture2D invincibilityPotionTexture;
+  private Texture2D infiniteAmmoPotionTexture;
 
   public static ItemFactory Instance { get; } = new();
 
   private ItemFactory() { }
 
   public void LoadAllTextures(ContentManager contentManager) {
-    basicGunsTexture = contentManager.Load<Texture2D>("Items/basic_guns_spritesheet");
-    invincibilityItemTexture = contentManager.Load<Texture2D>("Items/InvincibilityPotion");
-    healthItemTexture = contentManager.Load<Texture2D>("Items/HealthPotion");
-    infiniteAmmoItemTexture = contentManager.Load<Texture2D>("Items/AmmoPotion");
-    BFGTexture = contentManager.Load<Texture2D>("Items/new_guns");
+    basicGunsTexture = contentManager.Load<Texture2D>("World Pickups/Items/Basic Guns Spritesheet");
+    newGunsTexture = contentManager.Load<Texture2D>("World Pickups/Items/New Guns Spritesheet");
+    invincibilityPotionTexture = contentManager.Load<Texture2D>("World Pickups/Items/Invincibility Potion");
+    healthPotionTexture = contentManager.Load<Texture2D>("World Pickups/Items/Health Potion");
+    infiniteAmmoPotionTexture = contentManager.Load<Texture2D>("World Pickups/Items/Ammo Potion");
   }
 
   public IItem CreateRevolver(float xPos, float yPos, Player player, ILevelManager levelManager) {
@@ -80,7 +80,7 @@ internal class ItemFactory {
       AmmoType = AmmoType.Light,
       ReloadsOneByOne = false,
     };
-    return new SMGItem(BFGTexture, new Vector2(xPos, yPos), player, levelManager, smgStats);
+    return new SMGItem(newGunsTexture, new Vector2(xPos, yPos), player, levelManager, smgStats);
   }
 
   public IItem CreateBFG(float xPos, float yPos, Player player, ILevelManager levelManager) {
@@ -94,7 +94,7 @@ internal class ItemFactory {
       BaseDamage = 340,
       ReloadsOneByOne = false,
     };
-    return new BFGItem(BFGTexture, new Vector2(xPos, yPos), player, levelManager, stats);
+    return new BFGItem(newGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
   }
 
   public IItem CreateFakeBFG(float xPos, float yPos, Player player, ILevelManager levelManager) {
@@ -104,22 +104,22 @@ internal class ItemFactory {
       MaxAmmo = 999, // Doesn't matter
       CurrentAmmo = 999,
     };
-    return new FakeBFGItem(BFGTexture, new Vector2(xPos, yPos), player, levelManager, stats);
+    return new FakeBFGItem(newGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
   }
 
   public static IItem CreateKey(float xPos, float yPos, ILevelManager levelManager) {
     return new KeyItem(TextureStore.Instance.MainBlockItemAtlas, new Vector2(xPos, yPos), levelManager);
   }
 
-  public IItem CreateHealthItem(float xPos, float yPos, Player player) {
-    return new HealthItem(healthItemTexture, new Vector2(xPos, yPos), player);
+  public IItem CreateHealthPotion(float xPos, float yPos, Player player) {
+    return new HealthPotionItem(healthPotionTexture, new Vector2(xPos, yPos), player);
   }
 
-  public IItem CreateInvincibilityItem(float xPos, float yPos, Player player) {
-    return new InvincibilityItem(invincibilityItemTexture, new Vector2(xPos, yPos), player);
+  public IItem CreateInvincibilityPotion(float xPos, float yPos, Player player) {
+    return new InvincibilityPotionItem(invincibilityPotionTexture, new Vector2(xPos, yPos), player);
   }
 
-  public IItem CreateInfiniteAmmoItem(float xPos, float yPos, Player player) {
-    return new InfiniteAmmoItem(infiniteAmmoItemTexture, new Vector2(xPos, yPos), player);
+  public IItem CreateInfiniteAmmo(float xPos, float yPos, Player player) {
+    return new InfiniteAmmoPotionItem(infiniteAmmoPotionTexture, new Vector2(xPos, yPos), player);
   }
 }

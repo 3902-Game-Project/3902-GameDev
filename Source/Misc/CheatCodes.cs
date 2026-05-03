@@ -86,18 +86,18 @@ internal class CheatCodes : ITemporalUpdatable {
       player.Inventory.PickupItem(key);
     }
 
-    if (!player.Inventory.GeneralItems.OfType<HealthItem>().Any()) {
-      IItem health = ItemFactory.Instance.CreateHealthItem(-1f, -1f, player);
+    if (!player.Inventory.GeneralItems.OfType<HealthPotionItem>().Any()) {
+      IItem health = ItemFactory.Instance.CreateHealthPotion(-1f, -1f, player);
       player.Inventory.PickupItem(health);
     }
 
-    if (!player.Inventory.GeneralItems.OfType<InfiniteAmmoItem>().Any()) {
-      IItem ammo = ItemFactory.Instance.CreateInfiniteAmmoItem(-1f, -1f, player);
+    if (!player.Inventory.GeneralItems.OfType<InfiniteAmmoPotionItem>().Any()) {
+      IItem ammo = ItemFactory.Instance.CreateInfiniteAmmo(-1f, -1f, player);
       player.Inventory.PickupItem(ammo);
     }
 
-    if (!player.Inventory.GeneralItems.OfType<InvincibilityItem>().Any()) {
-      IItem invincible = ItemFactory.Instance.CreateInvincibilityItem(-1f, -1f, player);
+    if (!player.Inventory.GeneralItems.OfType<InvincibilityPotionItem>().Any()) {
+      IItem invincible = ItemFactory.Instance.CreateInvincibilityPotion(-1f, -1f, player);
       player.Inventory.PickupItem(invincible);
     }
     // add additional cases for other items

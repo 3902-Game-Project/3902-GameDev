@@ -8,22 +8,22 @@ internal class TextureStore : IInitable {
   public static TextureStore Instance { get; } = new TextureStore();
 
   public Texture2D WhitePixel { get; private set; }
+  public Texture2D TitleScreen { get; private set; }
   public Texture2D Player { get; private set; }
   public Texture2D MainBlockItemAtlas { get; private set; }
   public Texture2D AmmoRefill { get; private set; }
   public Texture2D HealthBar { get; private set; }
   public Texture2D HUDBackground { get; private set; }
-  public Texture2D TitleMenu { get; private set; }
 
   public void Initialize() { }
 
   public void LoadContent(ContentManager contentManager) {
-    TitleMenu = contentManager.Load<Texture2D>("Misc/Titlemenu");
-    WhitePixel = contentManager.Load<Texture2D>("Misc/WhitePixel");
-    Player = contentManager.Load<Texture2D>("Misc/playerSpritesheet");
-    MainBlockItemAtlas = contentManager.Load<Texture2D>("Misc/desert-atlas-v10");
-    AmmoRefill = contentManager.Load<Texture2D>("Items/ammo_drops");
-    HealthBar = contentManager.Load<Texture2D>("Misc/blood_red_bar");
+    WhitePixel = contentManager.Load<Texture2D>("Misc/White Pixel");
+    TitleScreen = contentManager.Load<Texture2D>("Misc/Title Screen");
+    Player = contentManager.Load<Texture2D>("Misc/Player Spritesheet");
+    MainBlockItemAtlas = contentManager.Load<Texture2D>("Misc/Main Block Item Atlas");
+    AmmoRefill = contentManager.Load<Texture2D>("World Pickups/Ammo Refill Spritesheet");
+    HealthBar = contentManager.Load<Texture2D>("Misc/Health Bar");
     HUDBackground = contentManager.Load<Texture2D>("Misc/HUD Background");
   }
 }

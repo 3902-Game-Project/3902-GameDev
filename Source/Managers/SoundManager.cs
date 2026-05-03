@@ -52,11 +52,12 @@ internal class SoundManager {
   }
 
   public void LoadAllContent(ContentManager content) {
-    sounds[SoundID.PlayerHurt] = content.Load<SoundEffect>("Sound Effects/player_hurt");
-    sounds[SoundID.GunshotDefault] = content.Load<SoundEffect>("Sound Effects/gun_shot_default");
-    sounds[SoundID.ReloadDefault] = content.Load<SoundEffect>("Sound Effects/reload_default");
-    sounds[SoundID.Background] = content.Load<SoundEffect>("Music/background_music");
-    sounds[SoundID.Door] = content.Load<SoundEffect>("Sound Effects/door-01");
+    sounds[SoundID.PlayerHurt] = content.Load<SoundEffect>("Sound Effects/Player Hurt");
+    sounds[SoundID.GunshotDefault] = content.Load<SoundEffect>("Sound Effects/Gun Shot");
+    sounds[SoundID.ReloadDefault] = content.Load<SoundEffect>("Sound Effects/Reload");
+    sounds[SoundID.Door] = content.Load<SoundEffect>("Sound Effects/Door Open");
+
+    sounds[SoundID.Background] = content.Load<SoundEffect>("Music/Western Rock-Metal Song");
   }
 
   public void Play(SoundID id, float volume = 1.0f, float pitch = 0f, float pan = 0f) {

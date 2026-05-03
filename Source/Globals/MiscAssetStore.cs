@@ -19,7 +19,7 @@ internal class MiscAssetStore : IInitable {
   public void Initialize() { }
 
   public void LoadContent(ContentManager contentManager) {
-    MainFont = contentManager.Load<SpriteFont>("Misc/CreditsFont");
+    MainFont = contentManager.Load<SpriteFont>("Misc/Main Font");
 
     Vignette = contentManager.Load<Effect>("Shaders/Vignette");
     Vignette.Parameters["VignetteDimensions"].SetValue(new Vector2(VIGNETTE_RADIUS, VIGNETTE_RADIUS) / new Vector2(Game1.GAME_WIDTH, Game1.GAME_HEIGHT));

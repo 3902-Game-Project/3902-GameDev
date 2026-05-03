@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-internal class InfiniteAmmoItem(Texture2D texture, Vector2 startPosition, Player player) : IItem, IWorldPickup {
+internal class InfiniteAmmoPotionItem(Texture2D texture, Vector2 startPosition, Player player) : IItem, IWorldPickup {
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   public Vector2 Position { get; set; } = startPosition;
   public bool IsCollected { get; set; } = false;
@@ -20,30 +20,30 @@ internal class InfiniteAmmoItem(Texture2D texture, Vector2 startPosition, Player
   public void Draw(SpriteBatch spriteBatch) {
     if (!IsCollected) {
       spriteBatch.Draw(
-          texture,
-          Position,
-          null,
-          Color.White,
-          0f,
-          Vector2.Zero,
-          .15f,
-          SpriteEffects.None,
-          0f
+        texture,
+        Position,
+        null,
+        Color.White,
+        0f,
+        Vector2.Zero,
+        .15f,
+        SpriteEffects.None,
+        0f
       );
     }
   }
 
   public void DrawUI(SpriteBatch spriteBatch, Vector2 position, float scale, Color tint) {
     spriteBatch.Draw(
-        texture: texture,
-        position: position,
-        sourceRectangle: null,
-        color: tint,
-        rotation: 0f,
-        origin: Vector2.Zero,
-        scale: scale,
-        effects: SpriteEffects.None,
-        layerDepth: 0f
+      texture: texture,
+      position: position,
+      sourceRectangle: null,
+      color: tint,
+      rotation: 0f,
+      origin: Vector2.Zero,
+      scale: scale,
+      effects: SpriteEffects.None,
+      layerDepth: 0f
     );
   }
 

@@ -32,7 +32,7 @@ internal class StateMenuType(Game1 game) : IGameState {
     spriteBatch.Begin();
 
     spriteBatch.Draw(
-      texture: TextureStore.Instance.TitleMenu,
+      texture: TextureStore.Instance.TitleScreen,
       position: new(-50.0f, 0.0f),
       sourceRectangle: new Rectangle(0, 0, 1028, 704), // FIX
       color: Color.White,
