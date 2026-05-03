@@ -27,6 +27,70 @@ internal class StateGameType : IGameState {
 
   private HUDManager hudManager;
 
+  private void DrawGameWithoutVignette(GraphicsDevice graphicsDevice, RenderTargetTracker renderTargetTracker, SpriteBatch spriteBatch) {
+    graphicsDevice.Clear(BACKGROUND_COLOR);
+
+    using (renderTargetTracker.TempSetTarget(nonHUDTarget)) {
+      spriteBatch.Begin(
+        sortMode: SpriteSortMode.Deferred,
+        blendState: BlendState.AlphaBlend,
+        samplerState: SamplerState.PointClamp,
+        depthStencilState: DepthStencilState.None,
+        rasterizerState: RasterizerState.CullNone
+      );
+
+      LevelManager.Draw(spriteBatch);
+      Player.Draw(spriteBatch);
+
+      spriteBatch.End();
+    }
+  }
+
+  private void DrawGameVignette(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
+    graphicsDevice.Viewport = game.GameViewport;
+
+    Effect effect;
+    if (Flags.Vignette && LevelManager.CurrentLevel.LevelFlags.Cave) {
+      MiscAssetStore.Instance.Vignette.Parameters["VignetteCenter"].SetValue(Player.Position / new Vector2(Game1.GAME_WIDTH, Game1.GAME_HEIGHT));
+      effect = MiscAssetStore.Instance.Vignette;
+    } else {
+      effect = null;
+    }
+
+    spriteBatch.Begin(
+      sortMode: SpriteSortMode.Deferred,
+      blendState: BlendState.AlphaBlend,
+      samplerState: SamplerState.PointClamp,
+      depthStencilState: DepthStencilState.None,
+      rasterizerState: RasterizerState.CullNone,
+      effect: effect
+    );
+
+    spriteBatch.Draw(nonHUDTarget, NON_HUD_RECTANGLE, Color.White);
+
+    spriteBatch.End();
+
+    graphicsDevice.Viewport = game.DefaultViewport;
+  }
+
+  private void DrawHUD(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
+    graphicsDevice.Viewport = game.HudViewport;
+
+    spriteBatch.Begin(
+      sortMode: SpriteSortMode.Deferred,
+      blendState: BlendState.AlphaBlend,
+      samplerState: SamplerState.PointClamp,
+      depthStencilState: DepthStencilState.None,
+      rasterizerState: RasterizerState.CullNone
+    );
+
+    hudManager.Draw(spriteBatch);
+
+    spriteBatch.End();
+
+    graphicsDevice.Viewport = game.DefaultViewport;
+  }
+
   public Player Player { get; private set; }
 
   public ILevelManager LevelManager { get; private set; }
@@ -74,61 +138,9 @@ internal class StateGameType : IGameState {
   }
 
   public void LowLevelDraw(GraphicsDevice graphicsDevice, RenderTargetTracker renderTargetTracker, SpriteBatch spriteBatch) {
-    graphicsDevice.Clear(BACKGROUND_COLOR);
-
-    using (renderTargetTracker.TempSetTarget(nonHUDTarget)) {
-      spriteBatch.Begin(
-        sortMode: SpriteSortMode.Deferred,
-        blendState: BlendState.AlphaBlend,
-        samplerState: SamplerState.PointClamp,
-        depthStencilState: DepthStencilState.None,
-        rasterizerState: RasterizerState.CullNone
-      );
-
-      LevelManager.Draw(spriteBatch);
-      Player.Draw(spriteBatch);
-
-      spriteBatch.End();
-    }
-
-    graphicsDevice.Viewport = game.GameViewport;
-
-    Effect effect;
-    if (Flags.Vignette && LevelManager.CurrentLevel.LevelFlags.Cave) {
-      MiscAssetStore.Instance.Vignette.Parameters["VignetteCenter"].SetValue(Player.Position / new Vector2(Game1.GAME_WIDTH, Game1.GAME_HEIGHT));
-      effect = MiscAssetStore.Instance.Vignette;
-    } else {
-      effect = null;
-    }
-
-    spriteBatch.Begin(
-      sortMode: SpriteSortMode.Deferred,
-      blendState: BlendState.AlphaBlend,
-      samplerState: SamplerState.PointClamp,
-      depthStencilState: DepthStencilState.None,
-      rasterizerState: RasterizerState.CullNone,
-      effect: effect
-    );
-
-    spriteBatch.Draw(nonHUDTarget, NON_HUD_RECTANGLE, Color.White);
-
-    spriteBatch.End();
-
-    graphicsDevice.Viewport = game.HudViewport;
-
-    spriteBatch.Begin(
-      sortMode: SpriteSortMode.Deferred,
-      blendState: BlendState.AlphaBlend,
-      samplerState: SamplerState.PointClamp,
-      depthStencilState: DepthStencilState.None,
-      rasterizerState: RasterizerState.CullNone
-    );
-
-    hudManager.Draw(spriteBatch);
-
-    spriteBatch.End();
-
-    graphicsDevice.Viewport = game.DefaultViewport;
+    DrawGameWithoutVignette(graphicsDevice, renderTargetTracker, spriteBatch);
+    DrawGameVignette(graphicsDevice, spriteBatch);
+    DrawHUD(graphicsDevice, spriteBatch);
   }
 
   public void OnStateEnter(bool prevStateIsCurrentState) {
