@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
+using GameProject.Factories;
+using GameProject.GlobalInterfaces;
 using GameProject.Items;
 using GameProject.Managers;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace;
 
-internal class PlayerInventory(ILevelManager levelManager) {
+internal class PlayerInventory(Player player, ILevelManager levelManager) : IInitable {
   private readonly Random random = new();
 
   // 1. Weapons List
@@ -82,6 +85,13 @@ internal class PlayerInventory(ILevelManager levelManager) {
       ActiveWeaponIndex = (ActiveWeaponIndex == 0) ? 1 : 0;
       ActiveItem?.OnEquip();
     }
+  }
+
+  public void Initialize() { }
+
+  public void LoadContent(ContentManager content) {
+    PickupItem(ItemFactory.Instance.CreateRevolver(0.0f, 0.0f, player, levelManager));
+    PickupItem(ItemFactory.Instance.CreateRifle(0.0f, 0.0f, player, levelManager));
   }
 
   public void Update(double deltaTime) {

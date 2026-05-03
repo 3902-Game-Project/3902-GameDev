@@ -42,6 +42,7 @@ internal class StateGameType : IGameState {
     gamePadController = GameControllerFactory.CreateGamePadController(game, Player, LevelManager);
 
     LevelManager.Initialize();
+    Player.Initialize();
     CheatCodes.Instance.LevelManager = LevelManager;
     CheatCodes.Instance.Initialize(Player);
   }
@@ -49,10 +50,8 @@ internal class StateGameType : IGameState {
   public void LoadContent(ContentManager contentManager) {
     nonHUDTarget = new RenderTarget2D(game.GraphicsDevice, Game1.GAME_WIDTH, Game1.GAME_HEIGHT);
 
-    Player.Inventory.PickupItem(ItemFactory.Instance.CreateRevolver(0.0f, 0.0f, game.StateGame.Player, game.StateGame.LevelManager));
-    Player.Inventory.PickupItem(ItemFactory.Instance.CreateRifle(0.0f, 0.0f, game.StateGame.Player, game.StateGame.LevelManager));
-
     LevelManager.LoadContent(contentManager);
+    Player.LoadContent(contentManager);
   }
 
   public void Update(double deltaTime) {

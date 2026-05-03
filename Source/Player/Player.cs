@@ -4,12 +4,14 @@ using GameProject.Collisions;
 using GameProject.Collisions.Shapes;
 using GameProject.Controllers;
 using GameProject.Enemies;
+using GameProject.Factories;
 using GameProject.GlobalInterfaces;
 using GameProject.Globals;
 using GameProject.Managers;
 using GameProject.PlayerSpace.States;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace;
@@ -23,7 +25,7 @@ internal enum FacingDirection {
   Down,
 }
 
-internal class Player : ITemporalUpdatable, IGPDrawable, ICollidable {
+internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable {
   private static readonly float PLAYER_WIDTH = 171.0f * 0.15f;
   private static readonly float PLAYER_HEIGHT = 323.0f * 0.15f;
 
@@ -79,7 +81,7 @@ internal class Player : ITemporalUpdatable, IGPDrawable, ICollidable {
     LevelManager = levelManager;
     Position = Vector2.Zero;
     Velocity = Vector2.Zero;
-    Inventory = new PlayerInventory(levelManager);
+    Inventory = new PlayerInventory(this, levelManager);
 
     float width = 171 * 0.15f;
     float height = 323 * 0.15f;
@@ -106,6 +108,14 @@ internal class Player : ITemporalUpdatable, IGPDrawable, ICollidable {
 
   public void TakeDamage(int amount) {
     State.TakeDamage(amount);
+  }
+
+  public void Initialize() {
+    Inventory.Initialize();
+  }
+
+  public void LoadContent(ContentManager content) {
+    Inventory.LoadContent(content);
   }
 
   public void Update(double deltaTime) {
@@ -182,6 +192,11 @@ internal class Player : ITemporalUpdatable, IGPDrawable, ICollidable {
     }
   }
 
+  public void Draw(SpriteBatch spriteBatch) {
+    State.Draw(spriteBatch);
+    Inventory.Draw(spriteBatch, Position, Direction, TextureStore.Instance.WhitePixel);
+  }
+
   public void OnCollision(CollisionInfo info) {
     if (info.Collider is IBlock) {
       Position = CollisionHelper.GetNudgedPosition(info, Position, info.Overlap + 0.01f);
@@ -204,10 +219,5 @@ internal class Player : ITemporalUpdatable, IGPDrawable, ICollidable {
       closestPickup.OnPickup(this);
       LevelManager.CurrentLevel.RemovePickup(closestPickup);
     }
-  }
-
-  public void Draw(SpriteBatch spriteBatch) {
-    State.Draw(spriteBatch);
-    Inventory.Draw(spriteBatch, Position, Direction, TextureStore.Instance.WhitePixel);
   }
 }
