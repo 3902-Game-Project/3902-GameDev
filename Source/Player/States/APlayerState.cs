@@ -1,11 +1,16 @@
 using GameProject.Controllers;
 using GameProject.Managers;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
 
 internal abstract class APlayerState(Player player) : IPlayerState {
-  public Player Player { get; } = player;
+  protected Player Player { get; } = player;
+
+  protected double DamageFlashTimer { get; set; } = 0.0;
+  
+  protected Color CurrentTintColor => DamageFlashTimer > 0 ? Color.Red : Color.White;
 
   public abstract void MoveDown();
   public abstract void MoveLeft();
@@ -18,7 +23,7 @@ internal abstract class APlayerState(Player player) : IPlayerState {
     if (!Player.IsInvincible) {
       Player.Health -= amount;
       Player.InvincibilityTimer = Player.INVINCIBILITY_DURATION;
-      Player.DamageFlashTimer = Player.DAMAGE_FLASH_DURATION;
+      DamageFlashTimer = Player.DAMAGE_FLASH_DURATION;
       if (Player.Health <= 0) {
         Player.Health = 0;
         Die();
@@ -31,6 +36,11 @@ internal abstract class APlayerState(Player player) : IPlayerState {
     Player.ChangeState(Player.DeadState);
   }
 
-  public abstract void Update(double deltaTime);
+  public virtual void Update(double deltaTime) {
+    if (DamageFlashTimer > 0) {
+      DamageFlashTimer -= deltaTime;
+    }
+  }
+
   public abstract void Draw(SpriteBatch spriteBatch);
 }

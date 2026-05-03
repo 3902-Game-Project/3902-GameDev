@@ -76,6 +76,8 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
   }
 
   public override void Update(double deltaTime) {
+    base.Update(deltaTime);
+
     if (Player.Velocity == Vector2.Zero) {
       Player.ChangeState(Player.StaticState);
       currentFrame = 0;
@@ -112,7 +114,7 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
       texture: TextureStore.Instance.Player,
       position: Player.Position,
       sourceRectangle: sourceRect,
-      color: Player.CurrentTintColor,
+      color: CurrentTintColor,
       rotation: 0f,
       origin: origin,
       scale: 0.15f,

@@ -49,7 +49,6 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   public int Health { get; set; } = 100;
   
   public double InvincibilityTimer { get; set; } = 0.0;
-  public double DamageFlashTimer { get; set; } = 0.0;
   public double InfiniteAmmoTimer { get; set; } = 0.0;
   public bool HasInfiniteAmmo => InfiniteAmmoTimer > 0;
 
@@ -69,7 +68,6 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     }
   }
 
-  public Color CurrentTintColor => DamageFlashTimer > 0 ? Color.Red : Color.White;
 
   public IPlayerState StaticState { get; private set; }
   public IPlayerState MovingState { get; private set; }
@@ -168,7 +166,6 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     lastInputVelocity = Velocity;
 
     if (InvincibilityTimer > 0) InvincibilityTimer -= deltaTime;
-    if (DamageFlashTimer > 0) DamageFlashTimer -= deltaTime;
     if (InfiniteAmmoTimer > 0) InfiniteAmmoTimer -= deltaTime;
     if (Velocity != Vector2.Zero) Velocity = Vector2.Normalize(Velocity) * Speed;
     float xStep = Velocity.X * ((float) deltaTime);

@@ -31,6 +31,8 @@ internal class PlayerDeadState(Player player, Action onLoss) : APlayerState(play
   public override void Die() { }
 
   public override void Update(double deltaTime) {
+    base.Update(deltaTime);
+
     Player.Velocity = Vector2.Zero;
 
     if (currentFrame < deathFrames.Count - 1) {
