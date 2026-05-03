@@ -4,8 +4,6 @@ using GameProject.ButtonDiffTrackers;
 using GameProject.Commands;
 using GameProject.Controllers;
 using GameProject.GameStates;
-using GameProject.Globals;
-using GameProject.Managers;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework.Input;
 
