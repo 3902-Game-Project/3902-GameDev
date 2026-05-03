@@ -39,45 +39,7 @@ internal class StateGameType : IGameState {
   }
 
   public void Initialize() {
-    keyboardController = new KeyboardController(
-      pressedMappings: new Dictionary<Keys, IGPCommand> {
-        { Keys.Q, new QuitCommand(game) },
-        { Keys.Back, new ReturnToMenuAndResetCommand(game) },
-        { Keys.P, new PauseCommand(game) },
-        { Keys.I, new OpenItemScreenCommand(game) },
-        { Keys.J, new PlayerUseItemCommand(Player, UseType.Pressed) },
-        { Keys.K, new PlayerUseKeyCommand(Player, UseType.Pressed) },
-        { Keys.F, new PlayerInteractCommand(Player) },
-        { Keys.Space, new PlayerSwapWeaponCommand(Player) },
-        { Keys.C, new PlayerDropItemCommand(game.StateGame.Player) },
-        { Keys.R, new PlayerReloadWeaponCommand(Player) },
-        { Keys.L, new PlayerDieCommand(Player) },
-        { Keys.N, new OpenSavePromptCommand(game) },
-        { Keys.M, new OpenLoadPromptCommand(game) },
-        { Keys.Tab, new ToggleMusicCommand() },
-      },
-      downMappings: new Dictionary<Keys, IGPCommand> {
-        { Keys.W, new PlayerMoveUpCommand(Player) },
-        { Keys.S, new PlayerMoveDownCommand(Player) },
-        { Keys.A, new PlayerMoveLeftCommand(Player) },
-        { Keys.D, new PlayerMoveRightCommand(Player) },
-        { Keys.Up, new PlayerMoveUpCommand(Player) },
-        { Keys.Down, new PlayerMoveDownCommand(Player) },
-        { Keys.Left, new PlayerMoveLeftCommand(Player) },
-        { Keys.Right, new PlayerMoveRightCommand(Player) },
-        { Keys.J, new PlayerUseItemCommand(Player, UseType.Held) },
-      },
-      releasedMappings: new Dictionary<Keys, IGPCommand> {
-        { Keys.J, new PlayerUseItemCommand(Player, UseType.Released) },
-      }
-    );
-
-    // Debug button binds:
-    if (Flags.DebugButtonBinds) {
-      keyboardController.PressedMappings.Add(Keys.T, new PreviousLevelCommand(LevelManager));
-      keyboardController.PressedMappings.Add(Keys.Y, new NextLevelCommand(LevelManager));
-      keyboardController.PressedMappings.Add(Keys.H, new ToggleUpdatesCommand());
-    }
+    keyboardController = GameButtons.CreateKeyboardController(game, Player, LevelManager);
 
     mouseController = new MouseController();
 
