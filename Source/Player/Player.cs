@@ -30,6 +30,7 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
 
   public static readonly float INVINCIBILITY_DURATION = 1.5f;
   public static readonly float DAMAGE_FLASH_DURATION = 0.3f;
+  public static readonly float PLAYER_SPEED = 200.0f;
 
   private readonly ILevelManager levelManager;
   private readonly BoxCollider collider;
@@ -44,7 +45,6 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   public Layer Layer { get; } = Layer.Player;
   public Vector2 Position { get; set; }
   public Vector2 Velocity { get; set; }
-  public float Speed { get; set; } = 200f;
 
   public int Health { get; set; } = 100;
   
@@ -167,7 +167,7 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
 
     if (InvincibilityTimer > 0) InvincibilityTimer -= deltaTime;
     if (InfiniteAmmoTimer > 0) InfiniteAmmoTimer -= deltaTime;
-    if (Velocity != Vector2.Zero) Velocity = Vector2.Normalize(Velocity) * Speed;
+    if (Velocity != Vector2.Zero) Velocity = Vector2.Normalize(Velocity) * PLAYER_SPEED;
     float xStep = Velocity.X * ((float) deltaTime);
     float yStep = Velocity.Y * ((float) deltaTime);
 
