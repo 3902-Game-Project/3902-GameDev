@@ -49,46 +49,50 @@ internal class StateGameType : IGameState {
   private void DrawGameVignette(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
     graphicsDevice.Viewport = game.GameViewport;
 
-    Effect effect;
-    if (Flags.Vignette && LevelManager.CurrentLevel.LevelFlags.Cave) {
-      MiscAssetStore.Instance.Vignette.Parameters["VignetteCenter"].SetValue(Player.Position / new Vector2(Game1.GAME_WIDTH, Game1.GAME_HEIGHT));
-      effect = MiscAssetStore.Instance.Vignette;
-    } else {
-      effect = null;
+    try {
+      Effect effect;
+      if (Flags.Vignette && LevelManager.CurrentLevel.LevelFlags.Cave) {
+        MiscAssetStore.Instance.Vignette.Parameters["VignetteCenter"].SetValue(Player.Position / new Vector2(Game1.GAME_WIDTH, Game1.GAME_HEIGHT));
+        effect = MiscAssetStore.Instance.Vignette;
+      } else {
+        effect = null;
+      }
+
+      spriteBatch.Begin(
+        sortMode: SpriteSortMode.Deferred,
+        blendState: BlendState.AlphaBlend,
+        samplerState: SamplerState.PointClamp,
+        depthStencilState: DepthStencilState.None,
+        rasterizerState: RasterizerState.CullNone,
+        effect: effect
+      );
+
+      spriteBatch.Draw(nonHUDTarget, NON_HUD_RECTANGLE, Color.White);
+
+      spriteBatch.End();
+    } finally {
+      graphicsDevice.Viewport = game.DefaultViewport;
     }
-
-    spriteBatch.Begin(
-      sortMode: SpriteSortMode.Deferred,
-      blendState: BlendState.AlphaBlend,
-      samplerState: SamplerState.PointClamp,
-      depthStencilState: DepthStencilState.None,
-      rasterizerState: RasterizerState.CullNone,
-      effect: effect
-    );
-
-    spriteBatch.Draw(nonHUDTarget, NON_HUD_RECTANGLE, Color.White);
-
-    spriteBatch.End();
-
-    graphicsDevice.Viewport = game.DefaultViewport;
   }
 
   private void DrawHUD(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
     graphicsDevice.Viewport = game.HudViewport;
 
-    spriteBatch.Begin(
-      sortMode: SpriteSortMode.Deferred,
-      blendState: BlendState.AlphaBlend,
-      samplerState: SamplerState.PointClamp,
-      depthStencilState: DepthStencilState.None,
-      rasterizerState: RasterizerState.CullNone
-    );
+    try {
+      spriteBatch.Begin(
+        sortMode: SpriteSortMode.Deferred,
+        blendState: BlendState.AlphaBlend,
+        samplerState: SamplerState.PointClamp,
+        depthStencilState: DepthStencilState.None,
+        rasterizerState: RasterizerState.CullNone
+      );
 
-    hudManager.Draw(spriteBatch);
+      hudManager.Draw(spriteBatch);
 
-    spriteBatch.End();
-
-    graphicsDevice.Viewport = game.DefaultViewport;
+      spriteBatch.End();
+    } finally {
+      graphicsDevice.Viewport = game.DefaultViewport;
+    }
   }
 
   public Player Player { get; private set; }
