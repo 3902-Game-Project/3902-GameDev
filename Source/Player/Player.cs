@@ -31,23 +31,23 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   public static readonly float INVINCIBILITY_DURATION = 1.5f;
   public static readonly float DAMAGE_FLASH_DURATION = 0.3f;
 
-  public IShape Shape => Collider;
-  private ILevelManager LevelManager { get; set; }
-  private BoxCollider Collider { get; set; }
+  private readonly ILevelManager levelManager;
+  private readonly BoxCollider collider;
+  private bool inputLeftThisFrame, inputRightThisFrame, inputUpThisFrame, inputDownThisFrame;
+  private bool inputLeftLastFrame, inputRightLastFrame, inputUpLastFrame, inputDownLastFrame;
+  private int activeDirX = 0;
+  private int activeDirY = 0;
+  private Vector2 lastInputVelocity = Vector2.Zero;
+
+  public IShape Shape => collider;
   public Layer Mask { get; } = Layer.Environment;
   public Layer Layer { get; } = Layer.Player;
-  public IPlayerState State { get; set; }
   public Vector2 Position { get; set; }
   public Vector2 Velocity { get; set; }
   public float Speed { get; set; } = 200f;
 
   public int Health { get; set; } = 100;
-  private bool inputLeftThisFrame, inputRightThisFrame, inputUpThisFrame, inputDownThisFrame;
-  private bool inputLeftLastFrame, inputRightLastFrame, inputUpLastFrame, inputDownLastFrame;
-
-  private int activeDirX = 0;
-  private int activeDirY = 0;
-
+  
   public double InvincibilityTimer { get; set; } = 0.0;
   public double DamageFlashTimer { get; set; } = 0.0;
   public double InfiniteAmmoTimer { get; set; } = 0.0;
@@ -56,7 +56,6 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   public bool IsInvincible => InvincibilityTimer > 0;
 
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
-  private Vector2 lastInputVelocity = Vector2.Zero;
 
   public PlayerInventory Inventory { get; private set; }
 
@@ -70,21 +69,23 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     }
   }
 
+  public Color CurrentTintColor => DamageFlashTimer > 0 ? Color.Red : Color.White;
+
   public IPlayerState StaticState { get; private set; }
   public IPlayerState MovingState { get; private set; }
   public IPlayerState UseItemState { get; private set; }
   public IPlayerState DeadState { get; private set; }
-  public Color CurrentTintColor => DamageFlashTimer > 0 ? Color.Red : Color.White;
+  public IPlayerState State { get; set; }
 
   public Player(ILevelManager levelManager, Game1 game) {
-    LevelManager = levelManager;
+    this.levelManager = levelManager;
     Position = Vector2.Zero;
     Velocity = Vector2.Zero;
     Inventory = new PlayerInventory(this, levelManager);
 
     float width = 171 * 0.15f;
     float height = 323 * 0.15f;
-    Collider = new BoxCollider(width, height, Position);
+    collider = new BoxCollider(width, height, Position);
 
     MovingState = new PlayerMovingState(this);
     StaticState = new PlayerStaticState(this);
@@ -94,15 +95,21 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   }
 
   public void MoveUp() => inputUpThisFrame = true;
+  
   public void MoveDown() => inputDownThisFrame = true;
+  
   public void MoveLeft() => inputLeftThisFrame = true;
+  
   public void MoveRight() => inputRightThisFrame = true;
+  
   public void UseItem(UseType useType) {
     State.UseItem(useType);
   }
+
   public void UseKey(UseType useType) {
     State.UseKey(useType);
   }
+
   public void Die() => State.Die();
 
   public void TakeDamage(int amount) {
@@ -162,12 +169,12 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     float yStep = Velocity.Y * ((float) deltaTime);
 
     Position = new Vector2(Position.X + xStep, Position.Y);
-    if (Collider != null) Collider.Position = Position;
-    LevelManager.CurrentLevel.PlayerResolveCollisions(this, CollisionAxis.X, MathF.Abs(yStep) + 1f);
+    if (collider != null) collider.Position = Position;
+    levelManager.CurrentLevel.PlayerResolveCollisions(this, CollisionAxis.X, MathF.Abs(yStep) + 1f);
 
     Position = new Vector2(Position.X, Position.Y + yStep);
-    if (Collider != null) Collider.Position = Position;
-    LevelManager.CurrentLevel.PlayerResolveCollisions(this, CollisionAxis.Y, MathF.Abs(xStep) + 1f);
+    if (collider != null) collider.Position = Position;
+    levelManager.CurrentLevel.PlayerResolveCollisions(this, CollisionAxis.Y, MathF.Abs(xStep) + 1f);
 
     State.Update(deltaTime);
     Velocity = Vector2.Zero;
@@ -184,8 +191,8 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     inputDownThisFrame = false;
 
     // Auto-Collect for Ammo
-    if (LevelManager?.CurrentLevel != null) {
-      foreach (var pickup in LevelManager.CurrentLevel.GetRemoveAmmoInRange(Position, 30.0f)) {
+    if (levelManager?.CurrentLevel != null) {
+      foreach (var pickup in levelManager.CurrentLevel.GetRemoveAmmoInRange(Position, 30.0f)) {
         pickup.OnPickup(this);
       }
     }
@@ -199,7 +206,7 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   public void OnCollision(CollisionInfo info) {
     if (info.Collider is IBlock) {
       Position = CollisionHelper.GetNudgedPosition(info, Position, info.Overlap + 0.01f);
-      if (Collider != null) Collider.Position = Position;
+      if (collider != null) collider.Position = Position;
     }
 
     if (info.Collider is IEnemy) {
@@ -208,15 +215,15 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   }
 
   public void Interact() {
-    if (LevelManager?.CurrentLevel == null) return;
+    if (levelManager?.CurrentLevel == null) return;
 
     float grabRange = 75f;
 
-    IWorldPickup? closestPickup = LevelManager.CurrentLevel.GetClosestPickupInRange(Position, grabRange);
+    IWorldPickup? closestPickup = levelManager.CurrentLevel.GetClosestPickupInRange(Position, grabRange);
 
     if (closestPickup != null) {
       closestPickup.OnPickup(this);
-      LevelManager.CurrentLevel.RemovePickup(closestPickup);
+      levelManager.CurrentLevel.RemovePickup(closestPickup);
     }
   }
 }
