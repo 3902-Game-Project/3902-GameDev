@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using GameProject.ButtonDiffTrackers;
-using GameProject.Commands;
 using GameProject.Controllers;
+using GameProject.Factories.Controller;
 using GameProject.Globals;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
@@ -16,24 +15,8 @@ internal class StateMenuType(Game1 game) : IGameState {
   private IController<GPGamePadButtons> gamePadController;
 
   public void Initialize() {
-    keyboardController = new KeyboardController(
-      pressedMappings: new Dictionary<Keys, IGPCommand> {
-        { Keys.Q, new QuitCommand(game) },
-        { Keys.Enter, new StartGameCommand(game) },
-        { Keys.S, new ToggleSlowModeCommand() },
-      }
-    );
-
-    // The gamepad bindings don't match the readme. this is intentional, because
-    // the readme is in Xbox controller layout, but testing with a
-    // nintendo pro controller seems to suggest it is pro controller layout.
-    gamePadController = new GamePadController(
-      pressedMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
-        { GPGamePadButtons.X, new QuitCommand(game) },
-        { GPGamePadButtons.A, new StartGameCommand(game) },
-        { GPGamePadButtons.Y, new ToggleSlowModeCommand() },
-      }
-    );
+    keyboardController = MenuControllerFactory.CreateKeyboardController(game);
+    gamePadController = MenuControllerFactory.CreateGamePadController(game);
   }
 
   public void LoadContent(ContentManager content) { }

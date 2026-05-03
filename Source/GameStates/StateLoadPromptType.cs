@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using GameProject.ButtonDiffTrackers;
-using GameProject.Commands;
 using GameProject.Controllers;
+using GameProject.Factories.Controller;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -18,22 +17,8 @@ internal class StateLoadPromptType(Game1 game) : IGameState {
   public bool IsShowingSuccess { get; set; } = false;
 
   public void Initialize() {
-    keyboardController = new KeyboardController(
-      pressedMappings: new Dictionary<Keys, IGPCommand> {
-        { Keys.A, new ExecuteLoadCommand(game, this) },
-        { Keys.D, new ReturnToGameNoFadeCommand(game) },
-      }
-    );
-
-    // The gamepad bindings don't match the readme. this is intentional, because
-    // the readme is in Xbox controller layout, but testing with a
-    // nintendo pro controller seems to suggest it is pro controller layout.
-    gamePadController = new GamePadController(
-      pressedMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
-        { GPGamePadButtons.A, new ExecuteLoadCommand(game, this) },
-        { GPGamePadButtons.B, new ReturnToGameNoFadeCommand(game) },
-      }
-    );
+    keyboardController = LoadPromptControllerFactory.CreateKeyboardController(game, this);
+    gamePadController = LoadPromptControllerFactory.CreateGamePadController(game, this);
   }
 
   public void LoadContent(ContentManager content) { }
@@ -49,7 +34,7 @@ internal class StateLoadPromptType(Game1 game) : IGameState {
   }
 
   public void LowLevelDraw(GraphicsDevice graphicsDevice, RenderTargetTracker renderTargetTracker, SpriteBatch spriteBatch) {
-    graphicsDevice.Clear(new Color(25, 28, 33));
+    graphicsDevice.Clear(new(25, 28, 33));
 
     spriteBatch.Begin();
 

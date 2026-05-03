@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using GameProject.ButtonDiffTrackers;
 using GameProject.Commands;
 using GameProject.Controllers;
+using GameProject.Factories.Controller;
 using GameProject.Globals;
 using GameProject.Items;
 using GameProject.Misc;
@@ -23,47 +23,8 @@ internal class StateItemScreenType(Game1 game) : IGameState {
   private const int BACKPACK_COLUMNS = 5;
 
   public void Initialize() {
-    keyboardController = new KeyboardController(
-      pressedMappings: new Dictionary<Keys, IGPCommand> {
-        { Keys.Q, new QuitCommand(game) },
-        { Keys.I, new ReturnToGameNoFadeCommand(game) },
-                
-        // Navigation bindings
-        { Keys.W, new MenuMoveUpCommand(this) },
-        { Keys.Up, new MenuMoveUpCommand(this) },
-        { Keys.S, new MenuMoveDownCommand(this) },
-        { Keys.Down, new MenuMoveDownCommand(this) },
-        { Keys.A, new MenuMoveLeftCommand(this) },
-        { Keys.Left, new MenuMoveLeftCommand(this) },
-        { Keys.D, new MenuMoveRightCommand(this) },
-        { Keys.Right, new MenuMoveRightCommand(this) },
-                
-        // Action bindings
-        { Keys.Enter, new MenuEquipCommand(this) },
-        { Keys.Space, new MenuEquipCommand(this) },
-        { Keys.C, new PlayerDropItemCommand(game.StateGame.Player) },
-      }
-    );
-
-    // The gamepad bindings don't match the readme. this is intentional, because
-    // the readme is in Xbox controller layout, but testing with a
-    // nintendo pro controller seems to suggest it is pro controller layout.
-    gamePadController = new GamePadController(
-      pressedMappings: new Dictionary<GPGamePadButtons, IGPCommand> {
-        { GPGamePadButtons.X, new QuitCommand(game) },
-        { GPGamePadButtons.B, new ReturnToGameNoFadeCommand(game) },
-                
-        // Navigation bindings
-        { GPGamePadButtons.DPadUp, new MenuMoveUpCommand(this) },
-        { GPGamePadButtons.DPadDown, new MenuMoveDownCommand(this) },
-        { GPGamePadButtons.DPadLeft, new MenuMoveLeftCommand(this) },
-        { GPGamePadButtons.DPadRight, new MenuMoveRightCommand(this) },
-                
-        // Action bindings
-        { GPGamePadButtons.A, new MenuEquipCommand(this) },
-        { GPGamePadButtons.Y, new PlayerDropItemCommand(game.StateGame.Player) },
-      }
-    );
+    keyboardController = ItemScreenControllerFactory.CreateKeyboardController(game, this, game.StateGame.Player);
+    gamePadController = ItemScreenControllerFactory.CreateGamePadController(game, this, game.StateGame.Player);
   }
 
   public void MoveCursorLeft() {
