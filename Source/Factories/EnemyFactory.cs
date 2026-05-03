@@ -1,4 +1,5 @@
 using GameProject.Enemies;
+using GameProject.Globals;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
@@ -14,20 +15,18 @@ internal class EnemyFactory {
   private Texture2D riflemanTexture;
   private Texture2D tumbleweedTexture;
   private Texture2D cactusTexture;
-  private Texture2D bossTexture;
 
   public static EnemyFactory Instance { get; } = new();
 
   private EnemyFactory() { }
 
-  public void LoadAllTextures(ContentManager content) {
-    snakeTexture = content.Load<Texture2D>("Enemies/Snake Spritesheet");
-    batTexture = content.Load<Texture2D>("Enemies/Bat Spritesheet");
-    shotgunnerTexture = content.Load<Texture2D>("Enemies/Shotgunner Spritesheet");
-    riflemanTexture = content.Load<Texture2D>("Enemies/Rifleman Spritesheet");
-    tumbleweedTexture = content.Load<Texture2D>("Enemies/Tumbleweed Spritesheet");
-    cactusTexture = content.Load<Texture2D>("Enemies/Cactus Spritesheet");
-    bossTexture = content.Load<Texture2D>("Enemies/Boss Spritesheet");
+  public void LoadAllTextures(ContentManager contentManager) {
+    snakeTexture = contentManager.Load<Texture2D>("Enemies/Snake Spritesheet");
+    batTexture = contentManager.Load<Texture2D>("Enemies/Bat Spritesheet");
+    shotgunnerTexture = contentManager.Load<Texture2D>("Enemies/Shotgunner Spritesheet");
+    riflemanTexture = contentManager.Load<Texture2D>("Enemies/Rifleman Spritesheet");
+    tumbleweedTexture = contentManager.Load<Texture2D>("Enemies/Tumbleweed Spritesheet");
+    cactusTexture = contentManager.Load<Texture2D>("Enemies/Cactus Spritesheet");
   }
 
   public IEnemy CreateSnakeSprite(float xPos, float yPos) {
@@ -57,6 +56,6 @@ internal class EnemyFactory {
   public IEnemy CreateBossSprite(float x, float y, ILevelManager levelManager) {
     // Assuming 'bossTexture' is loaded in your Factory. 
     // If you don't have one yet, you can pass in the Shotgunner texture temporarily just to see it render!
-    return new Boss(bossTexture, new Vector2(x, y), levelManager);
+    return new Boss(TextureStore.Instance.Boss, new Vector2(x, y), levelManager);
   }
 }

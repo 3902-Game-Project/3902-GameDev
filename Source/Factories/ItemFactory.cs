@@ -10,7 +10,6 @@ namespace GameProject.Factories;
 
 internal class ItemFactory {
   private Texture2D basicGunsTexture;
-  private Texture2D newGunsTexture;
   private Texture2D healthPotionTexture;
   private Texture2D invincibilityPotionTexture;
   private Texture2D infiniteAmmoPotionTexture;
@@ -21,7 +20,6 @@ internal class ItemFactory {
 
   public void LoadAllTextures(ContentManager contentManager) {
     basicGunsTexture = contentManager.Load<Texture2D>("World Pickups/Items/Basic Guns Spritesheet");
-    newGunsTexture = contentManager.Load<Texture2D>("World Pickups/Items/New Guns Spritesheet");
     invincibilityPotionTexture = contentManager.Load<Texture2D>("World Pickups/Items/Invincibility Potion");
     healthPotionTexture = contentManager.Load<Texture2D>("World Pickups/Items/Health Potion");
     infiniteAmmoPotionTexture = contentManager.Load<Texture2D>("World Pickups/Items/Ammo Potion");
@@ -80,7 +78,7 @@ internal class ItemFactory {
       AmmoType = AmmoType.Light,
       ReloadsOneByOne = false,
     };
-    return new SMGItem(newGunsTexture, new Vector2(xPos, yPos), player, levelManager, smgStats);
+    return new SMGItem(TextureStore.Instance.NewGuns, new Vector2(xPos, yPos), player, levelManager, smgStats);
   }
 
   public IItem CreateBFG(float xPos, float yPos, Player player, ILevelManager levelManager) {
@@ -94,7 +92,7 @@ internal class ItemFactory {
       BaseDamage = 340,
       ReloadsOneByOne = false,
     };
-    return new BFGItem(newGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
+    return new BFGItem(TextureStore.Instance.NewGuns, new Vector2(xPos, yPos), player, levelManager, stats);
   }
 
   public IItem CreateFakeBFG(float xPos, float yPos, Player player, ILevelManager levelManager) {
@@ -104,7 +102,7 @@ internal class ItemFactory {
       MaxAmmo = 999, // Doesn't matter
       CurrentAmmo = 999,
     };
-    return new FakeBFGItem(newGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
+    return new FakeBFGItem(TextureStore.Instance.NewGuns, new Vector2(xPos, yPos), player, levelManager, stats);
   }
 
   public static IItem CreateKey(float xPos, float yPos, ILevelManager levelManager) {
