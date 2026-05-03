@@ -7,7 +7,7 @@ using GameProject.Managers;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework.Input;
 
-internal static class GameButtons {
+internal static class GameControllerFactory {
   public static KeyboardController CreateKeyboardController(Game1 game, Player player, ILevelManager levelManager) {
     var keyboardController = new KeyboardController(
       pressedMappings: new Dictionary<Keys, IGPCommand> {

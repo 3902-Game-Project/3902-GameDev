@@ -39,7 +39,7 @@ internal class StateGameType : IGameState {
   }
 
   public void Initialize() {
-    keyboardController = GameButtons.CreateKeyboardController(game, Player, LevelManager);
+    keyboardController = GameControllerFactory.CreateKeyboardController(game, Player, LevelManager);
 
     mouseController = new MouseController();
 
