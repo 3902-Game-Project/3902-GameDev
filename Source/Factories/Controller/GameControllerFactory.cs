@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using GameProject;
 using GameProject.ButtonDiffTrackers;
 using GameProject.Commands;
 using GameProject.Controllers;
@@ -7,6 +6,8 @@ using GameProject.Globals;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework.Input;
+
+namespace GameProject.Factories.Controller;
 
 internal static class GameControllerFactory {
   public static KeyboardController CreateKeyboardController(Game1 game, Player player, ILevelManager levelManager) {

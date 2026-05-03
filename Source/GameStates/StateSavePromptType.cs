@@ -1,5 +1,6 @@
 using GameProject.ButtonDiffTrackers;
 using GameProject.Controllers;
+using GameProject.Factories.Controller;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -33,7 +34,7 @@ internal class StateSavePromptType(Game1 game) : IGameState {
   }
 
   public void LowLevelDraw(GraphicsDevice graphicsDevice, RenderTargetTracker renderTargetTracker, SpriteBatch spriteBatch) {
-    graphicsDevice.Clear(new Color(25, 28, 33)); // Dark gray background
+    graphicsDevice.Clear(new(25, 28, 33)); // Dark gray background
 
     spriteBatch.Begin();
 

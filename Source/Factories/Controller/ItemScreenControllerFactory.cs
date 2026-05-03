@@ -1,11 +1,12 @@
 using System.Collections.Generic;
-using GameProject;
 using GameProject.ButtonDiffTrackers;
 using GameProject.Commands;
 using GameProject.Controllers;
 using GameProject.GameStates;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework.Input;
+
+namespace GameProject.Factories.Controller;
 
 internal static class ItemScreenControllerFactory {
   public static KeyboardController CreateKeyboardController(Game1 game, StateItemScreenType itemScreen, Player player) {

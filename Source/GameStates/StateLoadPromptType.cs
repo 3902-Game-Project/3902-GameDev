@@ -1,5 +1,6 @@
 using GameProject.ButtonDiffTrackers;
 using GameProject.Controllers;
+using GameProject.Factories.Controller;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
