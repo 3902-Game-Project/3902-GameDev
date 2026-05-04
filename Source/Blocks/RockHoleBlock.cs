@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 internal class RockHoleBlock(Texture2D RockHoleTexture, Vector2 xyPos, string pairedLevelName, ILevelManager levelManager) : ABaseBlock(xyPos) {
-  private static Rectangle sourceRect = new(384, 128, 64, 64);
+  private static readonly Rectangle sourceRect = new(384, 128, 64, 64);
   public string PairedLevelName { get; private set; } = pairedLevelName;
 
   public override void Update(double deltaTime) { }

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 internal class CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : ABaseBlock(xyPos) {
-  private static Rectangle sourceRect = new(128, 0, 64, 64);
+  private static readonly Rectangle sourceRect = new(128, 0, 64, 64);
   private const float velocity = 120.0f;
   private Vector2 direction;
   public CrateBlockState State { get; set; } = CrateBlockState.Still;

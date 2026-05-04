@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 internal class ShelfBlock(Texture2D ShelfTexture, Vector2 xyPos) : ABaseBlock(xyPos, height: 37.0f) {
-  private static Rectangle sourceRect = new(128, 283, 64, 37);
+  private static readonly Rectangle sourceRect = new(128, 283, 64, 37);
 
   public override void Update(double deltaTime) { }
 

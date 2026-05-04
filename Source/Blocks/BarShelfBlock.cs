@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 internal class BarShelfBlock : ABaseBlock {
-  private static Rectangle sourceRect = new(256, 256, 64, 64);
+  private static readonly Rectangle sourceRect = new(256, 256, 64, 64);
   private readonly Texture2D barShelfTexture;
   private float rotation = 0f;
 

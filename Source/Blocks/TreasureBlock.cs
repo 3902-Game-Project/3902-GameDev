@@ -6,7 +6,7 @@ namespace GameProject.Blocks;
 
 internal class TreasureBlock(Texture2D TreasureTexture, Vector2 xyPos) :
   ABaseBlock(xyPos, Constants.BASE_BLOCK_WIDTH * 2.0f, Constants.BASE_BLOCK_HEIGHT * 2.0f) {
-  private static Rectangle sourceRect = new(256, 448, 64, 64);
+  private static readonly Rectangle sourceRect = new(256, 448, 64, 64);
 
   public override void Update(double deltaTime) { }
 

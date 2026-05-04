@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks; // Note: Kept your specific namespace here!
 
 internal class RockCornerBlock : ABaseBlock {
-  private static Rectangle sourceRect = new(384, 0, 64, 64);
+  private static readonly Rectangle sourceRect = new(384, 0, 64, 64);
   private readonly Texture2D rockCornerTexture;
 
   public float Rotation { get; private set; } = 0.0f;

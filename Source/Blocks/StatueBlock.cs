@@ -6,7 +6,7 @@ namespace GameProject.Blocks;
 
 internal class StatueBlock(Texture2D StatueTexture, Vector2 xyPos) :
   ABaseBlock(xyPos, Constants.BASE_BLOCK_WIDTH * 2.0f, Constants.BASE_BLOCK_HEIGHT * 3.0f) {
-  private static Rectangle sourceRect = new(0, 160, 64, 96);
+  private static readonly Rectangle sourceRect = new(0, 160, 64, 96);
 
   public override void Update(double deltaTime) { }
 

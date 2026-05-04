@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 internal class RedSandBlock(Texture2D RedSandTexture, Vector2 xyPos) : ABaseBlock(xyPos) {
-  private static Rectangle sourceRect = new(64, 256, 64, 64);
+  private static readonly Rectangle sourceRect = new(64, 256, 64, 64);
 
   public override void Update(double deltaTime) { }
 

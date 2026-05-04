@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 internal class FirePitBlock(Texture2D FirePitTexture, Vector2 xyPos) : ABaseBlock(xyPos) {
-  private static Rectangle sourceRect = new(320, 64, 64, 64);
+  private static readonly Rectangle sourceRect = new(320, 64, 64, 64);
 
   public override void Update(double deltaTime) { }
 

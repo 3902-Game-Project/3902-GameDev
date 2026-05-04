@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 internal class MudBlock(Texture2D MudTexture, Vector2 xyPos) : ABaseBlock(xyPos) {
-  private static Rectangle sourceRect = new(192, 0, 64, 64);
+  private static readonly Rectangle sourceRect = new(192, 0, 64, 64);
 
   public override void Update(double deltaTime) { }
 
