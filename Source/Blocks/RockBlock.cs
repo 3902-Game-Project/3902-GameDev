@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 internal class RockBlock(Texture2D RockTexture, Vector2 xyPos) : ABaseBlock(xyPos) {
-  private static readonly Rectangle sourceRect = new(320, 0, 64, 64);
+  private static readonly Rectangle SOURCE_RECT = new(320, 0, 64, 64);
   public float Rotation { get; private set; }
 
   public void Rotate() {
@@ -19,6 +19,6 @@ internal class RockBlock(Texture2D RockTexture, Vector2 xyPos) : ABaseBlock(xyPo
   public override void Update(double deltaTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(RockTexture, Position, sourceRect, Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
+    spriteBatch.Draw(RockTexture, Position, SOURCE_RECT, Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 }

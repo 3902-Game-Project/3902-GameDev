@@ -10,24 +10,24 @@ namespace GameProject.PlayerSpace.States;
 internal class PlayerMovingState(Player player) : APlayerState(player) {
   private static readonly double FRAME_INTERVAL = 0.2;
 
-  private readonly List<Rectangle> moveLeftFrames = [
+  private static readonly List<Rectangle> MOVE_LEFT_FRAMES = [
     new(1531, 420, 171, 323),
     new(1854, 427, 171, 323)
   ];
 
-  private readonly List<Rectangle> moveRightFrames = [
+  private static readonly List<Rectangle> MOVE_RIGHT_FRAMES = [
     new(2161, 52, 171, 323),
     new(2481, 54, 171, 323),
   ];
 
   // TODO: need to update below 2 later
-  private readonly List<Rectangle> moveUpFrames = [
+  private static readonly List<Rectangle> MOVE_UP_FRAMES = [
     new (130, 813, 159, 335),
     new (453, 813, 161, 335),
     new (1083, 813, 164, 335),
   ];
 
-  private readonly List<Rectangle> moveDownFrames = [
+  private static readonly List<Rectangle> MOVE_DOWN_FRAMES = [
     new (448, 1181, 177, 313),
     new (1256, 1181, 175, 320),
     new (991, 1181, 176, 313),
@@ -40,13 +40,13 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
   private List<Rectangle> ActiveFrames {
     get {
       if (Player.Direction == FacingDirection.Right) {
-        return moveRightFrames;
+        return MOVE_RIGHT_FRAMES;
       } else if (Player.Direction == FacingDirection.Left) {
-        return moveLeftFrames;
+        return MOVE_LEFT_FRAMES;
       } else if (Player.Direction == FacingDirection.Up) {
-        return moveUpFrames;
+        return MOVE_UP_FRAMES;
       } else {
-        return moveDownFrames;
+        return MOVE_DOWN_FRAMES;
       }
     }
   }

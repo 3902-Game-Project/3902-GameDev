@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 internal class BarShelfBlock : ABaseBlock {
-  private static readonly Rectangle sourceRect = new(256, 256, 64, 64);
+  private static readonly Rectangle SOURCE_RECT = new(256, 256, 64, 64);
   private readonly Texture2D barShelfTexture;
   private float rotation = 0f;
 
@@ -18,7 +18,7 @@ internal class BarShelfBlock : ABaseBlock {
   public override void Update(double deltaTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(barShelfTexture, Position, sourceRect, Color.White, rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
+    spriteBatch.Draw(barShelfTexture, Position, SOURCE_RECT, Color.White, rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 
   public void Rotate() {

@@ -8,6 +8,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Projectiles;
 
 internal class BangProjectile : IProjectile, ICollidable {
+  private static readonly Rectangle SOURCE_RECT = new(30, 20, 30, 20);
+
+  private readonly Texture2D texture;
+  private readonly ABaseGun sourceGun;
+  private FacingDirection direction;
+  private double lifetime = 1.0;
+
   public bool IsExpired { get; private set; }
   public Vector2 Position { get; set; }
   public Rectangle BoundingBox => new((int) Position.X, (int) Position.Y, 1, 1);
@@ -15,12 +22,6 @@ internal class BangProjectile : IProjectile, ICollidable {
   public IShape Shape { get; }
   public Layer Layer { get; } = Layer.Projectiles;
   public Layer Mask { get; } = Layer.Environment;
-
-  private readonly Texture2D texture;
-  private readonly ABaseGun sourceGun;
-  private FacingDirection direction;
-  private readonly Rectangle sourceRect = new(30, 20, 30, 20);
-  private double lifetime = 1.0;
 
   public BangProjectile(Texture2D texture, ABaseGun sourceGun) {
     this.texture = texture;
@@ -64,7 +65,7 @@ internal class BangProjectile : IProjectile, ICollidable {
     Vector2 origin = direction == FacingDirection.Left ? new Vector2(30, 10) : new Vector2(0, 10);
 
     // Ensure the rotation variable is passed to the Draw call
-    spriteBatch.Draw(texture, Position, sourceRect, Color.White, rotation, origin, 1f, effects, 0f);
+    spriteBatch.Draw(texture, Position, SOURCE_RECT, Color.White, rotation, origin, 1f, effects, 0f);
   }
 
   public void OnCollision(CollisionInfo info) { }

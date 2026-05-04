@@ -10,9 +10,8 @@ namespace GameProject.PlayerSpace.States;
 
 internal class PlayerDeadState(Player player, Action onLoss) : APlayerState(player) {
   private static readonly double LOSS_SCREEN_TIME = 3.0;
-  private readonly GPTimer deadTimer = new();
 
-  private readonly List<Rectangle> deathFrames = [
+  private static readonly List<Rectangle> SOURCE_RECTS = [
     new(2116, 1032, 282, 129),
     new(1807, 1034, 277, 127),
     new(1473, 1053, 298, 108)
@@ -21,6 +20,8 @@ internal class PlayerDeadState(Player player, Action onLoss) : APlayerState(play
   private int currentFrame = 0;
   private double animationTimer = 0;
   private readonly double frameInterval = 0.5;
+  private readonly GPTimer deadTimer = new();
+
   public override void MoveUp() { }
   public override void MoveDown() { }
   public override void MoveLeft() { }
@@ -35,7 +36,7 @@ internal class PlayerDeadState(Player player, Action onLoss) : APlayerState(play
 
     Player.Velocity = Vector2.Zero;
 
-    if (currentFrame < deathFrames.Count - 1) {
+    if (currentFrame < SOURCE_RECTS.Count - 1) {
       animationTimer += deltaTime;
       if (animationTimer > frameInterval) {
         currentFrame++;
@@ -50,7 +51,7 @@ internal class PlayerDeadState(Player player, Action onLoss) : APlayerState(play
   }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    Rectangle sourceRect = deathFrames[currentFrame];
+    Rectangle sourceRect = SOURCE_RECTS[currentFrame];
     Vector2 origin = new(sourceRect.Width / 2f, sourceRect.Height / 2f);
 
     spriteBatch.Draw(

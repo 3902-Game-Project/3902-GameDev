@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 internal class LogBlock : ABaseBlock {
-  private static readonly Rectangle sourceRect = new(256, 64, 64, 64);
+  private static readonly Rectangle SOURCE_RECT = new(256, 64, 64, 64);
   private readonly Texture2D logTexture;
 
   public float Rotation { get; private set; } = 0.0f;
@@ -35,6 +35,6 @@ internal class LogBlock : ABaseBlock {
   public override void Update(double deltaTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(logTexture, Position, sourceRect, Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
+    spriteBatch.Draw(logTexture, Position, SOURCE_RECT, Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 }

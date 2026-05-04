@@ -8,10 +8,10 @@ namespace GameProject.PlayerSpace.States;
 
 internal class PlayerStaticState(Player player) : APlayerState(player) {
   // Same rectangles as moving state except that left state set to same as right state (but flipped) for consistency
-  private Rectangle SpriteRight = new(773, 56, 171, 323);
-  private Rectangle SpriteLeft = new(773, 56, 171, 323);
-  private Rectangle SpriteUp = new(453, 425, 161, 322);
-  private Rectangle SpriteDown = new(455, 58, 161, 318);
+  private static readonly Rectangle SOURCE_RECT_RIGHT = new(773, 56, 171, 323);
+  private static readonly Rectangle SOURCE_RECT_LEFT = new(773, 56, 171, 323);
+  private static readonly Rectangle SOURCE_RECT_UP = new(453, 425, 161, 322);
+  private static readonly Rectangle SOURCE_RECT_DOWN = new(455, 58, 161, 318);
 
   public override void MoveUp() {
     Player.Velocity = new Vector2(Player.Velocity.X, -Player.PLAYER_SPEED);
@@ -78,16 +78,16 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
     SpriteEffects flipStatus;
 
     if (Player.Direction == FacingDirection.Right) {
-      sourceRect = SpriteRight;
+      sourceRect = SOURCE_RECT_RIGHT;
       flipStatus = SpriteEffects.None;
     } else if (Player.Direction == FacingDirection.Left) {
-      sourceRect = SpriteLeft;
+      sourceRect = SOURCE_RECT_LEFT;
       flipStatus = SpriteEffects.FlipHorizontally;
     } else if (Player.Direction == FacingDirection.Up) {
-      sourceRect = SpriteUp;
+      sourceRect = SOURCE_RECT_UP;
       flipStatus = SpriteEffects.None;
     } else {
-      sourceRect = SpriteDown;
+      sourceRect = SOURCE_RECT_DOWN;
       flipStatus = SpriteEffects.None;
     }
 
