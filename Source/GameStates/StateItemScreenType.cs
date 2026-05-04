@@ -20,7 +20,6 @@ internal class StateItemScreenType(Game1 game) : IGameState {
   public bool InWeaponMenu { get; private set; } = true;
   public int SelectedWeaponIndex { get; private set; } = 0;
   public int SelectedBackpackIndex { get; private set; } = 0;
-  private const int BACKPACK_COLUMNS = 5;
 
   public void Initialize() {
     keyboardController = ItemScreenControllerFactory.CreateKeyboardController(game, this, game.StateGame.Player);
@@ -63,8 +62,8 @@ internal class StateItemScreenType(Game1 game) : IGameState {
 
   public void MoveCursorUp() {
     if (!InWeaponMenu) {
-      if (SelectedBackpackIndex >= BACKPACK_COLUMNS) {
-        SelectedBackpackIndex -= BACKPACK_COLUMNS;
+      if (SelectedBackpackIndex >= Constants.BACKPACK_COLUMNS) {
+        SelectedBackpackIndex -= Constants.BACKPACK_COLUMNS;
       } else {
         InWeaponMenu = true;
       }
@@ -76,8 +75,8 @@ internal class StateItemScreenType(Game1 game) : IGameState {
       InWeaponMenu = false;
     } else {
       Player player = game.StateGame.Player;
-      if (player != null && SelectedBackpackIndex + BACKPACK_COLUMNS < player.Inventory.GeneralItems.Count) {
-        SelectedBackpackIndex += BACKPACK_COLUMNS;
+      if (player != null && SelectedBackpackIndex + Constants.BACKPACK_COLUMNS < player.Inventory.GeneralItems.Count) {
+        SelectedBackpackIndex += Constants.BACKPACK_COLUMNS;
       }
     }
   }
@@ -189,12 +188,12 @@ internal class StateItemScreenType(Game1 game) : IGameState {
 
       int itemSlotSize = 80;
       int itemSpacing = 100;
-      int gridStartX = centerX - (BACKPACK_COLUMNS * itemSpacing / 2) + (itemSpacing / 2) - (itemSlotSize / 2);
+      int gridStartX = centerX - (Constants.BACKPACK_COLUMNS * itemSpacing / 2) + (itemSpacing / 2) - (itemSlotSize / 2);
       int gridStartY = 400;
 
       for (int i = 0; i < 10; i++) {
-        int column = i % BACKPACK_COLUMNS;
-        int row = i / BACKPACK_COLUMNS;
+        int column = i % Constants.BACKPACK_COLUMNS;
+        int row = i / Constants.BACKPACK_COLUMNS;
         float uiX = gridStartX + (column * itemSpacing);
         float uiY = gridStartY + (row * itemSpacing);
 

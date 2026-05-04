@@ -5,13 +5,12 @@ using System.Text.Json;
 using GameProject.Enemies;
 using GameProject.Factories;
 using GameProject.GameStates;
+using GameProject.Globals;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.SaveLoad;
 
 internal static class SaveLoadManager {
-  private const string SAVE_FILE_PATH = "savegame.json";
-
   public static void SaveGame(StateGameType stateGame) {
     var saveData = new GameSaveData();
     var player = stateGame.Player;
@@ -44,13 +43,13 @@ internal static class SaveLoadManager {
 
     //Write to JSON
     string json = JsonSerializer.Serialize(saveData, new JsonSerializerOptions { WriteIndented = true });
-    File.WriteAllText(SAVE_FILE_PATH, json);
+    File.WriteAllText(Constants.SAVE_FILE_PATH, json);
   }
 
   public static void LoadGame(StateGameType stateGame) {
-    if (!File.Exists(SAVE_FILE_PATH)) return;
+    if (!File.Exists(Constants.SAVE_FILE_PATH)) return;
 
-    string json = File.ReadAllText(SAVE_FILE_PATH);
+    string json = File.ReadAllText(Constants.SAVE_FILE_PATH);
     var saveData = JsonSerializer.Deserialize<GameSaveData>(json);
     if (saveData == null) return;
 
