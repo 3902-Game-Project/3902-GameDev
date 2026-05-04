@@ -6,6 +6,7 @@ using GameProject.Blocks;
 using GameProject.Commands;
 using GameProject.Enemies;
 using GameProject.Factories;
+using GameProject.Globals;
 using GameProject.Items;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
@@ -15,23 +16,21 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Level;
 
 internal partial class LevelLoader {
-  private static readonly Vector2 PLAYER_POSITION_OFFSET = new(BLOCK_WIDTH / 2.0f, BLOCK_HEIGHT / 2.0f);
-  private static readonly Vector2 ENEMY_POSITION_OFFSET = new(BLOCK_WIDTH / 2.0f, BLOCK_HEIGHT);
+  private static readonly Vector2 PLAYER_POSITION_OFFSET = new(Constants.BASE_BLOCK_WIDTH / 2.0f, Constants.BASE_BLOCK_HEIGHT / 2.0f);
+  private static readonly Vector2 ENEMY_POSITION_OFFSET = new(Constants.BASE_BLOCK_WIDTH / 2.0f, Constants.BASE_BLOCK_HEIGHT);
   private static readonly string FLAGS_LINE_START = "Flags: ";
 
   [GeneratedRegex(@"\r?\n")]
   private static partial Regex NewlineSplitRegex { get; }
 
-  public static readonly int LEVEL_WIDTH = LEVEL_WIDTH_BLOCKS * BLOCK_WIDTH;
-  public static readonly int LEVEL_HEIGHT = LEVEL_HEIGHT_BLOCKS * BLOCK_HEIGHT;
-  public static readonly float PLAYER_LEFT_BOUNDARY_THRESHOLD = BLOCK_WIDTH * 2.0f;
-  public static readonly float PLAYER_TOP_BOUNDARY_THRESHOLD = BLOCK_WIDTH * 2.0f;
-  public static readonly float PLAYER_RIGHT_BOUNDARY_THRESHOLD = LEVEL_WIDTH - BLOCK_WIDTH * 2.0f;
-  public static readonly float PLAYER_BOTTOM_BOUNDARY_THRESHOLD = LEVEL_HEIGHT - BLOCK_WIDTH * 2.0f;
-  public static readonly float PLAYER_LEFT_POS_AFTER_TELEPORT = BLOCK_WIDTH * 1.5f;
-  public static readonly float PLAYER_TOP_POS_AFTER_TELEPORT = BLOCK_WIDTH * 1.5f;
-  public static readonly float PLAYER_RIGHT_POS_AFTER_TELEPORT = LEVEL_WIDTH - BLOCK_WIDTH * 1.5f;
-  public static readonly float PLAYER_BOTTOM_POS_AFTER_TELEPORT = LEVEL_HEIGHT - BLOCK_WIDTH * 1.5f;
+  public static readonly float PLAYER_LEFT_BOUNDARY_THRESHOLD = Constants.BASE_BLOCK_WIDTH * 2.0f;
+  public static readonly float PLAYER_TOP_BOUNDARY_THRESHOLD = Constants.BASE_BLOCK_WIDTH * 2.0f;
+  public static readonly float PLAYER_RIGHT_BOUNDARY_THRESHOLD = Constants.LEVEL_WIDTH - Constants.BASE_BLOCK_WIDTH * 2.0f;
+  public static readonly float PLAYER_BOTTOM_BOUNDARY_THRESHOLD = Constants.LEVEL_HEIGHT - Constants.BASE_BLOCK_WIDTH * 2.0f;
+  public static readonly float PLAYER_LEFT_POS_AFTER_TELEPORT = Constants.BASE_BLOCK_WIDTH * 1.5f;
+  public static readonly float PLAYER_TOP_POS_AFTER_TELEPORT = Constants.BASE_BLOCK_WIDTH * 1.5f;
+  public static readonly float PLAYER_RIGHT_POS_AFTER_TELEPORT = Constants.LEVEL_WIDTH - Constants.BASE_BLOCK_WIDTH * 1.5f;
+  public static readonly float PLAYER_BOTTOM_POS_AFTER_TELEPORT = Constants.LEVEL_HEIGHT - Constants.BASE_BLOCK_WIDTH * 1.5f;
 
   private static void ParseSingleFlag(LevelFlags flags, string flag) {
     switch (flag) {
@@ -427,8 +426,8 @@ internal partial class LevelLoader {
     List<IWorldPickup> pickups,
     ref Vector2? playerPositionNullable
   ) {
-    float xPos = BLOCK_WIDTH * colIndex;
-    float yPos = BLOCK_HEIGHT * rowIndex;
+    float xPos = Constants.BASE_BLOCK_WIDTH * colIndex;
+    float yPos = Constants.BASE_BLOCK_HEIGHT * rowIndex;
 
     var cellSplit = cell.Split(';');
 
