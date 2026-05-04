@@ -10,7 +10,7 @@ internal class BombProjectile : IProjectile {
     new Rectangle(16, 0, 5, 16),
     new Rectangle(22, 0, 5, 16),
   ];
-  
+
   private readonly Texture2D texture;
   private Vector2 position;
   private Rectangle currentSourceRect;

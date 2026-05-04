@@ -10,7 +10,7 @@ namespace GameProject.Items;
 
 internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager levelManager) : IItem, IWorldPickup {
   private static readonly Rectangle SOURCE_RECT = new(0, 448, 7, 13);
-  
+
   private readonly ILevelManager levelManager = levelManager;
 
   public FacingDirection Direction { get; set; } = FacingDirection.Right;

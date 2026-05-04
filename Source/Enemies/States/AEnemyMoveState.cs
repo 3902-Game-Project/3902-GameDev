@@ -10,7 +10,7 @@ internal abstract class AEnemyMoveState : IEnemyState {
   private double animationTimer = 0.0;
   private readonly float speed;
   private readonly bool lockYAxis;
-  
+
   protected readonly ABaseEnemy enemy;
   protected readonly Random random = new();
 

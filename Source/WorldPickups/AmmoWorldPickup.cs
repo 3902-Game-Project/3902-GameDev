@@ -10,7 +10,7 @@ internal class AmmoWorldPickup(Texture2D texture, Vector2 position, AmmoType typ
   private static readonly float SCALE = 2f;
 
   private Vector2 origin;
-  
+
   public AmmoType Type { get; } = type;
   public int Amount { get; } = amount;
   public override bool IsAutoCollect => true;

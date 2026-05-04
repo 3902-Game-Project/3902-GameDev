@@ -7,9 +7,9 @@ namespace GameProject.Items;
 
 internal class WhipItem(Texture2D texture, Vector2 startPosition) : IItem {
   private static readonly Rectangle SOURCE_RECT = new(0, 0, 8, 8);
-  
+
   private Vector2 origin;
-  
+
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   public Vector2 Position { get; set; } = startPosition;
   public ItemCategory Category { get; } = ItemCategory.Melee;
