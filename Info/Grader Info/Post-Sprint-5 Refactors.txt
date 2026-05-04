@@ -29,11 +29,11 @@ LevelManager
 What's the point of newLevelName? Why not just immediately switch the currentLevelName in SwitchLevel? Could be missing something
 I still don't understand why there's a check to see if the current level is different to the level to fade to, as this seems like a violation of programming by contract, that is if a devoper wants a level that infinitely loops or something they wouldn't be able to accomplish it with this system. Then again I haven't been working on the project so there might be some weird bugs that arise
 
-LevelLoader (High Priority)
+LevelLoader (High Priority; Excused)
 High cyclomatic complexity with conditionals inside of switch statements inside of conditionals.
 High cyclomatic complexity still, but cleaner and more or less excusable due to the nature of map loading
 
-LevelLoader (High Priority)
+LevelLoader (High Priority; Excused)
 Loops too nested
 Largely fixed. Still has some conditionals inside switch statements inside switch statements. Hard to maintain, but excusable as mentioned, I'd imagine this system is fairly bespoke
 
