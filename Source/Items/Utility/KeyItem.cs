@@ -9,7 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Items;
 
 internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager levelManager) : IItem, IWorldPickup {
-  private Rectangle sourceRectangle = new(0, 448, 7, 13);
+  private static readonly Rectangle SOURCE_RECT = new(0, 448, 7, 13);
+  
   private readonly ILevelManager levelManager = levelManager;
 
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
@@ -23,12 +24,12 @@ internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManage
 
   public void Draw(SpriteBatch spriteBatch) {
     if (!IsCollected) {
-      origin = new Vector2(sourceRectangle.Width, sourceRectangle.Height);
+      origin = new Vector2(SOURCE_RECT.Width, SOURCE_RECT.Height);
 
       spriteBatch.Draw(
         keyTexture,
         Position,
-        sourceRectangle,
+        SOURCE_RECT,
         Color.White,
         0f,
         origin,
@@ -43,7 +44,7 @@ internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManage
     spriteBatch.Draw(
       texture: keyTexture,
       position: position,
-      sourceRectangle: sourceRectangle,
+      sourceRectangle: SOURCE_RECT,
       color: tint,
       rotation: 0f,
       origin: Vector2.Zero,
