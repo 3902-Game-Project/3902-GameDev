@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.PlayerSpace.States;
 
 internal class PlayerMovingState(Player player) : APlayerState(player) {
+  private static readonly double FRAME_INTERVAL = 0.2;
+
   private readonly List<Rectangle> moveLeftFrames = [
     new(1531, 420, 171, 323),
     new(1854, 427, 171, 323)
@@ -34,7 +36,6 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
 
   private int currentFrame = 0;
   private double timer = 0;
-  private readonly double frameInterval = 0.2;
 
   public override void MoveUp() {
     Player.Velocity = new Vector2(Player.Velocity.X, -Player.PLAYER_SPEED);
@@ -88,12 +89,12 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
     }
 
     timer += deltaTime;
-    if (timer > frameInterval) {
+    if (timer > FRAME_INTERVAL) {
       currentFrame++;
       if (currentFrame >= 2) {
         currentFrame = 0;
       }
-      timer -= frameInterval;
+      timer -= FRAME_INTERVAL;
     }
   }
 
