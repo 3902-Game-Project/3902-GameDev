@@ -22,10 +22,10 @@ internal static class Constants {
 
   public const float BASE_ENEMY_WIDTH = 64.0f;
   public const float BASE_ENEMY_HEIGHT = 64.0f;
+  public const float ENEMY_DAMAGE_FLASH_DURATION = 0.15f;
 
   public const float PLAYER_WIDTH = 171.0f * 0.15f;
   public const float PLAYER_HEIGHT = 323.0f * 0.15f;
-
   public const float PLAYER_INVINCIBILITY_DURATION = 1.5f;
   public const float PLAYER_DAMAGE_FLASH_DURATION = 0.3f;
   public const float PLAYER_SPEED = 200.0f;

@@ -16,7 +16,6 @@ internal abstract class ABaseEnemy(
   float colliderHeight = Constants.BASE_ENEMY_HEIGHT,
   bool invulnerable = false
 ) : IEnemy {
-  protected const float DAMAGE_FLASH_DURATION = 0.15f;
   public static event Action<ABaseEnemy> OnDeath;
 
   protected float DrawScale { get; set; } = 1f;
@@ -126,7 +125,7 @@ internal abstract class ABaseEnemy(
 
     bool wasAlive = Health > 0;
     Health -= damage;
-    DamageFlashTimer = DAMAGE_FLASH_DURATION;
+    DamageFlashTimer = Constants.ENEMY_DAMAGE_FLASH_DURATION;
 
     if (wasAlive && Health <= 0) {
       Die();
