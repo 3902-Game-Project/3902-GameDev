@@ -15,7 +15,7 @@ namespace GameProject.GameStates;
 
 internal class StateGameType : IGameState {
   private static Color BACKGROUND_COLOR = new(20, 20, 120);
-  private static Rectangle NON_HUD_RECTANGLE = new(0, 0, Game1.GAME_WIDTH, Game1.GAME_HEIGHT);
+  private static Rectangle NON_HUD_RECTANGLE = new(0, 0, Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
 
   private RenderTarget2D nonHUDTarget;
 
@@ -52,7 +52,7 @@ internal class StateGameType : IGameState {
     try {
       Effect effect;
       if (Flags.Vignette && LevelManager.CurrentLevel.LevelFlags.Cave) {
-        MiscAssetStore.Instance.Vignette.Parameters["VignetteCenter"].SetValue(Player.Position / new Vector2(Game1.GAME_WIDTH, Game1.GAME_HEIGHT));
+        MiscAssetStore.Instance.Vignette.Parameters["VignetteCenter"].SetValue(Player.Position / new Vector2(Constants.GAME_WIDTH, Constants.GAME_HEIGHT));
         effect = MiscAssetStore.Instance.Vignette;
       } else {
         effect = null;
@@ -118,7 +118,7 @@ internal class StateGameType : IGameState {
   }
 
   public void LoadContent(ContentManager contentManager) {
-    nonHUDTarget = new RenderTarget2D(game.GraphicsDevice, Game1.GAME_WIDTH, Game1.GAME_HEIGHT);
+    nonHUDTarget = new RenderTarget2D(game.GraphicsDevice, Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
 
     LevelManager.LoadContent(contentManager);
     Player.LoadContent(contentManager);

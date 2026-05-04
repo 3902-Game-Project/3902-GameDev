@@ -10,10 +10,6 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject;
 
 internal class Game1 : Game {
-  public static readonly int HUD_HEIGHT = 100;
-  public static readonly int GAME_HEIGHT = 576;
-  public static readonly int GAME_WIDTH = 960;
-
   private readonly GraphicsDeviceManager graphics;
   public SpriteBatch SpriteBatch { get; private set; }
   public Viewport DefaultViewport { get; private set; }
@@ -68,21 +64,21 @@ internal class Game1 : Game {
   }
 
   protected override void Initialize() {
-    graphics.PreferredBackBufferHeight = GAME_HEIGHT + HUD_HEIGHT;
-    graphics.PreferredBackBufferWidth = GAME_WIDTH;
+    graphics.PreferredBackBufferHeight = Constants.GAME_HEIGHT + Constants.HUD_HEIGHT;
+    graphics.PreferredBackBufferWidth = Constants.GAME_WIDTH;
     graphics.ApplyChanges();
 
     renderTargetTracker = new(GraphicsDevice);
 
     Window.AllowUserResizing = true;
     Window.ClientSizeChanged += OnResize;
-    DefaultViewport = new Viewport(0, 0, GAME_WIDTH, GAME_HEIGHT + HUD_HEIGHT);
-    HudViewport = new Viewport(0, 0, GAME_WIDTH, HUD_HEIGHT);
-    GameViewport = new Viewport(0, HUD_HEIGHT, GAME_WIDTH, GAME_HEIGHT);
+    DefaultViewport = new Viewport(0, 0, Constants.GAME_WIDTH, Constants.GAME_HEIGHT + Constants.HUD_HEIGHT);
+    HudViewport = new Viewport(0, 0, Constants.GAME_WIDTH, Constants.HUD_HEIGHT);
+    GameViewport = new Viewport(0, Constants.HUD_HEIGHT, Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
 
     DefaultViewport = GraphicsDevice.Viewport;
-    HudViewport = new Viewport(0, 0, graphics.PreferredBackBufferWidth, HUD_HEIGHT);
-    GameViewport = new Viewport(0, HUD_HEIGHT, graphics.PreferredBackBufferWidth, GAME_HEIGHT);
+    HudViewport = new Viewport(0, 0, graphics.PreferredBackBufferWidth, Constants.HUD_HEIGHT);
+    GameViewport = new Viewport(0, Constants.HUD_HEIGHT, graphics.PreferredBackBufferWidth, Constants.GAME_HEIGHT);
 
     MiscAssetStore.Instance.Initialize();
     TextureStore.Instance.Initialize();
@@ -99,7 +95,7 @@ internal class Game1 : Game {
     int screenHeight = Window.ClientBounds.Height;
 
     float outputAspect = (float) screenWidth / screenHeight;
-    float preferredAspect = (float) GAME_WIDTH / (GAME_HEIGHT + HUD_HEIGHT);
+    float preferredAspect = (float) Constants.GAME_WIDTH / (Constants.GAME_HEIGHT + Constants.HUD_HEIGHT);
 
     int width, height;
     if (outputAspect <= preferredAspect) {
@@ -118,7 +114,7 @@ internal class Game1 : Game {
 
   protected override void LoadContent() {
     SpriteBatch = new SpriteBatch(GraphicsDevice);
-    renderTarget = new RenderTarget2D(GraphicsDevice, GAME_WIDTH, GAME_HEIGHT + HUD_HEIGHT);
+    renderTarget = new RenderTarget2D(GraphicsDevice, Constants.GAME_WIDTH, Constants.GAME_HEIGHT + Constants.HUD_HEIGHT);
     UpdateRenderScaleRectangle();
 
     StateTransition = new StateTransitionType(this);

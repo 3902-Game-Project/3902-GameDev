@@ -22,7 +22,7 @@ internal class MiscAssetStore : IInitable {
     MainFont = contentManager.Load<SpriteFont>("Misc/Main Font");
 
     Vignette = contentManager.Load<Effect>("Shaders/Vignette");
-    Vignette.Parameters["VignetteDimensions"].SetValue(new Vector2(VIGNETTE_RADIUS, VIGNETTE_RADIUS) / new Vector2(Game1.GAME_WIDTH, Game1.GAME_HEIGHT));
+    Vignette.Parameters["VignetteDimensions"].SetValue(new Vector2(VIGNETTE_RADIUS, VIGNETTE_RADIUS) / new Vector2(Constants.GAME_WIDTH, Constants.GAME_HEIGHT));
     Vignette.Parameters["VignetteMaxTopLeft"].SetValue(new Vector2(0.0f, 0.0f));
     Vignette.Parameters["VignetteMaxBottomRight"].SetValue(new Vector2(1.0f, 1.0f));
     Vignette.Parameters["VignetteNoneDistSq"].SetValue(VIGNETTE_NONE_FRAC * VIGNETTE_NONE_FRAC);
