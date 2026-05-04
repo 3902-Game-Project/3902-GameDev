@@ -65,16 +65,16 @@ internal class Game1 : Game {
 
   protected override void Initialize() {
     graphics.PreferredBackBufferHeight = Constants.GAME_HEIGHT + Constants.HUD_HEIGHT;
-    graphics.PreferredBackBufferWidth = Constants.GAME_WIDTH;
+    graphics.PreferredBackBufferWidth = Constants.WINDOW_WIDTH;
     graphics.ApplyChanges();
 
     renderTargetTracker = new(GraphicsDevice);
 
     Window.AllowUserResizing = true;
     Window.ClientSizeChanged += OnResize;
-    DefaultViewport = new Viewport(0, 0, Constants.GAME_WIDTH, Constants.GAME_HEIGHT + Constants.HUD_HEIGHT);
-    HudViewport = new Viewport(0, 0, Constants.GAME_WIDTH, Constants.HUD_HEIGHT);
-    GameViewport = new Viewport(0, Constants.HUD_HEIGHT, Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
+    DefaultViewport = new Viewport(0, 0, Constants.WINDOW_WIDTH, Constants.GAME_HEIGHT + Constants.HUD_HEIGHT);
+    HudViewport = new Viewport(0, 0, Constants.WINDOW_WIDTH, Constants.HUD_HEIGHT);
+    GameViewport = new Viewport(0, Constants.HUD_HEIGHT, Constants.WINDOW_WIDTH, Constants.GAME_HEIGHT);
 
     DefaultViewport = GraphicsDevice.Viewport;
     HudViewport = new Viewport(0, 0, graphics.PreferredBackBufferWidth, Constants.HUD_HEIGHT);
@@ -95,7 +95,7 @@ internal class Game1 : Game {
     int screenHeight = Window.ClientBounds.Height;
 
     float outputAspect = (float) screenWidth / screenHeight;
-    float preferredAspect = (float) Constants.GAME_WIDTH / (Constants.GAME_HEIGHT + Constants.HUD_HEIGHT);
+    float preferredAspect = (float) Constants.WINDOW_WIDTH / (Constants.GAME_HEIGHT + Constants.HUD_HEIGHT);
 
     int width, height;
     if (outputAspect <= preferredAspect) {
@@ -114,7 +114,7 @@ internal class Game1 : Game {
 
   protected override void LoadContent() {
     SpriteBatch = new SpriteBatch(GraphicsDevice);
-    renderTarget = new RenderTarget2D(GraphicsDevice, Constants.GAME_WIDTH, Constants.GAME_HEIGHT + Constants.HUD_HEIGHT);
+    renderTarget = new RenderTarget2D(GraphicsDevice, Constants.WINDOW_WIDTH, Constants.GAME_HEIGHT + Constants.HUD_HEIGHT);
     UpdateRenderScaleRectangle();
 
     StateTransition = new StateTransitionType(this);

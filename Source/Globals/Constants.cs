@@ -13,6 +13,6 @@ internal static class Constants {
   /* derived constants */
   public const float LEVEL_WIDTH = LEVEL_WIDTH_BLOCKS * BASE_BLOCK_WIDTH;
   public const float LEVEL_HEIGHT = LEVEL_HEIGHT_BLOCKS * BASE_BLOCK_HEIGHT;
-  public const int GAME_WIDTH = (int) LEVEL_WIDTH;
+  public const int WINDOW_WIDTH = (int) LEVEL_WIDTH;
   public const int GAME_HEIGHT = (int) LEVEL_HEIGHT;
 }
