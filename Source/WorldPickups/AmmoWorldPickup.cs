@@ -7,12 +7,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.WorldPickups;
 
 internal class AmmoWorldPickup(Texture2D texture, Vector2 position, AmmoType type, int amount) : ABaseWorldPickup(position), ICollidable {
+  private static readonly float SCALE = 2f;
+
+  private Vector2 origin;
+  
   public AmmoType Type { get; } = type;
   public int Amount { get; } = amount;
   public override bool IsAutoCollect => true;
-
-  private Vector2 origin;
-  private readonly float scale = 2f;
 
   public override void Draw(SpriteBatch spriteBatch) {
     int xOffset = Type == AmmoType.Light ? 0 : (Type == AmmoType.Heavy ? 16 : 32);
@@ -20,7 +21,7 @@ internal class AmmoWorldPickup(Texture2D texture, Vector2 position, AmmoType typ
 
     origin = new Vector2(8, 8);
 
-    spriteBatch.Draw(texture, Position, trueSourceRect, Color.White, 0f, origin, scale, SpriteEffects.None, 0f);
+    spriteBatch.Draw(texture, Position, trueSourceRect, Color.White, 0f, origin, SCALE, SpriteEffects.None, 0f);
   }
 
   public override void Update(double deltaTime) { }

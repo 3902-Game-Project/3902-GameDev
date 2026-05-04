@@ -9,16 +9,17 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Projectiles;
 
 internal class BulletDefault : IProjectile, ICollidable {
+  private static readonly Rectangle SOURCE_RECT = new(8, 0, 7, 7);
+  private static readonly float SCALE = 2.0f;
+  private static readonly int ENEMY_DAMAGE = 20;
+
   private readonly Texture2D texture;
-  private Rectangle sourceRectangle = new(8, 0, 7, 7);
   private Vector2 origin;
-  private readonly float scale = 2f;
   private Vector2 direction;
   private readonly float velocity;
   private readonly float bulletLifetime;
   private float lifetimeCounter = 0f;
-  private readonly int damage = 50; //damage from bullet, can be changed
-  private readonly int enemyDamage = 20;
+  private readonly int damage;
 
   public bool IsExpired { get; private set; }
   public bool IsPlayerShot { get; set; } = true;
@@ -36,7 +37,7 @@ internal class BulletDefault : IProjectile, ICollidable {
     this.velocity = velocity;
     this.bulletLifetime = bulletLifetime;
     this.damage = damage;
-    Collider = new BoxCollider(sourceRectangle.Width * scale, sourceRectangle.Height * scale, Position);
+    Collider = new BoxCollider(SOURCE_RECT.Width * SCALE, SOURCE_RECT.Height * SCALE, Position);
   }
 
   public void Expire() {
@@ -45,8 +46,8 @@ internal class BulletDefault : IProjectile, ICollidable {
 
   public Rectangle BoundingBox {
     get {
-      int width = (int) (sourceRectangle.Width * scale);
-      int height = (int) (sourceRectangle.Height * scale);
+      int width = (int) (SOURCE_RECT.Width * SCALE);
+      int height = (int) (SOURCE_RECT.Height * SCALE);
       int x = (int) Position.X - (width / 2);
       int y = (int) Position.Y - (height / 2);
 
@@ -55,16 +56,16 @@ internal class BulletDefault : IProjectile, ICollidable {
   }
 
   public void Draw(SpriteBatch spriteBatch) {
-    origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
+    origin = new Vector2(SOURCE_RECT.Width / 2, SOURCE_RECT.Height / 2);
 
     spriteBatch.Draw(
       texture,
       Position,
-      sourceRectangle,
+      SOURCE_RECT,
       Color.White,
       0f,
       origin,
-      scale,
+      SCALE,
       SpriteEffects.None,
       0f
     );
@@ -88,7 +89,7 @@ internal class BulletDefault : IProjectile, ICollidable {
       enemy.TakeDamage(damage);
       Expire();
     } else if (collisionInfo.Collider is Player player && !IsPlayerShot) {
-      player.TakeDamage(enemyDamage);
+      player.TakeDamage(ENEMY_DAMAGE);
       Expire();
     }
   }

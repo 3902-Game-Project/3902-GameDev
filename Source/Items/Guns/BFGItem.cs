@@ -13,7 +13,7 @@ internal class BFGItem : ABaseGun {
     Category = ItemCategory.Primary;
 
     sourceRectangle = new Rectangle(0, 0, 40, 20);
-    bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2f, 0) * scale;
+    bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2f, 0) * SCALE;
     fireMode = new SemiAutoFire(this.stats);
     projectilePattern = new BFGPattern();
   }

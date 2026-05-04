@@ -5,13 +5,14 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Enemies.States;
 
 internal abstract class AEnemyMoveState : IEnemyState {
-  protected readonly ABaseEnemy enemy;
-  protected readonly Random random = new();
   private double wanderTimer;
   private readonly double wanderDuration;
   private double animationTimer = 0.0;
   private readonly float speed;
   private readonly bool lockYAxis;
+  
+  protected readonly ABaseEnemy enemy;
+  protected readonly Random random = new();
 
   public AEnemyMoveState(ABaseEnemy enemy, List<Rectangle> frames, float speed, bool lockYAxis = false) {
     this.enemy = enemy;

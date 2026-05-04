@@ -10,12 +10,9 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Items;
 
 internal abstract class ABaseGun(Texture2D texture, Vector2 startPosition, Player player, ILevelManager levelManager, GunStats stats) : IItem {
-  public FacingDirection Direction { get; set; } = FacingDirection.Right;
-  public ItemCategory Category { get; protected set; }
-  public Vector2 Position { get; set; } = startPosition;
+  protected static readonly float SCALE = 1.0f;
 
   protected readonly Texture2D texture = texture;
-  protected readonly float scale = 1f;
   protected readonly GunStats stats = stats;
 
   protected IProjectilePattern projectilePattern = new SingleShotPattern();
@@ -24,12 +21,16 @@ internal abstract class ABaseGun(Texture2D texture, Vector2 startPosition, Playe
   protected Vector2 origin;
   protected Vector2 bulletSpawnOffset;
 
+  public FacingDirection Direction { get; set; } = FacingDirection.Right;
+  public ItemCategory Category { get; protected set; }
+  public Vector2 Position { get; set; } = startPosition;
+
   // Ammo and reload state
   public double EquipTimer { get; private set; } = 0.0;
   public double ReloadTimer { get; private set; } = 0.0;
   public bool IsReloading { get; private set; } = false;
 
-  public GunStats PublicStats => stats;
+  public GunStats Stats => stats;
 
   public virtual void OnEquip() {
     EquipTimer = stats.EquipTime; // Prevent double-pumping
@@ -94,7 +95,7 @@ internal abstract class ABaseGun(Texture2D texture, Vector2 startPosition, Playe
       rotation = MathHelper.PiOver2;
     }
 
-    spriteBatch.Draw(texture, Position, sourceRectangle, Color.White, rotation, origin, scale, effects, 0f);
+    spriteBatch.Draw(texture, Position, sourceRectangle, Color.White, rotation, origin, SCALE, effects, 0f);
   }
 
   public void DrawUI(SpriteBatch spriteBatch, Vector2 position, float scale, Color tint) {

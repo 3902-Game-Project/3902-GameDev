@@ -58,7 +58,7 @@ internal class HUDManager(Player player) : IGPDrawable {
     if (activeWeapon != null) {
       // Much cleaner! If it's any gun inheriting from DefaultGun, it will grab the stats.
       if (activeWeapon is ABaseGun activeGun) {
-        GunStats activeStats = activeGun.PublicStats;
+        GunStats activeStats = activeGun.Stats;
 
         if (activeStats != null) {
           // Draw Current Gun's Ammo

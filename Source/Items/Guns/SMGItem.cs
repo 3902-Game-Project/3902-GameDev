@@ -12,7 +12,7 @@ internal class SMGItem : ABaseGun {
     Category = ItemCategory.Primary;
 
     sourceRectangle = new Rectangle(0, 20, 25, 25);
-    bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2f, 0) * scale;
+    bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2f, 0) * SCALE;
     fireMode = new AutomaticFire(this.stats);
   }
 }

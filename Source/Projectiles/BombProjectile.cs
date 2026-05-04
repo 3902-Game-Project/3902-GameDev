@@ -6,18 +6,17 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Projectiles;
 
 internal class BombProjectile : IProjectile {
-  private readonly Texture2D texture;
-  private Vector2 position;
-  private readonly List<Rectangle> sourceRectangles = [
+  private static readonly List<Rectangle> SOURCE_RECTS = [
     new Rectangle(16, 0, 5, 16),
     new Rectangle(22, 0, 5, 16),
   ];
+  
+  private readonly Texture2D texture;
+  private Vector2 position;
   private Rectangle currentSourceRect;
   private readonly Animation bombAnimation;
   private Vector2 origin;
 
-  private Vector2 direction;
-  private readonly float velocity;
   private readonly double lifetime;
   private double lifetimeCounter;
 
@@ -64,11 +63,9 @@ internal class BombProjectile : IProjectile {
   public BombProjectile(Texture2D texture, Vector2 startPosition, Vector2 direction, float velocity, float lifetime) {
     this.texture = texture;
     position = startPosition;
-    this.direction = direction;
-    this.velocity = velocity;
     this.lifetime = lifetime;
     lifetimeCounter = 0f;
-    bombAnimation = new Animation(sourceRectangles, 10);
+    bombAnimation = new Animation(SOURCE_RECTS, 10);
     currentSourceRect = bombAnimation.CurrentFrame;
   }
 }

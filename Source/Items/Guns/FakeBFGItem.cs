@@ -15,7 +15,7 @@ internal class FakeBFGItem : ABaseGun {
     base(texture, startPosition, player, levelManager, stats) {
     Category = ItemCategory.Primary;
     sourceRectangle = new(0, 0, 40, 20);
-    bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2.0f, 0.0f) * scale;
+    bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2.0f, 0.0f) * SCALE;
     fireMode = new SemiAutoFire(this.stats);
     this.levelManager = levelManager;
   }

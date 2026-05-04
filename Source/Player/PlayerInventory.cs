@@ -98,7 +98,7 @@ internal class PlayerInventory(Player player, ILevelManager levelManager) : IIni
     if (ActiveItem != null) {
       ActiveItem.Update(deltaTime);
 
-      if (ActiveItem is ABaseGun gun && gun.PublicStats.CurrentAmmo <= 0 && !gun.IsReloading) {
+      if (ActiveItem is ABaseGun gun && gun.Stats.CurrentAmmo <= 0 && !gun.IsReloading) {
         gun.StartReload();
       }
     }
@@ -140,7 +140,7 @@ internal class PlayerInventory(Player player, ILevelManager levelManager) : IIni
       Vector2 barPos = Position + new Vector2(-totalWidth / 2f, -80f);
 
       for (int i = 0; i < 3; i++) {
-        Color c = (i < bfg.PublicStats.CurrentAmmo) ? Color.LimeGreen : Color.DarkGray * 0.5f;
+        Color c = (i < bfg.Stats.CurrentAmmo) ? Color.LimeGreen : Color.DarkGray * 0.5f;
         spriteBatch.Draw(whitePixel, new Rectangle((int) (barPos.X + i * (segmentWidth + gap)), (int) barPos.Y, (int) segmentWidth, 8), c);
       }
     } else if (ActiveItem is ABaseGun gun && gun.IsReloading && whitePixel != null) {
@@ -148,7 +148,7 @@ internal class PlayerInventory(Player player, ILevelManager levelManager) : IIni
       float barHeight = 8f;
       Vector2 barPos = Position + new Vector2(-barWidth / 2f, -80f);
 
-      float progress = 1.0f - ((float) (gun.ReloadTimer / gun.PublicStats.ReloadTime));
+      float progress = 1.0f - ((float) (gun.ReloadTimer / gun.Stats.ReloadTime));
 
       spriteBatch.Draw(whitePixel, new Rectangle((int) barPos.X, (int) barPos.Y, (int) barWidth, (int) barHeight), Color.DarkGray * 0.8f);
       spriteBatch.Draw(whitePixel, new Rectangle((int) barPos.X, (int) barPos.Y, (int) (barWidth * progress), (int) barHeight), Color.White);

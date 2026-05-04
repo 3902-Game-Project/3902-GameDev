@@ -5,21 +5,22 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.WorldPickups;
 
 internal class HeartWorldPickup(Texture2D texture, Vector2 position) : ABaseWorldPickup(position), ICollidable {
-  private Rectangle sourceRectangle = new(9, 15, 12, 11);
+  private static readonly Rectangle SOURCE_RECT = new(9, 15, 12, 11);
+  private static readonly float SCALE = 2f;
+  
   private Vector2 origin;
-  private readonly float scale = 2f;
-
+  
   public override void Draw(SpriteBatch spriteBatch) {
-    origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
+    origin = new Vector2(SOURCE_RECT.Width / 2, SOURCE_RECT.Height / 2);
 
     spriteBatch.Draw(
       texture,
       Position,
-      sourceRectangle,
+      SOURCE_RECT,
       Color.White,
       0f,
       origin,
-      scale,
+      SCALE,
       SpriteEffects.None,
       0f
     );
