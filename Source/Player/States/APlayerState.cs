@@ -9,7 +9,7 @@ internal abstract class APlayerState(Player player) : IPlayerState {
   protected Player Player { get; } = player;
 
   protected double DamageFlashTimer { get; set; } = 0.0;
-  
+
   protected Color CurrentTintColor => DamageFlashTimer > 0 ? Color.Red : Color.White;
 
   public abstract void MoveDown();

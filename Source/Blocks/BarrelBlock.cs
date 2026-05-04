@@ -12,9 +12,9 @@ internal class BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) : ABaseBlock(
     new(64, 0, 64, 64),
     new(64, 448, 64, 64),
   ];
-  
+
   private int currentFrame = 0;
-  
+
   public BarrelBlockState State { get; set; } = BarrelBlockState.Solid;
 
   public override void Update(double deltaTime) { }

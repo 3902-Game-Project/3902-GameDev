@@ -13,7 +13,7 @@ internal class SlattedDoorBlock : ABaseBlock {
     new(192, 128, 64, 64),
     new(320, 128, 64, 64),
   ];
-  
+
   private readonly Texture2D slattedDoorTexture;
   private readonly ILevelManager levelManager;
   private int currentFrame = 0;

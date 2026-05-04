@@ -6,7 +6,7 @@ namespace GameProject.Blocks; // Note: Kept your specific namespace here!
 
 internal class RockCornerBlock : ABaseBlock {
   private static readonly Rectangle SOURCE_RECT = new(384, 0, 64, 64);
-  
+
   private readonly Texture2D rockCornerTexture;
 
   public float Rotation { get; private set; } = 0.0f;

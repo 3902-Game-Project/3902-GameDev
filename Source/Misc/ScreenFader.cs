@@ -13,7 +13,7 @@ internal class ScreenFader(GameWindow gameWindow) : ITemporalUpdatable, ILowLeve
     FadedIn,
     FadedOut,
   };
-  
+
   private static readonly float FADE_DURATION = 0.2f;
 
   private void DrawFadeRectangle(SpriteBatch spriteBatch, double darkeningIntensity) {

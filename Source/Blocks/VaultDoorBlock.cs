@@ -19,7 +19,7 @@ internal class VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, VaultDo
     new(320, 192, 64, 64),
   ];
   private static readonly double TIME_PER_FRAME = 0.1;
-  
+
   private int currentFrame = state switch {
     VaultDoorBlockState.Opening => 1,
     VaultDoorBlockState.Open => SOURCE_RECTS.Count - 1,

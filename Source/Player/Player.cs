@@ -47,7 +47,7 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   public Vector2 Velocity { get; set; }
 
   public int Health { get; set; } = 100;
-  
+
   public double InvincibilityTimer { get; set; } = 0.0;
   public double InfiniteAmmoTimer { get; set; } = 0.0;
   public bool HasInfiniteAmmo => InfiniteAmmoTimer > 0;
@@ -97,13 +97,13 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   }
 
   public void MoveUp() => inputUpThisFrame = true;
-  
+
   public void MoveDown() => inputDownThisFrame = true;
-  
+
   public void MoveLeft() => inputLeftThisFrame = true;
-  
+
   public void MoveRight() => inputRightThisFrame = true;
-  
+
   public void UseItem(UseType useType) {
     currentState.UseItem(useType);
   }

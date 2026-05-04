@@ -38,7 +38,7 @@ internal class SoundManager {
   }
 
   public static SoundManager Instance { get; } = new();
-  
+
   private readonly Dictionary<SoundID, SoundEffect> sounds = [];
   private readonly Dictionary<SoundID, LoopingSound> loops = [];
 

@@ -13,11 +13,11 @@ internal class SmallDoorBlock : ABaseBlock {
     new(448, 256, 64, 64),
     new(448, 448, 64, 64),
   ];
-  
+
   private readonly Texture2D smallDoorTexture;
   private readonly ILevelManager levelManager;
   private int currentFrame = 0;
-  
+
   public float Rotation { get; private set; } = 0.0f;
   public string PairedLevelName { get; private set; }
   public LockableDoorBlockState State { get; private set; }
