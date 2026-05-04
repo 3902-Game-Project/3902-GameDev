@@ -22,10 +22,10 @@ internal class LogBlock : ABaseBlock {
     if (y < Constants.BASE_BLOCK_HEIGHT) {
       Rotation = MathHelper.ToRadians(90);
       x += Constants.BASE_BLOCK_WIDTH;
-    } else if (y >= 512) {
+    } else if (y >= Constants.LEVEL_HEIGHT - Constants.BASE_BLOCK_HEIGHT) {
       Rotation = MathHelper.ToRadians(90);
       x += Constants.BASE_BLOCK_WIDTH;
-    } else if (y < 128 && x >= 64 && x < 896) {
+    } else if (y < Constants.BASE_BLOCK_HEIGHT * 2.0f && x >= Constants.BASE_BLOCK_WIDTH && x < Constants.LEVEL_WIDTH - Constants.BASE_BLOCK_WIDTH) {
       Rotation = MathHelper.ToRadians(90);
       x += Constants.BASE_BLOCK_WIDTH;
     }

@@ -15,10 +15,6 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Level;
 
 internal partial class LevelLoader {
-  private static readonly int BLOCK_WIDTH = 64;
-  private static readonly int BLOCK_HEIGHT = 64;
-  private static readonly int LEVEL_WIDTH_BLOCKS = 15;
-  private static readonly int LEVEL_HEIGHT_BLOCKS = 9;
   private static readonly Vector2 PLAYER_POSITION_OFFSET = new(BLOCK_WIDTH / 2.0f, BLOCK_HEIGHT / 2.0f);
   private static readonly Vector2 ENEMY_POSITION_OFFSET = new(BLOCK_WIDTH / 2.0f, BLOCK_HEIGHT);
   private static readonly string FLAGS_LINE_START = "Flags: ";

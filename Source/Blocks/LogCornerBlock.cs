@@ -17,16 +17,16 @@ internal class LogCornerBlock : ABaseBlock {
 
   public void Rotate() {
     float x = Position.X, y = Position.Y;
-    if (x < 64 && y >= 512) {
+    if (x < Constants.BASE_BLOCK_WIDTH && y >= 512) {
       Rotation = MathHelper.ToRadians(270);
-      y += 64;
+      y += Constants.BASE_BLOCK_HEIGHT;
     } else if (x >= 896 && y >= 512) {
       Rotation = MathHelper.ToRadians(180);
-      x += 64;
-      y += 64;
+      x += Constants.BASE_BLOCK_WIDTH;
+      y += Constants.BASE_BLOCK_HEIGHT;
     } else if (y < 64 && x >= 896) {
       Rotation = MathHelper.ToRadians(90);
-      x += 64;
+      x += Constants.BASE_BLOCK_WIDTH;
     }
     Position = new(x, y);
   }

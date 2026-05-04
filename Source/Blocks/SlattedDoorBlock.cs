@@ -35,16 +35,16 @@ internal class SlattedDoorBlock : ABaseBlock {
 
   public void Rotate() {
     float x = Position.X, y = Position.Y;
-    if (x < 64) {
+    if (x < Constants.BASE_BLOCK_WIDTH) {
       Rotation = MathHelper.ToRadians(270);
-      y += 64;
+      y += Constants.BASE_BLOCK_HEIGHT;
     } else if (x >= 896 && y >= 64) {
       Rotation = MathHelper.ToRadians(90);
-      x += 64;
+      x += Constants.BASE_BLOCK_WIDTH;
     } else if (y >= 512 && x >= 64) {
       Rotation = MathHelper.ToRadians(180);
-      x += 64;
-      y += 64;
+      x += Constants.BASE_BLOCK_WIDTH;
+      y += Constants.BASE_BLOCK_HEIGHT;
     }
     Position = new(x, y);
   }
