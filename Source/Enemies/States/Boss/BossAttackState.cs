@@ -1,4 +1,5 @@
 using System;
+using GameProject.Globals;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies.BossStates;
@@ -33,7 +34,7 @@ internal class BossAttackState : IEnemyState {
     if (animationTimer >= 0.15) {
       animationTimer = 0;
       if (boss.CurrentFrame == 3 && !hasFiredThisLoop) {
-        boss.FireBullet(15); // Adjust damage here
+        boss.FireBullet(Constants.BOSS_DAMAGE);
         shotsFired++;
         hasFiredThisLoop = true;
       }

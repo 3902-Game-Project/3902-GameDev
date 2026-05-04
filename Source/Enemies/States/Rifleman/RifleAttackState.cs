@@ -1,3 +1,4 @@
+using GameProject.Globals;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies.RiflemanStates;
@@ -26,7 +27,7 @@ internal class RifleAttackState : IEnemyState {
     }
 
     if (rifleMan.CurrentFrame == rifleMan.CurrentSourceRectangles.Count - 1 && !hasFired) {
-      rifleMan.FireProjectile(80);
+      rifleMan.FireProjectile(Constants.RIFLEMAN_DAMAGE);
       hasFired = true;
     }
 

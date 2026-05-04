@@ -11,7 +11,6 @@ namespace GameProject.Projectiles;
 internal class BulletDefault : IProjectile, ICollidable {
   private static readonly Rectangle SOURCE_RECT = new(8, 0, 7, 7);
   private static readonly float SCALE = 2.0f;
-  private static readonly int ENEMY_DAMAGE = 20;
 
   private readonly Texture2D texture;
   private Vector2 origin;
@@ -89,7 +88,7 @@ internal class BulletDefault : IProjectile, ICollidable {
       enemy.TakeDamage(damage);
       Expire();
     } else if (collisionInfo.Collider is Player player && !IsPlayerShot) {
-      player.TakeDamage(ENEMY_DAMAGE);
+      player.TakeDamage(damage);
       Expire();
     }
   }

@@ -30,6 +30,10 @@ internal static class Constants {
   public const float PLAYER_DAMAGE_FLASH_DURATION = 0.3f;
   public const float PLAYER_SPEED = 200.0f;
 
+  public const int BOSS_DAMAGE = 15;
+  public const int RIFLEMAN_DAMAGE = 80;
+  public const int SHOTGUNNER_DAMAGE = 50;
+
   /* derived constants */
   public const float LEVEL_WIDTH = LEVEL_WIDTH_BLOCKS * BASE_BLOCK_WIDTH;
   public const float LEVEL_HEIGHT = LEVEL_HEIGHT_BLOCKS * BASE_BLOCK_HEIGHT;

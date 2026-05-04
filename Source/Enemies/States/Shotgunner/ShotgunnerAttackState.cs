@@ -1,3 +1,4 @@
+using GameProject.Globals;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies.ShotgunnerStates;
@@ -26,7 +27,7 @@ internal class ShotgunnerAttackState : IEnemyState {
     }
 
     if (shotgunner.CurrentFrame == shotgunner.CurrentSourceRectangles.Count - 1 && !hasFired) {
-      shotgunner.FireSpread(50);
+      shotgunner.FireSpread(Constants.SHOTGUNNER_DAMAGE);
       hasFired = true;
     }
 
