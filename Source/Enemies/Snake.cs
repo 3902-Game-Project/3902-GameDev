@@ -1,12 +1,14 @@
 using GameProject.Enemies.SnakeStates;
 using GameProject.Enemies.States;
+using GameProject.Globals;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
 internal class Snake : ABaseEnemy {
-  public Snake(Texture2D texture, Vector2 position) : base(texture, position, 64f, 32f) {
+  public Snake(Texture2D texture, Vector2 position) :
+    base(texture, position, colliderHeight: Constants.BASE_ENEMY_HEIGHT * 0.5f) {
     DrawScale = 2f;
     FlipOnRightDir = true;
     CurrentState = new SnakeWanderState(this);

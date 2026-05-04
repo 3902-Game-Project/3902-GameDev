@@ -1,6 +1,7 @@
 using GameProject.Enemies.RiflemanStates;
 using GameProject.Enemies.States;
 using GameProject.Factories;
+using GameProject.Globals;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
 using GameProject.Projectiles;
@@ -15,7 +16,8 @@ internal class Rifleman : ABaseEnemy {
 
   public ILevelManager LevelManager { get; }
 
-  public Rifleman(Texture2D texture, Vector2 position, ILevelManager levelManager, Player player) : base(texture, position, 48f, 96f) {
+  public Rifleman(Texture2D texture, Vector2 position, ILevelManager levelManager, Player player) :
+    base(texture, position, Constants.BASE_ENEMY_WIDTH * 0.75f, Constants.BASE_ENEMY_HEIGHT * 1.5f) {
     LevelManager = levelManager;
     DrawScale = 2f;
     FlipOnRightDir = false;

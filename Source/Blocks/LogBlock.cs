@@ -18,7 +18,7 @@ internal class LogBlock : ABaseBlock {
 
   public void Rotate() {
     float x = Position.X, y = Position.Y;
-    // TODO: someone else did these offsets but they maybe need double checking? - Santosh
+    // Someone else did these offsets but are they correct? they seem awfully arbitrary - Santosh
     if (y < Constants.BASE_BLOCK_HEIGHT) {
       Rotation = MathHelper.ToRadians(90);
       x += Constants.BASE_BLOCK_WIDTH;

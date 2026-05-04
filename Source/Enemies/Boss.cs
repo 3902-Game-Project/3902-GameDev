@@ -1,6 +1,7 @@
 using System;
 using GameProject.Enemies.BossStates;
 using GameProject.Factories;
+using GameProject.Globals;
 using GameProject.Managers;
 using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
@@ -14,7 +15,7 @@ internal class Boss : ABaseEnemy {
   public bool PhaseTwoTriggered { get; set; } = false;
   private readonly Random random = new();
 
-  public Boss(Texture2D texture, Vector2 position, ILevelManager levelManager) : base(texture, position, 64f, 128f) {
+  public Boss(Texture2D texture, Vector2 position, ILevelManager levelManager) : base(texture, position, colliderHeight: Constants.BASE_ENEMY_HEIGHT * 2.0f) {
     LevelManager = levelManager;
     DrawScale = 2.0f;
     FlipOnRightDir = false;

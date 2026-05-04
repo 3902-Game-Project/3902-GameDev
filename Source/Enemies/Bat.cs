@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Enemies;
 
 internal class Bat : ABaseEnemy {
-  public Bat(Texture2D texture, Vector2 position) : base(texture, position, 64f, 64f) {
+  public Bat(Texture2D texture, Vector2 position) : base(texture, position) {
     DrawScale = 2f;
     FlipOnRightDir = true;
     CurrentState = new BatIdleState(this);

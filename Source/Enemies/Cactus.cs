@@ -1,4 +1,5 @@
 using GameProject.Enemies.CactusStates;
+using GameProject.Globals;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -9,8 +10,7 @@ internal class Cactus : ABaseEnemy {
     base(
       texture: texture,
       position: position,
-      colliderWidth: 32f,
-      colliderHeight: 64f,
+      colliderWidth: Constants.BASE_ENEMY_WIDTH * 0.5f,
       invulnerable: true
     ) {
     DrawScale = 0.2f;

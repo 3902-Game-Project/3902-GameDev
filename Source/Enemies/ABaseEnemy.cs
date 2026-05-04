@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using GameProject.Blocks;
 using GameProject.Collisions;
 using GameProject.Collisions.Shapes;
+using GameProject.Globals;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-internal abstract class ABaseEnemy(Texture2D texture, Vector2 position, float colliderWidth = 64f, float colliderHeight = 64f, bool invulnerable = false) : IEnemy {
+internal abstract class ABaseEnemy(
+  Texture2D texture,
+  Vector2 position,
+  float colliderWidth = Constants.BASE_ENEMY_WIDTH,
+  float colliderHeight = Constants.BASE_ENEMY_HEIGHT,
+  bool invulnerable = false
+) : IEnemy {
   protected const float DAMAGE_FLASH_DURATION = 0.15f;
   public static event Action<ABaseEnemy> OnDeath;
 
