@@ -2,10 +2,10 @@ namespace GameProject.Globals;
 
 internal static class Flags {
   /* compile-time tweakables */
-  public static readonly bool StartInDebugLevel = false;
-  public static readonly bool StartInBossLevel = false;
-  public static readonly bool DebugButtonBinds = true;
-  public static readonly bool SpawnBfgImmediately = false;
+  public const bool StartInDebugLevel = false;
+  public const bool StartInBossLevel = false;
+  public const bool DebugButtonBinds = true;
+  public const bool SpawnBfgImmediately = false;
 
   /* runtime tweakables */
   public static bool Vignette { get; set; } = true;

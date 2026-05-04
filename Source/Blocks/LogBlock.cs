@@ -1,3 +1,4 @@
+using GameProject.Globals;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -17,15 +18,16 @@ internal class LogBlock : ABaseBlock {
 
   public void Rotate() {
     float x = Position.X, y = Position.Y;
-    if (y < 64) {
+    // TODO: someone else did these offsets but they maybe need double checking? - Santosh
+    if (y < Constants.BASE_BLOCK_HEIGHT) {
       Rotation = MathHelper.ToRadians(90);
-      x += 64;
+      x += Constants.BASE_BLOCK_WIDTH;
     } else if (y >= 512) {
       Rotation = MathHelper.ToRadians(90);
-      x += 64;
+      x += Constants.BASE_BLOCK_WIDTH;
     } else if (y < 128 && x >= 64 && x < 896) {
       Rotation = MathHelper.ToRadians(90);
-      x += 64;
+      x += Constants.BASE_BLOCK_WIDTH;
     }
     Position = new(x, y);
   }

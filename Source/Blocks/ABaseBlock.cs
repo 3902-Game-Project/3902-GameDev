@@ -1,5 +1,6 @@
 using GameProject.Collisions;
 using GameProject.Collisions.Shapes;
+using GameProject.Globals;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -15,9 +16,9 @@ internal abstract class ABaseBlock : IBlock, ICollidable {
 
   public Rectangle BoundingBox => throw new System.NotImplementedException();
 
-  protected ABaseBlock(Vector2 position, float width = 64f, float height = 64f) {
+  protected ABaseBlock(Vector2 position, float width = Constants.BASE_BLOCK_WIDTH, float height = Constants.BASE_BLOCK_HEIGHT) {
     Position = position;
-    Vector2 centerOffset = new(width / 2f, height / 2f);
+    Vector2 centerOffset = new(width / 2.0f, height / 2.0f);
 
     Collider = new BoxCollider(width, height, position + centerOffset);
   }

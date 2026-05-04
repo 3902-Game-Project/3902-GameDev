@@ -1,3 +1,4 @@
+using GameProject.Globals;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -24,7 +25,7 @@ internal class BarShelfBlock : ABaseBlock {
     float x = Position.X, y = Position.Y;
     if (Position.X >= 832) {
       rotation = MathHelper.ToRadians(90);
-      x += 64;
+      x += Constants.BASE_BLOCK_WIDTH;
     }
 
     Position = new(x, y);
