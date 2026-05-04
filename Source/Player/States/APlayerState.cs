@@ -1,4 +1,5 @@
 using GameProject.Controllers;
+using GameProject.Globals;
 using GameProject.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -22,8 +23,8 @@ internal abstract class APlayerState(Player player) : IPlayerState {
   public virtual void TakeDamage(int amount) {
     if (!Player.IsInvincible) {
       Player.Health -= amount;
-      Player.InvincibilityTimer = Player.INVINCIBILITY_DURATION;
-      DamageFlashTimer = Player.DAMAGE_FLASH_DURATION;
+      Player.InvincibilityTimer = Constants.PLAYER_INVINCIBILITY_DURATION;
+      DamageFlashTimer = Constants.PLAYER_DAMAGE_FLASH_DURATION;
       if (Player.Health <= 0) {
         Player.Health = 0;
         Die();

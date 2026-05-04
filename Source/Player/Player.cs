@@ -25,13 +25,6 @@ internal enum FacingDirection {
 }
 
 internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable {
-  private static readonly float PLAYER_WIDTH = 171.0f * 0.15f;
-  private static readonly float PLAYER_HEIGHT = 323.0f * 0.15f;
-
-  public static readonly float INVINCIBILITY_DURATION = 1.5f;
-  public static readonly float DAMAGE_FLASH_DURATION = 0.3f;
-  public static readonly float PLAYER_SPEED = 200.0f;
-
   private readonly ILevelManager levelManager;
   private readonly BoxCollider collider;
   private bool inputLeftThisFrame, inputRightThisFrame, inputUpThisFrame, inputDownThisFrame;
@@ -60,8 +53,8 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
 
   public Rectangle BoundingBox {
     get {
-      int width = (int) PLAYER_WIDTH;
-      int height = (int) PLAYER_HEIGHT;
+      int width = (int) Constants.PLAYER_WIDTH;
+      int height = (int) Constants.PLAYER_HEIGHT;
       int x = (int) Position.X - (width / 2);
       int y = (int) Position.Y - (height / 2);
       return new Rectangle(x, y, width, height);
@@ -167,7 +160,7 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
 
     if (InvincibilityTimer > 0) InvincibilityTimer -= deltaTime;
     if (InfiniteAmmoTimer > 0) InfiniteAmmoTimer -= deltaTime;
-    if (Velocity != Vector2.Zero) Velocity = Vector2.Normalize(Velocity) * PLAYER_SPEED;
+    if (Velocity != Vector2.Zero) Velocity = Vector2.Normalize(Velocity) * Constants.PLAYER_SPEED;
     float xStep = Velocity.X * ((float) deltaTime);
     float yStep = Velocity.Y * ((float) deltaTime);
 

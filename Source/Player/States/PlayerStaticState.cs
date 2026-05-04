@@ -14,22 +14,22 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
   private static readonly Rectangle SOURCE_RECT_DOWN = new(455, 58, 161, 318);
 
   public override void MoveUp() {
-    Player.Velocity = new Vector2(Player.Velocity.X, -Player.PLAYER_SPEED);
+    Player.Velocity = new Vector2(Player.Velocity.X, -Constants.PLAYER_SPEED);
     Player.Direction = FacingDirection.Up;
   }
 
   public override void MoveDown() {
-    Player.Velocity = new Vector2(Player.Velocity.X, Player.PLAYER_SPEED);
+    Player.Velocity = new Vector2(Player.Velocity.X, Constants.PLAYER_SPEED);
     Player.Direction = FacingDirection.Down;
   }
 
   public override void MoveLeft() {
-    Player.Velocity = new Vector2(-Player.PLAYER_SPEED, Player.Velocity.Y);
+    Player.Velocity = new Vector2(-Constants.PLAYER_SPEED, Player.Velocity.Y);
     Player.Direction = FacingDirection.Left;
   }
 
   public override void MoveRight() {
-    Player.Velocity = new Vector2(Player.PLAYER_SPEED, Player.Velocity.Y);
+    Player.Velocity = new Vector2(Constants.PLAYER_SPEED, Player.Velocity.Y);
     Player.Direction = FacingDirection.Right;
   }
 

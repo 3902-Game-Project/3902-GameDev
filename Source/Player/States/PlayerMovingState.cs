@@ -52,19 +52,19 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
   }
 
   public override void MoveUp() {
-    Player.Velocity = new Vector2(Player.Velocity.X, -Player.PLAYER_SPEED);
+    Player.Velocity = new Vector2(Player.Velocity.X, -Constants.PLAYER_SPEED);
   }
 
   public override void MoveDown() {
-    Player.Velocity = new Vector2(Player.Velocity.X, Player.PLAYER_SPEED);
+    Player.Velocity = new Vector2(Player.Velocity.X, Constants.PLAYER_SPEED);
   }
 
   public override void MoveLeft() {
-    Player.Velocity = new Vector2(-Player.PLAYER_SPEED, Player.Velocity.Y);
+    Player.Velocity = new Vector2(-Constants.PLAYER_SPEED, Player.Velocity.Y);
   }
 
   public override void MoveRight() {
-    Player.Velocity = new Vector2(Player.PLAYER_SPEED, Player.Velocity.Y);
+    Player.Velocity = new Vector2(Constants.PLAYER_SPEED, Player.Velocity.Y);
   }
 
   public override void UseItem(UseType useType) {
