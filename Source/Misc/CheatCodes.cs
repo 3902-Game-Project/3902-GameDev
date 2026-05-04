@@ -4,6 +4,7 @@ using System.Linq;
 using GameProject.Commands;
 using GameProject.Factories;
 using GameProject.GlobalInterfaces;
+using GameProject.Globals;
 using GameProject.Items;
 using GameProject.Managers;
 using GameProject.PlayerSpace;
@@ -13,8 +14,6 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.Source.Misc;
 
 internal class CheatCodes : ITemporalUpdatable {
-  private static readonly double MAX_WAIT_TIME = 5f;
-
   public static CheatCodes Instance { get; } = new CheatCodes();
 
   private double pressedDeltaTime = 0f;
@@ -127,7 +126,7 @@ internal class CheatCodes : ITemporalUpdatable {
   }
 
   public void Update(double deltaTime) {
-    if (pressedDeltaTime <= MAX_WAIT_TIME) {
+    if (pressedDeltaTime <= Constants.MAX_CHEAT_CODE_WAIT) {
       var cheatCodeExecuted = false;
 
       foreach (var code in Instance.cheatCodes) {

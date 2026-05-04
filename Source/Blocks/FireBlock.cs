@@ -11,8 +11,8 @@ internal class FireBlock(Texture2D FireTexture, Vector2 xyPos, Player player) : 
     new(384, 64, 64, 64),
     new(448, 64, 64, 64),
   ];
-
   private static readonly double TIME_PER_FRAME = 0.15;
+
   private static readonly int DAMAGE = 25;
 
   private int currentFrame = 0;

@@ -14,8 +14,6 @@ internal class ScreenFader(GameWindow gameWindow) : ITemporalUpdatable, ILowLeve
     FadedOut,
   };
 
-  private static readonly float FADE_DURATION = 0.2f;
-
   private void DrawFadeRectangle(SpriteBatch spriteBatch, double darkeningIntensity) {
     spriteBatch.Draw(
       texture: TextureStore.Instance.WhitePixel,
@@ -33,7 +31,7 @@ internal class ScreenFader(GameWindow gameWindow) : ITemporalUpdatable, ILowLeve
       case FadingState.FadeIn:
         fadeTime += deltaTime;
 
-        if (fadeTime > FADE_DURATION) {
+        if (fadeTime > Constants.SCREEN_FADE_DURATION) {
           FadeState = FadingState.FadedIn;
         }
         break;
@@ -41,7 +39,7 @@ internal class ScreenFader(GameWindow gameWindow) : ITemporalUpdatable, ILowLeve
       case FadingState.FadeOut:
         fadeTime += deltaTime;
 
-        if (fadeTime > FADE_DURATION) {
+        if (fadeTime > Constants.SCREEN_FADE_DURATION) {
           FadeState = FadingState.FadedOut;
         }
         break;
@@ -57,7 +55,7 @@ internal class ScreenFader(GameWindow gameWindow) : ITemporalUpdatable, ILowLeve
   }
 
   public void LowLevelDraw(GraphicsDevice graphicsDevice, RenderTargetTracker renderTargetTracker, SpriteBatch spriteBatch) {
-    var fadeProgress = fadeTime / FADE_DURATION;
+    var fadeProgress = fadeTime / Constants.SCREEN_FADE_DURATION;
 
     spriteBatch.Begin();
 

@@ -18,8 +18,6 @@ namespace GameProject.Level;
 #nullable enable
 
 internal class Level : ILevel {
-  private static readonly double WIN_SCREEN_DELAY = 10.0;
-
   private readonly List<IBlock> nonCollidableBlocks;
   private readonly List<IBlock> collidableBlocks;
   private readonly List<IBlock> doors;
@@ -176,7 +174,7 @@ internal class Level : ILevel {
 
     if (LevelFlags.VictoryLevel) {
       victoryTimer += deltaTime;
-      if (victoryTimer >= WIN_SCREEN_DELAY) {
+      if (victoryTimer >= Constants.WIN_SCREEN_WAIT) {
         winScreenCommand.Execute();
       }
     }

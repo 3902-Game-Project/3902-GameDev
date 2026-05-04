@@ -9,8 +9,6 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.PlayerSpace.States;
 
 internal class PlayerDeadState(Player player, Action onLoss) : APlayerState(player) {
-  private static readonly double LOSS_SCREEN_TIME = 3.0;
-
   private static readonly List<Rectangle> SOURCE_RECTS = [
     new(2116, 1032, 282, 129),
     new(1807, 1034, 277, 127),
@@ -45,7 +43,7 @@ internal class PlayerDeadState(Player player, Action onLoss) : APlayerState(play
     }
 
     deadTimer.Update(deltaTime);
-    if (deadTimer.Time >= LOSS_SCREEN_TIME) {
+    if (deadTimer.Time >= Constants.LOSS_SCREEN_WAIT) {
       onLoss?.Invoke();
     }
   }
