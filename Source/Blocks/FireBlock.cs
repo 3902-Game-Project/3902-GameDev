@@ -34,7 +34,7 @@ internal class FireBlock(Texture2D FireTexture, Vector2 xyPos, Player player) : 
 
   public override void OnCollision(CollisionInfo info) {
     if (info.Collider is Player) {
-      player.TakeDamage(damage);
+      player.TakeDamage(DAMAGE);
     }
   }
 }
