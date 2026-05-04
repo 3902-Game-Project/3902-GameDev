@@ -37,6 +37,20 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
   private int currentFrame = 0;
   private double timer = 0;
 
+  private List<Rectangle> ActiveFrames {
+    get {
+      if (Player.Direction == FacingDirection.Right) {
+        return moveRightFrames;
+      } else if (Player.Direction == FacingDirection.Left) {
+        return moveLeftFrames;
+      } else if (Player.Direction == FacingDirection.Up) {
+        return moveUpFrames;
+      } else {
+        return moveDownFrames;
+      }
+    }
+  }
+
   public override void MoveUp() {
     Player.Velocity = new Vector2(Player.Velocity.X, -Player.PLAYER_SPEED);
   }
@@ -91,7 +105,7 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
     timer += deltaTime;
     if (timer > FRAME_INTERVAL) {
       currentFrame++;
-      if (currentFrame >= 2) {
+      if (currentFrame >= ActiveFrames.Count) {
         currentFrame = 0;
       }
       timer -= FRAME_INTERVAL;
@@ -99,17 +113,8 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
   }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    List<Rectangle> activeFrames;
+    var activeFrames = ActiveFrames;
 
-    if (Player.Direction == FacingDirection.Right) {
-      activeFrames = moveRightFrames;
-    } else if (Player.Direction == FacingDirection.Left) {
-      activeFrames = moveLeftFrames;
-    } else if (Player.Direction == FacingDirection.Up) {
-      activeFrames = moveUpFrames;
-    } else {
-      activeFrames = moveDownFrames;
-    }
     int frameIndex = currentFrame % activeFrames.Count;
     Rectangle sourceRect = activeFrames[frameIndex];
     Vector2 origin = new(sourceRect.Width / 2, sourceRect.Height / 2);
