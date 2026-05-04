@@ -1,5 +1,9 @@
 -----Done-----:
 
+-----Done > Sprint 5 early comments-----:
+
+StateGameType
+
 -----Done > Sprint 5-----:
 
 Controllers
@@ -63,7 +67,6 @@ Replaced with ABaseEnemy. Still contains a lot of public fields which are refere
 
 -----Not Done > Sprint 5 early comments-----:
 
-StateGameType
 StateItemScreenType
 Level
 LevelLoader (excused based on being a level loading class)
