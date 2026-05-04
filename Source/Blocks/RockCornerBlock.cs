@@ -18,13 +18,13 @@ internal class RockCornerBlock : ABaseBlock {
 
   public void Rotate() {
     float x = Position.X, y = Position.Y;
-    if (x < Constants.BASE_BLOCK_WIDTH && y < 64) {
+    if (x < Constants.BASE_BLOCK_WIDTH && y < Constants.BASE_BLOCK_HEIGHT) {
       Rotation = MathHelper.ToRadians(270);
       y += Constants.BASE_BLOCK_HEIGHT;
-    } else if (x >= 896 && y >= 64) {
+    } else if (x >= Constants.LEVEL_WIDTH - Constants.BASE_BLOCK_WIDTH && y >= Constants.BASE_BLOCK_HEIGHT) {
       Rotation = MathHelper.ToRadians(90);
       x += Constants.BASE_BLOCK_WIDTH;
-    } else if (y >= 512 && x >= 64) {
+    } else if (y >= Constants.LEVEL_HEIGHT - Constants.BASE_BLOCK_HEIGHT && x >= Constants.BASE_BLOCK_WIDTH) {
       Rotation = MathHelper.ToRadians(180);
       x += Constants.BASE_BLOCK_WIDTH;
       y += Constants.BASE_BLOCK_HEIGHT;

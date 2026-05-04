@@ -39,7 +39,7 @@ internal class SmallDoorBlock : ABaseBlock {
     if (Position.X < Constants.BASE_BLOCK_WIDTH) {
       Rotation = MathHelper.ToRadians(90);
       x += Constants.BASE_BLOCK_WIDTH;
-    } else if (Position.X >= 896 && Position.Y >= 64) {
+    } else if (Position.X >= Constants.LEVEL_WIDTH - Constants.BASE_BLOCK_WIDTH && Position.Y >= Constants.BASE_BLOCK_HEIGHT) {
       Rotation = MathHelper.ToRadians(90);
       x += Constants.BASE_BLOCK_WIDTH;
     }

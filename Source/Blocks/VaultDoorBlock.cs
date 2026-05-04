@@ -7,7 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-internal class VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, VaultDoorBlockState state, string pairedLevelName, ILevelManager levelManager) : ABaseBlock(xyPos, 128f, 128f) {
+internal class VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, VaultDoorBlockState state, string pairedLevelName, ILevelManager levelManager) :
+  ABaseBlock(xyPos, Constants.BASE_BLOCK_WIDTH * 2.0f, Constants.BASE_BLOCK_HEIGHT * 2.0f) {
   private static readonly List<Rectangle> sourceRects = [
     new(64, 128, 64, 64),
     new(64, 192, 64, 64),
