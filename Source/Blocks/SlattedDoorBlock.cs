@@ -9,13 +9,14 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 internal class SlattedDoorBlock : ABaseBlock {
-  private int currentFrame = 0;
-  private static readonly List<Rectangle> sourceRects = [
-      new(192, 128, 64, 64),
-      new(320, 128, 64, 64)
-    ];
+  private static readonly List<Rectangle> SOURCE_RECTS = [
+    new(192, 128, 64, 64),
+    new(320, 128, 64, 64),
+  ];
+  
   private readonly Texture2D slattedDoorTexture;
   private readonly ILevelManager levelManager;
+  private int currentFrame = 0;
 
   public float Rotation { get; private set; } = 0.0f;
   public string PairedLevelName { get; private set; }
@@ -30,7 +31,7 @@ internal class SlattedDoorBlock : ABaseBlock {
     Rotate();
 
     if (State == LockableDoorBlockState.Open) {
-      currentFrame = sourceRects.Count - 1;
+      currentFrame = SOURCE_RECTS.Count - 1;
     }
   }
 
@@ -56,7 +57,7 @@ internal class SlattedDoorBlock : ABaseBlock {
     spriteBatch.Draw(
       slattedDoorTexture,
       Position,
-      sourceRects[currentFrame],
+      SOURCE_RECTS[currentFrame],
       Color.White,
       Rotation,
       Vector2.Zero,
@@ -76,7 +77,7 @@ internal class SlattedDoorBlock : ABaseBlock {
     State = state;
 
     if (State == LockableDoorBlockState.Open) {
-      currentFrame = sourceRects.Count - 1;
+      currentFrame = SOURCE_RECTS.Count - 1;
     }
   }
 

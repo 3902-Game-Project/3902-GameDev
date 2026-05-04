@@ -6,6 +6,7 @@ namespace GameProject.Blocks;
 
 internal class RockBlock(Texture2D RockTexture, Vector2 xyPos) : ABaseBlock(xyPos) {
   private static readonly Rectangle SOURCE_RECT = new(320, 0, 64, 64);
+  
   public float Rotation { get; private set; }
 
   public void Rotate() {

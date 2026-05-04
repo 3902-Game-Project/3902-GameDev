@@ -6,6 +6,7 @@ namespace GameProject.Blocks;
 
 internal class LogCornerBlock : ABaseBlock {
   private static readonly Rectangle SOURCE_RECT = new(192, 64, 64, 64);
+  
   private readonly Texture2D logCornerTexture;
 
   public float Rotation { get; private set; } = 0.0f;

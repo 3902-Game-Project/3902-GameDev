@@ -9,13 +9,15 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 internal class SmallDoorBlock : ABaseBlock {
-  private static readonly List<Rectangle> sourceRects = [
+  private static readonly List<Rectangle> SOURCE_RECTS = [
     new(448, 256, 64, 64),
-    new(448, 448, 64, 64)
+    new(448, 448, 64, 64),
   ];
+  
   private readonly Texture2D smallDoorTexture;
   private readonly ILevelManager levelManager;
   private int currentFrame = 0;
+  
   public float Rotation { get; private set; } = 0.0f;
   public string PairedLevelName { get; private set; }
   public LockableDoorBlockState State { get; private set; }
@@ -50,7 +52,7 @@ internal class SmallDoorBlock : ABaseBlock {
   public override void Update(double deltaTime) { }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(smallDoorTexture, Position, sourceRects[currentFrame], Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
+    spriteBatch.Draw(smallDoorTexture, Position, SOURCE_RECTS[currentFrame], Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 
   public override void OnCollision(CollisionInfo info) {

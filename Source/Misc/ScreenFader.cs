@@ -13,6 +13,8 @@ internal class ScreenFader(GameWindow gameWindow) : ITemporalUpdatable, ILowLeve
     FadedIn,
     FadedOut,
   };
+  
+  private static readonly float FADE_DURATION = 0.2f;
 
   private void DrawFadeRectangle(SpriteBatch spriteBatch, double darkeningIntensity) {
     spriteBatch.Draw(
@@ -22,7 +24,6 @@ internal class ScreenFader(GameWindow gameWindow) : ITemporalUpdatable, ILowLeve
     );
   }
 
-  private static readonly float FADE_DURATION = 0.2f;
   private double fadeTime = 0.0;
 
   public FadingState FadeState { get; private set; } = FadingState.FadedIn;

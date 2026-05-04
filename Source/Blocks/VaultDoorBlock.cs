@@ -10,42 +10,43 @@ namespace GameProject.Blocks;
 
 internal class VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, VaultDoorBlockState state, string pairedLevelName, ILevelManager levelManager) :
   ABaseBlock(xyPos, Constants.BASE_BLOCK_WIDTH * 2.0f, Constants.BASE_BLOCK_HEIGHT * 2.0f) {
-  private static readonly List<Rectangle> sourceRects = [
+  private static readonly List<Rectangle> SOURCE_RECTS = [
     new(64, 128, 64, 64),
     new(64, 192, 64, 64),
     new(128, 192, 64, 64),
     new(192, 192, 64, 64),
     new(256, 192, 64, 64),
-    new(320, 192, 64, 64)
+    new(320, 192, 64, 64),
   ];
+  private static readonly double TIME_PER_FRAME = 0.1;
+  
   private int currentFrame = state switch {
     VaultDoorBlockState.Opening => 1,
-    VaultDoorBlockState.Open => sourceRects.Count - 1,
+    VaultDoorBlockState.Open => SOURCE_RECTS.Count - 1,
     _ => 0,
   };
 
   private double animationTimer = 0.0f;
 
-  private readonly double timePerFrame = 0.1;
   public string PairedLevelName { get; private set; } = pairedLevelName;
   public VaultDoorBlockState State { get; private set; } = state;
 
   public override void Update(double deltaTime) {
     if (State == VaultDoorBlockState.Opening) {
       animationTimer += deltaTime;
-      if (animationTimer >= timePerFrame) {
+      if (animationTimer >= TIME_PER_FRAME) {
         currentFrame++;
-        animationTimer -= timePerFrame;
+        animationTimer -= TIME_PER_FRAME;
       }
-      if (currentFrame >= sourceRects.Count) {
+      if (currentFrame >= SOURCE_RECTS.Count) {
         State = VaultDoorBlockState.Open;
-        currentFrame = sourceRects.Count - 1;
+        currentFrame = SOURCE_RECTS.Count - 1;
       }
     }
   }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(VaultDoorTexture, Position, sourceRects[currentFrame], Color.White, 0.0f, Vector2.Zero, 2.0f, SpriteEffects.None, 0.0f);
+    spriteBatch.Draw(VaultDoorTexture, Position, SOURCE_RECTS[currentFrame], Color.White, 0.0f, Vector2.Zero, 2.0f, SpriteEffects.None, 0.0f);
   }
 
   public override void OnCollision(CollisionInfo info) {

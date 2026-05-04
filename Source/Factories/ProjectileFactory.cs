@@ -10,9 +10,8 @@ namespace GameProject.Factories;
 internal class ProjectileFactory {
   private Texture2D projectileTexture;
   private Texture2D bombBlinkingTexture;
-  private static readonly ProjectileFactory instance = new();
-
-  public static ProjectileFactory Instance => instance;
+  
+  public static ProjectileFactory Instance { get; }= new();
 
   private ProjectileFactory() { }
 

@@ -7,10 +7,6 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Factories;
 
 internal class BlockFactory {
-  public static BlockFactory Instance { get; } = new();
-
-  private BlockFactory() { }
-
   /* Floor Blocks */
   public static IBlock CreateSandBlockSprite(float x, float y) {
     return new SandBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y));

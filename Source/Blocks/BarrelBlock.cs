@@ -8,11 +8,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 internal class BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) : ABaseBlock(xyPos) {
-  private static readonly List<Rectangle> sourceRects = [
+  private static readonly List<Rectangle> SOURCE_RECTS = [
     new(64, 0, 64, 64),
     new(64, 448, 64, 64),
   ];
+  
   private int currentFrame = 0;
+  
   public BarrelBlockState State { get; set; } = BarrelBlockState.Solid;
 
   public override void Update(double deltaTime) { }
@@ -23,7 +25,7 @@ internal class BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) : ABaseBlock(
     spriteBatch.Draw(
       texture: barrelTexture,
       position: Position,
-      sourceRectangle: sourceRects[currentFrame],
+      sourceRectangle: SOURCE_RECTS[currentFrame],
       color: Color.White,
       rotation: 0.0f,
       origin: Vector2.Zero,

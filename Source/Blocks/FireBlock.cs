@@ -7,27 +7,29 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 internal class FireBlock(Texture2D FireTexture, Vector2 xyPos, Player player) : ABaseBlock(xyPos) {
-  private static readonly List<Rectangle> sourceRects = [
-      new(384, 64, 64, 64),
-      new(448, 64, 64, 64)
-    ];
+  private static readonly List<Rectangle> SOURCE_RECTS = [
+    new(384, 64, 64, 64),
+    new(448, 64, 64, 64),
+  ];
+  
+  private static readonly double TIME_PER_FRAME = 0.15;
+  private static readonly int DAMAGE = 25;
+  
   private int currentFrame = 0;
   private double animationTimer = 0.0f;
-  private readonly double timePerFrame = 0.15;
 
   private readonly Player player = player;
-  private static readonly int damage = 25;
 
   public override void Update(double deltaTime) {
     animationTimer += deltaTime;
-    if (animationTimer >= timePerFrame) {
+    if (animationTimer >= TIME_PER_FRAME) {
       currentFrame = 1 - currentFrame;
-      animationTimer -= timePerFrame;
+      animationTimer -= TIME_PER_FRAME;
     }
   }
 
   public override void Draw(SpriteBatch spriteBatch) {
-    spriteBatch.Draw(FireTexture, Position, sourceRects[currentFrame], Color.White, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
+    spriteBatch.Draw(FireTexture, Position, SOURCE_RECTS[currentFrame], Color.White, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 
   public override void OnCollision(CollisionInfo info) {

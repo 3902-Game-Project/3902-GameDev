@@ -8,8 +8,16 @@ namespace GameProject.Blocks;
 
 internal class CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : ABaseBlock(xyPos) {
   private static readonly Rectangle SOURCE_RECT = new(128, 0, 64, 64);
+  
   private const float velocity = 120.0f;
   private Vector2 direction;
+
+  protected void UpdateCollider() {
+    if (Collider != null) {
+      Collider.Position = Position + new Vector2(Collider.Width / 2f, Collider.Height / 2f);
+    }
+  }
+  
   public CrateBlockState State { get; set; } = CrateBlockState.Still;
 
   public override void Update(double deltaTime) {
@@ -53,12 +61,6 @@ internal class CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : ABaseBlock(xy
           State = CrateBlockState.Still;
           break;
       }
-    }
-  }
-
-  protected void UpdateCollider() {
-    if (Collider != null) {
-      Collider.Position = Position + new Vector2(Collider.Width / 2f, Collider.Height / 2f);
     }
   }
 

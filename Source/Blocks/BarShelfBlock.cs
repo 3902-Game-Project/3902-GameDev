@@ -6,6 +6,7 @@ namespace GameProject.Blocks;
 
 internal class BarShelfBlock : ABaseBlock {
   private static readonly Rectangle SOURCE_RECT = new(256, 256, 64, 64);
+  
   private readonly Texture2D barShelfTexture;
   private float rotation = 0f;
 

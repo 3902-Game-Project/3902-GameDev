@@ -14,11 +14,6 @@ internal enum SoundID {
 }
 
 internal class SoundManager {
-  private readonly Dictionary<SoundID, SoundEffect> sounds = [];
-  private readonly Dictionary<SoundID, LoopingSound> loops = [];
-
-  private bool musicEnabled = true;
-
   public bool MusicEnabled {
     get => musicEnabled;
     set {
@@ -42,14 +37,14 @@ internal class SoundManager {
     public float Volume;
   }
 
-  private static readonly SoundManager instance = new();
+  public static SoundManager Instance { get; } = new();
+  
+  private readonly Dictionary<SoundID, SoundEffect> sounds = [];
+  private readonly Dictionary<SoundID, LoopingSound> loops = [];
 
-  public static SoundManager Instance {
-    get { return instance; }
-  }
+  private bool musicEnabled = true;
 
-  private SoundManager() {
-  }
+  private SoundManager() { }
 
   public void LoadAllContent(ContentManager content) {
     sounds[SoundID.PlayerHurt] = content.Load<SoundEffect>("Sound Effects/Player Hurt");
