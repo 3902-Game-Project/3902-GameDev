@@ -1,4 +1,21 @@
------Sprint 3-----:
+-----Done-----:
+
+-----Done > Sprint 5-----:
+
+Controllers
+Seems like most controllers have similar functionality so an abstract class could clean up code, but for only three classes of relatively small size, it isn't that important
+
+Commands
+Move add folders for the commands. Right now its pretty hard to find what command you're looking for as there's a bunch in the same file level without any organization
+
+StateGameType (High Priority)
+Class is too large with some disconnected elements like key bindings
+The LowLevelDraw function is far too large and contains granular details like individual sprite batch groups that should be moved out into easier to read functions
+The class coupling for this class is 75 which is enormous and would be nightmare during testing
+
+-----Not Done-----:
+
+-----Not Done > Sprint 3-----:
 
 Game1
 Should not be passing around the main game often. Leads to high coupling
@@ -8,15 +25,15 @@ LevelManager
 What's the point of newLevelName? Why not just immediately switch the currentLevelName in SwitchLevel? Could be missing something
 I still don't understand why there's a check to see if the current level is different to the level to fade to, as this seems like a violation of programming by contract, that is if a devoper wants a level that infinitely loops or something they wouldn't be able to accomplish it with this system. Then again I haven't been working on the project so there might be some weird bugs that arise
 
-LevelLoader (High)
+LevelLoader (High Priority)
 High cyclomatic complexity with conditionals inside of switch statements inside of conditionals.
 High cyclomatic complexity still, but cleaner and more or less excusable due to the nature of map loading
 
-LevelLoader (High)
+LevelLoader (High Priority)
 Loops too nested
 Largely fixed. Still has some conditionals inside switch statements inside switch statements. Hard to maintain, but excusable as mentioned, I'd imagine this system is fairly bespoke
 
-LevelLoader (High)
+LevelLoader (High Priority)
 Maybe instead of using a massive switch statement, find some way to programmatically pick the required factory function, given that the contents of the switch statements are more or less the same
 Not implemented
 
@@ -24,11 +41,11 @@ Level
 Look at using coroutines instead of juggling the fade-in/out states. The C# keyword should be await. Even if you don't use coroutines the screen transitions should probably be separate from the level itself
 Coroutines not implemented, but screen transitions have been moved to their own class, which is good
 
-Player (High)
+Player (High Priority)
 Reduce the number of public fields. 
 Still lots of public fields that are manipulated by lots of other classes 
 
-Player (High)
+Player (High Priority)
 The player is tightly coupled with basically everything in the game. If I tried to copy and paste the Player class into another project I'd have to also copy like 5 other files for it just to compile
 Coupling is mostly resolved to the levelManager instead of more specific classes
 
@@ -40,20 +57,20 @@ OpenSlattedDoor
 A simple door shouldn't need to know about the game. 
 Class replaced with SlattedDoorBlock class and replaces the game1 with level manager.
 
-BaseEnemy (Medium)
+BaseEnemy (Medium Priority)
 Lots of public fields, along with usual problem of passing in the game
 Replaced with ABaseEnemy. Still contains a lot of public fields which are referenced a lot
 
------Sprint 5 early comments-----:
+-----Not Done > Sprint 5 early comments-----:
 
 StateGameType
 StateItemScreenType
 Level
 LevelLoader (excused based on being a level loading class)
 
------Sprint 5-----:
+-----Not Done > Sprint 5-----:
 
-Game1 (Medium)
+Game1 (Medium Priority)
 All the states should not be contained in Game1, as it defeats the purpose of using states to obscure the general logic in the first place
 
 Level
@@ -70,18 +87,3 @@ Lots of magic numbers.
 
 BossAttackState
 Magic numbers
-
------Done-----:
-
------Done > Sprint 5-----:
-
-Controllers
-Seems like most controllers have similar functionality so an abstract class could clean up code, but for only three classes of relatively small size, it isn't that important
-
-Commands
-Move add folders for the commands. Right now its pretty hard to find what command you're looking for as there's a bunch in the same file level without any organization
-
-StateGameType (High)
-Class is too large with some disconnected elements like key bindings
-The LowLevelDraw function is far too large and contains granular details like individual sprite batch groups that should be moved out into easier to read functions
-The class coupling for this class is 75 which is enormous and would be nightmare during testing
