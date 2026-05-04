@@ -1,6 +1,10 @@
 GitHub:
   The repo is publicly available at https://github.com/WhileWestGameDev/HighNoonHangover.
 
+Basic Game Info:
+  This is a wild-west-themed adventure game. Win condition is getting to room of gold after the boss.
+  A win occurs after staying in that room for 10 cumulative seconds.
+
 Controls:
   Gamepad controls are in reference to Xbox controls.
 
@@ -74,6 +78,9 @@ Controls:
     Key                               Action
     Q/GamePadY                        Quit the game.
     Backspace/GamePadA                Reset to main menu.
+
+Post-Sprint-5 Refactors:
+  See "Post-Sprint-5 Refactors.txt" file, and the "Done" section at the top to see what refactors we have implemented.
 
 Code Metrics:
   Raw data stored at "Info/Grader Info/Code Metrics/Code Metrics.txt"
