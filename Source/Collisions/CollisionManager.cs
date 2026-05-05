@@ -32,24 +32,6 @@ internal class CollisionManager : IInstantaneousUpdatable {
     colliders.Remove(collider);
   }
 
-  public void Clear() {
-    colliders.Clear();
-  }
-
-  public void DebugDraw(SpriteBatch spriteBatch, GraphicsDevice graphicsDevice) {
-    if (debugTexture == null) {
-      debugTexture = new Texture2D(graphicsDevice, 1, 1);
-      debugTexture.SetData([Color.White]);
-    }
-
-    foreach (var c in colliders) {
-      if (c.Shape is BoxCollider box) {
-        Rectangle rect = new((int) box.Left, (int) box.Top, (int) box.Width, (int) box.Height);
-        spriteBatch.Draw(debugTexture, rect, Color.Red * 0.5f);
-      }
-    }
-  }
-
   public void Update() {
     for (int i = 0; i < colliders.Count - 1; i++) {
       ICollidable c1 = colliders[i];
