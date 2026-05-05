@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using GameProject.GlobalInterfaces;
-using GameProject.Projectiles;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Managers;
+namespace GameProject.Projectiles;
 
 internal class ProjectileManager : ITemporalUpdatable, IGPDrawable {
   private readonly List<IProjectile> projectiles;

@@ -2,7 +2,7 @@ using System;
 using GameProject.Enemies.BossStates;
 using GameProject.Factories;
 using GameProject.Globals;
-using GameProject.Managers;
+using GameProject.Level;
 using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

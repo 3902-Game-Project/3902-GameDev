@@ -8,7 +8,6 @@ using GameProject.Enemies;
 using GameProject.Factories;
 using GameProject.Globals;
 using GameProject.Items;
-using GameProject.Managers;
 using GameProject.PlayerSpace;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;

@@ -6,12 +6,11 @@ using System.IO;
 using GameProject.Commands;
 using GameProject.Factories;
 using GameProject.Globals;
-using GameProject.Level;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Managers;
+namespace GameProject.Level;
 
 internal class LevelManager(Game1 game) : ILevelManager {
   private static readonly string[] LEVEL_NAMES = [

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using GameProject.Factories;
 using GameProject.GlobalInterfaces;
 using GameProject.Items;
-using GameProject.Managers;
+using GameProject.Level;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;

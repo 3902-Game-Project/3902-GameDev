@@ -5,7 +5,7 @@ using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Managers;
+namespace GameProject.Misc;
 
 internal class HUDManager(Player player) : IGPDrawable {
   public void Draw(SpriteBatch spriteBatch) {

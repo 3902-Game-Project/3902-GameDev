@@ -2,7 +2,7 @@ using GameProject.Enemies.RiflemanStates;
 using GameProject.Enemies.States;
 using GameProject.Factories;
 using GameProject.Globals;
-using GameProject.Managers;
+using GameProject.Level;
 using GameProject.PlayerSpace;
 using GameProject.Projectiles;
 using GameProject.WorldPickups;

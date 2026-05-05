@@ -1,4 +1,4 @@
-using GameProject.Managers;
+using GameProject.Misc;
 
 namespace GameProject.Items;
 

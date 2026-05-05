@@ -6,7 +6,7 @@ using GameProject.Factories;
 using GameProject.GlobalInterfaces;
 using GameProject.Globals;
 using GameProject.Items;
-using GameProject.Managers;
+using GameProject.Level;
 using GameProject.PlayerSpace;
 using GameProject.Source.Commands;
 using Microsoft.Xna.Framework.Input;

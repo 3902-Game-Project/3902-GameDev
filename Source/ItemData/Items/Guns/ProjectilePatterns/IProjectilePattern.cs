@@ -1,5 +1,5 @@
 using GameProject.Items;
-using GameProject.Managers;
+using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
 
 namespace GameProject.ProjectilePatterns;

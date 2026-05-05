@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using GameProject.Collisions;
 using GameProject.Collisions.Shapes;
 using GameProject.GlobalInterfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Managers;
+namespace GameProject.Collisions;
 
 // 1. Add an enum to force the resolution axis
 internal enum CollisionAxis {
@@ -119,10 +118,10 @@ internal class CollisionManager : IInstantaneousUpdatable {
     Vector2 direction2;
     float finalOverlap;
 
-    float b1CenterX = b1.Left + (b1.Width / 2f);
-    float b2CenterX = b2.Left + (b2.Width / 2f);
-    float b1CenterY = b1.Top + (b1.Height / 2f);
-    float b2CenterY = b2.Top + (b2.Height / 2f);
+    float b1CenterX = b1.Left + b1.Width / 2.0f;
+    float b2CenterX = b2.Left + b2.Width / 2.0f;
+    float b1CenterY = b1.Top + b1.Height / 2.0f;
+    float b2CenterY = b2.Top + b2.Height / 2.0f;
 
     bool resolveHorizontally;
     if (axis == CollisionAxis.X) resolveHorizontally = true;
@@ -164,7 +163,7 @@ internal class CollisionManager : IInstantaneousUpdatable {
     float dx = c.Position.X - closestX;
     float dy = c.Position.Y - closestY;
 
-    if ((dx * dx + dy * dy) > c.Radius * c.Radius) return false;
+    if (dx * dx + dy * dy > c.Radius * c.Radius) return false;
 
     Vector2 direction1 = new(c.Position.X - closestX, c.Position.Y - closestY);
     direction1 = Vector2.Normalize(direction1);
@@ -175,9 +174,21 @@ internal class CollisionManager : IInstantaneousUpdatable {
     float magY = Math.Abs(direction1.Y);
 
     if (magX > magY) {
-      if (direction1.X > 0) { side1 = CollisionSide.Right; side2 = CollisionSide.Left; } else { side1 = CollisionSide.Left; side2 = CollisionSide.Right; }
+      if (direction1.X > 0) {
+        side1 = CollisionSide.Right;
+        side2 = CollisionSide.Left;
+      } else {
+        side1 = CollisionSide.Left;
+        side2 = CollisionSide.Right;
+      }
     } else {
-      if (direction1.Y > 0) { side1 = CollisionSide.Top; side2 = CollisionSide.Bottom; } else { side1 = CollisionSide.Bottom; side2 = CollisionSide.Top; }
+      if (direction1.Y > 0) {
+        side1 = CollisionSide.Top;
+        side2 = CollisionSide.Bottom;
+      } else {
+        side1 = CollisionSide.Bottom;
+        side2 = CollisionSide.Top;
+      }
     }
 
     info1 = new CollisionInfo { Side = side1, Direction = direction1 };
@@ -192,7 +203,7 @@ internal class CollisionManager : IInstantaneousUpdatable {
     float dy = c2.Position.Y - c1.Position.Y;
     float r = c1.Radius + c2.Radius;
     float distSq = dx * dx + dy * dy;
-    if (distSq > (r * r)) return false;
+    if (distSq > r * r) return false;
 
     Vector2 direction1 = c2.Position - c1.Position;
     direction1 = Vector2.Normalize(direction1);
@@ -202,9 +213,21 @@ internal class CollisionManager : IInstantaneousUpdatable {
     float magX = Math.Abs(direction1.X);
     float magY = Math.Abs(direction1.Y);
     if (magX > magY) {
-      if (direction1.X > 0) { side1 = CollisionSide.Right; side2 = CollisionSide.Left; } else { side1 = CollisionSide.Left; side2 = CollisionSide.Right; }
+      if (direction1.X > 0) {
+        side1 = CollisionSide.Right;
+        side2 = CollisionSide.Left;
+      } else {
+        side1 = CollisionSide.Left;
+        side2 = CollisionSide.Right;
+      }
     } else {
-      if (direction1.Y > 0) { side1 = CollisionSide.Top; side2 = CollisionSide.Bottom; } else { side1 = CollisionSide.Bottom; side2 = CollisionSide.Top; }
+      if (direction1.Y > 0) {
+        side1 = CollisionSide.Top;
+        side2 = CollisionSide.Bottom;
+      } else {
+        side1 = CollisionSide.Bottom;
+        side2 = CollisionSide.Top;
+      }
     }
 
     info1 = new CollisionInfo { Side = side1, Direction = direction1 };

@@ -5,7 +5,6 @@ using GameProject.Collisions;
 using GameProject.Commands;
 using GameProject.Enemies;
 using GameProject.Globals;
-using GameProject.Managers;
 using GameProject.PlayerSpace;
 using GameProject.Projectiles;
 using GameProject.WorldPickups;

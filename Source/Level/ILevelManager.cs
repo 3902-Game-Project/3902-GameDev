@@ -1,7 +1,6 @@
 using GameProject.GlobalInterfaces;
-using GameProject.Level;
 
-namespace GameProject.Managers;
+namespace GameProject.Level;
 
 internal interface ILevelManager : IInitable, ITemporalUpdatable, IGPDrawable {
   ILevel CurrentLevel { get; }

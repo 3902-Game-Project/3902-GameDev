@@ -1,5 +1,5 @@
 using GameProject.FireModes;
-using GameProject.Managers;
+using GameProject.Level;
 using GameProject.PlayerSpace;
 using GameProject.ProjectilePatterns;
 using Microsoft.Xna.Framework;
