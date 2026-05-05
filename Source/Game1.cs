@@ -179,7 +179,7 @@ internal class Game1 : Game {
 
     // Then render the texture to screen
 
-    GraphicsDevice.Clear(Color.Black);
+    GraphicsDevice.Clear(Constants.LETTERBOX_COLOR);
     SpriteBatch.Begin(
       sortMode: SpriteSortMode.Deferred,
       blendState: BlendState.Opaque,

@@ -6,6 +6,7 @@ internal static class Constants {
   /* base constants */
   public static readonly Color MAIN_BACKGROUND_COLOR = new(25, 28, 33); // Dark gray background
   public static readonly Color LEVEL_BACKGROUND_COLOR = new(20, 20, 120); // Bluish background
+  public static readonly Color LETTERBOX_COLOR = Color.Black; // Color used for border with resized window
 
   public const float BASE_BLOCK_WIDTH = 64.0f;
   public const float BASE_BLOCK_HEIGHT = 64.0f;
