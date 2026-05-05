@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 
-namespace GameProject.Misc;
+namespace GameProject.HelperFuncs;
 
 public static class VectorFuncs {
   public static float Angle(Vector2 vector) {

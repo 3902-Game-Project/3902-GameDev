@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using GameProject.Misc;
+using GameProject.HelperFuncs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 

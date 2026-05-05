@@ -2,7 +2,7 @@ using GameProject.Globals;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Misc;
+namespace GameProject.HelperFuncs;
 
 internal static class TextFuncs {
   private static void DrawCenteredTextLine(SpriteBatch spriteBatch, Vector2 position, string line, Color? color = null) {
