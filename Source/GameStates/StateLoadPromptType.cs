@@ -36,7 +36,7 @@ internal class StateLoadPromptType(Game1 game) : IGameState {
   }
 
   public void LowLevelDraw(LowLevelDrawParams drawData) {
-    drawData.GraphicsDevice.Clear(new(25, 28, 33));
+    drawData.ClearWindowCallback(new(25, 28, 33));
 
     drawData.SpriteBatch.Begin();
 

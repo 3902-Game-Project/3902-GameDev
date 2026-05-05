@@ -28,7 +28,7 @@ internal class StatePauseType(Game1 game) : IGameState {
   }
 
   public void LowLevelDraw(LowLevelDrawParams drawData) {
-    drawData.GraphicsDevice.Clear(Color.CornflowerBlue);
+    drawData.ClearWindowCallback(Color.CornflowerBlue);
 
     drawData.SpriteBatch.Begin();
 

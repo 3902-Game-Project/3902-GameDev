@@ -120,8 +120,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
   }
 
   public void LowLevelDraw(LowLevelDrawParams drawData) {
-    drawData.GraphicsDevice.Viewport = game.DefaultViewport;
-    drawData.GraphicsDevice.Clear(new(25, 28, 33));
+    drawData.ClearWindowCallback(new(25, 28, 33));
 
     drawData.SpriteBatch.Begin(
       SpriteSortMode.Deferred,

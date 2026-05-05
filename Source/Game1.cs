@@ -11,13 +11,15 @@ namespace GameProject;
 
 internal class Game1 : Game {
   private readonly GraphicsDeviceManager graphics;
+  private RenderTarget2D renderTarget;
+  private ValueTracker<RenderTarget2D> renderTargetTracker;
+  private ValueTracker<Viewport> viewportTracker;
+  private Rectangle renderScaleRectangle;
+
   public SpriteBatch SpriteBatch { get; private set; }
   public Viewport DefaultViewport { get; private set; }
   public Viewport HudViewport { get; private set; }
   public Viewport GameViewport { get; private set; }
-  private RenderTarget2D renderTarget;
-  private ValueTracker<RenderTarget2D> renderTargetTracker;
-  private Rectangle renderScaleRectangle;
 
   private StateTransitionType StateTransition;
   public IGameState StateMenu { get; private set; }
@@ -28,7 +30,6 @@ internal class Game1 : Game {
   public StateGameType StateGame { get; private set; }
   public IGameState StateSavePrompt { get; private set; }
   public IGameState StateLoadPrompt { get; private set; }
-
   private IGameState currentState;
 
   public Game1() {
@@ -79,6 +80,8 @@ internal class Game1 : Game {
     DefaultViewport = GraphicsDevice.Viewport;
     HudViewport = new Viewport(0, 0, graphics.PreferredBackBufferWidth, Constants.HUD_HEIGHT);
     GameViewport = new Viewport(0, Constants.HUD_HEIGHT, graphics.PreferredBackBufferWidth, Constants.GAME_HEIGHT);
+
+    viewportTracker = ValueTrackerFactory.CreateViewportTracker(GraphicsDevice, DefaultViewport);
 
     MiscAssetStore.Instance.Initialize();
     TextureStore.Instance.Initialize();
@@ -167,11 +170,11 @@ internal class Game1 : Game {
     // Render everything that should be on screen to a texture
 
     using (renderTargetTracker.TempSet(renderTarget)) {
-      GraphicsDevice.SetRenderTarget(renderTarget);
       GraphicsDevice.Clear(Color.Black);
       currentState.LowLevelDraw(new (
-        GraphicsDevice,
+        GraphicsDevice.Clear,
         renderTargetTracker,
+        viewportTracker,
         SpriteBatch
       ));
     }
