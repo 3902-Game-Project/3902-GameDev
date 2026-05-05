@@ -39,10 +39,9 @@ internal class ValueTracker<T>(SetValueCallback<T> setValueCallback, T? defaultV
     }
 
     // // C# Docs: Override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
-    // ~ValueDisposer()
-    // {
-    //     // C# Docs: Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-    //     Dispose(disposing: false);
+    // ~ValueDisposer() {
+    //   // C# Docs: Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+    //   Dispose(disposing: false);
     // }
 
     public void Dispose() {
