@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Enemies.BossStates;
 
 internal class BossHurtState : IEnemyState {
+  private const double ANIMATION_INTERVAL = 0.15;
+
   private readonly Boss boss;
   private double animationTimer = 0.0;
 
@@ -22,11 +24,11 @@ internal class BossHurtState : IEnemyState {
 
   public void Update(double deltaTime) {
     animationTimer += deltaTime;
-    if (animationTimer >= 0.15 && boss.CurrentFrame < boss.CurrentSourceRectangles.Count - 1) {
+    if (animationTimer >= ANIMATION_INTERVAL && boss.CurrentFrame < boss.CurrentSourceRectangles.Count - 1) {
       boss.CurrentFrame++;
       animationTimer = 0;
     }
-    if (boss.CurrentFrame == boss.CurrentSourceRectangles.Count - 1 && animationTimer >= 0.15) {
+    if (boss.CurrentFrame == boss.CurrentSourceRectangles.Count - 1 && animationTimer >= ANIMATION_INTERVAL) {
       boss.CurrentState = new BossIdleState(boss);
     }
   }

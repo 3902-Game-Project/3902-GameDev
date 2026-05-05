@@ -1,5 +1,6 @@
 using System;
 using GameProject.Enemies.States;
+using GameProject.Globals;
 
 namespace GameProject.Enemies.BossStates;
 
@@ -17,7 +18,7 @@ internal class BossWanderState : AEnemyMoveState {
         new(224, 95, 56, 45),
         new(280, 95, 56, 45),
       ],
-      120.0f
+      Constants.BOSS_WANDER_SPEED
     ) {
     this.boss = boss;
     this.boss.CurrentFrame = 0;
@@ -31,7 +32,7 @@ internal class BossWanderState : AEnemyMoveState {
     float yDist = Math.Abs(boss.Position.Y - boss.Target.Y);
 
     // RIFLEMAN LOGIC: If lined up horizontally OR vertically, stop and attack!
-    if (xDist <= 25 || yDist <= 25) {
+    if (xDist <= Constants.BOSS_ALIGNMENT_THRESHOLD || yDist <= Constants.BOSS_ALIGNMENT_THRESHOLD) {
       boss.CurrentState = new BossAttackState(boss);
     }
   }

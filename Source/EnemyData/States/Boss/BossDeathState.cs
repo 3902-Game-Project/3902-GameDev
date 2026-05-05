@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Enemies.BossStates;
 
 internal class BossDeathState : IEnemyState {
+  private const double ANIMATION_INTERVAL = 0.2;
+
   private readonly Boss boss;
   private double animationTimer = 0.0;
   private bool isDoorUnlocked = false;
@@ -26,7 +28,7 @@ internal class BossDeathState : IEnemyState {
     // 1. Play the death animation until the final frame
     if (boss.CurrentFrame < boss.CurrentSourceRectangles.Count - 1) {
       animationTimer += deltaTime;
-      if (animationTimer >= 0.2) { // Adjust this number to speed up/slow down the animation
+      if (animationTimer >= ANIMATION_INTERVAL) {
         boss.CurrentFrame++;
         animationTimer = 0;
       }
