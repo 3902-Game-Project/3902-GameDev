@@ -1,3 +1,3 @@
-﻿namespace GameProject.Level;
+namespace GameProject.Level;
 
 internal delegate void ChangeLevelCallback(string levelName);
