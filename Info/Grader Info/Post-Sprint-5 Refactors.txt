@@ -29,6 +29,9 @@ DebugDraw doesn't belong in the collision manager and is never being referenced 
 Player - Eric
 Moves the states into their own state machine or something else instead of containing them all inside of the Player class. Adds unnecessary clutter
 
+PlayerAnimatedMovingState - Eric
+Lots of magic numbers.
+
 -----Not Done-----:
 
 -----Not Done > Sprint 3-----:
@@ -86,9 +89,6 @@ All the states should not be contained in Game1, as it defeats the purpose of us
 
 Level
 There's a lot of helper functions in Level that could moved out to make Level itself more coheasive
-
-PlayerAnimatedMovingState - Eric Possibly
-Lots of magic numbers.
 
 BossAttackState - Eric Possibly
 Magic numbers
