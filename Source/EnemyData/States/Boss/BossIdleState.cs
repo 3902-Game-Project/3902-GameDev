@@ -1,9 +1,16 @@
 using System;
 using Microsoft.Xna.Framework;
+using GameProject.Globals;
 
 namespace GameProject.Enemies.BossStates;
 
 internal class BossIdleState : IEnemyState {
+  private const double ANIMATION_INTERVAL = 0.2;
+  private const double IDLE_DURATION = 0.5;
+  private const int PHASE_TWO_CHANCE = 15;
+  private const int ATTACK_1_CHANCE = 50;
+  private const int ROLL_MAX = 100;
+
   private readonly Boss boss;
   private double timer = 0.0, animationTimer = 0.0;
   private readonly Random random = new();
@@ -20,13 +27,13 @@ internal class BossIdleState : IEnemyState {
 
   public void Update(double deltaTime) {
     animationTimer += deltaTime;
-    if (animationTimer > 0.2) {
+    if (animationTimer > ANIMATION_INTERVAL) {
       boss.CurrentFrame = (boss.CurrentFrame + 1) % boss.CurrentSourceRectangles.Count;
       animationTimer = 0;
     }
 
     timer += deltaTime;
-    if (timer > 0.5) {
+    if (timer > IDLE_DURATION) {
       boss.CurrentState = SelectState();
     }
   }
@@ -35,15 +42,15 @@ internal class BossIdleState : IEnemyState {
     // Rely purely on the base enemy's Target property!
     float xDist = Math.Abs(boss.Target.X - boss.Position.X);
     float yDist = Math.Abs(boss.Target.Y - boss.Position.Y);
-    int roll = random.Next(100);
+    int roll = random.Next(ROLL_MAX);
 
-    if (boss.PhaseTwoTriggered && roll < 15) {
+    if (boss.PhaseTwoTriggered && roll < PHASE_TWO_CHANCE) {
       return new BossSpecialAttackState(boss);
     }
 
     // RIFLEMAN LOGIC: If lined up, attack!
-    if (xDist <= 25 || yDist <= 25) {
-      if (roll < 50) return new BossAttackState(boss);
+    if (xDist <= Constants.BOSS_ALIGNMENT_THRESHOLD || yDist <= Constants.BOSS_ALIGNMENT_THRESHOLD) {
+      if (roll < ATTACK_1_CHANCE) return new BossAttackState(boss);
       else return new BossAttack2State(boss);
     }
 

@@ -51,6 +51,9 @@ internal static class Constants {
   public const int RIFLEMAN_DAMAGE = 80;
   public const int SHOTGUNNER_DAMAGE = 50;
 
+  public const float BOSS_ALIGNMENT_THRESHOLD = 25.0f;
+  public const float BOSS_WANDER_SPEED = 120.0f;
+
   public const string SAVE_FILE_PATH = "savegame.json";
 
   /* derived constants */

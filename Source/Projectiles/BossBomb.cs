@@ -8,6 +8,15 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Projectiles;
 
 internal class BossBomb : IProjectile, ICollidable {
+  private const float THROW_SPEED = 150f;
+  private const float FRICTION = 0.92f;
+  private const float STOP_VELOCITY_THRESHOLD = 10f;
+  private const double FUSE_TIME = 2.0;
+  private const int NORMAL_HITBOX_SIZE = 40;
+  private const int EXPLOSION_HITBOX_SIZE = 120;
+  private const double NORMAL_ANIM_INTERVAL = 0.15;
+  private const double EXPLOSION_ANIM_INTERVAL = 0.05;
+  private const int EXPLOSION_START_FRAME = 12;
   public Vector2 Position { get; set; }
   public Vector2 Velocity { get; set; }
 
@@ -26,7 +35,12 @@ internal class BossBomb : IProjectile, ICollidable {
 
   public bool IsExpired { get; private set; } = false;
   public void Expire() { IsExpired = true; }
-  public Rectangle BoundingBox => new((int) Position.X - 20, (int) Position.Y - 20, 40, 40);
+  public Rectangle BoundingBox => new(
+    (int) Position.X - (NORMAL_HITBOX_SIZE / 2),
+    (int) Position.Y - (NORMAL_HITBOX_SIZE / 2),
+    NORMAL_HITBOX_SIZE,
+    NORMAL_HITBOX_SIZE
+   );
 
   public BoxCollider Collider { get; private set; }
   public IShape Shape => Collider;
@@ -38,8 +52,8 @@ internal class BossBomb : IProjectile, ICollidable {
     blinkingTexture = blinkingTex;
     Position = startPos;
     this.damage = damage;
-    Velocity = direction * 150f;
-    Collider = new BoxCollider(40, 40, Position);
+    Velocity = direction * THROW_SPEED;
+    Collider = new BoxCollider(NORMAL_HITBOX_SIZE, NORMAL_HITBOX_SIZE, Position);
 
     flyingRectangles = [
         new(527, 324, 31, 19),
@@ -66,14 +80,14 @@ internal class BossBomb : IProjectile, ICollidable {
 
     if (!isLanded) {
       Position += Velocity * (float) deltaTime;
-      Velocity *= 0.92f;
+      Velocity *= FRICTION;
 
-      if (animationTimer > 0.15) {
+      if (animationTimer > NORMAL_ANIM_INTERVAL) {
         currentFrame = (currentFrame + 1) % flyingRectangles.Count;
         animationTimer = 0;
       }
 
-      if (Velocity.Length() < 10f) {
+      if (Velocity.Length() < STOP_VELOCITY_THRESHOLD) {
         Velocity = Vector2.Zero;
         isLanded = true;
         currentFrame = 0;
@@ -82,19 +96,19 @@ internal class BossBomb : IProjectile, ICollidable {
     } else if (!isExploding) {
       fuseTimer += deltaTime;
 
-      if (animationTimer > 0.15) {
-        currentFrame = (currentFrame + 1) % 12;
+      if (animationTimer > NORMAL_ANIM_INTERVAL) {
+        currentFrame = (currentFrame + 1) % EXPLOSION_START_FRAME;
         animationTimer = 0;
       }
 
-      if (fuseTimer > 2.0) {
+      if (fuseTimer > FUSE_TIME) {
         isExploding = true;
-        currentFrame = 12;
+        currentFrame = EXPLOSION_START_FRAME;
         animationTimer = 0;
-        Collider = new BoxCollider(120, 120, Position);
+        Collider = new BoxCollider(EXPLOSION_HITBOX_SIZE, EXPLOSION_HITBOX_SIZE, Position);
       }
     } else {
-      if (animationTimer > 0.05) {
+      if (animationTimer > EXPLOSION_ANIM_INTERVAL) {
         currentFrame++;
         animationTimer = 0;
 

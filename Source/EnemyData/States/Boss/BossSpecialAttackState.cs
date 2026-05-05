@@ -3,6 +3,10 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Enemies.BossStates;
 
 internal class BossSpecialAttackState : IEnemyState {
+  private const double ANIMATION_INTERVAL = 0.15;
+  private const double END_ANIMATION_INTERVAL = 0.2;
+  private const int BOMB_SPAWN_FRAME = 5;
+
   private readonly Boss boss;
   private double animationTimer = 0.0;
   private bool hasSpawnedBombs = false;
@@ -22,19 +26,19 @@ internal class BossSpecialAttackState : IEnemyState {
   public void Update(double deltaTime) {
     animationTimer += deltaTime;
 
-    if (animationTimer >= 0.15 && boss.CurrentFrame < boss.CurrentSourceRectangles.Count - 1) {
+    if (animationTimer >= ANIMATION_INTERVAL && boss.CurrentFrame < boss.CurrentSourceRectangles.Count - 1) {
       boss.CurrentFrame++;
       animationTimer = 0;
 
       // --- TRIGGER THE ARENA BOMBS ON FRAME 5 ---
-      if (boss.CurrentFrame == 5 && !hasSpawnedBombs) {
+      if (boss.CurrentFrame == BOMB_SPAWN_FRAME && !hasSpawnedBombs) {
         boss.SpawnArenaBombs();
         hasSpawnedBombs = true;
       }
     }
 
     // Return to idle once the animation completes
-    if (boss.CurrentFrame == boss.CurrentSourceRectangles.Count - 1 && animationTimer >= 0.2) {
+    if (boss.CurrentFrame == boss.CurrentSourceRectangles.Count - 1 && animationTimer >= END_ANIMATION_INTERVAL) {
       boss.CurrentState = new BossIdleState(boss);
     }
   }

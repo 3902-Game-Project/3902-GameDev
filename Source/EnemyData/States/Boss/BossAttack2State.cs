@@ -3,6 +3,10 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Enemies.BossStates;
 
 internal class BossAttack2State : IEnemyState {
+  private const double ANIMATION_INTERVAL = 0.15;
+  private const double END_ANIMATION_INTERVAL = 0.2;
+  private const int BOMB_THROW_FRAME = 4;
+  private const int BOMB_STRENGTH = 20;
   private readonly Boss boss;
   private double animationTimer = 0.0;
   private bool hasThrownBomb = false;
@@ -22,19 +26,19 @@ internal class BossAttack2State : IEnemyState {
   public void Update(double deltaTime) {
     animationTimer += deltaTime;
 
-    if (animationTimer >= 0.15 && boss.CurrentFrame < boss.CurrentSourceRectangles.Count - 1) {
+    if (animationTimer >= ANIMATION_INTERVAL && boss.CurrentFrame < boss.CurrentSourceRectangles.Count - 1) {
       boss.CurrentFrame++;
       animationTimer = 0;
-      if (boss.CurrentFrame == 4 && !hasThrownBomb) {
+      if (boss.CurrentFrame == BOMB_THROW_FRAME && !hasThrownBomb) {
         Vector2 dirToPlayer = boss.Target - boss.Position;
         boss.Direction = (dirToPlayer.X > 0) ? FacingDirection.Right : FacingDirection.Left;
 
-        boss.ThrowBomb(20);
+        boss.ThrowBomb(BOMB_STRENGTH);
         hasThrownBomb = true;
       }
     }
 
-    if (boss.CurrentFrame == boss.CurrentSourceRectangles.Count - 1 && animationTimer >= 0.2) {
+    if (boss.CurrentFrame == boss.CurrentSourceRectangles.Count - 1 && animationTimer >= END_ANIMATION_INTERVAL) {
       boss.CurrentState = new BossIdleState(boss);
     }
   }
