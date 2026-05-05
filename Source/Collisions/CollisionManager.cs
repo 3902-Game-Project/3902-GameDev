@@ -16,7 +16,6 @@ internal enum CollisionAxis {
 
 internal class CollisionManager : IInstantaneousUpdatable {
   private readonly List<ICollidable> colliders;
-  private Texture2D debugTexture;
 
   public CollisionManager() {
     colliders = [];

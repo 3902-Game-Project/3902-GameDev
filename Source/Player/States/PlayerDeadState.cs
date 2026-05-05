@@ -59,7 +59,7 @@ internal class PlayerDeadState(Player player, Action onLoss) : APlayerState(play
       color: Color.White,
       rotation: 0f,
       origin: origin,
-      scale: 0.15f,
+      scale: Constants.PLAYER_SPRITE_SCALE,
       effects: SpriteEffects.None,
       layerDepth: 0f
     );

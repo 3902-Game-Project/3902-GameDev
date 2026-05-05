@@ -20,7 +20,6 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
     new(2481, 54, 171, 323),
   ];
 
-  // TODO: need to update below 2 later
   private static readonly List<Rectangle> MOVE_UP_FRAMES = [
     new (130, 813, 159, 335),
     new (453, 813, 161, 335),
@@ -126,7 +125,7 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
       color: CurrentTintColor,
       rotation: 0f,
       origin: origin,
-      scale: 0.15f,
+      scale: Constants.PLAYER_SPRITE_SCALE,
       effects: SpriteEffects.None,
       layerDepth: 0f
     );

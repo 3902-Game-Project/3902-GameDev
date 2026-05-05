@@ -30,11 +30,20 @@ internal static class Constants {
   public const float BASE_ENEMY_HEIGHT = 64.0f;
   public const float ENEMY_DAMAGE_FLASH_DURATION = 0.15f;
 
-  public const float PLAYER_WIDTH = 171.0f * 0.15f;
-  public const float PLAYER_HEIGHT = 323.0f * 0.15f;
   public const float PLAYER_INVINCIBILITY_DURATION = 1.5f;
   public const float PLAYER_DAMAGE_FLASH_DURATION = 0.3f;
   public const float PLAYER_SPEED = 200.0f;
+
+  public const float PLAYER_SPRITE_SCALE = 0.15f;
+  public const float PLAYER_SPRITE_WIDTH = 171.0f;
+  public const float PLAYER_SPRITE_HEIGHT = 323.0f;
+  public const float HEALTH_BAR_SCALE = 0.15f;
+  public const int DEFAULT_MAX_HEALTH = 100;
+  public const int ENEMY_CONTACT_DAMAGE = 50;
+  public const float ITEM_GRAB_RANGE = 75.0f;
+  public const float AMMO_AUTO_COLLECT_RANGE = 30.0f;
+  public const float COLLISION_BUFFER = 1.0f;
+  public const int USE_ITEM_DURATION_FRAMES = 20;
 
   public const int BACKPACK_COLUMNS = 5;
 

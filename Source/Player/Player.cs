@@ -38,8 +38,7 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   public Layer Layer { get; } = Layer.Player;
   public Vector2 Position { get; set; }
   public Vector2 Velocity { get; set; }
-
-  public int Health { get; set; } = 100;
+  public int Health { get; set; } = Constants.DEFAULT_MAX_HEALTH;
 
   public double InvincibilityTimer { get; set; } = 0.0;
   public double InfiniteAmmoTimer { get; set; } = 0.0;
@@ -51,16 +50,6 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
 
   public PlayerInventory Inventory { get; private set; }
 
-  public Rectangle BoundingBox {
-    get {
-      int width = (int) Constants.PLAYER_WIDTH;
-      int height = (int) Constants.PLAYER_HEIGHT;
-      int x = (int) Position.X - (width / 2);
-      int y = (int) Position.Y - (height / 2);
-      return new Rectangle(x, y, width, height);
-    }
-  }
-
   public PlayerStateMachine StateMachine { get; private set; }
 
   public Player(ILevelManager levelManager, Game1 game) {
@@ -69,8 +58,8 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     Velocity = Vector2.Zero;
     Inventory = new PlayerInventory(this, levelManager);
 
-    float width = 171 * 0.15f;
-    float height = 323 * 0.15f;
+    float width = Constants.PLAYER_SPRITE_WIDTH * Constants.PLAYER_SPRITE_SCALE;
+    float height = Constants.PLAYER_SPRITE_HEIGHT * Constants.PLAYER_SPRITE_SCALE;
     collider = new BoxCollider(width, height, Position);
 
     StateMachine = new PlayerStateMachine(this, () => game.ChangeState(game.StateLoss));
@@ -126,10 +115,10 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     else if (!inputUpThisFrame && inputDownThisFrame) activeDirY = 1;
     else if (inputUpThisFrame && !inputDownThisFrame) activeDirY = -1;
 
-    if (activeDirX == -1) currentState.MoveLeft();
-    if (activeDirX == 1) currentState.MoveRight();
-    if (activeDirY == -1) currentState.MoveUp();
-    if (activeDirY == 1) currentState.MoveDown();
+    if (activeDirX == -1) StateMachine.CurrentState.MoveLeft();
+    if (activeDirX == 1) StateMachine.CurrentState.MoveRight();
+    if (activeDirY == -1) StateMachine.CurrentState.MoveUp();
+    if (activeDirY == 1) StateMachine.CurrentState.MoveDown();
 
     if (Velocity.X != 0 && MathF.Sign(Velocity.X) != MathF.Sign(lastInputVelocity.X)) {
       Direction = (Velocity.X > 0) ? FacingDirection.Right : FacingDirection.Left;
@@ -153,13 +142,13 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
 
     Position = new Vector2(Position.X + xStep, Position.Y);
     if (collider != null) collider.Position = Position;
-    levelManager.CurrentLevel.PlayerResolveCollisions(this, CollisionAxis.X, MathF.Abs(yStep) + 1f);
+    levelManager.CurrentLevel.PlayerResolveCollisions(this, CollisionAxis.X, MathF.Abs(yStep) + Constants.COLLISION_BUFFER);
 
     Position = new Vector2(Position.X, Position.Y + yStep);
     if (collider != null) collider.Position = Position;
-    levelManager.CurrentLevel.PlayerResolveCollisions(this, CollisionAxis.Y, MathF.Abs(xStep) + 1f);
+    levelManager.CurrentLevel.PlayerResolveCollisions(this, CollisionAxis.Y, MathF.Abs(xStep) + Constants.COLLISION_BUFFER);
 
-    currentState.Update(deltaTime);
+    StateMachine.CurrentState.Update(deltaTime);
     Velocity = Vector2.Zero;
 
     Inventory.Update(deltaTime);
@@ -175,14 +164,14 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
 
     // Auto-Collect for Ammo
     if (levelManager?.CurrentLevel != null) {
-      foreach (var pickup in levelManager.CurrentLevel.GetRemoveAmmoInRange(Position, 30.0f)) {
+      foreach (var pickup in levelManager.CurrentLevel.GetRemoveAmmoInRange(Position, Constants.AMMO_AUTO_COLLECT_RANGE)) {
         pickup.OnPickup(this);
       }
     }
   }
 
   public void Draw(SpriteBatch spriteBatch) {
-    currentState.Draw(spriteBatch);
+    StateMachine.CurrentState.Draw(spriteBatch);
     Inventory.Draw(spriteBatch, Position, Direction, TextureStore.Instance.WhitePixel);
   }
 
@@ -193,14 +182,14 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     }
 
     if (info.Collider is IEnemy) {
-      TakeDamage(50);
+      TakeDamage(Constants.ENEMY_CONTACT_DAMAGE);
     }
   }
 
   public void Interact() {
     if (levelManager?.CurrentLevel == null) return;
 
-    float grabRange = 75f;
+    float grabRange = Constants.ITEM_GRAB_RANGE;
 
     IWorldPickup? closestPickup = levelManager.CurrentLevel.GetClosestPickupInRange(Position, grabRange);
 

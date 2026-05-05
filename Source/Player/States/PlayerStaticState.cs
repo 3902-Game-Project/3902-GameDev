@@ -100,7 +100,7 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
       color: CurrentTintColor,
       rotation: 0f,
       origin: origin,
-      scale: 0.15f,
+      scale: Constants.PLAYER_SPRITE_SCALE,
       effects: flipStatus,
       layerDepth: 0f
     );
