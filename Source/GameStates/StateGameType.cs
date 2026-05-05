@@ -25,7 +25,7 @@ internal class StateGameType : IGameState {
   private IController<MouseButtons> mouseController;
   private IController<GPGamePadButtons> gamePadController;
 
-  private HUDManager hudManager;
+  private readonly HUDManager hudManager;
 
   private void DrawGameWithoutVignette(GraphicsDevice graphicsDevice, ValueTracker<RenderTarget2D> renderTargetTracker, SpriteBatch spriteBatch) {
     graphicsDevice.Clear(BACKGROUND_COLOR);
