@@ -17,7 +17,6 @@ internal class Game1 : Game {
   private Rectangle renderScaleRectangle;
 
   public SpriteBatch SpriteBatch { get; private set; }
-  public Viewport DefaultViewport { get; private set; }
   public Viewport HudViewport { get; private set; }
   public Viewport GameViewport { get; private set; }
 
@@ -73,15 +72,15 @@ internal class Game1 : Game {
 
     Window.AllowUserResizing = true;
     Window.ClientSizeChanged += OnResize;
-    DefaultViewport = new Viewport(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+    var defaultViewport = new Viewport(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
     HudViewport = new Viewport(0, 0, Constants.WINDOW_WIDTH, Constants.HUD_HEIGHT);
     GameViewport = new Viewport(0, Constants.HUD_HEIGHT, Constants.WINDOW_WIDTH, Constants.GAME_HEIGHT);
 
-    DefaultViewport = GraphicsDevice.Viewport;
+    defaultViewport = GraphicsDevice.Viewport;
     HudViewport = new Viewport(0, 0, graphics.PreferredBackBufferWidth, Constants.HUD_HEIGHT);
     GameViewport = new Viewport(0, Constants.HUD_HEIGHT, graphics.PreferredBackBufferWidth, Constants.GAME_HEIGHT);
 
-    viewportTracker = ValueTrackerFactory.CreateViewportTracker(GraphicsDevice, DefaultViewport);
+    viewportTracker = ValueTrackerFactory.CreateViewportTracker(GraphicsDevice, defaultViewport);
 
     MiscAssetStore.Instance.Initialize();
     TextureStore.Instance.Initialize();

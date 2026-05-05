@@ -131,11 +131,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     );
 
     SpriteFont font = MiscAssetStore.Instance.MainFont;
-    //int screenWidth = game.Window.ClientBounds.Width;
-    //int screenHeight = game.Window.ClientBounds.Height;
-    int screenWidth = game.DefaultViewport.Width;
-    int screenHeight = game.DefaultViewport.Height;
-    int centerX = screenWidth / 2;
+    int centerX = Constants.WINDOW_WIDTH / 2;
 
     TextFuncs.DrawCenteredString(
       spriteBatch: drawData.SpriteBatch,
@@ -219,7 +215,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
 
     TextFuncs.DrawCenteredString(
       spriteBatch: drawData.SpriteBatch,
-      position: new Vector2(centerX, screenHeight - 40.0f),
+      position: new Vector2(centerX, Constants.WINDOW_HEIGHT - 40.0f),
       text:
         "Press I / GamePadB to return to game\n" +
         "Press Q / GamePadY to quit",

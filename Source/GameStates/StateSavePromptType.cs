@@ -2,6 +2,7 @@ using GameProject.ButtonDiffTrackers;
 using GameProject.Controllers;
 using GameProject.Factories.Controller;
 using GameProject.GlobalInterfaces;
+using GameProject.Globals;
 using GameProject.HelperFuncs;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
@@ -46,7 +47,11 @@ internal class StateSavePromptType(Game1 game) : IGameState {
 
     TextFuncs.DrawCenteredString(
       spriteBatch: drawData.SpriteBatch,
-      position: new Vector2(game.DefaultViewport.Width, game.DefaultViewport.Height) * 0.5f,
+      position:
+        new Vector2(
+          Constants.WINDOW_WIDTH,
+          Constants.WINDOW_HEIGHT
+        ) * 0.5f,
       text: text,
       color: Color.White
     );
