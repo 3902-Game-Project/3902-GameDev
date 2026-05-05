@@ -2,17 +2,17 @@
 
 -----Done > Sprint 5 early comments-----:
 
-StateGameType
+StateGameType - Santosh
 
 -----Done > Sprint 5-----:
 
-Controllers
+Controllers - Santosh
 Seems like most controllers have similar functionality so an abstract class could clean up code, but for only three classes of relatively small size, it isn't that important
 
-Commands
+Commands - Santosh
 Move add folders for the commands. Right now its pretty hard to find what command you're looking for as there's a bunch in the same file level without any organization
 
-StateGameType (High Priority)
+StateGameType (High Priority) - Santosh
 Class is too large with some disconnected elements like key bindings
 The LowLevelDraw function is far too large and contains granular details like individual sprite batch groups that should be moved out into easier to read functions
 The class coupling for this class is 75 which is enormous and would be nightmare during testing
