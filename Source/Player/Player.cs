@@ -61,12 +61,7 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     }
   }
 
-
-  public IPlayerState StaticState { get; private set; }
-  public IPlayerState MovingState { get; private set; }
-  public IPlayerState UseItemState { get; private set; }
-  public IPlayerState DeadState { get; private set; }
-  private IPlayerState currentState;
+  public PlayerStateMachine StateMachine { get; private set; }
 
   public Player(ILevelManager levelManager, Game1 game) {
     this.levelManager = levelManager;
@@ -78,15 +73,7 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     float height = 323 * 0.15f;
     collider = new BoxCollider(width, height, Position);
 
-    MovingState = new PlayerMovingState(this);
-    StaticState = new PlayerStaticState(this);
-    UseItemState = new PlayerUseItemState(this);
-    DeadState = new PlayerDeadState(this, () => game.ChangeState(game.StateLoss));
-    currentState = StaticState;
-  }
-
-  public void ChangeState(IPlayerState newState) {
-    currentState = newState;
+    StateMachine = new PlayerStateMachine(this, () => game.ChangeState(game.StateLoss));
   }
 
   public void MoveUp() => inputUpThisFrame = true;
@@ -98,19 +85,19 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   public void MoveRight() => inputRightThisFrame = true;
 
   public void UseItem(UseType useType) {
-    currentState.UseItem(useType);
+    StateMachine.CurrentState.UseItem(useType);
   }
 
   public void UseKey(UseType useType) {
-    currentState.UseKey(useType);
+    StateMachine.CurrentState.UseKey(useType);
   }
 
   public void Die() {
-    currentState.Die();
+    StateMachine.CurrentState.Die();
   }
 
   public void TakeDamage(int amount) {
-    currentState.TakeDamage(amount);
+    StateMachine.CurrentState.TakeDamage(amount);
   }
 
   public void Initialize() {

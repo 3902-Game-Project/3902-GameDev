@@ -34,7 +34,7 @@ internal abstract class APlayerState(Player player) : IPlayerState {
   }
 
   public virtual void Die() {
-    Player.ChangeState(Player.DeadState);
+    Player.StateMachine.ChangeState(Player.StateMachine.DeadState);
   }
 
   public virtual void Update(double deltaTime) {
