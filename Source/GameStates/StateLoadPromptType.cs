@@ -35,7 +35,7 @@ internal class StateLoadPromptType(Game1 game) : IGameState {
   }
 
   public void LowLevelDraw(LowLevelDrawParams drawData) {
-    drawData.ClearWindowCallback(new(25, 28, 33));
+    drawData.ClearWindowCallback(Constants.MAIN_BACKGROUND_COLOR);
 
     drawData.SpriteBatch.Begin();
 

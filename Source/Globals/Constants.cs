@@ -1,7 +1,12 @@
-﻿namespace GameProject.Globals;
+﻿using Microsoft.Xna.Framework;
+
+namespace GameProject.Globals;
 
 internal static class Constants {
   /* base constants */
+  public static readonly Color MAIN_BACKGROUND_COLOR = new(25, 28, 33); // Dark gray background
+  public static readonly Color LEVEL_BACKGROUND_COLOR = new(20, 20, 120); // Bluish background
+
   public const float BASE_BLOCK_WIDTH = 64.0f;
   public const float BASE_BLOCK_HEIGHT = 64.0f;
   public const int LEVEL_WIDTH_BLOCKS = 15;

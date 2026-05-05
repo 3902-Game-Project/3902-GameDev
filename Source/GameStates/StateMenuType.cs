@@ -28,8 +28,6 @@ internal class StateMenuType(Game1 game) : IGameState {
   }
 
   public void LowLevelDraw(LowLevelDrawParams drawData) {
-    drawData.ClearWindowCallback(Color.CornflowerBlue);
-
     drawData.SpriteBatch.Begin();
 
     drawData.SpriteBatch.Draw(

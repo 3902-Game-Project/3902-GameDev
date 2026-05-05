@@ -27,7 +27,7 @@ internal class StateWinType(Game1 game) : IGameState {
   }
 
   public void LowLevelDraw(LowLevelDrawParams drawData) {
-    drawData.ClearWindowCallback(Color.CornflowerBlue);
+    drawData.ClearWindowCallback(Constants.MAIN_BACKGROUND_COLOR);
 
     drawData.SpriteBatch.Begin();
 

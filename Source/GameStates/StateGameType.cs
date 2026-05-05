@@ -14,7 +14,6 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.GameStates;
 
 internal class StateGameType : IGameState {
-  private static Color BACKGROUND_COLOR = new(20, 20, 120);
   private static Rectangle NON_HUD_RECTANGLE = new(0, 0, Constants.WINDOW_WIDTH, Constants.GAME_HEIGHT);
 
   private RenderTarget2D nonHUDTarget;
@@ -28,7 +27,7 @@ internal class StateGameType : IGameState {
   private readonly HUDManager hudManager;
 
   private void DrawGameWithoutVignette(LowLevelDrawParams drawData) {
-    drawData.ClearWindowCallback(BACKGROUND_COLOR);
+    drawData.ClearWindowCallback(Constants.LEVEL_BACKGROUND_COLOR);
 
     using (drawData.RenderTargetTracker.TempSet(nonHUDTarget)) {
       drawData.SpriteBatch.Begin(
