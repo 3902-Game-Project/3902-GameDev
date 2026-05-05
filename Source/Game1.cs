@@ -16,7 +16,7 @@ internal class Game1 : Game {
   public Viewport HudViewport { get; private set; }
   public Viewport GameViewport { get; private set; }
   private RenderTarget2D renderTarget;
-  private RenderTargetTracker renderTargetTracker;
+  private ValueTracker<RenderTarget2D> renderTargetTracker;
   private Rectangle renderScaleRectangle;
 
   private StateTransitionType StateTransition;
@@ -68,7 +68,7 @@ internal class Game1 : Game {
     graphics.PreferredBackBufferWidth = Constants.WINDOW_WIDTH;
     graphics.ApplyChanges();
 
-    renderTargetTracker = new(GraphicsDevice);
+    renderTargetTracker = ValueTrackerFactory.CreateRenderTargetTracker(GraphicsDevice);
 
     Window.AllowUserResizing = true;
     Window.ClientSizeChanged += OnResize;
@@ -166,7 +166,7 @@ internal class Game1 : Game {
   protected override void Draw(GameTime gameTime) {
     // Render everything that should be on screen to a texture
 
-    using (renderTargetTracker.TempSetTarget(renderTarget)) {
+    using (renderTargetTracker.TempSet(renderTarget)) {
       GraphicsDevice.SetRenderTarget(renderTarget);
       GraphicsDevice.Clear(Color.Black);
       currentState.LowLevelDraw(GraphicsDevice, renderTargetTracker, SpriteBatch);

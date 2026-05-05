@@ -27,7 +27,7 @@ internal class StateMenuType(Game1 game) : IGameState {
     gamePadController.Update();
   }
 
-  public void LowLevelDraw(GraphicsDevice graphicsDevice, RenderTargetTracker renderTargetTracker, SpriteBatch spriteBatch) {
+  public void LowLevelDraw(GraphicsDevice graphicsDevice, ValueTracker<RenderTarget2D> renderTargetTracker, SpriteBatch spriteBatch) {
     graphicsDevice.Clear(Color.CornflowerBlue);
 
     spriteBatch.Begin();

@@ -34,7 +34,7 @@ internal class StateSavePromptType(Game1 game) : IGameState {
     }
   }
 
-  public void LowLevelDraw(GraphicsDevice graphicsDevice, RenderTargetTracker renderTargetTracker, SpriteBatch spriteBatch) {
+  public void LowLevelDraw(GraphicsDevice graphicsDevice, ValueTracker<RenderTarget2D> renderTargetTracker, SpriteBatch spriteBatch) {
     graphicsDevice.Clear(new(25, 28, 33)); // Dark gray background
 
     spriteBatch.Begin();

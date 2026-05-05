@@ -4,5 +4,5 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.GlobalInterfaces;
 
 internal interface ILowLevelDrawable {
-  void LowLevelDraw(GraphicsDevice graphicsDevice, RenderTargetTracker renderTargetTracker, SpriteBatch spriteBatch);
+  void LowLevelDraw(GraphicsDevice graphicsDevice, ValueTracker<RenderTarget2D> renderTargetTracker, SpriteBatch spriteBatch);
 }

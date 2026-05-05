@@ -46,7 +46,7 @@ internal class StateTransitionType(Game1 game) : IGameState {
     }
   }
 
-  public void LowLevelDraw(GraphicsDevice graphicsDevice, RenderTargetTracker renderTargetTracker, SpriteBatch spriteBatch) {
+  public void LowLevelDraw(GraphicsDevice graphicsDevice, ValueTracker<RenderTarget2D> renderTargetTracker, SpriteBatch spriteBatch) {
     switch (screenFader.FadeState) {
       case ScreenFader.FadingState.FadeOut:
         fromGameState.LowLevelDraw(graphicsDevice, renderTargetTracker, spriteBatch);

@@ -27,10 +27,10 @@ internal class StateGameType : IGameState {
 
   private HUDManager hudManager;
 
-  private void DrawGameWithoutVignette(GraphicsDevice graphicsDevice, RenderTargetTracker renderTargetTracker, SpriteBatch spriteBatch) {
+  private void DrawGameWithoutVignette(GraphicsDevice graphicsDevice, ValueTracker<RenderTarget2D> renderTargetTracker, SpriteBatch spriteBatch) {
     graphicsDevice.Clear(BACKGROUND_COLOR);
 
-    using (renderTargetTracker.TempSetTarget(nonHUDTarget)) {
+    using (renderTargetTracker.TempSet(nonHUDTarget)) {
       spriteBatch.Begin(
         sortMode: SpriteSortMode.Deferred,
         blendState: BlendState.AlphaBlend,
@@ -141,7 +141,7 @@ internal class StateGameType : IGameState {
     }
   }
 
-  public void LowLevelDraw(GraphicsDevice graphicsDevice, RenderTargetTracker renderTargetTracker, SpriteBatch spriteBatch) {
+  public void LowLevelDraw(GraphicsDevice graphicsDevice, ValueTracker<RenderTarget2D> renderTargetTracker, SpriteBatch spriteBatch) {
     DrawGameWithoutVignette(graphicsDevice, renderTargetTracker, spriteBatch);
     DrawGameVignette(graphicsDevice, spriteBatch);
     DrawHUD(graphicsDevice, spriteBatch);

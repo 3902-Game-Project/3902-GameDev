@@ -54,7 +54,7 @@ internal class ScreenFader(GameWindow gameWindow) : ITemporalUpdatable, ILowLeve
     }
   }
 
-  public void LowLevelDraw(GraphicsDevice graphicsDevice, RenderTargetTracker renderTargetTracker, SpriteBatch spriteBatch) {
+  public void LowLevelDraw(GraphicsDevice graphicsDevice, ValueTracker<RenderTarget2D> renderTargetTracker, SpriteBatch spriteBatch) {
     var fadeProgress = fadeTime / Constants.SCREEN_FADE_DURATION;
 
     spriteBatch.Begin();

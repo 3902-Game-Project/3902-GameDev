@@ -118,7 +118,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     gamePadController.Update();
   }
 
-  public void LowLevelDraw(GraphicsDevice graphicsDevice, RenderTargetTracker renderTargetTracker, SpriteBatch spriteBatch) {
+  public void LowLevelDraw(GraphicsDevice graphicsDevice, ValueTracker<RenderTarget2D> renderTargetTracker, SpriteBatch spriteBatch) {
     graphicsDevice.Viewport = game.DefaultViewport;
     graphicsDevice.Clear(new Color(25, 28, 33));
 
