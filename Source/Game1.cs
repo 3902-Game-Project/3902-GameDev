@@ -169,7 +169,6 @@ internal class Game1 : Game {
     // Render everything that should be on screen to a texture
 
     using (renderTargetTracker.TempSet(renderTarget)) {
-      GraphicsDevice.Clear(Color.Black);
       currentState.LowLevelDraw(new(
         GraphicsDevice.Clear,
         renderTargetTracker,
