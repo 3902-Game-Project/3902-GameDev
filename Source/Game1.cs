@@ -170,7 +170,6 @@ internal class Game1 : Game {
 
     using (renderTargetTracker.TempSet(renderTarget)) {
       GraphicsDevice.Clear(Color.Black);
-      currentState.LowLevelDraw(new (
       currentState.LowLevelDraw(new(
         GraphicsDevice.Clear,
         renderTargetTracker,

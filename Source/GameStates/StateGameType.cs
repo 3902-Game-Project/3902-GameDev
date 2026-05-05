@@ -4,7 +4,6 @@ using GameProject.Factories.Controller;
 using GameProject.GlobalInterfaces;
 using GameProject.Globals;
 using GameProject.Managers;
-using GameProject.Misc;
 using GameProject.PlayerSpace;
 using GameProject.Source.Misc;
 using Microsoft.Xna.Framework;

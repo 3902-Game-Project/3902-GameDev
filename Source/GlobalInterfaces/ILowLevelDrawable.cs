@@ -6,7 +6,7 @@ namespace GameProject.GlobalInterfaces;
 
 internal delegate void ClearWindowCallback(Color color);
 
-internal record LowLevelDrawParams (
+internal record LowLevelDrawParams(
   ClearWindowCallback ClearWindowCallback,
   ValueTracker<RenderTarget2D> RenderTargetTracker,
   ValueTracker<Viewport> ViewportTracker,
