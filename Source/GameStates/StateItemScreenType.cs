@@ -2,6 +2,7 @@ using GameProject.ButtonDiffTrackers;
 using GameProject.Commands;
 using GameProject.Controllers;
 using GameProject.Factories.Controller;
+using GameProject.GlobalInterfaces;
 using GameProject.Globals;
 using GameProject.HelperFuncs;
 using GameProject.Items;
@@ -118,11 +119,11 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     gamePadController.Update();
   }
 
-  public void LowLevelDraw(GraphicsDevice graphicsDevice, ValueTracker<RenderTarget2D> renderTargetTracker, SpriteBatch spriteBatch) {
-    graphicsDevice.Viewport = game.DefaultViewport;
-    graphicsDevice.Clear(new Color(25, 28, 33));
+  public void LowLevelDraw(LowLevelDrawParams drawData) {
+    drawData.GraphicsDevice.Viewport = game.DefaultViewport;
+    drawData.GraphicsDevice.Clear(new(25, 28, 33));
 
-    spriteBatch.Begin(
+    drawData.SpriteBatch.Begin(
       SpriteSortMode.Deferred,
       BlendState.AlphaBlend,
       SamplerState.PointClamp,
@@ -138,7 +139,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     int centerX = screenWidth / 2;
 
     TextFuncs.DrawCenteredString(
-      spriteBatch: spriteBatch,
+      spriteBatch: drawData.SpriteBatch,
       position: new Vector2(centerX, 49.0f),
       text: "- INVENTORY -",
       color: Color.Gold
@@ -149,7 +150,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     if (player != null) {
       // --- DRAW WEAPONS ---
       TextFuncs.DrawCenteredString(
-        spriteBatch: spriteBatch,
+        spriteBatch: drawData.SpriteBatch,
         position: new Vector2(centerX, 129.0f),
         text: "WEAPONS",
         color: Color.LightGray
@@ -167,21 +168,21 @@ internal class StateItemScreenType(Game1 game) : IGameState {
         Vector2 uiPosition = new(uiX, uiY);
 
         Color slotColor = (InWeaponMenu && i == SelectedWeaponIndex) ? new Color(70, 70, 70, 200) : new Color(40, 40, 40, 200);
-        spriteBatch.Draw(blankTexture, new Rectangle((int) uiX, (int) uiY, weaponSlotSize, weaponSlotSize), slotColor);
+        drawData.SpriteBatch.Draw(blankTexture, new Rectangle((int) uiX, (int) uiY, weaponSlotSize, weaponSlotSize), slotColor);
 
         float scale = (InWeaponMenu && i == SelectedWeaponIndex) ? 2.5f : 2.0f;
         Color tint = (InWeaponMenu && i == SelectedWeaponIndex) ? Color.White : Color.Gray;
 
-        weapon.DrawUI(spriteBatch, uiPosition + new Vector2(20, 20), scale, tint);
+        weapon.DrawUI(drawData.SpriteBatch, uiPosition + new Vector2(20, 20), scale, tint);
 
         if (i == player.Inventory.ActiveWeaponIndex) {
-          spriteBatch.DrawString(font, "Equipped", new Vector2(uiX + 15, uiY + weaponSlotSize + 10), Color.MediumSpringGreen);
+          drawData.SpriteBatch.DrawString(font, "Equipped", new Vector2(uiX + 15, uiY + weaponSlotSize + 10), Color.MediumSpringGreen);
         }
       }
 
       // --- DRAW BACKPACK ---
       TextFuncs.DrawCenteredString(
-        spriteBatch: spriteBatch,
+        spriteBatch: drawData.SpriteBatch,
         position: new Vector2(centerX, 359.0f),
         text: "BACKPACK",
         color: Color.LightGray
@@ -201,7 +202,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
         bool isHovered = !InWeaponMenu && i == SelectedBackpackIndex && i < player.Inventory.GeneralItems.Count;
         Color slotColor = isHovered ? new Color(70, 70, 70, 200) : new Color(40, 40, 40, 200);
 
-        spriteBatch.Draw(blankTexture, new Rectangle((int) uiX, (int) uiY, itemSlotSize, itemSlotSize), slotColor);
+        drawData.SpriteBatch.Draw(blankTexture, new Rectangle((int) uiX, (int) uiY, itemSlotSize, itemSlotSize), slotColor);
 
         if (i < player.Inventory.GeneralItems.Count) {
           IItem item = player.Inventory.GeneralItems[i];
@@ -212,13 +213,13 @@ internal class StateItemScreenType(Game1 game) : IGameState {
             scale = isHovered ? 3.0f : 2.8f;
           }
 
-          item.DrawUI(spriteBatch, new Vector2(uiX, uiY) + new Vector2(10, 10), scale, tint);
+          item.DrawUI(drawData.SpriteBatch, new Vector2(uiX, uiY) + new Vector2(10, 10), scale, tint);
         }
       }
     }
 
     TextFuncs.DrawCenteredString(
-      spriteBatch: spriteBatch,
+      spriteBatch: drawData.SpriteBatch,
       position: new Vector2(centerX, screenHeight - 40.0f),
       text:
         "Press I / GamePadB to return to game\n" +
@@ -226,7 +227,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
       color: Color.DarkGray
     );
 
-    spriteBatch.End();
+    drawData.SpriteBatch.End();
   }
 
   public void OnStateEnter(bool prevStateIsCurrentState) { }

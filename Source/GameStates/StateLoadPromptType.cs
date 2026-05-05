@@ -1,6 +1,7 @@
 using GameProject.ButtonDiffTrackers;
 using GameProject.Controllers;
 using GameProject.Factories.Controller;
+using GameProject.GlobalInterfaces;
 using GameProject.HelperFuncs;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
@@ -34,23 +35,23 @@ internal class StateLoadPromptType(Game1 game) : IGameState {
     }
   }
 
-  public void LowLevelDraw(GraphicsDevice graphicsDevice, ValueTracker<RenderTarget2D> renderTargetTracker, SpriteBatch spriteBatch) {
-    graphicsDevice.Clear(new(25, 28, 33));
+  public void LowLevelDraw(LowLevelDrawParams drawData) {
+    drawData.GraphicsDevice.Clear(new(25, 28, 33));
 
-    spriteBatch.Begin();
+    drawData.SpriteBatch.Begin();
 
     string text = IsShowingSuccess
         ? "Progress successfully loaded"
         : "Would you like to load your last saved progress?\nPress A/GamePadB to confirm, D?GamePadA to cancel.";
 
     TextFuncs.DrawCenteredString(
-      spriteBatch: spriteBatch,
+      spriteBatch: drawData.SpriteBatch,
       position: new Vector2(game.DefaultViewport.Width, game.DefaultViewport.Height) * 0.5f,
       text: text,
       color: Color.White
     );
 
-    spriteBatch.End();
+    drawData.SpriteBatch.End();
   }
 
   public void OnStateEnter(bool prevStateIsCurrentState) {

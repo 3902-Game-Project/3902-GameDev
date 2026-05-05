@@ -1,6 +1,7 @@
 using GameProject.ButtonDiffTrackers;
 using GameProject.Controllers;
 using GameProject.Factories.Controller;
+using GameProject.GlobalInterfaces;
 using GameProject.Globals;
 using GameProject.Managers;
 using GameProject.Misc;
@@ -27,11 +28,11 @@ internal class StateGameType : IGameState {
 
   private readonly HUDManager hudManager;
 
-  private void DrawGameWithoutVignette(GraphicsDevice graphicsDevice, ValueTracker<RenderTarget2D> renderTargetTracker, SpriteBatch spriteBatch) {
-    graphicsDevice.Clear(BACKGROUND_COLOR);
+  private void DrawGameWithoutVignette(LowLevelDrawParams drawData) {
+    drawData.GraphicsDevice.Clear(BACKGROUND_COLOR);
 
-    using (renderTargetTracker.TempSet(nonHUDTarget)) {
-      spriteBatch.Begin(
+    using (drawData.RenderTargetTracker.TempSet(nonHUDTarget)) {
+      drawData.SpriteBatch.Begin(
         sortMode: SpriteSortMode.Deferred,
         blendState: BlendState.AlphaBlend,
         samplerState: SamplerState.PointClamp,
@@ -39,15 +40,15 @@ internal class StateGameType : IGameState {
         rasterizerState: RasterizerState.CullNone
       );
 
-      LevelManager.Draw(spriteBatch);
-      Player.Draw(spriteBatch);
+      LevelManager.Draw(drawData.SpriteBatch);
+      Player.Draw(drawData.SpriteBatch);
 
-      spriteBatch.End();
+      drawData.SpriteBatch.End();
     }
   }
 
-  private void DrawGameVignette(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
-    graphicsDevice.Viewport = game.GameViewport;
+  private void DrawGameVignette(LowLevelDrawParams drawData) {
+    drawData.GraphicsDevice.Viewport = game.GameViewport;
 
     try {
       Effect effect;
@@ -58,7 +59,7 @@ internal class StateGameType : IGameState {
         effect = null;
       }
 
-      spriteBatch.Begin(
+      drawData.SpriteBatch.Begin(
         sortMode: SpriteSortMode.Deferred,
         blendState: BlendState.AlphaBlend,
         samplerState: SamplerState.PointClamp,
@@ -67,19 +68,19 @@ internal class StateGameType : IGameState {
         effect: effect
       );
 
-      spriteBatch.Draw(nonHUDTarget, NON_HUD_RECTANGLE, Color.White);
+      drawData.SpriteBatch.Draw(nonHUDTarget, NON_HUD_RECTANGLE, Color.White);
 
-      spriteBatch.End();
+      drawData.SpriteBatch.End();
     } finally {
-      graphicsDevice.Viewport = game.DefaultViewport;
+      drawData.GraphicsDevice.Viewport = game.DefaultViewport;
     }
   }
 
-  private void DrawHUD(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch) {
-    graphicsDevice.Viewport = game.HudViewport;
+  private void DrawHUD(LowLevelDrawParams drawData) {
+    drawData.GraphicsDevice.Viewport = game.HudViewport;
 
     try {
-      spriteBatch.Begin(
+      drawData.SpriteBatch.Begin(
         sortMode: SpriteSortMode.Deferred,
         blendState: BlendState.AlphaBlend,
         samplerState: SamplerState.PointClamp,
@@ -87,11 +88,11 @@ internal class StateGameType : IGameState {
         rasterizerState: RasterizerState.CullNone
       );
 
-      hudManager.Draw(spriteBatch);
+      hudManager.Draw(drawData.SpriteBatch);
 
-      spriteBatch.End();
+      drawData.SpriteBatch.End();
     } finally {
-      graphicsDevice.Viewport = game.DefaultViewport;
+      drawData.GraphicsDevice.Viewport = game.DefaultViewport;
     }
   }
 
@@ -141,10 +142,10 @@ internal class StateGameType : IGameState {
     }
   }
 
-  public void LowLevelDraw(GraphicsDevice graphicsDevice, ValueTracker<RenderTarget2D> renderTargetTracker, SpriteBatch spriteBatch) {
-    DrawGameWithoutVignette(graphicsDevice, renderTargetTracker, spriteBatch);
-    DrawGameVignette(graphicsDevice, spriteBatch);
-    DrawHUD(graphicsDevice, spriteBatch);
+  public void LowLevelDraw(LowLevelDrawParams drawData) {
+    DrawGameWithoutVignette(drawData);
+    DrawGameVignette(drawData);
+    DrawHUD(drawData);
   }
 
   public void OnStateEnter(bool prevStateIsCurrentState) {

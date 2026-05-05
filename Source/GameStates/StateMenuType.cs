@@ -1,6 +1,7 @@
 using GameProject.ButtonDiffTrackers;
 using GameProject.Controllers;
 using GameProject.Factories.Controller;
+using GameProject.GlobalInterfaces;
 using GameProject.Globals;
 using GameProject.HelperFuncs;
 using GameProject.Misc;
@@ -27,12 +28,12 @@ internal class StateMenuType(Game1 game) : IGameState {
     gamePadController.Update();
   }
 
-  public void LowLevelDraw(GraphicsDevice graphicsDevice, ValueTracker<RenderTarget2D> renderTargetTracker, SpriteBatch spriteBatch) {
-    graphicsDevice.Clear(Color.CornflowerBlue);
+  public void LowLevelDraw(LowLevelDrawParams drawData) {
+    drawData.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-    spriteBatch.Begin();
+    drawData.SpriteBatch.Begin();
 
-    spriteBatch.Draw(
+    drawData.SpriteBatch.Draw(
       texture: TextureStore.Instance.TitleScreen,
       position: new(-50.0f, 0.0f),
       sourceRectangle: new Rectangle(0, 0, 1028, 704), // FIX
@@ -45,7 +46,7 @@ internal class StateMenuType(Game1 game) : IGameState {
     );
 
     TextFuncs.DrawCenteredString(
-      spriteBatch: spriteBatch,
+      spriteBatch: drawData.SpriteBatch,
       position: new Vector2(
           game.DefaultViewport.Width,
           game.DefaultViewport.Height
@@ -57,7 +58,7 @@ internal class StateMenuType(Game1 game) : IGameState {
     );
 
     TextFuncs.DrawCenteredString(
-      spriteBatch: spriteBatch,
+      spriteBatch: drawData.SpriteBatch,
       position: new Vector2(
           game.DefaultViewport.Width,
           game.DefaultViewport.Height
@@ -68,7 +69,7 @@ internal class StateMenuType(Game1 game) : IGameState {
       color: Color.Black
     );
 
-    spriteBatch.End();
+    drawData.SpriteBatch.End();
   }
 
   public void OnStateEnter(bool prevStateIsCurrentState) { }

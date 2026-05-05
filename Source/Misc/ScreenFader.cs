@@ -54,33 +54,33 @@ internal class ScreenFader(GameWindow gameWindow) : ITemporalUpdatable, ILowLeve
     }
   }
 
-  public void LowLevelDraw(GraphicsDevice graphicsDevice, ValueTracker<RenderTarget2D> renderTargetTracker, SpriteBatch spriteBatch) {
+  public void LowLevelDraw(LowLevelDrawParams drawData) {
     var fadeProgress = fadeTime / Constants.SCREEN_FADE_DURATION;
 
-    spriteBatch.Begin();
+    drawData.SpriteBatch.Begin();
 
     switch (FadeState) {
       case FadingState.FadeIn:
-        DrawFadeRectangle(spriteBatch, 1.0 - fadeProgress);
+        DrawFadeRectangle(drawData.SpriteBatch, 1.0 - fadeProgress);
         break;
 
       case FadingState.FadeOut:
-        DrawFadeRectangle(spriteBatch, fadeProgress);
+        DrawFadeRectangle(drawData.SpriteBatch, fadeProgress);
         break;
 
       case FadingState.FadedIn:
-        /* do nothing */
+        /* draw nothing */
         break;
 
       case FadingState.FadedOut:
-        DrawFadeRectangle(spriteBatch, 1.0);
+        DrawFadeRectangle(drawData.SpriteBatch, 1.0);
         break;
 
       default:
         throw new Exception("Unknown fading state value");
     }
 
-    spriteBatch.End();
+    drawData.SpriteBatch.End();
   }
 
   public void FadeIn() {

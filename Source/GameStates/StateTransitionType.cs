@@ -1,4 +1,5 @@
 using System;
+using GameProject.GlobalInterfaces;
 using GameProject.Misc;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -46,23 +47,23 @@ internal class StateTransitionType(Game1 game) : IGameState {
     }
   }
 
-  public void LowLevelDraw(GraphicsDevice graphicsDevice, ValueTracker<RenderTarget2D> renderTargetTracker, SpriteBatch spriteBatch) {
+  public void LowLevelDraw(LowLevelDrawParams drawData) {
     switch (screenFader.FadeState) {
       case ScreenFader.FadingState.FadeOut:
-        fromGameState.LowLevelDraw(graphicsDevice, renderTargetTracker, spriteBatch);
+        fromGameState.LowLevelDraw(drawData);
         break;
 
       case ScreenFader.FadingState.FadedOut:
       case ScreenFader.FadingState.FadeIn:
       case ScreenFader.FadingState.FadedIn:
-        toGameState.LowLevelDraw(graphicsDevice, renderTargetTracker, spriteBatch);
+        toGameState.LowLevelDraw(drawData);
         break;
 
       default:
         throw new Exception("Unknown fading state value");
     }
 
-    screenFader.LowLevelDraw(graphicsDevice, renderTargetTracker, spriteBatch);
+    screenFader.LowLevelDraw(drawData);
   }
 
   public void OnStateEnter(bool nextStateIsCurrentState) {

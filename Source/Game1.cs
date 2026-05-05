@@ -169,7 +169,11 @@ internal class Game1 : Game {
     using (renderTargetTracker.TempSet(renderTarget)) {
       GraphicsDevice.SetRenderTarget(renderTarget);
       GraphicsDevice.Clear(Color.Black);
-      currentState.LowLevelDraw(GraphicsDevice, renderTargetTracker, SpriteBatch);
+      currentState.LowLevelDraw(new (
+        GraphicsDevice,
+        renderTargetTracker,
+        SpriteBatch
+      ));
     }
 
     // Then render the texture to screen
