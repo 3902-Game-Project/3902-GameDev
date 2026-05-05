@@ -11,7 +11,7 @@ internal class Tumbleweed : ABaseEnemy {
   public Tumbleweed(Texture2D texture, Vector2 position) :
     base(texture, position, Constants.BASE_ENEMY_WIDTH * 0.75f, Constants.BASE_ENEMY_HEIGHT * 0.75f) {
     DrawScale = 0.4f;
-    FlipOnRightDir = true;
+    FlipWhenFacingRightUpDown = true;
     CurrentState = new TumbleweedIdleState(this);
   }
 

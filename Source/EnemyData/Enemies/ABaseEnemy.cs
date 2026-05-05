@@ -19,7 +19,7 @@ internal abstract class ABaseEnemy(
   public static event Action<ABaseEnemy> OnDeath;
 
   protected float DrawScale { get; set; } = 1f;
-  protected bool FlipOnRightDir { get; set; } = true;
+  protected bool FlipWhenFacingRightUpDown { get; set; } = true;
 
   protected virtual void DropLoot() { }
 
@@ -52,6 +52,24 @@ internal abstract class ABaseEnemy(
     DropLoot();
     OnDeath?.Invoke(this);
     TransitionToDeathState();
+  }
+
+  protected SpriteEffects GetFlipEffect() {
+    // Assume FlipWhenFacingRightUpDown = true
+    bool shouldFlip = Direction switch {
+      FacingDirection.Left => false,
+      FacingDirection.Right => true,
+      FacingDirection.Up => true,
+      FacingDirection.Down => true,
+      _ => throw new NotImplementedException("FacingDirection value not handled"),
+    };
+
+    // Invert result if FlipWhenFacingRightUpDown = false
+    if (!FlipWhenFacingRightUpDown) {
+      shouldFlip = !shouldFlip;
+    }
+
+    return shouldFlip ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
   }
 
   public Texture2D Texture { get; protected set; } = texture;
@@ -92,13 +110,11 @@ internal abstract class ABaseEnemy(
     if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return;
 
     Rectangle source = CurrentSourceRectangles[CurrentFrame];
-    bool shouldFlip = FlipOnRightDir ? Direction > 0 : Direction <= 0;
-    SpriteEffects effect = shouldFlip ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
     Vector2 origin = new(source.Width / 2f, source.Height);
     Color tintColor = DamageFlashTimer > 0 ? Color.Red : Color.White;
 
-    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, DrawScale, effect, 0f);
+    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, DrawScale, GetFlipEffect(), 0f);
   }
 
   public virtual void Update(double deltaTime) {

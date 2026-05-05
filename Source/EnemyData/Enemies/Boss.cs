@@ -18,7 +18,7 @@ internal class Boss : ABaseEnemy {
   public Boss(Texture2D texture, Vector2 position, ILevelManager levelManager) : base(texture, position, colliderHeight: Constants.BASE_ENEMY_HEIGHT * 2.0f) {
     LevelManager = levelManager;
     DrawScale = 2.0f;
-    FlipOnRightDir = false;
+    FlipWhenFacingRightUpDown = false;
     MaxHealth = 1000;
     Health = 1000;
 
@@ -124,8 +124,6 @@ internal class Boss : ABaseEnemy {
     if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return;
 
     Rectangle source = CurrentSourceRectangles[CurrentFrame];
-    bool shouldFlip = FlipOnRightDir ? Direction > 0 : Direction <= 0;
-    SpriteEffects effect = shouldFlip ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
     // --- THE MAGIC MATH FIX FOR JITTER ---
     int cellIndex = source.X / 56;
@@ -136,7 +134,7 @@ internal class Boss : ABaseEnemy {
 
     Color tintColor = DamageFlashTimer > 0 ? Color.Red : Color.White;
 
-    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, DrawScale, effect, 0f);
+    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, DrawScale, GetFlipEffect(), 0f);
   }
 
   protected override void TransitionToDeathState() {

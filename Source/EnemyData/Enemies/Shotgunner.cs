@@ -20,7 +20,7 @@ internal class Shotgunner : ABaseEnemy {
     base(texture, position, Constants.BASE_ENEMY_WIDTH * 0.75f, Constants.BASE_ENEMY_HEIGHT * 1.5f) {
     LevelManager = levelManager;
     DrawScale = 1.6f;
-    FlipOnRightDir = false;
+    FlipWhenFacingRightUpDown = false;
     CurrentState = new ShotgunnerWanderState(this);
     this.player = player;
   }

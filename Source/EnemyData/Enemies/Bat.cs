@@ -8,7 +8,7 @@ namespace GameProject.Enemies;
 internal class Bat : ABaseEnemy {
   public Bat(Texture2D texture, Vector2 position) : base(texture, position) {
     DrawScale = 2f;
-    FlipOnRightDir = true;
+    FlipWhenFacingRightUpDown = true;
     CurrentState = new BatIdleState(this);
   }
 

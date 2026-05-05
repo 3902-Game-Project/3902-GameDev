@@ -10,7 +10,7 @@ internal class Snake : ABaseEnemy {
   public Snake(Texture2D texture, Vector2 position) :
     base(texture, position, colliderHeight: Constants.BASE_ENEMY_HEIGHT * 0.5f) {
     DrawScale = 2f;
-    FlipOnRightDir = true;
+    FlipWhenFacingRightUpDown = true;
     CurrentState = new SnakeWanderState(this);
   }
 

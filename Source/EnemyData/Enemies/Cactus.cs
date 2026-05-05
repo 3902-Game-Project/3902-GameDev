@@ -14,7 +14,7 @@ internal class Cactus : ABaseEnemy {
       invulnerable: true
     ) {
     DrawScale = 0.2f;
-    FlipOnRightDir = false;
+    FlipWhenFacingRightUpDown = false;
     CurrentState = new CactusIdleState(this);
   }
 }

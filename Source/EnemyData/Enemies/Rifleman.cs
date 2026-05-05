@@ -20,7 +20,7 @@ internal class Rifleman : ABaseEnemy {
     base(texture, position, Constants.BASE_ENEMY_WIDTH * 0.75f, Constants.BASE_ENEMY_HEIGHT * 1.5f) {
     LevelManager = levelManager;
     DrawScale = 2f;
-    FlipOnRightDir = false;
+    FlipWhenFacingRightUpDown = false;
     CurrentState = new RifleWanderState(this);
     this.player = player;
   }
