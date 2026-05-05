@@ -142,7 +142,7 @@ internal class Game1 : Game {
     StateGame.Initialize();
 
     MiscAssetStore.Instance.LoadContent(Content);
-    TextureStore.Instance.LoadContent(Content);
+    TextureStore.Instance.LoadContent(GraphicsDevice, Content);
 
     EnemyFactory.Instance.LoadAllTextures(Content);
     SoundManager.Instance.LoadAllContent(Content);

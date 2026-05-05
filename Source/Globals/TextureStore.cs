@@ -1,10 +1,11 @@
 using GameProject.GlobalInterfaces;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Globals;
 
-internal class TextureStore : IInitable {
+internal class TextureStore : ILowLevelInitable {
   public static TextureStore Instance { get; } = new TextureStore();
 
   public Texture2D WhitePixel { get; private set; }
@@ -19,8 +20,10 @@ internal class TextureStore : IInitable {
 
   public void Initialize() { }
 
-  public void LoadContent(ContentManager contentManager) {
-    WhitePixel = contentManager.Load<Texture2D>("Misc/White Pixel");
+  public void LoadContent(GraphicsDevice graphicsDevice, ContentManager contentManager) {
+    WhitePixel = new(graphicsDevice, 1, 1);
+    WhitePixel.SetData([Color.White]);
+
     TitleScreen = contentManager.Load<Texture2D>("Misc/Title Screen");
     Player = contentManager.Load<Texture2D>("Misc/Player Spritesheet");
     MainBlockItemAtlas = contentManager.Load<Texture2D>("Misc/Main Block Item Atlas");

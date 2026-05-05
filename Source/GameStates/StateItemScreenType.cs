@@ -17,7 +17,6 @@ namespace GameProject.GameStates;
 internal class StateItemScreenType(Game1 game) : IGameState {
   private IController<Keys> keyboardController;
   private IController<GPGamePadButtons> gamePadController;
-  private Texture2D blankTexture;
   public bool InWeaponMenu { get; private set; } = true;
   public int SelectedWeaponIndex { get; private set; } = 0;
   public int SelectedBackpackIndex { get; private set; } = 0;
@@ -108,10 +107,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     }
   }
 
-  public void LoadContent(ContentManager content) {
-    blankTexture = new Texture2D(game.GraphicsDevice, 1, 1);
-    blankTexture.SetData([Color.White]);
-  }
+  public void LoadContent(ContentManager content) { }
 
   public void Update(double deltaTime) {
     keyboardController.Update();
@@ -162,7 +158,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
         Vector2 uiPosition = new(uiX, uiY);
 
         Color slotColor = (InWeaponMenu && i == SelectedWeaponIndex) ? new Color(70, 70, 70, 200) : new Color(40, 40, 40, 200);
-        drawData.SpriteBatch.Draw(blankTexture, new Rectangle((int) uiX, (int) uiY, weaponSlotSize, weaponSlotSize), slotColor);
+        drawData.SpriteBatch.Draw(TextureStore.Instance.WhitePixel, new Rectangle((int) uiX, (int) uiY, weaponSlotSize, weaponSlotSize), slotColor);
 
         float scale = (InWeaponMenu && i == SelectedWeaponIndex) ? 2.5f : 2.0f;
         Color tint = (InWeaponMenu && i == SelectedWeaponIndex) ? Color.White : Color.Gray;
@@ -196,7 +192,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
         bool isHovered = !InWeaponMenu && i == SelectedBackpackIndex && i < player.Inventory.GeneralItems.Count;
         Color slotColor = isHovered ? new Color(70, 70, 70, 200) : new Color(40, 40, 40, 200);
 
-        drawData.SpriteBatch.Draw(blankTexture, new Rectangle((int) uiX, (int) uiY, itemSlotSize, itemSlotSize), slotColor);
+        drawData.SpriteBatch.Draw(TextureStore.Instance.WhitePixel, new Rectangle((int) uiX, (int) uiY, itemSlotSize, itemSlotSize), slotColor);
 
         if (i < player.Inventory.GeneralItems.Count) {
           IItem item = player.Inventory.GeneralItems[i];
