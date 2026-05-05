@@ -1,5 +1,11 @@
 -----Done-----:
 
+-----Done > Sprint 3-----:
+
+OpenSlattedDoor - Santosh
+A simple door shouldn't need to know about the game. 
+Class replaced with SlattedDoorBlock class and replaces the game1 with level manager.
+
 -----Done > Sprint 5 early comments-----:
 
 StateGameType - Santosh
@@ -56,10 +62,6 @@ Coupling is mostly resolved to the levelManager instead of more specific classes
 Player - Eric Possibly
 The player shouldn't be drawing and updating the inventory. Player should just draw and update the player
 Player still draws and updates the inventory
-
-OpenSlattedDoor - Santosh
-A simple door shouldn't need to know about the game. 
-Class replaced with SlattedDoorBlock class and replaces the game1 with level manager.
 
 BaseEnemy (Medium Priority)
 Lots of public fields, along with usual problem of passing in the game

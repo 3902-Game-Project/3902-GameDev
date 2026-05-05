@@ -55,7 +55,7 @@ internal static class SaveLoadManager {
 
     var player = stateGame.Player;
     var levelManager = stateGame.LevelManager;
-    levelManager.ChangeLevel(saveData.Level.LevelName);
+    levelManager.SwitchLevelWithoutFading(saveData.Level.LevelName);
 
     //Load Player
     player.Position = new Vector2(saveData.Player.X, saveData.Player.Y);

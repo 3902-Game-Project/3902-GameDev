@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using GameProject.Collisions;
+using GameProject.Commands;
 using GameProject.Globals;
-using GameProject.Level;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-internal class VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, VaultDoorBlockState state, string pairedLevelName, ILevelManager levelManager) :
+internal class VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, VaultDoorBlockState state, IGPCommand changeLevelCommand) :
   ABaseBlock(xyPos, Constants.BASE_BLOCK_WIDTH * 2.0f, Constants.BASE_BLOCK_HEIGHT * 2.0f) {
   private static readonly List<Rectangle> SOURCE_RECTS = [
     new(64, 128, 64, 64),
@@ -28,7 +28,6 @@ internal class VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, VaultDo
 
   private double animationTimer = 0.0f;
 
-  public string PairedLevelName { get; private set; } = pairedLevelName;
   public VaultDoorBlockState State { get; private set; } = state;
 
   public override void Update(double deltaTime) {
@@ -51,7 +50,7 @@ internal class VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, VaultDo
 
   public override void OnCollision(CollisionInfo info) {
     if (State == VaultDoorBlockState.Open && info.Collider is Player) {
-      levelManager.SwitchLevel(PairedLevelName);
+      changeLevelCommand.Execute();
     }
   }
 

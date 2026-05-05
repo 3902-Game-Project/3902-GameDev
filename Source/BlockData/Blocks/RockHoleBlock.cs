@@ -1,15 +1,13 @@
 using GameProject.Collisions;
-using GameProject.Level;
+using GameProject.Commands;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Blocks;
 
-internal class RockHoleBlock(Texture2D RockHoleTexture, Vector2 xyPos, string pairedLevelName, ILevelManager levelManager) : ABaseBlock(xyPos) {
+internal class RockHoleBlock(Texture2D RockHoleTexture, Vector2 xyPos, IGPCommand changeLevelCommand) : ABaseBlock(xyPos) {
   private static readonly Rectangle SOURCE_RECT = new(384, 128, 64, 64);
-
-  public string PairedLevelName { get; private set; } = pairedLevelName;
 
   public override void Update(double deltaTime) { }
 
@@ -19,7 +17,7 @@ internal class RockHoleBlock(Texture2D RockHoleTexture, Vector2 xyPos, string pa
 
   public override void OnCollision(CollisionInfo info) {
     if (info.Collider is Player) {
-      levelManager.SwitchLevel(PairedLevelName);
+      changeLevelCommand.Execute();
     }
   }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GameProject.Collisions;
+using GameProject.Commands;
 using GameProject.Globals;
 using GameProject.Level;
 using GameProject.PlayerSpace;
@@ -15,24 +16,23 @@ internal class SlattedDoorBlock : ABaseBlock {
   ];
 
   private readonly Texture2D slattedDoorTexture;
-  private readonly ILevelManager levelManager;
+  private readonly IGPCommand changeLevelCommand;
   private int currentFrame = 0;
 
   public float Rotation { get; private set; } = 0.0f;
-  public string PairedLevelName { get; private set; }
   public LockableDoorBlockState State { get; private set; }
 
-  public SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, LockableDoorBlockState state, string pairedLevelName, ILevelManager levelManager) : base(xyPos) {
+  public SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, LockableDoorBlockState state, IGPCommand changeLevelCommand) : base(xyPos) {
     slattedDoorTexture = SlattedDoorTexture;
-    this.levelManager = levelManager;
-    PairedLevelName = pairedLevelName;
-    State = state;
+    this.changeLevelCommand = changeLevelCommand;
 
-    Rotate();
+    State = state;
 
     if (State == LockableDoorBlockState.Open) {
       currentFrame = SOURCE_RECTS.Count - 1;
     }
+
+    Rotate();
   }
 
   public void Rotate() {
@@ -69,7 +69,7 @@ internal class SlattedDoorBlock : ABaseBlock {
 
   public override void OnCollision(CollisionInfo info) {
     if (State == LockableDoorBlockState.Open && info.Collider is Player) {
-      levelManager.SwitchLevel(PairedLevelName);
+      changeLevelCommand.Execute();
     }
   }
 

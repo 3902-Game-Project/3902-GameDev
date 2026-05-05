@@ -176,6 +176,17 @@ internal class LevelManager(Game1 game) : ILevelManager {
     }
   }
 
+  public void SwitchLevelWithoutFading(string newLevelName) {
+    if (!levels.ContainsKey(newLevelName)) {
+      throw new ArgumentException($"level name unknown: '{newLevelName}'");
+    }
+
+    if (newLevelName != currentLevelName) {
+      fadeToLevelName = newLevelName;
+      InitializeLevel();
+    }
+  }
+
   // Called by StateGameType.cs when beginning to fade in stategame
   // If there is a level switch queued, process it now
   public void InitializeLevel() {

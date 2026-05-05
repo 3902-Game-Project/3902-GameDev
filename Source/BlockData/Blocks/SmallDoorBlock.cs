@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using GameProject.Collisions;
+using GameProject.Commands;
 using GameProject.Globals;
-using GameProject.Level;
 using GameProject.Misc;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
@@ -16,18 +16,17 @@ internal class SmallDoorBlock : ABaseBlock {
   ];
 
   private readonly Texture2D smallDoorTexture;
-  private readonly ILevelManager levelManager;
+  private readonly IGPCommand changeLevelCommand;
   private int currentFrame = 0;
 
   public float Rotation { get; private set; } = 0.0f;
   public string PairedLevelName { get; private set; }
   public LockableDoorBlockState State { get; private set; }
 
-  public SmallDoorBlock(Texture2D smallDoorTexture, Vector2 xyPos, LockableDoorBlockState state, string pairedLevelName, ILevelManager levelManager) : base(xyPos) {
+  public SmallDoorBlock(Texture2D smallDoorTexture, Vector2 xyPos, LockableDoorBlockState state, IGPCommand changeLevelCommand) : base(xyPos) {
     this.smallDoorTexture = smallDoorTexture;
-    this.levelManager = levelManager;
+    this.changeLevelCommand = changeLevelCommand;
 
-    PairedLevelName = pairedLevelName;
     State = state;
 
     if (State == LockableDoorBlockState.Open) {
@@ -58,7 +57,7 @@ internal class SmallDoorBlock : ABaseBlock {
 
   public override void OnCollision(CollisionInfo info) {
     if (State == LockableDoorBlockState.Open && info.Collider is Player) {
-      levelManager.SwitchLevel(PairedLevelName);
+      changeLevelCommand.Execute();
       SoundManager.Instance.Play(SoundID.Door);
     }
   }

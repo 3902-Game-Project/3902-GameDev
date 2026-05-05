@@ -134,7 +134,7 @@ internal partial class LevelLoader {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
           }
 
-          doors.Add(BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos, state, pairedLevelName, levelManager));
+          doors.Add(BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos, state, pairedLevelName, levelManager.SwitchLevel));
           break;
         }
 
@@ -195,7 +195,7 @@ internal partial class LevelLoader {
                   throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
                 }
 
-                doors.Add(BlockFactory.CreateRockHoleBlockSprite(xPos, yPos, pairedLevelName, levelManager));
+                doors.Add(BlockFactory.CreateRockHoleBlockSprite(xPos, yPos, pairedLevelName, levelManager.SwitchLevel));
                 break;
               }
 
@@ -275,7 +275,7 @@ internal partial class LevelLoader {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
           }
 
-          doors.Add(BlockFactory.CreateVaultDoorBlockSprite(xPos, yPos, state, pairedLevelName, levelManager));
+          doors.Add(BlockFactory.CreateVaultDoorBlockSprite(xPos, yPos, state, pairedLevelName, levelManager.SwitchLevel));
           break;
         }
 
@@ -338,7 +338,7 @@ internal partial class LevelLoader {
             throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
           }
 
-          doors.Add(BlockFactory.CreateSlattedDoorSprite(xPos, yPos, state, pairedLevelName, levelManager));
+          doors.Add(BlockFactory.CreateSlattedDoorSprite(xPos, yPos, state, pairedLevelName, levelManager.SwitchLevel));
           break;
         }
 

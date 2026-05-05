@@ -1,3 +1,4 @@
+using GameProject.Commands;
 using GameProject.Globals;
 using GameProject.Level;
 using GameProject.PlayerSpace;
@@ -32,17 +33,17 @@ internal class BlockFactory {
   }
 
   /* Doors */
-  public static IBlock CreateRockHoleBlockSprite(float x, float y, string pairedLevelName, ILevelManager levelManager) {
-    return new RockHoleBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y), pairedLevelName, levelManager);
+  public static IBlock CreateRockHoleBlockSprite(float x, float y, string pairedLevelName, ChangeLevelCallback changeLevelCallback) {
+    return new RockHoleBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y), new ChangeLevelCommand(changeLevelCallback, pairedLevelName));
   }
-  public static IBlock CreateSmallDoorBlockSprite(float x, float y, LockableDoorBlockState state, string pairedLevelName, ILevelManager levelManager) {
-    return new SmallDoorBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y), state, pairedLevelName, levelManager);
+  public static IBlock CreateSmallDoorBlockSprite(float x, float y, LockableDoorBlockState state, string pairedLevelName, ChangeLevelCallback changeLevelCallback) {
+    return new SmallDoorBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y), state, new ChangeLevelCommand(changeLevelCallback, pairedLevelName));
   }
-  public static IBlock CreateVaultDoorBlockSprite(float x, float y, VaultDoorBlockState state, string pairedLevelName, ILevelManager levelManager) {
-    return new VaultDoorBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y), state, pairedLevelName, levelManager);
+  public static IBlock CreateVaultDoorBlockSprite(float x, float y, VaultDoorBlockState state, string pairedLevelName, ChangeLevelCallback changeLevelCallback) {
+    return new VaultDoorBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y), state, new ChangeLevelCommand(changeLevelCallback, pairedLevelName));
   }
-  public static IBlock CreateSlattedDoorSprite(float x, float y, LockableDoorBlockState state, string pairedLevelName, ILevelManager levelManager) {
-    return new SlattedDoorBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y), state, pairedLevelName, levelManager);
+  public static IBlock CreateSlattedDoorSprite(float x, float y, LockableDoorBlockState state, string pairedLevelName, ChangeLevelCallback changeLevelCallback) {
+    return new SlattedDoorBlock(TextureStore.Instance.MainBlockItemAtlas, new Vector2(x, y), state, new ChangeLevelCommand(changeLevelCallback, pairedLevelName));
   }
 
   /* Object Blocks */
