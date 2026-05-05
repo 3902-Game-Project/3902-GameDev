@@ -20,7 +20,6 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
     new(2481, 54, 171, 323),
   ];
 
-  // TODO: need to update below 2 later
   private static readonly List<Rectangle> MOVE_UP_FRAMES = [
     new (130, 813, 159, 335),
     new (453, 813, 161, 335),
@@ -71,7 +70,7 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
     if (Player.Inventory.ActiveItem != null) {
       Player.Inventory.ActiveItem.Use(useType);
       if (Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
-        Player.ChangeState(Player.UseItemState);
+        Player.StateMachine.ChangeState(Player.StateMachine.UseItemState);
       }
     }
   }
@@ -87,7 +86,7 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
     if (keyToUse != null) {
       keyToUse.Use(useType);
       if (Player.Inventory.ActiveItem != null && Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
-        Player.ChangeState(Player.UseItemState);
+        Player.StateMachine.ChangeState(Player.StateMachine.UseItemState);
       }
       Player.Inventory.RemoveGeneralItem(keyToUse);
     }
@@ -97,7 +96,7 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
     base.Update(deltaTime);
 
     if (Player.Velocity == Vector2.Zero) {
-      Player.ChangeState(Player.StaticState);
+      Player.StateMachine.ChangeState(Player.StateMachine.StaticState);
       currentFrame = 0;
       return;
     }
@@ -126,7 +125,7 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
       color: CurrentTintColor,
       rotation: 0f,
       origin: origin,
-      scale: 0.15f,
+      scale: Constants.PLAYER_SPRITE_SCALE,
       effects: SpriteEffects.None,
       layerDepth: 0f
     );

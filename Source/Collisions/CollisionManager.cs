@@ -16,7 +16,6 @@ internal enum CollisionAxis {
 
 internal class CollisionManager : IInstantaneousUpdatable {
   private readonly List<ICollidable> colliders;
-  private Texture2D debugTexture;
 
   public CollisionManager() {
     colliders = [];
@@ -30,24 +29,6 @@ internal class CollisionManager : IInstantaneousUpdatable {
 
   public void Remove(ICollidable collider) {
     colliders.Remove(collider);
-  }
-
-  public void Clear() {
-    colliders.Clear();
-  }
-
-  public void DebugDraw(SpriteBatch spriteBatch, GraphicsDevice graphicsDevice) {
-    if (debugTexture == null) {
-      debugTexture = new Texture2D(graphicsDevice, 1, 1);
-      debugTexture.SetData([Color.White]);
-    }
-
-    foreach (var c in colliders) {
-      if (c.Shape is BoxCollider box) {
-        Rectangle rect = new((int) box.Left, (int) box.Top, (int) box.Width, (int) box.Height);
-        spriteBatch.Draw(debugTexture, rect, Color.Red * 0.5f);
-      }
-    }
   }
 
   public void Update() {

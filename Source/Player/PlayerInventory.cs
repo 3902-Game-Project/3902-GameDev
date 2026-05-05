@@ -7,11 +7,23 @@ using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using GameProject.Globals;
 
 namespace GameProject.PlayerSpace;
 
 internal class PlayerInventory(Player player, ILevelManager levelManager) : IInitable {
   private readonly Random random = new();
+  private const int MAX_WEAPONS = 2;
+  private const int MIN_DROP_VEL_X = -100;
+  private const int MAX_DROP_VEL_X = 100;
+  private const int MIN_DROP_VEL_Y = -150;
+  private const int MAX_DROP_VEL_Y = -50;
+
+  private const float BAR_Y_OFFSET = -80f;
+  private const float BFG_SEGMENT_WIDTH = 20f;
+  private const float BFG_SEGMENT_GAP = 4f;
+  private const float RELOAD_BAR_WIDTH = 60f;
+  private const float RELOAD_BAR_HEIGHT = 8f;
 
   // 1. Weapons List
   public List<IItem> Weapons { get; private set; } = [];
@@ -20,8 +32,6 @@ internal class PlayerInventory(Player player, ILevelManager levelManager) : IIni
 
   // 2. General Items List (Potions, Whiskey, etc.)
   public List<IItem> GeneralItems { get; set; } = [];
-
-  public List<IItem> Keys { get; set; } = [];
 
   // Overarching Ammo Stores
   public Dictionary<AmmoType, int> Ammo { get; set; } = new() {
@@ -57,8 +67,8 @@ internal class PlayerInventory(Player player, ILevelManager levelManager) : IIni
   }
 
   private void DropItem(IItem itemToDrop) {
-    float tossX = random.Next(-100, 100);
-    float tossY = random.Next(-150, -50);
+    float tossX = random.Next(MIN_DROP_VEL_X, MAX_DROP_VEL_X);
+    float tossY = random.Next(MIN_DROP_VEL_Y, MAX_DROP_VEL_Y);
     Vector2 dropVelocity = new(tossX, tossY);
 
     IWorldPickup droppedItem = new ItemWorldPickup(itemToDrop, dropVelocity);
@@ -105,10 +115,7 @@ internal class PlayerInventory(Player player, ILevelManager levelManager) : IIni
 
   public void Draw(SpriteBatch spriteBatch, Vector2 Position, FacingDirection Direction, Texture2D whitePixel) {
     if (ActiveItem != null) {
-      float unscaledWidth = 171f;
-      float unscaledHeight = 323f;
-      Vector2 spriteCenter = new(unscaledWidth / 2f, unscaledHeight / 2f);
-      float playerScale = 0.15f;
+      Vector2 spriteCenter = new(Constants.PLAYER_SPRITE_WIDTH / 2f, Constants.PLAYER_SPRITE_HEIGHT / 2f);
 
       Vector2 rightHandUnscaled = new(100f, 195f);
       Vector2 leftHandUnscaled = new(18f, 188f);
@@ -117,13 +124,13 @@ internal class PlayerInventory(Player player, ILevelManager levelManager) : IIni
       Vector2 currentOffset;
 
       if (Direction == FacingDirection.Right) {
-        currentOffset = (rightHandUnscaled - spriteCenter) * playerScale;
+        currentOffset = (rightHandUnscaled - spriteCenter) * Constants.PLAYER_SPRITE_SCALE;
       } else if (Direction == FacingDirection.Left) {
-        currentOffset = (leftHandUnscaled - spriteCenter) * playerScale;
+        currentOffset = (leftHandUnscaled - spriteCenter) * Constants.PLAYER_SPRITE_SCALE;
       } else if (Direction == FacingDirection.Up) {
-        currentOffset = (upHandUnscaled - spriteCenter) * playerScale;
+        currentOffset = (upHandUnscaled - spriteCenter) * Constants.PLAYER_SPRITE_SCALE;
       } else {
-        currentOffset = (downHandUnscaled - spriteCenter) * playerScale;
+        currentOffset = (downHandUnscaled - spriteCenter) * Constants.PLAYER_SPRITE_SCALE;
       }
       ActiveItem.Position = Position + currentOffset;
       ActiveItem.Direction = Direction;
@@ -133,24 +140,20 @@ internal class PlayerInventory(Player player, ILevelManager levelManager) : IIni
 
     // Draw Overhead Reload Bar or BFG Bar
     if (ActiveItem is BFGItem bfg && whitePixel != null) {
-      float segmentWidth = 20f;
-      float gap = 4f;
-      float totalWidth = (segmentWidth * 3) + (gap * 2);
-      Vector2 barPos = Position + new Vector2(-totalWidth / 2f, -80f);
+      float totalWidth = (BFG_SEGMENT_WIDTH * 3) + (BFG_SEGMENT_GAP * 2);
+      Vector2 barPos = Position + new Vector2(-totalWidth / 2f, BAR_Y_OFFSET);
 
       for (int i = 0; i < 3; i++) {
         Color c = (i < bfg.Stats.CurrentAmmo) ? Color.LimeGreen : Color.DarkGray * 0.5f;
-        spriteBatch.Draw(whitePixel, new Rectangle((int) (barPos.X + i * (segmentWidth + gap)), (int) barPos.Y, (int) segmentWidth, 8), c);
+        spriteBatch.Draw(whitePixel, new Rectangle((int) (barPos.X + i * (BFG_SEGMENT_WIDTH + BFG_SEGMENT_GAP)), (int) barPos.Y, (int) BFG_SEGMENT_WIDTH, (int) RELOAD_BAR_HEIGHT), c);
       }
     } else if (ActiveItem is ABaseGun gun && gun.IsReloading && whitePixel != null) {
-      float barWidth = 60f;
-      float barHeight = 8f;
-      Vector2 barPos = Position + new Vector2(-barWidth / 2f, -80f);
+      Vector2 barPos = Position + new Vector2(-RELOAD_BAR_WIDTH / 2f, BAR_Y_OFFSET);
 
       float progress = 1.0f - ((float) (gun.ReloadTimer / gun.Stats.ReloadTime));
 
-      spriteBatch.Draw(whitePixel, new Rectangle((int) barPos.X, (int) barPos.Y, (int) barWidth, (int) barHeight), Color.DarkGray * 0.8f);
-      spriteBatch.Draw(whitePixel, new Rectangle((int) barPos.X, (int) barPos.Y, (int) (barWidth * progress), (int) barHeight), Color.White);
+      spriteBatch.Draw(whitePixel, new Rectangle((int) barPos.X, (int) barPos.Y, (int) RELOAD_BAR_WIDTH, (int) RELOAD_BAR_HEIGHT), Color.DarkGray * 0.8f);
+      spriteBatch.Draw(whitePixel, new Rectangle((int) barPos.X, (int) barPos.Y, (int) (RELOAD_BAR_WIDTH * progress), (int) RELOAD_BAR_HEIGHT), Color.White);
     }
   }
 }

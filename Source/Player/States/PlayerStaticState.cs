@@ -38,7 +38,7 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
 
     // If we start moving, switch state
     if (Player.Velocity != Vector2.Zero) {
-      Player.ChangeState(Player.MovingState);
+      Player.StateMachine.ChangeState(Player.StateMachine.MovingState);
     }
   }
 
@@ -46,7 +46,7 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
     if (Player.Inventory.ActiveItem != null) {
       Player.Inventory.ActiveItem.Use(useType);
       if (Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
-        Player.ChangeState(Player.UseItemState);
+        Player.StateMachine.ChangeState(Player.StateMachine.UseItemState);
       }
     }
   }
@@ -63,7 +63,7 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
       keyToUse.Use(useType);
 
       if (Player.Inventory.ActiveItem != null && Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
-        Player.ChangeState(Player.UseItemState);
+        Player.StateMachine.ChangeState(Player.StateMachine.UseItemState);
       }
 
       Player.Inventory.RemoveGeneralItem(keyToUse);
@@ -100,7 +100,7 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
       color: CurrentTintColor,
       rotation: 0f,
       origin: origin,
-      scale: 0.15f,
+      scale: Constants.PLAYER_SPRITE_SCALE,
       effects: flipStatus,
       layerDepth: 0f
     );

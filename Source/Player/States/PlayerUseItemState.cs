@@ -11,7 +11,7 @@ internal class PlayerUseItemState(Player player) : APlayerState(player) {
   private static readonly Rectangle SOURCE_RECT_UP = new(453, 425, 161, 322);
   private static readonly Rectangle SOURCE_RECT_DOWN = new(455, 58, 161, 318);
 
-  private int timer = 20;
+  private int timer = Constants.USE_ITEM_DURATION_FRAMES;
 
   public override void MoveUp() { }
   public override void MoveDown() { }
@@ -19,7 +19,7 @@ internal class PlayerUseItemState(Player player) : APlayerState(player) {
   public override void MoveRight() { }
   public override void UseItem(UseType useType) {
     Player.Inventory.ActiveItem?.Use(useType);
-    timer = 20;
+    timer = Constants.USE_ITEM_DURATION_FRAMES; ;
   }
 
   public override void UseKey(UseType useType) { }
@@ -29,8 +29,8 @@ internal class PlayerUseItemState(Player player) : APlayerState(player) {
 
     timer--;
     if (timer <= 0) {
-      timer = 20;
-      Player.ChangeState(Player.StaticState);
+      timer = Constants.USE_ITEM_DURATION_FRAMES;
+      Player.StateMachine.ChangeState(Player.StateMachine.StaticState);
     }
   }
 
@@ -56,7 +56,7 @@ internal class PlayerUseItemState(Player player) : APlayerState(player) {
       color: CurrentTintColor,
       rotation: 0f,
       origin: origin,
-      scale: 0.15f, // Keeps the scale consistent with other states
+      scale: Constants.PLAYER_SPRITE_SCALE,
       effects: SpriteEffects.None,
       layerDepth: 0f
     );
