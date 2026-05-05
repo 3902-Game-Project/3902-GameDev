@@ -72,13 +72,13 @@ internal class Game1 : Game {
 
     Window.AllowUserResizing = true;
     Window.ClientSizeChanged += OnResize;
-    var defaultViewport = new Viewport(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+
+    var defaultViewport = GraphicsDevice.Viewport;
+    // Technically it might be best to get the width from graphics.PreferredBackBufferWidth in case it changes,
+    // And similarly for graphics.PreferredBackBufferHeight (which could alter Constants.GAME_HEIGHT)
+    // But its cleaner to use the value from Constants instead without altering the value from Constants to match
     HudViewport = new Viewport(0, 0, Constants.WINDOW_WIDTH, Constants.HUD_HEIGHT);
     GameViewport = new Viewport(0, Constants.HUD_HEIGHT, Constants.WINDOW_WIDTH, Constants.GAME_HEIGHT);
-
-    defaultViewport = GraphicsDevice.Viewport;
-    HudViewport = new Viewport(0, 0, graphics.PreferredBackBufferWidth, Constants.HUD_HEIGHT);
-    GameViewport = new Viewport(0, Constants.HUD_HEIGHT, graphics.PreferredBackBufferWidth, Constants.GAME_HEIGHT);
 
     viewportTracker = ValueTrackerFactory.CreateViewportTracker(GraphicsDevice, defaultViewport);
 
@@ -171,6 +171,7 @@ internal class Game1 : Game {
     using (renderTargetTracker.TempSet(renderTarget)) {
       GraphicsDevice.Clear(Color.Black);
       currentState.LowLevelDraw(new (
+      currentState.LowLevelDraw(new(
         GraphicsDevice.Clear,
         renderTargetTracker,
         viewportTracker,
