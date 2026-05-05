@@ -57,7 +57,7 @@ Player - Eric Possibly
 The player shouldn't be drawing and updating the inventory. Player should just draw and update the player
 Player still draws and updates the inventory
 
-OpenSlattedDoor
+OpenSlattedDoor - Santosh
 A simple door shouldn't need to know about the game. 
 Class replaced with SlattedDoorBlock class and replaces the game1 with level manager.
 
