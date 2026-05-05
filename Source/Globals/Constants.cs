@@ -15,9 +15,9 @@ internal static class Constants {
 
   public const double WIN_SCREEN_WAIT = 10.0;
   public const double LOSS_SCREEN_WAIT = 3.0;
-  
+
   public const double MAX_CHEAT_CODE_WAIT = 5.0;
-  
+
   public const double SCREEN_FADE_DURATION = 0.2;
 
   public const float BASE_ENEMY_WIDTH = 64.0f;
