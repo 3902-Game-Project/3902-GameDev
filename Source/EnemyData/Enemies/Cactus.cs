@@ -17,4 +17,6 @@ internal class Cactus : ABaseEnemy {
     FlipWhenFacingRightUpDown = false;
     CurrentState = new CactusIdleState(this);
   }
+
+  protected override void ChangeDirection() { }
 }
