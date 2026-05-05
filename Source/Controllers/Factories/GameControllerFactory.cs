@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using GameProject.ButtonDiffTrackers;
 using GameProject.Commands;
-using GameProject.Controllers;
 using GameProject.Globals;
 using GameProject.Level;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework.Input;
 
-namespace GameProject.Factories.Controller;
+namespace GameProject.Controllers.Factories;
 
 internal static class GameControllerFactory {
   public static KeyboardController CreateKeyboardController(Game1 game, Player player, ILevelManager levelManager) {

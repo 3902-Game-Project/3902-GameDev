@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using GameProject.ButtonDiffTrackers;
 using GameProject.Commands;
-using GameProject.Controllers;
 using GameProject.GameStates;
 using Microsoft.Xna.Framework.Input;
 
-namespace GameProject.Factories.Controller;
+namespace GameProject.Controllers.Factories;
 
 internal static class SavePromptControllerFactory {
   public static KeyboardController CreateKeyboardController(Game1 game, StateSavePromptType savePrompt) {

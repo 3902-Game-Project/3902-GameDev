@@ -1,6 +1,6 @@
 using GameProject.ButtonDiffTrackers;
 using GameProject.Controllers;
-using GameProject.Factories.Controller;
+using GameProject.Controllers.Factories;
 using GameProject.GlobalInterfaces;
 using GameProject.Globals;
 using GameProject.HelperFuncs;

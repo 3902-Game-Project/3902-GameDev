@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using GameProject.ButtonDiffTrackers;
 using GameProject.Commands;
-using GameProject.Controllers;
 using Microsoft.Xna.Framework.Input;
 
-namespace GameProject.Factories.Controller;
+namespace GameProject.Controllers.Factories;
 
 internal static class MenuControllerFactory {
   public static KeyboardController CreateKeyboardController(Game1 game) {

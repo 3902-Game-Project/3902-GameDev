@@ -1,8 +1,10 @@
 using System;
-using GameProject.Factories;
+using GameProject.Enemies;
 using GameProject.GameStates;
 using GameProject.Globals;
+using GameProject.Items;
 using GameProject.Misc;
+using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

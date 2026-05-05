@@ -1,11 +1,10 @@
 using GameProject.Globals;
 using GameProject.Items;
-using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Factories;
+namespace GameProject.Projectiles;
 
 internal class ProjectileFactory {
   private Texture2D projectileTexture;

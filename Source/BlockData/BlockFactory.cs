@@ -1,10 +1,9 @@
-using GameProject.Blocks;
 using GameProject.Globals;
 using GameProject.Level;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 
-namespace GameProject.Factories;
+namespace GameProject.Blocks;
 
 internal class BlockFactory {
   /* Floor Blocks */

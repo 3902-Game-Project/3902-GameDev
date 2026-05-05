@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using GameProject.Factories;
 using GameProject.GlobalInterfaces;
 using GameProject.Items;
 using GameProject.Level;

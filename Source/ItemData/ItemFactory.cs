@@ -1,12 +1,11 @@
 using GameProject.Globals;
-using GameProject.Items;
 using GameProject.Level;
 using GameProject.PlayerSpace;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Factories;
+namespace GameProject.Items;
 
 internal class ItemFactory {
   private Texture2D basicGunsTexture;

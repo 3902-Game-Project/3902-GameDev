@@ -1,4 +1,3 @@
-using GameProject.Enemies;
 using GameProject.Globals;
 using GameProject.Level;
 using GameProject.PlayerSpace;
@@ -6,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Factories;
+namespace GameProject.Enemies;
 
 internal class EnemyFactory {
   private Texture2D snakeTexture;
