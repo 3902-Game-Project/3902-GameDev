@@ -29,6 +29,7 @@ internal class PlayerDeadState(Player player, CurrentLevelGetter GetCurrentLevel
   public override void UseKey(UseType useType) { }
   public override void TakeDamage(int amount) { }
   public override void Die() { }
+  public override void Interact() { }
 
   public override void Update(double deltaTime) {
     base.Update(deltaTime);
