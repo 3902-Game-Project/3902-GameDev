@@ -14,6 +14,7 @@ namespace GameProject.PlayerSpace;
 internal class PlayerInventory(Player player, CurrentLevelGetter GetCurrentLevel) : IInitable {
   private readonly Random random = new();
   private const int MAX_WEAPONS = 2;
+  private const int MAX_GENERAL_ITEMS = 10;
   private const int MIN_DROP_VEL_X = -100;
   private const int MAX_DROP_VEL_X = 100;
   private const int MIN_DROP_VEL_Y = -150;
@@ -60,8 +61,13 @@ internal class PlayerInventory(Player player, CurrentLevelGetter GetCurrentLevel
       ActiveItem?.OnEquip();
     } else {
       GeneralItems.Add(newItem);
+      if (GeneralItems.Count > MAX_GENERAL_ITEMS) {
+        DropItem(GeneralItems[0]);
+        GeneralItems.RemoveAt(0);
+      }
     }
   }
+
   public void RemoveGeneralItem(IItem itemToRemove) {
     GeneralItems.Remove(itemToRemove);
   }
