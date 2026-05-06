@@ -42,7 +42,7 @@ internal class BossDeathState : IEnemyState {
 
   private void UnlockGoldRoomDoor() {
     // Scans the room and forces the Vault Door open
-    foreach (var block in boss.LevelManager.CurrentLevel.GetOpenableDoors()) {
+    foreach (var block in boss.CurrentLevel.GetOpenableDoors()) {
       if (block is VaultDoorBlock vaultDoor) {
         vaultDoor.Unlock();
       }

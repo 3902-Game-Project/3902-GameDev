@@ -253,7 +253,7 @@ internal partial class LevelLoader {
 
         CheckEntryLength(entrySplit, 1);
 
-        enemies.Add(EnemyFactory.Instance.CreateShotgunnerSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, () => levelManager.CurrentLevel.ProjectileManager, player));
+        enemies.Add(EnemyFactory.Instance.CreateShotgunnerSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, () => levelManager.CurrentLevel, player));
         break;
 
       case "10":
@@ -269,7 +269,7 @@ internal partial class LevelLoader {
 
         CheckEntryLength(entrySplit, 1);
 
-        enemies.Add(EnemyFactory.Instance.CreateRiflemanSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, () => levelManager.CurrentLevel.ProjectileManager, player));
+        enemies.Add(EnemyFactory.Instance.CreateRiflemanSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, () => levelManager.CurrentLevel, player));
         break;
 
       case "12":
@@ -533,7 +533,7 @@ internal partial class LevelLoader {
 
         CheckEntryLength(entrySplit, 1);
 
-        enemies.Add(EnemyFactory.Instance.CreateBossSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, levelManager));
+        enemies.Add(EnemyFactory.Instance.CreateBossSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, () => levelManager.CurrentLevel));
         break;
 
       default:

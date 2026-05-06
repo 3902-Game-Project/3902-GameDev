@@ -14,12 +14,17 @@ namespace GameProject.Enemies;
 
 internal class Rifleman : ABaseEnemy {
   private readonly Player player;
+  private readonly CurrentLevelGetter GetCurrentLevel;
 
-  public ProjectileManagerGetter GetProjectileManager { get; }
+  public ILevel CurrentLevel {
+    get {
+      return GetCurrentLevel();
+    }
+  }
 
-  public Rifleman(Texture2D texture, Vector2 position, ProjectileManagerGetter GetProjectileManager, Player player) :
+  public Rifleman(Texture2D texture, Vector2 position, CurrentLevelGetter GetCurrentLevel, Player player) :
     base(texture, position, Constants.BASE_ENEMY_WIDTH * 0.75f, Constants.BASE_ENEMY_HEIGHT * 1.5f) {
-    this.GetProjectileManager = GetProjectileManager;
+    this.GetCurrentLevel = GetCurrentLevel;
     DrawScale = 2f;
     FlipWhenFacingRightUpDown = false;
     CurrentState = new RifleWanderState(this);

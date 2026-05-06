@@ -14,12 +14,17 @@ namespace GameProject.Enemies;
 
 internal class Shotgunner : ABaseEnemy {
   private readonly Player player;
+  private readonly CurrentLevelGetter GetCurrentLevel;
 
-  public ProjectileManagerGetter GetProjectileManager { get; }
+  public ILevel CurrentLevel {
+    get {
+      return GetCurrentLevel();
+    }
+  }
 
-  public Shotgunner(Texture2D texture, Vector2 position, ProjectileManagerGetter GetProjectileManager, Player player) :
+  public Shotgunner(Texture2D texture, Vector2 position, CurrentLevelGetter GetCurrentLevel, Player player) :
     base(texture, position, Constants.BASE_ENEMY_WIDTH * 0.75f, Constants.BASE_ENEMY_HEIGHT * 1.5f) {
-    this.GetProjectileManager = GetProjectileManager;
+    this.GetCurrentLevel = GetCurrentLevel;
     DrawScale = 1.6f;
     FlipWhenFacingRightUpDown = false;
     CurrentState = new ShotgunnerWanderState(this);
@@ -56,13 +61,13 @@ internal class Shotgunner : ABaseEnemy {
       dir.Normalize();
       IProjectile bullet = ProjectileFactory.Instance.CreateBullet(spawnPosition, dir, 400f, 0.6f, damage);
       if (bullet is BulletDefault b) b.IsPlayerShot = false;
-      LevelManager.CurrentLevel.ProjectileManager.Add(bullet);
+      CurrentLevel.ProjectileManager.Add(bullet);
     }
   }
 
   protected override void DropLoot() {
-    LevelManager.CurrentLevel.AddPickup(WorldPickupFactory.Instance.CreateAmmo(Position, Items.AmmoType.Shells, 5));
-    LevelManager.CurrentLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateHealthPotion(Position.X, Position.Y - 60.0f, player)));
+    CurrentLevel.AddPickup(WorldPickupFactory.Instance.CreateAmmo(Position, AmmoType.Shells, 5));
+    CurrentLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateHealthPotion(Position.X, Position.Y - 60.0f, player)));
   }
 
   protected override void TransitionToDeathState() {

@@ -9,14 +9,20 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Enemies;
 
 internal class Boss : ABaseEnemy {
-  public ProjectileManagerGetter GetProjectileManager { get; }
+  private readonly CurrentLevelGetter GetCurrentLevel;
+
+  public ILevel CurrentLevel {
+    get {
+      return GetCurrentLevel();
+    }
+  }
 
   public bool PhaseTwoTriggered { get; set; } = false;
   private readonly Random random = new();
 
-  public Boss(Texture2D texture, Vector2 position, ProjectileManagerGetter GetProjectileManager) :
+  public Boss(Texture2D texture, Vector2 position, CurrentLevelGetter GetCurrentLevel) :
     base(texture, position, colliderHeight: Constants.BASE_ENEMY_HEIGHT * 2.0f) {
-    this.GetProjectileManager = GetProjectileManager;
+    this.GetCurrentLevel = GetCurrentLevel;
     DrawScale = 2.0f;
     FlipWhenFacingRightUpDown = false;
     MaxHealth = 1000;
@@ -76,7 +82,7 @@ internal class Boss : ABaseEnemy {
     IProjectile bullet = ProjectileFactory.Instance.CreateBullet(spawnPosition, direction, 350f, 0.8f, damage);
     if (bullet is BulletDefault b) b.IsPlayerShot = false;
 
-    LevelManager.CurrentLevel.ProjectileManager.Add(bullet);
+    CurrentLevel.ProjectileManager.Add(bullet);
   }
 
   public void ThrowBomb(int damage) {
@@ -95,7 +101,7 @@ internal class Boss : ABaseEnemy {
     }
 
     IProjectile bomb = ProjectileFactory.Instance.CreateBossBomb(spawnPosition, tossDirection, damage);
-    LevelManager.CurrentLevel.ProjectileManager.Add(bomb);
+    CurrentLevel.ProjectileManager.Add(bomb);
   }
 
   public void SpawnArenaBombs() {
@@ -115,7 +121,7 @@ internal class Boss : ABaseEnemy {
         Vector2 spawnPos = new(xPositions[x], yPositions[y]);
 
         IProjectile arenaBomb = ProjectileFactory.Instance.CreateBossBomb(spawnPos, Vector2.Zero, 25);
-        GetProjectileManager().Add(arenaBomb);
+        CurrentLevel.ProjectileManager.Add(arenaBomb);
       }
     }
   }

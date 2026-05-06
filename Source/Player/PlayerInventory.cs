@@ -99,8 +99,8 @@ internal class PlayerInventory(Player player, CurrentLevelGetter GetCurrentLevel
   public void Initialize() { }
 
   public void LoadContent(ContentManager content) {
-    PickupItem(ItemFactory.Instance.CreateRevolver(0.0f, 0.0f, player, GetCurrentLevel));
-    PickupItem(ItemFactory.Instance.CreateRifle(0.0f, 0.0f, player, GetCurrentLevel));
+    PickupItem(ItemFactory.Instance.CreateRevolver(0.0f, 0.0f, player, () => GetCurrentLevel().ProjectileManager));
+    PickupItem(ItemFactory.Instance.CreateRifle(0.0f, 0.0f, player, () => GetCurrentLevel().ProjectileManager));
   }
 
   public void Update(double deltaTime) {
