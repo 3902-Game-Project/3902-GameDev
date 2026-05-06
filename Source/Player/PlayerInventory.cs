@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using GameProject.GlobalInterfaces;
+using GameProject.Globals;
 using GameProject.Items;
 using GameProject.Level;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using GameProject.Globals;
 
 namespace GameProject.PlayerSpace;
 

@@ -8,7 +8,6 @@ using GameProject.GlobalInterfaces;
 using GameProject.Globals;
 using GameProject.Level;
 using GameProject.PlayerSpace.States;
-using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;

@@ -1,6 +1,5 @@
 using GameProject.Controllers;
 using GameProject.FireModes;
-using GameProject.Level;
 using GameProject.Misc;
 using GameProject.PlayerSpace;
 using GameProject.Projectiles;
