@@ -1,6 +1,7 @@
 using GameProject.Globals;
 using GameProject.Level;
 using GameProject.PlayerSpace;
+using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -24,7 +25,7 @@ internal class ItemFactory {
     infiniteAmmoPotionTexture = contentManager.Load<Texture2D>("World Pickups/Items/Ammo Potion");
   }
 
-  public IItem CreateRevolver(float xPos, float yPos, Player player, ILevelManager levelManager) {
+  public IItem CreateRevolver(float xPos, float yPos, Player player, ProjectileManagerGetter GetProjectileManager) {
     GunStats stats = new() {
       AmmoType = AmmoType.Light,
       BulletVelocity = 500f,
@@ -35,10 +36,10 @@ internal class ItemFactory {
       BaseDamage = 30,
     };
 
-    return new RevolverItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
+    return new RevolverItem(basicGunsTexture, new Vector2(xPos, yPos), player, GetProjectileManager, stats);
   }
 
-  public IItem CreateRifle(float xPos, float yPos, Player player, ILevelManager levelManager) {
+  public IItem CreateRifle(float xPos, float yPos, Player player, ProjectileManagerGetter GetProjectileManager) {
     var stats = new GunStats {
       AmmoType = AmmoType.Heavy,
       BulletVelocity = 1000f,
@@ -48,10 +49,10 @@ internal class ItemFactory {
       BaseDamage = 70,
     };
 
-    return new RifleItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
+    return new RifleItem(basicGunsTexture, new Vector2(xPos, yPos), player, GetProjectileManager, stats);
   }
 
-  public IItem CreateShotgun(float xPos, float yPos, Player player, ILevelManager levelManager) {
+  public IItem CreateShotgun(float xPos, float yPos, Player player, ProjectileManagerGetter GetProjectileManager) {
     var stats = new GunStats {
       AmmoType = AmmoType.Shells,
       BulletVelocity = 400f,
@@ -63,10 +64,10 @@ internal class ItemFactory {
       BaseDamage = 20,
     };
 
-    return new ShotgunItem(basicGunsTexture, new Vector2(xPos, yPos), player, levelManager, stats);
+    return new ShotgunItem(basicGunsTexture, new Vector2(xPos, yPos), player, GetProjectileManager, stats);
   }
 
-  public IItem CreateSMG(float xPos, float yPos, Player player, ILevelManager levelManager) {
+  public IItem CreateSMG(float xPos, float yPos, Player player, ProjectileManagerGetter GetProjectileManager) {
     GunStats smgStats = new() {
       MaxAmmo = 30,
       CurrentAmmo = 30,
@@ -77,10 +78,10 @@ internal class ItemFactory {
       AmmoType = AmmoType.Light,
       ReloadsOneByOne = false,
     };
-    return new SMGItem(TextureStore.Instance.NewGuns, new Vector2(xPos, yPos), player, levelManager, smgStats);
+    return new SMGItem(TextureStore.Instance.NewGuns, new Vector2(xPos, yPos), player, GetProjectileManager, smgStats);
   }
 
-  public IItem CreateBFG(float xPos, float yPos, Player player, ILevelManager levelManager) {
+  public IItem CreateBFG(float xPos, float yPos, Player player, ProjectileManagerGetter GetProjectileManager) {
     var stats = new GunStats {
       AmmoType = AmmoType.BFG,
       BulletVelocity = 800f,
@@ -91,21 +92,21 @@ internal class ItemFactory {
       BaseDamage = 340,
       ReloadsOneByOne = false,
     };
-    return new BFGItem(TextureStore.Instance.NewGuns, new Vector2(xPos, yPos), player, levelManager, stats);
+    return new BFGItem(TextureStore.Instance.NewGuns, new Vector2(xPos, yPos), player, GetProjectileManager, stats);
   }
 
-  public IItem CreateFakeBFG(float xPos, float yPos, Player player, ILevelManager levelManager) {
+  public IItem CreateFakeBFG(float xPos, float yPos, Player player, ProjectileManagerGetter GetProjectileManager) {
     var stats = new GunStats {
       AmmoType = AmmoType.BFG,
       FireRate = 1.0f,
       MaxAmmo = 999, // Doesn't matter
       CurrentAmmo = 999,
     };
-    return new FakeBFGItem(TextureStore.Instance.NewGuns, new Vector2(xPos, yPos), player, levelManager, stats);
+    return new FakeBFGItem(TextureStore.Instance.NewGuns, new Vector2(xPos, yPos), player, GetProjectileManager, stats);
   }
 
-  public static IItem CreateKey(float xPos, float yPos, ILevelManager levelManager) {
-    return new KeyItem(TextureStore.Instance.MainBlockItemAtlas, new Vector2(xPos, yPos), levelManager);
+  public static IItem CreateKey(float xPos, float yPos, CurrentLevelGetter GetCurrentLevel) {
+    return new KeyItem(TextureStore.Instance.MainBlockItemAtlas, new Vector2(xPos, yPos), GetCurrentLevel);
   }
 
   public IItem CreateHealthPotion(float xPos, float yPos, Player player) {

@@ -25,7 +25,6 @@ internal enum FacingDirection {
 }
 
 internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable {
-  private readonly ILevelManager levelManager;
   private readonly BoxCollider collider;
   private bool inputLeftThisFrame, inputRightThisFrame, inputUpThisFrame, inputDownThisFrame;
   private bool inputLeftLastFrame, inputRightLastFrame, inputUpLastFrame, inputDownLastFrame;
@@ -52,8 +51,7 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
 
   public PlayerStateMachine StateMachine { get; private set; }
 
-  public Player(ILevelManager levelManager, Game1 game) {
-    this.levelManager = levelManager;
+  public Player(CurrentLevelGetter GetCurrentLevel, Action onLoss) {
     Position = Vector2.Zero;
     Velocity = Vector2.Zero;
     Inventory = new PlayerInventory(this, levelManager);
@@ -62,7 +60,7 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     float height = Constants.PLAYER_SPRITE_HEIGHT * Constants.PLAYER_SPRITE_SCALE;
     collider = new BoxCollider(width, height, Position);
 
-    StateMachine = new PlayerStateMachine(this, () => game.ChangeState(game.StateLoss));
+    StateMachine = new PlayerStateMachine(this, GetCurrentLevel, onLoss);
   }
 
   public void MoveUp() => inputUpThisFrame = true;
@@ -187,15 +185,6 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   }
 
   public void Interact() {
-    if (levelManager?.CurrentLevel == null) return;
-
-    float grabRange = Constants.ITEM_GRAB_RANGE;
-
-    IWorldPickup? closestPickup = levelManager.CurrentLevel.GetClosestPickupInRange(Position, grabRange);
-
-    if (closestPickup != null) {
-      closestPickup.OnPickup(this);
-      levelManager.CurrentLevel.RemovePickup(closestPickup);
-    }
+    StateMachine.CurrentState.Interact();
   }
 }

@@ -253,7 +253,7 @@ internal partial class LevelLoader {
 
         CheckEntryLength(entrySplit, 1);
 
-        enemies.Add(EnemyFactory.Instance.CreateShotgunnerSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, levelManager, player));
+        enemies.Add(EnemyFactory.Instance.CreateShotgunnerSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, () => levelManager.CurrentLevel.ProjectileManager, player));
         break;
 
       case "10":
@@ -269,7 +269,7 @@ internal partial class LevelLoader {
 
         CheckEntryLength(entrySplit, 1);
 
-        enemies.Add(EnemyFactory.Instance.CreateRiflemanSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, levelManager, player));
+        enemies.Add(EnemyFactory.Instance.CreateRiflemanSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, () => levelManager.CurrentLevel.ProjectileManager, player));
         break;
 
       case "12":
@@ -293,7 +293,7 @@ internal partial class LevelLoader {
 
         CheckEntryLength(entrySplit, 1);
 
-        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateRevolver(xPos, yPos, player, levelManager)));
+        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateRevolver(xPos, yPos, player, () => levelManager.CurrentLevel.ProjectileManager)));
         break;
 
       case "15":
@@ -301,7 +301,7 @@ internal partial class LevelLoader {
 
         CheckEntryLength(entrySplit, 1);
 
-        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateRifle(xPos, yPos, player, levelManager)));
+        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateRifle(xPos, yPos, player, () => levelManager.CurrentLevel.ProjectileManager)));
         break;
 
       case "16":
@@ -309,7 +309,7 @@ internal partial class LevelLoader {
 
         CheckEntryLength(entrySplit, 1);
 
-        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateShotgun(xPos, yPos, player, levelManager)));
+        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateShotgun(xPos, yPos, player, () => levelManager.CurrentLevel.ProjectileManager)));
         break;
 
       case "17":
@@ -363,7 +363,7 @@ internal partial class LevelLoader {
 
         CheckEntryLength(entrySplit, 1);
 
-        pickups.Add(new ItemWorldPickup(ItemFactory.CreateKey(xPos, yPos, levelManager)));
+        pickups.Add(new ItemWorldPickup(ItemFactory.CreateKey(xPos, yPos, () => levelManager.CurrentLevel)));
         break;
 
       case "22":

@@ -11,7 +11,7 @@ using GameProject.Globals;
 
 namespace GameProject.PlayerSpace;
 
-internal class PlayerInventory(Player player, ILevelManager levelManager) : IInitable {
+internal class PlayerInventory(Player player, CurrentLevelGetter GetCurrentLevel) : IInitable {
   private readonly Random random = new();
   private const int MAX_WEAPONS = 2;
   private const int MIN_DROP_VEL_X = -100;
@@ -72,7 +72,7 @@ internal class PlayerInventory(Player player, ILevelManager levelManager) : IIni
     Vector2 dropVelocity = new(tossX, tossY);
 
     IWorldPickup droppedItem = new ItemWorldPickup(itemToDrop, dropVelocity);
-    levelManager.CurrentLevel.AddPickup(droppedItem);
+    GetCurrentLevel().AddPickup(droppedItem);
   }
 
   public void DropCurrentItem() {
@@ -99,8 +99,8 @@ internal class PlayerInventory(Player player, ILevelManager levelManager) : IIni
   public void Initialize() { }
 
   public void LoadContent(ContentManager content) {
-    PickupItem(ItemFactory.Instance.CreateRevolver(0.0f, 0.0f, player, levelManager));
-    PickupItem(ItemFactory.Instance.CreateRifle(0.0f, 0.0f, player, levelManager));
+    PickupItem(ItemFactory.Instance.CreateRevolver(0.0f, 0.0f, player, GetCurrentLevel));
+    PickupItem(ItemFactory.Instance.CreateRifle(0.0f, 0.0f, player, GetCurrentLevel));
   }
 
   public void Update(double deltaTime) {

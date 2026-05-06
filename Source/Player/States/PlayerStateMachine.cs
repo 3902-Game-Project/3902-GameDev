@@ -1,4 +1,5 @@
 ﻿using System;
+using GameProject.Level;
 
 namespace GameProject.PlayerSpace.States;
 
@@ -9,15 +10,16 @@ internal class PlayerStateMachine {
   public IPlayerState DeadState { get; }
   public IPlayerState CurrentState { get; private set; }
 
-  public PlayerStateMachine(Player player, Action onLoss) {
-    StaticState = new PlayerStaticState(player);
-    MovingState = new PlayerMovingState(player);
-    UseItemState = new PlayerUseItemState(player);
-    DeadState = new PlayerDeadState(player, onLoss);
+  public PlayerStateMachine(Player player, CurrentLevelGetter GetCurrentLevel, Action onLoss) {
+    StaticState = new PlayerStaticState(player, GetCurrentLevel);
+    MovingState = new PlayerMovingState(player, GetCurrentLevel);
+    UseItemState = new PlayerUseItemState(player, GetCurrentLevel);
+    DeadState = new PlayerDeadState(player, GetCurrentLevel, onLoss);
 
     // Initialize the default state
     CurrentState = StaticState;
   }
+
   public void ChangeState(IPlayerState newState) {
     CurrentState = newState;
   }
