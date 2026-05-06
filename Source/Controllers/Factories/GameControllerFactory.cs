@@ -45,8 +45,8 @@ internal static class GameControllerFactory {
 
     // Debug button binds:
     if (Flags.DebugButtonBinds) {
-      //keyboardController.PressedMappings.Add(Keys.T, new PreviousLevelCommand(levelManager));
-      //keyboardController.PressedMappings.Add(Keys.Y, new NextLevelCommand(levelManager));
+      keyboardController.PressedMappings.Add(Keys.T, new PreviousLevelCommand(levelManager));
+      keyboardController.PressedMappings.Add(Keys.Y, new NextLevelCommand(levelManager));
       keyboardController.PressedMappings.Add(Keys.H, new ToggleUpdatesCommand());
     }
 
@@ -58,8 +58,8 @@ internal static class GameControllerFactory {
 
     // Debug button binds:
     if (Flags.DebugButtonBinds) {
-      //mouseController.PressedMappings.Add(MouseButtons.Right, new PreviousLevelCommand(levelManager));
-      //mouseController.PressedMappings.Add(MouseButtons.Left, new NextLevelCommand(levelManager));
+      mouseController.PressedMappings.Add(MouseButtons.Right, new PreviousLevelCommand(levelManager));
+      mouseController.PressedMappings.Add(MouseButtons.Left, new NextLevelCommand(levelManager));
     }
 
     return mouseController;
@@ -100,8 +100,8 @@ internal static class GameControllerFactory {
 
     // Debug button binds:
     if (Flags.DebugButtonBinds) {
-      //gamePadController.PressedMappings.Add(GPGamePadButtons.DPadLeft, new PreviousLevelCommand(levelManager));
-      //gamePadController.PressedMappings.Add(GPGamePadButtons.DPadRight, new NextLevelCommand(levelManager));
+      gamePadController.PressedMappings.Add(GPGamePadButtons.DPadLeft, new PreviousLevelCommand(levelManager));
+      gamePadController.PressedMappings.Add(GPGamePadButtons.DPadRight, new NextLevelCommand(levelManager));
       gamePadController.PressedMappings.Add(GPGamePadButtons.DPadUp, new ToggleUpdatesCommand());
     }
 
