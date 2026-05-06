@@ -15,11 +15,11 @@ namespace GameProject.Enemies;
 internal class Shotgunner : ABaseEnemy {
   private readonly Player player;
 
-  public ILevelManager LevelManager { get; }
+  public ProjectileManagerGetter GetProjectileManager { get; }
 
-  public Shotgunner(Texture2D texture, Vector2 position, ILevelManager levelManager, Player player) :
+  public Shotgunner(Texture2D texture, Vector2 position, ProjectileManagerGetter GetProjectileManager, Player player) :
     base(texture, position, Constants.BASE_ENEMY_WIDTH * 0.75f, Constants.BASE_ENEMY_HEIGHT * 1.5f) {
-    LevelManager = levelManager;
+    this.GetProjectileManager = GetProjectileManager;
     DrawScale = 1.6f;
     FlipWhenFacingRightUpDown = false;
     CurrentState = new ShotgunnerWanderState(this);

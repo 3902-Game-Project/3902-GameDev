@@ -15,11 +15,11 @@ namespace GameProject.Enemies;
 internal class Rifleman : ABaseEnemy {
   private readonly Player player;
 
-  public ILevelManager LevelManager { get; }
+  public ProjectileManagerGetter GetProjectileManager { get; }
 
-  public Rifleman(Texture2D texture, Vector2 position, ILevelManager levelManager, Player player) :
+  public Rifleman(Texture2D texture, Vector2 position, ProjectileManagerGetter GetProjectileManager, Player player) :
     base(texture, position, Constants.BASE_ENEMY_WIDTH * 0.75f, Constants.BASE_ENEMY_HEIGHT * 1.5f) {
-    LevelManager = levelManager;
+    this.GetProjectileManager = GetProjectileManager;
     DrawScale = 2f;
     FlipWhenFacingRightUpDown = false;
     CurrentState = new RifleWanderState(this);
@@ -55,7 +55,7 @@ internal class Rifleman : ABaseEnemy {
     }
     IProjectile bullet = ProjectileFactory.Instance.CreateBullet(spawnPosition, bulletDirection, 300f, 2f, damage);
     if (bullet is BulletDefault b) b.IsPlayerShot = false;
-    LevelManager.CurrentLevel.ProjectileManager.Add(bullet);
+    GetProjectileManager().Add(bullet);
   }
 
   protected override void DropLoot() {

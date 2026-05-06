@@ -9,13 +9,14 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Enemies;
 
 internal class Boss : ABaseEnemy {
-  public ILevelManager LevelManager { get; }
+  public ProjectileManagerGetter GetProjectileManager { get; }
 
   public bool PhaseTwoTriggered { get; set; } = false;
   private readonly Random random = new();
 
-  public Boss(Texture2D texture, Vector2 position, ILevelManager levelManager) : base(texture, position, colliderHeight: Constants.BASE_ENEMY_HEIGHT * 2.0f) {
-    LevelManager = levelManager;
+  public Boss(Texture2D texture, Vector2 position, ProjectileManagerGetter GetProjectileManager) :
+    base(texture, position, colliderHeight: Constants.BASE_ENEMY_HEIGHT * 2.0f) {
+    this.GetProjectileManager = GetProjectileManager;
     DrawScale = 2.0f;
     FlipWhenFacingRightUpDown = false;
     MaxHealth = 1000;
@@ -114,7 +115,7 @@ internal class Boss : ABaseEnemy {
         Vector2 spawnPos = new(xPositions[x], yPositions[y]);
 
         IProjectile arenaBomb = ProjectileFactory.Instance.CreateBossBomb(spawnPos, Vector2.Zero, 25);
-        LevelManager.CurrentLevel.ProjectileManager.Add(arenaBomb);
+        GetProjectileManager().Add(arenaBomb);
       }
     }
   }
