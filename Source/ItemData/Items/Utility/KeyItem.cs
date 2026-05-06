@@ -8,10 +8,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManager levelManager) : IItem, IWorldPickup {
+internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, CurrentLevelGetter GetCurrentLevel) : IItem, IWorldPickup {
   private static readonly Rectangle SOURCE_RECT = new(0, 448, 7, 13);
-
-  private readonly ILevelManager levelManager = levelManager;
 
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
   public Vector2 Position { get; set; } = startPosition;
@@ -57,7 +55,7 @@ internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, ILevelManage
   public void Update(double deltaTime) { }
 
   public void Use(UseType useType) {
-    foreach (var block in levelManager.CurrentLevel.GetOpenableDoors()) {
+    foreach (var block in GetCurrentLevel().GetOpenableDoors()) {
       // Safely check if the block is a Vault Door
       if (block is VaultDoorBlock vaultDoor) {
         vaultDoor.Unlock(); // Explicitly trigger the door's built-in unlock method!

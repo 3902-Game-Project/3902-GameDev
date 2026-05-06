@@ -80,7 +80,7 @@ internal class CheatCodes : ITemporalUpdatable {
 
   public void UnlimitedItems(Player player) {
     if (!player.Inventory.GeneralItems.OfType<KeyItem>().Any()) {
-      IItem key = ItemFactory.CreateKey(-1f, -1f, LevelManager);
+      IItem key = ItemFactory.CreateKey(-1f, -1f, () => LevelManager.CurrentLevel);
       player.Inventory.PickupItem(key);
     }
 

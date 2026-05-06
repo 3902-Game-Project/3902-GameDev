@@ -1,16 +1,16 @@
 using System;
 using GameProject.Controllers;
 using GameProject.FireModes;
-using GameProject.Level;
 using GameProject.Misc;
 using GameProject.PlayerSpace;
 using GameProject.ProjectilePatterns;
+using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-internal abstract class ABaseGun(Texture2D texture, Vector2 startPosition, Player player, ILevelManager levelManager, GunStats stats) : IItem {
+internal abstract class ABaseGun(Texture2D texture, Vector2 startPosition, Player player, ProjectileManagerGetter GetProjectileManager, GunStats stats) : IItem {
   protected static readonly float SCALE = 1.0f;
 
   protected readonly Texture2D texture = texture;
@@ -136,7 +136,7 @@ internal abstract class ABaseGun(Texture2D texture, Vector2 startPosition, Playe
     }
 
     Vector2 bulletSpawnPosition = Position + actualOffset;
-    projectilePattern.SpawnProjectiles(levelManager.CurrentLevel.ProjectileManager, bulletSpawnPosition, bulletDirection, stats);
+    projectilePattern.SpawnProjectiles(GetProjectileManager(), bulletSpawnPosition, bulletDirection, stats);
     SoundManager.Instance.Play(stats.GunshotID);
   }
 }

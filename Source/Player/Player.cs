@@ -25,13 +25,19 @@ internal enum FacingDirection {
 }
 
 internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable {
-  private readonly ILevelManager levelManager;
   private readonly BoxCollider collider;
+  private readonly CurrentLevelGetter GetCurrentLevel;
   private bool inputLeftThisFrame, inputRightThisFrame, inputUpThisFrame, inputDownThisFrame;
   private bool inputLeftLastFrame, inputRightLastFrame, inputUpLastFrame, inputDownLastFrame;
   private int activeDirX = 0;
   private int activeDirY = 0;
   private Vector2 lastInputVelocity = Vector2.Zero;
+
+  private ILevel CurrentLevel {
+    get {
+      return GetCurrentLevel();
+    }
+  }
 
   public IShape Shape => collider;
   public Layer Mask { get; } = Layer.Environment;
@@ -52,17 +58,18 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
 
   public PlayerStateMachine StateMachine { get; private set; }
 
-  public Player(ILevelManager levelManager, Game1 game) {
-    this.levelManager = levelManager;
+  public Player(CurrentLevelGetter GetCurrentLevel, Action onLoss) {
     Position = Vector2.Zero;
     Velocity = Vector2.Zero;
-    Inventory = new PlayerInventory(this, levelManager);
+    Inventory = new PlayerInventory(this, GetCurrentLevel);
 
     float width = Constants.PLAYER_SPRITE_WIDTH * Constants.PLAYER_SPRITE_SCALE;
     float height = Constants.PLAYER_SPRITE_HEIGHT * Constants.PLAYER_SPRITE_SCALE;
     collider = new BoxCollider(width, height, Position);
 
-    StateMachine = new PlayerStateMachine(this, () => game.ChangeState(game.StateLoss));
+    StateMachine = new PlayerStateMachine(this, GetCurrentLevel, onLoss);
+
+    this.GetCurrentLevel = GetCurrentLevel;
   }
 
   public void MoveUp() => inputUpThisFrame = true;
@@ -142,11 +149,11 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
 
     Position = new Vector2(Position.X + xStep, Position.Y);
     if (collider != null) collider.Position = Position;
-    levelManager.CurrentLevel.PlayerResolveCollisions(this, CollisionAxis.X, MathF.Abs(yStep) + Constants.COLLISION_BUFFER);
+    CurrentLevel.PlayerResolveCollisions(this, CollisionAxis.X, MathF.Abs(yStep) + Constants.COLLISION_BUFFER);
 
     Position = new Vector2(Position.X, Position.Y + yStep);
     if (collider != null) collider.Position = Position;
-    levelManager.CurrentLevel.PlayerResolveCollisions(this, CollisionAxis.Y, MathF.Abs(xStep) + Constants.COLLISION_BUFFER);
+    CurrentLevel.PlayerResolveCollisions(this, CollisionAxis.Y, MathF.Abs(xStep) + Constants.COLLISION_BUFFER);
 
     StateMachine.CurrentState.Update(deltaTime);
     Velocity = Vector2.Zero;
@@ -163,10 +170,8 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     inputDownThisFrame = false;
 
     // Auto-Collect for Ammo
-    if (levelManager?.CurrentLevel != null) {
-      foreach (var pickup in levelManager.CurrentLevel.GetRemoveAmmoInRange(Position, Constants.AMMO_AUTO_COLLECT_RANGE)) {
-        pickup.OnPickup(this);
-      }
+    foreach (var pickup in CurrentLevel.GetRemoveAmmoInRange(Position, Constants.AMMO_AUTO_COLLECT_RANGE)) {
+      pickup.OnPickup(this);
     }
   }
 
@@ -187,15 +192,6 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   }
 
   public void Interact() {
-    if (levelManager?.CurrentLevel == null) return;
-
-    float grabRange = Constants.ITEM_GRAB_RANGE;
-
-    IWorldPickup? closestPickup = levelManager.CurrentLevel.GetClosestPickupInRange(Position, grabRange);
-
-    if (closestPickup != null) {
-      closestPickup.OnPickup(this);
-      levelManager.CurrentLevel.RemovePickup(closestPickup);
-    }
+    StateMachine.CurrentState.Interact();
   }
 }

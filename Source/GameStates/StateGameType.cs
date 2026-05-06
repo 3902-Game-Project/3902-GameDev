@@ -94,7 +94,7 @@ internal class StateGameType : IGameState {
   public StateGameType(Game1 game) {
     this.game = game;
     LevelManager = new LevelManager(game);
-    Player = new Player(LevelManager, game);
+    Player = new Player(() => LevelManager.CurrentLevel, () => game.ChangeState(game.StateLoss));
     hudManager = new(Player);
   }
 
