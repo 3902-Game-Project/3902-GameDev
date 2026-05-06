@@ -69,6 +69,22 @@ internal partial class LevelLoader {
     return flags;
   }
 
+  private static void CheckEntryLength(string[] entrySplit, int length) {
+    var type = entrySplit[0];
+
+    if (entrySplit.Length != length) {
+      throw new FormatException($"Expected {length - 1} parameter for level block/entity type '{type}'");
+    }
+  }
+
+  private static void CheckEntryLengthGreaterThanEqual(string[] entrySplit, int length) {
+    var type = entrySplit[0];
+
+    if (entrySplit.Length < length) {
+      throw new FormatException($"Expected at least {length - 1} parameter for level block/entity type '{type}'");
+    }
+  }
+
   private static void AddCellEntry(
     Player player,
     ILevelManager levelManager,
@@ -92,14 +108,14 @@ internal partial class LevelLoader {
       case "":
       case "0":
         /* empty, do nothing */
+
+        CheckEntryLength(entrySplit, 1);
         break;
 
       case "1": {
           /* log */
 
-          if (entrySplit.Length != 2) {
-            throw new FormatException($"Expected 1 parameter for level block/entity type '{type}'");
-          }
+          CheckEntryLength(entrySplit, 2);
 
           var variation = entrySplit[1];
 
@@ -122,12 +138,17 @@ internal partial class LevelLoader {
 
       case "2": {
           /* small door */
+
+          CheckEntryLength(entrySplit, 3);
+
           var stateString = entrySplit[1];
+
           var state = stateString switch {
             "0" => LockableDoorBlockState.Locked,
             "1" => LockableDoorBlockState.Open,
             _ => throw new FormatException($"unrecognized door state '{stateString}"),
           };
+
           var pairedLevelName = entrySplit[2];
 
           if (!levelNames.Contains(pairedLevelName)) {
@@ -140,6 +161,9 @@ internal partial class LevelLoader {
 
       case "3":
         /* player position */
+
+        CheckEntryLength(entrySplit, 1);
+
         if (playerPositionNullable is not null) {
           throw new FormatException("default player position set twice in same level");
         } else {
@@ -149,46 +173,65 @@ internal partial class LevelLoader {
 
       case "4":
         /* snake */
+
+        CheckEntryLength(entrySplit, 1);
+
         enemies.Add(EnemyFactory.Instance.CreateSnakeSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
         break;
 
       case "5":
         /* sand */
+
+        CheckEntryLength(entrySplit, 1);
+
         nonCollidableBlocks.Add(BlockFactory.CreateSandBlockSprite(xPos, yPos));
         break;
 
       case "6":
         /* red sand */
+
+        CheckEntryLength(entrySplit, 1);
+
         nonCollidableBlocks.Add(BlockFactory.CreateRedSandBlockSprite(xPos, yPos));
         break;
 
       case "7":
         /* wood plank */
+
+        CheckEntryLength(entrySplit, 1);
+
         nonCollidableBlocks.Add(BlockFactory.CreateWoodPlankBlockSprite(xPos, yPos));
         break;
 
       case "8": {
           /* rock */
 
-          if (entrySplit.Length < 2) {
-            throw new FormatException($"Expected 1 parameter for level block/entity type '{type}'");
-          }
+          CheckEntryLengthGreaterThanEqual(entrySplit, 2);
 
           var variation = entrySplit[1];
 
           switch (variation) {
             case "0":
               /* wall */
+
+              CheckEntryLength(entrySplit, 2);
+
               collidableBlocks.Add(BlockFactory.CreateRockBlockSprite(xPos, yPos));
               break;
 
             case "1":
               /* corner */
+
+              CheckEntryLength(entrySplit, 2);
+
               collidableBlocks.Add(BlockFactory.CreateRockCornerBlockSprite(xPos, yPos));
               break;
 
             case "3": {
                 /* hole to other room */
+
+                CheckEntryLength(entrySplit, 3);
+
                 var pairedLevelName = entrySplit[2];
 
                 if (!levelNames.Contains(pairedLevelName)) {
@@ -207,61 +250,97 @@ internal partial class LevelLoader {
 
       case "9":
         /* shotgunner */
+
+        CheckEntryLength(entrySplit, 1);
+
         enemies.Add(EnemyFactory.Instance.CreateShotgunnerSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, levelManager, player));
         break;
 
       case "10":
         /* bat */
+
+        CheckEntryLength(entrySplit, 1);
+
         enemies.Add(EnemyFactory.Instance.CreateBatSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
         break;
 
       case "11":
         /* rifleman */
+
+        CheckEntryLength(entrySplit, 1);
+
         enemies.Add(EnemyFactory.Instance.CreateRiflemanSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, levelManager, player));
         break;
 
       case "12":
         /* tumbleweed */
+
+        CheckEntryLength(entrySplit, 1);
+
         enemies.Add(EnemyFactory.Instance.CreateTumbleweedSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
         break;
 
       case "13":
         /* cactus */
+
+        CheckEntryLength(entrySplit, 1);
+
         enemies.Add(EnemyFactory.Instance.CreateCactusSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
         break;
 
       case "14":
         /* revolver */
+
+        CheckEntryLength(entrySplit, 1);
+
         pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateRevolver(xPos, yPos, player, levelManager)));
         break;
 
       case "15":
         /* rifle */
+
+        CheckEntryLength(entrySplit, 1);
+
         pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateRifle(xPos, yPos, player, levelManager)));
         break;
 
       case "16":
         /* shotgun */
+
+        CheckEntryLength(entrySplit, 1);
+
         pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateShotgun(xPos, yPos, player, levelManager)));
         break;
 
       case "17":
         /* barrel */
+
+        CheckEntryLength(entrySplit, 1);
+
         collidableBlocks.Add(BlockFactory.CreateBarrelBlockSprite(xPos, yPos));
         break;
 
       case "18":
         /* bar shelf */
+
+        CheckEntryLength(entrySplit, 1);
+
         collidableBlocks.Add(BlockFactory.CreateBarShelfBlockSprite(xPos, yPos));
         break;
 
       case "19":
         /* shelf */
+
+        CheckEntryLength(entrySplit, 1);
+
         collidableBlocks.Add(BlockFactory.CreateShelfBlockSprite(xPos, yPos));
         break;
 
       case "20": {
           /* vault door */
+
+          CheckEntryLength(entrySplit, 3);
+
           var stateString = entrySplit[1];
           var state = stateString switch {
             "0" => VaultDoorBlockState.Locked,
@@ -281,51 +360,81 @@ internal partial class LevelLoader {
 
       case "21":
         /* key item */
+
+        CheckEntryLength(entrySplit, 1);
+
         pickups.Add(new ItemWorldPickup(ItemFactory.CreateKey(xPos, yPos, levelManager)));
         break;
 
       case "22":
         /* fire pit */
+
+        CheckEntryLength(entrySplit, 1);
+
         collidableBlocks.Add(BlockFactory.CreateFirePitBlockSprite(xPos, yPos));
         break;
 
       case "23":
         /* fire */
+
+        CheckEntryLength(entrySplit, 1);
+
         collidableBlocks.Add(BlockFactory.CreateFireBlockSprite(xPos, yPos, player));
         break;
 
       case "25":
         /* mud */
+
+        CheckEntryLength(entrySplit, 1);
+
         collidableBlocks.Add(BlockFactory.CreateMudBlockSprite(xPos, yPos));
         break;
 
       case "26":
         /* crate */
+
+        CheckEntryLength(entrySplit, 1);
+
         collidableBlocks.Add(BlockFactory.CreateCrateBlockSprite(xPos, yPos));
         break;
 
       case "27":
         /* stool */
+
+        CheckEntryLength(entrySplit, 1);
+
         collidableBlocks.Add(BlockFactory.CreateStoolBlockSprite(xPos, yPos));
         break;
 
       case "28":
         /* table */
+
+        CheckEntryLength(entrySplit, 1);
+
         collidableBlocks.Add(BlockFactory.CreateTableBlockSprite(xPos, yPos));
         break;
 
       case "29":
         /* statue */
+
+        CheckEntryLength(entrySplit, 1);
+
         collidableBlocks.Add(BlockFactory.CreateStatueBlockSprite(xPos, yPos));
         break;
 
       case "30":
         /* window */
+
+        CheckEntryLength(entrySplit, 1);
+
         collidableBlocks.Add(BlockFactory.CreateWindowBlockSprite(xPos, yPos));
         break;
 
       case "31": {
           /* slatted door */
+
+          CheckEntryLength(entrySplit, 3);
+
           var stateString = entrySplit[1];
           var state = stateString switch {
             "0" => LockableDoorBlockState.Locked,
@@ -344,11 +453,16 @@ internal partial class LevelLoader {
 
       case "32":
         /* treasure block */
+
+        CheckEntryLength(entrySplit, 1);
+
         collidableBlocks.Add(BlockFactory.CreateTreasureBlockSprite(xPos, yPos));
         break;
 
       case "33":
         /* ammo item */
+
+        CheckEntryLength(entrySplit, 3);
 
         var ammoTypeString = entrySplit[1];
 
@@ -376,31 +490,49 @@ internal partial class LevelLoader {
 
       case "34":
         /* bank shelf */
+
+        CheckEntryLength(entrySplit, 1);
+
         collidableBlocks.Add(BlockFactory.CreateBankShelfBlockSprite(xPos, yPos));
         break;
 
       case "35":
         /* tellers desk */
+
+        CheckEntryLength(entrySplit, 1);
+
         collidableBlocks.Add(BlockFactory.CreateTellersDeskBlockSprite(xPos, yPos));
         break;
 
       case "36":
         /* health item */
+
+        CheckEntryLength(entrySplit, 1);
+
         pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateHealthPotion(xPos, yPos, player)));
         break;
 
       case "37":
         /* invincibility item */
+
+        CheckEntryLength(entrySplit, 1);
+
         pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateInvincibilityPotion(xPos, yPos, player)));
         break;
 
       case "38":
         /* infinite ammo item */
+
+        CheckEntryLength(entrySplit, 1);
+
         pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateInfiniteAmmo(xPos, yPos, player)));
         break;
 
       case "39":
         /* boss */
+
+        CheckEntryLength(entrySplit, 1);
+
         enemies.Add(EnemyFactory.Instance.CreateBossSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, levelManager));
         break;
 
