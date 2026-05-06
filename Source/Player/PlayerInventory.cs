@@ -51,7 +51,7 @@ internal class PlayerInventory(Player player, CurrentLevelGetter GetCurrentLevel
 
   public void PickupItem(IItem newItem) {
     if (newItem.Category == ItemCategory.Primary || newItem.Category == ItemCategory.Sidearm) {
-      if (Weapons.Count < 2) {
+      if (Weapons.Count < MAX_WEAPONS) {
         Weapons.Add(newItem);
         ActiveWeaponIndex = Weapons.Count - 1;
       } else {
