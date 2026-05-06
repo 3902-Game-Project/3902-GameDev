@@ -125,6 +125,10 @@ internal class StateGameType : IGameState {
     mouseController.Update();
     gamePadController.Update();
 
+    foreach (var key in keyboardController.GetPressed()) {
+      CheatCodes.Instance.AddKey(key);
+    }
+
     CheatCodes.Instance.Update(deltaTime);
 
     if (!Flags.HaltAllUpdates) {
