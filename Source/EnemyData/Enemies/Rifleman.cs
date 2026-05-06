@@ -60,12 +60,12 @@ internal class Rifleman : ABaseEnemy {
     }
     IProjectile bullet = ProjectileFactory.Instance.CreateBullet(spawnPosition, bulletDirection, 300f, 2f, damage);
     if (bullet is BulletDefault b) b.IsPlayerShot = false;
-    GetProjectileManager().Add(bullet);
+    CurrentLevel.ProjectileManager.Add(bullet);
   }
 
   protected override void DropLoot() {
-    LevelManager.CurrentLevel.AddPickup(WorldPickupFactory.Instance.CreateAmmo(Position, Items.AmmoType.Heavy, 5));
-    LevelManager.CurrentLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateHealthPotion(Position.X, Position.Y - 60.0f, player)));
+    CurrentLevel.AddPickup(WorldPickupFactory.Instance.CreateAmmo(Position, AmmoType.Heavy, 5));
+    CurrentLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateHealthPotion(Position.X, Position.Y - 60.0f, player)));
   }
 
   protected override void TransitionToDeathState() {
