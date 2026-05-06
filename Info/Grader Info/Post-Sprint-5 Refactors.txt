@@ -64,7 +64,7 @@ Look at using coroutines instead of juggling the fade-in/out states. The C# keyw
 Coroutines not implemented, but screen transitions have been moved to their own class, which is good
 
 Player (High Priority) - Eric Possibly
-Reduce the number of public fields. 
+Reduce the number of public fields.
 Still lots of public fields that are manipulated by lots of other classes 
 
 Player (High Priority) - Eric Possibly

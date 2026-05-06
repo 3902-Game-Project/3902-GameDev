@@ -64,34 +64,34 @@ internal class LevelManager(Game1 game) : ILevelManager {
     if (
       game.StateGame.Player.Position.X <= LevelLoader.PLAYER_LEFT_BOUNDARY_THRESHOLD
     ) {
-      game.StateGame.Player.Position = new(
+      game.StateGame.Player.TeleportTo(new(
         LevelLoader.PLAYER_RIGHT_POS_AFTER_TELEPORT,
         game.StateGame.Player.Position.Y
-      );
+      ));
     } else if (
         game.StateGame.Player.Position.X >= LevelLoader.PLAYER_RIGHT_BOUNDARY_THRESHOLD
       ) {
-      game.StateGame.Player.Position = new(
+      game.StateGame.Player.TeleportTo(new(
         LevelLoader.PLAYER_LEFT_POS_AFTER_TELEPORT,
         game.StateGame.Player.Position.Y
-      );
+      ));
     } else if (
       game.StateGame.Player.Position.Y <= LevelLoader.PLAYER_TOP_BOUNDARY_THRESHOLD
     ) {
-      game.StateGame.Player.Position = new(
+      game.StateGame.Player.TeleportTo(new(
         game.StateGame.Player.Position.X,
         LevelLoader.PLAYER_BOTTOM_POS_AFTER_TELEPORT
-      );
+      ));
     } else if (
       game.StateGame.Player.Position.Y >= LevelLoader.PLAYER_BOTTOM_BOUNDARY_THRESHOLD
     ) {
-      game.StateGame.Player.Position = new(
+      game.StateGame.Player.TeleportTo(new(
         game.StateGame.Player.Position.X,
         LevelLoader.PLAYER_TOP_POS_AFTER_TELEPORT
-      );
+      ));
     } else {
       // No wrapping possible, use default position
-      game.StateGame.Player.Position = CurrentLevel.GetDefaultPlayerPosition();
+      game.StateGame.Player.TeleportTo(CurrentLevel.GetDefaultPlayerPosition());
     }
   }
 
@@ -149,7 +149,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
       levels.Add(name, level);
     }
 
-    game.StateGame.Player.Position = CurrentLevel.GetDefaultPlayerPosition();
+    game.StateGame.Player.TeleportTo(CurrentLevel.GetDefaultPlayerPosition());
 
     if (Flags.SpawnBfgImmediately) {
       SpawnBfgs();

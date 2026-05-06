@@ -36,17 +36,17 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   public IShape Shape => collider;
   public Layer Mask { get; } = Layer.Environment;
   public Layer Layer { get; } = Layer.Player;
-  public Vector2 Position { get; set; }
-  public Vector2 Velocity { get; set; }
-  public int Health { get; set; } = Constants.DEFAULT_MAX_HEALTH;
+  public Vector2 Position { get; internal set; }
+  public Vector2 Velocity { get; internal set; }
+  public int Health { get; internal set; } = Constants.DEFAULT_MAX_HEALTH;
 
-  public double InvincibilityTimer { get; set; } = 0.0;
-  public double InfiniteAmmoTimer { get; set; } = 0.0;
+  public double InvincibilityTimer { get; private set; } = 0.0;
+  public double InfiniteAmmoTimer { get; private set; } = 0.0;
   public bool HasInfiniteAmmo => InfiniteAmmoTimer > 0;
 
   public bool IsInvincible => InvincibilityTimer > 0;
 
-  public FacingDirection Direction { get; set; } = FacingDirection.Right;
+  public FacingDirection Direction { get; internal set; } = FacingDirection.Right;
 
   public PlayerInventory Inventory { get; private set; }
 
@@ -63,6 +63,31 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     collider = new BoxCollider(width, height, Position);
 
     StateMachine = new PlayerStateMachine(this, () => game.ChangeState(game.StateLoss));
+  }
+
+  public void Heal(int amount) {
+    if(Health <= 0) {
+      return;
+    }
+    Health += amount;
+    if(Health > Constants.DEFAULT_MAX_HEALTH) {
+      Health = Constants.DEFAULT_MAX_HEALTH;
+    }
+  }
+
+  public void GrantInvincibility(double duration) {
+    InvincibilityTimer += duration;
+  }
+
+  public void GrantInfiniteAmmo(double duration) {
+    InfiniteAmmoTimer += duration;
+  }
+
+  public void TeleportTo(Vector2 newPosition) {
+    Position = newPosition;
+    if (collider != null) {
+      collider.Position = Position;
+    }
   }
 
   public void MoveUp() => inputUpThisFrame = true;

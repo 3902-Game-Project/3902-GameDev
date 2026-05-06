@@ -55,6 +55,6 @@ internal class InvincibilityPotionItem(Texture2D texture, Vector2 startPosition,
   }
 
   public void Use(UseType useType) {
-    player.InvincibilityTimer += 10f;
+    player.GrantInvincibility(10f);
   }
 }
