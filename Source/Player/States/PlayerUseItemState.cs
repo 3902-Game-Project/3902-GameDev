@@ -1,11 +1,12 @@
 using GameProject.Controllers;
 using GameProject.Globals;
+using GameProject.Level;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
 
-internal class PlayerUseItemState(Player player) : APlayerState(player) {
+internal class PlayerUseItemState(Player player, CurrentLevelGetter GetCurrentLevel) : APlayerState(player, GetCurrentLevel) {
   private static readonly Rectangle SOURCE_RECT_RIGHT = new(773, 56, 171, 323);
   private static readonly Rectangle SOURCE_RECT_LEFT = new(1531, 420, 171, 323);
   private static readonly Rectangle SOURCE_RECT_UP = new(453, 425, 161, 322);

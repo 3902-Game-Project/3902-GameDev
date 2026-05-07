@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using GameProject.Collisions.Shapes;
 using GameProject.GlobalInterfaces;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Collisions;
 

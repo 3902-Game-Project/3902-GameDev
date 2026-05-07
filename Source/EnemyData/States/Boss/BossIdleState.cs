@@ -1,6 +1,6 @@
 using System;
-using Microsoft.Xna.Framework;
 using GameProject.Globals;
+using Microsoft.Xna.Framework;
 
 namespace GameProject.Enemies.BossStates;
 

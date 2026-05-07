@@ -1,12 +1,16 @@
 using GameProject.Controllers;
 using GameProject.Globals;
+using GameProject.Level;
 using GameProject.Misc;
+using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
 
-internal abstract class APlayerState(Player player) : IPlayerState {
+#nullable enable
+
+internal abstract class APlayerState(Player player, CurrentLevelGetter GetCurrentLevel) : IPlayerState {
   protected Player Player { get; } = player;
 
   protected double DamageFlashTimer { get; set; } = 0.0;
@@ -35,6 +39,17 @@ internal abstract class APlayerState(Player player) : IPlayerState {
 
   public virtual void Die() {
     Player.StateMachine.ChangeState(Player.StateMachine.DeadState);
+  }
+
+  public virtual void Interact() {
+    float grabRange = Constants.ITEM_GRAB_RANGE;
+
+    IWorldPickup? closestPickup = GetCurrentLevel().GetClosestPickupInRange(Player.Position, grabRange);
+
+    if (closestPickup != null) {
+      closestPickup.OnPickup(Player);
+      GetCurrentLevel().RemovePickup(closestPickup);
+    }
   }
 
   public virtual void Update(double deltaTime) {

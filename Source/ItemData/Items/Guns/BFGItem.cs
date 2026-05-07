@@ -1,15 +1,15 @@
 using GameProject.FireModes;
-using GameProject.Level;
 using GameProject.PlayerSpace;
 using GameProject.ProjectilePatterns;
+using GameProject.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
 internal class BFGItem : ABaseGun {
-  public BFGItem(Texture2D texture, Vector2 startPosition, Player player, ILevelManager levelManager, GunStats stats)
-    : base(texture, startPosition, player, levelManager, stats) {
+  public BFGItem(Texture2D texture, Vector2 startPosition, Player player, ProjectileManagerGetter GetProjectileManager, GunStats stats)
+    : base(texture, startPosition, player, GetProjectileManager, stats) {
     Category = ItemCategory.Primary;
 
     sourceRectangle = new Rectangle(0, 0, 40, 20);

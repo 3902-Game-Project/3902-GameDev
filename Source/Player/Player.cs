@@ -8,7 +8,6 @@ using GameProject.GlobalInterfaces;
 using GameProject.Globals;
 using GameProject.Level;
 using GameProject.PlayerSpace.States;
-using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -26,11 +25,18 @@ internal enum FacingDirection {
 
 internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable {
   private readonly BoxCollider collider;
+  private readonly CurrentLevelGetter GetCurrentLevel;
   private bool inputLeftThisFrame, inputRightThisFrame, inputUpThisFrame, inputDownThisFrame;
   private bool inputLeftLastFrame, inputRightLastFrame, inputUpLastFrame, inputDownLastFrame;
   private int activeDirX = 0;
   private int activeDirY = 0;
   private Vector2 lastInputVelocity = Vector2.Zero;
+
+  private ILevel CurrentLevel {
+    get {
+      return GetCurrentLevel();
+    }
+  }
 
   public IShape Shape => collider;
   public Layer Mask { get; } = Layer.Environment;

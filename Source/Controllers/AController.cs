@@ -17,6 +17,18 @@ internal abstract class AController<ButtonsEnum, ButtonStateReference>(
 
   protected abstract ButtonStateReference GetButtonState();
 
+  public IEnumerable<ButtonsEnum> GetDown() {
+    return ButtonTracker.GetDown();
+  }
+
+  public IEnumerable<ButtonsEnum> GetPressed() {
+    return ButtonTracker.GetPressed();
+  }
+
+  public IEnumerable<ButtonsEnum> GetReleased() {
+    return ButtonTracker.GetReleased();
+  }
+
   public void Update() {
     ButtonStateReference buttonState = GetButtonState();
 

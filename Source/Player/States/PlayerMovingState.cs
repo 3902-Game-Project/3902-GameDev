@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using GameProject.Controllers;
 using GameProject.Globals;
 using GameProject.Items;
+using GameProject.Level;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
 
-internal class PlayerMovingState(Player player) : APlayerState(player) {
+internal class PlayerMovingState(Player player, CurrentLevelGetter GetCurrentLevel) : APlayerState(player, GetCurrentLevel) {
   private static readonly double FRAME_INTERVAL = 0.2;
 
   private static readonly List<Rectangle> MOVE_LEFT_FRAMES = [

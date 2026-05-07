@@ -1,19 +1,20 @@
 using System;
 using System.Collections.Generic;
 using GameProject.GlobalInterfaces;
+using GameProject.Globals;
 using GameProject.Items;
 using GameProject.Level;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using GameProject.Globals;
 
 namespace GameProject.PlayerSpace;
 
-internal class PlayerInventory(Player player, ILevelManager levelManager) : IInitable {
+internal class PlayerInventory(Player player, CurrentLevelGetter GetCurrentLevel) : IInitable {
   private readonly Random random = new();
   private const int MAX_WEAPONS = 2;
+  private const int MAX_GENERAL_ITEMS = 10;
   private const int MIN_DROP_VEL_X = -100;
   private const int MAX_DROP_VEL_X = 100;
   private const int MIN_DROP_VEL_Y = -150;
@@ -50,7 +51,7 @@ internal class PlayerInventory(Player player, ILevelManager levelManager) : IIni
 
   public void PickupItem(IItem newItem) {
     if (newItem.Category == ItemCategory.Primary || newItem.Category == ItemCategory.Sidearm) {
-      if (Weapons.Count < 2) {
+      if (Weapons.Count < MAX_WEAPONS) {
         Weapons.Add(newItem);
         ActiveWeaponIndex = Weapons.Count - 1;
       } else {
@@ -60,8 +61,13 @@ internal class PlayerInventory(Player player, ILevelManager levelManager) : IIni
       ActiveItem?.OnEquip();
     } else {
       GeneralItems.Add(newItem);
+      if (GeneralItems.Count > MAX_GENERAL_ITEMS) {
+        DropItem(GeneralItems[0]);
+        GeneralItems.RemoveAt(0);
+      }
     }
   }
+
   public void RemoveGeneralItem(IItem itemToRemove) {
     GeneralItems.Remove(itemToRemove);
   }
@@ -72,7 +78,7 @@ internal class PlayerInventory(Player player, ILevelManager levelManager) : IIni
     Vector2 dropVelocity = new(tossX, tossY);
 
     IWorldPickup droppedItem = new ItemWorldPickup(itemToDrop, dropVelocity);
-    levelManager.CurrentLevel.AddPickup(droppedItem);
+    GetCurrentLevel().AddPickup(droppedItem);
   }
 
   public void DropCurrentItem() {
@@ -99,8 +105,8 @@ internal class PlayerInventory(Player player, ILevelManager levelManager) : IIni
   public void Initialize() { }
 
   public void LoadContent(ContentManager content) {
-    PickupItem(ItemFactory.Instance.CreateRevolver(0.0f, 0.0f, player, levelManager));
-    PickupItem(ItemFactory.Instance.CreateRifle(0.0f, 0.0f, player, levelManager));
+    PickupItem(ItemFactory.Instance.CreateRevolver(0.0f, 0.0f, player, () => GetCurrentLevel().ProjectileManager));
+    PickupItem(ItemFactory.Instance.CreateRifle(0.0f, 0.0f, player, () => GetCurrentLevel().ProjectileManager));
   }
 
   public void Update(double deltaTime) {

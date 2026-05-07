@@ -96,6 +96,10 @@ Jira task screenshots:
   Found in the "Info/Grader Info/Jira Sprint Reports" folder.
 
 Known bugs:
+  -General items appear at the location they were picked up at when they are discarded from player inventory.
+  -Item screen "equipped" does not match what gun the player actually has equipped.
+  -Cannot discard general items on item screen, it discards a weapon instead.
+  -Item screen: cannot discard items after quitting to menu and reopening game. (Can discard just fine in game screen)
   -Can push crates through walls and enemies forced to move along with crate.
   -Mouse clicks are registered even if clicking outside the game window. This seems more to be a bug with MonoGame than the game itself.
   -Map at top of screen does not show what room player actually is in and is a static image.
