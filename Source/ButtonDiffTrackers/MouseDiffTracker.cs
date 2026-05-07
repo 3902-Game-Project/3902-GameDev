@@ -12,27 +12,29 @@ internal enum MouseButtons {
 };
 
 internal class MouseDiffTracker : AButtonDiffTracker<MouseButtons, MouseState> {
-  protected override MouseButtons[] ExtractPressedFromState(MouseState mouseState) {
+  protected override MouseButtons[] ExtractPressedFromState(MouseState mouseState, bool isActive) {
     var pressedButtons = new List<MouseButtons>();
 
-    if (mouseState.LeftButton == ButtonState.Pressed) {
-      pressedButtons.Add(MouseButtons.Left);
-    }
+    if (isActive) {
+      if (mouseState.LeftButton == ButtonState.Pressed) {
+        pressedButtons.Add(MouseButtons.Left);
+      }
 
-    if (mouseState.MiddleButton == ButtonState.Pressed) {
-      pressedButtons.Add(MouseButtons.Middle);
-    }
+      if (mouseState.MiddleButton == ButtonState.Pressed) {
+        pressedButtons.Add(MouseButtons.Middle);
+      }
 
-    if (mouseState.RightButton == ButtonState.Pressed) {
-      pressedButtons.Add(MouseButtons.Right);
-    }
+      if (mouseState.RightButton == ButtonState.Pressed) {
+        pressedButtons.Add(MouseButtons.Right);
+      }
 
-    if (mouseState.XButton1 == ButtonState.Pressed) {
-      pressedButtons.Add(MouseButtons.XButton1);
-    }
+      if (mouseState.XButton1 == ButtonState.Pressed) {
+        pressedButtons.Add(MouseButtons.XButton1);
+      }
 
-    if (mouseState.XButton2 == ButtonState.Pressed) {
-      pressedButtons.Add(MouseButtons.XButton2);
+      if (mouseState.XButton2 == ButtonState.Pressed) {
+        pressedButtons.Add(MouseButtons.XButton2);
+      }
     }
 
     return [.. pressedButtons];

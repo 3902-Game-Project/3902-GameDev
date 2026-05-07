@@ -16,7 +16,7 @@ internal class StateTransitionType(Game1 game) : IGameState {
 
   public void LoadContent(ContentManager content) { }
 
-  public void Update(double deltaTime) {
+  public void Update(double deltaTime, bool isActive) {
     screenFader.Update(deltaTime);
 
     switch (screenFader.FadeState) {

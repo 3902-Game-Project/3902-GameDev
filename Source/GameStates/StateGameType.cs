@@ -116,14 +116,14 @@ internal class StateGameType : IGameState {
     Player.LoadContent(contentManager);
   }
 
-  public void Update(double deltaTime) {
+  public void Update(double deltaTime, bool isActive) {
     if (Flags.SlowMode) {
       deltaTime *= 0.5;
     }
 
-    keyboardController.Update();
-    mouseController.Update();
-    gamePadController.Update();
+    keyboardController.Update(isActive);
+    mouseController.Update(isActive);
+    gamePadController.Update(isActive);
 
     foreach (var key in keyboardController.GetPressed()) {
       CheatCodes.Instance.AddKey(key);
