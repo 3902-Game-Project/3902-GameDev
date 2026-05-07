@@ -8,14 +8,12 @@ internal abstract class AController<ButtonsEnum, ButtonStateReference>(
   Dictionary<ButtonsEnum, IGPCommand> pressedMappings = null,
   Dictionary<ButtonsEnum, IGPCommand> downMappings = null,
   Dictionary<ButtonsEnum, IGPCommand> releasedMappings = null
-) : IController<ButtonsEnum> {
+) : IController<ButtonsEnum, ButtonStateReference> {
   public Dictionary<ButtonsEnum, IGPCommand> PressedMappings { get; } = pressedMappings ?? [];
   public Dictionary<ButtonsEnum, IGPCommand> DownMappings { get; } = downMappings ?? [];
   public Dictionary<ButtonsEnum, IGPCommand> ReleasedMappings { get; } = releasedMappings ?? [];
 
   protected abstract IButtonDiffTracker<ButtonsEnum, ButtonStateReference> ButtonTracker { get; }
-
-  protected abstract ButtonStateReference GetButtonState();
 
   public IEnumerable<ButtonsEnum> GetDown() {
     return ButtonTracker.GetDown();
@@ -29,9 +27,7 @@ internal abstract class AController<ButtonsEnum, ButtonStateReference>(
     return ButtonTracker.GetReleased();
   }
 
-  public void Update() {
-    ButtonStateReference buttonState = GetButtonState();
-
+  public void Update(ButtonStateReference buttonState) {
     ButtonTracker.Update(buttonState);
 
     foreach (ButtonsEnum button in ButtonTracker.GetPressed()) {

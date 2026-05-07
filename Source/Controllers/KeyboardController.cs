@@ -14,6 +14,4 @@ internal class KeyboardController(
   private static readonly KeyboardDiffTracker keyTracker = new();
 
   protected override IButtonDiffTracker<Keys, KeyboardState> ButtonTracker => keyTracker;
-
-  protected override KeyboardState GetButtonState() => Keyboard.GetState();
 }
