@@ -69,7 +69,7 @@ internal class CheatCodes : ITemporalUpdatable {
   }
 
   public static void UnlimitedHealth(Player player) {
-    player.Health = 999999;
+    player.SetHealth(999999);
   }
 
   public static void UnlimitedAmmo(Player player) {

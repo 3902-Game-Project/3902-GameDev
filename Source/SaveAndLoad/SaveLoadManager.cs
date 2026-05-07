@@ -58,10 +58,8 @@ internal static class SaveLoadManager {
     levelManager.SwitchLevelWithoutFading(saveData.Level.LevelName);
 
     //Load Player
-    player.Position = new Vector2(saveData.Player.X, saveData.Player.Y);
-    if (player.Shape is Collisions.Shapes.BoxCollider box) box.Position = player.Position;
-
-    player.Health = saveData.Player.Health;
+    player.TeleportTo(new Vector2(saveData.Player.X, saveData.Player.Y));
+    player.SetHealth(saveData.Player.Health);
     player.Inventory.Ammo = new Dictionary<Items.AmmoType, int>(saveData.Player.Ammo);
 
     //Load Weapons

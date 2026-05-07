@@ -22,7 +22,7 @@ internal abstract class APlayerState(Player player) : IPlayerState {
 
   public virtual void TakeDamage(int amount) {
     if (!Player.IsInvincible) {
-      Player.Health -= amount;
+      Player.SetHealth(Player.Health - amount);
       Player.GrantInvincibility(Constants.PLAYER_INVINCIBILITY_DURATION);
       DamageFlashTimer = Constants.PLAYER_DAMAGE_FLASH_DURATION;
       if (Player.Health <= 0) {

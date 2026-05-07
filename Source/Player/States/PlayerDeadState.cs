@@ -32,7 +32,7 @@ internal class PlayerDeadState(Player player, Action onLoss) : APlayerState(play
   public override void Update(double deltaTime) {
     base.Update(deltaTime);
 
-    Player.Velocity = Vector2.Zero;
+    Player.SetVelocity(Vector2.Zero);
 
     if (currentFrame < SOURCE_RECTS.Count - 1) {
       animationTimer += deltaTime;

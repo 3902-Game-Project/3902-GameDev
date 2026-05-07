@@ -94,7 +94,8 @@ internal class StateGameType : IGameState {
   public StateGameType(Game1 game) {
     this.game = game;
     LevelManager = new LevelManager(game);
-    Player = new Player(LevelManager, game);
+    Player = new Player(() => game.ChangeState(game.StateLoss));
+    Player.Inventory = new PlayerInventory(Player, LevelManager);
     hudManager = new(Player);
   }
 
@@ -103,8 +104,28 @@ internal class StateGameType : IGameState {
     mouseController = GameControllerFactory.CreateMouseController(LevelManager);
     gamePadController = GameControllerFactory.CreateGamePadController(game, Player, LevelManager);
 
+    Player.OnResolveCollisions = (player, axis, tolerance) => LevelManager.CurrentLevel.PlayerResolveCollisions(player, axis, tolerance);
+    Player.OnAutoCollect = (player) => {
+      if (LevelManager?.CurrentLevel != null) {
+        foreach (var pickup in LevelManager.CurrentLevel.GetRemoveAmmoInRange(player.Position, Constants.AMMO_AUTO_COLLECT_RANGE)) {
+          pickup.OnPickup(player);
+        }
+      }
+    };
+    Player.OnInteract = (player) => {
+      if (LevelManager?.CurrentLevel == null) return;
+      float grabRange = Constants.ITEM_GRAB_RANGE;
+      var closestPickup = LevelManager.CurrentLevel.GetClosestPickupInRange(player.Position, grabRange);
+      if (closestPickup != null) {
+        closestPickup.OnPickup(player);
+        LevelManager.CurrentLevel.RemovePickup(closestPickup);
+      }
+    };
+
     LevelManager.Initialize();
     Player.Initialize();
+    Player.Inventory.Initialize();
+
     CheatCodes.Instance.LevelManager = LevelManager;
     CheatCodes.Instance.Initialize(Player);
   }
@@ -114,6 +135,7 @@ internal class StateGameType : IGameState {
 
     LevelManager.LoadContent(contentManager);
     Player.LoadContent(contentManager);
+    Player.Inventory.LoadContent(contentManager);
   }
 
   public void Update(double deltaTime) {
@@ -129,12 +151,33 @@ internal class StateGameType : IGameState {
 
     if (!Flags.HaltAllUpdates) {
       Player.Update(deltaTime);
+      Player.Inventory.Update(deltaTime);
       LevelManager.Update(deltaTime);
     }
   }
 
+  private void DrawGame(LowLevelDrawParams drawData) {
+    drawData.ClearWindowCallback(Constants.LEVEL_BACKGROUND_COLOR);
+
+    using (drawData.RenderTargetTracker.TempSet(nonHUDTarget)) {
+      drawData.SpriteBatch.Begin(
+        sortMode: SpriteSortMode.Deferred,
+        blendState: BlendState.AlphaBlend,
+        samplerState: SamplerState.PointClamp,
+        depthStencilState: DepthStencilState.None,
+        rasterizerState: RasterizerState.CullNone
+      );
+
+      LevelManager.Draw(drawData.SpriteBatch);
+      Player.Draw(drawData.SpriteBatch);
+      Player.Inventory.Draw(drawData.SpriteBatch, Player.Position, Player.Direction, TextureStore.Instance.WhitePixel);
+
+      drawData.SpriteBatch.End();
+    }
+  }
+
   public void LowLevelDraw(LowLevelDrawParams drawData) {
-    DrawGameWithoutVignette(drawData);
+    DrawGame(drawData);
     DrawGameVignette(drawData);
     DrawHUD(drawData);
   }

@@ -25,7 +25,6 @@ internal enum FacingDirection {
 }
 
 internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable {
-  private readonly ILevelManager levelManager;
   private readonly BoxCollider collider;
   private bool inputLeftThisFrame, inputRightThisFrame, inputUpThisFrame, inputDownThisFrame;
   private bool inputLeftLastFrame, inputRightLastFrame, inputUpLastFrame, inputDownLastFrame;
@@ -45,19 +44,24 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   public bool HasInfiniteAmmo => InfiniteAmmoTimer > 0;
   public bool IsInvincible => InvincibilityTimer > 0;
   public FacingDirection Direction { get; internal set; } = FacingDirection.Right;
-  public PlayerInventory Inventory { get; private set; }
+  public PlayerInventory Inventory { get; set; } = null!;
   public PlayerStateMachine StateMachine { get; private set; }
+  public Action<Player, CollisionAxis, float>? OnResolveCollisions { get; set; }
+  public Action<Player>? OnAutoCollect { get; set; }
+  public Action<Player>? OnInteract { get; set; }
 
-  public Player(ILevelManager levelManager, Game1 game) {
-    this.levelManager = levelManager;
+  public Player(Action onLoss) {
     Position = Vector2.Zero;
     Velocity = Vector2.Zero;
-    Inventory = new PlayerInventory(this, levelManager);
     float width = Constants.PLAYER_SPRITE_WIDTH * Constants.PLAYER_SPRITE_SCALE;
     float height = Constants.PLAYER_SPRITE_HEIGHT * Constants.PLAYER_SPRITE_SCALE;
     collider = new BoxCollider(width, height, Position);
-    StateMachine = new PlayerStateMachine(this, () => game.ChangeState(game.StateLoss));
+    StateMachine = new PlayerStateMachine(this, onLoss);
   }
+
+  public void SetVelocity(Vector2 velocity) => Velocity = velocity;
+  public void SetDirection(FacingDirection direction) => Direction = direction;
+  public void SetHealth(int health) => Health = health;
 
   public void Heal(int amount) {
     if(Health <= 0) {
@@ -85,11 +89,8 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   }
 
   public void MoveUp() => inputUpThisFrame = true;
-
   public void MoveDown() => inputDownThisFrame = true;
-
   public void MoveLeft() => inputLeftThisFrame = true;
-
   public void MoveRight() => inputRightThisFrame = true;
 
   public void UseItem(UseType useType) {
@@ -108,13 +109,9 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     StateMachine.CurrentState.TakeDamage(amount);
   }
 
-  public void Initialize() {
-    Inventory.Initialize();
-  }
+  public void Initialize() { }
 
-  public void LoadContent(ContentManager content) {
-    Inventory.LoadContent(content);
-  }
+  public void LoadContent(ContentManager content) { }
 
   public void Update(double deltaTime) {
     bool justPressedLeft = inputLeftThisFrame && !inputLeftLastFrame;
@@ -161,16 +158,14 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
 
     Position = new Vector2(Position.X + xStep, Position.Y);
     if (collider != null) collider.Position = Position;
-    levelManager.CurrentLevel.PlayerResolveCollisions(this, CollisionAxis.X, MathF.Abs(yStep) + Constants.COLLISION_BUFFER);
+    OnResolveCollisions?.Invoke(this, CollisionAxis.X, MathF.Abs(yStep) + Constants.COLLISION_BUFFER);
 
     Position = new Vector2(Position.X, Position.Y + yStep);
     if (collider != null) collider.Position = Position;
-    levelManager.CurrentLevel.PlayerResolveCollisions(this, CollisionAxis.Y, MathF.Abs(xStep) + Constants.COLLISION_BUFFER);
+    OnResolveCollisions?.Invoke(this, CollisionAxis.Y, MathF.Abs(xStep) + Constants.COLLISION_BUFFER);
 
     StateMachine.CurrentState.Update(deltaTime);
     Velocity = Vector2.Zero;
-
-    Inventory.Update(deltaTime);
 
     inputLeftLastFrame = inputLeftThisFrame;
     inputRightLastFrame = inputRightThisFrame;
@@ -181,17 +176,11 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     inputUpThisFrame = false;
     inputDownThisFrame = false;
 
-    // Auto-Collect for Ammo
-    if (levelManager?.CurrentLevel != null) {
-      foreach (var pickup in levelManager.CurrentLevel.GetRemoveAmmoInRange(Position, Constants.AMMO_AUTO_COLLECT_RANGE)) {
-        pickup.OnPickup(this);
-      }
-    }
+    OnAutoCollect?.Invoke(this);
   }
 
   public void Draw(SpriteBatch spriteBatch) {
     StateMachine.CurrentState.Draw(spriteBatch);
-    Inventory.Draw(spriteBatch, Position, Direction, TextureStore.Instance.WhitePixel);
   }
 
   public void OnCollision(CollisionInfo info) {
@@ -206,15 +195,6 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   }
 
   public void Interact() {
-    if (levelManager?.CurrentLevel == null) return;
-
-    float grabRange = Constants.ITEM_GRAB_RANGE;
-
-    IWorldPickup? closestPickup = levelManager.CurrentLevel.GetClosestPickupInRange(Position, grabRange);
-
-    if (closestPickup != null) {
-      closestPickup.OnPickup(this);
-      levelManager.CurrentLevel.RemovePickup(closestPickup);
-    }
+    OnInteract?.Invoke(this);
   }
 }
