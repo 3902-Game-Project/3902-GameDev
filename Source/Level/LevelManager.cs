@@ -169,11 +169,9 @@ internal class LevelManager(Game1 game) : ILevelManager {
       throw new ArgumentException($"level name unknown: '{newLevelName}'");
     }
 
-    if (newLevelName != currentLevelName) {
-      fadeToLevelName = newLevelName;
-      // reloading StateGame to trigger level change code in the future
-      game.ChangeState(game.StateGame);
-    }
+    fadeToLevelName = newLevelName;
+    // reloading StateGame to trigger level change code in the future
+    game.ChangeState(game.StateGame);
   }
 
   public void SwitchLevelWithoutFading(string newLevelName) {
