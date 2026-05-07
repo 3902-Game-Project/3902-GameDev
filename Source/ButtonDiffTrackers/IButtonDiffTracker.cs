@@ -6,5 +6,5 @@ internal interface IButtonDiffTracker<ButtonsEnum, ButtonStateReference> {
   IEnumerable<ButtonsEnum> GetDown();
   IEnumerable<ButtonsEnum> GetPressed();
   IEnumerable<ButtonsEnum> GetReleased();
-  void Update(ButtonStateReference buttonState, bool isActive);
+  void Update(ButtonStateReference buttonState);
 }

@@ -29,10 +29,10 @@ internal abstract class AController<ButtonsEnum, ButtonStateReference>(
     return ButtonTracker.GetReleased();
   }
 
-  public void Update(bool isActive) {
+  public void Update() {
     ButtonStateReference buttonState = GetButtonState();
 
-    ButtonTracker.Update(buttonState, isActive);
+    ButtonTracker.Update(buttonState);
 
     foreach (ButtonsEnum button in ButtonTracker.GetPressed()) {
       if (PressedMappings.TryGetValue(button, out var command)) {

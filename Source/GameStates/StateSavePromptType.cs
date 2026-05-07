@@ -24,13 +24,13 @@ internal class StateSavePromptType(Game1 game) : IGameState {
 
   public void LoadContent(ContentManager content) { }
 
-  public void Update(double deltaTime, bool isActive) {
+  public void Update(double deltaTime) {
     if (IsShowingSuccess) {
       successTimer -= deltaTime;
       if (successTimer <= 0) game.ChangeStateWithoutFading(game.StateGame);
     } else {
-      keyboardController.Update(isActive);
-      gamePadController.Update(isActive);
+      keyboardController.Update();
+      gamePadController.Update();
     }
   }
 

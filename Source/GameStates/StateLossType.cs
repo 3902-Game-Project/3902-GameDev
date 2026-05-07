@@ -21,9 +21,9 @@ internal class StateLossType(Game1 game) : IGameState {
 
   public void LoadContent(ContentManager content) { }
 
-  public void Update(double deltaTime, bool isActive) {
-    keyboardController.Update(isActive);
-    gamePadController.Update(isActive);
+  public void Update(double deltaTime) {
+    keyboardController.Update();
+    gamePadController.Update();
   }
 
   public void LowLevelDraw(LowLevelDrawParams drawData) {
