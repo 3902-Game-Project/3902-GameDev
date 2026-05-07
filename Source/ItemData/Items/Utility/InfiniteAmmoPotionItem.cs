@@ -59,6 +59,6 @@ internal class InfiniteAmmoPotionItem(Texture2D texture, Vector2 startPosition, 
 
   public void Use(UseType useType) {
     // The primary constructor 'player' is used here!
-    player.InfiniteAmmoTimer += 10f;
+    player.GrantInfiniteAmmo(10f);
   }
 }

@@ -16,22 +16,22 @@ internal class PlayerStaticState(Player player, CurrentLevelGetter GetCurrentLev
 
   public override void MoveUp() {
     Player.Velocity = new Vector2(Player.Velocity.X, -Constants.PLAYER_SPEED);
-    Player.Direction = FacingDirection.Up;
+    Player.SetDirection(FacingDirection.Up);
   }
 
   public override void MoveDown() {
     Player.Velocity = new Vector2(Player.Velocity.X, Constants.PLAYER_SPEED);
-    Player.Direction = FacingDirection.Down;
+    Player.SetDirection(FacingDirection.Down);
   }
 
   public override void MoveLeft() {
     Player.Velocity = new Vector2(-Constants.PLAYER_SPEED, Player.Velocity.Y);
-    Player.Direction = FacingDirection.Left;
+    Player.SetDirection(FacingDirection.Left);
   }
 
   public override void MoveRight() {
     Player.Velocity = new Vector2(Constants.PLAYER_SPEED, Player.Velocity.Y);
-    Player.Direction = FacingDirection.Right;
+    Player.SetDirection(FacingDirection.Right);
   }
 
   public override void Update(double deltaTime) {

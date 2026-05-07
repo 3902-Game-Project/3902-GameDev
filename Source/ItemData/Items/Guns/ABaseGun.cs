@@ -48,7 +48,7 @@ internal abstract class ABaseGun(Texture2D texture, Vector2 startPosition, Playe
     if (IsReloading) {
       return;
     }
-    if (stats.CurrentAmmo < stats.MaxAmmo && player.Inventory.Ammo[stats.AmmoType] > 0) {
+    if (stats.CurrentAmmo < stats.MaxAmmo && (player.HasInfiniteAmmo || player.Inventory.Ammo[stats.AmmoType] > 0)) {
       IsReloading = true;
       ReloadTimer = stats.ReloadTime;
     }
@@ -61,12 +61,14 @@ internal abstract class ABaseGun(Texture2D texture, Vector2 startPosition, Playe
       ReloadTimer -= deltaTime;
       if (ReloadTimer <= 0) {
         int ammoNeeded = stats.MaxAmmo - stats.CurrentAmmo;
-        int ammoAvailable = player.Inventory.Ammo[stats.AmmoType];
+        int ammoAvailable = player.HasInfiniteAmmo ? 9999 : player.Inventory.Ammo[stats.AmmoType];
 
         if (ammoAvailable > 0 && ammoNeeded > 0) {
           int toLoad = stats.ReloadsOneByOne ? 1 : Math.Min(ammoNeeded, ammoAvailable);
           stats.CurrentAmmo += toLoad;
-          player.Inventory.Ammo[stats.AmmoType] -= toLoad;
+          if (!player.HasInfiniteAmmo) {
+            player.Inventory.Ammo[stats.AmmoType] -= toLoad;
+          }
 
           // Loop the reload if more still needed
           if (stats.CurrentAmmo < stats.MaxAmmo && player.Inventory.Ammo[stats.AmmoType] > 0) {

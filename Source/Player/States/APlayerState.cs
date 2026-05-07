@@ -26,8 +26,8 @@ internal abstract class APlayerState(Player player, CurrentLevelGetter GetCurren
 
   public virtual void TakeDamage(int amount) {
     if (!Player.IsInvincible) {
-      Player.Health -= amount;
-      Player.InvincibilityTimer = Constants.PLAYER_INVINCIBILITY_DURATION;
+      Player.SetHealth(Player.Health - amount);
+      Player.GrantInvincibility(Constants.PLAYER_INVINCIBILITY_DURATION);
       DamageFlashTimer = Constants.PLAYER_DAMAGE_FLASH_DURATION;
       if (Player.Health <= 0) {
         Player.Health = 0;
