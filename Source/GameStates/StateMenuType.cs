@@ -12,8 +12,8 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.GameStates;
 
 internal class StateMenuType(Game1 game) : IGameState {
-  private IController<Keys> keyboardController;
-  private IController<GPGamePadButtons> gamePadController;
+  private IController<Keys, KeyboardState> keyboardController;
+  private IController<GPGamePadButtons, GamePadState> gamePadController;
 
   public void Initialize() {
     keyboardController = MenuControllerFactory.CreateKeyboardController(game);
@@ -22,9 +22,9 @@ internal class StateMenuType(Game1 game) : IGameState {
 
   public void LoadContent(ContentManager content) { }
 
-  public void Update(double deltaTime) {
-    keyboardController.Update();
-    gamePadController.Update();
+  public void Update(double deltaTime, bool isActive) {
+    keyboardController.Update(Keyboard.GetState());
+    gamePadController.Update(GamePad.GetState(Constants.GAMEPAD_PLAYER_INDEX));
   }
 
   public void LowLevelDraw(LowLevelDrawParams drawData) {
