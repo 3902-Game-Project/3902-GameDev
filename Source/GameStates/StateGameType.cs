@@ -104,7 +104,7 @@ internal class StateGameType : IGameState {
     mouseController = GameControllerFactory.CreateMouseController(LevelManager);
     gamePadController = GameControllerFactory.CreateGamePadController(game, Player, LevelManager);
 
-    Player.OnResolveCollisions = (player, axis, tolerance) => LevelManager.CurrentLevel.PlayerResolveCollisions(player, axis, tolerance);
+    Player.OnResolveCollisions = LevelManager.CurrentLevel.PlayerResolveCollisions;
     Player.OnAutoCollect = (player) => {
       if (LevelManager?.CurrentLevel != null) {
         foreach (var pickup in LevelManager.CurrentLevel.GetRemoveAmmoInRange(player.Position, Constants.AMMO_AUTO_COLLECT_RANGE)) {
