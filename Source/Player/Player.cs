@@ -43,13 +43,9 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   public double InvincibilityTimer { get; private set; } = 0.0;
   public double InfiniteAmmoTimer { get; private set; } = 0.0;
   public bool HasInfiniteAmmo => InfiniteAmmoTimer > 0;
-
   public bool IsInvincible => InvincibilityTimer > 0;
-
   public FacingDirection Direction { get; internal set; } = FacingDirection.Right;
-
   public PlayerInventory Inventory { get; private set; }
-
   public PlayerStateMachine StateMachine { get; private set; }
 
   public Player(ILevelManager levelManager, Game1 game) {
@@ -57,11 +53,9 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
     Position = Vector2.Zero;
     Velocity = Vector2.Zero;
     Inventory = new PlayerInventory(this, levelManager);
-
     float width = Constants.PLAYER_SPRITE_WIDTH * Constants.PLAYER_SPRITE_SCALE;
     float height = Constants.PLAYER_SPRITE_HEIGHT * Constants.PLAYER_SPRITE_SCALE;
     collider = new BoxCollider(width, height, Position);
-
     StateMachine = new PlayerStateMachine(this, () => game.ChangeState(game.StateLoss));
   }
 
