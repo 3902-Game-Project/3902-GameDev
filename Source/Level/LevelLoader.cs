@@ -62,8 +62,11 @@ internal partial class LevelLoader {
   public static readonly float PLAYER_BOTTOM_POS_AFTER_TELEPORT = Constants.LEVEL_HEIGHT - Constants.BASE_BLOCK_WIDTH * 1.5f;
 
   private static readonly Dictionary<string, CellEntryParseFunc> CELL_ENTRY_FUNCS = new() {
+    { "", CreateEmptyCreator() }, /* empty, do nothing */
+    { "0", CreateEmptyCreator() }, /* empty, do nothing */
     { "1-0", CreateCollidableBlockCreator(BlockFactory.CreateLogBlockSprite) }, /* log: wall */
     { "1-1", CreateCollidableBlockCreator(BlockFactory.CreateLogCornerBlockSprite) }, /* log: corner */
+    { "3", CreatePlayerPositionSetter() }, /* player position */
     { "4", CreateEnemyCreator(EnemyFactory.Instance.CreateSnakeSprite) }, /* snake */
     { "5", CreateNonCollidableBlockCreator(BlockFactory.CreateSandBlockSprite) }, /* sand */
     { "6", CreateNonCollidableBlockCreator(BlockFactory.CreateRedSandBlockSprite) }, /* red sand */
@@ -99,6 +102,28 @@ internal partial class LevelLoader {
     { "38", CreatePlayerItemCreator(ItemFactory.Instance.CreateInfiniteAmmoPotion) }, /* infinite ammo potion item */
     { "39", CreateFiringEnemyCreator(EnemyFactory.Instance.CreateBossSprite) }, /* boss */
   };
+
+  private static CellEntryParseFunc CreateEmptyCreator() {
+    return (
+      Player player,
+      ILevelManager levelManager,
+      ISet<string> levelNames,
+
+      string type,
+      string[] arguments,
+      float xPos,
+      float yPos,
+
+      List<IBlock> nonCollidableBlocks,
+      List<IBlock> collidableBlocks,
+      List<IBlock> doors,
+      List<IEnemy> enemies,
+      List<IWorldPickup> pickups,
+      ref Vector2? playerPositionNullable
+    ) => {
+      CheckEntryLength(arguments, 0, type);
+    };
+  }
 
   private static CellEntryParseFunc CreateNonCollidableBlockCreator(BlockCreationFunc BlockCreator) {
     return (
@@ -359,6 +384,34 @@ internal partial class LevelLoader {
     };
   }
 
+  private static CellEntryParseFunc CreatePlayerPositionSetter() {
+    return (
+      Player player,
+      ILevelManager levelManager,
+      ISet<string> levelNames,
+
+      string type,
+      string[] arguments,
+      float xPos,
+      float yPos,
+
+      List<IBlock> nonCollidableBlocks,
+      List<IBlock> collidableBlocks,
+      List<IBlock> doors,
+      List<IEnemy> enemies,
+      List<IWorldPickup> pickups,
+      ref Vector2? playerPositionNullable
+    ) => {
+      CheckEntryLength(arguments, 0, type);
+
+      if (playerPositionNullable is not null) {
+        throw new FormatException("default player position set twice in same level");
+      } else {
+        playerPositionNullable = new Vector2(xPos, yPos) + PLAYER_POSITION_OFFSET;
+      }
+    };
+  }
+
   private static void ParseSingleFlag(LevelFlags flags, string flag) {
     switch (flag) {
       case "":
@@ -421,13 +474,6 @@ internal partial class LevelLoader {
     ref Vector2? playerPositionNullable
   ) {
     switch (type) {
-      case "":
-      case "0":
-        /* empty, do nothing */
-
-        CheckEntryLength(arguments, 0, type);
-        break;
-
       case "2": {
           /* small door */
 
@@ -450,18 +496,6 @@ internal partial class LevelLoader {
           doors.Add(BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos, state, pairedLevelName, levelManager.SwitchLevel));
           break;
         }
-
-      case "3":
-        /* player position */
-
-        CheckEntryLength(arguments, 0, type);
-
-        if (playerPositionNullable is not null) {
-          throw new FormatException("default player position set twice in same level");
-        } else {
-          playerPositionNullable = new Vector2(xPos, yPos) + PLAYER_POSITION_OFFSET;
-        }
-        break;
 
       case "8-3": {
           /* rock: hole to other room */
