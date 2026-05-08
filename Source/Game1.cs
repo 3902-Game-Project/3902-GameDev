@@ -21,14 +21,14 @@ internal class Game1 : Game {
   public Viewport DefaultViewport { get; private set; }
   public Viewport HudViewport { get; private set; }
   public Viewport GameViewport { get; private set; }
-  public GameStateMachine GameStateMachine { get; private set; }
+  public GameStateMachine StateMachine { get; private set; }
 
   public Game1() {
     graphics = new GraphicsDeviceManager(this);
     IsMouseVisible = true;
     Content.RootDirectory = "Content";
 
-    GameStateMachine = new(this);
+    StateMachine = new(this);
   }
 
   protected override void Initialize() {
@@ -97,7 +97,7 @@ internal class Game1 : Game {
   }
 
   protected override void Update(GameTime gameTime) {
-    GameStateMachine.Update(gameTime.ElapsedGameTime.TotalSeconds, IsActive);
+    StateMachine.Update(gameTime.ElapsedGameTime.TotalSeconds, IsActive);
 
     base.Update(gameTime);
   }
@@ -106,7 +106,7 @@ internal class Game1 : Game {
     // Render everything that should be on screen to a texture
 
     using (renderTargetTracker.TempSet(renderTarget)) {
-      GameStateMachine.LowLevelDraw(new(
+      StateMachine.LowLevelDraw(new(
         GraphicsDevice.Clear,
         renderTargetTracker,
         viewportTracker,

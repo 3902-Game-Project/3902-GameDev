@@ -20,7 +20,7 @@ internal static class GameControllerFactory {
         { Keys.K, new PlayerUseKeyCommand(player, UseType.Pressed) },
         { Keys.F, new PlayerInteractCommand(player) },
         { Keys.Space, new PlayerSwapWeaponCommand(player) },
-        { Keys.C, new PlayerDropItemCommand(game.StateGame.Player) },
+        { Keys.C, new PlayerDropItemCommand(game.StateMachine.StateGame.Player) },
         { Keys.R, new PlayerReloadWeaponCommand(player) },
         { Keys.L, new PlayerDieCommand(player) },
         { Keys.N, new OpenSavePromptCommand(game) },

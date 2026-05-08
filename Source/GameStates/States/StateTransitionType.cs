@@ -38,7 +38,7 @@ internal class StateTransitionType(Game1 game) : IGameState {
         break;
 
       case ScreenFader.FadingState.FadedIn:
-        game.ChangeStateWithoutFading(toGameState);
+        game.StateMachine.ChangeIStateWithoutFading(toGameState);
         break;
 
       default:

@@ -95,7 +95,7 @@ internal class StateGameType : IGameState, System.IDisposable {
   public StateGameType(Game1 game) {
     this.game = game;
     LevelManager = new LevelManager(game);
-    Player = new Player(() => LevelManager.CurrentLevel.ProjectileManager, () => game.ChangeState(game.StateLoss));
+    Player = new Player(() => LevelManager.CurrentLevel.ProjectileManager, () => game.StateMachine.ChangeState(GameState.StateLoss));
     hudManager = new(Player);
   }
 

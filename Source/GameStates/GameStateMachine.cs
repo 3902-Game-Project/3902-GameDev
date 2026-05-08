@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GameProject.GlobalInterfaces;
 using Microsoft.Xna.Framework.Content;
@@ -15,7 +16,10 @@ internal enum GameState {
   StateLoadPrompt,
 }
 
-internal class GameStateMachine(Game1 game) : IInitable, ITemporalActiveUpdatable, ILowLevelDrawable {
+internal class GameStateMachine : IInitable, ITemporalActiveUpdatable, ILowLevelDrawable {
+  private readonly Game1 game;
+  private Dictionary<GameState, IGameState> stateLookup;
+
   private StateTransitionType StateTransition;
   public StateGameType StateGame { get; private set; }
   private IGameState StateMenu { get; set; }
@@ -27,18 +31,27 @@ internal class GameStateMachine(Game1 game) : IInitable, ITemporalActiveUpdatabl
   private IGameState StateLoadPrompt { get; set; }
   private IGameState currentState;
 
-  private IGameState GetGameState(GameState state) {
-    return state switch {
-      GameState.StateGame => StateGame,
-      GameState.StateMenu => StateMenu,
-      GameState.StateLoss => StateLoss,
-      GameState.StateWin => StateWin,
-      GameState.StatePause => StatePause,
-      GameState.StateItemScreen => StateItemScreen,
-      GameState.StateSavePrompt => StateSavePrompt,
-      GameState.StateLoadPrompt => StateLoadPrompt,
-      _ => throw new System.NotImplementedException(),
+  public GameStateMachine(Game1 game) {
+    this.game = game;
+
+    stateLookup = new() {
+      { GameState.StateGame, StateGame },
+      { GameState.StateMenu, StateMenu },
+      { GameState.StateLoss, StateLoss },
+      { GameState.StateWin, StateWin },
+      { GameState.StatePause, StatePause },
+      { GameState.StateItemScreen, StateItemScreen },
+      { GameState.StateSavePrompt, StateSavePrompt },
+      { GameState.StateLoadPrompt, StateLoadPrompt },
     };
+  }
+
+  private IGameState GetGameState(GameState stateEnum) {
+    if (stateLookup.TryGetValue(stateEnum, out var state)) {
+      return state;
+    } else {
+      throw new ArgumentException("stateEnum not valid");
+    }
   }
 
   private void ChangeIStateWithoutFading(IGameState newState) {
@@ -57,7 +70,7 @@ internal class GameStateMachine(Game1 game) : IInitable, ITemporalActiveUpdatabl
 
   public void ChangeState(GameState newStateEnum) {
     StateTransition.SetFadingStates(currentState, GetGameState(newStateEnum));
-    ChangeStateWithoutFading(StateTransition);
+    ChangeIStateWithoutFading(StateTransition);
   }
 
   public void ChangeStateWithoutFading(GameState newStateEnum) {

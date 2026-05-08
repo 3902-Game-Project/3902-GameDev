@@ -27,7 +27,7 @@ internal class StateLoadPromptType(Game1 game) : IGameState {
   public void Update(double deltaTime, bool isActive) {
     if (IsShowingSuccess) {
       successTimer -= deltaTime;
-      if (successTimer <= 0) game.ChangeStateWithoutFading(game.StateGame);
+      if (successTimer <= 0) game.StateMachine.ChangeStateWithoutFading(GameState.StateGame);
     } else {
       keyboardController.Update(Keyboard.GetState());
       gamePadController.Update(GamePad.GetState(Constants.GAMEPAD_PLAYER_INDEX));
