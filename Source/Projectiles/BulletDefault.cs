@@ -26,7 +26,6 @@ internal class BulletDefault : IProjectile, ICollidable {
   public BoxCollider Collider { get; private set; }
   public IShape Shape => Collider;
   public Layer Layer { get; } = Layer.Projectiles;
-  public Layer Mask { get; } = Layer.Environment | Layer.Enemies;
 
   public BulletDefault(Texture2D texture, Vector2 startPosition,
     Vector2 direction, float velocity, float bulletLifetime, int damage) {

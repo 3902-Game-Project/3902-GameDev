@@ -11,7 +11,6 @@ internal abstract class ABaseWorldPickup : IWorldPickup {
   public virtual bool IsAutoCollect => false;
   public IShape Shape { get; }
   public Layer Layer { get; } = Layer.Pickups;
-  public Layer Mask { get; } = Layer.Player;
 
   protected ABaseWorldPickup(Vector2 position) {
     Position = position;

@@ -12,7 +12,6 @@ internal abstract class ABaseBlock : IBlock, ICollidable {
   public Vector2 Position { get; set; }
 
   public Layer Layer { get; } = Layer.Environment;
-  public Layer Mask { get; } = Layer.Player;
 
   public Rectangle BoundingBox => throw new System.NotImplementedException();
 

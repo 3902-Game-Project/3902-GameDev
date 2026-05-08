@@ -21,7 +21,6 @@ internal class BangProjectile : IProjectile, ICollidable {
 
   public IShape Shape { get; }
   public Layer Layer { get; } = Layer.Projectiles;
-  public Layer Mask { get; } = Layer.Environment;
 
   public BangProjectile(Texture2D texture, ABaseGun sourceGun) {
     this.texture = texture;

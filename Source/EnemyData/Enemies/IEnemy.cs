@@ -16,7 +16,6 @@ internal interface IEnemy : ISprite, ICollidable {
   int Health { get; }
   int MaxHealth { get; }
 
-  Rectangle BoundingBox { get; }
   Vector2 Velocity { get; set; }
   Vector2 Target { get; set; }
   FacingDirection Direction { get; set; }

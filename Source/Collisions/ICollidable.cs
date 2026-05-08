@@ -18,7 +18,6 @@ internal interface ICollidable {
   IShape Shape { get; }
   Vector2 Position { get; }
   Layer Layer { get; }
-  Layer Mask { get; }
 
   void OnCollision(CollisionInfo collisionInfo);
 }

@@ -88,15 +88,12 @@ internal abstract class ABaseEnemy(
   public IShape Shape => Collider;
   public BoxCollider Collider { get; private set; } = new BoxCollider(colliderWidth, colliderHeight, position);
   public Layer Layer { get; } = Layer.Enemies;
-  public Layer Mask { get; } = Layer.Player;
   public int Health { get; set; } = 100;
   public int MaxHealth { get; set; } = 100;
   public double DamageFlashTimer { get; protected set; }
   public bool Invulnerable { get; } = invulnerable;
 
   public IEnemyState CurrentState { get; set; }
-
-  public Rectangle BoundingBox => new((int) (Position.X - Collider.Width / 2), (int) (Position.Y - Collider.Height / 2), (int) Collider.Width, (int) Collider.Height);
 
   public virtual void OnCollision(CollisionInfo info) {
     if (info.Collider is IBlock) {

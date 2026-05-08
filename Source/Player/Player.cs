@@ -31,7 +31,6 @@ internal class Player : IInitable, ITemporalUpdatable, IGPDrawable, ICollidable 
   private int activeDirY = 0;
   private Vector2 lastInputVelocity = Vector2.Zero;
   public IShape Shape => collider;
-  public Layer Mask { get; } = Layer.Environment;
   public Layer Layer { get; } = Layer.Player;
   private Vector2 _position;
   public Vector2 Position {

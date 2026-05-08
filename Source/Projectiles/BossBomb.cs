@@ -45,7 +45,6 @@ internal class BossBomb : IProjectile, ICollidable {
   public BoxCollider Collider { get; private set; }
   public IShape Shape => Collider;
   public Layer Layer { get; } = Layer.Projectiles;
-  public Layer Mask { get; } = Layer.Player;
 
   public BossBomb(Texture2D flyingTex, Texture2D blinkingTex, Vector2 startPos, Vector2 direction, int damage) {
     flyingTexture = flyingTex;

@@ -19,7 +19,6 @@ internal class BFGProjectile(Texture2D texture, Vector2 position, Vector2 direct
 
   public IShape Shape => boxCollider;
   public Layer Layer { get; } = Layer.Projectiles;
-  public Layer Mask { get; } = Layer.Environment | Layer.Enemies;
 
   public void Update(double deltaTime) {
     Position += direction * speed * (float) deltaTime;
