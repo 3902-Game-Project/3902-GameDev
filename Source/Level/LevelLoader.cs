@@ -15,6 +15,7 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Level;
 
 internal delegate IBlock BlockCreationFunc(float x, float y);
+internal delegate IBlock PlayerBlockCreationFunc(float x, float y, Player player);
 
 internal delegate void CellEntryParseFunc(
   Player player,
@@ -53,6 +54,15 @@ internal partial class LevelLoader {
 
   private static readonly Dictionary<string, CellEntryParseFunc> CELL_ENTRY_FUNCS = new() {
     { "5", CreateNonCollidableBlockCreator(BlockFactory.CreateSandBlockSprite) }, /* sand */
+    { "6", CreateNonCollidableBlockCreator(BlockFactory.CreateRedSandBlockSprite) }, /* red sand */
+    { "7", CreateNonCollidableBlockCreator(BlockFactory.CreateWoodPlankBlockSprite) }, /* wood plank */
+    { "17", CreateCollidableBlockCreator(BlockFactory.CreateBarrelBlockSprite) }, /* barrel */
+    { "18", CreateCollidableBlockCreator(BlockFactory.CreateBarShelfBlockSprite) }, /* bar shelf */
+    { "19", CreateCollidableBlockCreator(BlockFactory.CreateShelfBlockSprite) }, /* shelf */
+    { "22", CreateCollidableBlockCreator(BlockFactory.CreateFirePitBlockSprite) }, /* fire pit */
+    { "23", CreateCollidablePlayerBlockCreator(BlockFactory.CreateFireBlockSprite) }, /* fire */
+    { "25", CreateCollidableBlockCreator(BlockFactory.CreateMudBlockSprite) }, /* mud */
+    { "26", CreateCollidableBlockCreator(BlockFactory.CreateCrateBlockSprite) }, /* crate */
   };
 
   private static CellEntryParseFunc CreateNonCollidableBlockCreator(BlockCreationFunc BlockCreator) {
@@ -76,6 +86,54 @@ internal partial class LevelLoader {
       CheckEntryLength(arguments, 0, type);
 
       nonCollidableBlocks.Add(BlockCreator(xPos, yPos));
+    };
+  }
+
+  private static CellEntryParseFunc CreateCollidableBlockCreator(BlockCreationFunc BlockCreator) {
+    return (
+      Player player,
+      ILevelManager levelManager,
+      ISet<string> levelNames,
+
+      string type, // needed for error information
+      string[] arguments,
+      float xPos,
+      float yPos,
+
+      List<IBlock> nonCollidableBlocks,
+      List<IBlock> collidableBlocks,
+      List<IBlock> doors,
+      List<IEnemy> enemies,
+      List<IWorldPickup> pickups,
+      ref Vector2? playerPositionNullable
+    ) => {
+      CheckEntryLength(arguments, 0, type);
+
+      collidableBlocks.Add(BlockCreator(xPos, yPos));
+    };
+  }
+
+  private static CellEntryParseFunc CreateCollidablePlayerBlockCreator(PlayerBlockCreationFunc PlayerBlockCreator) {
+    return (
+      Player player,
+      ILevelManager levelManager,
+      ISet<string> levelNames,
+
+      string type, // needed for error information
+      string[] arguments,
+      float xPos,
+      float yPos,
+
+      List<IBlock> nonCollidableBlocks,
+      List<IBlock> collidableBlocks,
+      List<IBlock> doors,
+      List<IEnemy> enemies,
+      List<IWorldPickup> pickups,
+      ref Vector2? playerPositionNullable
+    ) => {
+      CheckEntryLength(arguments, 0, type);
+
+      collidableBlocks.Add(PlayerBlockCreator(xPos, yPos, player));
     };
   }
 
@@ -221,22 +279,6 @@ internal partial class LevelLoader {
         enemies.Add(EnemyFactory.Instance.CreateSnakeSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
         break;
 
-      case "6":
-        /* red sand */
-
-        CheckEntryLength(arguments, 0, type);
-
-        nonCollidableBlocks.Add(BlockFactory.CreateRedSandBlockSprite(xPos, yPos));
-        break;
-
-      case "7":
-        /* wood plank */
-
-        CheckEntryLength(arguments, 0, type);
-
-        nonCollidableBlocks.Add(BlockFactory.CreateWoodPlankBlockSprite(xPos, yPos));
-        break;
-
       case "8": {
           /* rock */
 
@@ -346,30 +388,6 @@ internal partial class LevelLoader {
         pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateShotgun(xPos, yPos, player, () => levelManager.CurrentLevel.ProjectileManager)));
         break;
 
-      case "17":
-        /* barrel */
-
-        CheckEntryLength(arguments, 0, type);
-
-        collidableBlocks.Add(BlockFactory.CreateBarrelBlockSprite(xPos, yPos));
-        break;
-
-      case "18":
-        /* bar shelf */
-
-        CheckEntryLength(arguments, 0, type);
-
-        collidableBlocks.Add(BlockFactory.CreateBarShelfBlockSprite(xPos, yPos));
-        break;
-
-      case "19":
-        /* shelf */
-
-        CheckEntryLength(arguments, 0, type);
-
-        collidableBlocks.Add(BlockFactory.CreateShelfBlockSprite(xPos, yPos));
-        break;
-
       case "20": {
           /* vault door */
 
@@ -398,38 +416,6 @@ internal partial class LevelLoader {
         CheckEntryLength(arguments, 0, type);
 
         pickups.Add(new ItemWorldPickup(ItemFactory.CreateKey(xPos, yPos, () => levelManager.CurrentLevel)));
-        break;
-
-      case "22":
-        /* fire pit */
-
-        CheckEntryLength(arguments, 0, type);
-
-        collidableBlocks.Add(BlockFactory.CreateFirePitBlockSprite(xPos, yPos));
-        break;
-
-      case "23":
-        /* fire */
-
-        CheckEntryLength(arguments, 0, type);
-
-        collidableBlocks.Add(BlockFactory.CreateFireBlockSprite(xPos, yPos, player));
-        break;
-
-      case "25":
-        /* mud */
-
-        CheckEntryLength(arguments, 0, type);
-
-        collidableBlocks.Add(BlockFactory.CreateMudBlockSprite(xPos, yPos));
-        break;
-
-      case "26":
-        /* crate */
-
-        CheckEntryLength(arguments, 0, type);
-
-        collidableBlocks.Add(BlockFactory.CreateCrateBlockSprite(xPos, yPos));
         break;
 
       case "27":
