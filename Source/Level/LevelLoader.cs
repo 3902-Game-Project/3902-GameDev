@@ -589,30 +589,26 @@ internal partial class LevelLoader {
     List<IWorldPickup> pickups,
     ref Vector2? playerPositionNullable
   ) {
-    switch (type) {
-      default:
-        if (CELL_ENTRY_FUNCS.TryGetValue(type, out var EntryParseFunc)) {
-          EntryParseFunc(
-            player,
-            levelManager,
-            levelNames,
+    if (CELL_ENTRY_FUNCS.TryGetValue(type, out var EntryParseFunc)) {
+      EntryParseFunc(
+        player,
+        levelManager,
+        levelNames,
 
-            type,
-            arguments,
-            xPos,
-            yPos,
+        type,
+        arguments,
+        xPos,
+        yPos,
 
-            nonCollidableBlocks,
-            collidableBlocks,
-            doors,
-            enemies,
-            pickups,
-            ref playerPositionNullable
-          );
-        } else {
-          throw new FormatException($"unrecognized level block/entity type '{type}'");
-        }
-        break;
+        nonCollidableBlocks,
+        collidableBlocks,
+        doors,
+        enemies,
+        pickups,
+        ref playerPositionNullable
+      );
+    } else {
+      throw new FormatException($"unrecognized level block/entity type '{type}'");
     }
   }
 
