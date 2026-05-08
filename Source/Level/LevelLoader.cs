@@ -17,6 +17,9 @@ namespace GameProject.Level;
 
 internal delegate IBlock BlockCreationFunc(float x, float y);
 internal delegate IBlock PlayerBlockCreationFunc(float x, float y, Player player);
+internal delegate IBlock HoleBlockCreationFunc(float x, float y, string pairedLevelName, ChangeLevelCallback changeLevelCallback);
+internal delegate IBlock LockableDoorBlockCreationFunc(float x, float y, LockableDoorBlockState state, string pairedLevelName, ChangeLevelCallback changeLevelCallback);
+internal delegate IBlock VaultDoorBlockCreationFunc(float x, float y, VaultDoorBlockState state, string pairedLevelName, ChangeLevelCallback changeLevelCallback);
 internal delegate IEnemy EnemyCreationFunc(float x, float y);
 internal delegate IEnemy FiringEnemyCreationFunc(float x, float y, CurrentLevelGetter GetCurrentLevel);
 internal delegate IEnemy FiringItemEnemyCreationFunc(float x, float y, CurrentLevelGetter GetCurrentLevel, Player player);
@@ -66,6 +69,7 @@ internal partial class LevelLoader {
     { "0", CreateEmptyCreator() }, /* empty, do nothing */
     { "1-0", CreateCollidableBlockCreator(BlockFactory.CreateLogBlockSprite) }, /* log: wall */
     { "1-1", CreateCollidableBlockCreator(BlockFactory.CreateLogCornerBlockSprite) }, /* log: corner */
+    { "2", CreateCollidableLockableDoorBlockCreator(BlockFactory.CreateSmallDoorBlockSprite) }, /* small door */
     { "3", CreatePlayerPositionSetter() }, /* player position */
     { "4", CreateEnemyCreator(EnemyFactory.Instance.CreateSnakeSprite) }, /* snake */
     { "5", CreateNonCollidableBlockCreator(BlockFactory.CreateSandBlockSprite) }, /* sand */
@@ -74,6 +78,7 @@ internal partial class LevelLoader {
     { "8-0", CreateCollidableBlockCreator(BlockFactory.CreateRockBlockSprite) }, /* rock: wall */
     { "8-1", CreateCollidableBlockCreator(BlockFactory.CreateRockCornerBlockSprite) }, /* rock: corner */
     /* 8-2: omitted */
+    { "8-3", CreateCollidableHoleBlockCreator(BlockFactory.CreateRockHoleBlockSprite) }, /* rock: hole to other room */
     { "9", CreateFiringItemEnemyCreator(EnemyFactory.Instance.CreateShotgunnerSprite) }, /* shotgunner */
     { "10", CreateEnemyCreator(EnemyFactory.Instance.CreateBatSprite) }, /* bat */
     { "11", CreateFiringItemEnemyCreator(EnemyFactory.Instance.CreateRiflemanSprite) }, /* rifleman */
@@ -85,6 +90,7 @@ internal partial class LevelLoader {
     { "17", CreateCollidableBlockCreator(BlockFactory.CreateBarrelBlockSprite) }, /* barrel */
     { "18", CreateCollidableBlockCreator(BlockFactory.CreateBarShelfBlockSprite) }, /* bar shelf */
     { "19", CreateCollidableBlockCreator(BlockFactory.CreateShelfBlockSprite) }, /* shelf */
+    { "20", CreateCollidableVaultDoorBlockCreator(BlockFactory.CreateVaultDoorBlockSprite) }, /* vault door */
     { "21", CreateKeyItemCreator(ItemFactory.CreateKey) }, /* key item */
     { "22", CreateCollidableBlockCreator(BlockFactory.CreateFirePitBlockSprite) }, /* fire pit */
     { "23", CreateCollidablePlayerBlockCreator(BlockFactory.CreateFireBlockSprite) }, /* fire */
@@ -95,6 +101,7 @@ internal partial class LevelLoader {
     { "28", CreateCollidableBlockCreator(BlockFactory.CreateTableBlockSprite) }, /* table */
     { "29", CreateCollidableBlockCreator(BlockFactory.CreateStatueBlockSprite) }, /* statue */
     { "30", CreateCollidableBlockCreator(BlockFactory.CreateWindowBlockSprite) }, /* window */
+    { "31", CreateCollidableLockableDoorBlockCreator(BlockFactory.CreateSlattedDoorSprite) }, /* slatted door */
     { "32", CreateCollidableBlockCreator(BlockFactory.CreateTreasureBlockSprite) }, /* treasure block */
     { "33", CreateAmmoItemCreator(WorldPickupFactory.Instance.CreateAmmo) }, /* ammo item */
     { "34", CreateCollidableBlockCreator(BlockFactory.CreateBankShelfBlockSprite) }, /* bank shelf */
@@ -196,6 +203,113 @@ internal partial class LevelLoader {
       CheckEntryLength(arguments, 0, type);
 
       collidableBlocks.Add(PlayerBlockCreator(xPos, yPos, player));
+    };
+  }
+
+  private static CellEntryParseFunc CreateCollidableHoleBlockCreator(HoleBlockCreationFunc HoleBlockCreator) {
+    return (
+      Player player,
+      ILevelManager levelManager,
+      ISet<string> levelNames,
+
+      string type,
+      string[] arguments,
+      float xPos,
+      float yPos,
+
+      List<IBlock> nonCollidableBlocks,
+      List<IBlock> collidableBlocks,
+      List<IBlock> doors,
+      List<IEnemy> enemies,
+      List<IWorldPickup> pickups,
+      ref Vector2? playerPositionNullable
+    ) => {
+      CheckEntryLength(arguments, 1, type);
+
+      var pairedLevelName = arguments[0];
+
+      if (!levelNames.Contains(pairedLevelName)) {
+        throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+      }
+
+      collidableBlocks.Add(HoleBlockCreator(xPos, yPos, pairedLevelName, levelManager.SwitchLevel));
+    };
+  }
+
+  private static CellEntryParseFunc CreateCollidableLockableDoorBlockCreator(LockableDoorBlockCreationFunc LockableDoorBlockCreator) {
+    return (
+      Player player,
+      ILevelManager levelManager,
+      ISet<string> levelNames,
+
+      string type,
+      string[] arguments,
+      float xPos,
+      float yPos,
+
+      List<IBlock> nonCollidableBlocks,
+      List<IBlock> collidableBlocks,
+      List<IBlock> doors,
+      List<IEnemy> enemies,
+      List<IWorldPickup> pickups,
+      ref Vector2? playerPositionNullable
+    ) => {
+      CheckEntryLength(arguments, 2, type);
+
+      var stateString = arguments[0];
+
+      var state = stateString switch {
+        "0" => LockableDoorBlockState.Locked,
+        "1" => LockableDoorBlockState.Open,
+        _ => throw new FormatException($"unrecognized door state '{stateString}"),
+      };
+
+      var pairedLevelName = arguments[1];
+
+      if (!levelNames.Contains(pairedLevelName)) {
+        throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+      }
+
+      collidableBlocks.Add(LockableDoorBlockCreator(xPos, yPos, state, pairedLevelName, levelManager.SwitchLevel));
+    };
+  }
+
+  private static CellEntryParseFunc CreateCollidableVaultDoorBlockCreator(VaultDoorBlockCreationFunc VaultDoorBlockCreator) {
+    return (
+      Player player,
+      ILevelManager levelManager,
+      ISet<string> levelNames,
+
+      string type,
+      string[] arguments,
+      float xPos,
+      float yPos,
+
+      List<IBlock> nonCollidableBlocks,
+      List<IBlock> collidableBlocks,
+      List<IBlock> doors,
+      List<IEnemy> enemies,
+      List<IWorldPickup> pickups,
+      ref Vector2? playerPositionNullable
+    ) => {
+      CheckEntryLength(arguments, 2, type);
+
+      var stateString = arguments[0];
+
+      var state = stateString switch {
+        "0" => VaultDoorBlockState.Locked,
+        "1" => VaultDoorBlockState.Opening,
+        "2" => VaultDoorBlockState.Open,
+        _ => throw new FormatException($"unrecognized door state '{stateString}"),
+      };
+
+      var pairedLevelName = arguments[1];
+
+      if (!levelNames.Contains(pairedLevelName)) {
+        throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
+      }
+
+      collidableBlocks.Add(VaultDoorBlockCreator(xPos, yPos, state, pairedLevelName, levelManager.SwitchLevel));
     };
   }
 
@@ -476,87 +590,6 @@ internal partial class LevelLoader {
     ref Vector2? playerPositionNullable
   ) {
     switch (type) {
-      case "2": {
-          /* small door */
-
-          CheckEntryLength(arguments, 2, type);
-
-          var stateString = arguments[0];
-
-          var state = stateString switch {
-            "0" => LockableDoorBlockState.Locked,
-            "1" => LockableDoorBlockState.Open,
-            _ => throw new FormatException($"unrecognized door state '{stateString}"),
-          };
-
-          var pairedLevelName = arguments[1];
-
-          if (!levelNames.Contains(pairedLevelName)) {
-            throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
-          }
-
-          doors.Add(BlockFactory.CreateSmallDoorBlockSprite(xPos, yPos, state, pairedLevelName, levelManager.SwitchLevel));
-          break;
-        }
-
-      case "8-3": {
-          /* rock: hole to other room */
-
-          CheckEntryLength(arguments, 1, type);
-
-          var pairedLevelName = arguments[0];
-
-          if (!levelNames.Contains(pairedLevelName)) {
-            throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
-          }
-
-          doors.Add(BlockFactory.CreateRockHoleBlockSprite(xPos, yPos, pairedLevelName, levelManager.SwitchLevel));
-          break;
-        }
-
-      case "20": {
-          /* vault door */
-
-          CheckEntryLength(arguments, 2, type);
-
-          var stateString = arguments[0];
-          var state = stateString switch {
-            "0" => VaultDoorBlockState.Locked,
-            "1" => VaultDoorBlockState.Opening,
-            "2" => VaultDoorBlockState.Open,
-            _ => throw new FormatException($"unrecognized door state '{stateString}"),
-          };
-          var pairedLevelName = arguments[1];
-
-          if (!levelNames.Contains(pairedLevelName)) {
-            throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
-          }
-
-          doors.Add(BlockFactory.CreateVaultDoorBlockSprite(xPos, yPos, state, pairedLevelName, levelManager.SwitchLevel));
-          break;
-        }
-
-      case "31": {
-          /* slatted door */
-
-          CheckEntryLength(arguments, 2, type);
-
-          var stateString = arguments[0];
-          var state = stateString switch {
-            "0" => LockableDoorBlockState.Locked,
-            "1" => LockableDoorBlockState.Open,
-            _ => throw new FormatException($"unrecognized door state '{stateString}"),
-          };
-          var pairedLevelName = arguments[1];
-
-          if (!levelNames.Contains(pairedLevelName)) {
-            throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
-          }
-
-          doors.Add(BlockFactory.CreateSlattedDoorSprite(xPos, yPos, state, pairedLevelName, levelManager.SwitchLevel));
-          break;
-        }
-
       default:
         if (CELL_ENTRY_FUNCS.TryGetValue(type, out var EntryParseFunc)) {
           EntryParseFunc(

@@ -101,6 +101,7 @@ Known bugs:
   -Cannot discard general items on item screen, it discards a weapon instead.
   -Item screen: cannot discard items after quitting to menu and reopening game. (Can discard just fine in game screen)
   -Enemies placed at bottom of room cannot move upwards?
+  -Can go through door while level is still fading in, causes game crash.
   -Can push crates through walls and enemies forced to move along with crate.
   -Map at top of screen does not show what room player actually is in and is a static image.
   -Enemies sometimes can walk off screen.
