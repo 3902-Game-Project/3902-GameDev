@@ -16,8 +16,7 @@ internal enum GameState {
   StateLoadPrompt,
 }
 
-internal class GameStateMachine : IInitable, ITemporalActiveUpdatable, ILowLevelDrawable {
-  private readonly Game1 game;
+internal class GameStateMachine(Game1 game) : IInitable, ITemporalActiveUpdatable, ILowLevelDrawable {
   private Dictionary<GameState, IGameState> stateLookup;
 
   private StateTransitionType StateTransition;
@@ -30,21 +29,6 @@ internal class GameStateMachine : IInitable, ITemporalActiveUpdatable, ILowLevel
   private IGameState StateSavePrompt { get; set; }
   private IGameState StateLoadPrompt { get; set; }
   private IGameState currentState;
-
-  public GameStateMachine(Game1 game) {
-    this.game = game;
-
-    stateLookup = new() {
-      { GameState.StateGame, StateGame },
-      { GameState.StateMenu, StateMenu },
-      { GameState.StateLoss, StateLoss },
-      { GameState.StateWin, StateWin },
-      { GameState.StatePause, StatePause },
-      { GameState.StateItemScreen, StateItemScreen },
-      { GameState.StateSavePrompt, StateSavePrompt },
-      { GameState.StateLoadPrompt, StateLoadPrompt },
-    };
-  }
 
   private IGameState GetGameState(GameState stateEnum) {
     if (stateLookup.TryGetValue(stateEnum, out var state)) {
@@ -118,6 +102,17 @@ internal class GameStateMachine : IInitable, ITemporalActiveUpdatable, ILowLevel
     StateSavePrompt.LoadContent(contentManager);
     StateLoadPrompt.LoadContent(contentManager);
     StateGame.LoadContent(contentManager);
+
+    stateLookup = new() {
+      { GameState.StateGame, StateGame },
+      { GameState.StateMenu, StateMenu },
+      { GameState.StateLoss, StateLoss },
+      { GameState.StateWin, StateWin },
+      { GameState.StatePause, StatePause },
+      { GameState.StateItemScreen, StateItemScreen },
+      { GameState.StateSavePrompt, StateSavePrompt },
+      { GameState.StateLoadPrompt, StateLoadPrompt },
+    };
   }
 
   public void Update(double deltaTime, bool isActive) {

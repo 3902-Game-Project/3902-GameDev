@@ -53,6 +53,8 @@ internal class Game1 : Game {
     MiscAssetStore.Instance.Initialize();
     TextureStore.Instance.Initialize();
 
+    StateMachine.Initialize();
+
     base.Initialize();
   }
 
@@ -94,6 +96,8 @@ internal class Game1 : Game {
     SoundManager.Instance.LoadAllContent(Content);
     ItemFactory.Instance.LoadAllTextures(Content);
     ProjectileFactory.Instance.LoadAllTextures(Content);
+
+    StateMachine.LoadContent(Content);
   }
 
   protected override void Update(GameTime gameTime) {
