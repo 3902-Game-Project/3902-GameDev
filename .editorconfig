@@ -250,6 +250,9 @@ dotnet_diagnostic.CA1309.severity = suggestion
 dotnet_diagnostic.CA1311.severity = suggestion
 dotnet_diagnostic.CA1805.severity = none
 
+# IDE0059: Unnecessary assignment of a value
+dotnet_diagnostic.IDE0059.severity = none
+
 [*.{cs,vb}]
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
 tab_width = 2
