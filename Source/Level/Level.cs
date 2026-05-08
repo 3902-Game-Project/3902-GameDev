@@ -31,6 +31,19 @@ internal class Level : ILevel {
   private readonly IGPCommand winScreenCommand;
   private double victoryTimer = 0.0;
 
+  private IEnumerable<IWorldPickup> GetRemoveAmmoInRange(Vector2 position, float range) {
+    for (int i = pickups.Count - 1; i >= 0; i--) {
+      var pickup = pickups[i];
+
+      if (pickup.IsAutoCollect) {
+        if (Vector2.Distance(position, pickup.Position) < range) {
+          yield return pickup;
+          RemovePickup(pickup);
+        }
+      }
+    }
+  }
+
   public IEnumerable<IEnemy> GetAliveEnemies() {
     return aliveEnemies;
   }
@@ -177,15 +190,13 @@ internal class Level : ILevel {
 
     player.Position += new Vector2(0, yStep);
     PlayerResolveCollisions(player, CollisionAxis.Y, MathF.Abs(xStep) + Constants.COLLISION_BUFFER);
-    //auto collect ammo
-    for (int i = pickups.Count - 1; i >= 0; i--) {
-      var pickup = pickups[i];
-      if (pickup.IsAutoCollect && Vector2.Distance(player.Position, pickup.Position) < Constants.AMMO_AUTO_COLLECT_RANGE) {
-        pickup.OnPickup(player);
-        pickups.RemoveAt(i);
-      }
+
+    // Auto-Collect for ammo
+    foreach (var pickup in GetRemoveAmmoInRange(player.Position, Constants.AMMO_AUTO_COLLECT_RANGE)) {
+      pickup.OnPickup(player);
     }
-    //process player interactions
+
+    // Process player interactions
     if (player.WantsToInteract) {
       IWorldPickup? closestPickup = GetClosestPickupInRange(player.Position, Constants.ITEM_GRAB_RANGE);
       if (closestPickup != null) {
@@ -264,19 +275,6 @@ internal class Level : ILevel {
   public IEnumerable<IBlock> GetOpenableDoors() {
     return doors;
   }
-
-  //public IEnumerable<IWorldPickup> GetRemoveAmmoInRange(Vector2 position, float range) {
-  //  for (int i = pickups.Count - 1; i >= 0; i--) {
-  //    var pickup = pickups[i];
-
-  //    if (pickup.IsAutoCollect) {
-  //      if (Vector2.Distance(position, pickup.Position) < range) {
-  //        yield return pickup;
-  //        RemovePickup(pickup);
-  //      }
-  //    }
-  //  }
-  //}
 
   public IWorldPickup? GetClosestPickupInRange(Vector2 position, float range) {
     IWorldPickup? closestPickup = null;
