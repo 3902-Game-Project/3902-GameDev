@@ -221,14 +221,6 @@ internal partial class LevelLoader {
         enemies.Add(EnemyFactory.Instance.CreateSnakeSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
         break;
 
-      case "5":
-        /* sand */
-
-        CheckEntryLength(arguments, 0, type);
-
-        nonCollidableBlocks.Add(BlockFactory.CreateSandBlockSprite(xPos, yPos));
-        break;
-
       case "6":
         /* red sand */
 
