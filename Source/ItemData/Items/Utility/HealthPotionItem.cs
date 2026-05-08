@@ -55,7 +55,6 @@ internal class HealthPotionItem(Texture2D texture, Vector2 startPosition, Player
   }
 
   public void Use(UseType useType) {
-    player.Health += 50;
-    if (player.Health > 100) player.Health = 100;
+    player.Heal(50);
   }
 }

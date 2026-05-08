@@ -10,11 +10,9 @@ namespace GameProject.PlayerSpace.States;
 
 #nullable enable
 
-internal abstract class APlayerState(Player player, CurrentLevelGetter GetCurrentLevel) : IPlayerState {
+internal abstract class APlayerState(Player player) : IPlayerState {
   protected Player Player { get; } = player;
-
   protected double DamageFlashTimer { get; set; } = 0.0;
-
   protected Color CurrentTintColor => DamageFlashTimer > 0 ? Color.Red : Color.White;
 
   public abstract void MoveDown();
@@ -26,11 +24,10 @@ internal abstract class APlayerState(Player player, CurrentLevelGetter GetCurren
 
   public virtual void TakeDamage(int amount) {
     if (!Player.IsInvincible) {
-      Player.Health -= amount;
-      Player.InvincibilityTimer = Constants.PLAYER_INVINCIBILITY_DURATION;
+      Player.ReduceHealth(amount);
+      Player.SetInvincibility(Constants.PLAYER_INVINCIBILITY_DURATION);
       DamageFlashTimer = Constants.PLAYER_DAMAGE_FLASH_DURATION;
       if (Player.Health <= 0) {
-        Player.Health = 0;
         Die();
       }
       SoundManager.Instance.Play(SoundID.PlayerHurt);
@@ -42,14 +39,7 @@ internal abstract class APlayerState(Player player, CurrentLevelGetter GetCurren
   }
 
   public virtual void Interact() {
-    float grabRange = Constants.ITEM_GRAB_RANGE;
-
-    IWorldPickup? closestPickup = GetCurrentLevel().GetClosestPickupInRange(Player.Position, grabRange);
-
-    if (closestPickup != null) {
-      closestPickup.OnPickup(Player);
-      GetCurrentLevel().RemovePickup(closestPickup);
-    }
+    Player.WantsToInteract = true;
   }
 
   public virtual void Update(double deltaTime) {

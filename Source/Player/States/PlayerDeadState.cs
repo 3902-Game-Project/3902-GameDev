@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
 
-internal class PlayerDeadState(Player player, CurrentLevelGetter GetCurrentLevel, Action onLoss) : APlayerState(player, GetCurrentLevel) {
+internal class PlayerDeadState(Player player, Action onLoss) : APlayerState(player) {
   private static readonly List<Rectangle> SOURCE_RECTS = [
     new(2116, 1032, 282, 129),
     new(1807, 1034, 277, 127),

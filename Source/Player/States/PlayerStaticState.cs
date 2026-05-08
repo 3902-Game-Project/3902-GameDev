@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
 
-internal class PlayerStaticState(Player player, CurrentLevelGetter GetCurrentLevel) : APlayerState(player, GetCurrentLevel) {
+internal class PlayerStaticState(Player player) : APlayerState(player) {
   // Same rectangles as moving state except that left state set to same as right state (but flipped) for consistency
   private static readonly Rectangle SOURCE_RECT_RIGHT = new(773, 56, 171, 323);
   private static readonly Rectangle SOURCE_RECT_LEFT = new(773, 56, 171, 323);

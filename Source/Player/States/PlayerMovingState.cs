@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace.States;
 
-internal class PlayerMovingState(Player player, CurrentLevelGetter GetCurrentLevel) : APlayerState(player, GetCurrentLevel) {
+internal class PlayerMovingState(Player player) : APlayerState(player) {
   private static readonly double FRAME_INTERVAL = 0.2;
 
   private static readonly List<Rectangle> MOVE_LEFT_FRAMES = [

@@ -63,7 +63,7 @@ internal static class SaveLoadManager {
     player.Position = new Vector2(saveData.Player.X, saveData.Player.Y);
     if (player.Shape is Collisions.Shapes.BoxCollider box) box.Position = player.Position;
 
-    player.Health = saveData.Player.Health;
+    player.CheatHealth(saveData.Player.Health);
     player.Inventory.Ammo = new Dictionary<Items.AmmoType, int>(saveData.Player.Ammo);
 
     // Load Weapons

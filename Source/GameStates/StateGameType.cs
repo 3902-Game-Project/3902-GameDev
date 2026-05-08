@@ -41,6 +41,7 @@ internal class StateGameType : IGameState, System.IDisposable {
 
       LevelManager.Draw(drawData.SpriteBatch);
       Player.Draw(drawData.SpriteBatch);
+      Player.Inventory.Draw(drawData.SpriteBatch, Player.Position, Player.Direction, TextureStore.Instance.WhitePixel);
 
       drawData.SpriteBatch.End();
     }
@@ -94,7 +95,7 @@ internal class StateGameType : IGameState, System.IDisposable {
   public StateGameType(Game1 game) {
     this.game = game;
     LevelManager = new LevelManager(game);
-    Player = new Player(() => LevelManager.CurrentLevel, () => game.ChangeState(game.StateLoss));
+    Player = new Player(() => LevelManager.CurrentLevel.ProjectileManager, () => game.ChangeState(game.StateLoss));
     hudManager = new(Player);
   }
 
@@ -140,6 +141,7 @@ internal class StateGameType : IGameState, System.IDisposable {
 
     if (!Flags.HaltAllUpdates) {
       Player.Update(deltaTime);
+      Player.Inventory.Update(deltaTime);
       LevelManager.Update(deltaTime);
     }
   }

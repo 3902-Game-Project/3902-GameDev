@@ -4,6 +4,7 @@ using GameProject.GlobalInterfaces;
 using GameProject.Globals;
 using GameProject.Items;
 using GameProject.Level;
+using GameProject.Projectiles;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -11,7 +12,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.PlayerSpace;
 
-internal class PlayerInventory(Player player, CurrentLevelGetter GetCurrentLevel) : IInitable {
+internal class PlayerInventory(Player player, ProjectileManagerGetter GetProjectileManager) : IInitable {
   private readonly Random random = new();
   private const int MAX_WEAPONS = 2;
   private const int MAX_GENERAL_ITEMS = 10;
@@ -33,6 +34,7 @@ internal class PlayerInventory(Player player, CurrentLevelGetter GetCurrentLevel
 
   // 2. General Items List (Potions, Whiskey, etc.)
   public List<IItem> GeneralItems { get; set; } = [];
+  public Queue<IWorldPickup> DroppedItems { get; } = new();
 
   // Overarching Ammo Stores
   public Dictionary<AmmoType, int> Ammo { get; set; } = new() {
@@ -78,7 +80,7 @@ internal class PlayerInventory(Player player, CurrentLevelGetter GetCurrentLevel
     Vector2 dropVelocity = new(tossX, tossY);
 
     IWorldPickup droppedItem = new ItemWorldPickup(itemToDrop, dropVelocity);
-    GetCurrentLevel().AddPickup(droppedItem);
+    DroppedItems.Enqueue(droppedItem);
   }
 
   public void DropCurrentItem() {
@@ -105,8 +107,8 @@ internal class PlayerInventory(Player player, CurrentLevelGetter GetCurrentLevel
   public void Initialize() { }
 
   public void LoadContent(ContentManager content) {
-    PickupItem(ItemFactory.Instance.CreateRevolver(0.0f, 0.0f, player, () => GetCurrentLevel().ProjectileManager));
-    PickupItem(ItemFactory.Instance.CreateRifle(0.0f, 0.0f, player, () => GetCurrentLevel().ProjectileManager));
+    PickupItem(ItemFactory.Instance.CreateRevolver(0.0f, 0.0f, player, GetProjectileManager));
+    PickupItem(ItemFactory.Instance.CreateRifle(0.0f, 0.0f, player, GetProjectileManager));
   }
 
   public void Update(double deltaTime) {

@@ -18,6 +18,18 @@ LevelLoader (High Priority; Excused) - Santosh
 Loops too nested
 Largely fixed. Still has some conditionals inside switch statements inside switch statements. Hard to maintain, but excusable as mentioned, I'd imagine this system is fairly bespoke
 
+Player (High Priority) - Eric 
+Reduce the number of public fields. 
+Still lots of public fields that are manipulated by lots of other classes 
+
+Player (High Priority) - Eric
+The player is tightly coupled with basically everything in the game. If I tried to copy and paste the Player class into another project I'd have to also copy like 5 other files for it just to compile
+Coupling is mostly resolved to the levelManager instead of more specific classes
+
+Player - Eric
+The player shouldn't be drawing and updating the inventory. Player should just draw and update the player
+Player still draws and updates the inventory
+
 -----Done > Sprint 5 early comments-----:
 
 StateGameType - Santosh
@@ -66,18 +78,6 @@ Seems to be better. Current implementation such that smaller classes get the Lev
 Level
 Look at using coroutines instead of juggling the fade-in/out states. The C# keyword should be await. Even if you don't use coroutines the screen transitions should probably be separate from the level itself
 Coroutines not implemented, but screen transitions have been moved to their own class, which is good
-
-Player (High Priority) - Eric Possibly
-Reduce the number of public fields. 
-Still lots of public fields that are manipulated by lots of other classes 
-
-Player (High Priority) - Eric Possibly
-The player is tightly coupled with basically everything in the game. If I tried to copy and paste the Player class into another project I'd have to also copy like 5 other files for it just to compile
-Coupling is mostly resolved to the levelManager instead of more specific classes
-
-Player - Eric Possibly
-The player shouldn't be drawing and updating the inventory. Player should just draw and update the player
-Player still draws and updates the inventory
 
 BaseEnemy (Medium Priority)
 Lots of public fields, along with usual problem of passing in the game
