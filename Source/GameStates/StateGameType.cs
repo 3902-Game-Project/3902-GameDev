@@ -122,7 +122,14 @@ internal class StateGameType : IGameState {
     }
 
     keyboardController.Update(Keyboard.GetState());
-    mouseController.Update(new AugmentedMouseState(Mouse.GetState(), isActive));
+    mouseController.Update(
+      new AugmentedMouseState(
+        Mouse.GetState(),
+        isActive,
+        game.DefaultViewport.Width,
+        game.DefaultViewport.Height
+      )
+    );
     gamePadController.Update(GamePad.GetState(Constants.GAMEPAD_PLAYER_INDEX));
 
     foreach (var key in keyboardController.GetPressed()) {

@@ -18,6 +18,7 @@ internal class Game1 : Game {
   private Rectangle renderScaleRectangle;
 
   public SpriteBatch SpriteBatch { get; private set; }
+  public Viewport DefaultViewport { get; private set; }
   public Viewport HudViewport { get; private set; }
   public Viewport GameViewport { get; private set; }
 
@@ -74,14 +75,14 @@ internal class Game1 : Game {
     Window.AllowUserResizing = true;
     Window.ClientSizeChanged += OnResize;
 
-    var defaultViewport = GraphicsDevice.Viewport;
+    DefaultViewport = GraphicsDevice.Viewport;
     // Technically it might be best to get the width from graphics.PreferredBackBufferWidth in case it changes,
     // And similarly for graphics.PreferredBackBufferHeight (which could alter Constants.GAME_HEIGHT)
     // But its cleaner to use the value from Constants instead without altering the value from Constants to match
     HudViewport = new Viewport(0, 0, Constants.WINDOW_WIDTH, Constants.HUD_HEIGHT);
     GameViewport = new Viewport(0, Constants.HUD_HEIGHT, Constants.WINDOW_WIDTH, Constants.GAME_HEIGHT);
 
-    viewportTracker = ValueTrackerFactory.CreateViewportTracker(GraphicsDevice, defaultViewport);
+    viewportTracker = ValueTrackerFactory.CreateViewportTracker(GraphicsDevice, DefaultViewport);
 
     MiscAssetStore.Instance.Initialize();
     TextureStore.Instance.Initialize();
