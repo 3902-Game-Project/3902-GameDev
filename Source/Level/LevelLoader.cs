@@ -62,10 +62,14 @@ internal partial class LevelLoader {
   public static readonly float PLAYER_BOTTOM_POS_AFTER_TELEPORT = Constants.LEVEL_HEIGHT - Constants.BASE_BLOCK_WIDTH * 1.5f;
 
   private static readonly Dictionary<string, CellEntryParseFunc> CELL_ENTRY_FUNCS = new() {
+    { "1-0", CreateCollidableBlockCreator(BlockFactory.CreateLogBlockSprite) }, /* log: wall */
+    { "1-1", CreateCollidableBlockCreator(BlockFactory.CreateLogCornerBlockSprite) }, /* log: corner */
     { "4", CreateEnemyCreator(EnemyFactory.Instance.CreateSnakeSprite) }, /* snake */
     { "5", CreateNonCollidableBlockCreator(BlockFactory.CreateSandBlockSprite) }, /* sand */
     { "6", CreateNonCollidableBlockCreator(BlockFactory.CreateRedSandBlockSprite) }, /* red sand */
     { "7", CreateNonCollidableBlockCreator(BlockFactory.CreateWoodPlankBlockSprite) }, /* wood plank */
+    { "8-0", CreateCollidableBlockCreator(BlockFactory.CreateRockBlockSprite) }, /* rock: wall */
+    { "8-1", CreateCollidableBlockCreator(BlockFactory.CreateRockCornerBlockSprite) }, /* rock: corner */
     { "9", CreateFiringItemEnemyCreator(EnemyFactory.Instance.CreateShotgunnerSprite) }, /* shotgunner */
     { "10", CreateEnemyCreator(EnemyFactory.Instance.CreateBatSprite) }, /* bat */
     { "11", CreateFiringItemEnemyCreator(EnemyFactory.Instance.CreateRiflemanSprite) }, /* rifleman */
@@ -399,12 +403,6 @@ internal partial class LevelLoader {
     }
   }
 
-  private static void CheckEntryLengthGreaterThanEqual(string[] arguments, int length, string type) {
-    if (arguments.Length < length) {
-      throw new FormatException($"Expected at least {length - 1} parameter for level block/entity type '{type}'");
-    }
-  }
-
   private static void AddCellEntry(
     Player player,
     ILevelManager levelManager,
@@ -428,22 +426,6 @@ internal partial class LevelLoader {
         /* empty, do nothing */
 
         CheckEntryLength(arguments, 0, type);
-        break;
-
-      case "1-0":
-        /* log: wall */
-
-        CheckEntryLength(arguments, 0, type);
-
-        collidableBlocks.Add(BlockFactory.CreateLogBlockSprite(xPos, yPos));
-        break;
-
-      case "1-1":
-        /* log: corner */
-
-        CheckEntryLength(arguments, 0, type);
-
-        collidableBlocks.Add(BlockFactory.CreateLogCornerBlockSprite(xPos, yPos));
         break;
 
       case "2": {
@@ -479,22 +461,6 @@ internal partial class LevelLoader {
         } else {
           playerPositionNullable = new Vector2(xPos, yPos) + PLAYER_POSITION_OFFSET;
         }
-        break;
-
-      case "8-0":
-        /* rock: wall */
-
-        CheckEntryLength(arguments, 0, type);
-
-        collidableBlocks.Add(BlockFactory.CreateRockBlockSprite(xPos, yPos));
-        break;
-
-      case "8-1":
-        /* rock: corner */
-
-        CheckEntryLength(arguments, 0, type);
-
-        collidableBlocks.Add(BlockFactory.CreateRockCornerBlockSprite(xPos, yPos));
         break;
 
       case "8-3": {
