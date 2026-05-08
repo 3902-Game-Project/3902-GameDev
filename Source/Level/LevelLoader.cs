@@ -17,7 +17,8 @@ namespace GameProject.Level;
 internal delegate IBlock BlockCreationFunc(float x, float y);
 internal delegate IBlock PlayerBlockCreationFunc(float x, float y, Player player);
 internal delegate IEnemy EnemyCreationFunc(float x, float y);
-internal delegate IEnemy FiringEnemyCreationFunc(float x, float y, CurrentLevelGetter GetCurrentLevel, Player player);
+internal delegate IEnemy FiringEnemyCreationFunc(float x, float y, CurrentLevelGetter GetCurrentLevel);
+internal delegate IEnemy FiringItemEnemyCreationFunc(float x, float y, CurrentLevelGetter GetCurrentLevel, Player player);
 
 internal delegate void CellEntryParseFunc(
   Player player,
@@ -59,9 +60,9 @@ internal partial class LevelLoader {
     { "5", CreateNonCollidableBlockCreator(BlockFactory.CreateSandBlockSprite) }, /* sand */
     { "6", CreateNonCollidableBlockCreator(BlockFactory.CreateRedSandBlockSprite) }, /* red sand */
     { "7", CreateNonCollidableBlockCreator(BlockFactory.CreateWoodPlankBlockSprite) }, /* wood plank */
-    { "9", CreateFiringEnemyCreator(EnemyFactory.Instance.CreateShotgunnerSprite) }, /* shotgunner */
+    { "9", CreateFiringItemEnemyCreator(EnemyFactory.Instance.CreateShotgunnerSprite) }, /* shotgunner */
     { "10", CreateEnemyCreator(EnemyFactory.Instance.CreateBatSprite) }, /* bat */
-    { "11", CreateFiringEnemyCreator(EnemyFactory.Instance.CreateRiflemanSprite) }, /* rifleman */
+    { "11", CreateFiringItemEnemyCreator(EnemyFactory.Instance.CreateRiflemanSprite) }, /* rifleman */
     { "12", CreateEnemyCreator(EnemyFactory.Instance.CreateTumbleweedSprite) }, /* tumbleweed */
     { "13", CreateEnemyCreator(EnemyFactory.Instance.CreateCactusSprite) }, /* cactus */
     { "17", CreateCollidableBlockCreator(BlockFactory.CreateBarrelBlockSprite) }, /* barrel */
@@ -78,6 +79,7 @@ internal partial class LevelLoader {
     { "32", CreateCollidableBlockCreator(BlockFactory.CreateTreasureBlockSprite) }, /* treasure block */
     { "34", CreateCollidableBlockCreator(BlockFactory.CreateBankShelfBlockSprite) }, /* bank shelf */
     { "35", CreateCollidableBlockCreator(BlockFactory.CreateTellersDeskBlockSprite) }, /* tellers desk */
+    { "39", CreateFiringEnemyCreator(EnemyFactory.Instance.CreateBossSprite) }, /* boss */
   };
 
   private static CellEntryParseFunc CreateNonCollidableBlockCreator(BlockCreationFunc BlockCreator) {
@@ -196,7 +198,31 @@ internal partial class LevelLoader {
     ) => {
       CheckEntryLength(arguments, 0, type);
 
-      enemies.Add(FiringEnemyCreator(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, () => levelManager.CurrentLevel, player));
+      enemies.Add(FiringEnemyCreator(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, () => levelManager.CurrentLevel));
+    };
+  }
+
+  private static CellEntryParseFunc CreateFiringItemEnemyCreator(FiringItemEnemyCreationFunc FiringItemEnemyCreator) {
+    return (
+      Player player,
+      ILevelManager levelManager,
+      ISet<string> levelNames,
+
+      string type,
+      string[] arguments,
+      float xPos,
+      float yPos,
+
+      List<IBlock> nonCollidableBlocks,
+      List<IBlock> collidableBlocks,
+      List<IBlock> doors,
+      List<IEnemy> enemies,
+      List<IWorldPickup> pickups,
+      ref Vector2? playerPositionNullable
+    ) => {
+      CheckEntryLength(arguments, 0, type);
+
+      enemies.Add(FiringItemEnemyCreator(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, () => levelManager.CurrentLevel, player));
     };
   }
 
@@ -505,14 +531,6 @@ internal partial class LevelLoader {
         CheckEntryLength(arguments, 0, type);
 
         pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateInfiniteAmmo(xPos, yPos, player)));
-        break;
-
-      case "39":
-        /* boss */
-
-        CheckEntryLength(arguments, 0, type);
-
-        enemies.Add(EnemyFactory.Instance.CreateBossSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, () => levelManager.CurrentLevel));
         break;
 
       default:
