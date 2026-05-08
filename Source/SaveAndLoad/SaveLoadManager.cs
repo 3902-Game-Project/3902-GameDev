@@ -23,7 +23,7 @@ internal static class SaveLoadManager {
     saveData.Player.X = player.Position.X;
     saveData.Player.Y = player.Position.Y;
     saveData.Player.Health = player.Health;
-    saveData.Player.Ammo = new Dictionary<Items.AmmoType, int>(player.Inventory.Ammo);
+    saveData.Player.Ammo = new Dictionary<AmmoType, int>(player.Inventory.Ammo);
     saveData.Player.ActiveWeaponIndex = player.Inventory.ActiveWeaponIndex;
 
     // Save weapons by their class name
@@ -64,7 +64,7 @@ internal static class SaveLoadManager {
     if (player.Shape is Collisions.Shapes.BoxCollider box) box.Position = player.Position;
 
     player.CheatHealth(saveData.Player.Health);
-    player.Inventory.Ammo = new Dictionary<Items.AmmoType, int>(saveData.Player.Ammo);
+    player.Inventory.Ammo = new Dictionary<AmmoType, int>(saveData.Player.Ammo);
 
     // Load Weapons
     player.Inventory.Weapons.Clear();

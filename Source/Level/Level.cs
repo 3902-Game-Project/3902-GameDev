@@ -63,7 +63,7 @@ internal class Level : ILevel {
     for (int i = aliveEnemies.Count - 1; i >= 0; i--) {
       var enemy = aliveEnemies[i];
 
-      if (enemy.Health <= 0) {
+      if (enemy.IsDead()) {
         deadEnemies.Add(enemy);
         aliveEnemies.Remove(enemy);
         collisionManager.Remove(enemy);

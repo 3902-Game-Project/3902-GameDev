@@ -19,8 +19,9 @@ internal abstract class ABaseEnemy(
   public static event Action<ABaseEnemy> OnDeath;
 
   protected Texture2D Texture { get; } = texture;
-  protected float DrawScale { get; set; } = 1f;
+  protected float DrawScale { get; set; } = 1.0f;
   protected bool FlipWhenFacingRightUpDown { get; set; } = true;
+  protected int MaxHealth { get; set; } = 100;
 
   protected virtual void DropLoot() { }
 
@@ -89,7 +90,6 @@ internal abstract class ABaseEnemy(
   public BoxCollider Collider { get; private set; } = new BoxCollider(colliderWidth, colliderHeight, position);
   public Layer Layer { get; } = Layer.Enemies;
   public int Health { get; set; } = 100;
-  public int MaxHealth { get; set; } = 100;
   public double DamageFlashTimer { get; protected set; }
   public bool Invulnerable { get; } = invulnerable;
 
@@ -98,11 +98,11 @@ internal abstract class ABaseEnemy(
   public virtual void OnCollision(CollisionInfo info) {
     if (info.Collider is IBlock) {
       if (info.Side == CollisionSide.Left || info.Side == CollisionSide.Right) {
-        Velocity = new Vector2(0, Velocity.Y);
+        Velocity = new Vector2(0.0f, Velocity.Y);
       } else if (info.Side == CollisionSide.Top || info.Side == CollisionSide.Bottom) {
-        Velocity = new Vector2(Velocity.X, 0);
+        Velocity = new Vector2(Velocity.X, 0.0f);
       }
-      Position = CollisionHelper.GetNudgedPosition(info, Position, 2f);
+      Position = CollisionHelper.GetNudgedPosition(info, Position, 2.0f);
       UpdateCollider();
     }
   }
@@ -116,13 +116,13 @@ internal abstract class ABaseEnemy(
       Vector2 origin = GetDrawOrigin(source);
       Color tintColor = DamageFlashTimer > 0 ? Color.Red : Color.White;
 
-      spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, DrawScale, GetFlipEffect(), 0f);
+      spriteBatch.Draw(Texture, Position, source, tintColor, 0.0f, origin, DrawScale, GetFlipEffect(), 0.0f);
     }
 
     // Draw health bar
 
     if (!Invulnerable && Health > 0) {
-      float enemyHealthPercent = MathHelper.Clamp((float) Health / MaxHealth, 0f, 1f);
+      float enemyHealthPercent = MathHelper.Clamp((float) Health / MaxHealth, 0.0f, 1.0f);
       float scaleWidth = TextureStore.Instance.HealthBar.Width * 0.15f;
       Vector2 enemyHealthPositions = new(
         Position.X - scaleWidth * 0.5f,
@@ -132,11 +132,11 @@ internal abstract class ABaseEnemy(
         position: enemyHealthPositions,
         sourceRectangle: null,
         color: Color.DarkSlateGray,
-        rotation: 0f,
+        rotation: 0.0f,
         origin: Vector2.Zero,
         scale: 0.15f,
         effects: SpriteEffects.None,
-        layerDepth: 0f
+        layerDepth: 0.0f
        );
       int enemyHealthVisible = (int) (TextureStore.Instance.HealthBar.Width * enemyHealthPercent);
       Rectangle enemyHpSource = new(0, 0, enemyHealthVisible, TextureStore.Instance.HealthBar.Height);
@@ -146,22 +146,22 @@ internal abstract class ABaseEnemy(
         position: enemyHealthPositions,
         sourceRectangle: enemyHpSource,
         color: Color.White,
-        rotation: 0f,
+        rotation: 0.0f,
         origin: Vector2.Zero,
         scale: 0.15f,
         effects: SpriteEffects.None,
-        layerDepth: 0f
+        layerDepth: 0.0f
       );
     }
   }
 
   public virtual void Update(double deltaTime) {
-    if (DamageFlashTimer > 0) {
+    if (DamageFlashTimer > 0.0) {
       DamageFlashTimer -= deltaTime;
     }
     UpdateCollider();
     CurrentState?.Update(deltaTime);
-    if (Position.X < 0) {
+    if (Position.X < 0.0f) {
       Position = new Vector2(0, Position.Y);
     }
 
@@ -200,5 +200,9 @@ internal abstract class ABaseEnemy(
 
     Vector2 direction = Vector2.Normalize(delta);
     Velocity = direction * speed;
+  }
+
+  public bool IsDead() {
+    return Health <= 0;
   }
 }
