@@ -14,6 +14,24 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Level;
 
+internal delegate void CellEntryParseFunc(
+  Player player,
+  ILevelManager levelManager,
+  ISet<string> levelNames,
+
+  string type, // needed for error information
+  string[] arguments,
+  float xPos,
+  float yPos,
+
+  List<IBlock> nonCollidableBlocks,
+  List<IBlock> collidableBlocks,
+  List<IBlock> doors,
+  List<IEnemy> enemies,
+  List<IWorldPickup> pickups,
+  ref Vector2? playerPositionNullable
+);
+
 internal partial class LevelLoader {
   private static readonly Vector2 PLAYER_POSITION_OFFSET = new(Constants.BASE_BLOCK_WIDTH / 2.0f, Constants.BASE_BLOCK_HEIGHT / 2.0f);
   private static readonly Vector2 ENEMY_POSITION_OFFSET = new(Constants.BASE_BLOCK_WIDTH / 2.0f, Constants.BASE_BLOCK_HEIGHT);
@@ -30,6 +48,8 @@ internal partial class LevelLoader {
   public static readonly float PLAYER_TOP_POS_AFTER_TELEPORT = Constants.BASE_BLOCK_WIDTH * 1.5f;
   public static readonly float PLAYER_RIGHT_POS_AFTER_TELEPORT = Constants.LEVEL_WIDTH - Constants.BASE_BLOCK_WIDTH * 1.5f;
   public static readonly float PLAYER_BOTTOM_POS_AFTER_TELEPORT = Constants.LEVEL_HEIGHT - Constants.BASE_BLOCK_WIDTH * 1.5f;
+
+  private static readonly Dictionary<string, CellEntryParseFunc> CELL_ENTRY_FUNCS = [];
 
   private static void ParseSingleFlag(LevelFlags flags, string flag) {
     switch (flag) {
@@ -531,7 +551,28 @@ internal partial class LevelLoader {
         break;
 
       default:
-        throw new FormatException($"unrecognized level block/entity type '{type}'");
+        if (CELL_ENTRY_FUNCS.TryGetValue(type, out var EntryParseFunc)) {
+          EntryParseFunc(
+            player,
+            levelManager,
+            levelNames,
+
+            type,
+            arguments,
+            xPos,
+            yPos,
+
+            nonCollidableBlocks,
+            collidableBlocks,
+            doors,
+            enemies,
+            pickups,
+            ref playerPositionNullable
+          );
+        } else {
+          throw new FormatException($"unrecognized level block/entity type '{type}'");
+        }
+        break;
     }
   }
 
