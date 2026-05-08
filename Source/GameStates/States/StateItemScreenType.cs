@@ -17,16 +17,16 @@ namespace GameProject.GameStates;
 internal class StateItemScreenType(Game1 game) : IGameState {
   private IController<Keys, KeyboardState> keyboardController;
   private IController<GPGamePadButtons, GamePadState> gamePadController;
-  public bool InWeaponMenu { get; private set; } = true;
-  public int SelectedWeaponIndex { get; private set; } = 0;
-  public int SelectedBackpackIndex { get; private set; } = 0;
+  internal bool InWeaponMenu { get; private set; } = true;
+  internal int SelectedWeaponIndex { get; private set; } = 0;
+  internal int SelectedBackpackIndex { get; private set; } = 0;
 
-  public void Initialize() {
+  internal void Initialize() {
     keyboardController = ItemScreenControllerFactory.CreateKeyboardController(game, this, game.StateMachine.StateGame.Player);
     gamePadController = ItemScreenControllerFactory.CreateGamePadController(game, this, game.StateMachine.StateGame.Player);
   }
 
-  public void MoveCursorLeft() {
+  internal void MoveCursorLeft() {
     Player player = game.StateMachine.StateGame.Player;
     if (player == null) return;
 
@@ -43,7 +43,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     }
   }
 
-  public void MoveCursorRight() {
+  internal void MoveCursorRight() {
     Player player = game.StateMachine.StateGame.Player;
     if (player == null) return;
 
@@ -60,7 +60,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     }
   }
 
-  public void MoveCursorUp() {
+  internal void MoveCursorUp() {
     if (!InWeaponMenu) {
       if (SelectedBackpackIndex >= Constants.BACKPACK_COLUMNS) {
         SelectedBackpackIndex -= Constants.BACKPACK_COLUMNS;
@@ -70,7 +70,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     }
   }
 
-  public void MoveCursorDown() {
+  internal void MoveCursorDown() {
     if (InWeaponMenu) {
       InWeaponMenu = false;
     } else {
@@ -81,7 +81,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     }
   }
 
-  public void EquipSelectedWeapon() {
+  internal void EquipSelectedWeapon() {
     Player player = game.StateMachine.StateGame.Player;
     if (player == null) return;
 
@@ -107,14 +107,14 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     }
   }
 
-  public void LoadContent(ContentManager content) { }
+  internal void LoadContent(ContentManager content) { }
 
-  public void Update(double deltaTime, bool isActive) {
+  internal void Update(double deltaTime, bool isActive) {
     keyboardController.Update(Keyboard.GetState());
     gamePadController.Update(GamePad.GetState(Constants.GAMEPAD_PLAYER_INDEX));
   }
 
-  public void LowLevelDraw(LowLevelDrawParams drawData) {
+  internal void LowLevelDraw(LowLevelDrawParams drawData) {
     drawData.ClearWindowCallback(Constants.MAIN_BACKGROUND_COLOR);
 
     drawData.SpriteBatch.Begin(
@@ -220,8 +220,8 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     drawData.SpriteBatch.End();
   }
 
-  public void OnStateEnter(bool prevStateIsCurrentState) { }
-  public void OnStateLeave(bool nextStateIsCurrentState) { }
-  public void OnStateStartFadeIn(bool prevStateIsCurrentState) { }
-  public void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
+  internal void OnStateEnter(bool prevStateIsCurrentState) { }
+  internal void OnStateLeave(bool nextStateIsCurrentState) { }
+  internal void OnStateStartFadeIn(bool prevStateIsCurrentState) { }
+  internal void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
 }

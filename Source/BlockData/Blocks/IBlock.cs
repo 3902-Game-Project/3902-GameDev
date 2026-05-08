@@ -31,5 +31,5 @@ internal enum VaultDoorBlockState {
 }
 
 internal interface IBlock : ITemporalUpdatable, IGPDrawable, ICollidable {
-  Rectangle BoundingBox { get; }
+  internal Rectangle BoundingBox { get; }
 }

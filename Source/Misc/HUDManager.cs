@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Misc;
 
 internal class HUDManager(Player player) : IGPDrawable {
-  public void Draw(SpriteBatch spriteBatch) {
+  internal void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(
       texture: TextureStore.Instance.HUDBackground,
       position: Vector2.Zero,

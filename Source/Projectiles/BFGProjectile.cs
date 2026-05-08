@@ -12,24 +12,24 @@ internal class BFGProjectile(Texture2D texture, Vector2 position, Vector2 direct
 
   private readonly BoxCollider boxCollider = new(16f, 16f, position);
 
-  public bool IsExpired { get; private set; }
-  public Vector2 Position { get; set; } = position;
+  internal bool IsExpired { get; private set; }
+  internal Vector2 Position { get; set; } = position;
 
-  public Rectangle BoundingBox => new((int) Position.X - 8, (int) Position.Y - 8, 16, 16);
+  internal Rectangle BoundingBox => new((int) Position.X - 8, (int) Position.Y - 8, 16, 16);
 
-  public IShape Shape => boxCollider;
-  public Layer Layer { get; } = Layer.Projectiles;
+  internal IShape Shape => boxCollider;
+  internal Layer Layer { get; } = Layer.Projectiles;
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     Position += direction * speed * (float) deltaTime;
     boxCollider.Position = Position;
   }
 
-  public void Draw(SpriteBatch spriteBatch) {
+  internal void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(texture, Position, SOURCE_RECT, Color.White, 0f, new Vector2(8, 8), 2f, SpriteEffects.None, 0f);
   }
 
-  public void OnCollision(CollisionInfo info) {
+  internal void OnCollision(CollisionInfo info) {
     if (info.Collider is IEnemy enemy) {
       enemy.TakeDamage(damage);
       Expire();
@@ -38,5 +38,5 @@ internal class BFGProjectile(Texture2D texture, Vector2 position, Vector2 direct
     }
   }
 
-  public void Expire() => IsExpired = true;
+  internal void Expire() => IsExpired = true;
 }

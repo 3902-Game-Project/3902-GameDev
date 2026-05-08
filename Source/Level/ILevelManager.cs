@@ -3,12 +3,12 @@ using GameProject.GlobalInterfaces;
 namespace GameProject.Level;
 
 internal interface ILevelManager : IInitable, ITemporalUpdatable, IGPDrawable {
-  ILevel CurrentLevel { get; }
-  string CurrentLevelName { get; }
-  void SwitchLevel(string newLevelName);
-  void SwitchLevelWithoutFading(string newLevelName);
-  void PreviousLevel();
-  void NextLevel();
-  void InitializeLevel();
-  void CheckBfgSpawnable();
+  internal ILevel CurrentLevel { get; }
+  internal string CurrentLevelName { get; }
+  internal void SwitchLevel(string newLevelName);
+  internal void SwitchLevelWithoutFading(string newLevelName);
+  internal void PreviousLevel();
+  internal void NextLevel();
+  internal void InitializeLevel();
+  internal void CheckBfgSpawnable();
 }

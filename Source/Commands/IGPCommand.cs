@@ -1,5 +1,5 @@
 namespace GameProject.Commands;
 
 internal interface IGPCommand {
-  void Execute();
+  internal void Execute();
 }

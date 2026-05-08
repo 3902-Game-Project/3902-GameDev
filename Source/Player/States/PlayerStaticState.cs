@@ -13,27 +13,27 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
   private static readonly Rectangle SOURCE_RECT_UP = new(453, 425, 161, 322);
   private static readonly Rectangle SOURCE_RECT_DOWN = new(455, 58, 161, 318);
 
-  public override void MoveUp() {
+  internal override void MoveUp() {
     Player.Velocity = new Vector2(Player.Velocity.X, -Constants.PLAYER_SPEED);
     Player.Direction = FacingDirection.Up;
   }
 
-  public override void MoveDown() {
+  internal override void MoveDown() {
     Player.Velocity = new Vector2(Player.Velocity.X, Constants.PLAYER_SPEED);
     Player.Direction = FacingDirection.Down;
   }
 
-  public override void MoveLeft() {
+  internal override void MoveLeft() {
     Player.Velocity = new Vector2(-Constants.PLAYER_SPEED, Player.Velocity.Y);
     Player.Direction = FacingDirection.Left;
   }
 
-  public override void MoveRight() {
+  internal override void MoveRight() {
     Player.Velocity = new Vector2(Constants.PLAYER_SPEED, Player.Velocity.Y);
     Player.Direction = FacingDirection.Right;
   }
 
-  public override void Update(double deltaTime) {
+  internal override void Update(double deltaTime) {
     base.Update(deltaTime);
 
     // If we start moving, switch state
@@ -42,7 +42,7 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
     }
   }
 
-  public override void UseItem(UseType useType) {
+  internal override void UseItem(UseType useType) {
     if (Player.Inventory.ActiveItem != null) {
       Player.Inventory.ActiveItem.Use(useType);
       if (Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
@@ -51,7 +51,7 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
     }
   }
 
-  public override void UseKey(UseType useType) {
+  internal override void UseKey(UseType useType) {
     IItem keyToUse = null;
     foreach (var item in Player.Inventory.GeneralItems) {
       if (item is KeyItem) {
@@ -70,7 +70,7 @@ internal class PlayerStaticState(Player player) : APlayerState(player) {
     }
   }
 
-  public override void Draw(SpriteBatch spriteBatch) {
+  internal override void Draw(SpriteBatch spriteBatch) {
     Rectangle sourceRect;
     Vector2 origin;
 

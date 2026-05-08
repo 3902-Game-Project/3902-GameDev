@@ -3,7 +3,7 @@ using GameProject.PlayerSpace;
 namespace GameProject.Commands;
 
 internal class PlayerMoveUpCommand(Player player) : IGPCommand {
-  public void Execute() {
+  internal void Execute() {
     player.MoveUp();
   }
 }

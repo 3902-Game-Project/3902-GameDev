@@ -13,5 +13,5 @@ internal class GamePadController(
   // Tracking of presses / releases must be shared across GameStates
   private static readonly GamePadDiffTracker gamePadTracker = new();
 
-  protected override IButtonDiffTracker<GPGamePadButtons, GamePadState> ButtonTracker => gamePadTracker;
+  private protected override IButtonDiffTracker<GPGamePadButtons, GamePadState> ButtonTracker => gamePadTracker;
 }

@@ -14,7 +14,7 @@ internal class ValueTracker<T>(SetValueCallback<T> setValueCallback, T? defaultV
     private readonly T? defaultValue;
     private bool disposedValue;
 
-    public ValueDisposer(SetValueCallback<T> setValueCallback, Stack<T> values, T? defaultValue, T newValue) {
+    internal ValueDisposer(SetValueCallback<T> setValueCallback, Stack<T> values, T? defaultValue, T newValue) {
       this.setValueCallback = setValueCallback;
       this.values = values;
       this.defaultValue = defaultValue;
@@ -23,7 +23,7 @@ internal class ValueTracker<T>(SetValueCallback<T> setValueCallback, T? defaultV
       values.Push(newValue);
     }
 
-    protected virtual void Dispose(bool disposing) {
+    private protected virtual void Dispose(bool disposing) {
       if (!disposedValue) {
         if (disposing) {
           // C# Docs: Dispose managed state (managed objects)
@@ -44,7 +44,7 @@ internal class ValueTracker<T>(SetValueCallback<T> setValueCallback, T? defaultV
     //   Dispose(disposing: false);
     // }
 
-    public void Dispose() {
+    internal void Dispose() {
       // C# Docs: Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
       Dispose(disposing: true);
       GC.SuppressFinalize(this);
@@ -53,7 +53,7 @@ internal class ValueTracker<T>(SetValueCallback<T> setValueCallback, T? defaultV
 
   private readonly Stack<T> values = new();
 
-  public IDisposable TempSet(T newValue) {
+  internal IDisposable TempSet(T newValue) {
     return new ValueDisposer(setValueCallback, values, defaultValue, newValue);
   }
 }

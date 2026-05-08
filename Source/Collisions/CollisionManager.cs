@@ -16,21 +16,21 @@ internal enum CollisionAxis {
 internal class CollisionManager : IInstantaneousUpdatable {
   private readonly List<ICollidable> colliders;
 
-  public CollisionManager() {
+  internal CollisionManager() {
     colliders = [];
   }
 
-  public void Add(ICollidable collider) {
+  internal void Add(ICollidable collider) {
     if (!colliders.Contains(collider)) {
       colliders.Add(collider);
     }
   }
 
-  public void Remove(ICollidable collider) {
+  internal void Remove(ICollidable collider) {
     colliders.Remove(collider);
   }
 
-  public void Update() {
+  internal void Update() {
     for (int i = 0; i < colliders.Count - 1; i++) {
       ICollidable c1 = colliders[i];
       for (int j = i + 1; j < colliders.Count; j++) {
@@ -47,7 +47,7 @@ internal class CollisionManager : IInstantaneousUpdatable {
     }
   }
 
-  public void ResolveCollisionsFor(ICollidable movingEntity, CollisionAxis axis = CollisionAxis.Both, float cornerTolerance = 3.0f) {
+  internal void ResolveCollisionsFor(ICollidable movingEntity, CollisionAxis axis = CollisionAxis.Both, float cornerTolerance = 3.0f) {
     foreach (var otherEntity in colliders) {
       if (movingEntity == otherEntity) continue;
 

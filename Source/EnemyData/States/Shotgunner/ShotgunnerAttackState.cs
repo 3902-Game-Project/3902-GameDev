@@ -8,7 +8,7 @@ internal class ShotgunnerAttackState : IEnemyState {
   private double stateTimer = 0.0, animationTimer = 0.0;
   private bool hasFired = false;
 
-  public ShotgunnerAttackState(Shotgunner shotgunner) {
+  internal ShotgunnerAttackState(Shotgunner shotgunner) {
     this.shotgunner = shotgunner;
     this.shotgunner.Velocity = Vector2.Zero;
     this.shotgunner.CurrentSourceRectangles = [
@@ -19,7 +19,7 @@ internal class ShotgunnerAttackState : IEnemyState {
     this.shotgunner.CurrentFrame = 0;
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     animationTimer += deltaTime;
     if (animationTimer >= 0.15 && shotgunner.CurrentFrame < shotgunner.CurrentSourceRectangles.Count - 1) {
       shotgunner.CurrentFrame++;

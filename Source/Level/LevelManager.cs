@@ -50,7 +50,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
   private string? fadeToLevelName = null;
 
   private int CurrentLevelIndex => Array.IndexOf(LEVEL_NAMES, currentLevelName);
-  public string CurrentLevelName => currentLevelName;
+  internal string CurrentLevelName => currentLevelName;
 
   private void SwitchLevelByIndex(int newLevelIndex) {
     if (newLevelIndex < 0 || newLevelIndex >= LEVEL_NAMES.Length) {
@@ -118,15 +118,15 @@ internal class LevelManager(Game1 game) : ILevelManager {
     }
   }
 
-  public ILevel CurrentLevel => levels[currentLevelName];
+  internal ILevel CurrentLevel => levels[currentLevelName];
 
-  public bool BfgSpawned { get; set; } = false;
+  internal bool BfgSpawned { get; set; } = false;
 
-  public ILevel BfgLevel => levels[BFG_LEVEL];
+  internal ILevel BfgLevel => levels[BFG_LEVEL];
 
-  public void Initialize() { }
+  internal void Initialize() { }
 
-  public void LoadContent(ContentManager content) {
+  internal void LoadContent(ContentManager content) {
     if (LEVEL_NAMES.Length == 0) {
       throw new ArgumentException("There must be at least one level to load");
     }
@@ -158,15 +158,15 @@ internal class LevelManager(Game1 game) : ILevelManager {
     }
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     CurrentLevel.Update(deltaTime);
   }
 
-  public void Draw(SpriteBatch spriteBatch) {
+  internal void Draw(SpriteBatch spriteBatch) {
     CurrentLevel.Draw(spriteBatch);
   }
 
-  public void SwitchLevel(string newLevelName) {
+  internal void SwitchLevel(string newLevelName) {
     if (!levels.ContainsKey(newLevelName)) {
       throw new ArgumentException($"level name unknown: '{newLevelName}'");
     }
@@ -176,7 +176,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
     game.StateMachine.ChangeState(GameState.StateGame);
   }
 
-  public void SwitchLevelWithoutFading(string newLevelName) {
+  internal void SwitchLevelWithoutFading(string newLevelName) {
     if (!levels.ContainsKey(newLevelName)) {
       throw new ArgumentException($"level name unknown: '{newLevelName}'");
     }
@@ -189,7 +189,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
 
   // Called by StateGameType.cs when beginning to fade in stategame
   // If there is a level switch queued, process it now
-  public void InitializeLevel() {
+  internal void InitializeLevel() {
     if (fadeToLevelName != null) {
       currentLevelName = fadeToLevelName;
       fadeToLevelName = null;
@@ -199,15 +199,15 @@ internal class LevelManager(Game1 game) : ILevelManager {
     CurrentLevel.ProjectileManager.ClearProjectiles();
   }
 
-  public void PreviousLevel() {
+  internal void PreviousLevel() {
     SwitchLevelByIndex(Math.Max(CurrentLevelIndex - 1, 0));
   }
 
-  public void NextLevel() {
+  internal void NextLevel() {
     SwitchLevelByIndex(Math.Min(CurrentLevelIndex + 1, LEVEL_NAMES.Length - 1));
   }
 
-  public void ChangeLevel(string levelName) {
+  internal void ChangeLevel(string levelName) {
     if (!levels.ContainsKey(levelName)) {
       throw new ArgumentException($"Cannot load save: level name unknown '{levelName}'");
     }
@@ -216,7 +216,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
   }
 
   // Called by Level.cs the instant all enemies on a level are killed
-  public void CheckBfgSpawnable() {
+  internal void CheckBfgSpawnable() {
     if (!BfgSpawned && AllPreBfgLevelEnemiesKilled()) {
       SpawnBfgs();
     }

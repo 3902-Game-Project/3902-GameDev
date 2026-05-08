@@ -13,7 +13,7 @@ internal class ShotgunnerWanderState(Shotgunner shotgunner) :
     ],
     100f
   ) {
-  protected override void TransitionToNextState() {
+  private protected override void TransitionToNextState() {
     enemy.CurrentState = new ShotgunnerIdleState((Shotgunner) enemy);
   }
 }

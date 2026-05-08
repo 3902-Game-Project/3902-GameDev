@@ -15,11 +15,11 @@ internal class BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) : ABaseBlock(
 
   private int currentFrame = 0;
 
-  public BarrelBlockState State { get; set; } = BarrelBlockState.Solid;
+  internal BarrelBlockState State { get; set; } = BarrelBlockState.Solid;
 
-  public override void Update(double deltaTime) { }
+  internal override void Update(double deltaTime) { }
 
-  public override void Draw(SpriteBatch spriteBatch) {
+  internal override void Draw(SpriteBatch spriteBatch) {
     // We use the inherited 'Position' variable here to draw the sprite
     // exactly where the physical collision box is!
     spriteBatch.Draw(
@@ -35,7 +35,7 @@ internal class BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) : ABaseBlock(
     );
   }
 
-  public override void OnCollision(CollisionInfo info) {
+  internal override void OnCollision(CollisionInfo info) {
     if (info.Collider is IProjectile && State == BarrelBlockState.Solid) {
       ChangeState(BarrelBlockState.Broken);
       currentFrame = 1;
@@ -43,7 +43,7 @@ internal class BarrelBlock(Texture2D barrelTexture, Vector2 xyPos) : ABaseBlock(
     }
   }
 
-  public void ChangeState(BarrelBlockState state) {
+  internal void ChangeState(BarrelBlockState state) {
     State = state;
   }
 }

@@ -3,13 +3,13 @@
 namespace GameProject.PlayerSpace.States;
 
 internal class PlayerStateMachine {
-  public IPlayerState StaticState { get; }
-  public IPlayerState MovingState { get; }
-  public IPlayerState UseItemState { get; }
-  public IPlayerState DeadState { get; }
-  public IPlayerState CurrentState { get; private set; }
+  internal IPlayerState StaticState { get; }
+  internal IPlayerState MovingState { get; }
+  internal IPlayerState UseItemState { get; }
+  internal IPlayerState DeadState { get; }
+  internal IPlayerState CurrentState { get; private set; }
 
-  public PlayerStateMachine(Player player, Action onLoss) {
+  internal PlayerStateMachine(Player player, Action onLoss) {
     StaticState = new PlayerStaticState(player);
     MovingState = new PlayerMovingState(player);
     UseItemState = new PlayerUseItemState(player);
@@ -19,7 +19,7 @@ internal class PlayerStateMachine {
     CurrentState = StaticState;
   }
 
-  public void ChangeState(IPlayerState newState) {
+  internal void ChangeState(IPlayerState newState) {
     CurrentState = newState;
   }
 }

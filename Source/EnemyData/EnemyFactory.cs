@@ -16,13 +16,13 @@ internal class EnemyFactory : IInitable {
   private Texture2D tumbleweedTexture;
   private Texture2D cactusTexture;
 
-  public static EnemyFactory Instance { get; } = new();
+  internal static EnemyFactory Instance { get; } = new();
 
   private EnemyFactory() { }
 
-  public void Initialize() { }
+  internal void Initialize() { }
 
-  public void LoadContent(ContentManager contentManager) {
+  internal void LoadContent(ContentManager contentManager) {
     snakeTexture = contentManager.Load<Texture2D>("Enemies/Snake Spritesheet");
     batTexture = contentManager.Load<Texture2D>("Enemies/Bat Spritesheet");
     shotgunnerTexture = contentManager.Load<Texture2D>("Enemies/Shotgunner Spritesheet");
@@ -31,31 +31,31 @@ internal class EnemyFactory : IInitable {
     cactusTexture = contentManager.Load<Texture2D>("Enemies/Cactus Spritesheet");
   }
 
-  public IEnemy CreateSnakeSprite(float xPos, float yPos) {
+  internal IEnemy CreateSnakeSprite(float xPos, float yPos) {
     return new Snake(snakeTexture, new Vector2(xPos, yPos));
   }
 
-  public IEnemy CreateCactusSprite(float xPos, float yPos) {
+  internal IEnemy CreateCactusSprite(float xPos, float yPos) {
     return new Cactus(cactusTexture, new Vector2(xPos, yPos));
   }
 
-  public IEnemy CreateTumbleweedSprite(float xPos, float yPos) {
+  internal IEnemy CreateTumbleweedSprite(float xPos, float yPos) {
     return new Tumbleweed(tumbleweedTexture, new Vector2(xPos, yPos));
   }
 
-  public IEnemy CreateRiflemanSprite(float xPos, float yPos, CurrentLevelGetter GetCurrentLevel, Player player) {
+  internal IEnemy CreateRiflemanSprite(float xPos, float yPos, CurrentLevelGetter GetCurrentLevel, Player player) {
     return new Rifleman(riflemanTexture, new Vector2(xPos, yPos), GetCurrentLevel, player);
   }
 
-  public IEnemy CreateBatSprite(float xPos, float yPos) {
+  internal IEnemy CreateBatSprite(float xPos, float yPos) {
     return new Bat(batTexture, new Vector2(xPos, yPos));
   }
 
-  public IEnemy CreateShotgunnerSprite(float xPos, float yPos, CurrentLevelGetter GetCurrentLevel, Player player) {
+  internal IEnemy CreateShotgunnerSprite(float xPos, float yPos, CurrentLevelGetter GetCurrentLevel, Player player) {
     return new Shotgunner(shotgunnerTexture, new Vector2(xPos, yPos), GetCurrentLevel, player);
   }
 
-  public static IEnemy CreateBossSprite(float x, float y, CurrentLevelGetter GetCurrentLevel) {
+  internal static IEnemy CreateBossSprite(float x, float y, CurrentLevelGetter GetCurrentLevel) {
     // Assuming 'bossTexture' is loaded in your Factory. 
     // If you don't have one yet, you can pass in the Shotgunner texture temporarily just to see it render!
     return new Boss(TextureStore.Instance.Boss, new Vector2(x, y), GetCurrentLevel);

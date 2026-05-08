@@ -14,11 +14,11 @@ internal class RifleWanderState(Rifleman rifle) :
     ],
     100f
   ) {
-  protected override void TransitionToNextState() {
+  private protected override void TransitionToNextState() {
     enemy.CurrentState = new RifleIdleState((Rifleman) enemy);
   }
 
-  public override void Update(double deltaTime) {
+  internal override void Update(double deltaTime) {
     base.Update(deltaTime);
     float yDistanceFromTarget = Math.Abs(enemy.Position.Y - enemy.Target.Y);
     float xDistanceFromTarget = Math.Abs(enemy.Position.X - enemy.Target.X);

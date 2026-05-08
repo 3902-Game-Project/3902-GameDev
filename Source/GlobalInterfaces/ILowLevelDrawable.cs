@@ -14,5 +14,5 @@ internal record LowLevelDrawParams(
 );
 
 internal interface ILowLevelDrawable {
-  void LowLevelDraw(LowLevelDrawParams drawData);
+  internal void LowLevelDraw(LowLevelDrawParams drawData);
 }

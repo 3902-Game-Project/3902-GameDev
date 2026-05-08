@@ -7,13 +7,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Items;
 
 internal interface IItem : ISprite {
-  ItemCategory Category { get; }
-  FacingDirection Direction { get; set; }
-  Vector2 Position { get; set; }
-  void OnPickup(Player player);
-  void Use(UseType useType);
+  internal ItemCategory Category { get; }
+  internal FacingDirection Direction { get; set; }
+  internal Vector2 Position { get; set; }
+  internal void OnPickup(Player player);
+  internal void Use(UseType useType);
   // NEW: Dedicated method for drawing in menus:
-  void DrawUI(SpriteBatch spriteBatch, Vector2 position, float scale, Color tint);
-  void OnEquip();
-  void OnUnequip();
+  internal void DrawUI(SpriteBatch spriteBatch, Vector2 position, float scale, Color tint);
+  internal void OnEquip();
+  internal void OnUnequip();
 }

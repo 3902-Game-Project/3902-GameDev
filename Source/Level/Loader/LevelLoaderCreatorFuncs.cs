@@ -21,7 +21,7 @@ internal static class LevelLoaderCreatorFuncs {
     }
   }
 
-  public static CellEntryParseFunc CreateEmptyCreator() {
+  internal static CellEntryParseFunc CreateEmptyCreator() {
     return (
       Player player,
       ILevelManager levelManager,
@@ -43,7 +43,7 @@ internal static class LevelLoaderCreatorFuncs {
     };
   }
 
-  public static CellEntryParseFunc CreateNonCollidableBlockCreator(BlockCreationFunc BlockCreator) {
+  internal static CellEntryParseFunc CreateNonCollidableBlockCreator(BlockCreationFunc BlockCreator) {
     return (
       Player player,
       ILevelManager levelManager,
@@ -67,7 +67,7 @@ internal static class LevelLoaderCreatorFuncs {
     };
   }
 
-  public static CellEntryParseFunc CreateCollidableBlockCreator(BlockCreationFunc BlockCreator) {
+  internal static CellEntryParseFunc CreateCollidableBlockCreator(BlockCreationFunc BlockCreator) {
     return (
       Player player,
       ILevelManager levelManager,
@@ -91,7 +91,7 @@ internal static class LevelLoaderCreatorFuncs {
     };
   }
 
-  public static CellEntryParseFunc CreateCollidablePlayerBlockCreator(PlayerBlockCreationFunc PlayerBlockCreator) {
+  internal static CellEntryParseFunc CreateCollidablePlayerBlockCreator(PlayerBlockCreationFunc PlayerBlockCreator) {
     return (
       Player player,
       ILevelManager levelManager,
@@ -115,7 +115,7 @@ internal static class LevelLoaderCreatorFuncs {
     };
   }
 
-  public static CellEntryParseFunc CreateCollidableHoleBlockCreator(HoleBlockCreationFunc HoleBlockCreator) {
+  internal static CellEntryParseFunc CreateCollidableHoleBlockCreator(HoleBlockCreationFunc HoleBlockCreator) {
     return (
       Player player,
       ILevelManager levelManager,
@@ -145,7 +145,7 @@ internal static class LevelLoaderCreatorFuncs {
     };
   }
 
-  public static CellEntryParseFunc CreateCollidableLockableDoorBlockCreator(LockableDoorBlockCreationFunc LockableDoorBlockCreator) {
+  internal static CellEntryParseFunc CreateCollidableLockableDoorBlockCreator(LockableDoorBlockCreationFunc LockableDoorBlockCreator) {
     return (
       Player player,
       ILevelManager levelManager,
@@ -183,7 +183,7 @@ internal static class LevelLoaderCreatorFuncs {
     };
   }
 
-  public static CellEntryParseFunc CreateCollidableVaultDoorBlockCreator(VaultDoorBlockCreationFunc VaultDoorBlockCreator) {
+  internal static CellEntryParseFunc CreateCollidableVaultDoorBlockCreator(VaultDoorBlockCreationFunc VaultDoorBlockCreator) {
     return (
       Player player,
       ILevelManager levelManager,
@@ -222,7 +222,7 @@ internal static class LevelLoaderCreatorFuncs {
     };
   }
 
-  public static CellEntryParseFunc CreateEnemyCreator(EnemyCreationFunc EnemyCreator) {
+  internal static CellEntryParseFunc CreateEnemyCreator(EnemyCreationFunc EnemyCreator) {
     return (
       Player player,
       ILevelManager levelManager,
@@ -246,7 +246,7 @@ internal static class LevelLoaderCreatorFuncs {
     };
   }
 
-  public static CellEntryParseFunc CreateFiringEnemyCreator(FiringEnemyCreationFunc FiringEnemyCreator) {
+  internal static CellEntryParseFunc CreateFiringEnemyCreator(FiringEnemyCreationFunc FiringEnemyCreator) {
     return (
       Player player,
       ILevelManager levelManager,
@@ -270,7 +270,7 @@ internal static class LevelLoaderCreatorFuncs {
     };
   }
 
-  public static CellEntryParseFunc CreateFiringItemEnemyCreator(FiringItemEnemyCreationFunc FiringItemEnemyCreator) {
+  internal static CellEntryParseFunc CreateFiringItemEnemyCreator(FiringItemEnemyCreationFunc FiringItemEnemyCreator) {
     return (
       Player player,
       ILevelManager levelManager,
@@ -294,7 +294,7 @@ internal static class LevelLoaderCreatorFuncs {
     };
   }
 
-  public static CellEntryParseFunc CreateGunItemCreator(GunItemCreationFunc GunItemCreator) {
+  internal static CellEntryParseFunc CreateGunItemCreator(GunItemCreationFunc GunItemCreator) {
     return (
       Player player,
       ILevelManager levelManager,
@@ -318,7 +318,7 @@ internal static class LevelLoaderCreatorFuncs {
     };
   }
 
-  public static CellEntryParseFunc CreateKeyItemCreator(KeyItemCreationFunc KeyItemCreator) {
+  internal static CellEntryParseFunc CreateKeyItemCreator(KeyItemCreationFunc KeyItemCreator) {
     return (
       Player player,
       ILevelManager levelManager,
@@ -342,7 +342,7 @@ internal static class LevelLoaderCreatorFuncs {
     };
   }
 
-  public static CellEntryParseFunc CreatePlayerItemCreator(PlayerItemCreationFunc PlayerItemCreator) {
+  internal static CellEntryParseFunc CreatePlayerItemCreator(PlayerItemCreationFunc PlayerItemCreator) {
     return (
       Player player,
       ILevelManager levelManager,
@@ -366,7 +366,7 @@ internal static class LevelLoaderCreatorFuncs {
     };
   }
 
-  public static CellEntryParseFunc CreateAmmoItemCreator(AmmoItemCreationFunc AmmoItemCreator) {
+  internal static CellEntryParseFunc CreateAmmoItemCreator(AmmoItemCreationFunc AmmoItemCreator) {
     return (
       Player player,
       ILevelManager levelManager,
@@ -409,7 +409,7 @@ internal static class LevelLoaderCreatorFuncs {
     };
   }
 
-  public static CellEntryParseFunc CreatePlayerPositionSetter() {
+  internal static CellEntryParseFunc CreatePlayerPositionSetter() {
     return (
       Player player,
       ILevelManager levelManager,

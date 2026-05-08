@@ -10,9 +10,9 @@ internal class Animation(List<Rectangle> frames, int fps) : ITemporalUpdatable {
   private int currentFrame = 0;
   private readonly GPTimer timer = new();
 
-  public Rectangle CurrentFrame => frames[currentFrame];
+  internal Rectangle CurrentFrame => frames[currentFrame];
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     timer.Update(deltaTime);
 
     if (timer.Time >= frameDuration) {

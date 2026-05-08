@@ -1,5 +1,5 @@
 namespace GameProject.Blocks;
 
 internal interface IOpenableDoor {
-  void Unlock();
+  internal void Unlock();
 }

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.Controllers.Factories;
 
 internal static class PauseControllerFactory {
-  public static KeyboardController CreateKeyboardController(Game1 game) {
+  internal static KeyboardController CreateKeyboardController(Game1 game) {
     var keyboardController = new KeyboardController(
       pressedMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.Q, new QuitCommand(game) },
@@ -17,7 +17,7 @@ internal static class PauseControllerFactory {
     return keyboardController;
   }
 
-  public static GamePadController CreateGamePadController(Game1 game) {
+  internal static GamePadController CreateGamePadController(Game1 game) {
     // The gamepad bindings don't match the readme. this is intentional, because
     // the readme is in Xbox controller layout, but testing with a
     // nintendo pro controller seems to suggest it is pro controller layout.

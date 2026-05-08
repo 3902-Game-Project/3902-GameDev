@@ -20,14 +20,14 @@ internal class BulletDefault : IProjectile, ICollidable {
   private float lifetimeCounter = 0f;
   private readonly int damage;
 
-  public bool IsExpired { get; private set; }
-  public bool IsPlayerShot { get; set; } = true;
-  public Vector2 Position { get; private set; }
-  public BoxCollider Collider { get; private set; }
-  public IShape Shape => Collider;
-  public Layer Layer { get; } = Layer.Projectiles;
+  internal bool IsExpired { get; private set; }
+  internal bool IsPlayerShot { get; set; } = true;
+  internal Vector2 Position { get; private set; }
+  internal BoxCollider Collider { get; private set; }
+  internal IShape Shape => Collider;
+  internal Layer Layer { get; } = Layer.Projectiles;
 
-  public BulletDefault(Texture2D texture, Vector2 startPosition,
+  internal BulletDefault(Texture2D texture, Vector2 startPosition,
     Vector2 direction, float velocity, float bulletLifetime, int damage) {
     this.texture = texture;
     Position = startPosition;
@@ -38,11 +38,11 @@ internal class BulletDefault : IProjectile, ICollidable {
     Collider = new BoxCollider(SOURCE_RECT.Width * SCALE, SOURCE_RECT.Height * SCALE, Position);
   }
 
-  public void Expire() {
+  internal void Expire() {
     IsExpired = true;
   }
 
-  public Rectangle BoundingBox {
+  internal Rectangle BoundingBox {
     get {
       int width = (int) (SOURCE_RECT.Width * SCALE);
       int height = (int) (SOURCE_RECT.Height * SCALE);
@@ -53,7 +53,7 @@ internal class BulletDefault : IProjectile, ICollidable {
     }
   }
 
-  public void Draw(SpriteBatch spriteBatch) {
+  internal void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(SOURCE_RECT.Width / 2, SOURCE_RECT.Height / 2);
 
     spriteBatch.Draw(
@@ -69,7 +69,7 @@ internal class BulletDefault : IProjectile, ICollidable {
     );
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     // Logic for updating the bullet's position and state
     Position += direction * velocity * ((float) deltaTime);
     Collider.Position = Position;
@@ -80,7 +80,7 @@ internal class BulletDefault : IProjectile, ICollidable {
     }
   }
 
-  public void OnCollision(CollisionInfo collisionInfo) {
+  internal void OnCollision(CollisionInfo collisionInfo) {
     if (collisionInfo.Collider is IBlock) {
       Expire();
     } else if (collisionInfo.Collider is IEnemy enemy && IsPlayerShot) {

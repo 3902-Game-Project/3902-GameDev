@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Items;
 
 internal class ShotgunItem : ABaseGun {
-  public ShotgunItem(Texture2D texture, Vector2 position, Player player, ProjectileManagerGetter GetProjectileManager, GunStats stats)
+  internal ShotgunItem(Texture2D texture, Vector2 position, Player player, ProjectileManagerGetter GetProjectileManager, GunStats stats)
     : base(texture, position, player, GetProjectileManager, stats) {
     Category = ItemCategory.Primary;
     sourceRectangle = new Rectangle(0, 10, 27, 9);

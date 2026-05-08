@@ -9,7 +9,7 @@ internal class TumbleweedIdleState : IEnemyState {
   private double idleTimer = 0.0, animationTimer = 0.0;
   private readonly double idleDuration;
 
-  public TumbleweedIdleState(Tumbleweed tumbleweed) {
+  internal TumbleweedIdleState(Tumbleweed tumbleweed) {
     this.tumbleweed = tumbleweed;
     this.tumbleweed.Velocity = Vector2.Zero;
     this.tumbleweed.CurrentSourceRectangles = [
@@ -19,7 +19,7 @@ internal class TumbleweedIdleState : IEnemyState {
     idleDuration = 0.5 + random.NextDouble();
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     animationTimer += deltaTime;
     if (animationTimer >= 0.2) {
       tumbleweed.CurrentFrame = (tumbleweed.CurrentFrame + 1) % tumbleweed.CurrentSourceRectangles.Count;

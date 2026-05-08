@@ -50,23 +50,23 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
     }
   }
 
-  public override void MoveUp() {
+  internal override void MoveUp() {
     Player.Velocity = new Vector2(Player.Velocity.X, -Constants.PLAYER_SPEED);
   }
 
-  public override void MoveDown() {
+  internal override void MoveDown() {
     Player.Velocity = new Vector2(Player.Velocity.X, Constants.PLAYER_SPEED);
   }
 
-  public override void MoveLeft() {
+  internal override void MoveLeft() {
     Player.Velocity = new Vector2(-Constants.PLAYER_SPEED, Player.Velocity.Y);
   }
 
-  public override void MoveRight() {
+  internal override void MoveRight() {
     Player.Velocity = new Vector2(Constants.PLAYER_SPEED, Player.Velocity.Y);
   }
 
-  public override void UseItem(UseType useType) {
+  internal override void UseItem(UseType useType) {
     if (Player.Inventory.ActiveItem != null) {
       Player.Inventory.ActiveItem.Use(useType);
       if (Player.Inventory.ActiveItem.Category == ItemCategory.Consumable) {
@@ -75,7 +75,7 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
     }
   }
 
-  public override void UseKey(UseType useType) {
+  internal override void UseKey(UseType useType) {
     IItem keyToUse = null;
     foreach (var item in Player.Inventory.GeneralItems) {
       if (item is KeyItem) {
@@ -92,7 +92,7 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
     }
   }
 
-  public override void Update(double deltaTime) {
+  internal override void Update(double deltaTime) {
     base.Update(deltaTime);
 
     if (Player.Velocity == Vector2.Zero) {
@@ -111,7 +111,7 @@ internal class PlayerMovingState(Player player) : APlayerState(player) {
     }
   }
 
-  public override void Draw(SpriteBatch spriteBatch) {
+  internal override void Draw(SpriteBatch spriteBatch) {
     var activeFrames = ActiveFrames;
 
     int frameIndex = currentFrame % activeFrames.Count;

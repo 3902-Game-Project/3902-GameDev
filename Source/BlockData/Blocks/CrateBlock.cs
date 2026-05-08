@@ -12,15 +12,15 @@ internal class CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : ABaseBlock(xy
 
   private Vector2 direction;
 
-  protected void UpdateCollider() {
+  private protected void UpdateCollider() {
     if (Collider != null) {
       Collider.Position = Position + new Vector2(Collider.Width / 2f, Collider.Height / 2f);
     }
   }
 
-  public CrateBlockState State { get; set; } = CrateBlockState.Still;
+  internal CrateBlockState State { get; set; } = CrateBlockState.Still;
 
-  public override void Update(double deltaTime) {
+  internal override void Update(double deltaTime) {
     if (State == CrateBlockState.Moving) {
       Position += CRATE_VELOCITY * direction * ((float) deltaTime);
       UpdateCollider();
@@ -28,11 +28,11 @@ internal class CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : ABaseBlock(xy
     }
   }
 
-  public override void Draw(SpriteBatch spriteBatch) {
+  internal override void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(CrateTexture, Position, SOURCE_RECT, Color.White, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 
-  public override void OnCollision(CollisionInfo info) {
+  internal override void OnCollision(CollisionInfo info) {
     if (info.Collider is IBlock || info.Collider is IEnemy) {
       State = CrateBlockState.Still;
       Position = CollisionHelper.GetNudgedPosition(info, Position, info.Overlap);
@@ -64,7 +64,7 @@ internal class CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : ABaseBlock(xy
     }
   }
 
-  public void ChangeState(CrateBlockState state) {
+  internal void ChangeState(CrateBlockState state) {
     State = state;
   }
 }

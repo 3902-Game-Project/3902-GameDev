@@ -20,17 +20,17 @@ internal class PlayerDeadState(Player player, Action onLoss) : APlayerState(play
   private readonly double frameInterval = 0.5;
   private readonly GPTimer deadTimer = new();
 
-  public override void MoveUp() { }
-  public override void MoveDown() { }
-  public override void MoveLeft() { }
-  public override void MoveRight() { }
-  public override void UseItem(UseType useType) { }
-  public override void UseKey(UseType useType) { }
-  public override void TakeDamage(int amount) { }
-  public override void Die() { }
-  public override void Interact() { }
+  internal override void MoveUp() { }
+  internal override void MoveDown() { }
+  internal override void MoveLeft() { }
+  internal override void MoveRight() { }
+  internal override void UseItem(UseType useType) { }
+  internal override void UseKey(UseType useType) { }
+  internal override void TakeDamage(int amount) { }
+  internal override void Die() { }
+  internal override void Interact() { }
 
-  public override void Update(double deltaTime) {
+  internal override void Update(double deltaTime) {
     base.Update(deltaTime);
 
     Player.Velocity = Vector2.Zero;
@@ -49,7 +49,7 @@ internal class PlayerDeadState(Player player, Action onLoss) : APlayerState(play
     }
   }
 
-  public override void Draw(SpriteBatch spriteBatch) {
+  internal override void Draw(SpriteBatch spriteBatch) {
     Rectangle sourceRect = SOURCE_RECTS[currentFrame];
     Vector2 origin = new(sourceRect.Width / 2f, sourceRect.Height / 2f);
 

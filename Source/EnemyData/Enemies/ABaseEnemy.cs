@@ -16,23 +16,23 @@ internal abstract class ABaseEnemy(
   float colliderHeight = Constants.BASE_ENEMY_HEIGHT,
   bool invulnerable = false
 ) : IEnemy {
-  public static event Action<ABaseEnemy> OnDeath;
+  internal static event Action<ABaseEnemy> OnDeath;
 
-  protected Texture2D Texture { get; } = texture;
-  protected float DrawScale { get; set; } = 1f;
-  protected bool FlipWhenFacingRightUpDown { get; set; } = true;
+  private protected Texture2D Texture { get; } = texture;
+  private protected float DrawScale { get; set; } = 1f;
+  private protected bool FlipWhenFacingRightUpDown { get; set; } = true;
 
-  protected virtual void DropLoot() { }
+  private protected virtual void DropLoot() { }
 
-  protected virtual void TransitionToDeathState() { }
+  private protected virtual void TransitionToDeathState() { }
 
-  protected void UpdateCollider() {
+  private protected void UpdateCollider() {
     if (Collider != null) {
       Collider.Position = Position + new Vector2(0, -Collider.Height / 2f);
     }
   }
 
-  protected virtual void ChangeDirection() {
+  private protected virtual void ChangeDirection() {
     Vector2 delta = Target - Position;
     if (delta == Vector2.Zero) {
       Velocity = Vector2.Zero;
@@ -49,13 +49,13 @@ internal abstract class ABaseEnemy(
     }
   }
 
-  protected virtual void Die() {
+  private protected virtual void Die() {
     DropLoot();
     OnDeath?.Invoke(this);
     TransitionToDeathState();
   }
 
-  protected SpriteEffects GetFlipEffect() {
+  private protected SpriteEffects GetFlipEffect() {
     // Assume FlipWhenFacingRightUpDown = true
     bool shouldFlip = Direction switch {
       FacingDirection.Left => false,
@@ -73,29 +73,29 @@ internal abstract class ABaseEnemy(
     return shouldFlip ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
   }
 
-  protected virtual Vector2 GetDrawOrigin(Rectangle source) {
+  private protected virtual Vector2 GetDrawOrigin(Rectangle source) {
     return new(source.Width * 0.5f, source.Height);
   }
 
-  public Vector2 Position { get; set; } = position;
-  public Vector2 Velocity { get; set; }
-  public FacingDirection Direction { get; set; } = FacingDirection.Right;
+  internal Vector2 Position { get; set; } = position;
+  internal Vector2 Velocity { get; set; }
+  internal FacingDirection Direction { get; set; } = FacingDirection.Right;
 
-  public Vector2 Target { get; set; } = position;
+  internal Vector2 Target { get; set; } = position;
 
-  public List<Rectangle> CurrentSourceRectangles { get; set; } = [];
-  public int CurrentFrame { get; set; }
-  public IShape Shape => Collider;
-  public BoxCollider Collider { get; private set; } = new BoxCollider(colliderWidth, colliderHeight, position);
-  public Layer Layer { get; } = Layer.Enemies;
-  public int Health { get; set; } = 100;
-  public int MaxHealth { get; set; } = 100;
-  public double DamageFlashTimer { get; protected set; }
-  public bool Invulnerable { get; } = invulnerable;
+  internal List<Rectangle> CurrentSourceRectangles { get; set; } = [];
+  internal int CurrentFrame { get; set; }
+  internal IShape Shape => Collider;
+  internal BoxCollider Collider { get; private set; } = new BoxCollider(colliderWidth, colliderHeight, position);
+  internal Layer Layer { get; } = Layer.Enemies;
+  internal int Health { get; set; } = 100;
+  internal int MaxHealth { get; set; } = 100;
+  internal double DamageFlashTimer { get; private protected set; }
+  internal bool Invulnerable { get; } = invulnerable;
 
-  public IEnemyState CurrentState { get; set; }
+  internal IEnemyState CurrentState { get; set; }
 
-  public virtual void OnCollision(CollisionInfo info) {
+  internal virtual void OnCollision(CollisionInfo info) {
     if (info.Collider is IBlock) {
       if (info.Side == CollisionSide.Left || info.Side == CollisionSide.Right) {
         Velocity = new Vector2(0, Velocity.Y);
@@ -107,7 +107,7 @@ internal abstract class ABaseEnemy(
     }
   }
 
-  public virtual void Draw(SpriteBatch spriteBatch) {
+  internal virtual void Draw(SpriteBatch spriteBatch) {
     // Draw enemy
 
     if (CurrentSourceRectangles != null && CurrentSourceRectangles.Count > 0) {
@@ -155,7 +155,7 @@ internal abstract class ABaseEnemy(
     }
   }
 
-  public virtual void Update(double deltaTime) {
+  internal virtual void Update(double deltaTime) {
     if (DamageFlashTimer > 0) {
       DamageFlashTimer -= deltaTime;
     }
@@ -168,7 +168,7 @@ internal abstract class ABaseEnemy(
     ChangeDirection();
   }
 
-  public virtual void TakeDamage(int damage) {
+  internal virtual void TakeDamage(int damage) {
     if (Invulnerable) {
       return;
     }
@@ -186,12 +186,12 @@ internal abstract class ABaseEnemy(
     }
   }
 
-  public virtual void Kill() {
+  internal virtual void Kill() {
     Health = 0;
     Die();
   }
 
-  public virtual void Navigate(float speed) {
+  internal virtual void Navigate(float speed) {
     Vector2 delta = Target - Position;
     if (delta == Vector2.Zero) {
       Velocity = Vector2.Zero;

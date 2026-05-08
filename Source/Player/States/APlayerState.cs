@@ -9,18 +9,18 @@ namespace GameProject.PlayerSpace.States;
 #nullable enable
 
 internal abstract class APlayerState(Player player) : IPlayerState {
-  protected Player Player { get; } = player;
-  protected double DamageFlashTimer { get; set; } = 0.0;
-  protected Color CurrentTintColor => DamageFlashTimer > 0 ? Color.Red : Color.White;
+  private protected Player Player { get; } = player;
+  private protected double DamageFlashTimer { get; set; } = 0.0;
+  private protected Color CurrentTintColor => DamageFlashTimer > 0 ? Color.Red : Color.White;
 
-  public abstract void MoveDown();
-  public abstract void MoveLeft();
-  public abstract void MoveRight();
-  public abstract void MoveUp();
-  public abstract void UseItem(UseType useType);
-  public abstract void UseKey(UseType useType);
+  internal abstract void MoveDown();
+  internal abstract void MoveLeft();
+  internal abstract void MoveRight();
+  internal abstract void MoveUp();
+  internal abstract void UseItem(UseType useType);
+  internal abstract void UseKey(UseType useType);
 
-  public virtual void TakeDamage(int amount) {
+  internal virtual void TakeDamage(int amount) {
     if (!Player.IsInvincible) {
       Player.ReduceHealth(amount);
       Player.SetInvincibility(Constants.PLAYER_INVINCIBILITY_DURATION);
@@ -32,19 +32,19 @@ internal abstract class APlayerState(Player player) : IPlayerState {
     }
   }
 
-  public virtual void Die() {
+  internal virtual void Die() {
     Player.StateMachine.ChangeState(Player.StateMachine.DeadState);
   }
 
-  public virtual void Interact() {
+  internal virtual void Interact() {
     Player.WantsToInteract = true;
   }
 
-  public virtual void Update(double deltaTime) {
+  internal virtual void Update(double deltaTime) {
     if (DamageFlashTimer > 0) {
       DamageFlashTimer -= deltaTime;
     }
   }
 
-  public abstract void Draw(SpriteBatch spriteBatch);
+  internal abstract void Draw(SpriteBatch spriteBatch);
 }

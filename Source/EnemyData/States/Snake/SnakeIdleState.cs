@@ -8,7 +8,7 @@ internal class SnakeIdleState : IEnemyState {
   private double timer = 0.0, animationTimer = 0.0;
   private readonly Random random = new();
 
-  public SnakeIdleState(Snake snake) {
+  internal SnakeIdleState(Snake snake) {
     this.snake = snake;
     this.snake.Velocity = Vector2.Zero;
     this.snake.CurrentSourceRectangles = [
@@ -26,7 +26,7 @@ internal class SnakeIdleState : IEnemyState {
     this.snake.CurrentFrame = 0;
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     animationTimer += deltaTime;
     if (animationTimer > 0.1) {
       snake.CurrentFrame = (snake.CurrentFrame + 1) % snake.CurrentSourceRectangles.Count;

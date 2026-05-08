@@ -13,15 +13,15 @@ internal enum FacingDirection {
 }
 
 internal interface IEnemy : ISprite, ICollidable {
-  int Health { get; }
-  int MaxHealth { get; }
+  internal int Health { get; }
+  internal int MaxHealth { get; }
 
-  Vector2 Velocity { get; set; }
-  Vector2 Target { get; set; }
-  FacingDirection Direction { get; set; }
-  BoxCollider Collider { get; }
-  bool Invulnerable { get; }
+  internal Vector2 Velocity { get; set; }
+  internal Vector2 Target { get; set; }
+  internal FacingDirection Direction { get; set; }
+  internal BoxCollider Collider { get; }
+  internal bool Invulnerable { get; }
 
-  void TakeDamage(int damage);
-  void Kill();
+  internal void TakeDamage(int damage);
+  internal void Kill();
 }

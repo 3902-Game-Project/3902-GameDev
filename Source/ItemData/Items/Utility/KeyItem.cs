@@ -11,16 +11,16 @@ namespace GameProject.Items;
 internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, CurrentLevelGetter GetCurrentLevel) : IItem, IWorldPickup {
   private static readonly Rectangle SOURCE_RECT = new(0, 448, 7, 13);
 
-  public FacingDirection Direction { get; set; } = FacingDirection.Right;
-  public Vector2 Position { get; set; } = startPosition;
-  public bool IsCollected { get; set; } = false;
+  internal FacingDirection Direction { get; set; } = FacingDirection.Right;
+  internal Vector2 Position { get; set; } = startPosition;
+  internal bool IsCollected { get; set; } = false;
   private Vector2 origin;
-  public bool IsAutoCollect => false;
-  public ItemCategory Category { get; } = ItemCategory.Consumable;
-  public void OnEquip() { }
-  public void OnUnequip() { }
+  internal bool IsAutoCollect => false;
+  internal ItemCategory Category { get; } = ItemCategory.Consumable;
+  internal void OnEquip() { }
+  internal void OnUnequip() { }
 
-  public void Draw(SpriteBatch spriteBatch) {
+  internal void Draw(SpriteBatch spriteBatch) {
     if (!IsCollected) {
       origin = new Vector2(SOURCE_RECT.Width, SOURCE_RECT.Height);
 
@@ -38,7 +38,7 @@ internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, CurrentLevel
     }
   }
 
-  public void DrawUI(SpriteBatch spriteBatch, Vector2 position, float scale, Color tint) {
+  internal void DrawUI(SpriteBatch spriteBatch, Vector2 position, float scale, Color tint) {
     spriteBatch.Draw(
       texture: keyTexture,
       position: position,
@@ -52,9 +52,9 @@ internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, CurrentLevel
     );
   }
 
-  public void Update(double deltaTime) { }
+  internal void Update(double deltaTime) { }
 
-  public void Use(UseType useType) {
+  internal void Use(UseType useType) {
     foreach (var block in GetCurrentLevel().GetOpenableDoors()) {
       // Safely check if the block is a Vault Door
       if (block is VaultDoorBlock vaultDoor) {
@@ -65,7 +65,7 @@ internal class KeyItem(Texture2D keyTexture, Vector2 startPosition, CurrentLevel
     }
   }
 
-  public void OnPickup(Player player) {
+  internal void OnPickup(Player player) {
     if (!IsCollected) {
       IsCollected = true;
       player.Inventory.PickupItem(this);

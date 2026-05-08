@@ -14,19 +14,19 @@ internal class StatePauseType(Game1 game) : IGameState {
   private IController<Keys, KeyboardState> keyboardController;
   private IController<GPGamePadButtons, GamePadState> gamePadController;
 
-  public void Initialize() {
+  internal void Initialize() {
     keyboardController = PauseControllerFactory.CreateKeyboardController(game);
     gamePadController = PauseControllerFactory.CreateGamePadController(game);
   }
 
-  public void LoadContent(ContentManager content) { }
+  internal void LoadContent(ContentManager content) { }
 
-  public void Update(double deltaTime, bool isActive) {
+  internal void Update(double deltaTime, bool isActive) {
     keyboardController.Update(Keyboard.GetState());
     gamePadController.Update(GamePad.GetState(Constants.GAMEPAD_PLAYER_INDEX));
   }
 
-  public void LowLevelDraw(LowLevelDrawParams drawData) {
+  internal void LowLevelDraw(LowLevelDrawParams drawData) {
     drawData.ClearWindowCallback(Constants.MAIN_BACKGROUND_COLOR);
 
     drawData.SpriteBatch.Begin();
@@ -46,11 +46,11 @@ internal class StatePauseType(Game1 game) : IGameState {
     drawData.SpriteBatch.End();
   }
 
-  public void OnStateEnter(bool prevStateIsCurrentState) { }
+  internal void OnStateEnter(bool prevStateIsCurrentState) { }
 
-  public void OnStateLeave(bool nextStateIsCurrentState) { }
+  internal void OnStateLeave(bool nextStateIsCurrentState) { }
 
-  public void OnStateStartFadeIn(bool prevStateIsCurrentState) { }
+  internal void OnStateStartFadeIn(bool prevStateIsCurrentState) { }
 
-  public void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
+  internal void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
 }

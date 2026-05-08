@@ -10,11 +10,11 @@ internal enum UseType {
 }
 
 internal interface IController<ButtonsEnum, ButtonStateReference> {
-  Dictionary<ButtonsEnum, IGPCommand> PressedMappings { get; }
-  Dictionary<ButtonsEnum, IGPCommand> DownMappings { get; }
-  Dictionary<ButtonsEnum, IGPCommand> ReleasedMappings { get; }
-  IEnumerable<ButtonsEnum> GetDown();
-  IEnumerable<ButtonsEnum> GetPressed();
-  IEnumerable<ButtonsEnum> GetReleased();
-  void Update(ButtonStateReference buttonState);
+  internal Dictionary<ButtonsEnum, IGPCommand> PressedMappings { get; }
+  internal Dictionary<ButtonsEnum, IGPCommand> DownMappings { get; }
+  internal Dictionary<ButtonsEnum, IGPCommand> ReleasedMappings { get; }
+  internal IEnumerable<ButtonsEnum> GetDown();
+  internal IEnumerable<ButtonsEnum> GetPressed();
+  internal IEnumerable<ButtonsEnum> GetReleased();
+  internal void Update(ButtonStateReference buttonState);
 }

@@ -3,7 +3,7 @@ using GameProject.Globals;
 namespace GameProject.Commands;
 
 internal class ToggleUpdatesCommand : IGPCommand {
-  public void Execute() {
+  internal void Execute() {
     Flags.HaltAllUpdates = !Flags.HaltAllUpdates;
   }
 }

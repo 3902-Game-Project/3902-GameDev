@@ -13,18 +13,18 @@ internal class PlayerUseItemState(Player player) : APlayerState(player) {
 
   private int timer = Constants.USE_ITEM_DURATION_FRAMES;
 
-  public override void MoveUp() { }
-  public override void MoveDown() { }
-  public override void MoveLeft() { }
-  public override void MoveRight() { }
-  public override void UseItem(UseType useType) {
+  internal override void MoveUp() { }
+  internal override void MoveDown() { }
+  internal override void MoveLeft() { }
+  internal override void MoveRight() { }
+  internal override void UseItem(UseType useType) {
     Player.Inventory.ActiveItem?.Use(useType);
     timer = Constants.USE_ITEM_DURATION_FRAMES; ;
   }
 
-  public override void UseKey(UseType useType) { }
+  internal override void UseKey(UseType useType) { }
 
-  public override void Update(double deltaTime) {
+  internal override void Update(double deltaTime) {
     base.Update(deltaTime);
 
     timer--;
@@ -34,7 +34,7 @@ internal class PlayerUseItemState(Player player) : APlayerState(player) {
     }
   }
 
-  public override void Draw(SpriteBatch spriteBatch) {
+  internal override void Draw(SpriteBatch spriteBatch) {
     Rectangle sourceRect;
 
     if (Player.Direction == FacingDirection.Right) {

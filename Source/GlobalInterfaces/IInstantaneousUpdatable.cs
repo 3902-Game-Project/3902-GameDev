@@ -1,5 +1,5 @@
 namespace GameProject.GlobalInterfaces;
 
 internal interface IInstantaneousUpdatable {
-  void Update();
+  internal void Update();
 }

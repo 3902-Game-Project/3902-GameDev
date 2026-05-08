@@ -88,18 +88,18 @@ internal class StateGameType : IGameState, System.IDisposable {
     }
   }
 
-  public Player Player { get; private set; }
+  internal Player Player { get; private set; }
 
-  public ILevelManager LevelManager { get; private set; }
+  internal ILevelManager LevelManager { get; private set; }
 
-  public StateGameType(Game1 game) {
+  internal StateGameType(Game1 game) {
     this.game = game;
     LevelManager = new LevelManager(game);
     Player = new Player(() => LevelManager.CurrentLevel.ProjectileManager, () => game.StateMachine.ChangeState(GameState.StateLoss));
     hudManager = new(Player);
   }
 
-  public void Initialize() {
+  internal void Initialize() {
     keyboardController = GameControllerFactory.CreateKeyboardController(game, Player, LevelManager);
     mouseController = GameControllerFactory.CreateMouseController(LevelManager);
     gamePadController = GameControllerFactory.CreateGamePadController(game, Player, LevelManager);
@@ -110,14 +110,14 @@ internal class StateGameType : IGameState, System.IDisposable {
     CheatCodes.Instance.Initialize(Player);
   }
 
-  public void LoadContent(ContentManager contentManager) {
+  internal void LoadContent(ContentManager contentManager) {
     nonHUDTarget = new RenderTarget2D(game.GraphicsDevice, Constants.WINDOW_WIDTH, Constants.GAME_HEIGHT);
 
     LevelManager.LoadContent(contentManager);
     Player.LoadContent(contentManager);
   }
 
-  public void Update(double deltaTime, bool isActive) {
+  internal void Update(double deltaTime, bool isActive) {
     if (Flags.SlowMode) {
       deltaTime *= 0.5;
     }
@@ -146,31 +146,31 @@ internal class StateGameType : IGameState, System.IDisposable {
     }
   }
 
-  public void LowLevelDraw(LowLevelDrawParams drawData) {
+  internal void LowLevelDraw(LowLevelDrawParams drawData) {
     DrawGameWithoutVignette(drawData);
     DrawGameVignette(drawData);
     DrawHUD(drawData);
   }
 
-  public void OnStateEnter(bool prevStateIsCurrentState) {
+  internal void OnStateEnter(bool prevStateIsCurrentState) {
     if (!prevStateIsCurrentState) {
       SoundManager.Instance.PlayLoop(SoundID.Background);
     }
   }
 
-  public void OnStateLeave(bool nextStateIsCurrentState) {
+  internal void OnStateLeave(bool nextStateIsCurrentState) {
     if (!nextStateIsCurrentState) {
       SoundManager.Instance.StopAll();
     }
   }
 
-  public void OnStateStartFadeIn(bool prevStateIsCurrentState) {
+  internal void OnStateStartFadeIn(bool prevStateIsCurrentState) {
     LevelManager.InitializeLevel();
   }
 
-  public void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
+  internal void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
 
-  public void Dispose() {
+  internal void Dispose() {
     nonHUDTarget.Dispose();
   }
 }

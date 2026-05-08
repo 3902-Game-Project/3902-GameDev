@@ -7,7 +7,7 @@ using GameProject.Items;
 namespace GameProject.Level.Loader;
 
 internal class LevelLoaderCellEntries {
-  public static readonly Dictionary<string, CellEntryParseFunc> CELL_ENTRY_FUNCS = new() {
+  internal static readonly Dictionary<string, CellEntryParseFunc> CELL_ENTRY_FUNCS = new() {
     { "", LevelLoaderCreatorFuncs.CreateEmptyCreator() }, /* empty, do nothing */
     { "0", LevelLoaderCreatorFuncs.CreateEmptyCreator() }, /* empty, do nothing */
     { "1-0", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateLogBlockSprite) }, /* log: wall */

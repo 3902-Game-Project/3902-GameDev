@@ -1,5 +1,5 @@
 namespace GameProject.GlobalInterfaces;
 
 internal interface ITemporalUpdatable {
-  void Update(double deltaTime);
+  internal void Update(double deltaTime);
 }

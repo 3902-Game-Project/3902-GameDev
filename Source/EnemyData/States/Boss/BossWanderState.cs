@@ -7,7 +7,7 @@ namespace GameProject.Enemies.BossStates;
 internal class BossWanderState : AEnemyMoveState {
   private readonly Boss boss;
 
-  public BossWanderState(Boss boss) :
+  internal BossWanderState(Boss boss) :
     base(
       boss,
       [
@@ -24,7 +24,7 @@ internal class BossWanderState : AEnemyMoveState {
     this.boss.CurrentFrame = 0;
   }
 
-  public override void Update(double deltaTime) {
+  internal override void Update(double deltaTime) {
     base.Update(deltaTime);
 
     // Check distance on the X and Y axes individually using the built-in Target!
@@ -37,7 +37,7 @@ internal class BossWanderState : AEnemyMoveState {
     }
   }
 
-  protected override void TransitionToNextState() {
+  private protected override void TransitionToNextState() {
     boss.CurrentState = new BossIdleState(boss);
   }
 }

@@ -8,7 +8,7 @@ internal class ShotgunnerIdleState : IEnemyState {
   private double timer = 0.0, animationTimer = 0.0;
   private readonly Random random = new();
 
-  public ShotgunnerIdleState(Shotgunner shotgunner) {
+  internal ShotgunnerIdleState(Shotgunner shotgunner) {
     this.shotgunner = shotgunner;
     this.shotgunner.Velocity = Vector2.Zero;
     this.shotgunner.CurrentSourceRectangles = [
@@ -20,7 +20,7 @@ internal class ShotgunnerIdleState : IEnemyState {
     this.shotgunner.CurrentFrame = 0;
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     animationTimer += deltaTime;
     if (animationTimer > 0.2) {
       shotgunner.CurrentFrame = (shotgunner.CurrentFrame + 1) % shotgunner.CurrentSourceRectangles.Count;

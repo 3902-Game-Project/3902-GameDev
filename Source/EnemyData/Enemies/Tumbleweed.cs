@@ -8,14 +8,14 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Enemies;
 
 internal class Tumbleweed : ABaseEnemy {
-  public Tumbleweed(Texture2D texture, Vector2 position) :
+  internal Tumbleweed(Texture2D texture, Vector2 position) :
     base(texture, position, Constants.BASE_ENEMY_WIDTH * 0.75f, Constants.BASE_ENEMY_HEIGHT * 0.75f) {
     DrawScale = 0.4f;
     FlipWhenFacingRightUpDown = true;
     CurrentState = new TumbleweedIdleState(this);
   }
 
-  protected override void TransitionToDeathState() {
+  private protected override void TransitionToDeathState() {
     CurrentState = new GenericDeathState(
       this,
       [
@@ -24,7 +24,7 @@ internal class Tumbleweed : ABaseEnemy {
     );
   }
 
-  public override void OnCollision(CollisionInfo info) {
+  internal override void OnCollision(CollisionInfo info) {
     base.OnCollision(info);
     if (info.Collider.Layer == Layer.Environment) {
       Velocity *= -1;

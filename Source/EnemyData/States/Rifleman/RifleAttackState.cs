@@ -8,7 +8,7 @@ internal class RifleAttackState : IEnemyState {
   private double stateTimer = 0.0, animationTimer = 0.0;
   private bool hasFired = false;
 
-  public RifleAttackState(Rifleman rifleMan) {
+  internal RifleAttackState(Rifleman rifleMan) {
     this.rifleMan = rifleMan;
     this.rifleMan.Velocity = Vector2.Zero;
     this.rifleMan.CurrentSourceRectangles = [
@@ -19,7 +19,7 @@ internal class RifleAttackState : IEnemyState {
     this.rifleMan.CurrentFrame = 0;
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     animationTimer += deltaTime;
     if (animationTimer >= 0.15 && rifleMan.CurrentFrame < rifleMan.CurrentSourceRectangles.Count - 1) {
       rifleMan.CurrentFrame++;

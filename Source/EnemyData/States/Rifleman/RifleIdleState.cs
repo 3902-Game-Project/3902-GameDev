@@ -8,7 +8,7 @@ internal class RifleIdleState : IEnemyState {
   private double timer, animationTimer;
   private readonly Random random = new();
 
-  public RifleIdleState(Rifleman rifle) {
+  internal RifleIdleState(Rifleman rifle) {
     this.rifle = rifle;
     this.rifle.Velocity = Vector2.Zero;
     this.rifle.CurrentSourceRectangles = [
@@ -20,7 +20,7 @@ internal class RifleIdleState : IEnemyState {
     this.rifle.CurrentFrame = 0;
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     animationTimer += deltaTime;
     if (animationTimer > 0.2) {
       rifle.CurrentFrame = (rifle.CurrentFrame + 1) % rifle.CurrentSourceRectangles.Count;

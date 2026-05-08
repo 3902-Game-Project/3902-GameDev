@@ -19,7 +19,7 @@ internal class BossAttackState : IEnemyState {
   private bool hasFiredThisLoop = false;
   private readonly Random random = new();
 
-  public BossAttackState(Boss boss) {
+  internal BossAttackState(Boss boss) {
     this.boss = boss;
     this.boss.Velocity = Vector2.Zero;
     this.boss.CurrentSourceRectangles = [
@@ -34,7 +34,7 @@ internal class BossAttackState : IEnemyState {
     shotsToFire = random.Next(MIN_SHOTS, MAX_SHOTS_EXCLUSIVE);
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     animationTimer += deltaTime;
 
     if (animationTimer >= ANIMATION_INTERVAL) {

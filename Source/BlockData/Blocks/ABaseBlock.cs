@@ -7,24 +7,24 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Blocks;
 
 internal abstract class ABaseBlock : IBlock, ICollidable {
-  public IShape Shape => Collider;
-  public BoxCollider Collider { get; set; }
-  public Vector2 Position { get; set; }
+  internal IShape Shape => Collider;
+  internal BoxCollider Collider { get; set; }
+  internal Vector2 Position { get; set; }
 
-  public Layer Layer { get; } = Layer.Environment;
+  internal Layer Layer { get; } = Layer.Environment;
 
-  public Rectangle BoundingBox => throw new System.NotImplementedException();
+  internal Rectangle BoundingBox => throw new System.NotImplementedException();
 
-  protected ABaseBlock(Vector2 position, float width = Constants.BASE_BLOCK_WIDTH, float height = Constants.BASE_BLOCK_HEIGHT) {
+  private protected ABaseBlock(Vector2 position, float width = Constants.BASE_BLOCK_WIDTH, float height = Constants.BASE_BLOCK_HEIGHT) {
     Position = position;
     Vector2 centerOffset = new(width / 2.0f, height / 2.0f);
 
     Collider = new BoxCollider(width, height, position + centerOffset);
   }
 
-  public abstract void Update(double deltaTime);
+  internal abstract void Update(double deltaTime);
   
-  public abstract void Draw(SpriteBatch spriteBatch);
+  internal abstract void Draw(SpriteBatch spriteBatch);
 
-  public virtual void OnCollision(CollisionInfo info) { }
+  internal virtual void OnCollision(CollisionInfo info) { }
 }

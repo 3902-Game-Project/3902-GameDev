@@ -15,7 +15,7 @@ internal enum SoundID {
 }
 
 internal class SoundManager : IInitable {
-  public bool MusicEnabled {
+  internal bool MusicEnabled {
     get => musicEnabled;
     set {
       musicEnabled = value;
@@ -25,7 +25,7 @@ internal class SoundManager : IInitable {
 
   private float masterVolume = 1.0f;
 
-  public float MasterVolume {
+  internal float MasterVolume {
     get => masterVolume;
     set {
       masterVolume = Math.Clamp(value, 0.0f, 1.0f);
@@ -34,11 +34,11 @@ internal class SoundManager : IInitable {
   }
 
   private class LoopingSound {
-    public SoundEffectInstance Instance;
-    public float Volume;
+    internal SoundEffectInstance Instance;
+    internal float Volume;
   }
 
-  public static SoundManager Instance { get; } = new();
+  internal static SoundManager Instance { get; } = new();
 
   private readonly Dictionary<SoundID, SoundEffect> sounds = [];
   private readonly Dictionary<SoundID, LoopingSound> loops = [];
@@ -47,9 +47,9 @@ internal class SoundManager : IInitable {
 
   private SoundManager() { }
 
-  public void Initialize() { }
+  internal void Initialize() { }
 
-  public void LoadContent(ContentManager content) {
+  internal void LoadContent(ContentManager content) {
     sounds[SoundID.PlayerHurt] = content.Load<SoundEffect>("Sound Effects/Player Hurt");
     sounds[SoundID.GunshotDefault] = content.Load<SoundEffect>("Sound Effects/Gun Shot");
     sounds[SoundID.ReloadDefault] = content.Load<SoundEffect>("Sound Effects/Reload");
@@ -58,12 +58,12 @@ internal class SoundManager : IInitable {
     sounds[SoundID.Background] = content.Load<SoundEffect>("Music/Western Rock-Metal Song");
   }
 
-  public void Play(SoundID id, float volume = 1.0f, float pitch = 0f, float pan = 0f) {
+  internal void Play(SoundID id, float volume = 1.0f, float pitch = 0f, float pan = 0f) {
     SoundEffect sound = sounds[id];
     sound.Play(volume * MasterVolume, pitch, pan);
   }
 
-  public void PlayLoop(SoundID id, float volume = 1.0f) {
+  internal void PlayLoop(SoundID id, float volume = 1.0f) {
     if (!sounds.TryGetValue(id, out var sound))
       return;
 
@@ -89,7 +89,7 @@ internal class SoundManager : IInitable {
     };
   }
 
-  public void Stop(SoundID id) {
+  internal void Stop(SoundID id) {
     if (loops.TryGetValue(id, out var loop)) {
       loop.Instance.Stop();
       loop.Instance.Dispose();
@@ -97,7 +97,7 @@ internal class SoundManager : IInitable {
     }
   }
 
-  public void StopAll() {
+  internal void StopAll() {
     foreach (var loop in loops.Values) {
       loop.Instance.Stop();
       loop.Instance.Dispose();

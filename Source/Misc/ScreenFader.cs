@@ -24,9 +24,9 @@ internal class ScreenFader(GameWindow gameWindow) : ITemporalUpdatable, ILowLeve
 
   private double fadeTime = 0.0;
 
-  public FadingState FadeState { get; private set; } = FadingState.FadedIn;
+  internal FadingState FadeState { get; private set; } = FadingState.FadedIn;
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     switch (FadeState) {
       case FadingState.FadeIn:
         fadeTime += deltaTime;
@@ -54,7 +54,7 @@ internal class ScreenFader(GameWindow gameWindow) : ITemporalUpdatable, ILowLeve
     }
   }
 
-  public void LowLevelDraw(LowLevelDrawParams drawData) {
+  internal void LowLevelDraw(LowLevelDrawParams drawData) {
     var fadeProgress = fadeTime / Constants.SCREEN_FADE_DURATION;
 
     drawData.SpriteBatch.Begin();
@@ -83,7 +83,7 @@ internal class ScreenFader(GameWindow gameWindow) : ITemporalUpdatable, ILowLeve
     drawData.SpriteBatch.End();
   }
 
-  public void FadeIn() {
+  internal void FadeIn() {
     if (FadeState != FadingState.FadedOut) {
       throw new InvalidOperationException("Cannot fade in if not faded out");
     }
@@ -92,7 +92,7 @@ internal class ScreenFader(GameWindow gameWindow) : ITemporalUpdatable, ILowLeve
     fadeTime = 0.0;
   }
 
-  public void FadeOut() {
+  internal void FadeOut() {
     if (FadeState != FadingState.FadedIn) {
       throw new InvalidOperationException("Cannot fade out if not faded in");
     }

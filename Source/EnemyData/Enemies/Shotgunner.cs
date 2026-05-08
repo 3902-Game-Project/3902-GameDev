@@ -16,13 +16,13 @@ internal class Shotgunner : ABaseEnemy {
   private readonly Player player;
   private readonly CurrentLevelGetter GetCurrentLevel;
 
-  public ILevel CurrentLevel {
+  internal ILevel CurrentLevel {
     get {
       return GetCurrentLevel();
     }
   }
 
-  public Shotgunner(Texture2D texture, Vector2 position, CurrentLevelGetter GetCurrentLevel, Player player) :
+  internal Shotgunner(Texture2D texture, Vector2 position, CurrentLevelGetter GetCurrentLevel, Player player) :
     base(texture, position, Constants.BASE_ENEMY_WIDTH * 0.75f, Constants.BASE_ENEMY_HEIGHT * 1.5f) {
     this.GetCurrentLevel = GetCurrentLevel;
     DrawScale = 1.6f;
@@ -31,7 +31,7 @@ internal class Shotgunner : ABaseEnemy {
     this.player = player;
   }
 
-  public void FireSpread(int damage) {
+  internal void FireSpread(int damage) {
     Vector2 bulletDirection = Vector2.Zero;
     switch (Direction) {
       case FacingDirection.Left:
@@ -65,12 +65,12 @@ internal class Shotgunner : ABaseEnemy {
     }
   }
 
-  protected override void DropLoot() {
+  private protected override void DropLoot() {
     CurrentLevel.AddPickup(WorldPickupFactory.CreateAmmo(Position, AmmoType.Shells, 5));
     CurrentLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateHealthPotion(Position.X, Position.Y - 60.0f, player)));
   }
 
-  protected override void TransitionToDeathState() {
+  private protected override void TransitionToDeathState() {
     CurrentState = new GenericDeathState(
       this,
       [

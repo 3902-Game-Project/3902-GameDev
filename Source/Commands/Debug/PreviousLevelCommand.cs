@@ -3,7 +3,7 @@ using GameProject.Level;
 namespace GameProject.Commands;
 
 internal class PreviousLevelCommand(ILevelManager levelManager) : IGPCommand {
-  public void Execute() {
+  internal void Execute() {
     levelManager.PreviousLevel();
   }
 }

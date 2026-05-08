@@ -27,30 +27,30 @@ internal class PlayerInventory(Player player, ProjectileManagerGetter GetProject
   private const float RELOAD_BAR_HEIGHT = 8f;
 
   // 1. Weapons List
-  public List<IItem> Weapons { get; private set; } = [];
-  public int ActiveWeaponIndex { get; private set; } = 0;
-  public IItem ActiveItem => Weapons.Count > 0 ? Weapons[ActiveWeaponIndex] : null;
+  internal List<IItem> Weapons { get; private set; } = [];
+  internal int ActiveWeaponIndex { get; private set; } = 0;
+  internal IItem ActiveItem => Weapons.Count > 0 ? Weapons[ActiveWeaponIndex] : null;
 
   // 2. General Items List (Potions, Whiskey, etc.)
-  public List<IItem> GeneralItems { get; set; } = [];
-  public Queue<IWorldPickup> DroppedItems { get; } = new();
+  internal List<IItem> GeneralItems { get; set; } = [];
+  internal Queue<IWorldPickup> DroppedItems { get; } = new();
 
   // Overarching Ammo Stores
-  public Dictionary<AmmoType, int> Ammo { get; set; } = new() {
+  internal Dictionary<AmmoType, int> Ammo { get; set; } = new() {
     { AmmoType.Light, 30 },
     { AmmoType.Heavy, 10 },
     { AmmoType.Shells, 10 },
     { AmmoType.BFG, 3 }
   };
 
-  public void EquipWeapon(int index) {
+  internal void EquipWeapon(int index) {
     if (index >= 0 && index < Weapons.Count) {
       ActiveWeaponIndex = index;
       ActiveItem?.OnEquip();
     }
   }
 
-  public void PickupItem(IItem newItem) {
+  internal void PickupItem(IItem newItem) {
     if (newItem.Category == ItemCategory.Primary || newItem.Category == ItemCategory.Sidearm) {
       if (Weapons.Count < MAX_WEAPONS) {
         Weapons.Add(newItem);
@@ -69,7 +69,7 @@ internal class PlayerInventory(Player player, ProjectileManagerGetter GetProject
     }
   }
 
-  public void RemoveGeneralItem(IItem itemToRemove) {
+  internal void RemoveGeneralItem(IItem itemToRemove) {
     GeneralItems.Remove(itemToRemove);
   }
 
@@ -82,7 +82,7 @@ internal class PlayerInventory(Player player, ProjectileManagerGetter GetProject
     DroppedItems.Enqueue(droppedItem);
   }
 
-  public void DropCurrentItem() {
+  internal void DropCurrentItem() {
     if (Weapons.Count <= 0) {
       return;
     }
@@ -96,21 +96,21 @@ internal class PlayerInventory(Player player, ProjectileManagerGetter GetProject
     }
   }
 
-  public void SwapActiveWeapon() {
+  internal void SwapActiveWeapon() {
     if (Weapons.Count > 1) {
       ActiveWeaponIndex = (ActiveWeaponIndex == 0) ? 1 : 0;
       ActiveItem?.OnEquip();
     }
   }
 
-  public void Initialize() { }
+  internal void Initialize() { }
 
-  public void LoadContent(ContentManager content) {
+  internal void LoadContent(ContentManager content) {
     PickupItem(ItemFactory.Instance.CreateRevolver(0.0f, 0.0f, player, GetProjectileManager));
     PickupItem(ItemFactory.Instance.CreateRifle(0.0f, 0.0f, player, GetProjectileManager));
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     if (ActiveItem != null) {
       ActiveItem.Update(deltaTime);
 
@@ -120,7 +120,7 @@ internal class PlayerInventory(Player player, ProjectileManagerGetter GetProject
     }
   }
 
-  public void Draw(SpriteBatch spriteBatch, Vector2 Position, FacingDirection Direction, Texture2D whitePixel) {
+  internal void Draw(SpriteBatch spriteBatch, Vector2 Position, FacingDirection Direction, Texture2D whitePixel) {
     if (ActiveItem != null) {
       Vector2 spriteCenter = new(Constants.PLAYER_SPRITE_WIDTH / 2f, Constants.PLAYER_SPRITE_HEIGHT / 2f);
 

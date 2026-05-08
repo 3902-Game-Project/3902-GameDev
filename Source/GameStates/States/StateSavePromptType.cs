@@ -15,16 +15,16 @@ internal class StateSavePromptType(Game1 game) : IGameState {
   private IController<GPGamePadButtons, GamePadState> gamePadController;
   private double successTimer = 0.0;
 
-  public bool IsShowingSuccess { get; set; } = false;
+  internal bool IsShowingSuccess { get; set; } = false;
 
-  public void Initialize() {
+  internal void Initialize() {
     keyboardController = SavePromptControllerFactory.CreateKeyboardController(game, this);
     gamePadController = SavePromptControllerFactory.CreateGamePadController(game, this);
   }
 
-  public void LoadContent(ContentManager content) { }
+  internal void LoadContent(ContentManager content) { }
 
-  public void Update(double deltaTime, bool isActive) {
+  internal void Update(double deltaTime, bool isActive) {
     if (IsShowingSuccess) {
       successTimer -= deltaTime;
       if (successTimer <= 0) game.StateMachine.ChangeStateWithoutFading(GameState.StateGame);
@@ -34,7 +34,7 @@ internal class StateSavePromptType(Game1 game) : IGameState {
     }
   }
 
-  public void LowLevelDraw(LowLevelDrawParams drawData) {
+  internal void LowLevelDraw(LowLevelDrawParams drawData) {
     drawData.ClearWindowCallback(Constants.MAIN_BACKGROUND_COLOR);
 
     drawData.SpriteBatch.Begin();
@@ -57,11 +57,11 @@ internal class StateSavePromptType(Game1 game) : IGameState {
     drawData.SpriteBatch.End();
   }
 
-  public void OnStateEnter(bool prevStateIsCurrentState) {
+  internal void OnStateEnter(bool prevStateIsCurrentState) {
     IsShowingSuccess = false;
     successTimer = 1.5; // Displays the success text for 1.5 seconds
   }
-  public void OnStateLeave(bool nextStateIsCurrentState) { }
-  public void OnStateStartFadeIn(bool prevStateIsCurrentState) { }
-  public void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
+  internal void OnStateLeave(bool nextStateIsCurrentState) { }
+  internal void OnStateStartFadeIn(bool prevStateIsCurrentState) { }
+  internal void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
 }

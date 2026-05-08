@@ -28,9 +28,9 @@ internal class VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, VaultDo
 
   private double animationTimer = 0.0f;
 
-  public VaultDoorBlockState State { get; private set; } = state;
+  internal VaultDoorBlockState State { get; private set; } = state;
 
-  public override void Update(double deltaTime) {
+  internal override void Update(double deltaTime) {
     if (State == VaultDoorBlockState.Opening) {
       animationTimer += deltaTime;
       if (animationTimer >= TIME_PER_FRAME) {
@@ -44,21 +44,21 @@ internal class VaultDoorBlock(Texture2D VaultDoorTexture, Vector2 xyPos, VaultDo
     }
   }
 
-  public override void Draw(SpriteBatch spriteBatch) {
+  internal override void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(VaultDoorTexture, Position, SOURCE_RECTS[currentFrame], Color.White, 0.0f, Vector2.Zero, 2.0f, SpriteEffects.None, 0.0f);
   }
 
-  public override void OnCollision(CollisionInfo info) {
+  internal override void OnCollision(CollisionInfo info) {
     if (State == VaultDoorBlockState.Open && info.Collider is Player) {
       changeLevelCommand.Execute();
     }
   }
 
-  public void ChangeState(VaultDoorBlockState state) {
+  internal void ChangeState(VaultDoorBlockState state) {
     State = state;
   }
 
-  public void Unlock() {
+  internal void Unlock() {
     ChangeState(VaultDoorBlockState.Opening);
   }
 }

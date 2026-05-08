@@ -6,7 +6,7 @@ namespace GameProject.FireModes;
 internal class AutomaticFire(GunStats stats) : IFireMode {
   private double countdown = 0.0;
 
-  public bool CanFire(UseType useType) {
+  internal bool CanFire(UseType useType) {
     if (useType != UseType.Pressed && useType != UseType.Held) {
       return false;
     }
@@ -19,13 +19,13 @@ internal class AutomaticFire(GunStats stats) : IFireMode {
     return true;
   }
 
-  public void OnEquip() { }
+  internal void OnEquip() { }
 
-  public void OnUnequip() {
+  internal void OnUnequip() {
     countdown = 0;
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     if (countdown > 0) {
       countdown -= deltaTime;
     }

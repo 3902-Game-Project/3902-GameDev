@@ -9,15 +9,15 @@ internal class RockCornerBlock : ABaseBlock {
 
   private readonly Texture2D rockCornerTexture;
 
-  public float Rotation { get; private set; } = 0.0f;
+  internal float Rotation { get; private set; } = 0.0f;
 
-  public RockCornerBlock(Texture2D RockCornerTexture, Vector2 xyPos) : base(xyPos) {
+  internal RockCornerBlock(Texture2D RockCornerTexture, Vector2 xyPos) : base(xyPos) {
     rockCornerTexture = RockCornerTexture;
 
     Rotate();
   }
 
-  public void Rotate() {
+  internal void Rotate() {
     float x = Position.X, y = Position.Y;
     if (x < Constants.BASE_BLOCK_WIDTH && y < Constants.BASE_BLOCK_HEIGHT) {
       Rotation = MathHelper.ToRadians(270);
@@ -33,9 +33,9 @@ internal class RockCornerBlock : ABaseBlock {
     Position = new(x, y);
   }
 
-  public override void Update(double deltaTime) { }
+  internal override void Update(double deltaTime) { }
 
-  public override void Draw(SpriteBatch spriteBatch) {
+  internal override void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(rockCornerTexture, Position, SOURCE_RECT, Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 }

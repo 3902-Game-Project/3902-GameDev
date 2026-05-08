@@ -13,7 +13,7 @@ namespace GameProject.SaveLoad;
 internal static class SaveLoadManager {
   private static readonly JsonSerializerOptions SERIALIZER_OPTIONS = new() { WriteIndented = true };
 
-  public static void SaveGame(StateGameType stateGame) {
+  internal static void SaveGame(StateGameType stateGame) {
     var saveData = new GameSaveData();
     var player = stateGame.Player;
     var level = stateGame.LevelManager.CurrentLevel;
@@ -48,7 +48,7 @@ internal static class SaveLoadManager {
     File.WriteAllText(Constants.SAVE_FILE_PATH, json);
   }
 
-  public static void LoadGame(StateGameType stateGame) {
+  internal static void LoadGame(StateGameType stateGame) {
     if (!File.Exists(Constants.SAVE_FILE_PATH)) return;
 
     var json = File.ReadAllText(Constants.SAVE_FILE_PATH);

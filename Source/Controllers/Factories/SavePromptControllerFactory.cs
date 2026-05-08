@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.Controllers.Factories;
 
 internal static class SavePromptControllerFactory {
-  public static KeyboardController CreateKeyboardController(Game1 game, StateSavePromptType savePrompt) {
+  internal static KeyboardController CreateKeyboardController(Game1 game, StateSavePromptType savePrompt) {
     var keyboardController = new KeyboardController(
       pressedMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.A, new ExecuteSaveCommand(game, savePrompt) },
@@ -18,7 +18,7 @@ internal static class SavePromptControllerFactory {
     return keyboardController;
   }
 
-  public static GamePadController CreateGamePadController(Game1 game, StateSavePromptType savePrompt) {
+  internal static GamePadController CreateGamePadController(Game1 game, StateSavePromptType savePrompt) {
     // The gamepad bindings don't match the readme. this is intentional, because
     // the readme is in Xbox controller layout, but testing with a
     // nintendo pro controller seems to suggest it is pro controller layout.

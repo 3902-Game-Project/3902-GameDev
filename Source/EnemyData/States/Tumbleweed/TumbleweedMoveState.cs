@@ -16,11 +16,11 @@ internal class TumbleweedWanderState(Tumbleweed tumbleweed) :
     // Notice the `true` parameter! This locks the Y-axis so it only rolls left/right.
     lockYAxis: true
   ) {
-  protected override void TransitionToNextState() {
+  private protected override void TransitionToNextState() {
     enemy.CurrentState = new TumbleweedIdleState((Tumbleweed) enemy);
   }
 
-  public override void Update(double deltaTime) {
+  internal override void Update(double deltaTime) {
     base.Update(deltaTime);
     Vector2 horizontalVelocity = new(enemy.Velocity.X, 0f);
     enemy.Velocity = horizontalVelocity == Vector2.Zero ?

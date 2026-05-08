@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 namespace GameProject.WorldPickups;
 
 internal interface IWorldPickup : ISprite {
-  Vector2 Position { get; }
-  bool IsAutoCollect { get; }
-  void OnPickup(Player player);
+  internal Vector2 Position { get; }
+  internal bool IsAutoCollect { get; }
+  internal void OnPickup(Player player);
 }

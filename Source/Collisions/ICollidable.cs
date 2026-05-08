@@ -15,9 +15,9 @@ internal enum Layer {
 }
 
 internal interface ICollidable {
-  IShape Shape { get; }
-  Vector2 Position { get; }
-  Layer Layer { get; }
+  internal IShape Shape { get; }
+  internal Vector2 Position { get; }
+  internal Layer Layer { get; }
 
-  void OnCollision(CollisionInfo collisionInfo);
+  internal void OnCollision(CollisionInfo collisionInfo);
 }

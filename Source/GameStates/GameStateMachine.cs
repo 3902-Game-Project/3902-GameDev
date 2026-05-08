@@ -20,7 +20,7 @@ internal class GameStateMachine(Game1 game) : IInitable, ITemporalActiveUpdatabl
   private Dictionary<GameState, IGameState> stateLookup;
 
   private StateTransitionType StateTransition;
-  public StateGameType StateGame { get; private set; }
+  internal StateGameType StateGame { get; private set; }
   private IGameState StateMenu { get; set; }
   private IGameState StateLoss { get; set; }
   private IGameState StateWin { get; set; }
@@ -40,7 +40,7 @@ internal class GameStateMachine(Game1 game) : IInitable, ITemporalActiveUpdatabl
 
   // This function breaks encapsulation of gamestates and is only intended to be used by StateTransitionType
   // and nothing else. Think carefully before using it elsewhere.
-  public void ChangeIStateWithoutFading(IGameState newState) {
+  internal void ChangeIStateWithoutFading(IGameState newState) {
     bool nextStateIsCurrentState;
 
     if (currentState == StateTransition || newState == StateTransition) {
@@ -54,25 +54,25 @@ internal class GameStateMachine(Game1 game) : IInitable, ITemporalActiveUpdatabl
     newState.OnStateEnter(nextStateIsCurrentState);
   }
 
-  public void ChangeState(GameState newStateEnum) {
+  internal void ChangeState(GameState newStateEnum) {
     StateTransition.SetFadingStates(currentState, GetGameState(newStateEnum));
     ChangeIStateWithoutFading(StateTransition);
   }
 
-  public void ChangeStateWithoutFading(GameState newStateEnum) {
+  internal void ChangeStateWithoutFading(GameState newStateEnum) {
     ChangeIStateWithoutFading(GetGameState(newStateEnum));
   }
 
-  public void ResetGameState() {
+  internal void ResetGameState() {
     StateGame = new StateGameType(game);
     StateGame.Initialize();
     StateGame.LoadContent(game.Content);
     stateLookup[GameState.StateGame] = StateGame;
   }
 
-  public void Initialize() { }
+  internal void Initialize() { }
 
-  public void LoadContent(ContentManager contentManager) {
+  internal void LoadContent(ContentManager contentManager) {
     StateTransition = new StateTransitionType(game);
     StateMenu = new StateMenuType(game);
     StateLoss = new StateLossType(game);
@@ -116,11 +116,11 @@ internal class GameStateMachine(Game1 game) : IInitable, ITemporalActiveUpdatabl
     };
   }
 
-  public void Update(double deltaTime, bool isActive) {
+  internal void Update(double deltaTime, bool isActive) {
     currentState.Update(deltaTime, isActive);
   }
 
-  public void LowLevelDraw(LowLevelDrawParams drawData) {
+  internal void LowLevelDraw(LowLevelDrawParams drawData) {
     currentState.LowLevelDraw(drawData);
   }
 }

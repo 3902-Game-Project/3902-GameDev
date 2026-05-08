@@ -7,17 +7,17 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Items;
 
 internal class InvincibilityPotionItem(Texture2D texture, Vector2 startPosition, Player player) : IItem, IWorldPickup {
-  public FacingDirection Direction { get; set; } = FacingDirection.Right;
-  public Vector2 Position { get; set; } = startPosition;
-  public bool IsCollected { get; set; } = false;
-  public bool IsAutoCollect { get; } = true;
+  internal FacingDirection Direction { get; set; } = FacingDirection.Right;
+  internal Vector2 Position { get; set; } = startPosition;
+  internal bool IsCollected { get; set; } = false;
+  internal bool IsAutoCollect { get; } = true;
 
-  public ItemCategory Category { get; } = ItemCategory.Consumable;
+  internal ItemCategory Category { get; } = ItemCategory.Consumable;
 
-  public void OnEquip() { }
-  public void OnUnequip() { }
+  internal void OnEquip() { }
+  internal void OnUnequip() { }
 
-  public void Draw(SpriteBatch spriteBatch) {
+  internal void Draw(SpriteBatch spriteBatch) {
     if (!IsCollected) {
       spriteBatch.Draw(
         texture,
@@ -33,7 +33,7 @@ internal class InvincibilityPotionItem(Texture2D texture, Vector2 startPosition,
     }
   }
 
-  public void DrawUI(SpriteBatch spriteBatch, Vector2 position, float scale, Color tint) {
+  internal void DrawUI(SpriteBatch spriteBatch, Vector2 position, float scale, Color tint) {
     spriteBatch.Draw(
       texture: texture,
       position: position,
@@ -47,14 +47,14 @@ internal class InvincibilityPotionItem(Texture2D texture, Vector2 startPosition,
     );
   }
 
-  public void Update(double deltaTime) { }
+  internal void Update(double deltaTime) { }
 
-  public void OnPickup(Player player) {
+  internal void OnPickup(Player player) {
     IsCollected = true;
     // Logic to add to player's inventory goes here
   }
 
-  public void Use(UseType useType) {
+  internal void Use(UseType useType) {
     player.AddInvincibility(10f);
   }
 }

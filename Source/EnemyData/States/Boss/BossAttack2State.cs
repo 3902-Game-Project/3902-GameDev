@@ -11,7 +11,7 @@ internal class BossAttack2State : IEnemyState {
   private double animationTimer = 0.0;
   private bool hasThrownBomb = false;
 
-  public BossAttack2State(Boss boss) {
+  internal BossAttack2State(Boss boss) {
     this.boss = boss;
     this.boss.Velocity = Vector2.Zero;
 
@@ -23,7 +23,7 @@ internal class BossAttack2State : IEnemyState {
     this.boss.CurrentFrame = 0;
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     animationTimer += deltaTime;
 
     if (animationTimer >= ANIMATION_INTERVAL && boss.CurrentFrame < boss.CurrentSourceRectangles.Count - 1) {

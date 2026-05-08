@@ -12,5 +12,5 @@ internal class MouseController(
   // Tracking of presses / releases must be shared across GameStates
   private static readonly MouseDiffTracker mouseTracker = new();
 
-  protected override IButtonDiffTracker<MouseButtons, AugmentedMouseState> ButtonTracker => mouseTracker;
+  private protected override IButtonDiffTracker<MouseButtons, AugmentedMouseState> ButtonTracker => mouseTracker;
 }

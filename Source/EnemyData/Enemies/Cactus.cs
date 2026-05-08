@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Enemies;
 
 internal class Cactus : ABaseEnemy {
-  public Cactus(Texture2D texture, Vector2 position) :
+  internal Cactus(Texture2D texture, Vector2 position) :
     base(
       texture: texture,
       position: position,
@@ -18,5 +18,5 @@ internal class Cactus : ABaseEnemy {
     CurrentState = new CactusIdleState(this);
   }
 
-  protected override void ChangeDirection() { }
+  private protected override void ChangeDirection() { }
 }

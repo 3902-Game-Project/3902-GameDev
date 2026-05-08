@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Items;
 
 internal class RevolverItem : ABaseGun {
-  public RevolverItem(Texture2D texture, Vector2 startPosition, Player player, ProjectileManagerGetter GetProjectileManager, GunStats stats)
+  internal RevolverItem(Texture2D texture, Vector2 startPosition, Player player, ProjectileManagerGetter GetProjectileManager, GunStats stats)
     : base(texture, startPosition, player, GetProjectileManager, stats) {
     Category = ItemCategory.Sidearm;
     sourceRectangle = new Rectangle(0, 0, 16, 9);

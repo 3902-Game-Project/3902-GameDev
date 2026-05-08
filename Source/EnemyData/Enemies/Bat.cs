@@ -6,13 +6,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Enemies;
 
 internal class Bat : ABaseEnemy {
-  public Bat(Texture2D texture, Vector2 position) : base(texture, position) {
+  internal Bat(Texture2D texture, Vector2 position) : base(texture, position) {
     DrawScale = 2f;
     FlipWhenFacingRightUpDown = true;
     CurrentState = new BatIdleState(this);
   }
 
-  protected override void TransitionToDeathState() {
+  private protected override void TransitionToDeathState() {
     CurrentState = new GenericDeathState(
       this,
       [

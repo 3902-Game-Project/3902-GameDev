@@ -3,7 +3,7 @@ using GameProject.Globals;
 namespace GameProject.Commands;
 
 internal class ToggleHaltEnemyCommand : IGPCommand {
-  public void Execute() {
+  internal void Execute() {
     Flags.HaltEnemies = !Flags.HaltEnemies;
   }
 }

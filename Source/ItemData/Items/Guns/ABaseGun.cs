@@ -11,40 +11,40 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Items;
 
 internal abstract class ABaseGun(Texture2D texture, Vector2 startPosition, Player player, ProjectileManagerGetter GetProjectileManager, GunStats stats) : IItem {
-  protected static readonly float SCALE = 1.0f;
+  private protected static readonly float SCALE = 1.0f;
 
-  protected readonly Texture2D texture = texture;
-  protected readonly GunStats stats = stats;
+  private protected readonly Texture2D texture = texture;
+  private protected readonly GunStats stats = stats;
 
-  protected IProjectilePattern projectilePattern = new SingleShotPattern();
-  protected IFireMode fireMode;
-  protected Rectangle sourceRectangle;
-  protected Vector2 origin;
-  protected Vector2 bulletSpawnOffset;
+  private protected IProjectilePattern projectilePattern = new SingleShotPattern();
+  private protected IFireMode fireMode;
+  private protected Rectangle sourceRectangle;
+  private protected Vector2 origin;
+  private protected Vector2 bulletSpawnOffset;
 
-  public FacingDirection Direction { get; set; } = FacingDirection.Right;
-  public ItemCategory Category { get; protected set; }
-  public Vector2 Position { get; set; } = startPosition;
+  internal FacingDirection Direction { get; set; } = FacingDirection.Right;
+  internal ItemCategory Category { get; private protected set; }
+  internal Vector2 Position { get; set; } = startPosition;
 
   // Ammo and reload state
-  public double EquipTimer { get; private set; } = 0.0;
-  public double ReloadTimer { get; private set; } = 0.0;
-  public bool IsReloading { get; private set; } = false;
+  internal double EquipTimer { get; private set; } = 0.0;
+  internal double ReloadTimer { get; private set; } = 0.0;
+  internal bool IsReloading { get; private set; } = false;
 
-  public GunStats Stats => stats;
+  internal GunStats Stats => stats;
 
-  public virtual void OnEquip() {
+  internal virtual void OnEquip() {
     EquipTimer = stats.EquipTime; // Prevent double-pumping
     IsReloading = false;
     fireMode?.OnEquip();
   }
 
-  public virtual void OnUnequip() {
+  internal virtual void OnUnequip() {
     IsReloading = false;
     fireMode?.OnUnequip();
   }
 
-  public void StartReload() {
+  internal void StartReload() {
     if (IsReloading) {
       return;
     }
@@ -54,7 +54,7 @@ internal abstract class ABaseGun(Texture2D texture, Vector2 startPosition, Playe
     }
   }
 
-  public virtual void Update(double deltaTime) {
+  internal virtual void Update(double deltaTime) {
     if (EquipTimer > 0) {
       EquipTimer -= deltaTime;
     } else if (IsReloading) {
@@ -83,7 +83,7 @@ internal abstract class ABaseGun(Texture2D texture, Vector2 startPosition, Playe
     fireMode?.Update(deltaTime);
   }
 
-  public virtual void Draw(SpriteBatch spriteBatch) {
+  internal virtual void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
 
     SpriteEffects effects = SpriteEffects.None;
@@ -99,13 +99,13 @@ internal abstract class ABaseGun(Texture2D texture, Vector2 startPosition, Playe
     spriteBatch.Draw(texture, Position, sourceRectangle, Color.White, rotation, origin, SCALE, effects, 0f);
   }
 
-  public void DrawUI(SpriteBatch spriteBatch, Vector2 position, float scale, Color tint) {
+  internal void DrawUI(SpriteBatch spriteBatch, Vector2 position, float scale, Color tint) {
     spriteBatch.Draw(texture, position, sourceRectangle, tint, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
   }
 
-  public virtual void OnPickup(Player player) { }
+  internal virtual void OnPickup(Player player) { }
 
-  public virtual void Use(UseType useType) {
+  internal virtual void Use(UseType useType) {
     // Check for Reload Interruption
     if (IsReloading && stats.CurrentAmmo > 0) {
       IsReloading = false;

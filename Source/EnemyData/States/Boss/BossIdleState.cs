@@ -15,7 +15,7 @@ internal class BossIdleState : IEnemyState {
   private double timer = 0.0, animationTimer = 0.0;
   private readonly Random random = new();
 
-  public BossIdleState(Boss boss) {
+  internal BossIdleState(Boss boss) {
     this.boss = boss;
     this.boss.Velocity = Vector2.Zero;
     this.boss.CurrentSourceRectangles = [
@@ -25,7 +25,7 @@ internal class BossIdleState : IEnemyState {
     this.boss.CurrentFrame = 0;
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     animationTimer += deltaTime;
     if (animationTimer > ANIMATION_INTERVAL) {
       boss.CurrentFrame = (boss.CurrentFrame + 1) % boss.CurrentSourceRectangles.Count;

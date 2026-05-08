@@ -4,13 +4,13 @@ using GameProject.GlobalInterfaces;
 namespace GameProject.PlayerSpace.States;
 
 internal interface IPlayerState : ITemporalUpdatable, IGPDrawable {
-  void MoveUp();
-  void MoveDown();
-  void MoveLeft();
-  void MoveRight();
-  void UseItem(UseType useType);
-  void UseKey(UseType useType);
-  void TakeDamage(int amount);
-  void Die();
-  void Interact();
+  internal void MoveUp();
+  internal void MoveDown();
+  internal void MoveLeft();
+  internal void MoveRight();
+  internal void UseItem(UseType useType);
+  internal void UseKey(UseType useType);
+  internal void TakeDamage(int amount);
+  internal void Die();
+  internal void Interact();
 }

@@ -6,7 +6,7 @@ internal class SnakeAttackState : IEnemyState {
   private readonly Snake snake;
   private double timer = 0.0, animationTimer = 0.0;
 
-  public SnakeAttackState(Snake snake) {
+  internal SnakeAttackState(Snake snake) {
     this.snake = snake;
     int attackDirection = (snake.Direction == FacingDirection.Right) ? 1 : -1;
     this.snake.Velocity = new Vector2(attackDirection * 300f, 0);
@@ -25,7 +25,7 @@ internal class SnakeAttackState : IEnemyState {
     this.snake.CurrentFrame = 0;
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     timer += deltaTime;
     animationTimer += deltaTime;
 

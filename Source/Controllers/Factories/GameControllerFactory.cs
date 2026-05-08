@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.Controllers.Factories;
 
 internal static class GameControllerFactory {
-  public static KeyboardController CreateKeyboardController(Game1 game, Player player, ILevelManager levelManager) {
+  internal static KeyboardController CreateKeyboardController(Game1 game, Player player, ILevelManager levelManager) {
     var keyboardController = new KeyboardController(
       pressedMappings: new Dictionary<Keys, IGPCommand> {
         { Keys.Q, new QuitCommand(game) },
@@ -53,7 +53,7 @@ internal static class GameControllerFactory {
     return keyboardController;
   }
 
-  public static MouseController CreateMouseController(ILevelManager levelManager) {
+  internal static MouseController CreateMouseController(ILevelManager levelManager) {
     var mouseController = new MouseController();
 
     // Debug button binds:
@@ -65,7 +65,7 @@ internal static class GameControllerFactory {
     return mouseController;
   }
 
-  public static GamePadController CreateGamePadController(Game1 game, Player player, ILevelManager levelManager) {
+  internal static GamePadController CreateGamePadController(Game1 game, Player player, ILevelManager levelManager) {
     // The gamepad bindings don't match the readme. this is intentional, because
     // the readme is in Xbox controller layout, but testing with a
     // nintendo pro controller seems to suggest it is pro controller layout.

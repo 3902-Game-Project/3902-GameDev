@@ -11,7 +11,7 @@ namespace GameProject.Items;
 internal class FakeBFGItem : ABaseGun {
   private readonly ProjectileManagerGetter GetProjectileManager;
 
-  public FakeBFGItem(Texture2D texture, Vector2 startPosition, Player player, ProjectileManagerGetter GetProjectileManager, GunStats stats) :
+  internal FakeBFGItem(Texture2D texture, Vector2 startPosition, Player player, ProjectileManagerGetter GetProjectileManager, GunStats stats) :
     base(texture, startPosition, player, GetProjectileManager, stats) {
     Category = ItemCategory.Primary;
     sourceRectangle = new(0, 0, 40, 20);
@@ -20,7 +20,7 @@ internal class FakeBFGItem : ABaseGun {
     this.GetProjectileManager = GetProjectileManager;
   }
 
-  public override void Use(UseType useType) {
+  internal override void Use(UseType useType) {
     if (EquipTimer > 0) return;
 
     if (fireMode.CanFire(useType)) {

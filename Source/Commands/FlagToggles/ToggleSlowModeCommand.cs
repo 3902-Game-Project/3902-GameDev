@@ -3,7 +3,7 @@ using GameProject.Globals;
 namespace GameProject.Commands;
 
 internal class ToggleSlowModeCommand() : IGPCommand {
-  public void Execute() {
+  internal void Execute() {
     Flags.SlowMode = !Flags.SlowMode;
   }
 }

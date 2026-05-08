@@ -20,13 +20,13 @@ internal class BombProjectile : IProjectile {
   private readonly double lifetime;
   private double lifetimeCounter;
 
-  public bool IsExpired { get; private set; } = false;
+  internal bool IsExpired { get; private set; } = false;
 
-  public void Expire() {
+  internal void Expire() {
     IsExpired = true;
   }
 
-  public Rectangle BoundingBox {
+  internal Rectangle BoundingBox {
     get {
       int width = currentSourceRect.Width;
       int height = currentSourceRect.Height;
@@ -34,7 +34,7 @@ internal class BombProjectile : IProjectile {
     }
   }
 
-  public void Draw(SpriteBatch spriteBatch) {
+  internal void Draw(SpriteBatch spriteBatch) {
     origin = new Vector2(currentSourceRect.Width / 2, currentSourceRect.Height / 2);
 
     spriteBatch.Draw(
@@ -50,7 +50,7 @@ internal class BombProjectile : IProjectile {
     );
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     bombAnimation.Update(deltaTime);
     currentSourceRect = bombAnimation.CurrentFrame;
 
@@ -60,7 +60,7 @@ internal class BombProjectile : IProjectile {
     }
   }
 
-  public BombProjectile(Texture2D texture, Vector2 startPosition, float lifetime) {
+  internal BombProjectile(Texture2D texture, Vector2 startPosition, float lifetime) {
     this.texture = texture;
     position = startPosition;
     this.lifetime = lifetime;

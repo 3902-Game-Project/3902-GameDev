@@ -12,7 +12,7 @@ internal class BatMoveState(Bat bat) :
     ],
     100f
   ) {
-  protected override void TransitionToNextState() {
+  private protected override void TransitionToNextState() {
     enemy.CurrentState = new BatIdleState((Bat) enemy);
   }
 }

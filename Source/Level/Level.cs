@@ -44,11 +44,11 @@ internal class Level : ILevel {
     }
   }
 
-  public IEnumerable<IEnemy> GetAliveEnemies() {
+  internal IEnumerable<IEnemy> GetAliveEnemies() {
     return aliveEnemies;
   }
 
-  public void RestoreEnemies(List<IEnemy> restoredEnemies) {
+  internal void RestoreEnemies(List<IEnemy> restoredEnemies) {
     foreach (var enemy in aliveEnemies) collisionManager.Remove(enemy);
     foreach (var enemy in deadEnemies) collisionManager.Remove(enemy);
 
@@ -87,7 +87,7 @@ internal class Level : ILevel {
     }
   }
 
-  public Level(
+  internal Level(
     LevelFlags levelFlags,
     List<IBlock> nonCollidableBlocks,
     List<IBlock> collidableBlocks,
@@ -127,14 +127,14 @@ internal class Level : ILevel {
     }
   }
 
-  public LevelFlags LevelFlags { get; private set; }
-  public ProjectileManager ProjectileManager { get; private set; } = new ProjectileManager();
+  internal LevelFlags LevelFlags { get; private set; }
+  internal ProjectileManager ProjectileManager { get; private set; } = new ProjectileManager();
 
-  public void Initialize() { }
+  internal void Initialize() { }
 
-  public void LoadContent(ContentManager content) { }
+  internal void LoadContent(ContentManager content) { }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     foreach (var nonCollidableBlocks in nonCollidableBlocks) {
       nonCollidableBlocks.Update(deltaTime);
     }
@@ -220,7 +220,7 @@ internal class Level : ILevel {
     }
   }
 
-  public void Draw(SpriteBatch spriteBatch) {
+  internal void Draw(SpriteBatch spriteBatch) {
     foreach (var nonCollidableBlock in nonCollidableBlocks) {
       nonCollidableBlock.Draw(spriteBatch);
     }
@@ -248,15 +248,15 @@ internal class Level : ILevel {
     ProjectileManager.Draw(spriteBatch);
   }
 
-  public Vector2 GetDefaultPlayerPosition() {
+  internal Vector2 GetDefaultPlayerPosition() {
     return playerPosition;
   }
 
-  public bool HasKillableEnemiesRemaining() {
+  internal bool HasKillableEnemiesRemaining() {
     return aliveEnemies.Where(enemy => !enemy.Invulnerable).Any();
   }
 
-  public void KillAllDamageableEnemies() {
+  internal void KillAllDamageableEnemies() {
     foreach (var enemy in aliveEnemies) {
       if (!enemy.Invulnerable) {
         enemy.Kill();
@@ -264,19 +264,19 @@ internal class Level : ILevel {
     }
   }
 
-  public void AddPickup(IWorldPickup pickup) {
+  internal void AddPickup(IWorldPickup pickup) {
     pickups.Add(pickup);
   }
 
-  public void RemovePickup(IWorldPickup pickup) {
+  internal void RemovePickup(IWorldPickup pickup) {
     pickups.Remove(pickup);
   }
 
-  public IEnumerable<IBlock> GetOpenableDoors() {
+  internal IEnumerable<IBlock> GetOpenableDoors() {
     return doors;
   }
 
-  public IWorldPickup? GetClosestPickupInRange(Vector2 position, float range) {
+  internal IWorldPickup? GetClosestPickupInRange(Vector2 position, float range) {
     IWorldPickup? closestPickup = null;
     float? closestDistance = null;
 
@@ -292,7 +292,7 @@ internal class Level : ILevel {
     return closestPickup;
   }
 
-  public void PlayerResolveCollisions(ICollidable movingEntity, CollisionAxis axis = CollisionAxis.Both, float cornerTolerance = 3.0f) {
+  internal void PlayerResolveCollisions(ICollidable movingEntity, CollisionAxis axis = CollisionAxis.Both, float cornerTolerance = 3.0f) {
     collisionManager.ResolveCollisionsFor(movingEntity, axis, cornerTolerance);
   }
 }

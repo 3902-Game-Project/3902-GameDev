@@ -5,28 +5,28 @@ using GameProject.Items;
 namespace GameProject.SaveLoad;
 
 internal class GameSaveData {
-  public PlayerSaveData Player { get; set; } = new();
-  public LevelSaveData Level { get; set; } = new();
+  internal PlayerSaveData Player { get; set; } = new();
+  internal LevelSaveData Level { get; set; } = new();
 }
 
 internal class PlayerSaveData {
-  public float X { get; set; }
-  public float Y { get; set; }
-  public int Health { get; set; }
-  public Dictionary<AmmoType, int> Ammo { get; set; } = [];
-  public List<string> WeaponTypes { get; set; } = [];
-  public int ActiveWeaponIndex { get; set; }
+  internal float X { get; set; }
+  internal float Y { get; set; }
+  internal int Health { get; set; }
+  internal Dictionary<AmmoType, int> Ammo { get; set; } = [];
+  internal List<string> WeaponTypes { get; set; } = [];
+  internal int ActiveWeaponIndex { get; set; }
 }
 
 internal class LevelSaveData {
-  public string LevelName { get; set; }
-  public List<EnemySaveData> Enemies { get; set; } = [];
+  internal string LevelName { get; set; }
+  internal List<EnemySaveData> Enemies { get; set; } = [];
 }
 
 internal class EnemySaveData {
-  public string TypeName { get; set; }
-  public float X { get; set; }
-  public float Y { get; set; }
-  public int Health { get; set; }
-  public FacingDirection Direction { get; set; }
+  internal string TypeName { get; set; }
+  internal float X { get; set; }
+  internal float Y { get; set; }
+  internal int Health { get; set; }
+  internal FacingDirection Direction { get; set; }
 }

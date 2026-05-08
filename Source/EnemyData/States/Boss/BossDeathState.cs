@@ -10,7 +10,7 @@ internal class BossDeathState : IEnemyState {
   private double animationTimer = 0.0;
   private bool isDoorUnlocked = false;
 
-  public BossDeathState(Boss boss) {
+  internal BossDeathState(Boss boss) {
     this.boss = boss;
     this.boss.Velocity = Vector2.Zero;
 
@@ -24,7 +24,7 @@ internal class BossDeathState : IEnemyState {
     this.boss.CurrentFrame = 0;
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     // 1. Play the death animation until the final frame
     if (boss.CurrentFrame < boss.CurrentSourceRectangles.Count - 1) {
       animationTimer += deltaTime;

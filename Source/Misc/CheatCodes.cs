@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.Source.Misc;
 
 internal class CheatCodes : ITemporalUpdatable {
-  public static CheatCodes Instance { get; } = new CheatCodes();
+  internal static CheatCodes Instance { get; } = new CheatCodes();
 
   private double pressedDeltaTime = 0f;
   private bool itemsOn = false;
@@ -32,10 +32,10 @@ internal class CheatCodes : ITemporalUpdatable {
     return maxLength;
   }
 
-  public ILevelManager LevelManager { get; set; }
-  public List<Keys> lastPressed = [];
+  internal ILevelManager LevelManager { get; set; }
+  internal List<Keys> lastPressed = [];
 
-  public void Initialize(Player player) {
+  internal void Initialize(Player player) {
     Instance.cheatCodes = new Dictionary<List<Keys>, IGPCommand> {
       // Unlimited Health Mappings
       { [Keys.W, Keys.W, Keys.S, Keys.S, Keys.A, Keys.D, Keys.A, Keys.D], new PlayerUnlimitedHealthCommand(player) },
@@ -68,17 +68,17 @@ internal class CheatCodes : ITemporalUpdatable {
     maxBufferSize = GetMaxCheatCodeLength();
   }
 
-  public static void UnlimitedHealth(Player player) {
+  internal static void UnlimitedHealth(Player player) {
     player.CheatHealth(999999);
   }
 
-  public static void UnlimitedAmmo(Player player) {
+  internal static void UnlimitedAmmo(Player player) {
     player.Inventory.Ammo[AmmoType.Heavy] += 9999;
     player.Inventory.Ammo[AmmoType.Shells] += 9999;
     player.Inventory.Ammo[AmmoType.Light] += 9999;
   }
 
-  public void UnlimitedItems(Player player) {
+  internal void UnlimitedItems(Player player) {
     if (!player.Inventory.GeneralItems.OfType<KeyItem>().Any()) {
       IItem key = ItemFactory.CreateKey(-1f, -1f, () => LevelManager.CurrentLevel);
       player.Inventory.PickupItem(key);
@@ -105,7 +105,7 @@ internal class CheatCodes : ITemporalUpdatable {
     }
   }
 
-  public bool CodesMatch(List<Keys> code) {
+  internal bool CodesMatch(List<Keys> code) {
     if (lastPressed.Count < code.Count) {
       return false;
     }
@@ -117,14 +117,14 @@ internal class CheatCodes : ITemporalUpdatable {
     return true;
   }
 
-  public void AddKey(Keys key) {
+  internal void AddKey(Keys key) {
     if (lastPressed.Count >= maxBufferSize) {
       lastPressed.RemoveAt(0);
     }
     lastPressed.Add(key);
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     if (pressedDeltaTime <= Constants.MAX_CHEAT_CODE_WAIT) {
       var cheatCodeExecuted = false;
 

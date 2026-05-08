@@ -18,10 +18,10 @@ internal class SlattedDoorBlock : ABaseBlock {
   private readonly IGPCommand changeLevelCommand;
   private int currentFrame = 0;
 
-  public float Rotation { get; private set; } = 0.0f;
-  public LockableDoorBlockState State { get; private set; }
+  internal float Rotation { get; private set; } = 0.0f;
+  internal LockableDoorBlockState State { get; private set; }
 
-  public SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, LockableDoorBlockState state, IGPCommand changeLevelCommand) : base(xyPos) {
+  internal SlattedDoorBlock(Texture2D SlattedDoorTexture, Vector2 xyPos, LockableDoorBlockState state, IGPCommand changeLevelCommand) : base(xyPos) {
     slattedDoorTexture = SlattedDoorTexture;
     this.changeLevelCommand = changeLevelCommand;
 
@@ -34,7 +34,7 @@ internal class SlattedDoorBlock : ABaseBlock {
     Rotate();
   }
 
-  public void Rotate() {
+  internal void Rotate() {
     float x = Position.X, y = Position.Y;
     if (x < Constants.BASE_BLOCK_WIDTH) {
       Rotation = MathHelper.ToRadians(270);
@@ -50,9 +50,9 @@ internal class SlattedDoorBlock : ABaseBlock {
     Position = new(x, y);
   }
 
-  public override void Update(double deltaTime) { }
+  internal override void Update(double deltaTime) { }
 
-  public override void Draw(SpriteBatch spriteBatch) {
+  internal override void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(
       slattedDoorTexture,
       Position,
@@ -66,13 +66,13 @@ internal class SlattedDoorBlock : ABaseBlock {
     );
   }
 
-  public override void OnCollision(CollisionInfo info) {
+  internal override void OnCollision(CollisionInfo info) {
     if (State == LockableDoorBlockState.Open && info.Collider is Player) {
       changeLevelCommand.Execute();
     }
   }
 
-  public void ChangeState(LockableDoorBlockState state) {
+  internal void ChangeState(LockableDoorBlockState state) {
     State = state;
 
     if (State == LockableDoorBlockState.Open) {
@@ -80,7 +80,7 @@ internal class SlattedDoorBlock : ABaseBlock {
     }
   }
 
-  public void Unlock() {
+  internal void Unlock() {
     ChangeState(LockableDoorBlockState.Open);
   }
 }

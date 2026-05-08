@@ -4,9 +4,9 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Projectiles;
 
 internal interface IProjectile : ISprite {
-  bool IsExpired { get; }
+  internal bool IsExpired { get; }
 
-  void Expire();
+  internal void Expire();
 
-  Rectangle BoundingBox { get; }
+  internal Rectangle BoundingBox { get; }
 }

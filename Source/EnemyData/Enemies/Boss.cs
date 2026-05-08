@@ -12,7 +12,7 @@ internal class Boss : ABaseEnemy {
   private readonly CurrentLevelGetter GetCurrentLevel;
   private readonly Random random = new();
 
-  protected override Vector2 GetDrawOrigin(Rectangle source) {
+  private protected override Vector2 GetDrawOrigin(Rectangle source) {
     // --- THE MAGIC MATH FIX FOR JITTER ---
     int cellIndex = source.X / 56;
     float trueCenterX = (cellIndex * 56) + 28;
@@ -21,15 +21,15 @@ internal class Boss : ABaseEnemy {
     // -------------------------------------
   }
 
-  public ILevel CurrentLevel {
+  internal ILevel CurrentLevel {
     get {
       return GetCurrentLevel();
     }
   }
 
-  public bool PhaseTwoTriggered { get; set; } = false;
+  internal bool PhaseTwoTriggered { get; set; } = false;
 
-  public Boss(Texture2D texture, Vector2 position, CurrentLevelGetter GetCurrentLevel) :
+  internal Boss(Texture2D texture, Vector2 position, CurrentLevelGetter GetCurrentLevel) :
     base(texture, position, colliderHeight: Constants.BASE_ENEMY_HEIGHT * 2.0f) {
     this.GetCurrentLevel = GetCurrentLevel;
     DrawScale = 2.0f;
@@ -40,7 +40,7 @@ internal class Boss : ABaseEnemy {
     CurrentState = new BossIdleState(this);
   }
 
-  public override void TakeDamage(int damage) {
+  internal override void TakeDamage(int damage) {
     if (Health <= 0) return;
 
     base.TakeDamage(damage);
@@ -61,7 +61,7 @@ internal class Boss : ABaseEnemy {
     }
   }
 
-  public void FireBullet(int damage) {
+  internal void FireBullet(int damage) {
     Vector2 direction = Target - Position;
 
     // Force the boss to turn and face the player right as he shoots
@@ -94,7 +94,7 @@ internal class Boss : ABaseEnemy {
     CurrentLevel.ProjectileManager.Add(bullet);
   }
 
-  public void ThrowBomb(int damage) {
+  internal void ThrowBomb(int damage) {
     float offsetX = 40f;
     float offsetY = -45f;
 
@@ -114,7 +114,7 @@ internal class Boss : ABaseEnemy {
     CurrentLevel.ProjectileManager.Add(bomb);
   }
 
-  public void SpawnArenaBombs() {
+  internal void SpawnArenaBombs() {
     // Adjust these grid coordinates to fit your actual room size!
     int[] xPositions = [150, 400, 650];
     int[] yPositions = [150, 300, 450];
@@ -136,7 +136,7 @@ internal class Boss : ABaseEnemy {
     }
   }
 
-  protected override void TransitionToDeathState() {
+  private protected override void TransitionToDeathState() {
     CurrentState = new BossDeathState(this);
   }
 }

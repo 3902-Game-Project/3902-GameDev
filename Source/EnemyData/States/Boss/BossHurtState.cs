@@ -8,7 +8,7 @@ internal class BossHurtState : IEnemyState {
   private readonly Boss boss;
   private double animationTimer = 0.0;
 
-  public BossHurtState(Boss boss) {
+  internal BossHurtState(Boss boss) {
     this.boss = boss;
     this.boss.Velocity = Vector2.Zero;
 
@@ -22,7 +22,7 @@ internal class BossHurtState : IEnemyState {
     this.boss.CurrentFrame = 0;
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     animationTimer += deltaTime;
     if (animationTimer >= ANIMATION_INTERVAL && boss.CurrentFrame < boss.CurrentSourceRectangles.Count - 1) {
       boss.CurrentFrame++;

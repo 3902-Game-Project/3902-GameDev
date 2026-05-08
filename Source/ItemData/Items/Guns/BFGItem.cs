@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Items;
 
 internal class BFGItem : ABaseGun {
-  public BFGItem(Texture2D texture, Vector2 startPosition, Player player, ProjectileManagerGetter GetProjectileManager, GunStats stats)
+  internal BFGItem(Texture2D texture, Vector2 startPosition, Player player, ProjectileManagerGetter GetProjectileManager, GunStats stats)
     : base(texture, startPosition, player, GetProjectileManager, stats) {
     Category = ItemCategory.Primary;
 

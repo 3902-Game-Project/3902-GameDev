@@ -3,8 +3,8 @@ using GameProject.GlobalInterfaces;
 namespace GameProject.GameStates;
 
 internal interface IGameState : IInitable, ITemporalActiveUpdatable, ILowLevelDrawable {
-  void OnStateEnter(bool prevStateIsCurrentState);
-  void OnStateLeave(bool nextStateIsCurrentState);
-  void OnStateStartFadeIn(bool prevStateIsCurrentState);
-  void OnStateEndFadeOut(bool nextStateIsCurrentState);
+  internal void OnStateEnter(bool prevStateIsCurrentState);
+  internal void OnStateLeave(bool nextStateIsCurrentState);
+  internal void OnStateStartFadeIn(bool prevStateIsCurrentState);
+  internal void OnStateEndFadeOut(bool nextStateIsCurrentState);
 }

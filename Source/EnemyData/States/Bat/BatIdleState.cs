@@ -7,7 +7,7 @@ internal class BatIdleState : IEnemyState {
   private double timer = 0.0;
   private double animationTimer = 0.0;
 
-  public BatIdleState(Bat bat) {
+  internal BatIdleState(Bat bat) {
     this.bat = bat;
     this.bat.Velocity = Vector2.Zero;
     this.bat.CurrentSourceRectangles = [
@@ -19,7 +19,7 @@ internal class BatIdleState : IEnemyState {
     this.bat.CurrentFrame = 0;
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     animationTimer += deltaTime;
     if (animationTimer > 0.2) {
       bat.CurrentFrame++;

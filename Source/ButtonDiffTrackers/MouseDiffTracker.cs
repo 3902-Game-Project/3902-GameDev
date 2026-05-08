@@ -36,7 +36,7 @@ internal class MouseDiffTracker : AButtonDiffTracker<MouseButtons, AugmentedMous
     return mouseState.IsActive && MouseWithinWindowBounds(mouseState);
   }
 
-  protected override MouseButtons[] ExtractPressedFromState(AugmentedMouseState mouseState) {
+  private protected override MouseButtons[] ExtractPressedFromState(AugmentedMouseState mouseState) {
     var pressedButtons = new List<MouseButtons>();
 
     if (MouseCurrentlyOnWindow(mouseState)) {

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Items;
 
 internal class SMGItem : ABaseGun {
-  public SMGItem(Texture2D texture, Vector2 startPosition, Player player, ProjectileManagerGetter GetProjectileManager, GunStats stats) :
+  internal SMGItem(Texture2D texture, Vector2 startPosition, Player player, ProjectileManagerGetter GetProjectileManager, GunStats stats) :
     base(texture, startPosition, player, GetProjectileManager, stats) {
     Category = ItemCategory.Primary;
 

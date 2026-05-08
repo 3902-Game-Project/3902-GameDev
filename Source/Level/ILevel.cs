@@ -12,17 +12,17 @@ namespace GameProject.Level;
 #nullable enable
 
 internal interface ILevel : IInitable, ITemporalUpdatable, IGPDrawable {
-  LevelFlags LevelFlags { get; }
-  ProjectileManager ProjectileManager { get; }
-  IEnumerable<IEnemy> GetAliveEnemies();
-  void RestoreEnemies(List<IEnemy> restoredEnemies);
+  internal LevelFlags LevelFlags { get; }
+  internal ProjectileManager ProjectileManager { get; }
+  internal IEnumerable<IEnemy> GetAliveEnemies();
+  internal void RestoreEnemies(List<IEnemy> restoredEnemies);
 
-  Vector2 GetDefaultPlayerPosition();
-  bool HasKillableEnemiesRemaining();
-  void KillAllDamageableEnemies();
-  void AddPickup(IWorldPickup pickup);
-  void RemovePickup(IWorldPickup pickup);
-  IEnumerable<IBlock> GetOpenableDoors();
-  IWorldPickup? GetClosestPickupInRange(Vector2 position, float range);
-  void PlayerResolveCollisions(ICollidable movingEntity, CollisionAxis axis = CollisionAxis.Both, float cornerTolerance = 3.0f);
+  internal Vector2 GetDefaultPlayerPosition();
+  internal bool HasKillableEnemiesRemaining();
+  internal void KillAllDamageableEnemies();
+  internal void AddPickup(IWorldPickup pickup);
+  internal void RemovePickup(IWorldPickup pickup);
+  internal IEnumerable<IBlock> GetOpenableDoors();
+  internal IWorldPickup? GetClosestPickupInRange(Vector2 position, float range);
+  internal void PlayerResolveCollisions(ICollidable movingEntity, CollisionAxis axis = CollisionAxis.Both, float cornerTolerance = 3.0f);
 }

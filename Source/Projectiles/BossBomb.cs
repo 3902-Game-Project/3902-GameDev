@@ -17,8 +17,8 @@ internal class BossBomb : IProjectile, ICollidable {
   private const double NORMAL_ANIM_INTERVAL = 0.15;
   private const double EXPLOSION_ANIM_INTERVAL = 0.05;
   private const int EXPLOSION_START_FRAME = 12;
-  public Vector2 Position { get; set; }
-  public Vector2 Velocity { get; set; }
+  internal Vector2 Position { get; set; }
+  internal Vector2 Velocity { get; set; }
 
   private readonly Texture2D flyingTexture;
   private readonly Texture2D blinkingTexture;
@@ -33,20 +33,20 @@ internal class BossBomb : IProjectile, ICollidable {
   private double fuseTimer = 0;
   private readonly int damage;
 
-  public bool IsExpired { get; private set; } = false;
-  public void Expire() { IsExpired = true; }
-  public Rectangle BoundingBox => new(
+  internal bool IsExpired { get; private set; } = false;
+  internal void Expire() { IsExpired = true; }
+  internal Rectangle BoundingBox => new(
     (int) Position.X - (NORMAL_HITBOX_SIZE / 2),
     (int) Position.Y - (NORMAL_HITBOX_SIZE / 2),
     NORMAL_HITBOX_SIZE,
     NORMAL_HITBOX_SIZE
    );
 
-  public BoxCollider Collider { get; private set; }
-  public IShape Shape => Collider;
-  public Layer Layer { get; } = Layer.Projectiles;
+  internal BoxCollider Collider { get; private set; }
+  internal IShape Shape => Collider;
+  internal Layer Layer { get; } = Layer.Projectiles;
 
-  public BossBomb(Texture2D flyingTex, Texture2D blinkingTex, Vector2 startPos, Vector2 direction, int damage) {
+  internal BossBomb(Texture2D flyingTex, Texture2D blinkingTex, Vector2 startPos, Vector2 direction, int damage) {
     flyingTexture = flyingTex;
     blinkingTexture = blinkingTex;
     Position = startPos;
@@ -71,7 +71,7 @@ internal class BossBomb : IProjectile, ICollidable {
     ];
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     if (IsExpired) return;
 
     animationTimer += deltaTime;
@@ -118,13 +118,13 @@ internal class BossBomb : IProjectile, ICollidable {
     }
   }
 
-  public void OnCollision(CollisionInfo collisionInfo) {
+  internal void OnCollision(CollisionInfo collisionInfo) {
     if (isExploding && collisionInfo.Collider is Player player) {
       player.TakeDamage(damage);
     }
   }
 
-  public void Draw(SpriteBatch spriteBatch) {
+  internal void Draw(SpriteBatch spriteBatch) {
     if (IsExpired) return;
 
     Texture2D currentTexture = isLanded ? blinkingTexture : flyingTexture;

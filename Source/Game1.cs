@@ -17,13 +17,13 @@ internal class Game1 : Game {
   private ValueTracker<Viewport> viewportTracker;
   private Rectangle renderScaleRectangle;
 
-  public SpriteBatch SpriteBatch { get; private set; }
-  public Viewport DefaultViewport { get; private set; }
-  public Viewport HudViewport { get; private set; }
-  public Viewport GameViewport { get; private set; }
-  public GameStateMachine StateMachine { get; private set; }
+  internal SpriteBatch SpriteBatch { get; private set; }
+  internal Viewport DefaultViewport { get; private set; }
+  internal Viewport HudViewport { get; private set; }
+  internal Viewport GameViewport { get; private set; }
+  internal GameStateMachine StateMachine { get; private set; }
 
-  public Game1() {
+  internal Game1() {
     graphics = new GraphicsDeviceManager(this);
     IsMouseVisible = true;
     Content.RootDirectory = "Content";
@@ -31,7 +31,7 @@ internal class Game1 : Game {
     StateMachine = new(this);
   }
 
-  protected override void Initialize() {
+  private protected override void Initialize() {
     graphics.PreferredBackBufferHeight = Constants.WINDOW_HEIGHT;
     graphics.PreferredBackBufferWidth = Constants.WINDOW_WIDTH;
     graphics.ApplyChanges();
@@ -89,7 +89,7 @@ internal class Game1 : Game {
     renderScaleRectangle = new Rectangle(x, y, width, height);
   }
 
-  protected override void LoadContent() {
+  private protected override void LoadContent() {
     SpriteBatch = new SpriteBatch(GraphicsDevice);
     renderTarget = new RenderTarget2D(GraphicsDevice, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
     UpdateRenderScaleRectangle();
@@ -105,13 +105,13 @@ internal class Game1 : Game {
     StateMachine.LoadContent(Content);
   }
 
-  protected override void Update(GameTime gameTime) {
+  private protected override void Update(GameTime gameTime) {
     StateMachine.Update(gameTime.ElapsedGameTime.TotalSeconds, IsActive);
 
     base.Update(gameTime);
   }
 
-  protected override void Draw(GameTime gameTime) {
+  private protected override void Draw(GameTime gameTime) {
     // Render everything that should be on screen to a texture
 
     using (renderTargetTracker.TempSet(renderTarget)) {

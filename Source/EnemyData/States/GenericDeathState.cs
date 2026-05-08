@@ -11,7 +11,7 @@ internal class GenericDeathState : IEnemyState {
   private double deadHoldTimer = 0.0;
   private bool isAnimationFinished = false;
 
-  public GenericDeathState(ABaseEnemy enemy, List<Rectangle> frames, double timePerFrame = 0.15, double holdTime = 1.5) {
+  internal GenericDeathState(ABaseEnemy enemy, List<Rectangle> frames, double timePerFrame = 0.15, double holdTime = 1.5) {
     this.enemy = enemy;
     this.timePerFrame = timePerFrame;
     timeToHoldLastFrame = holdTime;
@@ -21,7 +21,7 @@ internal class GenericDeathState : IEnemyState {
     this.enemy.CurrentFrame = 0;
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     if (!isAnimationFinished) {
       animationTimer += deltaTime;
       if (animationTimer >= timePerFrame) {

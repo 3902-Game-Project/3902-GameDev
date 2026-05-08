@@ -7,7 +7,7 @@ internal class SemiAutoFire(GunStats stats) : IFireMode {
   private double timer = 0.0;
   private bool triggerReleased = true;
 
-  public bool CanFire(UseType useType) {
+  internal bool CanFire(UseType useType) {
     if (useType == UseType.Released) {
       triggerReleased = true;
       return false;
@@ -23,15 +23,15 @@ internal class SemiAutoFire(GunStats stats) : IFireMode {
     return false;
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     if (timer > 0) {
       timer -= deltaTime;
     }
   }
 
-  public void OnEquip() {
+  internal void OnEquip() {
     triggerReleased = true;
   }
 
-  public void OnUnequip() { }
+  internal void OnUnequip() { }
 }

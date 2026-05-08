@@ -4,7 +4,7 @@ using GameProject.SaveLoad;
 namespace GameProject.Commands;
 
 internal class ExecuteLoadCommand(Game1 game, StateLoadPromptType promptState) : IGPCommand {
-  public void Execute() {
+  internal void Execute() {
     if (!promptState.IsShowingSuccess) {
       SaveLoadManager.LoadGame(game.StateMachine.StateGame);
       promptState.IsShowingSuccess = true;

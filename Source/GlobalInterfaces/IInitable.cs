@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Content;
 namespace GameProject.GlobalInterfaces;
 
 internal interface IInitable {
-  void Initialize();
+  internal void Initialize();
 
-  void LoadContent(ContentManager contentManager);
+  internal void LoadContent(ContentManager contentManager);
 }

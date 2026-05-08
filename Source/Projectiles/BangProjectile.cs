@@ -15,14 +15,14 @@ internal class BangProjectile : IProjectile, ICollidable {
   private FacingDirection direction;
   private double lifetime = 1.0;
 
-  public bool IsExpired { get; private set; }
-  public Vector2 Position { get; set; }
-  public Rectangle BoundingBox => new((int) Position.X, (int) Position.Y, 1, 1);
+  internal bool IsExpired { get; private set; }
+  internal Vector2 Position { get; set; }
+  internal Rectangle BoundingBox => new((int) Position.X, (int) Position.Y, 1, 1);
 
-  public IShape Shape { get; }
-  public Layer Layer { get; } = Layer.Projectiles;
+  internal IShape Shape { get; }
+  internal Layer Layer { get; } = Layer.Projectiles;
 
-  public BangProjectile(Texture2D texture, ABaseGun sourceGun) {
+  internal BangProjectile(Texture2D texture, ABaseGun sourceGun) {
     this.texture = texture;
     this.sourceGun = sourceGun;
     direction = sourceGun.Direction;
@@ -30,7 +30,7 @@ internal class BangProjectile : IProjectile, ICollidable {
     Shape = new BoxCollider(1f, 1f, Position);
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     lifetime -= deltaTime;
     if (lifetime <= 0) Expire();
 
@@ -47,7 +47,7 @@ internal class BangProjectile : IProjectile, ICollidable {
     Position = sourceGun.Position + barrelOffset + visualNudge;
   }
 
-  public void Draw(SpriteBatch spriteBatch) {
+  internal void Draw(SpriteBatch spriteBatch) {
     SpriteEffects effects = SpriteEffects.None;
     float rotation = 0f;
 
@@ -67,6 +67,6 @@ internal class BangProjectile : IProjectile, ICollidable {
     spriteBatch.Draw(texture, Position, SOURCE_RECT, Color.White, rotation, origin, 1f, effects, 0f);
   }
 
-  public void OnCollision(CollisionInfo info) { }
-  public void Expire() => IsExpired = true;
+  internal void OnCollision(CollisionInfo info) { }
+  internal void Expire() => IsExpired = true;
 }

@@ -19,11 +19,11 @@ internal class SmallDoorBlock : ABaseBlock {
   private readonly IGPCommand changeLevelCommand;
   private int currentFrame = 0;
 
-  public float Rotation { get; private set; } = 0.0f;
-  public string PairedLevelName { get; private set; }
-  public LockableDoorBlockState State { get; private set; }
+  internal float Rotation { get; private set; } = 0.0f;
+  internal string PairedLevelName { get; private set; }
+  internal LockableDoorBlockState State { get; private set; }
 
-  public SmallDoorBlock(Texture2D smallDoorTexture, Vector2 xyPos, LockableDoorBlockState state, IGPCommand changeLevelCommand) : base(xyPos) {
+  internal SmallDoorBlock(Texture2D smallDoorTexture, Vector2 xyPos, LockableDoorBlockState state, IGPCommand changeLevelCommand) : base(xyPos) {
     this.smallDoorTexture = smallDoorTexture;
     this.changeLevelCommand = changeLevelCommand;
 
@@ -36,7 +36,7 @@ internal class SmallDoorBlock : ABaseBlock {
     Rotate();
   }
 
-  public void Rotate() {
+  internal void Rotate() {
     float x = Position.X, y = Position.Y;
     if (Position.X < Constants.BASE_BLOCK_WIDTH) {
       Rotation = MathHelper.ToRadians(90);
@@ -49,20 +49,20 @@ internal class SmallDoorBlock : ABaseBlock {
     Position = new(x, y);
   }
 
-  public override void Update(double deltaTime) { }
+  internal override void Update(double deltaTime) { }
 
-  public override void Draw(SpriteBatch spriteBatch) {
+  internal override void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(smallDoorTexture, Position, SOURCE_RECTS[currentFrame], Color.White, Rotation, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 
-  public override void OnCollision(CollisionInfo info) {
+  internal override void OnCollision(CollisionInfo info) {
     if (State == LockableDoorBlockState.Open && info.Collider is Player) {
       changeLevelCommand.Execute();
       SoundManager.Instance.Play(SoundID.Door);
     }
   }
 
-  public void ChangeState(LockableDoorBlockState state) {
+  internal void ChangeState(LockableDoorBlockState state) {
     State = state;
 
     if (State == LockableDoorBlockState.Open) {

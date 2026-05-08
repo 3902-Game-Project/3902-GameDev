@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.GlobalInterfaces;
 
 internal interface ILowLevelInitable {
-  void Initialize();
+  internal void Initialize();
 
-  void LoadContent(GraphicsDevice graphicsDevice, ContentManager content);
+  internal void LoadContent(GraphicsDevice graphicsDevice, ContentManager content);
 }

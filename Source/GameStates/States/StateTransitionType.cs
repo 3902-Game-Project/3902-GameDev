@@ -12,11 +12,11 @@ internal class StateTransitionType(Game1 game) : IGameState {
   private IGameState fromGameState;
   private IGameState toGameState;
 
-  public void Initialize() { }
+  internal void Initialize() { }
 
-  public void LoadContent(ContentManager content) { }
+  internal void LoadContent(ContentManager content) { }
 
-  public void Update(double deltaTime, bool isActive) {
+  internal void Update(double deltaTime, bool isActive) {
     screenFader.Update(deltaTime);
 
     switch (screenFader.FadeState) {
@@ -46,7 +46,7 @@ internal class StateTransitionType(Game1 game) : IGameState {
     }
   }
 
-  public void LowLevelDraw(LowLevelDrawParams drawData) {
+  internal void LowLevelDraw(LowLevelDrawParams drawData) {
     switch (screenFader.FadeState) {
       case ScreenFader.FadingState.FadeOut:
         fromGameState.LowLevelDraw(drawData);
@@ -65,22 +65,22 @@ internal class StateTransitionType(Game1 game) : IGameState {
     screenFader.LowLevelDraw(drawData);
   }
 
-  public void OnStateEnter(bool nextStateIsCurrentState) {
+  internal void OnStateEnter(bool nextStateIsCurrentState) {
     screenFader.FadeOut();
   }
 
-  public void OnStateLeave(bool nextStateIsCurrentState) { }
+  internal void OnStateLeave(bool nextStateIsCurrentState) { }
 
-  public void SetFadingStates(IGameState fromGameState, IGameState toGameState) {
+  internal void SetFadingStates(IGameState fromGameState, IGameState toGameState) {
     this.fromGameState = fromGameState;
     this.toGameState = toGameState;
   }
 
-  public void OnStateStartFadeIn(bool nextStateIsCurrentState) { }
+  internal void OnStateStartFadeIn(bool nextStateIsCurrentState) { }
 
-  public void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
+  internal void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
 
-  public bool NextStateIsCurrentState() {
+  internal bool NextStateIsCurrentState() {
     return fromGameState == toGameState;
   }
 }

@@ -11,7 +11,7 @@ internal class BossSpecialAttackState : IEnemyState {
   private double animationTimer = 0.0;
   private bool hasSpawnedBombs = false;
 
-  public BossSpecialAttackState(Boss boss) {
+  internal BossSpecialAttackState(Boss boss) {
     this.boss = boss;
     this.boss.Velocity = Vector2.Zero; // Lock him in place
 
@@ -23,7 +23,7 @@ internal class BossSpecialAttackState : IEnemyState {
     this.boss.CurrentFrame = 0;
   }
 
-  public void Update(double deltaTime) {
+  internal void Update(double deltaTime) {
     animationTimer += deltaTime;
 
     if (animationTimer >= ANIMATION_INTERVAL && boss.CurrentFrame < boss.CurrentSourceRectangles.Count - 1) {

@@ -13,5 +13,5 @@ internal class KeyboardController(
   // Tracking of presses / releases must be shared across GameStates
   private static readonly KeyboardDiffTracker keyTracker = new();
 
-  protected override IButtonDiffTracker<Keys, KeyboardState> ButtonTracker => keyTracker;
+  private protected override IButtonDiffTracker<Keys, KeyboardState> ButtonTracker => keyTracker;
 }

@@ -6,9 +6,9 @@ namespace GameProject.Blocks;
 internal class SandBlock(Texture2D sandTexture, Vector2 xyPos) : ABaseBlock(xyPos) {
   private static readonly Rectangle SOURCE_RECT = new(0, 0, 64, 64);
 
-  public override void Update(double deltaTime) { }
+  internal override void Update(double deltaTime) { }
 
-  public override void Draw(SpriteBatch spriteBatch) {
+  internal override void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(sandTexture, Position, SOURCE_RECT, Color.White, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 }

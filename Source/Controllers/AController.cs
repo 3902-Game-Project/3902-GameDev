@@ -9,25 +9,25 @@ internal abstract class AController<ButtonsEnum, ButtonStateReference>(
   Dictionary<ButtonsEnum, IGPCommand> downMappings = null,
   Dictionary<ButtonsEnum, IGPCommand> releasedMappings = null
 ) : IController<ButtonsEnum, ButtonStateReference> {
-  public Dictionary<ButtonsEnum, IGPCommand> PressedMappings { get; } = pressedMappings ?? [];
-  public Dictionary<ButtonsEnum, IGPCommand> DownMappings { get; } = downMappings ?? [];
-  public Dictionary<ButtonsEnum, IGPCommand> ReleasedMappings { get; } = releasedMappings ?? [];
+  internal Dictionary<ButtonsEnum, IGPCommand> PressedMappings { get; } = pressedMappings ?? [];
+  internal Dictionary<ButtonsEnum, IGPCommand> DownMappings { get; } = downMappings ?? [];
+  internal Dictionary<ButtonsEnum, IGPCommand> ReleasedMappings { get; } = releasedMappings ?? [];
 
-  protected abstract IButtonDiffTracker<ButtonsEnum, ButtonStateReference> ButtonTracker { get; }
+  private protected abstract IButtonDiffTracker<ButtonsEnum, ButtonStateReference> ButtonTracker { get; }
 
-  public IEnumerable<ButtonsEnum> GetDown() {
+  internal IEnumerable<ButtonsEnum> GetDown() {
     return ButtonTracker.GetDown();
   }
 
-  public IEnumerable<ButtonsEnum> GetPressed() {
+  internal IEnumerable<ButtonsEnum> GetPressed() {
     return ButtonTracker.GetPressed();
   }
 
-  public IEnumerable<ButtonsEnum> GetReleased() {
+  internal IEnumerable<ButtonsEnum> GetReleased() {
     return ButtonTracker.GetReleased();
   }
 
-  public void Update(ButtonStateReference buttonState) {
+  internal void Update(ButtonStateReference buttonState) {
     ButtonTracker.Update(buttonState);
 
     foreach (ButtonsEnum button in ButtonTracker.GetPressed()) {

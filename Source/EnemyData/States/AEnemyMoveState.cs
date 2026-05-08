@@ -11,10 +11,10 @@ internal abstract class AEnemyMoveState : IEnemyState {
   private readonly float speed;
   private readonly bool lockYAxis;
 
-  protected readonly ABaseEnemy enemy;
-  protected readonly Random random = new();
+  private protected readonly ABaseEnemy enemy;
+  private protected readonly Random random = new();
 
-  public AEnemyMoveState(ABaseEnemy enemy, List<Rectangle> frames, float speed, bool lockYAxis = false) {
+  internal AEnemyMoveState(ABaseEnemy enemy, List<Rectangle> frames, float speed, bool lockYAxis = false) {
     this.enemy = enemy;
     this.speed = speed;
     this.lockYAxis = lockYAxis;
@@ -25,7 +25,7 @@ internal abstract class AEnemyMoveState : IEnemyState {
     wanderDuration = 1.0 + (random.NextDouble() * 2.0);
   }
 
-  public virtual void Update(double deltaTime) {
+  internal virtual void Update(double deltaTime) {
     animationTimer += deltaTime;
     if (animationTimer >= 0.2) {
       enemy.CurrentFrame = (enemy.CurrentFrame + 1) % enemy.CurrentSourceRectangles.Count;
@@ -48,5 +48,5 @@ internal abstract class AEnemyMoveState : IEnemyState {
     if (wanderTimer >= wanderDuration) TransitionToNextState();
   }
 
-  protected abstract void TransitionToNextState();
+  private protected abstract void TransitionToNextState();
 }

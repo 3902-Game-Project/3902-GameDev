@@ -6,21 +6,21 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameProject.Globals;
 
 internal class TextureStore : ILowLevelInitable {
-  public static TextureStore Instance { get; } = new TextureStore();
+  internal static TextureStore Instance { get; } = new TextureStore();
 
-  public Texture2D WhitePixel { get; private set; }
-  public Texture2D TitleScreen { get; private set; }
-  public Texture2D Player { get; private set; }
-  public Texture2D MainBlockItemAtlas { get; private set; }
-  public Texture2D NewGuns { get; private set; }
-  public Texture2D AmmoRefill { get; private set; }
-  public Texture2D Boss { get; private set; }
-  public Texture2D HealthBar { get; private set; }
-  public Texture2D HUDBackground { get; private set; }
+  internal Texture2D WhitePixel { get; private set; }
+  internal Texture2D TitleScreen { get; private set; }
+  internal Texture2D Player { get; private set; }
+  internal Texture2D MainBlockItemAtlas { get; private set; }
+  internal Texture2D NewGuns { get; private set; }
+  internal Texture2D AmmoRefill { get; private set; }
+  internal Texture2D Boss { get; private set; }
+  internal Texture2D HealthBar { get; private set; }
+  internal Texture2D HUDBackground { get; private set; }
 
-  public void Initialize() { }
+  internal void Initialize() { }
 
-  public void LoadContent(GraphicsDevice graphicsDevice, ContentManager contentManager) {
+  internal void LoadContent(GraphicsDevice graphicsDevice, ContentManager contentManager) {
     WhitePixel = new(graphicsDevice, 1, 1);
     WhitePixel.SetData([Color.White]);
 

@@ -20,7 +20,7 @@ internal class FireBlock(Texture2D FireTexture, Vector2 xyPos, Player player) : 
 
   private readonly Player player = player;
 
-  public override void Update(double deltaTime) {
+  internal override void Update(double deltaTime) {
     animationTimer += deltaTime;
     if (animationTimer >= TIME_PER_FRAME) {
       currentFrame = 1 - currentFrame;
@@ -28,11 +28,11 @@ internal class FireBlock(Texture2D FireTexture, Vector2 xyPos, Player player) : 
     }
   }
 
-  public override void Draw(SpriteBatch spriteBatch) {
+  internal override void Draw(SpriteBatch spriteBatch) {
     spriteBatch.Draw(FireTexture, Position, SOURCE_RECTS[currentFrame], Color.White, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
   }
 
-  public override void OnCollision(CollisionInfo info) {
+  internal override void OnCollision(CollisionInfo info) {
     if (info.Collider is Player) {
       player.TakeDamage(DAMAGE);
     }

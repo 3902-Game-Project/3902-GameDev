@@ -16,13 +16,13 @@ internal class Rifleman : ABaseEnemy {
   private readonly Player player;
   private readonly CurrentLevelGetter GetCurrentLevel;
 
-  public ILevel CurrentLevel {
+  internal ILevel CurrentLevel {
     get {
       return GetCurrentLevel();
     }
   }
 
-  public Rifleman(Texture2D texture, Vector2 position, CurrentLevelGetter GetCurrentLevel, Player player) :
+  internal Rifleman(Texture2D texture, Vector2 position, CurrentLevelGetter GetCurrentLevel, Player player) :
     base(texture, position, Constants.BASE_ENEMY_WIDTH * 0.75f, Constants.BASE_ENEMY_HEIGHT * 1.5f) {
     this.GetCurrentLevel = GetCurrentLevel;
     DrawScale = 2f;
@@ -31,7 +31,7 @@ internal class Rifleman : ABaseEnemy {
     this.player = player;
   }
 
-  public void FireProjectile(int damage) {
+  internal void FireProjectile(int damage) {
     Vector2 bulletDirection = Vector2.Zero;
     Vector2 spawnPosition = Vector2.Zero;
     switch (Direction) {
@@ -63,12 +63,12 @@ internal class Rifleman : ABaseEnemy {
     CurrentLevel.ProjectileManager.Add(bullet);
   }
 
-  protected override void DropLoot() {
+  private protected override void DropLoot() {
     CurrentLevel.AddPickup(WorldPickupFactory.CreateAmmo(Position, AmmoType.Heavy, 5));
     CurrentLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateHealthPotion(Position.X, Position.Y - 60.0f, player)));
   }
 
-  protected override void TransitionToDeathState() {
+  private protected override void TransitionToDeathState() {
     CurrentState = new GenericDeathState(
       this,
       [
