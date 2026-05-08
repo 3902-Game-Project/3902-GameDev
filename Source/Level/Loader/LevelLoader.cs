@@ -13,7 +13,7 @@ using GameProject.Projectiles;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 
-namespace GameProject.Level;
+namespace GameProject.Level.Loader;
 
 internal delegate IBlock BlockCreationFunc(float x, float y);
 internal delegate IBlock PlayerBlockCreationFunc(float x, float y, Player player);

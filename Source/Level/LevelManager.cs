@@ -6,6 +6,7 @@ using System.IO;
 using GameProject.Commands;
 using GameProject.Globals;
 using GameProject.Items;
+using GameProject.Level.Loader;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
