@@ -73,6 +73,7 @@ internal partial class LevelLoader {
     { "7", CreateNonCollidableBlockCreator(BlockFactory.CreateWoodPlankBlockSprite) }, /* wood plank */
     { "8-0", CreateCollidableBlockCreator(BlockFactory.CreateRockBlockSprite) }, /* rock: wall */
     { "8-1", CreateCollidableBlockCreator(BlockFactory.CreateRockCornerBlockSprite) }, /* rock: corner */
+    /* 8-2: omitted */
     { "9", CreateFiringItemEnemyCreator(EnemyFactory.Instance.CreateShotgunnerSprite) }, /* shotgunner */
     { "10", CreateEnemyCreator(EnemyFactory.Instance.CreateBatSprite) }, /* bat */
     { "11", CreateFiringItemEnemyCreator(EnemyFactory.Instance.CreateRiflemanSprite) }, /* rifleman */
@@ -87,6 +88,7 @@ internal partial class LevelLoader {
     { "21", CreateKeyItemCreator(ItemFactory.CreateKey) }, /* key item */
     { "22", CreateCollidableBlockCreator(BlockFactory.CreateFirePitBlockSprite) }, /* fire pit */
     { "23", CreateCollidablePlayerBlockCreator(BlockFactory.CreateFireBlockSprite) }, /* fire */
+    /* 24: omitted */
     { "25", CreateCollidableBlockCreator(BlockFactory.CreateMudBlockSprite) }, /* mud */
     { "26", CreateCollidableBlockCreator(BlockFactory.CreateCrateBlockSprite) }, /* crate */
     { "27", CreateCollidableBlockCreator(BlockFactory.CreateStoolBlockSprite) }, /* stool */
