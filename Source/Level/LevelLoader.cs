@@ -92,7 +92,7 @@ internal partial class LevelLoader {
     { "35", CreateCollidableBlockCreator(BlockFactory.CreateTellersDeskBlockSprite) }, /* tellers desk */
     { "36", CreatePlayerItemCreator(ItemFactory.Instance.CreateHealthPotion) }, /* health potion item */
     { "37", CreatePlayerItemCreator(ItemFactory.Instance.CreateInvincibilityPotion) }, /* invincibility potion item */
-    { "38", CreatePlayerItemCreator(ItemFactory.Instance.CreateInfiniteAmmo) }, /* infinite ammo potion item */
+    { "38", CreatePlayerItemCreator(ItemFactory.Instance.CreateInfiniteAmmoPotion) }, /* infinite ammo potion item */
     { "39", CreateFiringEnemyCreator(EnemyFactory.Instance.CreateBossSprite) }, /* boss */
   };
 

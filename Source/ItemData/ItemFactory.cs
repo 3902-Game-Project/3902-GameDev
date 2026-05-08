@@ -117,7 +117,7 @@ internal class ItemFactory {
     return new InvincibilityPotionItem(invincibilityPotionTexture, new Vector2(xPos, yPos), player);
   }
 
-  public IItem CreateInfiniteAmmo(float xPos, float yPos, Player player) {
+  public IItem CreateInfiniteAmmoPotion(float xPos, float yPos, Player player) {
     return new InfiniteAmmoPotionItem(infiniteAmmoPotionTexture, new Vector2(xPos, yPos), player);
   }
 }

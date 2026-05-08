@@ -90,7 +90,7 @@ internal class CheatCodes : ITemporalUpdatable {
     }
 
     if (!player.Inventory.GeneralItems.OfType<InfiniteAmmoPotionItem>().Any()) {
-      IItem ammo = ItemFactory.Instance.CreateInfiniteAmmo(-1f, -1f, player);
+      IItem ammo = ItemFactory.Instance.CreateInfiniteAmmoPotion(-1f, -1f, player);
       player.Inventory.PickupItem(ammo);
     }
 
