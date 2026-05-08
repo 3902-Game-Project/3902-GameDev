@@ -33,6 +33,7 @@ Player still draws and updates the inventory
 -----Done > Sprint 5 early comments-----:
 
 StateGameType - Santosh
+LevelLoader (excused based on being a level loading class) - Santosh
 
 -----Done > Sprint 5-----:
 
@@ -90,7 +91,6 @@ Replaced with ABaseEnemy. Still contains a lot of public fields which are refere
 
 StateItemScreenType
 Level
-LevelLoader (excused based on being a level loading class)
 
 -----Not Done > Sprint 5-----:
 
