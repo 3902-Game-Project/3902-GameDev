@@ -16,6 +16,8 @@ namespace GameProject.Level;
 
 internal delegate IBlock BlockCreationFunc(float x, float y);
 internal delegate IBlock PlayerBlockCreationFunc(float x, float y, Player player);
+internal delegate IEnemy EnemyCreationFunc(float x, float y);
+internal delegate IEnemy FiringEnemyCreationFunc(float x, float y, CurrentLevelGetter GetCurrentLevel, Player player);
 
 internal delegate void CellEntryParseFunc(
   Player player,
@@ -53,9 +55,15 @@ internal partial class LevelLoader {
   public static readonly float PLAYER_BOTTOM_POS_AFTER_TELEPORT = Constants.LEVEL_HEIGHT - Constants.BASE_BLOCK_WIDTH * 1.5f;
 
   private static readonly Dictionary<string, CellEntryParseFunc> CELL_ENTRY_FUNCS = new() {
+    { "4", CreateEnemyCreator(EnemyFactory.Instance.CreateSnakeSprite) }, /* snake */
     { "5", CreateNonCollidableBlockCreator(BlockFactory.CreateSandBlockSprite) }, /* sand */
     { "6", CreateNonCollidableBlockCreator(BlockFactory.CreateRedSandBlockSprite) }, /* red sand */
     { "7", CreateNonCollidableBlockCreator(BlockFactory.CreateWoodPlankBlockSprite) }, /* wood plank */
+    { "9", CreateFiringEnemyCreator(EnemyFactory.Instance.CreateShotgunnerSprite) }, /* shotgunner */
+    { "10", CreateEnemyCreator(EnemyFactory.Instance.CreateBatSprite) }, /* bat */
+    { "11", CreateFiringEnemyCreator(EnemyFactory.Instance.CreateRiflemanSprite) }, /* rifleman */
+    { "12", CreateEnemyCreator(EnemyFactory.Instance.CreateTumbleweedSprite) }, /* tumbleweed */
+    { "13", CreateEnemyCreator(EnemyFactory.Instance.CreateCactusSprite) }, /* cactus */
     { "17", CreateCollidableBlockCreator(BlockFactory.CreateBarrelBlockSprite) }, /* barrel */
     { "18", CreateCollidableBlockCreator(BlockFactory.CreateBarShelfBlockSprite) }, /* bar shelf */
     { "19", CreateCollidableBlockCreator(BlockFactory.CreateShelfBlockSprite) }, /* shelf */
@@ -78,7 +86,7 @@ internal partial class LevelLoader {
       ILevelManager levelManager,
       ISet<string> levelNames,
 
-      string type, // needed for error information
+      string type,
       string[] arguments,
       float xPos,
       float yPos,
@@ -102,7 +110,7 @@ internal partial class LevelLoader {
       ILevelManager levelManager,
       ISet<string> levelNames,
 
-      string type, // needed for error information
+      string type,
       string[] arguments,
       float xPos,
       float yPos,
@@ -126,7 +134,7 @@ internal partial class LevelLoader {
       ILevelManager levelManager,
       ISet<string> levelNames,
 
-      string type, // needed for error information
+      string type,
       string[] arguments,
       float xPos,
       float yPos,
@@ -141,6 +149,54 @@ internal partial class LevelLoader {
       CheckEntryLength(arguments, 0, type);
 
       collidableBlocks.Add(PlayerBlockCreator(xPos, yPos, player));
+    };
+  }
+
+  private static CellEntryParseFunc CreateEnemyCreator(EnemyCreationFunc EnemyCreator) {
+    return (
+      Player player,
+      ILevelManager levelManager,
+      ISet<string> levelNames,
+
+      string type,
+      string[] arguments,
+      float xPos,
+      float yPos,
+
+      List<IBlock> nonCollidableBlocks,
+      List<IBlock> collidableBlocks,
+      List<IBlock> doors,
+      List<IEnemy> enemies,
+      List<IWorldPickup> pickups,
+      ref Vector2? playerPositionNullable
+    ) => {
+      CheckEntryLength(arguments, 0, type);
+
+      enemies.Add(EnemyCreator(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
+    };
+  }
+
+  private static CellEntryParseFunc CreateFiringEnemyCreator(FiringEnemyCreationFunc FiringEnemyCreator) {
+    return (
+      Player player,
+      ILevelManager levelManager,
+      ISet<string> levelNames,
+
+      string type,
+      string[] arguments,
+      float xPos,
+      float yPos,
+
+      List<IBlock> nonCollidableBlocks,
+      List<IBlock> collidableBlocks,
+      List<IBlock> doors,
+      List<IEnemy> enemies,
+      List<IWorldPickup> pickups,
+      ref Vector2? playerPositionNullable
+    ) => {
+      CheckEntryLength(arguments, 0, type);
+
+      enemies.Add(FiringEnemyCreator(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, () => levelManager.CurrentLevel, player));
     };
   }
 
@@ -278,14 +334,6 @@ internal partial class LevelLoader {
         }
         break;
 
-      case "4":
-        /* snake */
-
-        CheckEntryLength(arguments, 0, type);
-
-        enemies.Add(EnemyFactory.Instance.CreateSnakeSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
-        break;
-
       case "8": {
           /* rock */
 
@@ -330,46 +378,6 @@ internal partial class LevelLoader {
           }
           break;
         }
-
-      case "9":
-        /* shotgunner */
-
-        CheckEntryLength(arguments, 0, type);
-
-        enemies.Add(EnemyFactory.Instance.CreateShotgunnerSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, () => levelManager.CurrentLevel, player));
-        break;
-
-      case "10":
-        /* bat */
-
-        CheckEntryLength(arguments, 0, type);
-
-        enemies.Add(EnemyFactory.Instance.CreateBatSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
-        break;
-
-      case "11":
-        /* rifleman */
-
-        CheckEntryLength(arguments, 0, type);
-
-        enemies.Add(EnemyFactory.Instance.CreateRiflemanSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, () => levelManager.CurrentLevel, player));
-        break;
-
-      case "12":
-        /* tumbleweed */
-
-        CheckEntryLength(arguments, 0, type);
-
-        enemies.Add(EnemyFactory.Instance.CreateTumbleweedSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
-        break;
-
-      case "13":
-        /* cactus */
-
-        CheckEntryLength(arguments, 0, type);
-
-        enemies.Add(EnemyFactory.Instance.CreateCactusSprite(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
-        break;
 
       case "14":
         /* revolver */
