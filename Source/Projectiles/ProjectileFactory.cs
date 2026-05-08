@@ -1,3 +1,4 @@
+using GameProject.GlobalInterfaces;
 using GameProject.Globals;
 using GameProject.Items;
 using Microsoft.Xna.Framework;
@@ -6,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Projectiles;
 
-internal class ProjectileFactory {
+internal class ProjectileFactory : IInitable {
   private Texture2D projectileTexture;
   private Texture2D bombBlinkingTexture;
 
@@ -14,7 +15,9 @@ internal class ProjectileFactory {
 
   private ProjectileFactory() { }
 
-  public void LoadAllTextures(ContentManager content) {
+  public void Initialize() { }
+
+  public void LoadContent(ContentManager content) {
     projectileTexture = content.Load<Texture2D>("Projectiles/Projectile Spritesheet");
     bombBlinkingTexture = content.Load<Texture2D>("Projectiles/Bomb Spritesheet");
   }

@@ -1,3 +1,4 @@
+using GameProject.GlobalInterfaces;
 using GameProject.Globals;
 using GameProject.Level;
 using GameProject.PlayerSpace;
@@ -8,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Items;
 
-internal class ItemFactory {
+internal class ItemFactory : IInitable {
   private Texture2D basicGunsTexture;
   private Texture2D healthPotionTexture;
   private Texture2D invincibilityPotionTexture;
@@ -18,7 +19,9 @@ internal class ItemFactory {
 
   private ItemFactory() { }
 
-  public void LoadAllTextures(ContentManager contentManager) {
+  public void Initialize() { }
+
+  public void LoadContent(ContentManager contentManager) {
     basicGunsTexture = contentManager.Load<Texture2D>("World Pickups/Items/Basic Guns Spritesheet");
     invincibilityPotionTexture = contentManager.Load<Texture2D>("World Pickups/Items/Invincibility Potion");
     healthPotionTexture = contentManager.Load<Texture2D>("World Pickups/Items/Health Potion");

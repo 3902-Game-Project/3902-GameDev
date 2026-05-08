@@ -1,3 +1,4 @@
+using GameProject.GlobalInterfaces;
 using GameProject.Globals;
 using GameProject.Level;
 using GameProject.PlayerSpace;
@@ -7,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject.Enemies;
 
-internal class EnemyFactory {
+internal class EnemyFactory : IInitable {
   private Texture2D snakeTexture;
   private Texture2D batTexture;
   private Texture2D shotgunnerTexture;
@@ -19,7 +20,9 @@ internal class EnemyFactory {
 
   private EnemyFactory() { }
 
-  public void LoadAllTextures(ContentManager contentManager) {
+  public void Initialize() { }
+
+  public void LoadContent(ContentManager contentManager) {
     snakeTexture = contentManager.Load<Texture2D>("Enemies/Snake Spritesheet");
     batTexture = contentManager.Load<Texture2D>("Enemies/Bat Spritesheet");
     shotgunnerTexture = contentManager.Load<Texture2D>("Enemies/Shotgunner Spritesheet");

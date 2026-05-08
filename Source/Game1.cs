@@ -53,6 +53,11 @@ internal class Game1 : Game {
     MiscAssetStore.Instance.Initialize();
     TextureStore.Instance.Initialize();
 
+    EnemyFactory.Instance.Initialize();
+    SoundManager.Instance.Initialize();
+    ItemFactory.Instance.Initialize();
+    ProjectileFactory.Instance.Initialize();
+
     StateMachine.Initialize();
 
     base.Initialize();
@@ -92,10 +97,10 @@ internal class Game1 : Game {
     MiscAssetStore.Instance.LoadContent(Content);
     TextureStore.Instance.LoadContent(GraphicsDevice, Content);
 
-    EnemyFactory.Instance.LoadAllTextures(Content);
-    SoundManager.Instance.LoadAllContent(Content);
-    ItemFactory.Instance.LoadAllTextures(Content);
-    ProjectileFactory.Instance.LoadAllTextures(Content);
+    EnemyFactory.Instance.LoadContent(Content);
+    SoundManager.Instance.LoadContent(Content);
+    ItemFactory.Instance.LoadContent(Content);
+    ProjectileFactory.Instance.LoadContent(Content);
 
     StateMachine.LoadContent(Content);
   }

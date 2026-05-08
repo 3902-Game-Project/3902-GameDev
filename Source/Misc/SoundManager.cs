@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using GameProject.GlobalInterfaces;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 
@@ -13,7 +14,7 @@ internal enum SoundID {
   Door,
 }
 
-internal class SoundManager {
+internal class SoundManager : IInitable {
   public bool MusicEnabled {
     get => musicEnabled;
     set {
@@ -46,7 +47,9 @@ internal class SoundManager {
 
   private SoundManager() { }
 
-  public void LoadAllContent(ContentManager content) {
+  public void Initialize() { }
+
+  public void LoadContent(ContentManager content) {
     sounds[SoundID.PlayerHurt] = content.Load<SoundEffect>("Sound Effects/Player Hurt");
     sounds[SoundID.GunshotDefault] = content.Load<SoundEffect>("Sound Effects/Gun Shot");
     sounds[SoundID.ReloadDefault] = content.Load<SoundEffect>("Sound Effects/Reload");
