@@ -248,7 +248,7 @@ dotnet_diagnostic.CA1812.severity = warning
 dotnet_diagnostic.CA1200.severity = suggestion
 dotnet_diagnostic.CA1309.severity = suggestion
 dotnet_diagnostic.CA1311.severity = suggestion
-dotnet_diagnostic.CA1805.severity = suggestion
+dotnet_diagnostic.CA1805.severity = none
 
 [*.{cs,vb}]
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
