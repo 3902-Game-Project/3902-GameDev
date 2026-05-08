@@ -122,7 +122,7 @@ internal class PlayerInventory(Player player, ProjectileManagerGetter GetProject
 
   public void Draw(SpriteBatch spriteBatch, Vector2 Position, FacingDirection Direction, Texture2D whitePixel) {
     if (ActiveItem != null) {
-      Vector2 spriteCenter = new(Constants.PLAYER_SPRITE_WIDTH / 2f, Constants.PLAYER_SPRITE_HEIGHT / 2f);
+      Vector2 spriteCenter = new(Constants.PLAYER_SPRITE_WIDTH * 0.5f, Constants.PLAYER_SPRITE_HEIGHT * 0.5f);
 
       Vector2 rightHandUnscaled = new(100f, 195f);
       Vector2 leftHandUnscaled = new(18f, 188f);
@@ -148,14 +148,14 @@ internal class PlayerInventory(Player player, ProjectileManagerGetter GetProject
     // Draw Overhead Reload Bar or BFG Bar
     if (ActiveItem is BFGItem bfg && whitePixel != null) {
       float totalWidth = (BFG_SEGMENT_WIDTH * 3) + (BFG_SEGMENT_GAP * 2);
-      Vector2 barPos = Position + new Vector2(-totalWidth / 2f, BAR_Y_OFFSET);
+      Vector2 barPos = Position + new Vector2(-totalWidth * 0.5f, BAR_Y_OFFSET);
 
       for (int i = 0; i < 3; i++) {
         Color c = (i < bfg.Stats.CurrentAmmo) ? Color.LimeGreen : Color.DarkGray * 0.5f;
         spriteBatch.Draw(whitePixel, new Rectangle((int) (barPos.X + i * (BFG_SEGMENT_WIDTH + BFG_SEGMENT_GAP)), (int) barPos.Y, (int) BFG_SEGMENT_WIDTH, (int) RELOAD_BAR_HEIGHT), c);
       }
     } else if (ActiveItem is ABaseGun gun && gun.IsReloading && whitePixel != null) {
-      Vector2 barPos = Position + new Vector2(-RELOAD_BAR_WIDTH / 2f, BAR_Y_OFFSET);
+      Vector2 barPos = Position + new Vector2(-RELOAD_BAR_WIDTH * 0.5f, BAR_Y_OFFSET);
 
       float progress = 1.0f - ((float) (gun.ReloadTimer / gun.Stats.ReloadTime));
 

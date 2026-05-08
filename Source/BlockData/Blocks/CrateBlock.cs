@@ -14,7 +14,7 @@ internal class CrateBlock(Texture2D CrateTexture, Vector2 xyPos) : ABaseBlock(xy
 
   protected void UpdateCollider() {
     if (Collider != null) {
-      Collider.Position = Position + new Vector2(Collider.Width / 2f, Collider.Height / 2f);
+      Collider.Position = Position + new Vector2(Collider.Width * 0.5f, Collider.Height * 0.5f);
     }
   }
 

@@ -28,7 +28,7 @@ internal abstract class ABaseEnemy(
 
   protected void UpdateCollider() {
     if (Collider != null) {
-      Collider.Position = Position + new Vector2(0, -Collider.Height / 2f);
+      Collider.Position = Position + new Vector2(0.0f, -Collider.Height * 0.5f);
     }
   }
 
@@ -125,7 +125,7 @@ internal abstract class ABaseEnemy(
       float enemyHealthPercent = MathHelper.Clamp((float) Health / MaxHealth, 0f, 1f);
       float scaleWidth = TextureStore.Instance.HealthBar.Width * 0.15f;
       Vector2 enemyHealthPositions = new(
-        Position.X - (scaleWidth / 2f),
+        Position.X - scaleWidth * 0.5f,
         Position.Y - Collider.Height
       );
       spriteBatch.Draw(texture: TextureStore.Instance.HealthBar,

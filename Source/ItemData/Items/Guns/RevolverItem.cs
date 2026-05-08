@@ -11,7 +11,7 @@ internal class RevolverItem : ABaseGun {
     : base(texture, startPosition, player, GetProjectileManager, stats) {
     Category = ItemCategory.Sidearm;
     sourceRectangle = new Rectangle(0, 0, 16, 9);
-    bulletSpawnOffset = new Vector2(sourceRectangle.Width / 2f, -1f * (sourceRectangle.Height / 2f - 3f)) * SCALE;
+    bulletSpawnOffset = new Vector2(sourceRectangle.Width * 0.5f, -1.0f * (sourceRectangle.Height * 0.5f - 3.0f)) * SCALE;
     fireMode = new SemiAutoFire(this.stats);
   }
 }

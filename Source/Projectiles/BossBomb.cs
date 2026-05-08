@@ -130,7 +130,7 @@ internal class BossBomb : IProjectile, ICollidable {
     Texture2D currentTexture = isLanded ? blinkingTexture : flyingTexture;
     Rectangle sourceRect = isLanded ? blinkingRectangles[currentFrame] : flyingRectangles[currentFrame];
 
-    Vector2 origin = new(sourceRect.Width / 2f, sourceRect.Height / 2f);
+    Vector2 origin = new(sourceRect.Width * 0.5f, sourceRect.Height * 0.5f);
 
     spriteBatch.Draw(currentTexture, Position, sourceRect, Color.White, 0f, origin, 1.0f, SpriteEffects.None, 0f);
   }

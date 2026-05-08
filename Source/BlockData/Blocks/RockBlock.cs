@@ -10,10 +10,10 @@ internal class RockBlock(Texture2D RockTexture, Vector2 xyPos) : ABaseBlock(xyPo
   public float Rotation { get; private set; }
 
   public void Rotate() {
-    if (Position.X > 0 && Position.Y > 0) {
-      Rotation = (float) Math.PI;
-    } else if (Position.Y > 0 && Position.X == 0) {
-      Rotation = 3f * (float) Math.PI / 2f;
+    if (Position.X > 0.0f && Position.Y > 0.0f) {
+      Rotation = MathF.PI;
+    } else if (Position.Y > 0.0f && Position.X == 0.0f) {
+      Rotation = 3.0f * MathF.PI * 0.5f;
     }
   }
 

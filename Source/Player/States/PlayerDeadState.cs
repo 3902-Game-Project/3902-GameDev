@@ -51,7 +51,7 @@ internal class PlayerDeadState(Player player, Action onLoss) : APlayerState(play
 
   public override void Draw(SpriteBatch spriteBatch) {
     Rectangle sourceRect = SOURCE_RECTS[currentFrame];
-    Vector2 origin = new(sourceRect.Width / 2f, sourceRect.Height / 2f);
+    Vector2 origin = new(sourceRect.Width * 0.5f, sourceRect.Height * 0.5f);
 
     spriteBatch.Draw(
       texture: TextureStore.Instance.Player,
