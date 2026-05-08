@@ -98,7 +98,7 @@ internal partial class LevelLoader {
   }
 
   private static LevelFlags ParseFlags(string flagString) {
-    if (!flagString.StartsWith(FLAGS_LINE_START)) {
+    if (!flagString.StartsWith(FLAGS_LINE_START, StringComparison.Ordinal)) {
       throw new FormatException("level data flags entry invalid");
     }
 
