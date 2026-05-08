@@ -14,6 +14,8 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject.Level;
 
+internal delegate IBlock BlockCreationFunc(float x, float y);
+
 internal delegate void CellEntryParseFunc(
   Player player,
   ILevelManager levelManager,
@@ -49,7 +51,33 @@ internal partial class LevelLoader {
   public static readonly float PLAYER_RIGHT_POS_AFTER_TELEPORT = Constants.LEVEL_WIDTH - Constants.BASE_BLOCK_WIDTH * 1.5f;
   public static readonly float PLAYER_BOTTOM_POS_AFTER_TELEPORT = Constants.LEVEL_HEIGHT - Constants.BASE_BLOCK_WIDTH * 1.5f;
 
-  private static readonly Dictionary<string, CellEntryParseFunc> CELL_ENTRY_FUNCS = [];
+  private static readonly Dictionary<string, CellEntryParseFunc> CELL_ENTRY_FUNCS = new() {
+    { "5", CreateNonCollidableBlockCreator(BlockFactory.CreateSandBlockSprite) }, /* sand */
+  };
+
+  private static CellEntryParseFunc CreateNonCollidableBlockCreator(BlockCreationFunc BlockCreator) {
+    return (
+      Player player,
+      ILevelManager levelManager,
+      ISet<string> levelNames,
+
+      string type, // needed for error information
+      string[] arguments,
+      float xPos,
+      float yPos,
+
+      List<IBlock> nonCollidableBlocks,
+      List<IBlock> collidableBlocks,
+      List<IBlock> doors,
+      List<IEnemy> enemies,
+      List<IWorldPickup> pickups,
+      ref Vector2? playerPositionNullable
+    ) => {
+      CheckEntryLength(arguments, 0, type);
+
+      nonCollidableBlocks.Add(BlockCreator(xPos, yPos));
+    };
+  }
 
   private static void ParseSingleFlag(LevelFlags flags, string flag) {
     switch (flag) {
