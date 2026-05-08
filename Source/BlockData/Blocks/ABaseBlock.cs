@@ -23,7 +23,9 @@ internal abstract class ABaseBlock : IBlock, ICollidable {
     Collider = new BoxCollider(width, height, position + centerOffset);
   }
 
-  public virtual void OnCollision(CollisionInfo info) { }
   public abstract void Update(double deltaTime);
+  
   public abstract void Draw(SpriteBatch spriteBatch);
+
+  public virtual void OnCollision(CollisionInfo info) { }
 }

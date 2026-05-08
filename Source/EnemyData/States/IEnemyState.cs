@@ -1,5 +1,5 @@
+using GameProject.GlobalInterfaces;
+
 namespace GameProject.Enemies;
 
-internal interface IEnemyState {
-  void Update(double deltaTime);
-}
+internal interface IEnemyState : ITemporalUpdatable { }
