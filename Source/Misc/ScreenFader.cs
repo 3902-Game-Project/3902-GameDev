@@ -50,7 +50,7 @@ internal class ScreenFader(GameWindow gameWindow) : ITemporalUpdatable, ILowLeve
         break;
 
       default:
-        throw new Exception("Unknown fading state value");
+        throw new NotImplementedException("Unknown fading state value");
     }
   }
 
@@ -77,7 +77,7 @@ internal class ScreenFader(GameWindow gameWindow) : ITemporalUpdatable, ILowLeve
         break;
 
       default:
-        throw new Exception("Unknown fading state value");
+        throw new NotImplementedException("Unknown fading state value");
     }
 
     drawData.SpriteBatch.End();

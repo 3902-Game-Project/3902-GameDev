@@ -42,7 +42,7 @@ internal class StateTransitionType(Game1 game) : IGameState {
         break;
 
       default:
-        throw new Exception("Unknown fading state value");
+        throw new NotImplementedException("Unknown fading state value");
     }
   }
 
@@ -59,7 +59,7 @@ internal class StateTransitionType(Game1 game) : IGameState {
         break;
 
       default:
-        throw new Exception("Unknown fading state value");
+        throw new NotImplementedException("Unknown fading state value");
     }
 
     screenFader.LowLevelDraw(drawData);
