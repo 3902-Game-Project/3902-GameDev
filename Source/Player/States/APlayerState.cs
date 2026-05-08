@@ -1,8 +1,6 @@
 using GameProject.Controllers;
 using GameProject.Globals;
-using GameProject.Level;
 using GameProject.Misc;
-using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

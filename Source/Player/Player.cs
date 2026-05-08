@@ -6,7 +6,6 @@ using GameProject.Controllers;
 using GameProject.Enemies;
 using GameProject.GlobalInterfaces;
 using GameProject.Globals;
-using GameProject.Level;
 using GameProject.PlayerSpace.States;
 using GameProject.Projectiles;
 using Microsoft.Xna.Framework;

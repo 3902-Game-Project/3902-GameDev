@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using GameProject.Controllers;
 using GameProject.Globals;
-using GameProject.Level;
 using GameProject.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
