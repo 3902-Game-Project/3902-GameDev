@@ -430,29 +430,21 @@ internal partial class LevelLoader {
         CheckEntryLength(arguments, 0, type);
         break;
 
-      case "1": {
-          /* log */
+      case "1-0":
+        /* log: wall */
 
-          CheckEntryLength(arguments, 1, type);
+        CheckEntryLength(arguments, 0, type);
 
-          var variation = arguments[0];
+        collidableBlocks.Add(BlockFactory.CreateLogBlockSprite(xPos, yPos));
+        break;
 
-          switch (variation) {
-            case "0":
-              /* wall */
-              collidableBlocks.Add(BlockFactory.CreateLogBlockSprite(xPos, yPos));
-              break;
+      case "1-1":
+        /* log: corner */
 
-            case "1":
-              /* corner */
-              collidableBlocks.Add(BlockFactory.CreateLogCornerBlockSprite(xPos, yPos));
-              break;
+        CheckEntryLength(arguments, 0, type);
 
-            default:
-              throw new FormatException($"unrecognized level block/entity variation '{arguments[0]}'");
-          }
-          break;
-        }
+        collidableBlocks.Add(BlockFactory.CreateLogCornerBlockSprite(xPos, yPos));
+        break;
 
       case "2": {
           /* small door */
@@ -489,48 +481,34 @@ internal partial class LevelLoader {
         }
         break;
 
-      case "8": {
-          /* rock */
+      case "8-0":
+        /* rock: wall */
 
-          CheckEntryLengthGreaterThanEqual(arguments, 1, type);
+        CheckEntryLength(arguments, 0, type);
 
-          var variation = arguments[0];
+        collidableBlocks.Add(BlockFactory.CreateRockBlockSprite(xPos, yPos));
+        break;
 
-          switch (variation) {
-            case "0":
-              /* wall */
+      case "8-1":
+        /* rock: corner */
 
-              CheckEntryLength(arguments, 1, type);
+        CheckEntryLength(arguments, 0, type);
 
-              collidableBlocks.Add(BlockFactory.CreateRockBlockSprite(xPos, yPos));
-              break;
+        collidableBlocks.Add(BlockFactory.CreateRockCornerBlockSprite(xPos, yPos));
+        break;
 
-            case "1":
-              /* corner */
+      case "8-3": {
+          /* rock: hole to other room */
 
-              CheckEntryLength(arguments, 1, type);
+          CheckEntryLength(arguments, 1, type);
 
-              collidableBlocks.Add(BlockFactory.CreateRockCornerBlockSprite(xPos, yPos));
-              break;
+          var pairedLevelName = arguments[0];
 
-            case "3": {
-                /* hole to other room */
-
-                CheckEntryLength(arguments, 2, type);
-
-                var pairedLevelName = arguments[1];
-
-                if (!levelNames.Contains(pairedLevelName)) {
-                  throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
-                }
-
-                doors.Add(BlockFactory.CreateRockHoleBlockSprite(xPos, yPos, pairedLevelName, levelManager.SwitchLevel));
-                break;
-              }
-
-            default:
-              throw new FormatException($"unrecognized level block/entity variation '{variation}'");
+          if (!levelNames.Contains(pairedLevelName)) {
+            throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
           }
+
+          doors.Add(BlockFactory.CreateRockHoleBlockSprite(xPos, yPos, pairedLevelName, levelManager.SwitchLevel));
           break;
         }
 
