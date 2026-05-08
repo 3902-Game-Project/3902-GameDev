@@ -18,11 +18,11 @@ internal class HUDManager(Player player) : IGPDrawable {
       origin: Vector2.Zero,
       scale: 1.0f,
       effects: SpriteEffects.None,
-      layerDepth: 0f
+      layerDepth: 0.0f
     );
 
     var healthBarPosition = new Vector2(20, 20);
-    float healthPercent = MathHelper.Clamp(player.Health / 100f, 0f, 1f);
+    float healthPercent = MathHelper.Clamp(player.Health / 100.0f, 0.0f, 1.0f);
     spriteBatch.Draw(
       texture: TextureStore.Instance.HealthBar,
       position: healthBarPosition,
@@ -32,7 +32,7 @@ internal class HUDManager(Player player) : IGPDrawable {
       origin: Vector2.Zero,
       scale: 0.5f,  //scale of blood bar
       effects: SpriteEffects.None,
-      layerDepth: 0f
+      layerDepth: 0.0f
     );
 
 
@@ -47,7 +47,7 @@ internal class HUDManager(Player player) : IGPDrawable {
       origin: Vector2.Zero,
       scale: 0.5f, //scale of the blood bar
       effects: SpriteEffects.None,
-      layerDepth: 0f
+      layerDepth: 0.0f
     );
 
     //draw player's items, keys...
