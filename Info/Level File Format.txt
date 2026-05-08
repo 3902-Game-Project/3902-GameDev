@@ -23,11 +23,11 @@ Entry IDs:
     7 = Wood Plank
 
   Colliding blocks:
-    1:X = Log
+    1-X = Log
       X = variation:
         0 = wall
         1 = corner
-    8:X = Rock
+    8-X = Rock
       X = variation:
         0 = wall
         1 = corner
@@ -106,7 +106,7 @@ Entry IDs:
     39 = boss
 
   Gaps in the IDs:
-    8:2, 24
+    8-2, 24
 
   Biggest ID:
     39
