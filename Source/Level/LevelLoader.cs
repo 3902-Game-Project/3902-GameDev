@@ -23,6 +23,7 @@ internal delegate IEnemy FiringItemEnemyCreationFunc(float x, float y, CurrentLe
 internal delegate IItem GunItemCreationFunc(float xPos, float yPos, Player player, ProjectileManagerGetter GetProjectileManager);
 internal delegate IItem KeyItemCreationFunc(float xPos, float yPos, CurrentLevelGetter GetCurrentLevel);
 internal delegate IItem PlayerItemCreationFunc(float xPos, float yPos, Player player);
+internal delegate IWorldPickup AmmoItemCreationFunc(Vector2 position, AmmoType type, int amount);
 
 internal delegate void CellEntryParseFunc(
   Player player,
@@ -45,6 +46,7 @@ internal delegate void CellEntryParseFunc(
 internal partial class LevelLoader {
   private static readonly Vector2 PLAYER_POSITION_OFFSET = new(Constants.BASE_BLOCK_WIDTH / 2.0f, Constants.BASE_BLOCK_HEIGHT / 2.0f);
   private static readonly Vector2 ENEMY_POSITION_OFFSET = new(Constants.BASE_BLOCK_WIDTH / 2.0f, Constants.BASE_BLOCK_HEIGHT);
+  private static readonly Vector2 AMMO_POSITION_OFFSET = new(Constants.BASE_BLOCK_WIDTH / 2.0f, Constants.BASE_BLOCK_HEIGHT / 2.0f);
   private static readonly string FLAGS_LINE_START = "Flags: ";
 
   [GeneratedRegex(@"\r?\n")]
@@ -85,6 +87,7 @@ internal partial class LevelLoader {
     { "29", CreateCollidableBlockCreator(BlockFactory.CreateStatueBlockSprite) }, /* statue */
     { "30", CreateCollidableBlockCreator(BlockFactory.CreateWindowBlockSprite) }, /* window */
     { "32", CreateCollidableBlockCreator(BlockFactory.CreateTreasureBlockSprite) }, /* treasure block */
+    { "33", CreateAmmoItemCreator(WorldPickupFactory.Instance.CreateAmmo) }, /* ammo item */
     { "34", CreateCollidableBlockCreator(BlockFactory.CreateBankShelfBlockSprite) }, /* bank shelf */
     { "35", CreateCollidableBlockCreator(BlockFactory.CreateTellersDeskBlockSprite) }, /* tellers desk */
     { "36", CreatePlayerItemCreator(ItemFactory.Instance.CreateHealthPotion) }, /* health potion item */
@@ -309,6 +312,49 @@ internal partial class LevelLoader {
     };
   }
 
+  private static CellEntryParseFunc CreateAmmoItemCreator(AmmoItemCreationFunc AmmoItemCreator) {
+    return (
+      Player player,
+      ILevelManager levelManager,
+      ISet<string> levelNames,
+
+      string type,
+      string[] arguments,
+      float xPos,
+      float yPos,
+
+      List<IBlock> nonCollidableBlocks,
+      List<IBlock> collidableBlocks,
+      List<IBlock> doors,
+      List<IEnemy> enemies,
+      List<IWorldPickup> pickups,
+      ref Vector2? playerPositionNullable
+    ) => {
+      CheckEntryLength(arguments, 2, type);
+
+      var ammoTypeString = arguments[0];
+
+      var ammoType = ammoTypeString switch {
+        "0" => AmmoType.Light,
+        "1" => AmmoType.Heavy,
+        "2" => AmmoType.Shells,
+        _ => throw new FormatException($"unrecognized ammo type '{ammoTypeString}"),
+      };
+
+      var countString = arguments[1];
+
+      if (!int.TryParse(countString, out var count)) {
+        throw new FormatException($"ammo count not int: '{countString}");
+      }
+
+      if (count < 0) {
+        throw new FormatException($"ammo count out of bounds int: '{count}");
+      }
+
+      pickups.Add(AmmoItemCreator(new Vector2(xPos, yPos) + AMMO_POSITION_OFFSET, ammoType, count));
+    };
+  }
+
   private static void ParseSingleFlag(LevelFlags flags, string flag) {
     switch (flag) {
       case "":
@@ -530,35 +576,6 @@ internal partial class LevelLoader {
           doors.Add(BlockFactory.CreateSlattedDoorSprite(xPos, yPos, state, pairedLevelName, levelManager.SwitchLevel));
           break;
         }
-
-      case "33":
-        /* ammo item */
-
-        CheckEntryLength(arguments, 2, type);
-
-        var ammoTypeString = arguments[0];
-
-        var ammoType = ammoTypeString switch {
-          "0" => AmmoType.Light,
-          "1" => AmmoType.Heavy,
-          "2" => AmmoType.Shells,
-          _ => throw new FormatException($"unrecognized ammo type '{ammoTypeString}"),
-        };
-
-        var countString = arguments[1];
-
-        int count;
-
-        if (!int.TryParse(countString, out count)) {
-          throw new FormatException($"ammo count not int: '{countString}");
-        }
-
-        if (count < 0) {
-          throw new FormatException($"ammo count out of bounds int: '{count}");
-        }
-
-        pickups.Add(WorldPickupFactory.Instance.CreateAmmo(new Vector2(xPos + 32f, yPos + 32f), ammoType, count));
-        break;
 
       default:
         if (CELL_ENTRY_FUNCS.TryGetValue(type, out var EntryParseFunc)) {
