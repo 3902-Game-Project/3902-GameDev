@@ -23,15 +23,15 @@ internal class ProjectileFactory {
     return new BulletDefault(projectileTexture, startPosition, direction, velocity, lifetime, damage);
   }
 
-  public IProjectile CreateBomb(Vector2 startPosition, Vector2 direction, float velocity, float lifetime) {
-    return new BombProjectile(projectileTexture, startPosition, direction, velocity, lifetime);
+  public IProjectile CreateBomb(Vector2 startPosition, float lifetime) {
+    return new BombProjectile(projectileTexture, startPosition, lifetime);
   }
 
-  public IProjectile CreateBang(ABaseGun sourceGun) {
+  public static IProjectile CreateBang(ABaseGun sourceGun) {
     return new BangProjectile(TextureStore.Instance.NewGuns, sourceGun);
   }
 
-  public IProjectile CreateBFGShot(Vector2 position, Vector2 direction, GunStats stats) {
+  public static IProjectile CreateBFGShot(Vector2 position, Vector2 direction, GunStats stats) {
     return new BFGProjectile(TextureStore.Instance.NewGuns, position, direction, stats.BulletVelocity, stats.BaseDamage);
   }
 

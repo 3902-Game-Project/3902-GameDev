@@ -67,7 +67,7 @@ internal class ItemFactory {
     return new ShotgunItem(basicGunsTexture, new Vector2(xPos, yPos), player, GetProjectileManager, stats);
   }
 
-  public IItem CreateSMG(float xPos, float yPos, Player player, ProjectileManagerGetter GetProjectileManager) {
+  public static IItem CreateSMG(float xPos, float yPos, Player player, ProjectileManagerGetter GetProjectileManager) {
     GunStats smgStats = new() {
       MaxAmmo = 30,
       CurrentAmmo = 30,
@@ -81,7 +81,7 @@ internal class ItemFactory {
     return new SMGItem(TextureStore.Instance.NewGuns, new Vector2(xPos, yPos), player, GetProjectileManager, smgStats);
   }
 
-  public IItem CreateBFG(float xPos, float yPos, Player player, ProjectileManagerGetter GetProjectileManager) {
+  public static IItem CreateBFG(float xPos, float yPos, Player player, ProjectileManagerGetter GetProjectileManager) {
     var stats = new GunStats {
       AmmoType = AmmoType.BFG,
       BulletVelocity = 800f,
@@ -95,7 +95,7 @@ internal class ItemFactory {
     return new BFGItem(TextureStore.Instance.NewGuns, new Vector2(xPos, yPos), player, GetProjectileManager, stats);
   }
 
-  public IItem CreateFakeBFG(float xPos, float yPos, Player player, ProjectileManagerGetter GetProjectileManager) {
+  public static IItem CreateFakeBFG(float xPos, float yPos, Player player, ProjectileManagerGetter GetProjectileManager) {
     var stats = new GunStats {
       AmmoType = AmmoType.BFG,
       FireRate = 1.0f,

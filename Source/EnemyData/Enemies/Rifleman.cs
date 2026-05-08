@@ -64,7 +64,7 @@ internal class Rifleman : ABaseEnemy {
   }
 
   protected override void DropLoot() {
-    CurrentLevel.AddPickup(WorldPickupFactory.Instance.CreateAmmo(Position, AmmoType.Heavy, 5));
+    CurrentLevel.AddPickup(WorldPickupFactory.CreateAmmo(Position, AmmoType.Heavy, 5));
     CurrentLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateHealthPotion(Position.X, Position.Y - 60.0f, player)));
   }
 

@@ -68,13 +68,13 @@ internal partial class LevelLoader {
     { "30", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateWindowBlockSprite) }, /* window */
     { "31", LevelLoaderCreatorFuncs.CreateCollidableLockableDoorBlockCreator(BlockFactory.CreateSlattedDoorSprite) }, /* slatted door */
     { "32", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateTreasureBlockSprite) }, /* treasure block */
-    { "33", LevelLoaderCreatorFuncs.CreateAmmoItemCreator(WorldPickupFactory.Instance.CreateAmmo) }, /* ammo item */
+    { "33", LevelLoaderCreatorFuncs.CreateAmmoItemCreator(WorldPickupFactory.CreateAmmo) }, /* ammo item */
     { "34", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateBankShelfBlockSprite) }, /* bank shelf */
     { "35", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateTellersDeskBlockSprite) }, /* tellers desk */
     { "36", LevelLoaderCreatorFuncs.CreatePlayerItemCreator(ItemFactory.Instance.CreateHealthPotion) }, /* health potion item */
     { "37", LevelLoaderCreatorFuncs.CreatePlayerItemCreator(ItemFactory.Instance.CreateInvincibilityPotion) }, /* invincibility potion item */
     { "38", LevelLoaderCreatorFuncs.CreatePlayerItemCreator(ItemFactory.Instance.CreateInfiniteAmmoPotion) }, /* infinite ammo potion item */
-    { "39", LevelLoaderCreatorFuncs.CreateFiringEnemyCreator(EnemyFactory.Instance.CreateBossSprite) }, /* boss */
+    { "39", LevelLoaderCreatorFuncs.CreateFiringEnemyCreator(EnemyFactory.CreateBossSprite) }, /* boss */
   };
 
   private static void ParseSingleFlag(LevelFlags flags, string flag) {

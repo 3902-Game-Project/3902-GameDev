@@ -71,8 +71,8 @@ internal static class SaveLoadManager {
         case "RevolverItem": player.Inventory.PickupItem(ItemFactory.Instance.CreateRevolver(0, 0, player, () => levelManager.CurrentLevel.ProjectileManager)); break;
         case "RifleItem": player.Inventory.PickupItem(ItemFactory.Instance.CreateRifle(0, 0, player, () => levelManager.CurrentLevel.ProjectileManager)); break;
         case "ShotgunItem": player.Inventory.PickupItem(ItemFactory.Instance.CreateShotgun(0, 0, player, () => levelManager.CurrentLevel.ProjectileManager)); break;
-        case "SMGItem": player.Inventory.PickupItem(ItemFactory.Instance.CreateSMG(0, 0, player, () => levelManager.CurrentLevel.ProjectileManager)); break;
-        case "BFGItem": player.Inventory.PickupItem(ItemFactory.Instance.CreateBFG(0, 0, player, () => levelManager.CurrentLevel.ProjectileManager)); break;
+        case "SMGItem": player.Inventory.PickupItem(ItemFactory.CreateSMG(0, 0, player, () => levelManager.CurrentLevel.ProjectileManager)); break;
+        case "BFGItem": player.Inventory.PickupItem(ItemFactory.CreateBFG(0, 0, player, () => levelManager.CurrentLevel.ProjectileManager)); break;
       }
     }
     player.Inventory.EquipWeapon(saveData.Player.ActiveWeaponIndex);
@@ -87,7 +87,7 @@ internal static class SaveLoadManager {
         "Rifleman" => EnemyFactory.Instance.CreateRiflemanSprite(enemyData.X, enemyData.Y, () => levelManager.CurrentLevel, player),
         "Tumbleweed" => EnemyFactory.Instance.CreateTumbleweedSprite(enemyData.X, enemyData.Y),
         "Cactus" => EnemyFactory.Instance.CreateCactusSprite(enemyData.X, enemyData.Y),
-        "Boss" => EnemyFactory.Instance.CreateBossSprite(enemyData.X, enemyData.Y, () => levelManager.CurrentLevel),
+        "Boss" => EnemyFactory.CreateBossSprite(enemyData.X, enemyData.Y, () => levelManager.CurrentLevel),
         _ => null
       };
 

@@ -52,7 +52,7 @@ internal class EnemyFactory {
     return new Shotgunner(shotgunnerTexture, new Vector2(xPos, yPos), GetCurrentLevel, player);
   }
 
-  public IEnemy CreateBossSprite(float x, float y, CurrentLevelGetter GetCurrentLevel) {
+  public static IEnemy CreateBossSprite(float x, float y, CurrentLevelGetter GetCurrentLevel) {
     // Assuming 'bossTexture' is loaded in your Factory. 
     // If you don't have one yet, you can pass in the Shotgunner texture temporarily just to see it render!
     return new Boss(TextureStore.Instance.Boss, new Vector2(x, y), GetCurrentLevel);

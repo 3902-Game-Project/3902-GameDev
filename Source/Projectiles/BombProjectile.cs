@@ -60,7 +60,7 @@ internal class BombProjectile : IProjectile {
     }
   }
 
-  public BombProjectile(Texture2D texture, Vector2 startPosition, Vector2 direction, float velocity, float lifetime) {
+  public BombProjectile(Texture2D texture, Vector2 startPosition, float lifetime) {
     this.texture = texture;
     position = startPosition;
     this.lifetime = lifetime;

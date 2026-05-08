@@ -24,7 +24,7 @@ internal class FakeBFGItem : ABaseGun {
     if (EquipTimer > 0) return;
 
     if (fireMode.CanFire(useType)) {
-      GetProjectileManager().Add(ProjectileFactory.Instance.CreateBang(this));
+      GetProjectileManager().Add(ProjectileFactory.CreateBang(this));
 
       SoundManager.Instance.Play(SoundID.GunshotDefault);
     }

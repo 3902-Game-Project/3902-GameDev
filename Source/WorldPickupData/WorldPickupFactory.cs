@@ -10,7 +10,7 @@ internal class WorldPickupFactory {
 
   private WorldPickupFactory() { }
 
-  public IWorldPickup CreateAmmo(Vector2 position, AmmoType type, int amount) {
+  public static IWorldPickup CreateAmmo(Vector2 position, AmmoType type, int amount) {
     return new AmmoWorldPickup(TextureStore.Instance.AmmoRefill, position, type, amount);
   }
 }

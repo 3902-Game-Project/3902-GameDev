@@ -111,9 +111,9 @@ internal class LevelManager(Game1 game) : ILevelManager {
       BfgSpawned = true; // prevent multi-spawns
 
       // Spawn 3 BFGs around the center of the room
-      BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateBFG(480.0f, 280.0f, game.StateGame.Player, () => CurrentLevel.ProjectileManager)));
-      BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateFakeBFG(380.0f, 280.0f, game.StateGame.Player, () => CurrentLevel.ProjectileManager)));
-      BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateFakeBFG(580.0f, 280.0f, game.StateGame.Player, () => CurrentLevel.ProjectileManager)));
+      BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.CreateBFG(480.0f, 280.0f, game.StateGame.Player, () => CurrentLevel.ProjectileManager)));
+      BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.CreateFakeBFG(380.0f, 280.0f, game.StateGame.Player, () => CurrentLevel.ProjectileManager)));
+      BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.CreateFakeBFG(580.0f, 280.0f, game.StateGame.Player, () => CurrentLevel.ProjectileManager)));
     }
   }
 

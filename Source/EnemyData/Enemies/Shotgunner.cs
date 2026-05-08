@@ -66,7 +66,7 @@ internal class Shotgunner : ABaseEnemy {
   }
 
   protected override void DropLoot() {
-    CurrentLevel.AddPickup(WorldPickupFactory.Instance.CreateAmmo(Position, AmmoType.Shells, 5));
+    CurrentLevel.AddPickup(WorldPickupFactory.CreateAmmo(Position, AmmoType.Shells, 5));
     CurrentLevel.AddPickup(new ItemWorldPickup(ItemFactory.Instance.CreateHealthPotion(Position.X, Position.Y - 60.0f, player)));
   }
 
