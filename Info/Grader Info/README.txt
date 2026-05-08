@@ -101,7 +101,6 @@ Known bugs:
   -Cannot discard general items on item screen, it discards a weapon instead.
   -Item screen: cannot discard items after quitting to menu and reopening game. (Can discard just fine in game screen)
   -Can push crates through walls and enemies forced to move along with crate.
-  -Mouse clicks are registered even if clicking outside the game window. This seems more to be a bug with MonoGame than the game itself.
   -Map at top of screen does not show what room player actually is in and is a static image.
   -Enemies sometimes can walk off screen.
   -Confusion in codebase between gunstats, ammostats, etc.

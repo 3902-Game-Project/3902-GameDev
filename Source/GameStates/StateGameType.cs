@@ -21,9 +21,9 @@ internal class StateGameType : IGameState {
 
   private readonly Game1 game;
 
-  private IController<Keys> keyboardController;
-  private IController<MouseButtons> mouseController;
-  private IController<GPGamePadButtons> gamePadController;
+  private IController<Keys, KeyboardState> keyboardController;
+  private IController<MouseButtons, AugmentedMouseState> mouseController;
+  private IController<GPGamePadButtons, GamePadState> gamePadController;
 
   private readonly HUDManager hudManager;
 
@@ -116,14 +116,21 @@ internal class StateGameType : IGameState {
     Player.LoadContent(contentManager);
   }
 
-  public void Update(double deltaTime) {
+  public void Update(double deltaTime, bool isActive) {
     if (Flags.SlowMode) {
       deltaTime *= 0.5;
     }
 
-    keyboardController.Update();
-    mouseController.Update();
-    gamePadController.Update();
+    keyboardController.Update(Keyboard.GetState());
+    mouseController.Update(
+      new AugmentedMouseState(
+        Mouse.GetState(),
+        isActive,
+        game.DefaultViewport.Width,
+        game.DefaultViewport.Height
+      )
+    );
+    gamePadController.Update(GamePad.GetState(Constants.GAMEPAD_PLAYER_INDEX));
 
     foreach (var key in keyboardController.GetPressed()) {
       CheatCodes.Instance.AddKey(key);

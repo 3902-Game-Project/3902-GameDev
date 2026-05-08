@@ -54,6 +54,8 @@ internal static class Constants {
   public const float BOSS_ALIGNMENT_THRESHOLD = 25.0f;
   public const float BOSS_WANDER_SPEED = 120.0f;
 
+  public const PlayerIndex GAMEPAD_PLAYER_INDEX = PlayerIndex.One;
+
   public const string SAVE_FILE_PATH = "savegame.json";
 
   /* derived constants */

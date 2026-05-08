@@ -4,8 +4,10 @@ using System.Linq;
 namespace GameProject.ButtonDiffTrackers;
 
 internal abstract class AButtonDiffTracker<ButtonsEnum, ButtonStateReference> : IButtonDiffTracker<ButtonsEnum, ButtonStateReference> {
+  // These 2 variables ought to be private, but MouseDiffTracker.cs has to work around hacky behavior in MonoGame itself,
+  // See MouseDiffTracker.cs for explanation.
   private ButtonsEnum[] pastButtonState = [];
-  private ButtonsEnum[] currentButtonState = [];
+  protected ButtonsEnum[] currentButtonState = [];
 
   protected abstract ButtonsEnum[] ExtractPressedFromState(ButtonStateReference gamePadState);
 

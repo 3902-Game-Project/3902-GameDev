@@ -11,8 +11,8 @@ using Microsoft.Xna.Framework.Input;
 namespace GameProject.GameStates;
 
 internal class StateSavePromptType(Game1 game) : IGameState {
-  private IController<Keys> keyboardController;
-  private IController<GPGamePadButtons> gamePadController;
+  private IController<Keys, KeyboardState> keyboardController;
+  private IController<GPGamePadButtons, GamePadState> gamePadController;
   private double successTimer = 0.0;
 
   public bool IsShowingSuccess { get; set; } = false;
@@ -24,13 +24,13 @@ internal class StateSavePromptType(Game1 game) : IGameState {
 
   public void LoadContent(ContentManager content) { }
 
-  public void Update(double deltaTime) {
+  public void Update(double deltaTime, bool isActive) {
     if (IsShowingSuccess) {
       successTimer -= deltaTime;
       if (successTimer <= 0) game.ChangeStateWithoutFading(game.StateGame);
     } else {
-      keyboardController.Update();
-      gamePadController.Update();
+      keyboardController.Update(Keyboard.GetState());
+      gamePadController.Update(GamePad.GetState(Constants.GAMEPAD_PLAYER_INDEX));
     }
   }
 
