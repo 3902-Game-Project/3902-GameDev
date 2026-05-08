@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using GameProject.Commands;
+using GameProject.GameStates;
 using GameProject.Globals;
 using GameProject.Items;
 using GameProject.Level.Loader;
@@ -63,36 +64,36 @@ internal class LevelManager(Game1 game) : ILevelManager {
     // Wrap player position around if player is at edge
 
     if (
-      game.StateGame.Player.Position.X <= LevelLoader.PLAYER_LEFT_BOUNDARY_THRESHOLD
+      game.StateMachine.StateGame.Player.Position.X <= LevelLoader.PLAYER_LEFT_BOUNDARY_THRESHOLD
     ) {
-      game.StateGame.Player.Position = new(
+      game.StateMachine.StateGame.Player.Position = new(
         LevelLoader.PLAYER_RIGHT_POS_AFTER_TELEPORT,
-        game.StateGame.Player.Position.Y
+        game.StateMachine.StateGame.Player.Position.Y
       );
     } else if (
-        game.StateGame.Player.Position.X >= LevelLoader.PLAYER_RIGHT_BOUNDARY_THRESHOLD
+        game.StateMachine.StateGame.Player.Position.X >= LevelLoader.PLAYER_RIGHT_BOUNDARY_THRESHOLD
       ) {
-      game.StateGame.Player.Position = new(
+      game.StateMachine.StateGame.Player.Position = new(
         LevelLoader.PLAYER_LEFT_POS_AFTER_TELEPORT,
-        game.StateGame.Player.Position.Y
+        game.StateMachine.StateGame.Player.Position.Y
       );
     } else if (
-      game.StateGame.Player.Position.Y <= LevelLoader.PLAYER_TOP_BOUNDARY_THRESHOLD
+      game.StateMachine.StateGame.Player.Position.Y <= LevelLoader.PLAYER_TOP_BOUNDARY_THRESHOLD
     ) {
-      game.StateGame.Player.Position = new(
-        game.StateGame.Player.Position.X,
+      game.StateMachine.StateGame.Player.Position = new(
+        game.StateMachine.StateGame.Player.Position.X,
         LevelLoader.PLAYER_BOTTOM_POS_AFTER_TELEPORT
       );
     } else if (
-      game.StateGame.Player.Position.Y >= LevelLoader.PLAYER_BOTTOM_BOUNDARY_THRESHOLD
+      game.StateMachine.StateGame.Player.Position.Y >= LevelLoader.PLAYER_BOTTOM_BOUNDARY_THRESHOLD
     ) {
-      game.StateGame.Player.Position = new(
-        game.StateGame.Player.Position.X,
+      game.StateMachine.StateGame.Player.Position = new(
+        game.StateMachine.StateGame.Player.Position.X,
         LevelLoader.PLAYER_TOP_POS_AFTER_TELEPORT
       );
     } else {
       // No wrapping possible, use default position
-      game.StateGame.Player.Position = CurrentLevel.GetDefaultPlayerPosition();
+      game.StateMachine.StateGame.Player.Position = CurrentLevel.GetDefaultPlayerPosition();
     }
   }
 
@@ -111,9 +112,9 @@ internal class LevelManager(Game1 game) : ILevelManager {
       BfgSpawned = true; // prevent multi-spawns
 
       // Spawn 3 BFGs around the center of the room
-      BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.CreateBFG(480.0f, 280.0f, game.StateGame.Player, () => CurrentLevel.ProjectileManager)));
-      BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.CreateFakeBFG(380.0f, 280.0f, game.StateGame.Player, () => CurrentLevel.ProjectileManager)));
-      BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.CreateFakeBFG(580.0f, 280.0f, game.StateGame.Player, () => CurrentLevel.ProjectileManager)));
+      BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.CreateBFG(480.0f, 280.0f, game.StateMachine.StateGame.Player, () => CurrentLevel.ProjectileManager)));
+      BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.CreateFakeBFG(380.0f, 280.0f, game.StateMachine.StateGame.Player, () => CurrentLevel.ProjectileManager)));
+      BfgLevel.AddPickup(new ItemWorldPickup(ItemFactory.CreateFakeBFG(580.0f, 280.0f, game.StateMachine.StateGame.Player, () => CurrentLevel.ProjectileManager)));
     }
   }
 
@@ -140,9 +141,9 @@ internal class LevelManager(Game1 game) : ILevelManager {
 
     foreach (var name in LEVEL_NAMES) {
       var level = LevelLoader.FromString(
-        player: game.StateGame.Player,
+        player: game.StateMachine.StateGame.Player,
         winScreenCommand: winScreenCommand,
-        levelManager: game.StateGame.LevelManager,
+        levelManager: game.StateMachine.StateGame.LevelManager,
         levelNames: levelNamesSet,
         levelDataString: File.ReadAllText(content.RootDirectory + "/Levels/" + name + ".csv")
       );
@@ -150,7 +151,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
       levels.Add(name, level);
     }
 
-    game.StateGame.Player.Position = CurrentLevel.GetDefaultPlayerPosition();
+    game.StateMachine.StateGame.Player.Position = CurrentLevel.GetDefaultPlayerPosition();
 
     if (Flags.SpawnBfgImmediately) {
       SpawnBfgs();
@@ -172,7 +173,7 @@ internal class LevelManager(Game1 game) : ILevelManager {
 
     fadeToLevelName = newLevelName;
     // reloading StateGame to trigger level change code in the future
-    game.ChangeState(game.StateGame);
+    game.StateMachine.ChangeState(GameState.StateGame);
   }
 
   public void SwitchLevelWithoutFading(string newLevelName) {

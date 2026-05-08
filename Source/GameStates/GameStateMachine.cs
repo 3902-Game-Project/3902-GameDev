@@ -54,7 +54,9 @@ internal class GameStateMachine : IInitable, ITemporalActiveUpdatable, ILowLevel
     }
   }
 
-  private void ChangeIStateWithoutFading(IGameState newState) {
+  // This function breaks encapsulation of gamestates and is only intended to be used by StateTransitionType
+  // and nothing else. Think carefully before using it elsewhere.
+  public void ChangeIStateWithoutFading(IGameState newState) {
     bool nextStateIsCurrentState;
 
     if (currentState == StateTransition || newState == StateTransition) {
