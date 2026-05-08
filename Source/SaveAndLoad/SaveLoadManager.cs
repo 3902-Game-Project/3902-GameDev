@@ -11,26 +11,28 @@ using Microsoft.Xna.Framework;
 namespace GameProject.SaveLoad;
 
 internal static class SaveLoadManager {
+  private static readonly JsonSerializerOptions SERIALIZER_OPTIONS = new() { WriteIndented = true };
+
   public static void SaveGame(StateGameType stateGame) {
     var saveData = new GameSaveData();
     var player = stateGame.Player;
     var level = stateGame.LevelManager.CurrentLevel;
     var levelManager = stateGame.LevelManager;
 
-    //Save Player State
+    // Save Player State
     saveData.Player.X = player.Position.X;
     saveData.Player.Y = player.Position.Y;
     saveData.Player.Health = player.Health;
     saveData.Player.Ammo = new Dictionary<Items.AmmoType, int>(player.Inventory.Ammo);
     saveData.Player.ActiveWeaponIndex = player.Inventory.ActiveWeaponIndex;
 
-    //Save weapons by their class name
+    // Save weapons by their class name
     saveData.Player.WeaponTypes = [.. player.Inventory.Weapons.Select(w => w.GetType().Name)];
 
-    //Save current level
+    // Save current level
     saveData.Level.LevelName = levelManager.CurrentLevelName;
 
-    //Save Enemies State
+    // Save Enemies State
     foreach (var enemy in level.GetAliveEnemies()) {
       saveData.Level.Enemies.Add(new EnemySaveData {
         TypeName = enemy.GetType().Name,
@@ -41,15 +43,15 @@ internal static class SaveLoadManager {
       });
     }
 
-    //Write to JSON
-    string json = JsonSerializer.Serialize(saveData, new JsonSerializerOptions { WriteIndented = true });
+    // Write to JSON
+    var json = JsonSerializer.Serialize(saveData, SERIALIZER_OPTIONS);
     File.WriteAllText(Constants.SAVE_FILE_PATH, json);
   }
 
   public static void LoadGame(StateGameType stateGame) {
     if (!File.Exists(Constants.SAVE_FILE_PATH)) return;
 
-    string json = File.ReadAllText(Constants.SAVE_FILE_PATH);
+    var json = File.ReadAllText(Constants.SAVE_FILE_PATH);
     var saveData = JsonSerializer.Deserialize<GameSaveData>(json);
     if (saveData == null) return;
 
@@ -57,14 +59,14 @@ internal static class SaveLoadManager {
     var levelManager = stateGame.LevelManager;
     levelManager.SwitchLevelWithoutFading(saveData.Level.LevelName);
 
-    //Load Player
+    // Load Player
     player.Position = new Vector2(saveData.Player.X, saveData.Player.Y);
     if (player.Shape is Collisions.Shapes.BoxCollider box) box.Position = player.Position;
 
     player.Health = saveData.Player.Health;
     player.Inventory.Ammo = new Dictionary<Items.AmmoType, int>(saveData.Player.Ammo);
 
-    //Load Weapons
+    // Load Weapons
     player.Inventory.Weapons.Clear();
     foreach (var weaponName in saveData.Player.WeaponTypes) {
       switch (weaponName) {
@@ -77,7 +79,7 @@ internal static class SaveLoadManager {
     }
     player.Inventory.EquipWeapon(saveData.Player.ActiveWeaponIndex);
 
-    //Load Enemies
+    // Load Enemies
     var restoredEnemies = new List<IEnemy>();
     foreach (var enemyData in saveData.Level.Enemies) {
       IEnemy newEnemy = enemyData.TypeName switch {
