@@ -15,9 +15,6 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Level.Loader;
 
 internal partial class LevelLoader {
-  private static readonly Vector2 PLAYER_POSITION_OFFSET = new(Constants.BASE_BLOCK_WIDTH / 2.0f, Constants.BASE_BLOCK_HEIGHT / 2.0f);
-  private static readonly Vector2 ENEMY_POSITION_OFFSET = new(Constants.BASE_BLOCK_WIDTH / 2.0f, Constants.BASE_BLOCK_HEIGHT);
-  private static readonly Vector2 AMMO_POSITION_OFFSET = new(Constants.BASE_BLOCK_WIDTH / 2.0f, Constants.BASE_BLOCK_HEIGHT / 2.0f);
   private static readonly string FLAGS_LINE_START = "Flags: ";
 
   [GeneratedRegex(@"\r?\n")]
@@ -33,468 +30,52 @@ internal partial class LevelLoader {
   public static readonly float PLAYER_BOTTOM_POS_AFTER_TELEPORT = Constants.LEVEL_HEIGHT - Constants.BASE_BLOCK_WIDTH * 1.5f;
 
   private static readonly Dictionary<string, CellEntryParseFunc> CELL_ENTRY_FUNCS = new() {
-    { "", CreateEmptyCreator() }, /* empty, do nothing */
-    { "0", CreateEmptyCreator() }, /* empty, do nothing */
-    { "1-0", CreateCollidableBlockCreator(BlockFactory.CreateLogBlockSprite) }, /* log: wall */
-    { "1-1", CreateCollidableBlockCreator(BlockFactory.CreateLogCornerBlockSprite) }, /* log: corner */
-    { "2", CreateCollidableLockableDoorBlockCreator(BlockFactory.CreateSmallDoorBlockSprite) }, /* small door */
-    { "3", CreatePlayerPositionSetter() }, /* player position */
-    { "4", CreateEnemyCreator(EnemyFactory.Instance.CreateSnakeSprite) }, /* snake */
-    { "5", CreateNonCollidableBlockCreator(BlockFactory.CreateSandBlockSprite) }, /* sand */
-    { "6", CreateNonCollidableBlockCreator(BlockFactory.CreateRedSandBlockSprite) }, /* red sand */
-    { "7", CreateNonCollidableBlockCreator(BlockFactory.CreateWoodPlankBlockSprite) }, /* wood plank */
-    { "8-0", CreateCollidableBlockCreator(BlockFactory.CreateRockBlockSprite) }, /* rock: wall */
-    { "8-1", CreateCollidableBlockCreator(BlockFactory.CreateRockCornerBlockSprite) }, /* rock: corner */
+    { "", LevelLoaderCreatorFuncs.CreateEmptyCreator() }, /* empty, do nothing */
+    { "0", LevelLoaderCreatorFuncs.CreateEmptyCreator() }, /* empty, do nothing */
+    { "1-0", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateLogBlockSprite) }, /* log: wall */
+    { "1-1", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateLogCornerBlockSprite) }, /* log: corner */
+    { "2", LevelLoaderCreatorFuncs.CreateCollidableLockableDoorBlockCreator(BlockFactory.CreateSmallDoorBlockSprite) }, /* small door */
+    { "3", LevelLoaderCreatorFuncs.CreatePlayerPositionSetter() }, /* player position */
+    { "4", LevelLoaderCreatorFuncs.CreateEnemyCreator(EnemyFactory.Instance.CreateSnakeSprite) }, /* snake */
+    { "5", LevelLoaderCreatorFuncs.CreateNonCollidableBlockCreator(BlockFactory.CreateSandBlockSprite) }, /* sand */
+    { "6", LevelLoaderCreatorFuncs.CreateNonCollidableBlockCreator(BlockFactory.CreateRedSandBlockSprite) }, /* red sand */
+    { "7", LevelLoaderCreatorFuncs.CreateNonCollidableBlockCreator(BlockFactory.CreateWoodPlankBlockSprite) }, /* wood plank */
+    { "8-0", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateRockBlockSprite) }, /* rock: wall */
+    { "8-1", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateRockCornerBlockSprite) }, /* rock: corner */
     /* 8-2: omitted */
-    { "8-3", CreateCollidableHoleBlockCreator(BlockFactory.CreateRockHoleBlockSprite) }, /* rock: hole to other room */
-    { "9", CreateFiringItemEnemyCreator(EnemyFactory.Instance.CreateShotgunnerSprite) }, /* shotgunner */
-    { "10", CreateEnemyCreator(EnemyFactory.Instance.CreateBatSprite) }, /* bat */
-    { "11", CreateFiringItemEnemyCreator(EnemyFactory.Instance.CreateRiflemanSprite) }, /* rifleman */
-    { "12", CreateEnemyCreator(EnemyFactory.Instance.CreateTumbleweedSprite) }, /* tumbleweed */
-    { "13", CreateEnemyCreator(EnemyFactory.Instance.CreateCactusSprite) }, /* cactus */
-    { "14", CreateGunItemCreator(ItemFactory.Instance.CreateRevolver) }, /* revolver */
-    { "15", CreateGunItemCreator(ItemFactory.Instance.CreateRifle) }, /* rifle */
-    { "16", CreateGunItemCreator(ItemFactory.Instance.CreateShotgun) }, /* shotgun */
-    { "17", CreateCollidableBlockCreator(BlockFactory.CreateBarrelBlockSprite) }, /* barrel */
-    { "18", CreateCollidableBlockCreator(BlockFactory.CreateBarShelfBlockSprite) }, /* bar shelf */
-    { "19", CreateCollidableBlockCreator(BlockFactory.CreateShelfBlockSprite) }, /* shelf */
-    { "20", CreateCollidableVaultDoorBlockCreator(BlockFactory.CreateVaultDoorBlockSprite) }, /* vault door */
-    { "21", CreateKeyItemCreator(ItemFactory.CreateKey) }, /* key item */
-    { "22", CreateCollidableBlockCreator(BlockFactory.CreateFirePitBlockSprite) }, /* fire pit */
-    { "23", CreateCollidablePlayerBlockCreator(BlockFactory.CreateFireBlockSprite) }, /* fire */
+    { "8-3", LevelLoaderCreatorFuncs.CreateCollidableHoleBlockCreator(BlockFactory.CreateRockHoleBlockSprite) }, /* rock: hole to other room */
+    { "9", LevelLoaderCreatorFuncs.CreateFiringItemEnemyCreator(EnemyFactory.Instance.CreateShotgunnerSprite) }, /* shotgunner */
+    { "10", LevelLoaderCreatorFuncs.CreateEnemyCreator(EnemyFactory.Instance.CreateBatSprite) }, /* bat */
+    { "11", LevelLoaderCreatorFuncs.CreateFiringItemEnemyCreator(EnemyFactory.Instance.CreateRiflemanSprite) }, /* rifleman */
+    { "12", LevelLoaderCreatorFuncs.CreateEnemyCreator(EnemyFactory.Instance.CreateTumbleweedSprite) }, /* tumbleweed */
+    { "13", LevelLoaderCreatorFuncs.CreateEnemyCreator(EnemyFactory.Instance.CreateCactusSprite) }, /* cactus */
+    { "14", LevelLoaderCreatorFuncs.CreateGunItemCreator(ItemFactory.Instance.CreateRevolver) }, /* revolver */
+    { "15", LevelLoaderCreatorFuncs.CreateGunItemCreator(ItemFactory.Instance.CreateRifle) }, /* rifle */
+    { "16", LevelLoaderCreatorFuncs.CreateGunItemCreator(ItemFactory.Instance.CreateShotgun) }, /* shotgun */
+    { "17", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateBarrelBlockSprite) }, /* barrel */
+    { "18", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateBarShelfBlockSprite) }, /* bar shelf */
+    { "19", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateShelfBlockSprite) }, /* shelf */
+    { "20", LevelLoaderCreatorFuncs.CreateCollidableVaultDoorBlockCreator(BlockFactory.CreateVaultDoorBlockSprite) }, /* vault door */
+    { "21", LevelLoaderCreatorFuncs.CreateKeyItemCreator(ItemFactory.CreateKey) }, /* key item */
+    { "22", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateFirePitBlockSprite) }, /* fire pit */
+    { "23", LevelLoaderCreatorFuncs.CreateCollidablePlayerBlockCreator(BlockFactory.CreateFireBlockSprite) }, /* fire */
     /* 24: omitted */
-    { "25", CreateCollidableBlockCreator(BlockFactory.CreateMudBlockSprite) }, /* mud */
-    { "26", CreateCollidableBlockCreator(BlockFactory.CreateCrateBlockSprite) }, /* crate */
-    { "27", CreateCollidableBlockCreator(BlockFactory.CreateStoolBlockSprite) }, /* stool */
-    { "28", CreateCollidableBlockCreator(BlockFactory.CreateTableBlockSprite) }, /* table */
-    { "29", CreateCollidableBlockCreator(BlockFactory.CreateStatueBlockSprite) }, /* statue */
-    { "30", CreateCollidableBlockCreator(BlockFactory.CreateWindowBlockSprite) }, /* window */
-    { "31", CreateCollidableLockableDoorBlockCreator(BlockFactory.CreateSlattedDoorSprite) }, /* slatted door */
-    { "32", CreateCollidableBlockCreator(BlockFactory.CreateTreasureBlockSprite) }, /* treasure block */
-    { "33", CreateAmmoItemCreator(WorldPickupFactory.Instance.CreateAmmo) }, /* ammo item */
-    { "34", CreateCollidableBlockCreator(BlockFactory.CreateBankShelfBlockSprite) }, /* bank shelf */
-    { "35", CreateCollidableBlockCreator(BlockFactory.CreateTellersDeskBlockSprite) }, /* tellers desk */
-    { "36", CreatePlayerItemCreator(ItemFactory.Instance.CreateHealthPotion) }, /* health potion item */
-    { "37", CreatePlayerItemCreator(ItemFactory.Instance.CreateInvincibilityPotion) }, /* invincibility potion item */
-    { "38", CreatePlayerItemCreator(ItemFactory.Instance.CreateInfiniteAmmoPotion) }, /* infinite ammo potion item */
-    { "39", CreateFiringEnemyCreator(EnemyFactory.Instance.CreateBossSprite) }, /* boss */
+    { "25", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateMudBlockSprite) }, /* mud */
+    { "26", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateCrateBlockSprite) }, /* crate */
+    { "27", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateStoolBlockSprite) }, /* stool */
+    { "28", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateTableBlockSprite) }, /* table */
+    { "29", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateStatueBlockSprite) }, /* statue */
+    { "30", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateWindowBlockSprite) }, /* window */
+    { "31", LevelLoaderCreatorFuncs.CreateCollidableLockableDoorBlockCreator(BlockFactory.CreateSlattedDoorSprite) }, /* slatted door */
+    { "32", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateTreasureBlockSprite) }, /* treasure block */
+    { "33", LevelLoaderCreatorFuncs.CreateAmmoItemCreator(WorldPickupFactory.Instance.CreateAmmo) }, /* ammo item */
+    { "34", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateBankShelfBlockSprite) }, /* bank shelf */
+    { "35", LevelLoaderCreatorFuncs.CreateCollidableBlockCreator(BlockFactory.CreateTellersDeskBlockSprite) }, /* tellers desk */
+    { "36", LevelLoaderCreatorFuncs.CreatePlayerItemCreator(ItemFactory.Instance.CreateHealthPotion) }, /* health potion item */
+    { "37", LevelLoaderCreatorFuncs.CreatePlayerItemCreator(ItemFactory.Instance.CreateInvincibilityPotion) }, /* invincibility potion item */
+    { "38", LevelLoaderCreatorFuncs.CreatePlayerItemCreator(ItemFactory.Instance.CreateInfiniteAmmoPotion) }, /* infinite ammo potion item */
+    { "39", LevelLoaderCreatorFuncs.CreateFiringEnemyCreator(EnemyFactory.Instance.CreateBossSprite) }, /* boss */
   };
-
-  private static CellEntryParseFunc CreateEmptyCreator() {
-    return (
-      Player player,
-      ILevelManager levelManager,
-      ISet<string> levelNames,
-
-      string type,
-      string[] arguments,
-      float xPos,
-      float yPos,
-
-      List<IBlock> nonCollidableBlocks,
-      List<IBlock> collidableBlocks,
-      List<IBlock> doors,
-      List<IEnemy> enemies,
-      List<IWorldPickup> pickups,
-      ref Vector2? playerPositionNullable
-    ) => {
-      CheckEntryLength(arguments, 0, type);
-    };
-  }
-
-  private static CellEntryParseFunc CreateNonCollidableBlockCreator(BlockCreationFunc BlockCreator) {
-    return (
-      Player player,
-      ILevelManager levelManager,
-      ISet<string> levelNames,
-
-      string type,
-      string[] arguments,
-      float xPos,
-      float yPos,
-
-      List<IBlock> nonCollidableBlocks,
-      List<IBlock> collidableBlocks,
-      List<IBlock> doors,
-      List<IEnemy> enemies,
-      List<IWorldPickup> pickups,
-      ref Vector2? playerPositionNullable
-    ) => {
-      CheckEntryLength(arguments, 0, type);
-
-      nonCollidableBlocks.Add(BlockCreator(xPos, yPos));
-    };
-  }
-
-  private static CellEntryParseFunc CreateCollidableBlockCreator(BlockCreationFunc BlockCreator) {
-    return (
-      Player player,
-      ILevelManager levelManager,
-      ISet<string> levelNames,
-
-      string type,
-      string[] arguments,
-      float xPos,
-      float yPos,
-
-      List<IBlock> nonCollidableBlocks,
-      List<IBlock> collidableBlocks,
-      List<IBlock> doors,
-      List<IEnemy> enemies,
-      List<IWorldPickup> pickups,
-      ref Vector2? playerPositionNullable
-    ) => {
-      CheckEntryLength(arguments, 0, type);
-
-      collidableBlocks.Add(BlockCreator(xPos, yPos));
-    };
-  }
-
-  private static CellEntryParseFunc CreateCollidablePlayerBlockCreator(PlayerBlockCreationFunc PlayerBlockCreator) {
-    return (
-      Player player,
-      ILevelManager levelManager,
-      ISet<string> levelNames,
-
-      string type,
-      string[] arguments,
-      float xPos,
-      float yPos,
-
-      List<IBlock> nonCollidableBlocks,
-      List<IBlock> collidableBlocks,
-      List<IBlock> doors,
-      List<IEnemy> enemies,
-      List<IWorldPickup> pickups,
-      ref Vector2? playerPositionNullable
-    ) => {
-      CheckEntryLength(arguments, 0, type);
-
-      collidableBlocks.Add(PlayerBlockCreator(xPos, yPos, player));
-    };
-  }
-
-  private static CellEntryParseFunc CreateCollidableHoleBlockCreator(HoleBlockCreationFunc HoleBlockCreator) {
-    return (
-      Player player,
-      ILevelManager levelManager,
-      ISet<string> levelNames,
-
-      string type,
-      string[] arguments,
-      float xPos,
-      float yPos,
-
-      List<IBlock> nonCollidableBlocks,
-      List<IBlock> collidableBlocks,
-      List<IBlock> doors,
-      List<IEnemy> enemies,
-      List<IWorldPickup> pickups,
-      ref Vector2? playerPositionNullable
-    ) => {
-      CheckEntryLength(arguments, 1, type);
-
-      var pairedLevelName = arguments[0];
-
-      if (!levelNames.Contains(pairedLevelName)) {
-        throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
-      }
-
-      collidableBlocks.Add(HoleBlockCreator(xPos, yPos, pairedLevelName, levelManager.SwitchLevel));
-    };
-  }
-
-  private static CellEntryParseFunc CreateCollidableLockableDoorBlockCreator(LockableDoorBlockCreationFunc LockableDoorBlockCreator) {
-    return (
-      Player player,
-      ILevelManager levelManager,
-      ISet<string> levelNames,
-
-      string type,
-      string[] arguments,
-      float xPos,
-      float yPos,
-
-      List<IBlock> nonCollidableBlocks,
-      List<IBlock> collidableBlocks,
-      List<IBlock> doors,
-      List<IEnemy> enemies,
-      List<IWorldPickup> pickups,
-      ref Vector2? playerPositionNullable
-    ) => {
-      CheckEntryLength(arguments, 2, type);
-
-      var stateString = arguments[0];
-
-      var state = stateString switch {
-        "0" => LockableDoorBlockState.Locked,
-        "1" => LockableDoorBlockState.Open,
-        _ => throw new FormatException($"unrecognized door state '{stateString}"),
-      };
-
-      var pairedLevelName = arguments[1];
-
-      if (!levelNames.Contains(pairedLevelName)) {
-        throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
-      }
-
-      collidableBlocks.Add(LockableDoorBlockCreator(xPos, yPos, state, pairedLevelName, levelManager.SwitchLevel));
-    };
-  }
-
-  private static CellEntryParseFunc CreateCollidableVaultDoorBlockCreator(VaultDoorBlockCreationFunc VaultDoorBlockCreator) {
-    return (
-      Player player,
-      ILevelManager levelManager,
-      ISet<string> levelNames,
-
-      string type,
-      string[] arguments,
-      float xPos,
-      float yPos,
-
-      List<IBlock> nonCollidableBlocks,
-      List<IBlock> collidableBlocks,
-      List<IBlock> doors,
-      List<IEnemy> enemies,
-      List<IWorldPickup> pickups,
-      ref Vector2? playerPositionNullable
-    ) => {
-      CheckEntryLength(arguments, 2, type);
-
-      var stateString = arguments[0];
-
-      var state = stateString switch {
-        "0" => VaultDoorBlockState.Locked,
-        "1" => VaultDoorBlockState.Opening,
-        "2" => VaultDoorBlockState.Open,
-        _ => throw new FormatException($"unrecognized door state '{stateString}"),
-      };
-
-      var pairedLevelName = arguments[1];
-
-      if (!levelNames.Contains(pairedLevelName)) {
-        throw new FormatException($"unrecognized pairing level name '{pairedLevelName}'");
-      }
-
-      collidableBlocks.Add(VaultDoorBlockCreator(xPos, yPos, state, pairedLevelName, levelManager.SwitchLevel));
-    };
-  }
-
-  private static CellEntryParseFunc CreateEnemyCreator(EnemyCreationFunc EnemyCreator) {
-    return (
-      Player player,
-      ILevelManager levelManager,
-      ISet<string> levelNames,
-
-      string type,
-      string[] arguments,
-      float xPos,
-      float yPos,
-
-      List<IBlock> nonCollidableBlocks,
-      List<IBlock> collidableBlocks,
-      List<IBlock> doors,
-      List<IEnemy> enemies,
-      List<IWorldPickup> pickups,
-      ref Vector2? playerPositionNullable
-    ) => {
-      CheckEntryLength(arguments, 0, type);
-
-      enemies.Add(EnemyCreator(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y));
-    };
-  }
-
-  private static CellEntryParseFunc CreateFiringEnemyCreator(FiringEnemyCreationFunc FiringEnemyCreator) {
-    return (
-      Player player,
-      ILevelManager levelManager,
-      ISet<string> levelNames,
-
-      string type,
-      string[] arguments,
-      float xPos,
-      float yPos,
-
-      List<IBlock> nonCollidableBlocks,
-      List<IBlock> collidableBlocks,
-      List<IBlock> doors,
-      List<IEnemy> enemies,
-      List<IWorldPickup> pickups,
-      ref Vector2? playerPositionNullable
-    ) => {
-      CheckEntryLength(arguments, 0, type);
-
-      enemies.Add(FiringEnemyCreator(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, () => levelManager.CurrentLevel));
-    };
-  }
-
-  private static CellEntryParseFunc CreateFiringItemEnemyCreator(FiringItemEnemyCreationFunc FiringItemEnemyCreator) {
-    return (
-      Player player,
-      ILevelManager levelManager,
-      ISet<string> levelNames,
-
-      string type,
-      string[] arguments,
-      float xPos,
-      float yPos,
-
-      List<IBlock> nonCollidableBlocks,
-      List<IBlock> collidableBlocks,
-      List<IBlock> doors,
-      List<IEnemy> enemies,
-      List<IWorldPickup> pickups,
-      ref Vector2? playerPositionNullable
-    ) => {
-      CheckEntryLength(arguments, 0, type);
-
-      enemies.Add(FiringItemEnemyCreator(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, () => levelManager.CurrentLevel, player));
-    };
-  }
-
-  private static CellEntryParseFunc CreateGunItemCreator(GunItemCreationFunc GunItemCreator) {
-    return (
-      Player player,
-      ILevelManager levelManager,
-      ISet<string> levelNames,
-
-      string type,
-      string[] arguments,
-      float xPos,
-      float yPos,
-
-      List<IBlock> nonCollidableBlocks,
-      List<IBlock> collidableBlocks,
-      List<IBlock> doors,
-      List<IEnemy> enemies,
-      List<IWorldPickup> pickups,
-      ref Vector2? playerPositionNullable
-    ) => {
-      CheckEntryLength(arguments, 0, type);
-
-      pickups.Add(new ItemWorldPickup(GunItemCreator(xPos, yPos, player, () => levelManager.CurrentLevel.ProjectileManager)));
-    };
-  }
-
-  private static CellEntryParseFunc CreateKeyItemCreator(KeyItemCreationFunc KeyItemCreator) {
-    return (
-      Player player,
-      ILevelManager levelManager,
-      ISet<string> levelNames,
-
-      string type,
-      string[] arguments,
-      float xPos,
-      float yPos,
-
-      List<IBlock> nonCollidableBlocks,
-      List<IBlock> collidableBlocks,
-      List<IBlock> doors,
-      List<IEnemy> enemies,
-      List<IWorldPickup> pickups,
-      ref Vector2? playerPositionNullable
-    ) => {
-      CheckEntryLength(arguments, 0, type);
-
-      pickups.Add(new ItemWorldPickup(KeyItemCreator(xPos, yPos, () => levelManager.CurrentLevel)));
-    };
-  }
-
-  private static CellEntryParseFunc CreatePlayerItemCreator(PlayerItemCreationFunc PlayerItemCreator) {
-    return (
-      Player player,
-      ILevelManager levelManager,
-      ISet<string> levelNames,
-
-      string type,
-      string[] arguments,
-      float xPos,
-      float yPos,
-
-      List<IBlock> nonCollidableBlocks,
-      List<IBlock> collidableBlocks,
-      List<IBlock> doors,
-      List<IEnemy> enemies,
-      List<IWorldPickup> pickups,
-      ref Vector2? playerPositionNullable
-    ) => {
-      CheckEntryLength(arguments, 0, type);
-
-      pickups.Add(new ItemWorldPickup(PlayerItemCreator(xPos, yPos, player)));
-    };
-  }
-
-  private static CellEntryParseFunc CreateAmmoItemCreator(AmmoItemCreationFunc AmmoItemCreator) {
-    return (
-      Player player,
-      ILevelManager levelManager,
-      ISet<string> levelNames,
-
-      string type,
-      string[] arguments,
-      float xPos,
-      float yPos,
-
-      List<IBlock> nonCollidableBlocks,
-      List<IBlock> collidableBlocks,
-      List<IBlock> doors,
-      List<IEnemy> enemies,
-      List<IWorldPickup> pickups,
-      ref Vector2? playerPositionNullable
-    ) => {
-      CheckEntryLength(arguments, 2, type);
-
-      var ammoTypeString = arguments[0];
-
-      var ammoType = ammoTypeString switch {
-        "0" => AmmoType.Light,
-        "1" => AmmoType.Heavy,
-        "2" => AmmoType.Shells,
-        _ => throw new FormatException($"unrecognized ammo type '{ammoTypeString}"),
-      };
-
-      var countString = arguments[1];
-
-      if (!int.TryParse(countString, out var count)) {
-        throw new FormatException($"ammo count not int: '{countString}");
-      }
-
-      if (count < 0) {
-        throw new FormatException($"ammo count out of bounds int: '{count}");
-      }
-
-      pickups.Add(AmmoItemCreator(new Vector2(xPos, yPos) + AMMO_POSITION_OFFSET, ammoType, count));
-    };
-  }
-
-  private static CellEntryParseFunc CreatePlayerPositionSetter() {
-    return (
-      Player player,
-      ILevelManager levelManager,
-      ISet<string> levelNames,
-
-      string type,
-      string[] arguments,
-      float xPos,
-      float yPos,
-
-      List<IBlock> nonCollidableBlocks,
-      List<IBlock> collidableBlocks,
-      List<IBlock> doors,
-      List<IEnemy> enemies,
-      List<IWorldPickup> pickups,
-      ref Vector2? playerPositionNullable
-    ) => {
-      CheckEntryLength(arguments, 0, type);
-
-      if (playerPositionNullable is not null) {
-        throw new FormatException("default player position set twice in same level");
-      } else {
-        playerPositionNullable = new Vector2(xPos, yPos) + PLAYER_POSITION_OFFSET;
-      }
-    };
-  }
 
   private static void ParseSingleFlag(LevelFlags flags, string flag) {
     switch (flag) {
@@ -532,12 +113,6 @@ internal partial class LevelLoader {
     }
 
     return flags;
-  }
-
-  private static void CheckEntryLength(string[] arguments, int length, string type) {
-    if (arguments.Length != length) {
-      throw new FormatException($"Expected {length - 1} parameter for level block/entity type '{type}'");
-    }
   }
 
   private static void AddCellEntry(
