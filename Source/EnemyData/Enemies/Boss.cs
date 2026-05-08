@@ -90,7 +90,8 @@ internal class Boss : ABaseEnemy {
     float offsetY = -45f;
 
     Vector2 spawnPosition = Position;
-    Vector2 tossDirection; // implicitly assigned Vector2.Zero, reassured by IDE this is the case
+    // default value of uninitialized Vector2 is Vector2.Zero, according to IDE:
+    Vector2 tossDirection = Vector2.Zero;
 
     if (Direction == FacingDirection.Right) {
       spawnPosition += new Vector2(offsetX, offsetY);
