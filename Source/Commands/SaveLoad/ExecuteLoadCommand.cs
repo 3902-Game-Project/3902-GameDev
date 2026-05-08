@@ -6,7 +6,7 @@ namespace GameProject.Commands;
 internal class ExecuteLoadCommand(Game1 game, StateLoadPromptType promptState) : IGPCommand {
   public void Execute() {
     if (!promptState.IsShowingSuccess) {
-      SaveLoadManager.LoadGame(game.StateGame);
+      SaveLoadManager.LoadGame(game.StateMachine.StateGame);
       promptState.IsShowingSuccess = true;
     }
   }

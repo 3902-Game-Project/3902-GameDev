@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.GameStates;
 
-internal class StateLoadPromptType(Game1 game) : IGameState {
+internal class StateSavePromptType(Game1 game) : IGameState {
   private IController<Keys, KeyboardState> keyboardController;
   private IController<GPGamePadButtons, GamePadState> gamePadController;
   private double successTimer = 0.0;
@@ -18,8 +18,8 @@ internal class StateLoadPromptType(Game1 game) : IGameState {
   public bool IsShowingSuccess { get; set; } = false;
 
   public void Initialize() {
-    keyboardController = LoadPromptControllerFactory.CreateKeyboardController(game, this);
-    gamePadController = LoadPromptControllerFactory.CreateGamePadController(game, this);
+    keyboardController = SavePromptControllerFactory.CreateKeyboardController(game, this);
+    gamePadController = SavePromptControllerFactory.CreateGamePadController(game, this);
   }
 
   public void LoadContent(ContentManager content) { }
@@ -27,7 +27,7 @@ internal class StateLoadPromptType(Game1 game) : IGameState {
   public void Update(double deltaTime, bool isActive) {
     if (IsShowingSuccess) {
       successTimer -= deltaTime;
-      if (successTimer <= 0) game.ChangeStateWithoutFading(game.StateGame);
+      if (successTimer <= 0) game.StateMachine.ChangeStateWithoutFading(GameState.StateGame);
     } else {
       keyboardController.Update(Keyboard.GetState());
       gamePadController.Update(GamePad.GetState(Constants.GAMEPAD_PLAYER_INDEX));
@@ -40,8 +40,8 @@ internal class StateLoadPromptType(Game1 game) : IGameState {
     drawData.SpriteBatch.Begin();
 
     string text = IsShowingSuccess
-        ? "Progress successfully loaded"
-        : "Would you like to load your last saved progress?\nPress A/GamePadB to confirm, D?GamePadA to cancel.";
+        ? "The game is successfully saved"
+        : "Would you like to save the game?\nPress A/GamePadB to confirm, D/GamePadA to cancel.";
 
     TextFuncs.DrawCenteredString(
       spriteBatch: drawData.SpriteBatch,
@@ -59,7 +59,7 @@ internal class StateLoadPromptType(Game1 game) : IGameState {
 
   public void OnStateEnter(bool prevStateIsCurrentState) {
     IsShowingSuccess = false;
-    successTimer = 1.5;
+    successTimer = 1.5; // Displays the success text for 1.5 seconds
   }
   public void OnStateLeave(bool nextStateIsCurrentState) { }
   public void OnStateStartFadeIn(bool prevStateIsCurrentState) { }

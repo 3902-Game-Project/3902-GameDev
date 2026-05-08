@@ -22,12 +22,12 @@ internal class StateItemScreenType(Game1 game) : IGameState {
   public int SelectedBackpackIndex { get; private set; } = 0;
 
   public void Initialize() {
-    keyboardController = ItemScreenControllerFactory.CreateKeyboardController(game, this, game.StateGame.Player);
-    gamePadController = ItemScreenControllerFactory.CreateGamePadController(game, this, game.StateGame.Player);
+    keyboardController = ItemScreenControllerFactory.CreateKeyboardController(game, this, game.StateMachine.StateGame.Player);
+    gamePadController = ItemScreenControllerFactory.CreateGamePadController(game, this, game.StateMachine.StateGame.Player);
   }
 
   public void MoveCursorLeft() {
-    Player player = game.StateGame.Player;
+    Player player = game.StateMachine.StateGame.Player;
     if (player == null) return;
 
     if (InWeaponMenu) {
@@ -44,7 +44,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
   }
 
   public void MoveCursorRight() {
-    Player player = game.StateGame.Player;
+    Player player = game.StateMachine.StateGame.Player;
     if (player == null) return;
 
     if (InWeaponMenu) {
@@ -74,7 +74,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
     if (InWeaponMenu) {
       InWeaponMenu = false;
     } else {
-      Player player = game.StateGame.Player;
+      Player player = game.StateMachine.StateGame.Player;
       if (player != null && SelectedBackpackIndex + Constants.BACKPACK_COLUMNS < player.Inventory.GeneralItems.Count) {
         SelectedBackpackIndex += Constants.BACKPACK_COLUMNS;
       }
@@ -82,7 +82,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
   }
 
   public void EquipSelectedWeapon() {
-    Player player = game.StateGame.Player;
+    Player player = game.StateMachine.StateGame.Player;
     if (player == null) return;
 
     if (InWeaponMenu) {
@@ -135,7 +135,7 @@ internal class StateItemScreenType(Game1 game) : IGameState {
       color: Color.Gold
     );
 
-    Player player = game.StateGame.Player;
+    Player player = game.StateMachine.StateGame.Player;
 
     if (player != null) {
       // --- DRAW WEAPONS ---

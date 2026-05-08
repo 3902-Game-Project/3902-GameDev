@@ -21,48 +21,14 @@ internal class Game1 : Game {
   public Viewport DefaultViewport { get; private set; }
   public Viewport HudViewport { get; private set; }
   public Viewport GameViewport { get; private set; }
-
-  private StateTransitionType StateTransition;
-  public IGameState StateMenu { get; private set; }
-  public IGameState StateLoss { get; private set; }
-  public IGameState StateWin { get; private set; }
-  public IGameState StatePause { get; private set; }
-  public IGameState StateItemScreen { get; private set; }
-  public StateGameType StateGame { get; private set; }
-  public IGameState StateSavePrompt { get; private set; }
-  public IGameState StateLoadPrompt { get; private set; }
-  private IGameState currentState;
+  public GameStateMachine StateMachine { get; private set; }
 
   public Game1() {
     graphics = new GraphicsDeviceManager(this);
     IsMouseVisible = true;
-
     Content.RootDirectory = "Content";
-  }
 
-  public void ChangeState(IGameState newState) {
-    StateTransition.SetFadingStates(currentState, newState);
-    ChangeStateWithoutFading(StateTransition);
-  }
-
-  public void ChangeStateWithoutFading(IGameState newState) {
-    bool nextStateIsCurrentState;
-
-    if (currentState == StateTransition || newState == StateTransition) {
-      nextStateIsCurrentState = StateTransition.NextStateIsCurrentState();
-    } else {
-      nextStateIsCurrentState = currentState == newState;
-    }
-
-    currentState.OnStateLeave(nextStateIsCurrentState);
-    currentState = newState;
-    newState.OnStateEnter(nextStateIsCurrentState);
-  }
-
-  public void ResetGameState() {
-    StateGame = new StateGameType(this);
-    StateGame.Initialize();
-    StateGame.LoadContent(Content);
+    StateMachine = new(this);
   }
 
   protected override void Initialize() {
@@ -86,6 +52,8 @@ internal class Game1 : Game {
 
     MiscAssetStore.Instance.Initialize();
     TextureStore.Instance.Initialize();
+
+    StateMachine.Initialize();
 
     base.Initialize();
   }
@@ -121,27 +89,6 @@ internal class Game1 : Game {
     renderTarget = new RenderTarget2D(GraphicsDevice, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
     UpdateRenderScaleRectangle();
 
-    StateTransition = new StateTransitionType(this);
-    StateMenu = new StateMenuType(this);
-    StateLoss = new StateLossType(this);
-    StateWin = new StateWinType(this);
-    StatePause = new StatePauseType(this);
-    StateItemScreen = new StateItemScreenType(this);
-    StateSavePrompt = new StateSavePromptType(this);
-    StateLoadPrompt = new StateLoadPromptType(this);
-    StateGame = new StateGameType(this);
-    currentState = StateMenu;
-
-    StateTransition.Initialize();
-    StateMenu.Initialize();
-    StateLoss.Initialize();
-    StateWin.Initialize();
-    StatePause.Initialize();
-    StateItemScreen.Initialize();
-    StateSavePrompt.Initialize();
-    StateLoadPrompt.Initialize();
-    StateGame.Initialize();
-
     MiscAssetStore.Instance.LoadContent(Content);
     TextureStore.Instance.LoadContent(GraphicsDevice, Content);
 
@@ -150,19 +97,11 @@ internal class Game1 : Game {
     ItemFactory.Instance.LoadAllTextures(Content);
     ProjectileFactory.Instance.LoadAllTextures(Content);
 
-    StateTransition.LoadContent(Content);
-    StateMenu.LoadContent(Content);
-    StateLoss.LoadContent(Content);
-    StateWin.LoadContent(Content);
-    StatePause.LoadContent(Content);
-    StateItemScreen.LoadContent(Content);
-    StateSavePrompt.LoadContent(Content);
-    StateLoadPrompt.LoadContent(Content);
-    StateGame.LoadContent(Content);
+    StateMachine.LoadContent(Content);
   }
 
   protected override void Update(GameTime gameTime) {
-    currentState.Update(gameTime.ElapsedGameTime.TotalSeconds, IsActive);
+    StateMachine.Update(gameTime.ElapsedGameTime.TotalSeconds, IsActive);
 
     base.Update(gameTime);
   }
@@ -171,7 +110,7 @@ internal class Game1 : Game {
     // Render everything that should be on screen to a texture
 
     using (renderTargetTracker.TempSet(renderTarget)) {
-      currentState.LowLevelDraw(new(
+      StateMachine.LowLevelDraw(new(
         GraphicsDevice.Clear,
         renderTargetTracker,
         viewportTracker,

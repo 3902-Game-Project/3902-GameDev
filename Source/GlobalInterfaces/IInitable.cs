@@ -5,5 +5,5 @@ namespace GameProject.GlobalInterfaces;
 internal interface IInitable {
   void Initialize();
 
-  void LoadContent(ContentManager content);
+  void LoadContent(ContentManager contentManager);
 }
