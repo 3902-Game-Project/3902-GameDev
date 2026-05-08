@@ -235,40 +235,6 @@ internal class Level : ILevel {
     }
 
     ProjectileManager.Draw(spriteBatch);
-
-    foreach (var enemy in aliveEnemies) {
-      if (!enemy.Invulnerable && enemy.Health > 0) {
-        float enemyHealthPercent = MathHelper.Clamp((float) enemy.Health / enemy.MaxHealth, 0f, 1f);
-        float scaleWidth = TextureStore.Instance.HealthBar.Width * 0.15f;
-        Vector2 enemyHealthPositions = new(
-          enemy.Position.X - (scaleWidth / 2f),
-          enemy.Position.Y - enemy.Collider.Height);
-        spriteBatch.Draw(texture: TextureStore.Instance.HealthBar,
-          position: enemyHealthPositions,
-          sourceRectangle: null,
-          color: Color.DarkSlateGray,
-          rotation: 0f,
-          origin: Vector2.Zero,
-          scale: 0.15f,
-          effects: SpriteEffects.None,
-          layerDepth: 0f
-          );
-        int enemyHealthVisible = (int) (TextureStore.Instance.HealthBar.Width * enemyHealthPercent);
-        Rectangle enemyHpSource = new(0, 0, enemyHealthVisible, TextureStore.Instance.HealthBar.Height);
-
-        spriteBatch.Draw(
-          texture: TextureStore.Instance.HealthBar,
-          position: enemyHealthPositions,
-          sourceRectangle: enemyHpSource,
-          color: Color.White,
-          rotation: 0f,
-          origin: Vector2.Zero,
-          scale: 0.15f,
-          effects: SpriteEffects.None,
-          layerDepth: 0f
-        );
-      }
-    }
   }
 
   public Vector2 GetDefaultPlayerPosition() {

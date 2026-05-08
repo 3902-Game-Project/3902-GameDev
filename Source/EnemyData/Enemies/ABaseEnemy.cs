@@ -72,7 +72,7 @@ internal abstract class ABaseEnemy(
     return shouldFlip ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
   }
 
-  public Texture2D Texture { get; protected set; } = texture;
+  protected Texture2D Texture { get; } = texture;
   public Vector2 Position { get; set; } = position;
   public Vector2 Velocity { get; set; }
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
@@ -107,14 +107,51 @@ internal abstract class ABaseEnemy(
   }
 
   public virtual void Draw(SpriteBatch spriteBatch) {
-    if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return;
+    // Draw enemy
 
-    Rectangle source = CurrentSourceRectangles[CurrentFrame];
+    if (CurrentSourceRectangles != null && CurrentSourceRectangles.Count > 0) {
+      Rectangle source = CurrentSourceRectangles[CurrentFrame];
 
-    Vector2 origin = new(source.Width / 2f, source.Height);
-    Color tintColor = DamageFlashTimer > 0 ? Color.Red : Color.White;
+      Vector2 origin = new(source.Width / 2f, source.Height);
+      Color tintColor = DamageFlashTimer > 0 ? Color.Red : Color.White;
 
-    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, DrawScale, GetFlipEffect(), 0f);
+      spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, DrawScale, GetFlipEffect(), 0f);
+    }
+
+    // Draw health bar
+
+    if (!Invulnerable && Health > 0) {
+      float enemyHealthPercent = MathHelper.Clamp((float) Health / MaxHealth, 0f, 1f);
+      float scaleWidth = TextureStore.Instance.HealthBar.Width * 0.15f;
+      Vector2 enemyHealthPositions = new(
+        Position.X - (scaleWidth / 2f),
+        Position.Y - Collider.Height
+      );
+      spriteBatch.Draw(texture: TextureStore.Instance.HealthBar,
+        position: enemyHealthPositions,
+        sourceRectangle: null,
+        color: Color.DarkSlateGray,
+        rotation: 0f,
+        origin: Vector2.Zero,
+        scale: 0.15f,
+        effects: SpriteEffects.None,
+        layerDepth: 0f
+       );
+      int enemyHealthVisible = (int) (TextureStore.Instance.HealthBar.Width * enemyHealthPercent);
+      Rectangle enemyHpSource = new(0, 0, enemyHealthVisible, TextureStore.Instance.HealthBar.Height);
+
+      spriteBatch.Draw(
+        texture: TextureStore.Instance.HealthBar,
+        position: enemyHealthPositions,
+        sourceRectangle: enemyHpSource,
+        color: Color.White,
+        rotation: 0f,
+        origin: Vector2.Zero,
+        scale: 0.15f,
+        effects: SpriteEffects.None,
+        layerDepth: 0f
+      );
+    }
   }
 
   public virtual void Update(double deltaTime) {
