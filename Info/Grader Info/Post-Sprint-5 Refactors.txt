@@ -59,6 +59,9 @@ Lots of magic numbers.
 BossAttackState - Eric
 Magic numbers
 
+Game1 (Medium Priority) - Santosh
+All the states should not be contained in Game1, as it defeats the purpose of using states to obscure the general logic in the first place
+
 -----Done (Possibly)-----:
 
 -----Done (Possibly) > Sprint 3-----:
@@ -90,9 +93,6 @@ Level
 LevelLoader (excused based on being a level loading class)
 
 -----Not Done > Sprint 5-----:
-
-Game1 (Medium Priority)
-All the states should not be contained in Game1, as it defeats the purpose of using states to obscure the general logic in the first place
 
 Level
 There's a lot of helper functions in Level that could moved out to make Level itself more coheasive

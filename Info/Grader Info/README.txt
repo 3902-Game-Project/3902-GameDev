@@ -1,3 +1,6 @@
+Post-Sprint-5 Refactors:
+  See "Post-Sprint-5 Refactors.txt" file, and the "Done" section at the top to see what refactors we have implemented.
+
 GitHub:
   The repo is publicly available at https://github.com/WhileWestGameDev/HighNoonHangover.
 
@@ -78,9 +81,6 @@ Controls:
     Key                               Action
     Q/GamePadY                        Quit the game.
     Backspace/GamePadA                Reset to main menu.
-
-Post-Sprint-5 Refactors:
-  See "Post-Sprint-5 Refactors.txt" file, and the "Done" section at the top to see what refactors we have implemented.
 
 Code Metrics:
   Raw data stored at "Info/Grader Info/Code Metrics/Code Metrics.txt"
