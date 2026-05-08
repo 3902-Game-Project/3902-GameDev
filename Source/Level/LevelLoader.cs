@@ -9,6 +9,7 @@ using GameProject.Factories;
 using GameProject.Globals;
 using GameProject.Items;
 using GameProject.PlayerSpace;
+using GameProject.Projectiles;
 using GameProject.WorldPickups;
 using Microsoft.Xna.Framework;
 
@@ -19,6 +20,7 @@ internal delegate IBlock PlayerBlockCreationFunc(float x, float y, Player player
 internal delegate IEnemy EnemyCreationFunc(float x, float y);
 internal delegate IEnemy FiringEnemyCreationFunc(float x, float y, CurrentLevelGetter GetCurrentLevel);
 internal delegate IEnemy FiringItemEnemyCreationFunc(float x, float y, CurrentLevelGetter GetCurrentLevel, Player player);
+internal delegate IItem GunItemCreationFunc(float xPos, float yPos, Player player, ProjectileManagerGetter GetProjectileManager);
 
 internal delegate void CellEntryParseFunc(
   Player player,
@@ -65,6 +67,9 @@ internal partial class LevelLoader {
     { "11", CreateFiringItemEnemyCreator(EnemyFactory.Instance.CreateRiflemanSprite) }, /* rifleman */
     { "12", CreateEnemyCreator(EnemyFactory.Instance.CreateTumbleweedSprite) }, /* tumbleweed */
     { "13", CreateEnemyCreator(EnemyFactory.Instance.CreateCactusSprite) }, /* cactus */
+    { "14", CreateGunItemCreator(ItemFactory.Instance.CreateRevolver) }, /* revolver */
+    { "15", CreateGunItemCreator(ItemFactory.Instance.CreateRifle) }, /* rifle */
+    { "16", CreateGunItemCreator(ItemFactory.Instance.CreateShotgun) }, /* shotgun */
     { "17", CreateCollidableBlockCreator(BlockFactory.CreateBarrelBlockSprite) }, /* barrel */
     { "18", CreateCollidableBlockCreator(BlockFactory.CreateBarShelfBlockSprite) }, /* bar shelf */
     { "19", CreateCollidableBlockCreator(BlockFactory.CreateShelfBlockSprite) }, /* shelf */
@@ -223,6 +228,30 @@ internal partial class LevelLoader {
       CheckEntryLength(arguments, 0, type);
 
       enemies.Add(FiringItemEnemyCreator(xPos + ENEMY_POSITION_OFFSET.X, yPos + ENEMY_POSITION_OFFSET.Y, () => levelManager.CurrentLevel, player));
+    };
+  }
+
+  private static CellEntryParseFunc CreateGunItemCreator(GunItemCreationFunc GunItemCreator) {
+    return (
+      Player player,
+      ILevelManager levelManager,
+      ISet<string> levelNames,
+
+      string type,
+      string[] arguments,
+      float xPos,
+      float yPos,
+
+      List<IBlock> nonCollidableBlocks,
+      List<IBlock> collidableBlocks,
+      List<IBlock> doors,
+      List<IEnemy> enemies,
+      List<IWorldPickup> pickups,
+      ref Vector2? playerPositionNullable
+    ) => {
+      CheckEntryLength(arguments, 0, type);
+
+      pickups.Add(new ItemWorldPickup(GunItemCreator(xPos, yPos, player, () => levelManager.CurrentLevel.ProjectileManager)));
     };
   }
 
@@ -404,30 +433,6 @@ internal partial class LevelLoader {
           }
           break;
         }
-
-      case "14":
-        /* revolver */
-
-        CheckEntryLength(arguments, 0, type);
-
-        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateRevolver(xPos, yPos, player, () => levelManager.CurrentLevel.ProjectileManager)));
-        break;
-
-      case "15":
-        /* rifle */
-
-        CheckEntryLength(arguments, 0, type);
-
-        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateRifle(xPos, yPos, player, () => levelManager.CurrentLevel.ProjectileManager)));
-        break;
-
-      case "16":
-        /* shotgun */
-
-        CheckEntryLength(arguments, 0, type);
-
-        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateShotgun(xPos, yPos, player, () => levelManager.CurrentLevel.ProjectileManager)));
-        break;
 
       case "20": {
           /* vault door */
