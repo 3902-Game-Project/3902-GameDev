@@ -16,6 +16,9 @@
     <None Remove="Info\Code Review\**" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Source-Unused/**/*.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>
@@ -36,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+    <None Include="Source-Unused/**/*.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Info\Grader Info\Burndown Charts\Sprint 4\" />
