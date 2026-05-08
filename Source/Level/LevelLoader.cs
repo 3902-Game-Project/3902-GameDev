@@ -21,6 +21,8 @@ internal delegate IEnemy EnemyCreationFunc(float x, float y);
 internal delegate IEnemy FiringEnemyCreationFunc(float x, float y, CurrentLevelGetter GetCurrentLevel);
 internal delegate IEnemy FiringItemEnemyCreationFunc(float x, float y, CurrentLevelGetter GetCurrentLevel, Player player);
 internal delegate IItem GunItemCreationFunc(float xPos, float yPos, Player player, ProjectileManagerGetter GetProjectileManager);
+internal delegate IItem KeyItemCreationFunc(float xPos, float yPos, CurrentLevelGetter GetCurrentLevel);
+internal delegate IItem PlayerItemCreationFunc(float xPos, float yPos, Player player);
 
 internal delegate void CellEntryParseFunc(
   Player player,
@@ -73,6 +75,7 @@ internal partial class LevelLoader {
     { "17", CreateCollidableBlockCreator(BlockFactory.CreateBarrelBlockSprite) }, /* barrel */
     { "18", CreateCollidableBlockCreator(BlockFactory.CreateBarShelfBlockSprite) }, /* bar shelf */
     { "19", CreateCollidableBlockCreator(BlockFactory.CreateShelfBlockSprite) }, /* shelf */
+    { "21", CreateKeyItemCreator(ItemFactory.CreateKey) }, /* key item */
     { "22", CreateCollidableBlockCreator(BlockFactory.CreateFirePitBlockSprite) }, /* fire pit */
     { "23", CreateCollidablePlayerBlockCreator(BlockFactory.CreateFireBlockSprite) }, /* fire */
     { "25", CreateCollidableBlockCreator(BlockFactory.CreateMudBlockSprite) }, /* mud */
@@ -84,6 +87,9 @@ internal partial class LevelLoader {
     { "32", CreateCollidableBlockCreator(BlockFactory.CreateTreasureBlockSprite) }, /* treasure block */
     { "34", CreateCollidableBlockCreator(BlockFactory.CreateBankShelfBlockSprite) }, /* bank shelf */
     { "35", CreateCollidableBlockCreator(BlockFactory.CreateTellersDeskBlockSprite) }, /* tellers desk */
+    { "36", CreatePlayerItemCreator(ItemFactory.Instance.CreateHealthPotion) }, /* health potion item */
+    { "37", CreatePlayerItemCreator(ItemFactory.Instance.CreateInvincibilityPotion) }, /* invincibility potion item */
+    { "38", CreatePlayerItemCreator(ItemFactory.Instance.CreateInfiniteAmmo) }, /* infinite ammo potion item */
     { "39", CreateFiringEnemyCreator(EnemyFactory.Instance.CreateBossSprite) }, /* boss */
   };
 
@@ -252,6 +258,54 @@ internal partial class LevelLoader {
       CheckEntryLength(arguments, 0, type);
 
       pickups.Add(new ItemWorldPickup(GunItemCreator(xPos, yPos, player, () => levelManager.CurrentLevel.ProjectileManager)));
+    };
+  }
+
+  private static CellEntryParseFunc CreateKeyItemCreator(KeyItemCreationFunc KeyItemCreator) {
+    return (
+      Player player,
+      ILevelManager levelManager,
+      ISet<string> levelNames,
+
+      string type,
+      string[] arguments,
+      float xPos,
+      float yPos,
+
+      List<IBlock> nonCollidableBlocks,
+      List<IBlock> collidableBlocks,
+      List<IBlock> doors,
+      List<IEnemy> enemies,
+      List<IWorldPickup> pickups,
+      ref Vector2? playerPositionNullable
+    ) => {
+      CheckEntryLength(arguments, 0, type);
+
+      pickups.Add(new ItemWorldPickup(KeyItemCreator(xPos, yPos, () => levelManager.CurrentLevel)));
+    };
+  }
+
+  private static CellEntryParseFunc CreatePlayerItemCreator(PlayerItemCreationFunc PlayerItemCreator) {
+    return (
+      Player player,
+      ILevelManager levelManager,
+      ISet<string> levelNames,
+
+      string type,
+      string[] arguments,
+      float xPos,
+      float yPos,
+
+      List<IBlock> nonCollidableBlocks,
+      List<IBlock> collidableBlocks,
+      List<IBlock> doors,
+      List<IEnemy> enemies,
+      List<IWorldPickup> pickups,
+      ref Vector2? playerPositionNullable
+    ) => {
+      CheckEntryLength(arguments, 0, type);
+
+      pickups.Add(new ItemWorldPickup(PlayerItemCreator(xPos, yPos, player)));
     };
   }
 
@@ -456,14 +510,6 @@ internal partial class LevelLoader {
           break;
         }
 
-      case "21":
-        /* key item */
-
-        CheckEntryLength(arguments, 0, type);
-
-        pickups.Add(new ItemWorldPickup(ItemFactory.CreateKey(xPos, yPos, () => levelManager.CurrentLevel)));
-        break;
-
       case "31": {
           /* slatted door */
 
@@ -512,30 +558,6 @@ internal partial class LevelLoader {
         }
 
         pickups.Add(WorldPickupFactory.Instance.CreateAmmo(new Vector2(xPos + 32f, yPos + 32f), ammoType, count));
-        break;
-
-      case "36":
-        /* health item */
-
-        CheckEntryLength(arguments, 0, type);
-
-        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateHealthPotion(xPos, yPos, player)));
-        break;
-
-      case "37":
-        /* invincibility item */
-
-        CheckEntryLength(arguments, 0, type);
-
-        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateInvincibilityPotion(xPos, yPos, player)));
-        break;
-
-      case "38":
-        /* infinite ammo item */
-
-        CheckEntryLength(arguments, 0, type);
-
-        pickups.Add(new ItemWorldPickup(ItemFactory.Instance.CreateInfiniteAmmo(xPos, yPos, player)));
         break;
 
       default:
