@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject.GameStates;
 
-internal class StateGameType : IGameState {
+internal class StateGameType : IGameState, System.IDisposable {
   private static Rectangle NON_HUD_RECTANGLE = new(0, 0, Constants.WINDOW_WIDTH, Constants.GAME_HEIGHT);
 
   private RenderTarget2D nonHUDTarget;
@@ -167,4 +167,8 @@ internal class StateGameType : IGameState {
   }
 
   public void OnStateEndFadeOut(bool nextStateIsCurrentState) { }
+
+  public void Dispose() {
+    nonHUDTarget.Dispose();
+  }
 }
