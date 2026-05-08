@@ -24,8 +24,8 @@ internal abstract class ABaseWorldPickup : IWorldPickup {
   public virtual void OnPickup(Player player) { }
 
   public virtual void OnCollision(CollisionInfo info) {
-    if (info.Collider.Layer == Layer.Player && info.Collider as Player != null) {
-      OnPickup(info.Collider as Player);
+    if (info.Collider.Layer == Layer.Player && info.Collider is Player player) {
+      OnPickup(player);
     }
   }
 }
