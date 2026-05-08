@@ -67,6 +67,7 @@ internal class GameStateMachine(Game1 game) : IInitable, ITemporalActiveUpdatabl
     StateGame = new StateGameType(game);
     StateGame.Initialize();
     StateGame.LoadContent(game.Content);
+    stateLookup[GameState.StateGame] = StateGame;
   }
 
   public void Initialize() { }
