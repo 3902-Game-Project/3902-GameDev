@@ -63,6 +63,13 @@ internal partial class LevelLoader {
     { "23", CreateCollidablePlayerBlockCreator(BlockFactory.CreateFireBlockSprite) }, /* fire */
     { "25", CreateCollidableBlockCreator(BlockFactory.CreateMudBlockSprite) }, /* mud */
     { "26", CreateCollidableBlockCreator(BlockFactory.CreateCrateBlockSprite) }, /* crate */
+    { "27", CreateCollidableBlockCreator(BlockFactory.CreateStoolBlockSprite) }, /* stool */
+    { "28", CreateCollidableBlockCreator(BlockFactory.CreateTableBlockSprite) }, /* table */
+    { "29", CreateCollidableBlockCreator(BlockFactory.CreateStatueBlockSprite) }, /* statue */
+    { "30", CreateCollidableBlockCreator(BlockFactory.CreateWindowBlockSprite) }, /* window */
+    { "32", CreateCollidableBlockCreator(BlockFactory.CreateTreasureBlockSprite) }, /* treasure block */
+    { "34", CreateCollidableBlockCreator(BlockFactory.CreateBankShelfBlockSprite) }, /* bank shelf */
+    { "35", CreateCollidableBlockCreator(BlockFactory.CreateTellersDeskBlockSprite) }, /* tellers desk */
   };
 
   private static CellEntryParseFunc CreateNonCollidableBlockCreator(BlockCreationFunc BlockCreator) {
@@ -418,38 +425,6 @@ internal partial class LevelLoader {
         pickups.Add(new ItemWorldPickup(ItemFactory.CreateKey(xPos, yPos, () => levelManager.CurrentLevel)));
         break;
 
-      case "27":
-        /* stool */
-
-        CheckEntryLength(arguments, 0, type);
-
-        collidableBlocks.Add(BlockFactory.CreateStoolBlockSprite(xPos, yPos));
-        break;
-
-      case "28":
-        /* table */
-
-        CheckEntryLength(arguments, 0, type);
-
-        collidableBlocks.Add(BlockFactory.CreateTableBlockSprite(xPos, yPos));
-        break;
-
-      case "29":
-        /* statue */
-
-        CheckEntryLength(arguments, 0, type);
-
-        collidableBlocks.Add(BlockFactory.CreateStatueBlockSprite(xPos, yPos));
-        break;
-
-      case "30":
-        /* window */
-
-        CheckEntryLength(arguments, 0, type);
-
-        collidableBlocks.Add(BlockFactory.CreateWindowBlockSprite(xPos, yPos));
-        break;
-
       case "31": {
           /* slatted door */
 
@@ -470,14 +445,6 @@ internal partial class LevelLoader {
           doors.Add(BlockFactory.CreateSlattedDoorSprite(xPos, yPos, state, pairedLevelName, levelManager.SwitchLevel));
           break;
         }
-
-      case "32":
-        /* treasure block */
-
-        CheckEntryLength(arguments, 0, type);
-
-        collidableBlocks.Add(BlockFactory.CreateTreasureBlockSprite(xPos, yPos));
-        break;
 
       case "33":
         /* ammo item */
@@ -506,22 +473,6 @@ internal partial class LevelLoader {
         }
 
         pickups.Add(WorldPickupFactory.Instance.CreateAmmo(new Vector2(xPos + 32f, yPos + 32f), ammoType, count));
-        break;
-
-      case "34":
-        /* bank shelf */
-
-        CheckEntryLength(arguments, 0, type);
-
-        collidableBlocks.Add(BlockFactory.CreateBankShelfBlockSprite(xPos, yPos));
-        break;
-
-      case "35":
-        /* tellers desk */
-
-        CheckEntryLength(arguments, 0, type);
-
-        collidableBlocks.Add(BlockFactory.CreateTellersDeskBlockSprite(xPos, yPos));
         break;
 
       case "36":
