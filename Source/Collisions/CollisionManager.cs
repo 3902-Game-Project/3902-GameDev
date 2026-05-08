@@ -98,10 +98,10 @@ internal class CollisionManager : IInstantaneousUpdatable {
     Vector2 direction2;
     float finalOverlap;
 
-    float b1CenterX = b1.Left + b1.Width / 2.0f;
-    float b2CenterX = b2.Left + b2.Width / 2.0f;
-    float b1CenterY = b1.Top + b1.Height / 2.0f;
-    float b2CenterY = b2.Top + b2.Height / 2.0f;
+    float b1CenterX = b1.Left + b1.Width * 0.5f;
+    float b2CenterX = b2.Left + b2.Width * 0.5f;
+    float b1CenterY = b1.Top + b1.Height * 0.5f;
+    float b2CenterY = b2.Top + b2.Height * 0.5f;
 
     bool resolveHorizontally;
     if (axis == CollisionAxis.X) resolveHorizontally = true;

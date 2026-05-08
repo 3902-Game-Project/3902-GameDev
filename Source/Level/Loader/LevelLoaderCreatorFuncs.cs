@@ -11,9 +11,9 @@ using Microsoft.Xna.Framework;
 namespace GameProject.Level.Loader;
 
 internal static class LevelLoaderCreatorFuncs {
-  private static readonly Vector2 PLAYER_POSITION_OFFSET = new(Constants.BASE_BLOCK_WIDTH / 2.0f, Constants.BASE_BLOCK_HEIGHT / 2.0f);
-  private static readonly Vector2 ENEMY_POSITION_OFFSET = new(Constants.BASE_BLOCK_WIDTH / 2.0f, Constants.BASE_BLOCK_HEIGHT);
-  private static readonly Vector2 AMMO_POSITION_OFFSET = new(Constants.BASE_BLOCK_WIDTH / 2.0f, Constants.BASE_BLOCK_HEIGHT / 2.0f);
+  private static readonly Vector2 PLAYER_POSITION_OFFSET = new(Constants.BASE_BLOCK_WIDTH * 0.5f, Constants.BASE_BLOCK_HEIGHT * 0.5f);
+  private static readonly Vector2 ENEMY_POSITION_OFFSET = new(Constants.BASE_BLOCK_WIDTH * 0.5f, Constants.BASE_BLOCK_HEIGHT);
+  private static readonly Vector2 AMMO_POSITION_OFFSET = new(Constants.BASE_BLOCK_WIDTH * 0.5f, Constants.BASE_BLOCK_HEIGHT * 0.5f);
 
   private static void CheckEntryLength(string[] arguments, int length, string type) {
     if (arguments.Length != length) {

@@ -17,7 +17,7 @@ internal abstract class ABaseBlock : IBlock, ICollidable {
 
   protected ABaseBlock(Vector2 position, float width = Constants.BASE_BLOCK_WIDTH, float height = Constants.BASE_BLOCK_HEIGHT) {
     Position = position;
-    Vector2 centerOffset = new(width / 2.0f, height / 2.0f);
+    Vector2 centerOffset = new(width * 0.5f, height * 0.5f);
 
     Collider = new BoxCollider(width, height, position + centerOffset);
   }
