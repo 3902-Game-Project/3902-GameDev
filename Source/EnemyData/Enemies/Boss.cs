@@ -10,6 +10,16 @@ namespace GameProject.Enemies;
 
 internal class Boss : ABaseEnemy {
   private readonly CurrentLevelGetter GetCurrentLevel;
+  private readonly Random random = new();
+
+  protected override Vector2 GetDrawOrigin(Rectangle source) {
+    // --- THE MAGIC MATH FIX FOR JITTER ---
+    int cellIndex = source.X / 56;
+    float trueCenterX = (cellIndex * 56) + 28;
+    float originX = trueCenterX - source.X;
+    return new(originX, source.Height);
+    // -------------------------------------
+  }
 
   public ILevel CurrentLevel {
     get {
@@ -18,7 +28,6 @@ internal class Boss : ABaseEnemy {
   }
 
   public bool PhaseTwoTriggered { get; set; } = false;
-  private readonly Random random = new();
 
   public Boss(Texture2D texture, Vector2 position, CurrentLevelGetter GetCurrentLevel) :
     base(texture, position, colliderHeight: Constants.BASE_ENEMY_HEIGHT * 2.0f) {
@@ -125,23 +134,6 @@ internal class Boss : ABaseEnemy {
         CurrentLevel.ProjectileManager.Add(arenaBomb);
       }
     }
-  }
-
-  public override void Draw(SpriteBatch spriteBatch) {
-    if (CurrentSourceRectangles == null || CurrentSourceRectangles.Count == 0) return;
-
-    Rectangle source = CurrentSourceRectangles[CurrentFrame];
-
-    // --- THE MAGIC MATH FIX FOR JITTER ---
-    int cellIndex = source.X / 56;
-    float trueCenterX = (cellIndex * 56) + 28;
-    float originX = trueCenterX - source.X;
-    Vector2 origin = new(originX, source.Height);
-    // -------------------------------------
-
-    Color tintColor = DamageFlashTimer > 0 ? Color.Red : Color.White;
-
-    spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, DrawScale, GetFlipEffect(), 0f);
   }
 
   protected override void TransitionToDeathState() {

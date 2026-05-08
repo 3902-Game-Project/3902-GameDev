@@ -18,6 +18,7 @@ internal abstract class ABaseEnemy(
 ) : IEnemy {
   public static event Action<ABaseEnemy> OnDeath;
 
+  protected Texture2D Texture { get; } = texture;
   protected float DrawScale { get; set; } = 1f;
   protected bool FlipWhenFacingRightUpDown { get; set; } = true;
 
@@ -72,7 +73,10 @@ internal abstract class ABaseEnemy(
     return shouldFlip ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
   }
 
-  protected Texture2D Texture { get; } = texture;
+  protected virtual Vector2 GetDrawOrigin(Rectangle source) {
+    return new(source.Width * 0.5f, source.Height);
+  }
+
   public Vector2 Position { get; set; } = position;
   public Vector2 Velocity { get; set; }
   public FacingDirection Direction { get; set; } = FacingDirection.Right;
@@ -112,7 +116,7 @@ internal abstract class ABaseEnemy(
     if (CurrentSourceRectangles != null && CurrentSourceRectangles.Count > 0) {
       Rectangle source = CurrentSourceRectangles[CurrentFrame];
 
-      Vector2 origin = new(source.Width / 2f, source.Height);
+      Vector2 origin = GetDrawOrigin(source);
       Color tintColor = DamageFlashTimer > 0 ? Color.Red : Color.White;
 
       spriteBatch.Draw(Texture, Position, source, tintColor, 0f, origin, DrawScale, GetFlipEffect(), 0f);
