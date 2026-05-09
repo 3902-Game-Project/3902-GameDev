@@ -152,3 +152,14 @@ Sprint 5 Report:
 
 Credits:
   See "Info/Credits.txt" for attributions on this project.
+
+"Source/Commands/Debug"-apocalypse (from Santosh):
+  On May 2, I categorized the commands in the "Source/Commands" folder. 2 commands, NextLevelCommand.cs and PreviousLevelCommand.cs, I decided to put in "Source/Commands/Debug". What I did not realize was that the default MonoGame gitignore file will ignore any folder with the name Debug anywhere in the file tree. I did not see it in the git diff and committed a removal of those files, unknowingly breaking commits on everyone's devices but my own (as my device has the files, just gitignored). After 3 days I eventually realized (in part due to strange compilation errors when checking out older commits) and fixed the issue by removing the lines from the gitignore and re-adding the files.
+  
+  Commits:
+    Start: "finish categorizing commands" (2026 May 2 7:54PM; 882fd33)
+    ... 94 intermediary commits ...
+    Last affected commit: "Merge pull request #142 from WhileWestGameDev/Eric" (2026 May 5 8:54PM; d0ae71c)
+    Fixed: "re-add gitignored commands to fix build anomaly" (2026 May 5 9:38PM; defbff4)
+  
+  If anyone wants to check out any commits in that range, the NextLevelCommand.cs and PreviousLevelCommand.cs must be manually placed in the "Source/Commands/Debug" folder after checkout to ensure the code compiles. Those files can be moved from wherever they reside (possibly "Source/Commands"), or created if they do not reside anywhere (so sourcing them from commits after or equal to defbff4). This information must be remembered when using git bisect (or anything else which uses git checkout, including git checkout itself).
