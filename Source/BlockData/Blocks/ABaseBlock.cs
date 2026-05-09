@@ -23,7 +23,7 @@ internal abstract class ABaseBlock : IBlock, ICollidable {
   }
 
   public abstract void Update(double deltaTime);
-  
+
   public abstract void Draw(SpriteBatch spriteBatch);
 
   public virtual void OnCollision(CollisionInfo info) { }
