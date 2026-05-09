@@ -18,6 +18,8 @@ internal abstract class ABaseEnemy(
 ) : IEnemy {
   public static event Action<ABaseEnemy> OnDeath;
 
+  private double DamageFlashTimer;
+
   protected Texture2D Texture { get; } = texture;
   protected float DrawScale { get; set; } = 1.0f;
   protected bool FlipWhenFacingRightUpDown { get; set; } = true;
@@ -90,8 +92,6 @@ internal abstract class ABaseEnemy(
   public BoxCollider Collider { get; private set; } = new BoxCollider(colliderWidth, colliderHeight, position);
   public Layer Layer { get; } = Layer.Enemies;
   public int Health { get; set; } = 100;
-  public double DamageFlashTimer { get; protected set; }
-  public bool Invulnerable { get; } = invulnerable;
 
   public IEnemyState CurrentState { get; set; }
 
@@ -121,7 +121,7 @@ internal abstract class ABaseEnemy(
 
     // Draw health bar
 
-    if (!Invulnerable && Health > 0) {
+    if (!IsInvulnerable() && Health > 0) {
       float enemyHealthPercent = MathHelper.Clamp((float) Health / MaxHealth, 0.0f, 1.0f);
       float scaleWidth = TextureStore.Instance.HealthBar.Width * 0.15f;
       Vector2 enemyHealthPositions = new(
@@ -169,7 +169,7 @@ internal abstract class ABaseEnemy(
   }
 
   public virtual void TakeDamage(int damage) {
-    if (Invulnerable) {
+    if (IsInvulnerable()) {
       return;
     }
 
@@ -200,6 +200,10 @@ internal abstract class ABaseEnemy(
 
     Vector2 direction = Vector2.Normalize(delta);
     Velocity = direction * speed;
+  }
+
+  public bool IsInvulnerable() {
+    return invulnerable;
   }
 
   public bool IsDead() {

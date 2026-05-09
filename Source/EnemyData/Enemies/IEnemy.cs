@@ -19,9 +19,9 @@ internal interface IEnemy : ISprite, ICollidable {
   Vector2 Target { get; set; }
   FacingDirection Direction { get; set; }
   BoxCollider Collider { get; }
-  bool Invulnerable { get; }
 
   void TakeDamage(int damage);
   void Kill();
+  bool IsInvulnerable();
   bool IsDead();
 }
